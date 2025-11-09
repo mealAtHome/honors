@@ -53,6 +53,12 @@
             var scriptloaded = false;
             var localmode = false;
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
+            var ServerInfo =
+            {
+                getServerHost()   { return localmode ? 'http://localhost:8080/honors-server' : 'http://api.yogimoim.com/honors-server'; },
+                getResourceHost() { return localmode ? 'http://localhost:8081'               : 'http://res.yogimoim.com'; },
+                getScriptHost()   { return localmode ? 'http://localhost:8084'               : 'http://script.yogimoim.com'; },
+            };
             var initApp = function()
             {
                 /* ==================== */
@@ -172,11 +178,11 @@
                 /* ========================= */
                 /* load script first */
                 /* ========================= */
-                let head      = document.getElementsByTagName('head')[0];
-                let now       = Date.now();
+                let scriptHost = ServerInfo.getScriptHost();
+                let head = document.getElementsByTagName('head')[0];
                 let scriptArr = [];
+                scriptArr.push(`./js/script/base/version.js?${Date.now().getTime()}`);
                 scriptArr.push(`./js/script/base-GGF/GGF.js?${now}`);
-                scriptArr.push(`./js/script/base/serverinfo.js?${now}`);
                 scriptArr.push(`./js/script/base/gg-storage.js?${now}`);
                 scriptArr.push(`./js/script/base/gg-base.js?${now}`);
 
