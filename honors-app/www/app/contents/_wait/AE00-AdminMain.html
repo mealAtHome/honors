@@ -1,0 +1,133 @@
+<ons-page id="AMAN">
+
+    <style>
+        .AMAN-btn-menu
+        {
+            width: 9em;
+            height: 3em;
+            margin: 0.6em 0.6em;
+        }
+    </style>
+
+    <!-- ========================= -->
+    <!-- 로그아웃 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <button class="common-btn-outline" id="AMAN-btn-logout">로그아웃</button>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 공지사항 -->
+    <!-- ========================= -->
+    <table class="common-tbl-subtitle">
+        <tbody>
+            <tr>
+                <td><span data-i18n="">공지사항</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="common-div-cushion" id="AMAN-div-systemBoard"></div>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <hr class="common-hr-padding"/>
+
+    <p class="common-p-subtitle">
+        <span data-i18n="">고객</span>
+    </p>
+    <div class="common-div-cushion">
+        <a id="AMAN-btn-paymentMissedreqList" class="AMAN-btn-common common-btn-outline">오송금신고 처리</a>
+    </div>
+
+    <p class="common-p-subtitle">
+        <span data-i18n="">매장</span>
+    </p>
+    <div class="common-div-cushion">
+        <a id="AMAN-btn-adminSearchStore"    class="AMAN-btn-common common-btn-outline">매장 검색</a>
+        <a id="AMAN-btn-adminStoreAllow"     class="AMAN-btn-common common-btn-outline">신규 매장 허가</a>
+        <a id="AMAN-btn-adminStoreSanction"  class="AMAN-btn-common common-btn-outline">매장 제재</a>
+    </div>
+
+    <p class="common-p-subtitle">
+        <span data-i18n="">주문</span>
+    </p>
+    <div class="common-div-cushion">
+        <a id="AMAN-btn-orders" class="AMAN-btn-common common-btn-outline">주문검색</a>
+    </div>
+
+
+    <script>
+        var AMAN =
+        {
+            code: "AMAN",
+            Data : {},
+
+
+            show()
+            {
+                /* vars */
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 공지사항 조회 */
+                    let mSystemBoards = Api.SystemBoard.selectMain();
+                    mSystemBoards.makeMainBanners("#AMAN-div-systemBoard");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            $("#AMAN-btn-paymentMissedreqList")     .click(function() { Navigation.moveFrontPage(Navigation.Page.E40PaymentMissedreqList); });
+            $("#AMAN-btn-adminSearchStore")         .click(function() { Navigation.moveFrontPage(Navigation.Page.E20AdminStoreSearch); });
+            $("#AMAN-btn-adminStoreAllow")          .click(function() { Navigation.moveFrontPage(Navigation.Page.E20AdminStoreAllow); });
+            $("#AMAN-btn-adminStoreSanction")       .click(function() { Navigation.moveFrontPage(Navigation.Page.E20AdminStoreSanction); });
+            $("#AMAN-btn-orders")                   .click(function() { Navigation.moveFrontPage(Navigation.Page.E30AdminOrdera); });
+
+            /* ------------ */
+            /* logout */
+            /* ------------ */
+            $("#AMAN-btn-logout").click(function()
+            {
+                /* 로그아웃 함수 정의 */
+                let title = $.i18n('(MH)logout');
+                let msg   = $.i18n('(MH)do_you_want_to_logout');
+                let logout = function()
+                {
+                    // GGstorage.setAutologinFlg('n');
+                    GGstorage.logout();
+                    GGsidemenu.close();
+                    Navigation.moveLogin();
+                };
+
+                /* 로그아웃 실시 */
+                Common.confirm2(msg, logout);
+            });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+
+            /* get data from Config */
+            try
+            {
+                AMAN.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                AMAN.close(true);
+            }
+
+        }); /* end ready */
+    </script>
+</ons-page>

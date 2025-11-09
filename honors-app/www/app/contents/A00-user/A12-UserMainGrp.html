@@ -1,0 +1,67 @@
+<ons-page id="UMGP">
+
+    <!-- =============== -->
+    <!-- grp list -->
+    <!-- =============== -->
+    <div id="UMGP-div-list" class="common-div-cushionUD"></div>
+
+    <!-- =============== -->
+    <!-- cushion for tab -->
+    <!-- =============== -->
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+
+        var UMGP =
+        {
+            code: "UMGP",
+            Data: {},
+
+            show()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 활동상태인 그룹 조회 */
+                    let mGrps = Api.Grp.selectActiveForUsr();
+                    mGrps.makeForView("#UMGP-div-list");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            close()
+            {
+                Common.confirmExit();
+            }
+        };
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* events */
+            /* ========================= */
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UMGP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UMGP.close(true);
+            }
+
+            /* localizing */
+            /* $("#UMGP").i18n(); */
+
+        });
+
+    </script>
+</ons-page>

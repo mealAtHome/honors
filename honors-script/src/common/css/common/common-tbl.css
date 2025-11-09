@@ -1,0 +1,498 @@
+/*=================================*/
+/* table to center */
+/*=================================*/
+.common-tbl-center
+{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.common-tbl-textCenter,
+.common-tbl-textCenter > tbody > tr > td,
+.common-tbl-textCenter > tbody > tr > th,
+.common-tbl-textCenter > thead > tr > td,
+.common-tbl-textCenter > thead > tr > th,
+.common-tbl-textCenter > tfoot > tr > td,
+.common-tbl-textCenter > tfoot > tr > th
+{
+    text-align: center;
+}
+
+/*=================================*/
+/* page title */
+/*=================================*/
+.common-tbl-title
+{
+    width:100%;
+    border-collapse:collapse;
+    margin: 0em 0em 0.5em;
+    padding: 0em;
+}
+.common-tbl-title > tbody > tr > td                   { white-space: nowrap; }
+.common-tbl-title > tbody > tr > td:nth-child(1)      { vertical-align: middle; width:20%; text-align: left; }
+.common-tbl-title > tbody > tr > td:nth-child(2)      { vertical-align: bottom; width:80%; text-align: right; }
+
+/* title */
+.common-tbl-title > tbody > tr > td:nth-child(1) > span:nth-child(1)
+{
+    color:rgb(2,6,84);
+    font-weight: 900;
+    padding:0.3em 0.7em 0.3em 0.3em;
+    font-size:1.2em;
+}
+
+/*=================================*/
+/* dialog title */
+/*=================================*/
+.common-tbl-dialogtitle
+{
+    width:100%;
+    border-collapse:collapse;
+    margin: 0em 0em 0.5em;
+    padding: 0em;
+    border-bottom: 1px solid rgb(2,6,84);
+}
+.common-tbl-dialogtitle > tbody > tr > td                   { padding:0.5em; white-space: nowrap; }
+.common-tbl-dialogtitle > tbody > tr > td:nth-child(1)      { vertical-align: middle; width:20%; text-align: left; }
+.common-tbl-dialogtitle > tbody > tr > td:nth-child(2)      { vertical-align: bottom; width:80%; text-align: right; }
+
+/* title */
+.common-tbl-dialogtitle > tbody > tr > td:nth-child(1) > span:nth-child(1)
+{
+    color:rgb(2,6,84);
+    font-weight: 900;
+    padding:0.3em 0.7em 0.3em 0.3em;
+    font-size:1.2em;
+}
+
+/*=================================*/
+/* page subtitle */
+/*=================================*/
+/*
+    sample code
+
+    <table class="common-tbl-subtitle">
+        <tbody>
+            <tr>
+                <td><span data-i18n="">정산계좌</span></td>
+            </tr>
+        </tbody>
+    </table>
+ */
+.common-div-cushion > .common-tbl-subtitle { margin: 0em; }
+.common-div-cushion > .common-tbl-subtitle > tbody > tr > td:nth-child(1) { padding-left: 0em; }
+.common-tbl-subtitle
+{
+    border-collapse:collapse;
+    display: block;
+    min-width:100%;
+    width:100%;
+    margin: 1em 0em 0.3em 0em;
+    padding: 0em;
+    /* border-bottom: 1px solid rgb(2,6,84); */
+}
+.common-tbl-subtitle > tbody > tr > td:nth-child(1)      { vertical-align : middle; padding-left:0.6em; } /* 타이틀 */
+.common-tbl-subtitle > tbody > tr > td:nth-last-child(1) { vertical-align : middle; padding-right:0.6em; } /* 마지막 td */
+
+/* 페이지 안의 부제목 span */
+.common-tbl-subtitle > tbody > tr > td:nth-child(1) > span:nth-child(1)
+{
+    display: inline-table;
+    color:rgb(2,6,84);
+    font-weight: 900;
+    padding:0.3em 0.7em 0.3em 0.3em;
+    line-height:1.4em;
+    font-size:1.1em;
+    vertical-align: bottom;
+}
+/*
+.common-tbl-subtitle > tbody > tr > td:nth-child(1) > span:nth-child(1)::before
+{
+    background-image: url('../../res/icon/subtitle_header.png');
+    background-size : 100% 100%;
+    display: inline-block;
+    width: 2.23em;
+    height: 1em;
+    vertical-align: middle;
+    margin-right:0.3em;
+    margin-bottom:0.2em;
+    content:"";
+}
+*/
+.common-tbl-subtitle > tbody > tr > td:nth-child(1) { text-align: left;  width:90%; }
+.common-tbl-subtitle > tbody > tr > td:nth-child(2) { text-align: right; white-space: nowrap; }
+.common-tbl-subtitle > tbody > tr > td:nth-child(2) * { white-space: nowrap;}
+.common-tbl-subtitle button { margin:0.2em 0.1em 0.2em 0em; }
+
+/* ============================== */
+/* tab */
+/*
+    <div class="common-div-cushion">
+        <table class="common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="UD-td-entity" tab="" entity_type="player" data-i18n="(UD)managing player"><!-- 연동선수 --></td>
+                    <td class="UD-td-entity" tab="" entity_type="team"   data-i18n="(UD)managing team"  ><!-- 관리 팀 --></td>
+                    <td class="UD-td-entity" tab="" entity_type="league" data-i18n="(UD)managing league"><!-- 관리 리그 --></td>
+                    <td tab="space"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ */
+/* ============================== */
+.common-tbl-tab
+{
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+.common-tbl-tab > tbody > tr > td
+{
+    padding: 0.5em 0.7em;
+    border-radius: 3em;
+    color: rgba(2, 6, 84, 1.0);
+    line-height: 1.6;
+}
+.common-tbl-tab > tbody > tr > td[tab="space"]
+{
+    width:90%;
+    border:none;
+    padding:0em 0.3em;
+    text-align: right;
+}
+.common-tbl-tab > tbody > tr > td[tab="tab"]
+{
+    color: white;
+    border-radius: 3em;
+    background-color: rgba(2, 6, 84, 1.0);
+}
+.common-tbl-tab > tbody > tr > td[tab=""]:active,
+.common-tbl-tab > tbody > tr > td[tab="tab"]:active
+{
+    background-color:rgba(2, 6, 84, 0.3);
+}
+
+/* ============================== */
+/* lineTab */
+/*
+    <div class="common-div-cushion">
+        <table class="common-tbl-lineTab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="UD-td-entity" tab="" entity_type="player" data-i18n="(UD)managing player"><!-- 연동선수 --></td>
+                    <td class="UD-td-entity" tab="" entity_type="team"   data-i18n="(UD)managing team"  ><!-- 관리 팀 --></td>
+                    <td class="UD-td-entity" tab="" entity_type="league" data-i18n="(UD)managing league"><!-- 관리 리그 --></td>
+                    <td tab="space"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ */
+/* ============================== */
+.common-tbl-lineTab
+{
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+.common-tbl-lineTab > tbody > tr > td
+{
+    padding:0.5em 0.8em;
+    border-top    : 4px solid rgb(200,200,200);
+    border-bottom : 2px solid rgba(2, 6, 84, 1.0);
+    border-left   : 2px solid rgb(200,200,200);
+    /* border-right  : 2px solid rgb(200,200,200); */
+}
+.common-tbl-lineTab > tbody > tr > td[tab="space"]
+{
+    width:90%;
+    border:none;
+    border-bottom : 2px solid rgba(2, 6, 84, 1.0);
+    border-left   : 2px solid rgb(200,200,200);
+    padding:0em 0.3em;
+}
+.common-tbl-lineTab > tbody > tr > td[tab="tab"]
+{
+    font-weight   : bold;
+    border-top    : 4px solid rgba(2, 6, 84, 1.0);
+    border-left   : 2px solid rgba(2, 6, 84, 1.0) !important;
+    border-right  : 2px solid rgba(2, 6, 84, 1.0) !important;
+    border-bottom : none;
+    color         : rgba(2, 6, 84, 1.0);
+}
+.common-tbl-lineTab > tbody > tr > td[tab=""]:active,
+.common-tbl-lineTab > tbody > tr > td[tab="tab"]:active
+{
+    background-color:rgb(220,220,220);
+}
+
+/* ============================== */
+/* button group */
+/* ============================== */
+.common-tbl-btnGroup
+{
+    border-collapse: collapse;
+    white-space: normal;
+}
+/* nowrap은 첫 번째 버튼 그룹에만 해당함 */
+.common-tbl-btnGroup > tbody > tr:nth-child(1) > td { white-space: nowrap; }
+.common-tbl-btnGroup > tbody > tr > td
+{
+    padding:0.3em 0.5em;
+}
+
+/* 색 지정 등 */
+.common-tbl-btnGroup > tbody > tr > td[tab=""],
+.common-tbl-btnGroup > tbody > tr > td[tab="tab"]
+{
+    border:1px solid rgb(2, 6, 84);;
+    color:rgb(2, 6, 84);;
+}
+.common-tbl-btnGroup > tbody > tr > td[tab="tab"]
+{
+    color:white;
+    background-color: rgb(2, 6, 84);;
+}
+.commonEvent-tbl-btnGroup > tbody > tr > td[tab=""]:active,
+.commonEvent-tbl-btnGroup > tbody > tr > td[tab="tab"]:active
+{
+    background-color: rgba(2, 6, 84, 0.4);;
+}
+.common-tbl-btnGroup > tbody > tr > td[tab="space"]
+{
+    width:90%;
+}
+
+/* ============================== */
+/* 테이블 기본 */
+/* ============================== */
+.common-tbl-default
+{
+}
+.common-tbl-default > thead > tr > td,
+.common-tbl-default > thead > tr > th,
+.common-tbl-default > tbody > tr > td,
+.common-tbl-default > tbody > tr > th
+{
+    padding:0.4em;
+    line-height: 1.6;
+}
+
+/* ============================== */
+/* common-tbl */
+/* ============================== */
+.common-tbl-sort
+{
+    border-collapse:collapse;
+}
+.common-tbl-sort { border:1px solid rgb(180,180,180); }
+.common-tbl-sort > thead > tr > th,
+.common-tbl-sort > tbody > tr > th
+{
+    padding:0.4em;
+    background-color:rgb(230,230,230);
+    border:1px solid rgb(180,180,180);
+    white-space: nowrap;
+    text-align:center;
+}
+.common-tbl-sort > thead > tr > td,
+.common-tbl-sort > tfoot > tr > td,
+.common-tbl-sort > tbody > tr > td
+{
+    padding:0.4em;
+    border:1px solid rgb(180,180,180);
+}
+
+/* 정렬 상태에 따른 컨텐츠 */
+.common-tbl-sort > thead > tr > th[sort_status="not"]:after  { content: ""; }
+.common-tbl-sort > thead > tr > th[sort_status="desc"]:after { content: " ▼"; }
+.common-tbl-sort > thead > tr > th[sort_status="asc"]:after  { content: " ▲"; }
+
+/* ============================== */
+/* common-tbl */
+/* ============================== */
+.common-tbl-normal
+{
+    border-collapse:collapse;
+}
+.common-tbl-normal > thead > tr > th,
+.common-tbl-normal > tbody > tr > th
+{
+    padding:0.4em;
+    background-color:rgb(230,230,230);
+    white-space: nowrap;
+    text-align:center;
+}
+.common-tbl-normal > thead > tr > td,
+.common-tbl-normal > tfoot > tr > td,
+.common-tbl-normal > tbody > tr > td
+{
+    padding:0.4em;
+}
+
+/*
+    class="common-tbl-normal" tbl-type="noborder"
+*/
+.common-tbl-normal[tbl-type="normal"]                       { border:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="normal"]    > thead > tr > th  { border:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="normal"]    > tbody > tr > th  { border:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="normal"]    > tbody > tr > td  { border:1px solid rgb(180,180,180); }
+
+.common-tbl-normal[tbl-type="noborder"]                     { border:none; }
+.common-tbl-normal[tbl-type="noborder"]  > thead > tr > th  { border:none; }
+.common-tbl-normal[tbl-type="noborder"]  > tbody > tr > th  { border:none; }
+.common-tbl-normal[tbl-type="noborder"]  > tbody > tr > td  { border:none; }
+
+.common-tbl-normal[tbl-type="rowborder"]                    { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="rowborder"] > thead > tr > th  { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
+
+/* ============================== */
+/* 슬라이드 입력폼용 테이블 */
+/* ============================== */
+.common-tbl-slideformFooterBtn
+{
+    width:calc(100%);
+    /* max-width:300px; */
+    margin:1em auto;
+    border-collapse:collapse;
+}
+.common-tbl-slideformFooterBtn > thead > tr > th,
+.common-tbl-slideformFooterBtn > tbody > tr > th
+{
+    padding:0em;
+    background-color:rgb(230,230,230);
+    white-space: nowrap;
+    text-align:center;
+}
+.common-tbl-slideformFooterBtn > thead > tr > td,
+.common-tbl-slideformFooterBtn > tfoot > tr > td,
+.common-tbl-slideformFooterBtn > tbody > tr > td
+{
+    padding:0em;
+}
+.common-tbl-slideformFooterBtn                     { border:none; }
+.common-tbl-slideformFooterBtn  > thead > tr > th  { border:none; }
+.common-tbl-slideformFooterBtn  > tbody > tr > th  { border:none; }
+.common-tbl-slideformFooterBtn  > tbody > tr > td  { border:none; }
+
+.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td          { width:100%; }
+.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td > button { width:100%; padding:0.6em; }
+
+.common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td:nth-child(1) { width:20%;  padding-right : 0.3em; }
+.common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td:nth-child(2) { width:100%; padding-left  : 0.3em; }
+.common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td > button     { width:100%; padding:0.6em; }
+
+
+/* ============================== */
+/* 집계용 테이블 */
+/* ============================== */
+.common-tbl-summary
+{
+    white-space: nowrap;
+    min-width:15em;
+    border-collapse: collapse;
+    margin:1em auto;
+}
+.common-tbl-summary > tbody > tr > * { padding:0.4em; border:1px solid rgb(150,150,150); }
+.common-tbl-summary > tbody > tr > th
+{
+    font-weight: normal;
+    background-color: rgb(230,230,230);
+}
+
+/* ============================== */
+/* TABLE */
+/* =============z================= */
+/* horizon table */
+.common-tbl-horizon
+{
+    border-collapse: collapse;
+}
+
+.common-tbl-horizon > tbody > tr > * { padding:0.4em; border: 1px solid rgb(150,150,150); }
+.common-tbl-horizon > tbody > tr > th { text-align:right; background-color: rgb(230,230,230); }
+.common-tbl-horizon > tbody > tr > td { text-align:center; }
+
+/* tr line */
+.common-tbl-trLine {
+    border-collapse: collapse;
+}
+.common-tbl-trLine > tbody > tr > td { border-bottom:1px dashed grey; }
+
+/* ============================== */
+/* TABLE : 세로형 테이블 */
+/* ============================== */
+.common-tbl-vertical
+{
+    text-align:center;
+    border-collapse:collapse;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+.common-tbl-vertical > thead > tr > th,
+.common-tbl-vertical > tbody > tr > th,
+.common-tbl-vertical > tbody > tr > td
+{
+    padding:0.4em;
+}
+.common-tbl-vertical[tbl-type="normal"]   { border:1px solid rgb(180,180,180); }
+.common-tbl-vertical[tbl-type="normal"]   > tbody > tr > th { background-color:rgb(230,230,230); border:1px solid rgb(180,180,180); }
+.common-tbl-vertical[tbl-type="normal"]   > tbody > tr > th { width: 5%;  text-align:right; font-weight:bold; }
+.common-tbl-vertical[tbl-type="normal"]   > tbody > tr > td { width: 95%; text-align:left;  border:1px solid rgb(180,180,180); white-space:normal;}
+
+.common-tbl-vertical[tbl-type="noborder"] { border:none; }
+.common-tbl-vertical[tbl-type="noborder"] > thead > tr > th { background-color: rgba(0,0,0,0); }
+.common-tbl-vertical[tbl-type="noborder"] > tbody > tr > th { width: 5%;  text-align:right; border:none; font-weight:bold; }
+.common-tbl-vertical[tbl-type="noborder"] > tbody > tr > td { width: 95%; text-align:left;  border:none; white-space:normal; }
+
+.common-tbl-vertical[tbl-type="rowborder"] { border:none; }
+.common-tbl-vertical[tbl-type="rowborder"] > thead > tr > th { background-color: rgba(0,0,0,0); border:none; }
+.common-tbl-vertical[tbl-type="rowborder"] > tbody > tr > th { width: 5%;  text-align:right; border:none; font-weight:bold; }
+.common-tbl-vertical[tbl-type="rowborder"] > tbody > tr > td { width: 95%; text-align:left;  border:none; white-space:normal; }
+
+.common-tbl-vertical[tbl-type="rowborder"] > tbody > tr > th,
+.common-tbl-vertical[tbl-type="rowborder"] > tbody > tr > td
+{
+    border-top:1px solid rgb(220,220,220);
+}
+.common-tbl-vertical[tbl-type="rowborder"] > tbody > tr:nth-child(1) > th,
+.common-tbl-vertical[tbl-type="rowborder"] > tbody > tr:nth-child(1) > td
+{
+    border-top:none;
+}
+
+/* ============================== */
+/* TABLE : 테이블 안에 테이블을 활용할 시 */
+/* ============================== */
+.common-tbl-inside
+{
+    width:100%;
+    border-collapse:collapse;
+}
+
+/* ============================== */
+/* TABLE : 라디오 버튼용 */
+/* ============================== */
+.common-tbl-radio
+{
+    line-height: 1.4;
+    width:100%;
+}
+.common-tbl-radio > tbody > tr > td:nth-child(1) { width: 1%;  }
+.common-tbl-radio > tbody > tr > td:nth-child(2) { width: 99%; }
+.common-tbl-radio > tbody > tr > td
+{
+    vertical-align: top;
+    padding:0.3em;
+}
+.common-tbl-radio > tbody > tr > td > label
+{
+    display:block;
+}
+
+.common-tbl-nobold > thead > tr > th,
+.common-tbl-nobold > tbody > tr > th
+{
+    font-weight:normal;
+}

@@ -1,0 +1,85 @@
+<ons-page id="SAPP">
+
+    <!-- ========================= -->
+    <!-- 페이지 타이틀 -->
+    <!-- ========================= -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="SAPP.close(true);"></gg-backbtn></div>
+        <div class="center"><span>앱 업데이트</span></div>
+    </ons-toolbar>
+
+    <!-- =============== -->
+    <!-- 안드로이드 -->
+    <!-- =============== -->
+    <hr class="common-hr-padding"/>
+    <div class="common-div-cushion">
+        <p class="common-tag-fontsize12 common-p-title">안드로이드- 구글 플레이</p>
+        <a class="common-tag-fontsize11" href="https://play.google.com/store/apps/details?id=com.yogimoim">앱 업데이트 바로가기</a>
+    </div>
+
+    <!-- =============== -->
+    <!-- iOS -->
+    <!-- =============== -->
+    <hr class="common-hr-padding"/>
+    <div class="common-div-cushion">
+        <p class="common-tag-fontsize12 common-p-title">iOS - 앱 스토어</p>
+        <a class="common-tag-fontsize11" href="https://apps.apple.com/us/app/%EB%AA%A8%EC%9E%84%EC%9D%80%EC%95%BC%EA%B5%AC/id6751578899">앱 업데이트 바로가기</a>
+    </div>
+
+    <script>
+        var SAPP =
+        {
+            code : "SAPP",
+            Data : {},
+
+            show()
+            {
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                SAPP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SAPP.close(true);
+            }
+
+            /* localizing */
+            /* $("#SAPP").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

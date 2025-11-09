@@ -1,0 +1,64 @@
+<ons-page id="UMAN">
+
+    <style>
+        #UMAN-img-title
+        {
+            display: block;
+            max-width: 320px;
+            max-height: 30px;
+        }
+    </style>
+
+    <ons-tabbar id="UMAN-tabbar" position="bottom">
+        <ons-tab page="./app/contents/A00-user/A11-UserMainHome.html"   label="홈"></ons-tab>
+        <ons-tab page="./app/contents/A00-user/A12-UserMainGrp.html"  label="참가"></ons-tab>
+        <ons-tab page="./app/contents/A00-user/A13-UserMainGames.html"  label="이력"></ons-tab>
+        <ons-tab page="./app/contents/A00-user/A14-UserMainManage.html" label="설정"></ons-tab>
+    </ons-tabbar>
+
+    <script>
+
+        var UMAN =
+        {
+            code: "UMAN",
+            Data:
+            {
+                lastTabIndex : 0, /* 전체 : 마지막으로 선택한 탭 */
+            },
+
+            /* ============================== */
+            /* getPageParam for recovery */
+            /* ============================== */
+            getPageParam()
+            {
+                /* 페이지 파라미터 : 자세한 주석은 해당 함수에 있음 */
+                let pageDat = Navigation.getPageParam();
+                Navigation.executeShow();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ====================== */
+            /* event */
+            /* ====================== */
+
+            /* ====================== */
+            /* init page */
+            /* ====================== */
+
+            /* localizing */
+            $("#UMAN").i18n();
+
+            /* localizing ons-tabbar */
+            // $("#UMAN-tabbar .tabbar__label").each(function()
+            // {
+            //     let labelBefore = $(this).parents("ons-tab").attr("label");
+            //     let label = $.i18n(labelBefore);
+            //     $(this).html(label);
+            // });
+
+        }); /* end ready */
+    </script>
+</ons-page>
+

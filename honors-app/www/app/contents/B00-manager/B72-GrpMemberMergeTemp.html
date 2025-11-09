@@ -1,0 +1,178 @@
+<ons-page id="GMMT">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="GMMT.close(true);"></gg-backbtn></div>
+        <div class="center">임시멤버병합</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 선택한 유저 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <p class="common-p-title">선택한 임시유저</p>
+        <div id="GMMT-div-selectedUser"></div>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- 병합대상 멤버 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <p class="common-p-title">병합대상</p>
+        <style>
+            #GMMT-input-searchKeyword
+            {
+                width:13em;
+                font-size:1em;
+                line-height:1.5;
+                vertical-align: middle;
+            }
+            #GMMT-btn-search
+            {
+                padding-left  : 1em;
+                padding-right : 1em;
+                font-size:1em;
+                line-height:1.5;
+                vertical-align: middle;
+            }
+        </style>
+        <div class="common-div-cushion">
+            <input type="text" id="GMMT-input-searchKeyword" class="common-input-text"/>
+            <button id="GMMT-btn-search" class="common-btn-outline">검색</button>
+        </div>
+        <div id="GMMT-div-searchResult" style="margin-top:0.5em;"></div>
+    </div>
+
+    <script>
+        var GMMT =
+        {
+            code : "GMMT",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(GMMT.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); GMMT.close(true); return; }
+                if(GMMT.Data.userno     == undefined) { Common.toast("잘못된 접근입니다."); GMMT.close(true); return; }
+
+                /* 선택한 그룹멤버 표시 */
+                let mGrpMember = Api.GrpMember.selectByPkForMng(GMMT.Data.grpno, GMMT.Data.userno, GGF.none, GGF.toast);
+                if(mGrpMember == null)
+                {
+                    Common.toast("잘못된 접근입니다.");
+                    GMMT.close(true);
+                    return;
+                }
+                $("#GMMT-div-selectedUser").html(mGrpMember.make());
+
+                /* 멤버 검색 */
+                $("#GMMT-btn-search").click();
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            /* 검색 */
+            $("#GMMT-btn-search").click(function()
+            {
+                /* validation */
+                let keyword = $("#GMMT-input-searchKeyword").val();
+                if(Validation.Common.hasSpecialChar(keyword))
+                    return Common.toast("검색어에 특수문자를 포함할 수 없습니다.", "warning");
+
+                /* search */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* sendData */
+                    let mGrpMembers = Api.GrpMember.selectByKeywordForAll(GMMT.Data.grpno, keyword);
+
+                    /* fileter temp user */
+                    let models = mGrpMembers.getModels();
+                    let modelsFiletered = [];
+                    for(let i in models)
+                    {
+                        let model = models[i];
+                        if(model.isUsertypeTemp() == false)
+                            modelsFiletered.push(model);
+                    }
+                    mGrpMembers.models = modelsFiletered;
+                    mGrpMembers.makeForChoose("#GMMT-div-searchResult");
+
+                    /* 선택버튼 누를 시 */
+                    $("#GMMT-div-searchResult .MGrpMember-make-btn-choose").off("click").on("click", function()
+                    {
+                        let grpno = GMMT.Data.grpno;
+                        let userno = GMMT.Data.userno;
+                        let target = $(this).attr("userno");
+                        let process = function()
+                        {
+                            Common.showProgress();
+                            setTimeout(function()
+                            {
+                                let mApiResponse = Api.GrpMember.mergeTempToMemberForMng(grpno, userno, target);
+                                if(mApiResponse.isSuccess())
+                                {
+                                    Common.hideProgress();
+                                    GMMT.close(true);
+                                    return;
+                                }
+                                Common.hideProgress();
+                            }, ajaxDelayTime);
+                        };
+                        Common.confirm2("선택한 멤버로 병합처리하시겠습니까? 병합처리 후 이 임시멤버는 사라집니다.", process);
+                    });
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GMMT.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GMMT.close(true);
+            }
+
+            /* localizing */
+            /* $("#GMMT").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

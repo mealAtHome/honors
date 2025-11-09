@@ -1,0 +1,265 @@
+<ons-page id="GMDT">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="GMDT.close(true);"></gg-backbtn></div>
+        <div class="center">멤버상세</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 선택 탭 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <table class="GMDT-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="GMDT-td-searchtype" val="detail" tab="tab" >상세</td>
+                    <td class="GMDT-td-searchtype" val="cls"    tab=""    >일정</td>
+                    <td class="GMDT-td-searchtype" val="settle" tab=""    >미임급</td>
+                    <td class="GMDT-td-searchtype" val="point"  tab=""    >잔여금</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- 멤버상세 -->
+    <!-- ========================= -->
+    <div class="GMDT-div-tab common-div-cushion" tab="detail">
+        <p class="common-p-title">멤버정보</p>
+        <table class="common-tbl-normal common-tag-fontsize09" tbl-type="normal">
+            <tbody>
+                <tr><th>유저타입</th><td><span id="GMDT-span-usertype"></span></td></tr>
+                <tr><th>직위</th><td><span id="GMDT-span-position"></span></td></tr>
+                <tr><th>이름</th><td><span id="GMDT-span-name"></span></td></tr>
+                <tr><th>출생년도</th><td><span id="GMDT-span-birthyear"></span></td></tr>
+                <tr><th>전화번호</th><td><span id="GMDT-span-phone"></span></td></tr>
+                <tr><th>자차여부</th><td><span id="GMDT-span-hascarflg"></span></td></tr>
+                <tr><th>잔여금</th><td><span id="GMDT-span-point"></span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 일정이력 -->
+    <!-- ========================= -->
+    <div class="GMDT-div-tab common-div-cushion" tab="cls" style="display:none;">
+        <p class="common-p-title">일정이력</p>
+        <div id="GMDT-div-clsList"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 미입금 -->
+    <!-- ========================= -->
+    <div class="GMDT-div-tab common-div-cushion" tab="settle" style="display:none;">
+        <p class="common-p-title">미입금</p>
+        <div id="GMDT-div-clssettleList"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 잔여금 -->
+    <!-- ========================= -->
+    <style>
+        #GMDT-tbl-pointInject {
+            width: 100%;
+        }
+        #GMDT-tbl-pointInject > tbody > tr > td:nth-child(1) { width:35%; }
+        #GMDT-tbl-pointInject > tbody > tr > td:nth-child(2) { width:55%; }
+        #GMDT-tbl-pointInject > tbody > tr > td:nth-child(3) { width:10%; }
+    </style>
+    <div class="GMDT-div-tab common-div-cushion" tab="point" style="display:none;">
+        <p class="common-p-title">잔여금</p>
+        <div class="common-div-cushionUD">
+            <table id="GMDT-tbl-pointInject" class="common-tbl-normal" tbl-type="rowborder">
+                <thead>
+                    <tr>
+                        <th>투여액</th>
+                        <th>비고</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input id="GMDT-input-point"     type="number" class="common-input-text common-tag-fontsize10" style="width:100%;"/></td>
+                        <td><input id="GMDT-input-pointmemo" type="text"   class="common-input-text common-tag-fontsize10" style="width:100%;"/></td>
+                        <td><button id="GMDT-btn-injectPoint" class="common-btn-outline common-tag-fontsize09">투여</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr class="common-hr-full"/>
+        <div id="GMDT-div-pointhistList"></div>
+    </div>
+
+    <script>
+        var GMDT =
+        {
+            code : "GMDT",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(GMDT.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); GMDT.close(); return; }
+                if(GMDT.Data.userno     == undefined) { Common.toast("잘못된 접근입니다."); GMDT.close(); return; }
+                if(GMDT.Data.searchtype == undefined) { GMDT.Data.searchtype = "detail"; } /* 기본값 */
+
+                /* init */
+                $(`.GMDT-td-searchtype[val='${GMDT.Data.searchtype}']`).click();
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            $(".GMDT-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("val");
+                $(".GMDT-td-searchtype").removeAttr("tab");
+                $(this).attr("tab", "tab");
+
+                /* save selected */
+                GMDT.Data.searchtype = searchtype;
+
+                /* process */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let grpno = GMDT.Data.grpno;
+                        let userno = GMDT.Data.userno;
+
+                        /* 탭별표시 */
+                        switch(searchtype)
+                        {
+                            case "detail":
+                            {
+                                let mGrpMember = Api.GrpMember.selectByPkForMng(grpno, userno, GGF.none, GGF.toast);
+                                let mGrpMemberUser = mGrpMember.getMUser();
+                                $("#GMDT-span-usertype").text(mGrpMemberUser.getUsertypeCvrt());
+                                $("#GMDT-span-position").text(mGrpMember.getGrpmtypeCvrt() + (Common.isEmpty(mGrpMember.getGrpmposition()) ? "" : ` (${mGrpMember.getGrpmposition()})`));
+                                $("#GMDT-span-name").text(mGrpMemberUser.getName());
+                                $("#GMDT-span-birthyear").text(mGrpMemberUser.getBirthyear());
+                                $("#GMDT-span-phone").text(mGrpMemberUser.getPhone());
+                                $("#GMDT-span-hascarflg").text(mGrpMemberUser.getHascarflgCvrt());
+                                $("#GMDT-span-point").text(mGrpMember.getPointWon());
+                                break;
+                            }
+                            case "point":
+                            {
+                                let mGrpMemberPointhists = Api.GrpMemberPointhist.selectLast3mByUserno(grpno, userno, GGF.none, GGF.toast);
+                                mGrpMemberPointhists.make("#GMDT-div-pointhistList");
+                                break;
+                            }
+                            case "cls":
+                            {
+                                let mClss = Api.Cls.selectAppliedFor1YearByUserno(grpno, userno, GGF.none, GGF.toast);
+                                mClss.make("#GMDT-div-clsList");
+                                break;
+                            }
+                            case "settle":
+                            {
+                                let mClssettles = Api.Clssettle.selectNotDepositedByUsernoForMng(grpno, userno, GGF.none, GGF.toast);
+                                mClssettles.make("#GMDT-div-clssettleList");
+                                break;
+                            }
+                        }
+                        /* show / hide */
+                        $(".GMDT-div-tab").hide();
+                        $(`.GMDT-div-tab[tab='${searchtype}']`).show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* =============== */
+            /* 포인트 투여 */
+            /* =============== */
+            $("#GMDT-btn-injectPoint").click(function()
+            {
+                /* ----- */
+                /* validation */
+                /* ----- */
+                let point = $("#GMDT-input-point").val();
+                let pointmemo = $("#GMDT-input-pointmemo").val();
+                if(point     == "") { Common.toast("투여액을 입력해주세요."); return; }
+                if(pointmemo == "") { Common.toast("비고를 입력해주세요."); return; }
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let grpno = GMDT.Data.grpno;
+                        let userno = GMDT.Data.userno;
+                        let mApiResponse = Api.GrpMember.updateInjectPointForMng(grpno, userno, point, pointmemo, GGF.toast, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Navigation.executeShow();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+
+                let pointWon = GGC.Common.priceWon(point);
+                Common.confirm2(`${pointWon}이 반영됩니다. 계속하시겠습니까?`, process);
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GMDT.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GMDT.close(true);
+            }
+
+            /* localizing */
+            /* $("#GMDT").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

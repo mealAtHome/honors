@@ -1,0 +1,128 @@
+<ons-page id="UALI">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="UALI.close(true);"></gg-backbtn></div>
+        <div class="center"><span data-i18n="(UALI)choose_addr">주소 리스트</span></div>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- 새로운 주소 추가 -->
+    <!-- ======================== -->
+    <style>
+        #UALI-btn-addAddr
+        {
+            display:block;
+            margin:1em auto;
+            min-width:15em;
+            font-size:1.1em;
+            padding:0.6em;
+        }
+    </style>
+    <button id="UALI-btn-addAddr" class="common-btn-outline">＋ 새로운 주소 추가</button>
+
+    <!-- ======================== -->
+    <!-- 주소리스트 -->
+    <!-- ======================== -->
+    <div id="UALI-div-userAddrList" class="common-div-scrollX"></div>
+
+    <script>
+        var UALI =
+        {
+            code : "UALI",
+
+            /*
+                ■ 유저가 주소에 대한 변경을 해야할 때,
+                option : "manage"
+
+                ■ 주문 시, 주소를 선택해야 할 때,
+                option : "order"
+             */
+            Data :
+            {
+                option : "",
+            },
+
+            show()
+            {
+                if(UALI.Data.option == undefined || UALI.Data.option == "") UALI.Data.option = GGF.Page.A1010UserAddrList.Option.MANAGE;
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mUserAddrs = Api.UserAddr.selectByExecutor();
+                    mUserAddrs.makeUserAddrs("#UALI-div-userAddrList", UALI.Data.option);
+
+                    // var position = new naver.maps.LatLng(37.3595704, 127.105399);
+
+                    // var map = new naver.maps.Map('map', {
+                    //     center: position,
+                    //     zoom: 15
+                    // });
+
+                    // var marker = new naver.maps.Marker({
+                    //     position: position,
+                    //     map: map
+                    // });
+
+                    // naver.maps.Event.addListener(map, 'click', function(e) {
+                    //     marker.setPosition(e.coord);
+                    // });
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#UALI-btn-addAddr").click(function()
+            {
+                let data =
+                {
+                    option: GGF.Page.UserAddrUpdate.Option.INSERT
+                }
+                Navigation.moveFrontPage(Navigation.Page.B20UserAddrUpdate, data);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UALI.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UALI.close(true);
+            }
+
+            /* localizing */
+            /* $("#UALI").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

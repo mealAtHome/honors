@@ -1,0 +1,103 @@
+<ons-page id="UMCL">
+
+    <!-- ----- -->
+    <!-- 선택 탭 -->
+    <!-- ----- -->
+    <div class="common-div-cushion">
+        <table class="UMCL-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="UMCL-td-searchtype" searchtype="ing"       tab="tab" >진행중</td>
+                    <td class="UMCL-td-searchtype" searchtype="endcls"    tab=""    >정산중</td>
+                    <td class="UMCL-td-searchtype" searchtype="endsettle" tab=""    >완료</td>
+                    <td class="UMCL-td-searchtype" searchtype="cancel"    tab=""    >취소</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ----- -->
+    <!-- list -->
+    <!-- ----- -->
+    <div id="UMCL-div-list" class="common-div-cushionUD"></div>
+
+    <!-- =============== -->
+    <!-- cushion for tab -->
+    <!-- =============== -->
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+
+        var UMCL =
+        {
+            code: "UMCL",
+            Data: {},
+
+            show()
+            {
+                if(Common.isEmpty(UMCL.Data.searchtype)) { UMCL.Data.searchtype = "ing"; }
+
+                /* 선택사항 복구 */
+                $(`.UMCL-td-searchtype[searchtype='${UMCL.Data.searchtype}']`).click();
+            },
+
+            close()
+            {
+                Common.confirmExit();
+            }
+        };
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* events */
+            /* ========================= */
+            $(".UMCL-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("searchtype");
+                $(".UMCL-td-searchtype").removeAttr("tab");
+                $(this).attr("tab", "tab");
+
+                /* show / hide */
+                $(".UMCL-div-byTab").hide();
+                $(`.UMCL-div-byTab[searchtype='${searchtype}']`).show();
+
+                /* save choosed */
+                UMCL.Data.searchtype = searchtype;
+
+                /* search */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mClss = Api.Cls.selectByClsstatusForUser(searchtype, GGF.none, GGF.toast);
+                    mClss.make("#UMCL-div-list");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UMCL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UMCL.close(true);
+            }
+
+            /* localizing */
+            /* $("#UMCL").i18n(); */
+
+        });
+
+    </script>
+</ons-page>

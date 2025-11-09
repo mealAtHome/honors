@@ -1,0 +1,53 @@
+/* ============================== */
+/* 안내메시지 */
+/* ============================== */
+/*
+    예제코드
+
+    <ul class="common-ul-announce">
+        <li data-i18n="(TI)uniform_announce-1"><!-- 팀의 유니폼 색상을 설정하는 곳입니다. --></li>
+    </ul>
+*/
+.common-ul-announce
+{
+    display:block;
+    padding:1em 1em 1em 2em;
+    background-color: rgb(230,230,230);
+    font-size:0.9em;
+    text-align: left;
+    line-height:1.5em;
+    list-style-type: disc;
+    margin:0em;
+}
+.common-ul-announce > li { margin-bottom:0.3em; }
+.common-ul-announce > li:nth-last-child(1) { margin-bottom:0em; }
+
+/* 배경이 없는 형태 */
+.common-ul-announceWhite
+{
+    display:block;
+    padding:0em 1em 0em 2em;
+    margin:0.5em 0em;
+    text-align: left;
+    line-height:1.6em;
+    list-style-type: disc;
+}
+.common-ul-announceWhite > li { margin-bottom:0.8em; }
+.common-ul-announceWhite > li:nth-last-child(1) { margin-bottom:0em; }
+
+/* ============================== */
+/* 생성/입력용 안내메시지 */
+/* ============================== */
+.common-ul-announce-underInputTag
+{
+    display:inline-table;
+    padding:1em 1em 1em 2em;
+    background-color: rgb(230,230,230);
+    font-size:0.9em;
+    text-align: left;
+    line-height:1.5em;
+    list-style-type: disc;
+    margin:0.5em 0em;
+}
+.common-ul-announce-underInputTag > li { margin-bottom:0.3em; }
+.common-ul-announce-underInputTag > li:nth-last-child(1) { margin-bottom:0em; }

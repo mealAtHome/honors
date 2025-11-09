@@ -1,0 +1,105 @@
+<ons-page id="CCBK">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar id="CCBK-toolbar">
+        <div class="left"><gg-backbtn onclick="CCBK.close(true);"></gg-backbtn></div>
+        <div class="center"><span>은행계좌선택</span></div>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- 컨텐츠 -->
+    <!-- ======================== -->
+
+    <!-- 계좌리스트 -->
+    <div id="CCBK-div-bankaccountList" class="common-div-cushionUD"></div>
+
+    <!-- 저장 -->
+    <button id="CCBK-btn-add" class="common-btn-outline" btn-size="large">＋ 은행계좌추가</button>
+
+    <script>
+        var CCBK =
+        {
+            code : "CCBK",
+
+            /* ===================== */
+            /* 페이지 파라메터
+
+                CCBK.Data =
+                {
+                    [*] el : 수정할 엘리먼트
+                }
+            /* ===================== */
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(CCBK.Data.el == undefined) CCBK.Data.el = "";
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 내 은행계좌리스트 조회 */
+                    let mBackaccounts = Api.Bankaccount.selectByUserno();
+                    mBackaccounts.make("#CCBK-div-bankaccountList", CCBK.Data.el);
+
+                    /* hide progress */
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ===================== */
+            /* 페이지 종료 */
+            /* ===================== */
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        } /* end CCBK */
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            $("#CCBK-btn-add").click(function()
+            {
+                Navigation.moveFrontDialog(Navigation.Page.B30UserBankacctUpdate, {});
+            });
+
+
+            /* ======================== */
+            /* page initialize */
+            /* ======================== */
+
+            /* get data from Config */
+            try
+            {
+                CCBK.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CCBK.close(true);
+            }
+
+        }); /* end ready */
+
+    </script>
+
+
+</ons-page>

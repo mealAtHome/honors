@@ -1,0 +1,119 @@
+<ons-page id="SMOD">
+
+    <style>
+        #SMOD-div-btns { margin: 0.5em; font-size: 0.9em; }
+        #SMOD-div-btns > button
+        {
+            margin:0.2em 0em;
+            box-sizing: content-box;
+        }
+        #SMOD-btn-moveBack
+        {
+            position: absolute;
+            font-size:0.9em;
+            right:0.5em;
+            top:0.5em;
+        }
+    </style>
+
+    <!-- =============== -->
+    <!-- 뒤로 -->
+    <!-- =============== -->
+    <button id="SMOD-btn-moveBack" class="common-btn-outline" btn-type="cancel">뒤로</button>
+
+    <!-- =============== -->
+    <!-- 주문 탭 -->
+    <!-- =============== -->
+    <div id="SMOD-div-btns">
+        <button class="SMOD-btn-orderstatus commonEvent-btn-radio common-btn-radio" radio_name="SMOD-btn-orderstatus" val="confirm"   tab="">대기&nbsp;<span class="SMOD-span-orderstatusCnt"></span></button>
+        <button class="SMOD-btn-orderstatus commonEvent-btn-radio common-btn-radio" radio_name="SMOD-btn-orderstatus" val="cook"      tab="">요리&nbsp;<span class="SMOD-span-orderstatusCnt"></span></button>
+        <button class="SMOD-btn-orderstatus commonEvent-btn-radio common-btn-radio" radio_name="SMOD-btn-orderstatus" val="complete"  tab="">완료&nbsp;<span class="SMOD-span-orderstatusCnt"></span></button>
+        <button class="SMOD-btn-orderstatus commonEvent-btn-radio common-btn-radio" radio_name="SMOD-btn-orderstatus" val="cancel"    tab="">취소&nbsp;<span class="SMOD-span-orderstatusCnt"></span></button>
+    </div>
+    <hr class="common-hr"/>
+    <div id="SMOD-div-orderList"></div>
+
+    <script>
+        var SMOD =
+        {
+            code: "SMOD",
+            Data : null,
+            myStore: null,
+
+
+            show()
+            {
+                /* set lastTab : 마지막으로 활성화시킨 탭 번호 저장 */
+                SMOD.Data.lastTabIndex = 2;
+
+                /* init SMOD.Data */
+                if(SMOD.Data.soOrderstatus == undefined) SMOD.Data.soOrderstatus = "confirm";
+
+                /* recovery */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    $(".SMOD-btn-orderstatus[val="+SMOD.Data.soOrderstatus+"]").click();
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+
+            $("#SMOD-btn-moveBack").click(function()
+            {
+                Navigation.moveBack();
+            });
+
+            /* ================== */
+            /* 주문검색 */
+            /* ================== */
+            $(".SMOD-btn-orderstatus").click(function()
+            {
+                let orderstatus = $(this).attr("val");
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 옵션에 따라 주문 리스트 조회 */
+                    let MClsStores = Api.Ordering.selectByOrderstatus(orderstatus, 1);
+                    MClsStores.makeOrderSimple("#SMOD-div-orderList");
+
+                    /* 상태별 건수 획득 */
+                    let storeno = GGstorage.getStoreno();
+                    let mCntStoreOrderstatus = Api.CntStoreOrderstatus.selectByStoreno(storeno);
+                    $(".SMOD-btn-orderstatus[val='confirm']  > .SMOD-span-orderstatusCnt").html(mCntStoreOrderstatus.getCntConfirm());
+                    $(".SMOD-btn-orderstatus[val='cook']     > .SMOD-span-orderstatusCnt").html(mCntStoreOrderstatus.getCntCook());
+                    $(".SMOD-btn-orderstatus[val='complete'] > .SMOD-span-orderstatusCnt").html(mCntStoreOrderstatus.getCntComplete());
+                    $(".SMOD-btn-orderstatus[val='cancel']   > .SMOD-span-orderstatusCnt").html(mCntStoreOrderstatus.getCntCancel());
+
+                    /* 선택사항 보존 */
+                    SMOD.Data.soOrderstatus = orderstatus;
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+            try
+            {
+                SMOD.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SMOD.close(true);
+            }
+
+
+        }); /* end ready */
+    </script>
+</ons-page>

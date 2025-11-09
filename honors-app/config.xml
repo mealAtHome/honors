@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.yogimoim" version="1.0.10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>모임은야구</name>
+    <description>모임관리 어플리케이션</description>
+    <author email="team.goldenglove@gmail.com" href="">
+        모임은야구
+    </author>
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <splash src="res/splash/splash02.png" />
+    <icon src="res/icon/icon-02.png" />
+    <platform name="android">
+        <content src="http://localhost/index.html" />
+        <allow-intent href="market:*" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+    </platform>
+    <platform name="ios">
+        <content src="index.html" />
+        <preference name="scheme" value="app" />
+        <preference name="hostname" value="localhost" />
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+        </config-file>
+    </platform>
+</widget>

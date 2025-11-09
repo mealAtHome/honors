@@ -1,0 +1,158 @@
+<ons-page id="CLDC">
+
+    <style>
+        .CLDC-tbl-clslineup2 { white-space: nowrap; }
+        .CLDC-tbl-clslineup2 > tbody > tr > td { text-align: center; }
+        .CLDC-input-username { width: 6em; vertical-align: middle;}
+        #CLDC-tbl-clssettle  { white-space: nowrap; }
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="CLDC.close(true);"></gg-backbtn></div>
+        <div class="center">일정상세 &gt; 일정요약</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion common-tag-fontsize09">
+        <button id="CLDC-btn-copyContent" class="common-btn-outline">내용복사</button>
+        <hr class="common-hr-paddingTop"/>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 일정요약 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <pre id="CLDC-pre-summary"></pre>
+    </div>
+
+    <script>
+        var CLDC =
+        {
+            code : "CLDC",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(CLDC.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CLDC.close(); return; }
+                if(CLDC.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CLDC.close(); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* html */
+                        let html = "";
+
+                        /* get var */
+                        let clsno = CLDC.Data.clsno;
+                        let grpno = CLDC.Data.grpno;
+
+                        /* 기본정보 */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        html += `이번일정 안내드립니다.`;
+                        html += `\n`;
+                        html += `\n■일정 : ${mCls.getClsPeriod()}`;
+                        html += `\n■모집 : ${mCls.getClsapplyPeriod()}`;
+                        html += `\n■장소 : ${mCls.getClsground()} (${mCls.getClsgroundaddr()})`;
+                        html += `\n■참가비 : ${mCls.getClsapplybillpriceWon()}`;
+                        html += `\n■주관 : (주) ${mCls.getClsusernoadmname()} ${Common.isEmpty(mCls.getClsusernosubname()) ? "" : `, (부) ${mCls.getClsusernosubname()}`}`;
+                        html += `\n■특이사항`;
+                        html += `\n`;
+
+                        let hour = GGdate.fromStr(mCls.getClsapplystartdt()).getHours();
+                        let daydiff = GGdate.getDaysBetweenDates(null, mCls.getClsapplystartdt());
+                        let daystring = "";
+                        if      (daydiff == 0) daystring = "오늘";
+                        else if (daydiff == 1) daystring = "내일";
+                        else if (daydiff == 2) daystring = "모레";
+                        else if (daydiff < 0) daystring = `${Math.abs(daydiff)}일 전`;
+                        else
+                            daystring = `${daydiff}일 후`;
+
+                        html += `\n참가신청 ${daystring} ${hour}시 부터!!!`;
+                        html += `\n참가신청 ${daystring} ${hour}시 부터!!!`;
+                        html += `\n참가신청 ${daystring} ${hour}시 부터!!!`;
+                        html += `\n참가신청 ${daystring} ${hour}시 부터!!!`;
+
+                        html += `\n`;
+                        html += `\n감사합니다.`;
+
+                        $("#CLDC-pre-summary").html(html);
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#CLDC-btn-copyContent").on("click", function()
+            {
+                /* copy content */
+                let content = $("#CLDC-pre-summary").html();
+                Common.copyToClipboard(content);
+            });
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CLDC.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CLDC.close(true);
+            }
+
+            /* localizing */
+            /* $("#CLDC").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

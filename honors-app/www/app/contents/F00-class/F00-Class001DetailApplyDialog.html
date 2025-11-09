@@ -1,0 +1,237 @@
+<ons-page id="CLSA">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="CLSA-toolbar">
+        <div class="left"><gg-backbtn onclick="CLSA.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="CLSA-span-title">참가신청</span></div>
+    </ons-toolbar>
+
+    <!-- --------------- -->
+    <!-- 탭 -->
+    <!-- --------------- -->
+    <div class="common-div-formChild">
+
+        <div id="CLSA-div-tabBtn" class="common-div-cushionUD">
+            <button class="CLSA-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CLSA-btn-tab" val="apply"  tab="">본인기명</button>
+            <button class="CLSA-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CLSA-btn-tab" val="invite" tab="">지인기명</button>
+            <!-- <button class="CLSA-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CLSA-btn-tab" val="origin" tab="tab">기존멤버에서</button> -->
+            <!-- <button class="CLSA-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CLSA-btn-tab" val="temp"   tab="">임시멤버생성</button> -->
+        </div>
+        <hr class="common-hr-paddingUD"/>
+
+        <!-- --------------- -->
+        <!-- 안내 -->
+        <!-- --------------- -->
+        <ul class="common-ul-announce">
+            <li>참가기명 후 불참 시, 요금이 청구됩니다.</li>
+            <li>지인기명 시, 요금은 신청자에게 청구됩니다.</li>
+        </ul>
+
+        <!-- --------------- -->
+        <!-- 본인기명 -->
+        <!-- --------------- -->
+        <div class="CLSA-div-tabDiv" screen-tab="apply" style="display:none;">
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>본인기명</span>
+                <span class="CLSA-span-choosedPosition"></span>
+            </div>
+        </div>
+
+        <!-- --------------- -->
+        <!-- 지인기명 -->
+        <!-- --------------- -->
+        <div class="CLSA-div-tabDiv" screen-tab="invite" style="display:none;">
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>지인기명</span>
+                <span class="CLSA-span-choosedPosition"></span>
+            </div>
+
+        </div>
+
+        <!-- --------------- -->
+        <!-- 입력정보 -->
+        <!-- --------------- -->
+
+        <!-- 이름 -->
+        <div class="common-div-formField">
+            <span>이름(실명)</span>
+            <span>특수문자는 사용하실 수 없습니다.</span>
+            <input id="CLSA-input-username" type="text" class="common-input-field" placeholder="이름"/>
+        </div>
+
+        <!-- 비고 -->
+        <div class="common-div-formField">
+            <span>비고</span>
+            <span>특이사항이 있으면 입력 부탁드립니다.</span>
+            <textarea id="CLSA-textarea-etc" type="text" class="common-textarea-field" rows="4"></textarea>
+        </div>
+
+        <!-- 다음으로 -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="CLSA-btn-apply" class="common-btn-inline">참가하기</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- formChild -->
+
+    <script>
+        var CLSA =
+        {
+            code : "CLSA",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(CLSA.Data.grpno))    { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.clsno))    { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.teamname)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.orderno))  { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.teamnick)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.position)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.bill))     { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.tab))      { CLSA.Data.tab = "apply"; }
+                if(Common.isEmpty(CLSA.Data.name))     { CLSA.Data.name = ""; }
+
+                /* 화면 표시 */
+                $(`.CLSA-btn-tab[val=${CLSA.Data.tab}]`).click();
+
+                /* 지원 포지션 */
+                $(".CLSA-span-choosedPosition").text(`${CLSA.Data.teamnick}, ${CLSA.Data.position}, ${CLSA.Data.orderno}`);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* =============== */
+            /* 탭 */
+            /* =============== */
+            $(".CLSA-btn-tab").click(function()
+            {
+                /* --------------- */
+                /* 탭 전환 */
+                /* --------------- */
+                let val = $(this).attr("val");
+                CLSA.Data.tab = val;
+                $(".CLSA-div-tabDiv").hide();
+                $(`.CLSA-div-tabDiv[screen-tab="${val}"]`).show();
+
+                /* --------------- */
+                /* 탭에 따라 별도처리 */
+                /* --------------- */
+                switch(val)
+                {
+                    case "apply":
+                    {
+                        if(Common.isEmpty(CLSA.Data.name))
+                        {
+                            Common.showProgress();
+                            setTimeout(function()
+                            {
+                                let mGrpMember = Api.GrpMember.selectMeByGrpno(CLSA.Data.grpno);
+                                if(mGrpMember == null)
+                                {
+                                    Common.toast("잘못된 접근입니다.");
+                                    CLSA.close(true);
+                                    return;
+                                }
+                                let mUser = mGrpMember.getMUser();
+                                CLSA.Data.name = mUser.getName();
+                                $("#CLSA-input-username").val(CLSA.Data.name);
+
+                                Common.hideProgress();
+                            }, ajaxDelayTime);
+                        }
+                        else
+                        {
+                            $("#CLSA-input-username").val(CLSA.Data.name);
+                        }
+                        $("#CLSA-input-username").prop("disabled", true);
+                        break;
+                    }
+                    case "invite":
+                    {
+                        $("#CLSA-input-username").prop("disabled", false);
+                        $("#CLSA-input-username").val("");
+                        break;
+                    }
+                }
+            });
+
+            /* 참가신청 */
+            $("#CLSA-btn-apply").click(function()
+            {
+                let grpno = CLSA.Data.grpno;
+                let clsno = CLSA.Data.clsno;
+                let teamname = CLSA.Data.teamname;
+                let orderno = CLSA.Data.orderno;
+                let username = $("#CLSA-input-username").val().trim();
+                let etc = $("#CLSA-textarea-etc").val().trim();
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.Clslineup2.updateApplyRegist(grpno, clsno, teamname, orderno, username, etc, GGF.toast, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.hideProgress();
+                            CLSA.close(true);
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2(`참가신청하시겠습니까?`, process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CLSA.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CLSA.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

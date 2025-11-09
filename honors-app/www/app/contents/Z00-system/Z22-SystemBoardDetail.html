@@ -1,0 +1,99 @@
+<ons-page id="SBDL">
+
+    <!-- ========================= -->
+    <!-- 페이지 타이틀 -->
+    <!-- ========================= -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="SBDL.close(true)"></gg-backbtn></div>
+        <div class="center"><span>공지사항</span></div>
+    </ons-toolbar>
+
+    <!-- 타이틀 -->
+    <div id="SBDL-div-title" class="common-div-cuhsion"></div>
+
+    <!-- 컨텐츠 -->
+    <div id="SBDL-div-content" class="common-div-cuhsion"></div>
+
+    <script>
+        var SBDL =
+        {
+            code : "SBDL",
+
+            /* 페이지 데이터 */
+            Data :
+            {
+                sbindex : "",
+            },
+
+            show()
+            {
+                if(SBDL.Data.sbindex == undefined) SBDL.Data.sbindex  = "";
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 공지사항 조회 */
+                    let mSystemBoards = Api.SystemBoard.selectOpenByPk(SBDL.Data.sbindex);
+                    if(mSystemBoards.getModels().length > 0)
+                    {
+                        let mSystemBoard = mSystemBoards.getModel();
+                        let url = mSystemBoard.getFullUrl()+"/index.php";
+                        $("#SBDL-div-content").load(url);
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#SBDL-btn-close").click(function(e)
+            {
+                e.stopPropagation();
+                SBDL.close(true);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                SBDL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SBDL.close(true);
+            }
+
+            /* localizing */
+            /* $("#SBDL").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

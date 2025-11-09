@@ -1,0 +1,30 @@
+.common-img-userBig      { border:1px solid rgb(230,230,230); width: 6em; height: 6em; border-radius: 100%; vertical-align: middle; }
+.common-img-userMiddle   { border:1px solid rgb(230,230,230); width: 4em; height: 4em; border-radius: 100%; vertical-align: middle; }
+.common-img-userMini     { border:1px solid rgb(230,230,230); width: 2em; height: 2em; border-radius: 100%; vertical-align: middle; }
+.common-img-leagueBig    {                                      width: 6em; height: 6em; border-radius:  10%; vertical-align: middle; }
+.common-img-leagueMiddle {                                      width: 4em; height: 4em; border-radius:  10%; vertical-align: middle; }
+.common-img-leagueMini   {                                      width: 2em; height: 2em; border-radius:  10%; vertical-align: middle; }
+.common-img-teamBig      {                                      width: 6em; height: 6em; border-radius:  10%; vertical-align: middle; }
+.common-img-teamMiddle   {                                      width: 4em; height: 4em; border-radius:  10%; vertical-align: middle; }
+.common-img-teamMini     {                                      width: 2em; height: 2em; border-radius:  10%; vertical-align: middle; }
+
+.common-img-storeBig     {                                      width: 6em; height: 6em; border-radius:  10%; vertical-align: middle; }
+.common-img-storeMiddle  {                                      width: 4em; height: 4em; border-radius:  10%; vertical-align: middle; }
+.common-img-storeMini    {                                      width: 2em; height: 2em; border-radius:  10%; vertical-align: middle; }
+
+.common-img-big     { width: 6em; height: 6em; vertical-align: middle; border-radius: 10%; }
+.common-img-middle  { width: 4em; height: 4em; vertical-align: middle; border-radius: 10%; }
+.common-img-mini    { width: 2em; height: 2em; vertical-align: middle; border-radius: 10%; }
+
+.common-img-3       { width: 3em; height: 3em; vertical-align: middle; border-radius: 10%; }
+.common-img-2       { width: 2em; height: 2em; vertical-align: middle; border-radius: 10%; }
+
+.common-img-service
+{
+    width:3em;
+}
+
+.common-img-tap:active
+{
+    border: 1px solid rgb(2, 6, 84);
+}

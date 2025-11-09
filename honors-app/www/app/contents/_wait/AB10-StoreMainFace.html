@@ -1,0 +1,80 @@
+<ons-page id="SMFC">
+
+    <!-- ========================= -->
+    <!-- 매장정보 -->
+    <!-- ========================= -->
+    <div>
+        <table class="common-tbl-subtitle">
+            <tbody>
+                <tr>
+                    <td><span data-i18n="">매장정보</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="SMFC-div-storeInfo" class="common-div-card"></div>
+    </div>
+    <hr class="common-hr-normal"/>
+
+    <!-- =============== -->
+    <!-- 매장 상태 -->
+    <!-- =============== -->
+    <div id="SMFC-div-storeStatus"></div>
+    <hr class="common-hr-normal"/>
+
+    <script>
+        var SMFC =
+        {
+            code: "SMFC",
+            Data : {},
+
+
+            show()
+            {
+                /* --------------- */
+                /* vars */
+                /* --------------- */
+
+                /* --------------- */
+                /* init */
+                /* --------------- */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 매장 조회 */
+                    let mStore = Api.Store.selectMyStore();
+                    if(mStore != null)
+                    {
+                        let html = mStore.makeStoreHorizon();
+                        $("#SMFC-div-storeInfo").html(html);
+                        mStore.makeStoreStatusDetail("#SMFC-div-storeStatus");
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+            /* get data from Config */
+            try
+            {
+                SMFC.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SMFC.close(true);
+            }
+
+        }); /* end ready */
+    </script>
+</ons-page>

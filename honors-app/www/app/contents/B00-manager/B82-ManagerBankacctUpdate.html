@@ -1,0 +1,214 @@
+<ons-page id="MBKU">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar id="MBKU-toolbar" class="MBKU-element-viewMode">
+        <div class="left"><gg-backbtn onclick="MBKU.close(true);"></gg-backbtn></div>
+        <div class="center">계좌등록/수정</div>
+    </ons-toolbar>
+
+    <!-- ================ -->
+    <!-- 은행 선택 -->
+    <!-- ================ -->
+    <div class="common-div-mass">
+        <p class="common-p-insertTitle">
+            <span>은행선택</span>
+        </p>
+        <div id="MBKU-div-banks"></div>
+    </div>
+
+    <!-- ================ -->
+    <!-- 이름등록 -->
+    <!-- ================ -->
+    <div class="common-div-mass">
+        <p class="common-p-insertTitle">
+            <span>계좌이름</span>
+            <span>(구분하기 쉬운 별칭을 붙여주세요)</span>
+        </p>
+        <input
+            id="MBKU-inputText-baccnickname"
+            type="text"
+            class="common-text-insertPage common-input-text"
+            style="width:70%;"
+        >
+    </div>
+
+    <!-- ================ -->
+    <!-- 계좌번호등록 -->
+    <!-- ================ -->
+    <div class="common-div-mass">
+        <p class="common-p-insertTitle">
+            <span>계좌번호</span>
+            <span>(하이픈 여부 상관없음)</span>
+        </p>
+        <input
+            id="MBKU-inputText-baccacct"
+            type="text"
+            class="common-text-insertPage common-input-text"
+            style="width:70%;"
+        >
+    </div>
+
+    <!-- ================ -->
+    <!-- 예금주명 -->
+    <!-- ================ -->
+    <div class="common-div-mass">
+        <p class="common-p-insertTitle">
+            <span>예금주명</span>
+        </p>
+        <input
+            id="MBKU-inputText-baccname"
+            type="text"
+            class="common-text-insertPage common-input-text"
+            style="width:70%;"
+        >
+    </div>
+
+    <!-- ======================== -->
+    <!-- 저장하기 -->
+    <!-- ======================== -->
+    <button id="MBKU-btn-save" class="common-btn-footer">계좌등록</button>
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+        var MBKU =
+        {
+            code : "MBKU",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+
+                GGF.Page.Option.insert
+                GGF.Page.Option.update
+
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                if(MBKU.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); MBKU.close(); return; }
+                if(MBKU.Data.option == undefined) { MBKU.Data.option = GGF.Page.Option.insert; }
+                if(MBKU.Data.baccno == undefined) { MBKU.Data.baccno = ""; }
+
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* --------------- */
+                    /* get category info */
+                    /* --------------- */
+                    let mBanks = Api.Bank.selectAll();
+                    mBanks.makeBankForChoose("#MBKU-div-banks");
+
+                    /* --------------- */
+                    /* 옵션에 따른 처리 */
+                    /* --------------- */
+                    switch(MBKU.Data.option)
+                    {
+                        case GGF.Page.Option.insert:
+                        {
+                            break;
+                        }
+                        case GGF.Page.Option.update:
+                        {
+                            /* 계좌정보조회 */
+                            let mBankaccounts = Api.Bankaccount.selectByPk(MBKU.Data.baccno, "none", "toast");
+                            let mBankaccount  = mBankaccounts.getModel();
+
+                            /* 데이터 복구 */
+                            $(`#MBKU-div-banks > .MBank-makeBankForChoose-tbl-forChoose > tbody > tr > td[bankcode=${mBankaccount.bacccode}]`).click();
+                            $("#MBKU-inputText-baccnickname")  .val(mBankaccount.baccnickname);
+                            $("#MBKU-inputText-baccacct")      .val(mBankaccount.baccacct);
+                            $("#MBKU-inputText-baccname")      .val(mBankaccount.baccname);
+                            break;
+                        }
+                    }
+
+                    /* hide progress */
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Common.confirmClose();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* ========================= */
+            /* DB 업데이트 */
+            /* ========================= */
+            $("#MBKU-btn-save").click(function()
+            {
+                let process = function()
+                {
+                    /* get chosen bank */
+                    let bacccode = "";
+                    $("#MBKU-div-banks > .MBank-makeBankForChoose-tbl-forChoose > tbody > tr > td").each(function()
+                    {
+                        let bankcode = $(this).attr("bankcode");
+                        let tab      = $(this).attr("tab");
+                        if(tab == "tab")
+                            bacccode = bankcode;
+                    });
+
+                    /* make main data */
+                    let baccnickname  = $("#MBKU-inputText-baccnickname").val();
+                    let baccacct      = $("#MBKU-inputText-baccacct").val();
+                    let baccname      = $("#MBKU-inputText-baccname").val();
+
+                    /* execute api */
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let grpno = MBKU.Data.grpno;
+                        let mApiResponse = Api.Bankaccount.insertForGrp(
+                              grpno
+                            , baccnickname
+                            , bacccode
+                            , baccacct
+                            , baccname
+                            , "toast"
+                            , "toast");
+                        if(mApiResponse.isSuccess())
+                            Navigation.moveBack();
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("실행하시겠습니까?", process);
+
+            }); /* updateMenu */
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MBKU.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MBKU.close(true);
+            }
+
+        }); /* end function */
+
+    </script>
+</ons-page>

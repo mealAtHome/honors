@@ -1,0 +1,5 @@
+<?php
+
+$GLOBALS['SERVICE_LAYER'] = $SERVICE_LAYER != "" ? $SERVICE_LAYER : "cus";
+
+?>

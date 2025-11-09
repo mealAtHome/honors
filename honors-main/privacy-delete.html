@@ -1,0 +1,203 @@
+<html>
+    <head>
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta http-equiv="Content-Security-Policy">
+
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>모임은야구</title>
+
+        <!-- ========================= -->
+        <!-- fav -->
+        <!-- ========================= -->
+        <link rel="icon" href="res/fav.ico" type="image/x-icon">
+
+        <!-- ========================= -->
+        <!-- libraries -->
+        <!-- ========================= -->
+        <script src="./lib/jquery-3.3.1.min.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.messagestore.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.fallbacks.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.parser.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.emitter.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.language.js"></script>
+
+        <script src="./lib/jquery-toast-plugin-master/src/jquery.toast.js"></script>
+        <link rel="stylesheet" href="./lib/jquery-toast-plugin-master/src/jquery.toast.css" />
+
+        <style>
+            /* =============== */
+            /* top */
+            /* =============== */
+            body
+            {
+                padding:0px;
+                margin:0px;
+                background-color: rgb(210, 210, 210);
+            }
+            #index-div-top
+            {
+                display: block;
+                margin:0px auto;
+                width:1400px;
+                height:100%;
+                padding: 5px 10px;
+                box-sizing: border-box;
+                background-color: white;
+            }
+            /* =============== */
+            /* header */
+            /* =============== */
+            #index-div-header
+            {
+                display: block;
+                padding: 10px 0px;
+                border-bottom:1px solid #777;
+            }
+
+            /* =============== */
+            /* footer */
+            /* =============== */
+            #index-div-footer
+            {
+                display:block;
+                border-top:1px solid #777;
+                padding-top:10px;
+            }
+            #index-div-footer a { color:#777; }
+            #index-div-footer > div
+            {
+                display:inline-block;
+                vertical-align: top;
+                color:#777;
+                padding-right:50px;
+                font-size:0.9em;
+            }
+        </style>
+        <style>
+            #index-tbl-userinfo > tbody > tr > td { padding: 0.4em; }
+        </style>
+    </head>
+    <body>
+        <div id="index-div-top">
+            <div id="index-div-header">
+                <h1 style="font-size:1.2em; margin:0em;">모임은야구</h1>
+            </div>
+            <div id="index-div-title">
+                <h2>개인정보삭제요청</h2>
+            </div>
+            <div id="index-div-content">
+                <table class="common-tbl-normal" tbl-type="noborder">
+                    <tbody>
+                        <tr>
+                            <td>개인정보를 삭제하고 싶으시다면 아이디와 비밀번호를 입력 후, 아래의 버튼을 눌러주세요.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table id="index-tbl-userinfo" class="common-tbl-vertical" tbl-type="normal">
+                                    <tbody>
+                                        <tr>
+                                            <th>아이디</th>
+                                            <td><input id="index-input-id" type="text" class="common-input-text" /></td>
+                                        </tr>
+                                        <tr>
+                                            <th>비밀번호</th>
+                                            <td><input id="index-input-pw" type="password" class="common-input-text" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="common-div-cushionUD">
+                                    <button id="input-btn-delete" class="common-btn-outline">개인정보삭제신청</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="common-tag-block">※ 개인정보 삭제는 복구가 불가능합니다. 신중하게 결정해주세요.</span>
+                                <span class="common-tag-block">※ 개인정보 삭제신청 후, 6개월 이내에 데이터가 삭제됩니다.</span>
+                                <span class="common-tag-block">※ 삭제 신청 후, 취소는 불가합니다.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="index-div-body"></div>
+            <div id="index-div-footer">
+                <div class="index-div-content">
+                    <span>&gt; 사업자정보</span>
+                    <ul>
+                        <li>상호 : 코드주머니</li>
+                        <li>사업자등록번호 : 666-31-01249</li>
+                        <li>사업장소재지 : 경북 경주시 천북면 동산3길 23-59 101동 604호</li>
+                        <li>대표 : 서준형 (TEL:010-7417-4268)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        var scriptloaded = false;
+        var localmode = false;
+        var scriptver = 1;
+        window.onload = function()
+        {
+            /* ========================= */
+            /* load script first */
+            /* ========================= */
+            let head = document.getElementsByTagName('head')[0];
+            let scriptArr = [];
+            scriptArr.push(`./js/script/base-GGF/GGF.js?${scriptver}`);
+            scriptArr.push(`./js/script/base/serverinfo.js?${scriptver}`);
+            scriptArr.push(`./js/script/base/gg-storage.js?${scriptver}`);
+            scriptArr.push(`./js/script/base/gg-base.js?${scriptver}`);
+
+            /* recursive for load js */
+            let scriptLoad = function(scriptArr, index)
+            {
+                if(scriptArr[index] == undefined)
+                {
+                    /* set deviceKind */
+                    GGstorage.setDeviceKind(GGF.System.DeviceKind.WEB);
+
+                    /* load javascript/css */
+                    GGbase.load(function(){});
+                    return;
+                }
+
+                let script = null;
+                script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = scriptArr[index];
+                head.append(script);
+
+                script.addEventListener('load', () => {
+                    scriptLoad(scriptArr, index+1);
+                });
+            }
+            scriptLoad(scriptArr, 0);
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* set event */
+            /* ========================= */
+            $('#input-btn-delete').click(function()
+            {
+                let id = $('#index-input-id').val();
+                let pw = $('#index-input-pw').val();
+
+                if(id == '' || pw == '')
+                {
+                    alert("아이디와 비밀번호를 입력해주세요.");
+                    return;
+                }
+                Api.User.deleteUserInfo(id, pw, GGF.toast, GGF.toast);
+            });
+        });
+    </script>
+</html>

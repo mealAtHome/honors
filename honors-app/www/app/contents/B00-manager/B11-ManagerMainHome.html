@@ -1,0 +1,159 @@
+<ons-page id="MMHM">
+
+    <!-- =============== -->
+    <!-- 로그아웃 -->
+    <!-- =============== -->
+    <div class="common-div-cushion">
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <td style="text-align:left;"><button id="MMHM-btn-logout" class="common-btn-outline common-tag-fontsize09">로그아웃</button></td>
+                    <td style="text-align:right;"><button id="MMHM-btn-toUser" class="common-btn-inline  common-tag-fontsize09">유저 홈</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 그룹 -->
+    <!-- ========================= -->
+    <hr class="common-hr-padding"/>
+    <div class="common-div-cushion">
+        <div id="MMHM-div-grp"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <hr class="common-hr-padding"/>
+    <style>
+        .MMHM-btn-menu
+        {
+            min-width: 6em;
+            height: 2.4em;
+            margin: 0.4em 0.4em;
+        }
+    </style>
+    <div class="common-div-cushion">
+        <table class="common-tbl-normal" tbl-type="noborder">
+            <tbody>
+                <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-classes" >일정</button></td><td style="line-height:1.6em;">일정생성 및 관리</td></tr>
+                <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-settle"  >정산</button></td><td style="line-height:1.6em;">실제 일정 후, 정산 및 현황확인</td></tr>
+                <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-members" >멤버</button></td><td style="line-height:1.6em;">멤버정보 확인, 포인트 투여</td></tr>
+                <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-manage"  >설정</button></td><td style="line-height:1.6em;">정산 후 입금처 등 상세설정</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        var MMHM =
+        {
+            code: "MMHM",
+            Data: {},
+
+            /* =============== */
+            /* show */
+            /* =============== */
+            show()
+            {
+                if(Common.isEmpty(MMHM.Data.grpno)) { Common.toast("잘못된 접근입니다."); MMHM.close(); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 공지사항 조회 */
+                    /* let mSystemBoards = Api.SystemBoard.selectMain(); */
+                    /* mSystemBoards.makeMainBanners("#MMHM-div-systemBoard"); */
+
+                    /* 그룹정보조회 */
+                    let mGrp = Api.Grp.selectByPk(MMHM.Data.grpno);
+                    if(mGrp == null)
+                    {
+                        Common.error("그룹정보가 없습니다.");
+                        return;
+                    }
+                    $("#MMHM-div-grp").html(mGrp.make());
+
+                    /* 이 그룹의 매니저인지 여부를 확인 */
+                    if(GGstorage.isManagerOfGrp(MMHM.Data.grpno) == false)
+                    {
+                        Common.toast("매니저 권한이 없습니다.");
+                        Navigation.moveHome();
+                        return;
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+                // GGinitPage.setCartFab();
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmExit();
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            $("#MMHM-btn-toUser")  .click(function() { GGstorage.clearPageStack(); Navigation.moveFrontPage(Navigation.Page.A11UserMainHome, {}); });
+            $("#MMHM-btn-classes") .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B12ManagerMainClasses, {grpno: MMHM.Data.grpno}); });
+            $("#MMHM-btn-members") .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B13ManagerMainMembers, {grpno: MMHM.Data.grpno}); });
+            $("#MMHM-btn-settle")  .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B14ManagerMainSettle, {grpno: MMHM.Data.grpno}); });
+            $("#MMHM-btn-manage")  .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B15ManagerMainManage, {grpno: MMHM.Data.grpno}); });
+
+            /* ------------ */
+            /* logout */
+            /* ------------ */
+            $("#MMHM-btn-logout").click(function()
+            {
+                /* 로그아웃 함수 정의 */
+                let logout = function()
+                {
+                    GGstorage.logout();
+                };
+
+                /* 로그아웃 실시 */
+                Common.confirm
+                ({
+                    title : "로그아웃",
+                    msg : "로그아웃하시겠습니까?",
+                    okCallback : logout
+                });
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MMHM.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MMHM.close(true);
+            }
+
+            /* localizing */
+            /* $("#MMHM").i18n(); */
+
+        }); /* end ready */
+    </script>
+</ons-page>

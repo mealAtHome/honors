@@ -1,0 +1,116 @@
+<ons-page id="MGCG">
+
+    <!-- =============== -->
+    <!-- 로그아웃 -->
+    <!-- =============== -->
+    <div class="common-div-cushion">
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <td style="text-align:left;"  ><button id="MGCG-btn-logout" class="common-btn-outline common-tag-fontsize09">로그아웃</button></td>
+                    <td style="text-align:right;" ><button id="MGCG-btn-toUser" class="common-btn-inline  common-tag-fontsize09" style="display:none;">유저 홈</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <hr class="common-hr-padding"/>
+    <div id="MGCG-div-list"></div>
+
+    <script>
+        var MGCG =
+        {
+            code: "MGCG",
+            mUser: null,
+
+            /* =============== */
+            /* show */
+            /* =============== */
+            show()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 그룹리스트 조회 */
+                    let mGrps = Api.Grp.selectManaging();
+                    mGrps.makeForChooseGrp("#MGCG-div-list");
+
+                    /* 그룹이 하나밖에 존재하지 않으면 첫번째 엘리먼트 자동선택 */
+                    if(mGrps.getModels().length == 1)
+                    {
+                        Navigation.loginIntoGrp(mGrps.getModel().getGrpno());
+                        return;
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+                // GGinitPage.setCartFab();
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            /* $("#MGCG-btn-toAdmin").click(function() { Navigation.moveFrontPage(Navigation.Page.B01BizRegist, {}); }); */
+
+            /* ------------ */
+            /* logout */
+            /* ------------ */
+            $("#MGCG-btn-logout").click(function()
+            {
+                /* 로그아웃 함수 정의 */
+                let logout = function()
+                {
+                    GGstorage.logout();
+                };
+
+                /* 로그아웃 실시 */
+                Common.confirm
+                ({
+                    title : "로그아웃",
+                    msg : "로그아웃하시겠습니까?",
+                    okCallback : logout
+                });
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MGCG.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MGCG.close(true);
+            }
+
+            /* localizing */
+            /* $("#MGCG").i18n(); */
+
+        }); /* end ready */
+    </script>
+</ons-page>

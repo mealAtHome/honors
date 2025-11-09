@@ -1,0 +1,359 @@
+<ons-page id="CUST">
+
+    <style>
+        #CUST-tbl-settle
+        {
+            white-space: nowrap;
+        }
+        #CUST-tbl-settle > tbody > tr > td:nth-child(1) { text-align: left; }
+        #CUST-tbl-settle > tbody > tr > td:nth-child(2) { text-align: right; }
+        #CUST-tbl-settle > tbody > tr > td:nth-child(3) { text-align: right; }
+        #CUST-tbl-settle > tbody > tr > td[col="username"]          { text-align:left; }
+        #CUST-tbl-settle > tbody > tr > td[col="billstand"]         { text-align:right; }
+        #CUST-tbl-settle > tbody > tr > td[col="billfinal"]         { text-align:center; }
+        #CUST-tbl-settle > tbody > tr > td[col="billdiscount"]      { text-align:center; }
+        #CUST-tbl-settle > tbody > tr > td[col="billmemo"]          { text-align:center; }
+        #CUST-tbl-settle > tbody > tr > td[col="memberpoint"]       { text-align:right; }
+        #CUST-tbl-settle > tbody > tr > td[col="billpointed"]       { text-align:center; }
+        #CUST-tbl-settle > tfoot > tr > td { text-align:right; }
+
+        .CUST-input-billfinal         { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
+        .CUST-input-billdiscount      { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
+        .CUST-input-memberpoint       { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
+        .CUST-input-billpointed       { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
+        .CUST-input-billmemo          { font-size:1em; width: 8em; vertical-align: middle; text-align: left; }
+
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="CUST.close(true);"></gg-backbtn></div>
+        <div class="center">정산</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 일정상세 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <p class="common-p-title">
+            <span id="CUST-span-clstitle"></span>
+        </p>
+        <table class="common-tbl-normal common-tag-cushionUp common-tag-fontsize09" tbl-type="normal">
+            <tbody>
+                <tr><th>시간</th><td><span id="CUST-span-clsdt"></span></td></tr>
+                <tr><th>장소</th><td><span id="CUST-span-clsground"></span></td></tr>
+                <tr><th>주소</th><td><span id="CUST-span-clsgroundaddr"></span></td></tr>
+                <tr><th>참가비</th><td><span id="CUST-span-clsapplybill"></span></td></tr>
+                <tr><th>기간</th>
+                    <td>
+                        <span class="common-tag-block" >・참가등록기간</span>
+                        <span class="common-tag-block common-tag-indent08" id="CUST-span-clsapplydt"></span>
+                    </td>
+                </tr>
+                <tr><th>상세</th><td><span id="CUST-span-clscontent"></span></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-padding">
+    <div class="common-div-cushionLRD">
+        <p class="common-p-title">참가명단</p>
+        <div class="common-div-scrollX">
+            <table id="CUST-tbl-settle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                <thead>
+                    <tr>
+                        <th>참가자</th>
+                        <th>참가비</th>
+                        <th>청구비용</th>
+                        <th>감액</th>
+                        <th>잔여금</th>
+                        <th>잔여금사용</th>
+                        <th>비고(감액사유등)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>합계</td>
+                        <td><span id="CUST-span-billstandSummary"></span></td>
+                        <td><span id="CUST-span-billfinalSummary"></span></td>
+                        <td><span id="CUST-span-billdiscountSummary"></span></td>
+                        <td>-</span></td>
+                        <td><span id="CUST-span-billpointedSummary"></span></td>
+                        <td>-</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <span class="common-tag-block common-tag-fontsize09">※옆으로 늘어나는 테이블입니다. 스크롤을 좌우로 움직여서 확인하세요.</span>
+        <div class="common-div-cushionUD">
+            <button id="CUST-btn-settleComplete" class="common-btn-inline" style="width:8em;">정산완료</button>
+        </div>
+    </div>
+
+    <script>
+        var CUST =
+        {
+            code : "CUST",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(CUST.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
+                if(CUST.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
+
+                /* tab */
+                $(`.CUST-td-tab[val=decide]`).click();
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* remove el after created */
+                        $("#CUST-tbl-settle > tbody").empty();
+
+                        /* get var */
+                        let clsno = CUST.Data.clsno;
+                        let grpno = CUST.Data.grpno;
+
+                        /* 기본정보 */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        $("#CUST-span-clstitle")       .text(mCls.getClstitle());
+                        $("#CUST-span-clsdt")          .text(mCls.getClsPeriod());
+                        $("#CUST-span-clsground")      .text(mCls.getClsground());
+                        $("#CUST-span-clsgroundaddr")  .text(mCls.getClsgroundaddr());
+                        $("#CUST-span-clsapplybill")   .text(mCls.getClsapplybillpriceWon());
+                        $("#CUST-span-clsapplydt")     .text(mCls.getClsapplyPeriod());
+                        $("#CUST-span-clscontent")     .text(mCls.getClscontent());
+
+                        /* 참가정보 : clstype 에 따라 다르게 대응 */
+                        let clstype = mCls.getClstype();
+                        switch(clstype)
+                        {
+                            case GGF.Cls.Clstype.LINEUP1:
+                            case GGF.Cls.Clstype.LINEUP2:
+                            case GGF.Cls.Clstype.LINEUP4:
+                            {
+                                let mClslineup2s = Api.Clslineup2.selectByClsnoForSettleForMng(grpno, clsno, GGF.none, GGF.toast);
+                                let lineups = mClslineup2s.getModels();
+                                for(let i in lineups)
+                                    CUST.addRow(lineups[i]);
+                                break;
+                            }
+                        }
+                        CUST.setEvent();
+                        CUST.calSummary();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            addRow(model)
+            {
+                let html =
+                `
+                    <tr userno="${model.getUserno()}">
+                        <td col="username"         userno="${model.getUserno()}" >${model.getUsername()}</td>
+                        <td col="billstand"        subval="${model.getBill()}"   >${model.getBillWon()}</td>
+                        <td col="billfinal"        ><input type="text"   class="common-input-text CUST-input-billfinal"      userno="${model.getUserno()}" value="${model.getBillWon()}" subvalori="${model.getBill()}" subval="${model.getBill()}" disabled></td>
+                        <td col="billdiscount"     ><input type="number" class="common-input-text CUST-input-billdiscount"   userno="${model.getUserno()}" value="0"></td>
+                        <td col="memberpoint"      ><input type="text"   class="common-input-text CUST-input-memberpoint"    userno="${model.getUserno()}" value="${model.getMemberpointWon()}" subval="${model.getMemberpoint()}" disabled></td>
+                        <td col="billpointed"      ><input type="number" class="common-input-text CUST-input-billpointed"    userno="${model.getUserno()}" value="0"></td>
+                        <td col="billmemo"         ><input type="text"   class="common-input-text CUST-input-billmemo"       userno="${model.getUserno()}" value=""></td>
+                    </tr>
+                `;
+                $(`#CUST-tbl-settle > tbody`).append(html);
+            },
+
+            setEvent()
+            {
+                /* 감액 */
+                $(".CUST-input-billdiscount").off("keyup").on("keyup", function()
+                {
+                    let userno = $(this).attr("userno");
+                    let billfinalEl = $(`.CUST-input-billfinal[userno=${userno}]`);
+                    let billdiscountEl = $(this);
+                    let billpointedEl = $(`.CUST-input-billpointed[userno=${userno}]`);
+                    let billfinal = parseInt(billfinalEl.attr("subval"));
+                    let billfinalOri = parseInt(billfinalEl.attr("subvalori"));
+                    let billdiscount = parseInt(billdiscountEl.val());
+                    let billpointed = parseInt(billpointedEl.val());
+
+                    if(isNaN(billdiscount)) return;
+                    if(billfinalOri < (billdiscount + billpointed)) { Common.toast("감액이 청구비용보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
+
+                    let result = billfinalOri - billdiscount - billpointed;
+                    billfinalEl.attr("subval", result);
+                    billfinalEl.val(GGC.Common.priceWon(result));
+                    CUST.calSummary();
+                });
+
+                /* 잔여금 */
+                $(".CUST-input-billpointed").off("keyup").on("keyup", function()
+                {
+                    let userno = $(this).attr("userno");
+                    let billfinalEl = $(`.CUST-input-billfinal[userno=${userno}]`);
+                    let billdiscountEl = $(`.CUST-input-billdiscount[userno=${userno}]`);
+                    let billpointedEl = $(this);
+                    let billfinal = parseInt(billfinalEl.attr("subval"));
+                    let billfinalOri = parseInt(billfinalEl.attr("subvalori"));
+                    let billdiscount = parseInt(billdiscountEl.val());
+                    let billpointed = parseInt(billpointedEl.val());
+                    let memberpoint = parseInt($(`.CUST-input-memberpoint[userno=${userno}]`).attr("subval"));
+
+                    if(isNaN(billpointed)) return;
+                    if(billfinalOri < (billdiscount + billpointed)) { Common.toast("잔여금 사용금액이 청구비용보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
+                    if(billpointed > memberpoint)                   { Common.toast("잔여금 사용금액이 잔여금보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
+
+                    let result = billfinalOri - billdiscount - billpointed;
+                    billfinalEl.attr("subval", result);
+                    billfinalEl.val(GGC.Common.priceWon(result));
+                    CUST.calSummary();
+                });
+
+                /* null 일 떄 */
+                $(".CUST-input-billdiscount") .off("change").on("change", function() { if($(this).val() == "") $(this).val(0); $(this).keyup(); });
+                $(".CUST-input-billpointed")  .off("change").on("change", function() { if($(this).val() == "") $(this).val(0); $(this).keyup(); });
+            },
+
+            calSummary()
+            {
+                let billstandSummary = 0;
+                let billfinalSummary = 0;
+                let billdiscountSummary = 0;
+                let billpointedSummary = 0;
+
+                /* 합계 */
+                $("#CUST-tbl-settle > tbody > tr").each(function()
+                {
+                    let billstand    = parseInt($(this).find("td[col=billstand]").attr("subval"));
+                    let billfinal    = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
+                    let billdiscount = parseInt($(this).find("td[col=billdiscount] > input").val());
+                    let billpointed  = parseInt($(this).find("td[col=billpointed] > input").val());
+
+                    if(isNaN(billstand)) return;
+                    if(isNaN(billfinal)) return;
+                    if(isNaN(billdiscount)) return;
+                    if(isNaN(billpointed)) return;
+
+                    billstandSummary += billstand;
+                    billfinalSummary += billfinal;
+                    billdiscountSummary += billdiscount;
+                    billpointedSummary += billpointed;
+                });
+
+                $("#CUST-span-billstandSummary").text(GGC.Common.priceWon(billstandSummary));
+                $("#CUST-span-billfinalSummary").text(GGC.Common.priceWon(billfinalSummary));
+                $("#CUST-span-billdiscountSummary").text(GGC.Common.priceWon(billdiscountSummary));
+                $("#CUST-span-billpointedSummary").text(GGC.Common.priceWon(billpointedSummary));
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+            $("#CUST-btn-settleComplete").click(function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        let clsno = CUST.Data.clsno;
+                        let grpno = CUST.Data.grpno;
+                        let arr = [];
+
+                        /* 정산정보수집 */
+                        $("#CUST-tbl-settle > tbody > tr").each(function()
+                        {
+                            let userno       = $(this).attr("userno");
+                            let billstand    = parseInt($(this).find("td[col=billstand]").attr("subval"));
+                            let billfinal    = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
+                            let billdiscount = parseInt($(this).find("td[col=billdiscount] > input").val());
+                            let billpointed  = parseInt($(this).find("td[col=billpointed] > input").val());
+                            let billmemo     = $(this).find("td[col=billmemo] > input").val();
+                            let dat =
+                            {
+                                USERNO        : userno,
+                                BILLSTARDARD  : billstand,
+                                BILLDISCOUNT  : billdiscount,
+                                BILLPOINTED   : billpointed,
+                                BILLFINAL     : billfinal,
+                                BILLMEMO      : billmemo,
+                            }
+                            arr.push(dat);
+                        });
+
+                        /* 정산 */
+                        let mApiResponse = Api.Cls.updateClsstatusIngToEndsettle(grpno, clsno, JSON.stringify(arr), GGF.toast, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                            Navigation.moveBack();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CUST.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CUST.close(true);
+            }
+
+            /* localizing */
+            /* $("#CUST").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

@@ -1,0 +1,85 @@
+<ons-page id="SBLI">
+
+    <!-- ========================= -->
+    <!-- 페이지 타이틀 -->
+    <!-- ========================= -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="SBLI.close(true);"></gg-backbtn></div>
+        <div class="center"><span>공지사항</span></div>
+    </ons-toolbar>
+
+    <div id="SBLI-div-systemBoard" class="common-div-cushion"></div>
+
+    <script>
+        var SBLI =
+        {
+            code : "SBLI",
+
+            /* 페이지 데이터 */
+            Data :
+            {
+                storeno : null,
+            },
+
+            show()
+            {
+                if(SBLI.Data.storeno == undefined) SBLI.Data.storeno  = "";
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 공지사항 조회 */
+                    let mSystemBoards = Api.SystemBoard.selectOpenList();
+                    mSystemBoards.makeHorizon("#SBLI-div-systemBoard");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                SBLI.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SBLI.close(true);
+            }
+
+            /* localizing */
+            /* $("#SBLI").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

@@ -1,0 +1,91 @@
+<ons-page id="UMHM">
+
+    <!-- =============== -->
+    <!-- 로그아웃 -->
+    <!-- =============== -->
+    <div class="common-div-cushion">
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <td style="text-align:left;"  ><button id="UMHM-btn-logout"    class="common-btn-outline common-tag-fontsize09">로그아웃</button></td>
+                    <td style="text-align:right;" ><button id="UMHM-btn-toAdmin"   class="common-btn-inline  common-tag-fontsize09" style="display:none;">관리자모드</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- =============== -->
+    <!-- 공지사항 -->
+    <!-- =============== -->
+    <hr class="common-hr-padding"/>
+    <div class="common-div-cushion" style="display:none;">
+        <p class="common-p-title">공지사항</p>
+        <div id="UMHM-div-systemBoard"></div>
+    </div>
+
+    <script>
+        var UMHM =
+        {
+            code: "UMHM",
+            mUser: null,
+
+            /* =============== */
+            /* show */
+            /* =============== */
+            show()
+            {
+                /* recovery */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 공지사항 조회 */
+                    /* let mSystemBoards = Api.SystemBoard.selectMain(); */
+                    /* mSystemBoards.makeMainBanners("#UMHM-div-systemBoard"); */
+
+                    /* 유저정보 조회 */
+
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+                // GGinitPage.setCartFab();
+
+            },
+
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            /* $("#UMHM-btn-toAdmin").click(function() { Navigation.moveFrontPage(Navigation.Page.B01BizRegist, {}); }); */
+
+            /* ------------ */
+            /* logout */
+            /* ------------ */
+            $("#UMHM-btn-logout").click(function()
+            {
+                /* 로그아웃 함수 정의 */
+                let logout = function()
+                {
+                    GGstorage.logout();
+                };
+
+                /* 로그아웃 실시 */
+                Common.confirm
+                ({
+                    title : "로그아웃",
+                    msg : "로그아웃하시겠습니까?",
+                    okCallback : logout
+                });
+            });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+            // $("#UMHM").i18n();
+
+        }); /* end ready */
+    </script>
+</ons-page>

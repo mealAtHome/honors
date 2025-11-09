@@ -1,0 +1,130 @@
+<ons-page id="SMAN">
+
+    <!-- ========================= -->
+    <!-- 경고모음 -->
+    <!-- ========================= -->
+    <div id="SMAN-div-warnings"></div>
+
+    <!-- ========================= -->
+    <!-- 공지사항 -->
+    <!-- ========================= -->
+    <table class="common-tbl-subtitle">
+        <tbody>
+            <tr>
+                <td><span data-i18n="">공지사항</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="common-div-cushion" id="SMAN-div-systemBoard"></div>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <hr class="common-hr-padding"/>
+    <style>
+        .SMAN-btn-menu
+        {
+            width: 9em;
+            height: 3em;
+            margin: 0.4em 0.4em;
+        }
+    </style>
+    <!-- <div class="common-icon-delivery"><img src="res/icon/delivery.png" style="height:100%;"/></div> -->
+    <div class="common-div-cushion">
+        <button class="common-btn-square SMAN-btn-menu" id="SMAN-btn-order"    >주문</button>
+        <button class="common-btn-square SMAN-btn-menu" id="SMAN-btn-history"  >이력</button>
+        <button class="common-btn-square SMAN-btn-menu" id="SMAN-btn-menu"     >메뉴</button>
+        <button class="common-btn-square SMAN-btn-menu" id="SMAN-btn-settle"   >매출</button>
+        <button class="common-btn-square SMAN-btn-menu" id="SMAN-btn-setting"  >설정</button>
+    </div>
+    <script>
+        var SMAN =
+        {
+            code: "SMAN",
+            Data : {},
+
+
+            show()
+            {
+                /* --------------- */
+                /* vars */
+                /* --------------- */
+
+                /* --------------- */
+                /* init */
+                /* --------------- */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* ----- */
+                    /* 내 매장 조회 (없으면 매장 등록) */
+                    /* ----- */
+                    let mStore = Api.Store.selectMyStore();
+                    if(mStore == null)
+                    {
+                        Navigation.moveFrontPage(Navigation.Page.C10StoreUpdate, {option:GGF.Page.Option.insert});
+                        return;
+                    }
+
+                    /* ----- */
+                    /* validation */
+                    /* ----- */
+                    $("#SMAN-div-warnings").html("");
+
+                    /* 매장 허가여부 */
+                    mStore.makeStoreAllowedMsg("#SMAN-div-warnings");
+
+                    /* 배달료 테이블 설정되어 있는지? */
+                    let mStoreDeliverycharges = Api.StoreDeliverycharge.select(GGstorage.getStoreno());
+                    mStoreDeliverycharges.makeErrorForStoreStart("#SMAN-div-warnings");
+
+                    /* 1. 정지여부 */
+                    /* 2. 계좌설정이 완료되어 있는지? */
+                    mStore.makeErrorForStoreOpen("#SMAN-div-warnings");
+
+                    /* 영업시간설정 되어있는지? */
+                    mStore.makeErrorForIsExistsStoreSalestatus("#SMAN-div-warnings");
+
+                    /* ----- */
+                    /* 공지사항 조회 */
+                    /* ----- */
+                    let mSystemBoards = Api.SystemBoard.selectMain();
+                    mSystemBoards.makeMainBanners("#SMAN-div-systemBoard");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            $("#SMAN-btn-order")   .click(function() { Navigation.moveFrontPage(Navigation.Page.AB20StoreMainOrder, {}); });
+            $("#SMAN-btn-history") .click(function() { Navigation.moveFrontPage(Navigation.Page.F71OrderList, {}); });
+            $("#SMAN-btn-menu")    .click(function() { Navigation.moveFrontPage(Navigation.Page.AB30StoreMainMenu, {}); });
+            /* $("#SMAN-btn-settle")  .click(function() { Navigation.moveFrontPage(Navigation.Page.C80StoreSalesHome, {}); }); */
+            $("#SMAN-btn-settle")  .click(function() { Navigation.moveFrontPage(Navigation.Page.C90StoreSalesSettle, {}); });
+            $("#SMAN-btn-setting") .click(function() { Navigation.moveFrontPage(Navigation.Page.AB40StoreMainManage, {}); });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+
+            /* get data from Config */
+            try
+            {
+                SMAN.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SMAN.close(true);
+            }
+
+        }); /* end ready */
+    </script>
+</ons-page>
+

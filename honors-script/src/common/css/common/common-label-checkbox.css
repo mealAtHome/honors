@@ -1,0 +1,86 @@
+/* Samplecode */
+/*
+    <label class="common-label-checkbox">
+        <input
+            type="checkbox"
+            name=""
+            value="5"
+        />
+        <span></span>
+    </label>
+    <span>맛있어요</span>
+*/
+
+/* Customize the label (the container) */
+.common-label-checkbox
+{
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    padding-left: 26px;
+    /* margin-bottom: 12px; */
+    cursor: pointer;
+    height:26px;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox button */
+.common-label-checkbox > input[type=checkbox]
+{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox button */
+.common-label-checkbox > span
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 26px;
+    width: 26px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.common-label-checkbox:hover input[type=checkbox] ~ span
+{
+    background-color: #ccc;
+}
+
+/* When the checkbox button is checked, add a blue background */
+.common-label-checkbox > input[type=checkbox]:checked ~ span
+{
+    background-color: rgba(2, 6, 84, 1.0);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.common-label-checkbox > span:after
+{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.common-label-checkbox > input[type=checkbox]:checked ~ span:after
+{
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.common-label-checkbox > span:after
+{
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    background: white;
+}

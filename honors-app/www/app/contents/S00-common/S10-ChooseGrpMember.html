@@ -1,0 +1,279 @@
+<ons-page id="CHGM">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="CHGM-toolbar">
+        <div class="left"><gg-backbtn onclick="CHGM.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="CHGM-span-title">멤버선택</span></div>
+    </ons-toolbar>
+
+    <!-- --------------- -->
+    <!-- 탭 -->
+    <!-- --------------- -->
+    <div id="CHGM-div-tabBtn" class="common-div-cushion" style="display:none;">
+        <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="origin" tab="tab">기존멤버에서</button>
+        <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="temp"   tab="">임시멤버생성</button>
+        <hr class="common-hr-paddingUD"/>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 기존멤버 -->
+    <!-- --------------- -->
+    <div class="CHGM-div-tabDiv" screen-tab="origin">
+        <style>
+            #CHGM-input-searchKeyword
+            {
+                width:13em;
+                font-size:1em;
+                line-height:1.5;
+                vertical-align: middle;
+            }
+            #CHGM-btn-search
+            {
+                padding-left  : 1em;
+                padding-right : 1em;
+                font-size:1em;
+                line-height:1.5;
+                vertical-align: middle;
+            }
+        </style>
+        <div class="common-div-cushion">
+            <input type="text" id="CHGM-input-searchKeyword" class="common-input-text"/>
+            <button id="CHGM-btn-search" class="common-btn-outline">검색</button>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 검색결과 -->
+        <!-- ======================== -->
+        <hr class="common-hr-padding"/>
+        <div class="common-div-cushion">
+            <div id="CHGM-div-searchResult" class="common-div-scrollX"></div>
+        </div>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 임시멤버생성 -->
+    <!-- --------------- -->
+    <div class="CHGM-div-tabDiv" screen-tab="temp" style="display:none;">
+        <div class="common-div-form">
+            <span>이름</span>
+            <span>실명으로 입력해주세요.</span>
+            <div class="common-div-cushionUD">
+                <input type="text" id="CHGM-input-username" class="common-input-text" style="width:15em;"/>
+            </div>
+        </div>
+        <div class="common-div-form">
+            <span>잔여금</span>
+            <span>선납된 금액이 있으면 입력해주세요.</span>
+            <div class="common-div-cushionUD">
+                <input type="text" id="CHGM-input-point" class="common-input-text" style="width:15em;"/>
+                <span id="CHGM-span-pointWon" class="common-tag-block common-tag-fontsize09"></span>
+            </div>
+        </div>
+        <div class="common-div-form">
+            <button id="CHGM-btn-createTempUser" class="common-btn-inline" btn-size="large">임시유저 생성하고 포지션에 기입</button>
+        </div>
+    </div>
+
+    <script>
+        var CHGM =
+        {
+            code : "CHGM",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(CHGM.Data.option     == undefined) { CHGM.Data.option = ""; }
+                if(CHGM.Data.grpno      == undefined) { CHGM.Data.grpno = ""; }
+                if(CHGM.Data.clsno      == undefined) { CHGM.Data.clsno = ""; }
+                if(CHGM.Data.teamname   == undefined) { CHGM.Data.teamname = ""; }
+                if(CHGM.Data.orderno    == undefined) { CHGM.Data.orderno = ""; }
+                if(CHGM.Data.el         == undefined) { CHGM.Data.el = ""; }
+                if(CHGM.Data.regmember  == undefined) { CHGM.Data.regmember = ""; }
+                if(CHGM.Data.title      == undefined) { CHGM.Data.title = ""; }
+
+                /* title */
+                if(CHGM.Data.title != "")
+                    $("#CHGM-span-title").text(CHGM.Data.title);
+
+                /* view div by option */
+                if(CHGM.Data.regmember == GGF.Y)
+                {
+                    $("#CHGM-div-tabBtn").show();
+                    $(".CHGM-div-tabDiv").hide();
+                    $(".CHGM-div-tabDiv[screen-tab='origin']").show();
+                }
+                else
+                {
+                    $("#CHGM-div-tabBtn").hide();
+                    $(".CHGM-div-tabDiv").hide();
+                    $(".CHGM-div-tabDiv[screen-tab='origin']").show();
+                }
+
+                /* search for init */
+                $("#CHGM-btn-search").click();
+            },
+
+            /* ===================== */
+            /* option 에 따른 액션 (당시는 "대리참가" 기능에 사용) */
+            /* ===================== */
+            actionByOption(userno, forceflg=false)
+            {
+                let process = null;
+                switch(CHGM.Data.option)
+                {
+                    case "makeToEl":
+                    {
+                        let grpno = CHGM.Data.grpno;
+                        let mGrpMember = Api.GrpMember.selectByPkForAll(grpno, userno);
+                        if(mGrpMember == null)
+                            return Common.toast("해당 그룹의 멤버가 아닙니다.");
+
+                        let mUser = mGrpMember.getMUser();
+                        $(CHGM.Data.el).html(mGrpMember.make());
+                        $(CHGM.Data.el).attr("grpno", grpno);
+                        $(CHGM.Data.el).attr("userno", userno);
+                        $(CHGM.Data.el).attr("name", mUser.getName());
+                        Navigation.moveBack();
+                        break;
+                    }
+                    case "F00-applyToClslineup2":
+                    {
+                        let grpno = CHGM.Data.grpno;
+                        let clsno = CHGM.Data.clsno;
+                        let teamname = CHGM.Data.teamname;
+                        let orderno = CHGM.Data.orderno;
+                        let etc = "관라자에 의한 대리접수";
+                        process = function()
+                        {
+                            Common.showProgress();
+                            setTimeout(function()
+                            {
+                                let mApiResponse = Api.Clslineup2.updateApplyRegistStead(grpno, clsno, teamname, orderno, userno, etc, GGF.toast, GGF.toast);
+                                if(mApiResponse.isSuccess())
+                                    Navigation.moveBack();
+
+                                Common.hideProgress();
+                            }, ajaxDelayTime);
+                        };
+                        Common.confirm2(`참가신청하시겠습니까?`, process);
+                        break;
+                    }
+                }
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 탭 */
+            $(".CHGM-btn-tab").click(function()
+            {
+                let val = $(this).attr("val");
+                $(".CHGM-div-tabDiv").hide();
+                $(`.CHGM-div-tabDiv[screen-tab="${val}"]`).show();
+            });
+
+            /* 임시유저 생성하고 포지션에 기입하기 */
+            $("#CHGM-btn-createTempUser").click(function()
+            {
+                /* check username */
+                let username = $("#CHGM-input-username").val().trim();
+                if(username == "")
+                    return Common.toast("이름을 입력해주세요.");
+                if(Validation.Common.hasSpecialChar(username))
+                    return Common.toast("이름에 특수문자를 포함할 수 없습니다.");
+
+                /* check point */
+                let point = $("#CHGM-input-point").val().trim();
+                if(point == "")
+                    point = "0";
+
+                /* process */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* make user */
+                    let grpno = CHGM.Data.grpno;
+                    let mApiResponse = Api.GrpMember.makeTempUserForMng(grpno, username, point, GGF.none, GGF.toast);
+                    if(!mApiResponse.isSuccess())
+                    {
+                        Common.hideProgress();
+                        return;
+                    }
+                    Common.hideProgress();
+
+                    /* apply to lineup */
+                    CHGM.actionByOption(mApiResponse.getUserno(), true);
+                }, ajaxDelayTime);
+            });
+
+            /* 검색 */
+            $("#CHGM-btn-search").click(function()
+            {
+                /* validation */
+                let keyword = $("#CHGM-input-searchKeyword").val();
+                if(Validation.Common.hasSpecialChar(keyword))
+                    return Common.toast("검색어에 특수문자를 포함할 수 없습니다.", "warning");
+
+                /* search */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* sendData */
+                    let mGrpMembers = Api.GrpMember.selectByKeywordForAll(CHGM.Data.grpno, keyword);
+                    mGrpMembers.makeForChoose("#CHGM-div-searchResult");
+
+                    /* 선택버튼 누를 시 */
+                    $("#CHGM-div-searchResult .MGrpMember-make-btn-choose").off("click").on("click", function()
+                    {
+                        let userno = $(this).attr("userno");
+                        CHGM.actionByOption(userno);
+                    });
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CHGM.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CHGM.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

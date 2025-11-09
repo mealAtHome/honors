@@ -1,0 +1,154 @@
+<ons-page id="UBUP">
+
+    <!-- ======================== -->
+    <!-- 페이지 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="UBUP.close(true);"></gg-backbtn></div>
+        <div class="center"><span>환불계좌</span></div>
+    </ons-toolbar>
+
+    <!-- --------------- -->
+    <!-- 환불계좌 -->
+    <!-- --------------- -->
+    <table class="common-tbl-subtitle">
+        <tbody>
+            <tr>
+                <td><span data-i18n="">환불계좌</span></td>
+                <td>
+                    <button id="UBUP-btn-chooseC" class="common-btn-outline" el="#UBUP-div-bankaccount" btn-type="normal">선택</button>
+                    <button id="UBUP-btn-chooseD" class="common-btn-outline" el="#UBUP-div-bankaccount" btn-type="cancel">해제</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div id="UBUP-div-bankaccount"></div>
+
+    <!-- --------------- -->
+    <!-- 저장 -->
+    <!-- --------------- -->
+    <div class="common-div-cushion" style="text-align:center; margin:1em auto;">
+        <button id="UBUP-btn-save" class="common-btn-gradientBig">저장하기</button>
+    </div>
+
+    <script>
+        var UBUP =
+        {
+            code : "UBUP",
+
+            /* ========================= */
+            /* 페이지 데이터 */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 환불계좌 */
+                    let mBankaccount = Api.Bankaccount.selectByBaccnoRefundOfUserForMe();
+                    mBankaccount.makeCards("#UBUP-div-bankaccount");
+
+                    /* hide progress */
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* --------------- */
+            /* 환불계좌 */
+            /* --------------- */
+            $("#UBUP-btn-chooseC").click(function()
+            {
+                let el = $(this).attr("el");
+                let pageData =
+                {
+                    el : el,
+                    executeShowWhenClose : false,
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S33CommonChooseBankaccount, pageData);
+            });
+            $("#UBUP-btn-chooseD").click(function()
+            {
+                let el = $(this).attr("el");
+                $(el).html("");
+            });
+
+            /* --------------- */
+            /* 저장 */
+            /* --------------- */
+            $("#UBUP-btn-save").click(function()
+            {
+                let bankaccount  = $("#UBUP-div-bankaccount > .MBankaccount-makeBankaccount-table-top").attr("baccno");
+
+                /* validation */
+                if(bankaccount == undefined)
+                {
+                    Common.toast("settle account is not set. please set.");
+                    return;
+                }
+
+                /* save */
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let rslt = Api.User.updateBaccnoRefund(bankaccount, "toast", "toast");
+                        if(rslt)
+                            Navigation.showLastPage();
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm
+                ({
+                    msg : "실행하시겠습니까?",
+                    okCallback : process
+                });
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UBUP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UBUP.close(true);
+            }
+
+            /* localizing */
+            /* $("#UBUP").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

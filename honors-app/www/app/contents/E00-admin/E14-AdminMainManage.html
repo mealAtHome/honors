@@ -1,0 +1,39 @@
+<ons-page id="UMMG">
+
+    <div class="common-div-cushion common-div-manages">
+        <!-- <button id="UMMG-btn-manageUserAddr"           class="common-btn-outline">주소설정</button> -->
+        <!-- <button id="UMMG-btn-manageUserAcctList"       class="common-btn-outline">계좌리스트</button> -->
+        <!-- <button id="UMMG-btn-manageUserAcctRefund"     class="common-btn-outline">환불계좌설정</button> -->
+        <!-- <button id="UMMG-btn-paymentMissedreq"         class="common-btn-outline">오입금(오송금) 반환신청</button> -->
+    </div>
+
+    <script>
+        var UMMG =
+        {
+            code: "UMMG",
+
+            show()
+            {
+            },
+
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            $("#UMMG-btn-manageUserAddr")         .click(function() {Navigation.moveFrontPage(Navigation.Page.B21UserAddrList, {}); });
+            $("#UMMG-btn-manageUserAcctList")     .click(function() {Navigation.moveFrontPage(Navigation.Page.B31UserBankacctList, {}); });
+            $("#UMMG-btn-manageUserAcctRefund")   .click(function() {Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate, {}); });
+            $("#UMMG-btn-paymentMissedreq")       .click(function() {Navigation.moveFrontPage(Navigation.Page.B33UserPaymentMissedreq, {}); });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+
+            /* localizing */
+            // $("#UMMG").i18n();
+        });
+    </script>
+</ons-page>

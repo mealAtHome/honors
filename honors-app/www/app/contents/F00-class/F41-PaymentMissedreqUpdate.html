@@ -1,0 +1,352 @@
+<ons-page id="OPMU">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="OPMU.close(true);"></gg-backbtn></div>
+        <div class="center">오송금반환신청</div>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- main page -->
+    <!-- ======================== -->
+    <div class="common-div-noPad">
+
+        <!-- ================ -->
+        <!-- 안내 -->
+        <!-- ================ -->
+        <div class="common-div-announce common-tag-fontsize09">
+            <span class="common-tag-block">・모임은야구 계좌에 잘못된 금액을 송금</span>
+            <span class="common-tag-block">・모임은야구 계좌에 잘못된 입금자명 표기 실수</span>
+            <span class="common-tag-block">・결제처리가 안되는 경우</span>
+            <span class="common-tag-block common-tag-strong">・처리소요기간 : 약 3일</span>
+        </div>
+
+        <!-- ================ -->
+        <!-- 입금자명 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span>입금자명</span>
+                <span>송금 시, 사용했던 입금자명</span>
+            </p>
+            <input
+                id="OPMU-inputText-depositor"
+                type="text"
+                class="common-text-insertPage common-input-text"
+                style="width:70%;"
+            >
+        </div>
+
+        <!-- ================ -->
+        <!-- 송금액 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span>송금액</span>
+                <span>오입금한 금액</span>
+            </p>
+            <input
+                id="OPMU-inputText-deposited"
+                type="number"
+                class="common-text-insertPage common-input-text"
+                style="width:70%;"
+            >
+        </div>
+
+        <!-- ================ -->
+        <!-- 송금한 계좌 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span>송금계좌</span>
+                <span>오송금한 계좌를 선택해주세요.</span>
+            </p>
+            <div class="common-div-cushionUD">
+                <select id="OPMU-select-paymentAccount" class="common-select-outline common-tag-fontsize09" style="width:auto;"></select>
+            </div>
+            <div id="OPMU-div-paymentAccountSelected" class="common-div-cushionUD"></div>
+        </div>
+
+        <!-- ================ -->
+        <!-- 송금화면 캡쳐 -->
+        <!-- ================ -->
+        <!--
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span>송금화면 캡처 (선택)</span>
+                <span>
+                    은행 앱에서 송금한 이력을 캡쳐 후 첨부 <br>
+                    더 빠른 확인이 가능합니다.
+                </span>
+            </p>
+            <div id="OPMU-div-bankappCapture" class="common-div-defaultImg"></div>
+            <div class="common-div-cushionUD">
+                <div class="OPMU-div-bankappCapture"></div>
+                <button id="OPMU-btn-chooseBankappCapture" class="common-btn-outline">사진선택</button>
+                <button id="OPMU-btn-deleteBankappCapture" class="common-btn-outline" btn-type="cancel">취소</button>
+            </div>
+        </div>
+        -->
+
+        <!-- ================ -->
+        <!-- 송금한 계좌 선택 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span>반환받을 계좌 선택</span>
+                <span>반환처리 시, 입금받을 계좌를 선택해주세요.</span>
+            </p>
+            <div class="common-div-cushionUD">
+                <select id="OPMU-select-refundBankaccount" class="common-select-outline common-tag-fontsize09" style="width:auto;"></select>
+            </div>
+            <div id="OPMU-div-refundBankaccountSelected" class="common-div-cushionUD"></div>
+        </div>
+
+        <!-- ================ -->
+        <!-- 제출하기 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <button id="OPMU-btn-save" class="common-btn-gradientBig" data-i18n="(common)save">제출하기</button>
+        </div>
+        <div class="common-div-cushionFooter"></div>
+
+    </div>
+
+    <script>
+        var OPMU =
+        {
+            code : "OPMU",
+            Data : {},
+
+            show()
+            {
+                /* init OPMU.Data */
+                if(OPMU.Data.option  == undefined) OPMU.Data.option = GGF.Page.Option.insert;
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 시스템 계좌 리스트 */
+                    let mPaymentAccounts = Api.PaymentAccount.selectAll();
+                    $("#OPMU-select-paymentAccount").html(mPaymentAccounts.makeSelectOption());
+
+                    /* 반환받을 유저 계좌 리스트 */
+                    let mBankaccounts = Api.Bankaccount.selectAbleByUserno();
+                    $("#OPMU-select-refundBankaccount").html(mBankaccounts.makeSelectOption());
+
+                    switch(OPMU.Data.option)
+                    {
+                        case GGF.Page.Option.update:
+                        {
+                            break;
+                        }
+                    }
+
+                    /* hide progress */
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* ---------------------- */
+            /* 송금화면 캡처 */
+            /* ---------------------- */
+            $("#OPMU-btn-chooseDrivinglicensePic").click(function()
+            {
+                Common.getPicFromAlbum(function(data)
+                {
+                    $("#OPMU-div-bankappCapture").css({"background-image":"url('"+data+"')"});
+                    $("#OPMU-div-bankappCapture").attr("uri", data);
+                });
+            });
+            $("#OPMU-btn-deleteDrivinglicensePic").click(function()
+            {
+                $("#OPMU-div-bankappCapture").css({"background":""});
+                $("#OPMU-div-bankappCapture").attr("uri", undefined);
+            });
+
+            /* ========================= */
+            /* 오송금한 계좌 표시 */
+            /* ========================= */
+            $("#OPMU-select-paymentAccount").change(function()
+            {
+                let paccIndex     = $(this).val();
+                let paccName      = $("#OPMU-select-paymentAccount > option[value="+paccIndex+"]").attr("pacc_name");
+                let paccBankname  = $("#OPMU-select-paymentAccount > option[value="+paccIndex+"]").attr("pacc_bankname");
+                let paccBankcode  = $("#OPMU-select-paymentAccount > option[value="+paccIndex+"]").attr("pacc_bankcode");
+                let paccAccountno = $("#OPMU-select-paymentAccount > option[value="+paccIndex+"]").attr("pacc_accountno");
+                if(paccIndex == undefined)
+                {
+                    $("#OPMU-div-paymentAccountSelected").html("");
+                    return;
+                }
+
+                /* make model */
+                let data =
+                {
+                    pacc_index : paccIndex,
+                    pacc_name : paccName,
+                    pacc_bankname : paccBankname,
+                    pacc_bankcode : paccBankcode,
+                    pacc_accountno : paccAccountno,
+                }
+                let mPaymentAccount = new MPaymentAccount(data);
+                $("#OPMU-div-paymentAccountSelected").html(mPaymentAccount.makeCard());
+            });
+
+            /* ========================= */
+            /* 반환받을 계좌 표시 */
+            /* ========================= */
+            $("#OPMU-select-refundBankaccount").change(function()
+            {
+                let baccno            = $(this).val();
+                let bankaccountSortno = $("#OPMU-select-refundBankaccount > option[value="+baccno+"]").attr("bankaccount_sortno");
+                let baccnickname      = $("#OPMU-select-refundBankaccount > option[value="+baccno+"]").attr("baccnickname");
+                let bacccode          = $("#OPMU-select-refundBankaccount > option[value="+baccno+"]").attr("bacccode");
+                let baccacct          = $("#OPMU-select-refundBankaccount > option[value="+baccno+"]").attr("baccacct");
+                let baccname          = $("#OPMU-select-refundBankaccount > option[value="+baccno+"]").attr("baccname");
+                let bankname          = $("#OPMU-select-refundBankaccount > option[value="+baccno+"]").attr("bankname");
+                if(baccno == undefined)
+                {
+                    $("#OPMU-div-refundBankaccountSelected").html("");
+                    return;
+                }
+
+                /* make model */
+                let data =
+                {
+                    baccno : baccno,
+                    bankaccount_sortno : bankaccountSortno,
+                    baccnickname : baccnickname,
+                    bacccode : bacccode,
+                    baccacct : baccacct,
+                    baccname : baccname,
+                    bankname : bankname,
+                }
+                let mBankaccount = new MBankaccount(data);
+                $("#OPMU-div-refundBankaccountSelected").html(mBankaccount.makeCard());
+            });
+
+            /* ---------------------- */
+            /* 오송금한 계좌 선택 */
+            /* ---------------------- */
+            // $("#OUPA-btn-chooseOtherAddr").click(function()
+            // {
+            //     Navigation.moveFrontPage(Navigation.Page.B21UserAddrList, {option : GGF.Page.A1010UserAddrList.Option.ORDER});
+            // });
+
+
+            /* ---------------------- */
+            /* 라이더 생성/수정 프로세스 */
+            /* ---------------------- */
+            $("#OPMU-btn-save").click(function()
+            {
+                /* vars */
+                let depositor = $("#OPMU-inputText-depositor").val();
+                let deposited = $("#OPMU-inputText-deposited").val();
+                let paccIndex = $("#OPMU-select-paymentAccount").val();
+                let refundBaccno = $("#OPMU-select-refundBankaccount").val();
+
+                /* validation */
+                if(Common.isEmpty(depositor))           { Common.toastError("입금자명을 입력해주세요."); return; }
+                if(Common.isEmpty(deposited))           { Common.toastError("송금금액을 입력해주세요."); return; }
+                if(Common.isEmpty(paccIndex))           { Common.toastError("오송금한 계좌를 선택해주세요."); return; }
+                if(Common.isEmpty(refundBaccno)) { Common.toastError("반환받을 계좌를 선택해주세요."); return; }
+
+                /* process */
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let rslt = null;
+                        switch(OPMU.Data.option)
+                        {
+                            case GGF.Page.Option.insert:
+                            {
+                                rslt = Api.PaymentMissedreq.insert(
+                                    OPMU.Data.option
+                                    ,paccIndex
+                                    ,depositor
+                                    ,deposited
+                                    ,refundBaccno
+                                    ,"toast"
+                                    ,"toast"
+                                );
+                                break;
+                            }
+                            case GGF.Page.Option.update:
+                            {
+                                rslt = Api.PaymentMissedreq.update(
+                                    OPMU.Data.option
+                                    ,paccIndex
+                                    ,depositor
+                                    ,deposited
+                                    ,refundBaccno
+                                    ,"toast"
+                                    ,"toast"
+                                );
+                                break;
+                            }
+                        }
+                        if(rslt)
+                            Navigation.moveBack();
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+
+                /* ------- */
+                /* confirm */
+                /* ------- */
+                Common.confirm
+                ({
+                    title : OPMU.pageTitle,
+                    msg   : "실행하시겠습니까?",
+                    okCallback : process
+                });
+            }); /* 매장 등록 */
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+            try
+            {
+                OPMU.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                OPMU.close(true);
+            }
+
+            /* localizing */
+            /* $("#OPMU").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

@@ -1,0 +1,168 @@
+.common-span-strong
+{
+    font-size:1.2em;
+    font-weight: bold;
+}
+.common-span-block
+{
+    display:block;
+    margin:0.3em auto;
+}
+.common-span-content
+{
+    color:black;
+}
+.common-span-subcontent
+{
+    font-size:0.9em;
+    color:gray;
+    line-height:1.6;
+}
+
+/* ============================== */
+/* 유효성검사 안내문 span */
+/* ============================== */
+.common-span-validationAnnounce
+{
+    display:block;
+    margin:0.3em auto;
+    font-size:0.9em;
+}
+
+/* ============================== */
+/* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
+/* ============================== */
+.common-span-color { color: rgba(2, 6, 84, 1.0); }
+
+/* ============================== */
+/* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
+/* ============================== */
+.common-span-label
+{
+    display: inline-block;
+    padding:0.5em;
+    margin:0.1em 0em;
+    background-color:transparent;
+    border-radius: 0.3em;
+    font-size:0.9em;
+    line-height:0.9em;
+    white-space: nowrap;
+    /* box-sizing: border-box; */
+}
+.common-span-label[label_type=outline],
+.common-span-label
+{
+    color: rgba(2, 6, 84, 1.0);
+    background-color: transparent;
+    border: 1px solid rgba(2, 6, 84, 1.0);
+}
+.common-span-label[label_type=inline]
+{
+    color: white;
+    background-color: rgba(2, 6, 84, 1.0);
+    border: 1px solid rgba(2, 6, 84, 1.0);
+}
+
+/* ============================== */
+/* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
+/* ============================== */
+.common-span-record-subTitle
+{
+    padding: 0.4em;
+    border: 1px solid gray;
+    font-weight:900;
+    display:inline-block;
+}
+
+/* ============================== */
+/* 태그 : 각 엔티티의 밑에 표시되는 엔티티의 특성을 표시함 */
+/* ============================== */
+.common-span-tag
+{
+    font-size:0.9em;
+    white-space: nowrap;
+    padding: 0.3em 0.4em;
+    margin:0.1em 0.0em;
+}
+.common-span-tag[common-span-tag="none"]   { display:none; }
+.common-span-tag[common-span-tag="blue"]   { color:rgb(54, 54, 255);  border:2px solid rgb(110,110,255);   background-color: rgb(200,200,255); }
+.common-span-tag[common-span-tag="yellow"] { color:rgb(255, 166, 34); border:2px solid rgb(255, 187, 85);  background-color: rgb(255,224,179); }
+.common-span-tag[common-span-tag="red"]    { color:rgb(255, 78, 78);  border:2px solid rgb(255, 78, 78);   background-color: rgb(255,200,200); }
+
+/* ------------------- */
+/* 태그 - 수행완료 했음 */
+/* ------------------- */
+.common-span-tag-ok { background-color:rgb(255,215,0); }
+.common-span-tag-no { color:rgb(200,15,51); }
+
+/* ============================== */
+/* insert 페이지에서 특정 항목을 반드시 입력해야할 때, 사용 */
+/* ============================== */
+.common-span-must
+{
+    color:red;
+    font-weight: 900;
+}
+
+/* ============================== */
+/* 카드 형태의 span */
+/* ============================== */
+.common-span-card
+{
+    display     : inline-block;
+    font-size   : 1em;
+    font-weight : 600;
+    padding     : 0.3em 0.6em;
+}
+.common-span-mini
+{
+    display     : inline-block;
+    font-size   : 1em;
+    font-weight : 600;
+    padding     : 0.1em 0.3em;
+}
+
+.common-span-mini[span-type="succeed"]  , .common-span-card[span-type="succeed"]  { color:blue;       border:2px solid rgb(110,110,255); background-color: rgb(200,200,255); }
+.common-span-mini[span-type="warning"]  , .common-span-card[span-type="warning"]  { color:darkorange; border:2px solid rgb(255,163,26);  background-color: rgb(255,224,179); }
+.common-span-mini[span-type="failed"]   , .common-span-card[span-type="failed"]   { color:red;        border:2px solid lightcoral;       background-color: rgb(255,200,200); }
+.common-span-mini[span-type="nodata"]   , .common-span-card[span-type="nodata"]   { color:darkorange; border:2px solid rgb(255,163,26);  background-color: rgb(255,224,179); }
+
+/* 매장상태에 따른 표시 */
+.common-span-mini[store_status="open"]  , .common-span-card[store_status="open"]  { color:blue;       border:2px solid rgb(110,110,255); background-color: rgb(200,200,255); }
+.common-span-mini[store_status="pause"] , .common-span-card[store_status="pause"] { color:darkorange; border:2px solid rgb(255,163,26);  background-color: rgb(255,224,179); }
+.common-span-mini[store_status="close"] , .common-span-card[store_status="close"] { color:red;        border:2px solid lightcoral;       background-color: rgb(255,200,200); }
+
+/* 일정상태에 따른 표시 */
+.common-span-card[clsstatus="edit"]       { color:rgb(212 , 173 , 0   ); border:2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
+.common-span-card[clsstatus="ing"]        { color:rgb(  3 , 154 , 0   ); border:2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
+.common-span-card[clsstatus="endcls"]     { color:rgb( 10 ,  95 , 0   ); border:2px solid rgb( 10 ,  95 , 0   ); background-color: rgb( 10 ,  95 , 0   , 0.3); }
+.common-span-card[clsstatus="endsettle"]  { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
+.common-span-card[clsstatus="cancel"]     { color:rgb(120 ,   0 , 0   ); border:2px solid rgb(120 ,   0 , 0   ); background-color: rgb(120 ,   0 , 0   , 0.3); }
+
+/* 주문상태에 따른 표시 */
+.common-span-card[bankaccount-defaultflg="y"] { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
+.common-span-card[bankaccount-defaultflg="n"] { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
+
+/* rgb( 173 , 216 , 230 ) Light Blue */
+/* rgb( 135 , 206 , 235 ) Sky Blue */
+/* rgb( 0   , 150 , 255 ) Bright Blue */
+/* rgb( 65  , 105 , 225 ) Royal Blue */
+/* rgb( 4   , 55  , 242 ) Ultramarine */
+/* rgb( 34  , 139 , 34  ) Forest Green */
+/* rgb( 210 , 43  , 43  ) Cadmium Red */
+
+
+/* ============================== */
+/* noBorder 형태의 span */
+/* ============================== */
+.common-span-msg
+{
+    display     : inline-block;
+    font-size   : 1em;
+    font-weight : normal;
+}
+.common-span-msg[span-type="normal"]       { color:black;                    }
+.common-span-msg[span-type="success"]      { color:rgba(2, 6, 84, 1.0);      }
+.common-span-msg[span-type="warning"]      { color:rgba(255, 116, 21, 1.0);  }
+.common-span-msg[span-type="error"]        { color:rgba(139, 0, 0, 1.0); ;   }
+.common-span-msg[span-type="critical"]     { color:rgba(139, 0, 0, 1.0); ;   }

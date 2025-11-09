@@ -1,0 +1,171 @@
+<ons-page id="CCPC">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar id="CCPC-toolbar">
+        <div class="left"><gg-backbtn onclick="CCPC.close(true);"></gg-backbtn></div>
+        <div class="center"><span data-i18n="(CCPC)choose_addr">사진선택</span></div>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- 매뉴 -->
+    <!-- ======================== -->
+    <div class="common-div-mass" style="margin-top:0.5em;">
+        <table class="common-tbl-textCenter common-tbl-btnGroup commonEvent-tbl-btnGroup">
+            <tbody>
+                <tr>
+                    <td class="CCPC-td-menuTab" tab_type="search" tab="">기존 이미지 선택</td>
+                    <td class="CCPC-td-menuTab" tab_type="newpic" tab="">새로운 사진</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ======================== -->
+    <!-- 검색 -->
+    <!-- ======================== -->
+    <!-- 검색창 -->
+    <div class="common-div-mass CCPC-div-menuTab" tab_type="search">
+        <input
+            id="CCPC-inputText-keyword"
+            class="common-input-text"
+            maxlength="30"
+            style="text-align:center; width:60%;"
+            placeholder="검색어를 입력해주세요"
+        />
+        <button id="CCPC-btn-search" class="common-btn-outline" data-i18n="">검색</button>
+
+        <!-- 분류별 버튼 -->
+        <div id="CCPC-div-picKinds" class="common-div-cushion"></div>
+
+        <!-- 검색결과 -->
+        <div id="CCPC-div-searchResult" class="common-div-cushionUD" style="text-align:left;"></div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- updateMenuPIc -->
+    <!-- ======================== -->
+    <div class="common-div-noPad CCPC-div-menuTab" tab_type="newpic">
+
+        <!-- --------------- -->
+        <!-- 업로드할 사진 선택 -->
+        <!-- --------------- -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span data-i18n="(CCPC)user picture">사진선택</span>
+                <span>등록할 사진을 선택해주세요</span>
+            </p>
+            <div id="CCPC-div-pic" class="common-div-defaultImg" style="width:15em; height:15em;"></div>
+            <button id="CCPC-btn-chooseImgFromAlbum" class="common-btn-outline" data-i18n="(common)select from album">앨범에서 선택</button>
+        </div>
+
+        <!-- --------------- -->
+        <!-- 사진이름 -->
+        <!-- --------------- -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span data-i18n="">사진이름</span>
+                <span data-i18n="">(필수, 30글자이내)</span>
+            </p>
+            <input
+                id="CCPC-inputText-picName"
+                type="text"
+                class="common-text-insertPage common-input-text"
+                style="width:70%;"
+                value="사진이름"
+            >
+        </div>
+
+        <!-- --------------- -->
+        <!-- 분류명 -->
+        <!-- --------------- -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span data-i18n="">분류명</span>
+                <span data-i18n="">
+                    (30글자이내)<br>
+                    사진이 분류명별로 정리됩니다
+                </span>
+            </p>
+            <input
+                id="CCPC-inputText-picKind"
+                type="text"
+                class="common-text-insertPage common-input-text"
+                style="width:70%;"
+                value="분류명"
+            >
+        </div>
+
+        <div class="common-div-mass">
+            <button id="CCPC-btn-updateMenuPIc" class="common-btn-gradientBig">등록</button>
+        </div>
+        <img id="CCPC-img" src="">
+    </div>
+
+
+    <script>
+        var CCPC =
+        {
+            code : "CCPC",
+
+            /* ===================== */
+            /* 페이지 파라메터
+
+                CCPC.Data =
+                {
+                    [*][string] viewMode : [dialog,page]
+                }
+            /* ===================== */
+            Data: {},
+            imgUri: null,
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        } /* end CCPC */
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+
+            /* ======================== */
+            /* page initialize */
+            /* ======================== */
+            try
+            {
+                CCPC.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                Navigation.moveBack();
+            }
+
+        }); /* end ready */
+
+    </script>
+
+
+</ons-page>

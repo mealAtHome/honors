@@ -1,0 +1,172 @@
+<ons-page id="CLDA">
+
+    <style>
+        .CLDA-tbl-clslineup2 { white-space: nowrap; }
+        .CLDA-tbl-clslineup2 > tbody > tr > td { text-align: center; }
+        .CLDA-input-username { width: 6em; vertical-align: middle;}
+        #CLDA-tbl-clssettle  { white-space: nowrap; }
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="CLDA.close(true);"></gg-backbtn></div>
+        <div class="center">일정상세 &gt; 참가요약</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion common-tag-fontsize09">
+        <button id="CLDA-btn-copyContent" class="common-btn-outline">내용복사</button>
+        <hr class="common-hr-paddingTop"/>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 일정요약 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <pre id="CLDA-pre-summary"></pre>
+    </div>
+
+    <script>
+        var CLDA =
+        {
+            code : "CLDA",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(CLDA.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CLDA.close(); return; }
+                if(CLDA.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CLDA.close(); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* html */
+                        let html = "";
+
+                        /* get var */
+                        let clsno = CLDA.Data.clsno;
+                        let grpno = CLDA.Data.grpno;
+
+                        /* 기본정보 */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        html += `<참가명단> ${mCls.getClsPeriod()}`;
+                        html += `\n장소 : ${mCls.getClsground()} (${mCls.getClsgroundaddr()})`;
+
+
+                        /* 참가정보 : clstype에 따라 다르게 대응 */
+                        let clstype = mCls.getClstype();
+                        switch(clstype)
+                        {
+                            case GGF.Cls.Clstype.LINEUP1:
+                            case GGF.Cls.Clstype.LINEUP2:
+                            case GGF.Cls.Clstype.LINEUP4:
+                            {
+                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                                let lineups = mClslineup2s.getModels();
+                                let teamnick = "";
+                                for(let i in lineups)
+                                {
+                                    let model = lineups[i];
+
+                                    /* team */
+                                    if(teamnick != model.getTeamnick())
+                                    {
+                                        html += `\n\n■ ${model.getTeamnick()}`;
+                                        teamnick = model.getTeamnick();
+                                    }
+
+                                    /* orderno */
+                                    let orderno = model.getOrderno();
+                                    if(model.isBattingflgY() == false)
+                                        orderno = "0";
+
+                                    /* username */
+                                    let username = `${model.getUsername()}`;
+                                    if(model.getUsername() != model.getApplyername())
+                                        username = `${model.getUsername()} (${model.getApplyername()})`;
+
+                                    /* add row */
+                                    html += `\n${orderno}. ${model.getPosition()} - ${username}`;
+                                }
+                                break;
+                            }
+                        }
+                        $("#CLDA-pre-summary").html(html);
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#CLDA-btn-copyContent").on("click", function()
+            {
+                /* copy content */
+                let content = $("#CLDA-pre-summary").html();
+                Common.copyToClipboard(content);
+            });
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CLDA.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CLDA.close(true);
+            }
+
+            /* localizing */
+            /* $("#CLDA").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

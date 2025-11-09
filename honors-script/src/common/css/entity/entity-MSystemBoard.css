@@ -1,0 +1,41 @@
+/* ============================== */
+/* 공지사항 배너형 */
+/* ============================== */
+.MSystemBoard-makeMainBanner-div-top
+{
+    display:block;
+    width:100%;
+}
+
+.MSystemBoard-makeMainBanner-img
+{
+    display:block;
+    width:100%;
+}
+
+
+/* ============================== */
+/* 공지사항 가로형 */
+/* ============================== */
+.MSystemBoards-makeHorizon-div-top > div:nth-child(1) { border-top    : 1px solid #ccc; }
+.MSystemBoards-makeHorizon-div-top > div              { border-bottom : 1px solid #ccc; }
+
+.MSystemBoard-makeHorizon-div-top
+{
+    position:relative;
+    display:block;
+    width:100%;
+}
+.MSystemBoard-makeHorizon-div-image
+{
+    /* width:100%; */
+    width:3.4em;
+    height:3.4em;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin-right:0.4em;
+}
+
+
+.MSystemBoard-makeHorizon-table-info > tbody > tr > td:nth-child(1) { width: 10%; }

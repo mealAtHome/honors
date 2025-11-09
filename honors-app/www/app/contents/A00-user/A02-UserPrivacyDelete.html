@@ -1,0 +1,135 @@
+<ons-page id="UPRD">
+
+    <ons-toolbar>
+        <ons-toolbar>
+            <div class="left"><gg-backbtn onclick="UPRD.close()"></gg-backbtn></div>
+            <div class="center">회원탈퇴</div>
+        </ons-toolbar>
+    </ons-toolbar>
+
+    <style>
+        /* 이 페이지의 input들 */
+        .UPRD-input-text { width:80%; }
+    </style>
+
+    <!-- ======================== -->
+    <!-- main page -->
+    <!-- ======================== -->
+    <div class="common-div-cushion">
+
+        <table class="common-tbl-normal" tbl-type="noborder">
+            <tbody>
+                <tr>
+                    <td>회원탈퇴를 원하신다면 아이디와 비밀번호를 입력 후, 아래의 버튼을 눌러주세요.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table id="index-tbl-userinfo" class="common-tbl-vertical" tbl-type="normal">
+                            <tbody>
+                                <tr>
+                                    <th>아이디</th>
+                                    <td><input id="index-input-id" type="text" class="common-input-text" /></td>
+                                </tr>
+                                <tr>
+                                    <th>비밀번호</th>
+                                    <td><input id="index-input-pw" type="password" class="common-input-text" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="common-tag-block">※ 삭제된 회원정보는 복구가 불가능합니다. 신중하게 결정해주세요.</span>
+                        <span class="common-tag-block">※ 탈퇴 후, 6개월 이내에 데이터가 삭제됩니다.</span>
+                        <span class="common-tag-block">※ 삭제 신청 후, 취소를 원하시면 개발자 연락처로 문의해주세요. (010-7471-4268)</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ======================== -->
+        <!-- footer -->
+        <!-- ======================== -->
+        <button id="UPRD-btn-save" class="common-btn-footer">요청하기</button>
+        <div class="common-div-cushionFooter"></div>
+
+    </div>
+
+    <script>
+
+        /* =============================== */
+        /* page obj */
+        /* =============================== */
+        var UPRD =
+        {
+            code : "UPRD",
+            userImgUri: null,
+            Data: {},
+
+            /* -------------------- */
+            /* show */
+            /* -------------------- */
+            show()
+            {
+
+            },
+
+            close()
+            {
+                Navigation.moveBack();
+            },
+        };
+
+
+        $(document).ready(function()
+        {
+            /* =============================== */
+            /* events */
+            /* =============================== */
+
+            /* ---------------------- */
+            /* 요청하기 */
+            /* ---------------------- */
+            $("#UPRD-btn-save").click(function()
+            {
+                let id = $('#index-input-id').val();
+                let pw = $('#index-input-pw').val();
+
+                if(id == '' || pw == '')
+                {
+                    alert("아이디와 비밀번호를 입력해주세요.");
+                    return;
+                }
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let rslt = Api.User.deleteUserInfo(id, pw, GGF.toast, GGF.toast);
+                        if(rslt == true)
+                            GGstorage.logout();
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("회원탈퇴 하시겠습니까?", process);
+            });
+
+            /* =============================== */
+            /* page process */
+            /* =============================== */
+
+            /* ------------- */
+            /* set pageParam */
+            /* ------------- */
+            let pageDat = Navigation.getPageParam();
+
+            /* localizing */
+            $("#UPRD").i18n();
+
+        });
+
+    </script>
+</ons-page>

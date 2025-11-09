@@ -1,0 +1,90 @@
+<ons-page id="UMMG">
+
+    <style>
+        #UMMG-span-version
+        {
+            font-size:0.9em;
+            color: rgb(150,150,150);
+        }
+        #UMMG-span-version::before
+        {
+            content: "v";
+        }
+    </style>
+    <div class="common-div-cushion">
+        <span id="UMMG-span-version" class="common-tag-block"></span>
+    </div>
+
+    <div class="common-div-cushion common-div-manages">
+        <button id="UMMG-btn-privacyDelete" class="common-btn-outline">회원탈퇴</button>
+        <!-- <button id="UMMG-btn-manageUserAcctList" class="common-btn-outline">은행계좌관리</button> -->
+        <!-- <button id="UMMG-btn-manageUserAddr"           class="common-btn-outline">주소설정</button> -->
+        <!-- <button id="UMMG-btn-manageUserAcctRefund"     class="common-btn-outline">환불계좌설정</button> -->
+        <!-- <button id="UMMG-btn-paymentMissedreq"         class="common-btn-outline">오입금(오송금) 반환신청</button> -->
+    </div>
+
+    <!-- =============== -->
+    <!-- cushion for tab -->
+    <!-- =============== -->
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+        var UMMG =
+        {
+            code: "UMMG",
+            Data: {},
+
+            show()
+            {
+                /* set version */
+                $("#UMMG-span-version").text(versionCl);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmExit();
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            $("#UMMG-btn-privacyDelete").click(function() { Navigation.moveFrontPage(Navigation.Page.A02UserPrivacyDelete, {}); });
+            // $("#UMMG-btn-manageUserAddr")         .click(function() {Navigation.moveFrontPage(Navigation.Page.B21UserAddrList, {}); });
+            // $("#UMMG-btn-manageUserAcctRefund")   .click(function() {Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate, {}); });
+            // $("#UMMG-btn-paymentMissedreq")       .click(function() {Navigation.moveFrontPage(Navigation.Page.B33UserPaymentMissedreq, {}); });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UMMG.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UMMG.close(true);
+            }
+
+            /* localizing */
+            /* $("#UMMG").i18n(); */
+
+        });
+    </script>
+</ons-page>

@@ -1,0 +1,167 @@
+<ons-page id="MMMB">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="MMMB.close(true);"></gg-backbtn></div>
+        <div class="center">멤버</div>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- choose -->
+    <!-- ======================== -->
+    <div class="common-div-cushion">
+        <table class="common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="MMMB-td-searchtype" searchtype="all"       tab="tab" >전체</td>
+                    <td class="MMMB-td-searchtype" searchtype="manager"   tab=""    >관리자</td>
+                    <td class="MMMB-td-searchtype" searchtype="member"    tab=""    >멤버</td>
+                    <td class="MMMB-td-searchtype" searchtype="temp"      tab=""    >임시</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- list -->
+    <!-- ========================= -->
+    <div id="MMMB-div-list"></div>
+
+    <div class="common-div-cushionFooter"></div>
+    <script>
+        var MMMB =
+        {
+            code : "MMMB",
+
+            show()
+            {
+                if(MMMB.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); MMMB.close(); return; }
+                if(MMMB.Data.searchtype == undefined) { MMMB.Data.searchtype = "all"; }
+
+                /* 멤버 리스트 조회 */
+                $(`.MMMB-td-searchtype[searchtype='${MMMB.Data.searchtype}']`).click();
+            },
+
+            search()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let grpno = MMMB.Data.grpno;
+                    let searchtype = MMMB.Data.searchtype;
+                    let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(MMMB.Data.grpno, GGF.none, GGF.toast);
+                    let models = mGrpMembers.getModels();
+
+                    let filteredModels = [];
+                    switch(searchtype)
+                    {
+                        case "all":
+                        {
+                            filteredModels = models;
+                            break;
+                        }
+                        case "manager":
+                        {
+                            for(let i in models)
+                            {
+                                let model = models[i];
+                                let cut = true;
+                                if(model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNG) cut = false;
+                                if(model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNGSUB) cut = false;
+
+                                /* splice */
+                                if(cut == false)
+                                    filteredModels.push(model);
+                            }
+                            break;
+                        }
+                        case "member":
+                        {
+                            for(let i in models)
+                            {
+                                let model = models[i];
+                                let mUser = model.getMUser();
+                                let cut = false;
+                                if(model.getGrpmtype() != GGF.GrpMember.Grpmtype.MEMBER) cut = true;
+                                if(mUser.isUsertypeTemp()) cut = true;
+
+                                /* splice */
+                                if(cut == false)
+                                    filteredModels.push(model);
+                            }
+                            break;
+                        }
+                        case "temp":
+                        {
+                            for(let i in models)
+                            {
+                                let model = models[i];
+                                let mUser = model.getMUser();
+                                let cut = true;
+                                if(mUser.isUsertypeTemp()) cut = false;
+
+                                /* splice */
+                                if(cut == false)
+                                    filteredModels.push(model);
+                            }
+                            break;
+                        }
+                    }
+                    mGrpMembers.models = filteredModels;
+                    mGrpMembers.make("#MMMB-div-list");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $(".MMMB-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("searchtype");
+
+                /* save selected */
+                MMMB.Data.searchtype = searchtype;
+
+                /* process */
+                MMMB.search();
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MMMB.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MMMB.close(true);
+            }
+
+        }); /* end function */
+
+    </script>
+</ons-page>

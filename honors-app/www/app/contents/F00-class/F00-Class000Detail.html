@@ -1,0 +1,644 @@
+<ons-page id="CLSD">
+
+    <style>
+        /* settle */
+        #CLSD-tbl-clssettle  { white-space: nowrap; }
+
+        /* lineup2 */
+        .CLSD-tbl-clslineup2 { white-space: nowrap; }
+        .CLSD-tbl-clslineup2 > tbody > tr > td { text-align: center; }
+        .CLSD-tbl-clslineup2 > tbody > tr > td[col="etc"] { font-size:0.9em; text-align: left; white-space: normal;}
+
+        /* lineup > common */
+        .CLSD-input-username { width: 6em; vertical-align: middle; text-align: center;}
+        .CLSD-input-etc      { width: 8em; vertical-align: middle; text-align: left; }
+
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="CLSD.close(true);"></gg-backbtn></div>
+        <div class="center">일정상세</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion common-tag-fontsize09">
+        <button id="CLSD-btn-textCls"    class="common-btn-outline">일정요약</button>
+        <button id="CLSD-btn-textApply"  class="common-btn-outline">참가요약</button>
+        <button id="CLSD-btn-textSettle" class="common-btn-outline" style="display:none;">정산요약</button>
+        <button id="CLSD-btn-copyCls"    class="common-btn-outline" style="display:none;">일정복사</button>
+        <hr class="common-hr-paddingTop"/>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 일정상세 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <p class="common-p-title">
+            <span id="CLSD-span-clstitle"></span>
+        </p>
+        <table class="common-tbl-vertical common-tag-cushionUp common-tag-fontsize09" tbl-type="normal">
+            <tbody>
+                <tr><th>모임시간</th><td><span id="CLSD-span-clsdt"></span></td></tr>
+                <tr><th>모집일정</th><td><span id="CLSD-span-clsapplydt"></span></td></tr>
+                <tr><th>집합장소</th><td><span id="CLSD-span-clsgroundaddr"></span> (<span id="CLSD-span-clsground"></span>)</td></tr>
+                <tr><th>참가비</th><td><span id="CLSD-span-clsapplybill"></span></td></tr>
+                <tr><th>상세</th><td><span id="CLSD-span-clscontent"></span></td></tr>
+                <tr>
+                    <th>담당자</th>
+                    <td>
+                        <div class="common-tag-block">주관(정) : <span id="CLSD-span-clsusernoadmname"></span></div>
+                        <div class="common-tag-block">주관(부) : <span id="CLSD-span-clsusernosubname"></span></div>
+                    </td>
+                </tr>
+                <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
+            </tbody>
+        </table>
+        <div class="common-tag-block common-tag-fontsize09">일정작성자 : <span id="CLSD-span-clsusernoregname"></span></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 정산 -->
+    <!-- ========================= -->
+    <div id="CLSD-div-clssettleTop" style="display:none;">
+        <hr class="common-hr-padding">
+        <div class="common-div-cushionLRD">
+            <p class="common-p-title">정산현황</p>
+            <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                <thead>
+                    <tr>
+                        <th>접수자</th>
+                        <th>정산금액</th>
+                        <th>할인금액</th>
+                        <th>사전정산</th>
+                        <th>참가비고</th>
+                        <th>입금여부</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 참가자목록 -->
+    <!-- ========================= -->
+    <hr class="common-hr-padding">
+    <div class="common-div-cushionLRD">
+        <p class="common-p-title">참가현황</p>
+
+        <!-- --------------- -->
+        <!-- 참가형식 : 라인업(1팀) -->
+        <!-- --------------- -->
+        <div class="CLSD-div-clssub" tab="lineup1" style="display:none;">
+            <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
+                <thead>
+                    <tr>
+                        <th>타순</th>
+                        <th>포지션</th>
+                        <th>참가자</th>
+                        <th>접수자</th>
+                        <th>참가비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- --------------- -->
+        <!-- 참가형식 : 라인업(1시합) -->
+        <!-- --------------- -->
+        <div class="CLSD-div-clssub" tab="lineup2" style="display:none;">
+            <div class="common-tag-fontsize09">
+                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀A</button>
+                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀B</button>
+            </div>
+            <hr class="common-hr-paddingUD"/>
+
+            <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
+                <p class="common-p-titlesub"><span>팀A - </span><span class="CLSD-span-teamnick" teamname="a"></span></p>
+                <div class="common-div-scrollX">
+                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
+                        <thead>
+                            <tr>
+                                <th>타순</th>
+                                <th>포지션</th>
+                                <th>참가자</th>
+                                <th>접수자</th>
+                                <th>참가비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
+                <p class="common-p-titlesub"><span>팀B - </span><span class="CLSD-span-teamnick" teamname="b"></span></p>
+                <div class="common-div-scrollX">
+                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
+                        <thead>
+                            <tr>
+                                <th>타순</th>
+                                <th>포지션</th>
+                                <th>참가자</th>
+                                <th>접수자</th>
+                                <th>참가비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- --------------- -->
+        <!-- 참가형식 : 라인업(2시합) -->
+        <!-- --------------- -->
+        <div class="CLSD-div-clssub" tab="lineup4" style="display:none;">
+            <div class="common-tag-fontsize09">
+                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="a" tab="">시합1 - 팀A</button>
+                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="b" tab="">시합1 - 팀B</button>
+                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="c" tab="">시합2 - 팀C</button>
+                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="d" tab="">시합2 - 팀D</button>
+            </div>
+            <hr class="common-hr-paddingUD"/>
+            <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
+                <p class="common-p-titlesub"><span>1시합 팀A - </span><span class="CLSD-span-teamnick" teamname="a"></span></p>
+                <div class="common-div-scrollX">
+                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
+                        <thead>
+                            <tr>
+                                <th>타순</th>
+                                <th>포지션</th>
+                                <th>참가자</th>
+                                <th>접수자</th>
+                                <th>참가비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
+                <p class="common-p-titlesub"><span>1시합 팀B - </span><span class="CLSD-span-teamnick" teamname="b"></span></p>
+                <div class="common-div-scrollX">
+                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
+                        <thead>
+                            <tr>
+                                <th>타순</th>
+                                <th>포지션</th>
+                                <th>참가자</th>
+                                <th>접수자</th>
+                                <th>참가비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="CLSD-div-tabTeam" teamname="c" style="display:none;">
+                <p class="common-p-titlesub"><span>2시합 팀C - </span><span class="CLSD-span-teamnick" teamname="c"></span></p>
+                <div class="common-div-scrollX">
+                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="c">
+                        <thead>
+                            <tr>
+                                <th>타순</th>
+                                <th>포지션</th>
+                                <th>참가자</th>
+                                <th>접수자</th>
+                                <th>참가비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="CLSD-div-tabTeam" teamname="d" style="display:none;">
+                <p class="common-p-titlesub"><span>2시합 팀D - </span><span class="CLSD-span-teamnick" teamname="d"></span></p>
+                <div class="common-div-scrollX">
+                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="d">
+                        <thead>
+                            <tr>
+                                <th>타순</th>
+                                <th>포지션</th>
+                                <th>참가자</th>
+                                <th>접수자</th>
+                                <th>참가비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+        var CLSD =
+        {
+            code : "CLSD",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+            clstype : null,
+            isManager : false,
+
+            show()
+            {
+                /* validation param */
+                if(CLSD.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
+                if(CLSD.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
+
+                /* init el */
+                $(".CLSD-tbl-clslineup2 > tbody").empty();
+                $("#CLSD-btn-textSettle").hide();
+                $("#CLSD-btn-copyCls").hide();
+                $("#CLSD-tr-clscancelreason").hide();
+
+                /* tab */
+                $(`.CLSD-td-tab[val=decide]`).click();
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let clsno = CLSD.Data.clsno;
+                        let grpno = CLSD.Data.grpno;
+
+                        /* 기본정보 */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        $("#CLSD-span-clstitle")            .text(mCls.getClstitle());
+                        $("#CLSD-span-clsdt")               .text(mCls.getClsPeriod());
+                        $("#CLSD-span-clsground")           .text(mCls.getClsground());
+                        $("#CLSD-span-clsgroundaddr")       .text(mCls.getClsgroundaddr());
+                        $("#CLSD-span-clsapplybill")        .text(mCls.getClsapplybillpriceWon());
+                        $("#CLSD-span-clsapplydt")          .text(mCls.getClsapplyPeriod());
+                        $("#CLSD-span-clscontent")          .text(mCls.getClscontent());
+                        $("#CLSD-span-clsusernoregname")    .text(mCls.getClsusernoregname());
+                        $("#CLSD-span-clsusernoadmname")    .text(mCls.getClsusernoadmname());
+                        $("#CLSD-span-clsusernosubname")    .text(mCls.getClsusernosubname());
+                        $("#CLSD-span-clscancelreason")     .text(mCls.getClscancelreason());
+
+                        /* ----- */
+                        /* show / hide */
+                        /* ----- */
+                        /* clstype */
+                        $(`.CLSD-div-clssub[tab=${mCls.getClstype()}]`).show();
+                        $(`.CLSD-div-clssub[tab!=${mCls.getClstype()}]`).hide();
+
+                        /* team tab */
+                        switch(mCls.getClstype())
+                        {
+                            case GGF.Cls.Clstype.LINEUP1:
+                            {
+                                break;
+                            }
+                            case GGF.Cls.Clstype.LINEUP2:
+                            case GGF.Cls.Clstype.LINEUP4:
+                            {
+                                $(`.CLSD-btn-tabTeam[val=a]`).click();
+                                break;
+                            }
+                        }
+
+                        /* cancel reason */
+                        if(mCls.isCancel())
+                            $("#CLSD-tr-clscancelreason").show();
+
+                        /* for manager */
+                        CLSD.isManager = GGstorage.isManagerOfGrp(grpno);
+                        if(CLSD.isManager)
+                        {
+                            $("#CLSD-btn-textSettle").show();
+                            $("#CLSD-btn-copyCls").show();
+                        }
+
+                        /* ----- */
+                        /* 정산현황 */
+                        /* ----- */
+                        if(mCls.isEndsettle())
+                        {
+                            let mClssettles = Api.Clssettle.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                            let models = mClssettles.getModels();
+                            for(let i in models)
+                            {
+                                let model = models[i];
+                                let html =
+                                `
+                                    <tr>
+                                        <td class="common-tag-alignC">${model.getUsername()}</td>
+                                        <td class="common-tag-alignR">${model.getBillfinalWon()}</td>
+                                        <td class="common-tag-alignR">${model.getBilldiscountWon()}</td>
+                                        <td class="common-tag-alignR">${model.getBillpointedWon()}</td>
+                                        <td class="common-tag-alignL">${model.getBillmemo()}</td>
+                                        <td class="common-tag-alignC">${model.getManagerdepositflgCvrt()}</td>
+                                    </tr>
+                                `;
+                                $("#CLSD-tbl-clssettle > tbody").append(html);
+                            }
+                            $("#CLSD-div-clssettleTop").show();
+                        }
+
+                        /* 참가정보 : clstype에 따라 다르게 대응 */
+                        CLSD.clstype = mCls.getClstype();
+                        switch(CLSD.clstype)
+                        {
+                            case GGF.Cls.Clstype.LINEUP1:
+                            {
+                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                                let lineups = mClslineup2s.getModels();
+                                for(let i in lineups)
+                                    CLSD.addRowForLineup2(lineups[i]);
+                                break;
+                            }
+                            case GGF.Cls.Clstype.LINEUP2:
+                            {
+                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                                $(".CLSD-span-teamnick[teamname=a]").text(mClslineup2s.getTeamnick("a"));
+                                $(".CLSD-span-teamnick[teamname=b]").text(mClslineup2s.getTeamnick("b"));
+                                let lineups = mClslineup2s.getModels();
+                                for(let i in lineups)
+                                    CLSD.addRowForLineup2(lineups[i]);
+                                break;
+                            }
+                            case GGF.Cls.Clstype.LINEUP4:
+                            {
+                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                                $(".CLSD-span-teamnick[teamname=a]").text(mClslineup2s.getTeamnick("a"));
+                                $(".CLSD-span-teamnick[teamname=b]").text(mClslineup2s.getTeamnick("b"));
+                                $(".CLSD-span-teamnick[teamname=c]").text(mClslineup2s.getTeamnick("c"));
+                                $(".CLSD-span-teamnick[teamname=d]").text(mClslineup2s.getTeamnick("d"));
+                                let lineups = mClslineup2s.getModels();
+                                for(let i in lineups)
+                                    CLSD.addRowForLineup2(lineups[i]);
+                                break;
+                            }
+                        }
+                        CLSD.setEvent();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            addRowForLineup2(mClslineup2)
+            {
+                let model = mClslineup2;
+
+                /* ----- */
+                /* battingflg */
+                /* ----- */
+                let orderno = model.getOrderno();
+                if(model.isBattingflgY() == false)
+                    orderno = "-";
+
+                /* ----- */
+                /* position */
+                /* ----- */
+                let position = model.getPosition();
+                if(position == "")
+                    position = "-";
+
+                /* ----- */
+                /* apply */
+                /* ----- */
+                let apply = "";
+                if(model.hasApplyer())
+                {
+                    switch(model.getClsstatus())
+                    {
+                        case GGF.Cls.Clsstatus.EDIT:
+                        case GGF.Cls.Clsstatus.ENDCLS:
+                        case GGF.Cls.Clsstatus.ENDSETTLE:
+                        {
+                            apply = `${model.getUsername()}`;
+                            break;
+                        }
+                        case GGF.Cls.Clsstatus.ING:
+                        {
+                            apply =
+                            `
+                                <input type="text" class="common-input-text CLSD-input-username" value="${model.getUsername()}" disabled/>
+                                <button class="common-btn-outline CLSD-btn-cancelForLineup2" btn-type="cancel" ${model.getPk()}>취소</button>
+                            `;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    switch(model.getClsstatus())
+                    {
+                        case GGF.Cls.Clsstatus.EDIT       : apply = "-"; break;
+                        case GGF.Cls.Clsstatus.ENDCLS     : apply = "-"; break;
+                        case GGF.Cls.Clsstatus.ENDSETTLE  : apply = "-"; break;
+                        case GGF.Cls.Clsstatus.ING        :
+                        {
+                            apply =
+                            `
+                                <input type="text" class="common-input-text CLSD-input-username" value="${model.getUsername()}" ${model.getPk()} disabled/>
+                                <button class="common-btn-outline CLSD-btn-applyForLineup2" ${model.getPk()} teamnick="${model.getTeamnick()}" position="${model.getPosition()}" bill="${model.getBillWon()}">참가</button>
+                            `;
+                            break;
+                        }
+                    }
+                }
+
+                /* ----- */
+                /* applyer */
+                /* ----- */
+                let applyer = model.getApplyername();
+                if(applyer == "")
+                {
+                    if(CLSD.isManager)
+                        applyer = `<button class="common-btn-outline CLSD-btn-applyStead" ${model.getPk()}>대리접수</button>`;
+                }
+
+                /* ----- */
+                /* make TR */
+                /* ----- */
+                let html =
+                `
+                    <tr>
+                        <td>${orderno}</td>
+                        <td>${position}</td>
+                        <td>${apply}</td>
+                        <td>${applyer}</td>
+                        <td col="etc">${model.getEtc()}</td>
+                    </tr>
+                `;
+                $(`.CLSD-tbl-clslineup2[teamname=${model.getTeamname()}] > tbody`).append(html);
+            },
+
+            setEvent()
+            {
+                /* 참가신청 : clslineup2 */
+                $(".CLSD-btn-applyForLineup2").off("click").on("click", function()
+                {
+                    let grpno = $(this).attr("grpno");
+                    let clsno = $(this).attr("clsno");
+                    let teamname = $(this).attr("teamname");
+                    let orderno = $(this).attr("orderno");
+                    let teamnick = $(this).attr("teamnick");
+                    let position = $(this).attr("position");
+                    let bill = $(this).attr("bill");
+                    let pageData =
+                    {
+                        grpno : grpno,
+                        clsno : clsno,
+                        teamname : teamname,
+                        orderno : orderno,
+                        teamnick : teamnick,
+                        position : position,
+                        bill : bill,
+                    };
+                    console.log(pageData);
+                    Navigation.moveFrontDialog(Navigation.Page.F00Class001DetailApplyDialog, pageData);
+                });
+
+                /* 참가취소 : clslineup2 */
+                $(".CLSD-btn-cancelForLineup2").off("click").on("click", function()
+                {
+                    let grpno = $(this).attr("grpno");
+                    let clsno = $(this).attr("clsno");
+                    let teamname = $(this).attr("teamname");
+                    let orderno = $(this).attr("orderno");
+                    let process = function()
+                    {
+                        Common.showProgress();
+                        setTimeout(function()
+                        {
+                            let mApiResponse = Api.Clslineup2.updateApplyCancel(grpno, clsno, teamname, orderno, GGF.toast, GGF.toast);
+                            Navigation.executeShow();
+                            Common.hideProgress();
+                        }, ajaxDelayTime);
+                    };
+                    Common.confirm2(`참가를 취소하시겠습니까?`, process);
+                });
+
+                /* 대리접수 */
+                $(".CLSD-btn-applyStead").off("click").on("click", function()
+                {
+                    switch(CLSD.clstype)
+                    {
+                        case GGF.Cls.Clstype.LINEUP1:
+                        case GGF.Cls.Clstype.LINEUP2:
+                        case GGF.Cls.Clstype.LINEUP4:
+                        {
+                            let grpno = $(this).attr("grpno");
+                            let clsno = $(this).attr("clsno");
+                            let teamname = $(this).attr("teamname");
+                            let orderno = $(this).attr("orderno");
+                            let data =
+                            {
+                                option : "F00-applyToClslineup2",
+                                grpno : grpno,
+                                clsno : clsno,
+                                teamname : teamname,
+                                orderno : orderno,
+                                regmember : GGF.Y,
+                            }
+                            Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
+                            break;
+                        }
+                    }
+                });
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#CLSD-btn-textCls")      .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class080TextCls,    {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-textApply")    .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class081TextApply,  {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-textSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class082TextSettle, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-copyCls").click(function()
+            {
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.Cls.copyClsForMng(CLSD.Data.grpno, CLSD.Data.clsno, GGF.toast, GGF.toast);
+                        // if(mApiResponse.isSuccess())
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2(`일정을 복사하시겠습니까?`, process);
+            });
+
+            /* 팀 선택 */
+            $(".CLSD-btn-tabTeam").click(function()
+            {
+                let teamname = $(this).attr('val');
+                $(".CLSD-div-tabTeam").hide();
+                $(`.CLSD-div-tabTeam[teamname="${teamname}"]`).show();
+            });
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CLSD.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CLSD.close(true);
+            }
+
+            /* localizing */
+            /* $("#CLSD").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

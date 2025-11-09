@@ -1,0 +1,108 @@
+.common-tag-indent04 { padding-left: 0.4em; }
+.common-tag-indent08 { padding-left: 0.8em; }
+
+.common-tag-marginTop10 { margin-top: 1.0em; }
+
+.common-tag-paddingUD02 { padding-top: 0.2em; padding-bottom: 0.2em; }
+.common-tag-padding02 { padding: 0.2em; }
+.common-tag-padding03 { padding: 0.3em; }
+.common-tag-padding04 { padding: 0.4em; }
+.common-tag-padding05 { padding: 0.5em; }
+
+.common-tag-cushionL  { margin:0.0em 0.0em 0.0em 0.6em; }
+.common-tag-cushionUp { margin:0.6em 0.0em 0.0em 0.0em; }
+.common-tag-cushionUD { margin:0.6em 0.0em 0.6em 0.0em; }
+
+.common-tag-cushionDw03 { margin-bottom:0.3em; }
+
+/* 모든 태그에 적용이 가능한 클래스 모음 */
+.common-tag-strong     { font-weight:bold; font-size:1.1em; }
+.common-tag-textCenter { text-align: center; }
+.common-tag-blockCenter
+{
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.common-tag-alignC { text-align: center; }
+.common-tag-alignR { text-align: right; }
+.common-tag-alignL { text-align: left; }
+
+
+/* ============================== */
+/* 아래 보더라인 */
+/* ============================== */
+.common-tag-hrD { border-bottom: 2px dashed #ccc; }
+
+/* ============================== */
+/* 쿠션 */
+/* ============================== */
+.common-tag-block
+{
+    display:block;
+    line-height:1.6;
+}
+.common-tag-inlineBlock
+{
+    display:inline-block;
+    line-height:1.6;
+}
+.common-tag-marginUp    { display:block; margin-top:0.4em; }
+.common-tag-marginUp06  { display:block; margin-top:0.6em; }
+.common-tag-marginUD    { display:block; margin-top:0.4em; margin-bottom:0.4em; }
+.common-tag-padding06   { padding:0.6em; }
+.common-tag-paddingRight04 { padding-right:0.4em; }
+
+/* ============================== */
+/* fixed 고정 TAG */
+/* ============================== */
+.common-tag-fixedTopRight
+{
+    display: inline-block;
+    position: fixed;
+    top: 0.5em;
+    right: 0.5em;
+}
+
+.common-tag-announce
+{
+    display:block;
+    padding:0.4em;
+    text-align: left;
+    line-height: 1.4;
+    background-color: #ddd;
+}
+
+/* ============================== */
+/* 글자크기 */
+/* ============================== */
+.common-tag-fontsize08 { font-size:0.8em; }
+.common-tag-fontsize09 { font-size:0.9em; }
+.common-tag-fontsize10 { font-size:1.0em; }
+.common-tag-fontsize11 { font-size:1.1em; }
+.common-tag-fontsize12 { font-size:1.2em; }
+.common-tag-fontsize13 { font-size:1.3em; }
+.common-tag-fontsize14 { font-size:1.4em; }
+.common-tag-fontsize15 { font-size:1.5em; }
+
+.common-tag-paddingLR08 { padding-left:0.8em; padding-right:0.8em; }
+
+.common-tag-lineheight14 { line-height:1.4; }
+.common-tag-lineheight15 { line-height:1.5; }
+.common-tag-lineheight16 { line-height:1.6; }
+.common-tag-lineheight17 { line-height:1.7; }
+.common-tag-lineheight18 { line-height:1.8; }
+.common-tag-lineheight19 { line-height:1.9; }
+.common-tag-lineheight20 { line-height:2.0; }
+
+
+.common-tag-bold      { font-weight: bold; }
+.common-tag-colorWarn { color:rgba(255, 116, 21, 1.0); }
+.common-tag-colorPstv { color:rgba(0, 128, 0, 1.0); }
+.common-tag-colorNgtv { color:rgba(255, 0, 0, 1.0); }
+.common-tag-colorGrey { color:rgba(128, 128, 128, 1.0); }
+.common-tag-colorGray { color:rgba(128, 128, 128, 1.0); }
+
+.common-tag-positionAbsUR { position:absolute; top:0.5em; right:0.5em; }

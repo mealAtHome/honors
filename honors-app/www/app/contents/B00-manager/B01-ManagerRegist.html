@@ -1,0 +1,215 @@
+<ons-page id="BIST">
+
+    <!-- ========================== -->
+    <!-- 회원등록 페이지 -->
+    <!-- ========================== -->
+    <ons-toolbar>
+        <ons-toolbar>
+            <div class="left"><gg-backbtn onclick="BIST.close()"></gg-backbtn></div>
+            <div class="center">업체등록</div>
+        </ons-toolbar>
+    </ons-toolbar>
+
+    <style>
+        /* 이 페이지의 input들 */
+        .BIST-input-text { width:80%; }
+    </style>
+
+    <!-- ======================== -->
+    <!-- main page -->
+    <!-- ======================== -->
+    <div class="common-div-noPad">
+
+        <!-- ======================== -->
+        <!-- 업체명 -->
+        <!-- ======================== -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span>업체명</span>
+                <span>(필수, 50글자이내)</span>
+            </p>
+            <input id="BIST-input-bizname" class="BIST-input-text common-input-text" placeholder="업체명" value="총무덕트">
+        </div>
+
+        <!-- ================ -->
+        <!-- 사업자등록번호 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span data-i18n="">사업자등록번호</span>
+                <span>(필수)</span>
+            </p>
+            <input
+                id="BIST-input-biznum"
+                type="text"
+                class="BIST-input-text common-text-insertPage common-input-text"
+                placeholder="사업자등록번호"
+                value="110-53-12345"
+            >
+        </div>
+
+        <!-- ================ -->
+        <!-- 업체대표명 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span data-i18n="">업체대표명</span>
+                <span>(필수, 50글자이내)</span>
+            </p>
+            <input
+                id="BIST-input-bizrep"
+                type="text"
+                class="BIST-input-text common-text-insertPage common-input-text"
+                placeholder="대표자명"
+                value="서준형형"
+            >
+        </div>
+
+        <!-- ================ -->
+        <!-- 업체위치 -->
+        <!-- ================ -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span data-i18n="">업체주소입력</span>
+            </p>
+
+            <!-- 주소 -->
+            <button id="BIST-btn-chooseAddr" class="common-btn-outline" data-i18n="(common)choose area">주소선택</button>
+            <div id="BIST-div-address" class="common-div-mass"></div>
+
+            <!-- 상세주소 -->
+            <p>상세주소</p>
+            <input
+                id="BIST-input-addrDetail"
+                type="text"
+                class="BIST-input-text common-text-insertPage common-input-text"
+                placeholder="상세주소"
+                value="샤인빌 302호"
+            >
+        </div>
+
+        <!-- ======================== -->
+        <!-- 업체전화번호 -->
+        <!-- ======================== -->
+        <div class="common-div-mass">
+            <p class="common-p-insertTitle">
+                <span>업체전화번호</span>
+            </p>
+            <input id="BIST-input-phone1" class="BIST-input-text common-input-text" type="text" placeholder="전화번호1" style="margin-bottom:0.4em;" value="01074174268">
+            <input id="BIST-input-phone2" class="BIST-input-text common-input-text" type="text" placeholder="전화번호2" style="margin-bottom:0.4em;">
+            <input id="BIST-input-phone3" class="BIST-input-text common-input-text" type="text" placeholder="전화번호3" style="margin-bottom:0.4em;">
+        </div>
+
+        <!-- ======================== -->
+        <!-- 저장하기 -->
+        <!-- ======================== -->
+        <button id="BIST-btn-save" class="common-btn-footer">업체등록</button>
+        <div class="common-div-cushionFooter"></div>
+
+    </div>
+
+    <script>
+
+        /* =============================== */
+        /* page obj */
+        /* =============================== */
+        var BIST =
+        {
+            code : "BIST",
+            userImgUri: null,
+            Data: {},
+
+            /* -------------------- */
+            /* show */
+            /* -------------------- */
+            show()
+            {
+
+
+            },
+
+        };
+
+
+        $(document).ready(function()
+        {
+            /* =============================== */
+            /* events */
+            /* =============================== */
+
+            /* ------------- */
+            /* 지역선택 */
+            /* ------------- */
+            $("#BIST-btn-chooseAddr").click(function()
+            {
+                let data =
+                {
+                    fromPageCode         : BIST.code,            /* 호출한 페이지 코드 */
+                    fromPageElement      : "BIST-div-address",   /* 주소 입력할 엘리먼트 ID */
+                    executeShowWhenClose : false,               /* 다이얼로그 종료 시, show 실행안 함 */
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S31CommonChooseAddr, data);
+            });
+
+            /* ---------------- */
+            /* back */
+            /* ---------------- */
+            $("#BIST-btn-back").click(function(){ Navigation.moveBack(); });
+
+            /* ---------------------- */
+            /* 업체등록 */
+            /* ---------------------- */
+            $("#BIST-btn-save").click(function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let bizname     = $("#BIST-input-bizname").val();
+                    let biznum      = $("#BIST-input-biznum").val();
+                    let bizrep      = $("#BIST-input-bizrep").val();
+                    let addrDetail  = $("#BIST-input-addrDetail").val();
+                    let bizphone1   = $("#BIST-input-phone1").val();
+                    let bizphone2   = $("#BIST-input-phone2").val();
+                    let bizphone3   = $("#BIST-input-phone3").val();
+                    let addrEl      = "#BIST-div-address";
+
+                    let rslt = Api.Biz.insert(
+                          bizname
+                        , biznum
+                        , bizrep
+                        , addrDetail
+                        , bizphone1
+                        , bizphone2
+                        , bizphone3
+                        , addrEl
+                    );
+                    if(rslt == true)
+                    {
+                        let bizno = Api.getUpdateIndexFromRslt(rslt);
+                        if(bizno != null)
+                            GGF.storage.setBizno(bizno);
+
+                        Navigation.moveFront(Navigation.Page.B11BizMainHome, {});
+                        return;
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* =============================== */
+            /* page process */
+            /* =============================== */
+
+            /* ------------- */
+            /* set pageParam */
+            /* ------------- */
+            let pageDat = Navigation.getPageParam();
+
+            /* localizing */
+            $("#BIST").i18n();
+
+        });
+
+    </script>
+</ons-page>

@@ -1,0 +1,39 @@
+# view, install : http://www.nncron.ru
+#CRONTAB FILE
+# Classic crontab format:
+# Minutes Hours Days Months WeekDays Command
+
+#*/15 8-16 * * 1-5 checkmail.exe
+
+# #########################
+# execute all
+# #########################
+curl -X POST http://localhost:8080/honors-server/src/batch/per-00-all.php -d "key=racoonable"
+
+# #########################
+# per 10 sec
+# #########################
+curl -X POST http://localhost:8080/honors-server/src/batch/per-20-sec-riderDeliverymatch.php -d "key=racoonable"
+
+# #########################
+# per min
+# #########################
+#* * * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-min-01-orderingToOrdera.php -d "key=racoonable"
+#* * * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-min-02-storeSalestatusAutoProcess.php -d "key=racoonable"
+#* * * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-min-03-orderCancelNotPaid.php -d "key=racoonable"
+#* * * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-min-04-orderCancelNotConfirmed.php -d "key=racoonable"
+
+# #########################
+# per hour
+# #########################
+#0 * * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-hou-01-partitions.php -d "key=racoonable"
+#0 * * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-hou-02-storeOrderproctimeSummaryToday.php -d "key=racoonable"
+
+# #########################
+# per day
+# #########################
+#0 0 * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-day-01-storeOrderproctimeSummaryMonth.php -d "key=racoonable"
+#0 0 * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-day-02-updateReorderpct.php -d "key=racoonable"
+#0 0 * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-day-03-summaryStoreorderRecent.php -d "key=racoonable"
+#0 0 * * * curl -X POST http://localhost:8080/honors-server/src/batch/per-day-04-salesSummary.php -d "key=racoonable"
+

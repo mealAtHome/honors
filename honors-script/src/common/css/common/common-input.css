@@ -1,0 +1,81 @@
+/* ========================= */
+/* 각 인풋박스 */
+/* ========================= */
+.common-div-formField > .common-input-field { width:100%; max-width:500px; box-sizing:border-box; outline:none; background-color:transparent; }
+.common-input-field
+{
+    padding:0.4em 0em;
+    font-size:1.1em;
+    border:none;
+    border-bottom:1px solid #ccc;
+    text-align:left;
+}
+.common-input-field:focus { border:none; border-bottom:3px solid rgb(2, 6, 84); }
+
+.common-div-formField > .common-textarea-field { width:100%; max-width:500px; box-sizing:border-box; outline:none; background-color:transparent; }
+.common-textarea-field
+{
+  padding:0.4em;
+  font-size:1.1em;
+  border:1px solid #ccc;
+}
+.common-textarea-field:focus { border:1px solid rgb(2, 6, 84); border-bottom:3px solid rgb(2, 6, 84); }
+
+/* ========================= */
+/* 각 인풋박스 (기존) */
+/* ========================= */
+.common-input-text
+{
+    /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
+    /* -moz-appearance: none; */
+    /* -webkit-appearance: none; */
+
+    /* box-sizing: content-box; */
+    padding:0.4em;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+}
+
+.common-input-text:focus
+{
+    /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
+    /* -moz-appearance: none; */
+    /* -webkit-appearance: none; */
+
+    border:1px solid rgb(255, 215, 0);
+    box-shadow: 0px 0px 5px rgb(255, 215, 0);
+}
+
+.common-text
+{
+    /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
+    /* -moz-appearance: none; */
+    /* -webkit-appearance: none; */
+
+    box-sizing: initial;
+    padding:0.4em;
+    font-size: 1.1em;
+    border: none;
+}
+
+.common-textarea
+{
+  /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  /* box-sizing: content-box; */
+  padding:0.4em;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+}
+
+.common-textarea:focus
+{
+  /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  border:1px solid rgb(255, 215, 0);
+  box-shadow: 0px 0px 5px rgb(255, 215, 0);
+}

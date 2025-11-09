@@ -1,0 +1,12 @@
+.common-hr-card       { margin:   1em   1em  1.4em  0.8em;  border: 1px dashed #ccc; } /* card 사이의 hr */
+.common-hr-padding    { margin: 0.6em 0.6em;                border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-normal     { margin: 0.8em   0em  0.6em;         border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-full       { margin: 0.3em   0em;                border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-paddingLR  { margin:   0em 0.6em;                border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-paddingUD  { margin: 0.6em   0em;                border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-paddingTop { margin: 0.6em   0em  0.0em  0.0em;  border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+
+.common-hr-card[type="strong"]    { margin:   1em   1em    1.4em  0.8em;  border: 1px dashed rgb(2, 6, 84); } /* card 사이의 hr */
+.common-hr-padding[type="strong"] { margin: 0.6em 0.6em;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
+.common-hr-normal[type="strong"]  { margin: 0.8em   0em    0.6em;         border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
+.common-hr-full[type="strong"]    { margin: 0.6em   0em;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */

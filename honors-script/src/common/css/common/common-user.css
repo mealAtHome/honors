@@ -1,0 +1,41 @@
+/* ============================== */
+/* user big */
+/* ============================== */
+.common-div-userBig
+{
+    padding:0.5em;
+}
+.common-div-userBig > table > tbody > tr > td
+{
+    padding:0.4em;
+}
+
+/* userBig top table */
+.common-tbl-userBig
+{
+    margin:0em 0.5em;
+    text-align:center;
+}
+.common-tbl-userBig  > tbody > tr > td { padding:0.5em; }
+.common-tbl-userBig  > tbody > tr > td:nth-child(2)
+{
+    text-align: left;
+    vertical-align: top;
+}
+.common-tbl-userBig  > tbody > tr > td:nth-child(2) > span
+{
+    display:block;
+    line-height:1.4em;
+}
+
+/* ============================== */
+/* user mini */
+/* ============================== */
+.common-div-userMini
+{
+    padding:0.5em;
+}
+.common-div-userMini > table > tbody > tr > td
+{
+    padding:0.4em;
+}

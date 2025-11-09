@@ -1,0 +1,191 @@
+/* ====================== */
+/* 토스트 */
+/* ====================== */
+#index-div-toast
+{
+    visibility: hidden;
+    opacity: 0;
+    bottom: 1em;
+    left: 1em;
+    right: 1em;
+    min-width: calc(100% - 4em);
+    padding: 0.5em 1em;
+    text-align: left;
+    border-radius: 8px;
+    position: fixed;
+    background-color: #333;
+    color: #fff;
+    z-index: 999;
+    font-size: 1em;
+    transition: opacity 0.5s, bottom 0.5s;
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+/* 토스트 메시지를 보여줄 때 */
+#index-div-toast.show { visibility: visible; opacity: 1; }
+#index-div-toast.hide { visibility: hidden;  opacity: 0; }
+
+/* ====================== */
+/* 사이드메뉴 */
+/* ====================== */
+#index-div-sidemenu
+{
+    position: absolute;
+    top:0px;
+    left:-350px;
+    width:350px;
+    height:100%;
+    background-color: rgb(240,240,240);
+    z-index:999;
+}
+/* 사이드메뉴 열기 */
+.index-div-sidemenu-bringUp
+{
+    animation-name: keyframes-div-sidemenu-bringUp;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+@keyframes keyframes-div-sidemenu-bringUp
+{
+    0%      { left: -350px; }
+    100%    { left: 0px;   }
+}
+/* 사이드메뉴 닫기 */
+.index-div-sidemenu-bringDown
+{
+    animation-name: keyframes-div-sidemenu-bringDown;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+}
+@keyframes keyframes-div-sidemenu-bringDown
+{
+    0%      { left: 0px; }
+    100%    { left: -350px;   }
+}
+/* 사이드메뉴 마스크 */
+#index-div-sidemenuMask
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .2);
+    height:100%;
+    width:100%;
+    z-index:997;
+}
+/* ====================== */
+/* 이미지뷰어 */
+/* ====================== */
+#index-div-imageViewer
+{
+    position:fixed;
+    width:100%;
+    height:auto;
+    max-height:90%;
+    overflow-y: scroll;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    z-index:1002;
+    padding:0.5em;
+
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+#index-div-imageViewerMask
+{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .2);
+    height:100%;
+    width:100%;
+    z-index:1001;
+}
+#index-img-image
+{
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* ====================== */
+/* 카트버튼 */
+/* ====================== */
+#index-btn-cart
+{
+    position:fixed;
+    right:1em;
+    bottom:1em;
+    z-index:999;
+}
+
+/* ============================== */
+/* CART FAB */
+/* ============================== */
+#index-ggCart[cart-style=tabbar] > .common-div-cartFab { bottom:4em; }
+#index-ggCart[cart-style=page]   > .common-div-cartFab { bottom:1em; }
+.common-div-cartFab
+{
+    position:fixed;
+    height:3em;
+    width:3em;
+    /* bottom:4em; */
+    right:1em;
+    border-radius: 100%;
+    box-shadow: 2px 2px 4px 1px rgba(0,0,0,0.3);
+    background-color: rgb(2,6,84);
+    z-index: 995;
+}
+.common-div-cartFab:active
+{
+    background-color: rgba(2,6,84,0.5);
+}
+.common-div-cartFab > svg
+{
+    vertical-align: middle;;
+    height:2em;
+    width:2em;
+    margin:0.5em;
+}
+
+/* ============================== */
+/* footers */
+/* ============================== */
+.index-div-footer
+{
+    z-index: 995;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:3em;
+    background-color:white;
+    box-shadow:0 0 0.2em rgba(0,0,0,0.2);
+    /* display: flex; */
+    /* justify-content: space-around; */
+    /* align-items: center; */
+}
+.index-div-footer > table
+{
+    width:100%;
+    height:100%;
+    text-align:center;
+    font-size:1em;
+}
+.index-div-footer > table > tbody > tr > td
+{
+    width:20%;
+    height:100%;
+    color:rgba(0,0,0,0.5);
+}
+/* .index-div-footer > table > tbody > tr > td:active { background-color:rgba(0,0,0,0.1); } */
+.index-div-footer > table > tbody > tr > td[tab=tab]  { color: rgb(2, 6, 84); font-weight: bold; }

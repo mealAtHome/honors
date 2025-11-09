@@ -1,0 +1,132 @@
+<ons-page id="SMMN">
+
+    <style>
+        .SMMN-btn-menustatus
+        {
+            margin:0.2em 0em;
+            box-sizing: content-box;
+        }
+    </style>
+
+    <!-- ========================= -->
+    <!-- 탭 : 상품리스트 표시 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion common-tag-fontsize09">
+        <div class="common-tag-block">
+            <button class="common-btn-outline" onclick="SMMN.close(true);" btn-type="cancel">뒤로</button>
+            <button class="SMMN-btn-menustatus commonEvent-btn-radio common-btn-radio" radio_name="SMMN-btn-menustatus" val="all"            tab="">전체</button> <!--  (<span class="SMMN-span-orderstatusCnt"></span>) -->
+            <button class="SMMN-btn-menustatus commonEvent-btn-radio common-btn-radio" radio_name="SMMN-btn-menustatus" val="displayY"       tab="">판매중</button> <!--  (<span class="SMMN-span-orderstatusCnt"></span>) -->
+            <button class="SMMN-btn-menustatus commonEvent-btn-radio common-btn-radio" radio_name="SMMN-btn-menustatus" val="displayYstockN" tab="">재고없음</button> <!--  (<span class="SMMN-span-orderstatusCnt"></span>) -->
+            <button class="SMMN-btn-menustatus commonEvent-btn-radio common-btn-radio" radio_name="SMMN-btn-menustatus" val="displayN"       tab="">미표시</button> <!--  (<span class="SMMN-span-orderstatusCnt"></span>) -->
+        </div>
+        <div class="common-tag-block common-div-cushionUp">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input
+                                id="SMMN-inputText-menuname"
+                                type="text"
+                                class="common-text-insertPage common-input-text"
+                                style="width:100%;"
+                                maxlength="20"
+                                placeholder="메뉴이름"
+                            >
+                        </td>
+                        <td><button id="SMMN-btn-search" class="common-btn-inline" style="padding:0.43em 1.2em;">검색</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr class="common-hr-padding"/>
+    <div id="SMMN-div-menuList"></div>
+
+    <script>
+        var SMMN =
+        {
+            code: "SMMN",
+            Data: null,
+            myStore: null,
+
+            show()
+            {
+                /* --------------- */
+                /* data recovery */
+                /* --------------- */
+                SMMN.Data.lastTabIndex = 3; /* set lastTab : 마지막으로 활성화시킨 탭 번호 저장 */
+                if(SMMN.Data.msMenustatus == undefined) SMMN.Data.msMenustatus  = "";
+                if(SMMN.Data.msPagenum    == undefined) SMMN.Data.msPagenum     = 1;
+
+                /* --------------- */
+                /* process recovery */
+                /* --------------- */
+                /* menustatus 선택 */
+                let menustatus = SMMN.Data.msMenustatus != "" ? SMMN.Data.msMenustatus : "all";
+                $(`.SMMN-btn-menustatus[val=${menustatus}]`).click();
+            },
+
+            search(status)
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let menuName = $("#SMMN-inputText-menuname").val();
+                    let storeno = GGstorage.getStoreno();
+                    let mMenuStores = Api.Menu.selectMenuForStoreMain(storeno, status, menuName, SMMN.Data.msPagenum);
+                    mMenuStores.makeMenuStores("#SMMN-div-menuList");
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* 탭 선택 */
+            /* ========================= */
+            $(".SMMN-btn-menustatus").click(function()
+            {
+                let tab = $(this).attr("val");
+                SMMN.search(tab);
+            });
+
+            /* ========================= */
+            /* 검색버튼 클릭 */
+            /* ========================= */
+            $("#SMMN-btn-search").click(function()
+            {
+                let tab = $(".SMMN-btn-menustatus[tab=tab]").attr("val");
+                SMMN.search(tab);
+            });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+            try
+            {
+                SMMN.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SMMN.close(true);
+            }
+
+        }); /* end ready */
+    </script>
+</ons-page>

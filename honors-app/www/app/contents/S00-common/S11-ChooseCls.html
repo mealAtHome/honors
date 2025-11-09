@@ -1,0 +1,157 @@
+<ons-page id="CHCL">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="CHCL-toolbar">
+        <div class="left"><gg-backbtn onclick="CHCL.close(true);"></gg-backbtn></div>
+        <div class="center"><span>일정선택</span></div>
+    </ons-toolbar>
+
+    <!-- --------------- -->
+    <!-- 일정목록 -->
+    <!-- --------------- -->
+    <div class="common-div-cushion">
+        <div id="CHCL-div-searchResult" class="common-div-scrollX"></div>
+    </div>
+
+    <script>
+        var CHCL =
+        {
+            code : "CHCL",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(CHCL.Data.option     == undefined) { CHCL.Data.option = ""; }
+                if(CHCL.Data.grpno      == undefined) { CHCL.Data.grpno = ""; }
+                if(CHCL.Data.pagenum    == undefined) { CHCL.Data.pagenum = 1; }
+
+                /* init */
+                CHCL.search();
+            },
+
+            search()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let grpno = CHCL.Data.grpno;
+                    let pagenum  = CHCL.Data.pagenum;
+                    let mClss = Api.Cls.selectByGrpnoForMng(grpno, pagenum, GGF.none, GGF.toast);
+                    mClss.makeForChoose("#CHCL-div-searchResult");
+                    CHCL.eventAfterSearch();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            eventAfterSearch()
+            {
+                /* pagenation */
+                $("#CHCL-div-searchResult .common-btn-pagenationBtn").off("click").on("click", function()
+                {
+                    let toPage = $(this).attr("to_page");
+                    CHCL.Data.pagenum = parseInt(toPage);
+                    CHCL.search();
+                });
+
+                /* 선택 */
+                $("#CHCL-div-searchResult .MClss-make-btn-choose").off("click").on("click", function()
+                {
+                    let option = CHCL.Data.option;
+                    let grpno = CHCL.Data.grpno;
+                    let clsno  = $(this).attr("clsno");
+
+                    switch(option)
+                    {
+                        case "chooseFromF10":
+                        {
+                            Common.showProgress();
+                            setTimeout(function()
+                            {
+                                let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
+                                if(mCls == null)
+                                {
+                                    Common.toastError("일정을 불러오지 못했습니다.");
+                                    Common.hideProgress();
+                                    return;
+                                }
+
+                                /* to F10ClassUpdate000Default */
+                                $(`.CUDE-btn-clstype[val='${mCls.getClstype()}']`).click();
+                                $("#CUDE-input-clstitle").val(mCls.getClstitle());
+                                $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
+                                $("#CUDE-input-clsground").val(mCls.getClsground());
+                                $("#CUDE-input-clsgroundaddr").val(mCls.getClsgroundaddr());
+                                $("#CUDE-input-clsbillapplyprice").val(mCls.getClsbillapplyprice());
+                                $("#CUDE-input-clsbillapplyunit").val(mCls.getClsbillapplyunit());
+                                GGdate.toDivYearToMin("#CUDE-div-clsstartdt", new Date(mCls.getClsstartdt()));
+                                GGdate.toDivYearToMin("#CUDE-div-clsclosedt", new Date(mCls.getClsclosedt()));
+                                GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", new Date(mCls.getClsapplystartdt()));
+                                GGdate.toDivYearToMin("#CUDE-div-clsapplyclosedt", new Date(mCls.getClsapplyclosedt()));
+                                CUDE.keyup();
+
+                                /* close CHCL */
+                                CHCL.close(true);
+
+                                Common.hideProgress();
+                            }, ajaxDelayTime);
+                            break;
+                        }
+                        default:
+                        {
+                            Common.toastError("잘못된 접근입니다.");
+                            CHCL.close(true);
+                            break;
+                        }
+                    }
+
+                });
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CHCL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CHCL.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

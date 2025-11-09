@@ -1,0 +1,77 @@
+/* ============================= */
+/* customized checkbox */
+/* ============================= */
+
+/* element example */
+/*
+    <div class="SG-div-inputBox common-div-checkbox commonEvent-div-checkbox" check="n">
+        <span><span></span></span>
+        <span>label</span>
+    </div>
+*/
+
+/* -------------------- */
+/* checkbox div */
+/* -------------------- */
+.common-tag-checkbox[checkbox_checked="y"] { background-color: rgba(2, 6, 84, 0.2); }
+
+/* -------------------- */
+/* checkTr */
+/* -------------------- */
+.common-tr-checkTr[checkbox_checked="y"] { background-color: rgba(2, 6, 84, 0.1); }
+.common-tr-checkTr[checkbox_checked="y"] > .common-td-checkTr::before { content:"선택"; }
+
+/* -------------------- */
+/* top label */
+/* 미사용중 */
+/* -------------------- */
+/* .common-label-check */
+.common-label-check
+{
+    display:block;
+    margin:0.2em;
+}
+
+.common-div-checkbox
+{
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* 위에서 첫 번째 span 이 체크표시를 담당한다. 체크여부에 따라 배경을 칠할 지 정한다. */
+.common-div-checkbox > span:nth-child(1)
+{
+    display:inline-block;
+    position: relative;
+    width:1.5em;
+    height:1.5em;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+.common-div-checkbox[check=y] > span:nth-child(1) { border:3px solid #ffa115; background-color: #ffa115; }
+.common-div-checkbox[check=n] > span:nth-child(1) { border:3px solid #ffa115; background-color: #fff; }
+
+/* v 모양 체크표시 담당 */
+.common-div-checkbox > span:nth-child(1) > span
+{
+    position: absolute;
+    left: 20%;
+    top: -10%;
+    width: 40%;
+    height: 80%;
+    border: solid white;
+    border-width: 0 0.2em 0.2em 0;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}
+.common-div-checkbox[check=y] > span:nth-child(1) > span { display:inherit; }
+.common-div-checkbox[check=n] > span:nth-child(1) > span { display:none; }
+
+/* 위에서 두 번째 span 은 라벨을 담당한다. */
+.common-div-checkbox > span:nth-child(2)
+{
+    display:inline-block;
+    margin-left:1em;
+    line-height:1.5em;
+}

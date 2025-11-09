@@ -1,0 +1,301 @@
+<ons-page id="AORA">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="AORA.close(true);"></gg-backbtn></div>
+        <div class="center"><span>주문검색</span></div>
+    </ons-toolbar>
+
+    <style>
+        .AORA-tbl-common > tbody > tr > td
+        {
+            white-space: nowrap;
+        }
+        .AORA-btn-search
+        {
+            padding-left  : 1em;
+            padding-right : 1em;
+        }
+    </style>
+
+    <!-- ========================= -->
+    <!-- 검색옵션 탭 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+
+        <!-- ----- -->
+        <!-- 선택 탭 -->
+        <!-- ----- -->
+        <table class="AORA-tbl-common common-tbl-tab commonEvent-tbl-tab" style="margin-bottom:0.5em;">
+            <tbody>
+                <tr>
+                    <td tab="" class="AORA-td-searchtype" searchtype="lastday" >최근24시간</td>
+                    <td tab="" class="AORA-td-searchtype" searchtype="month"   >월별</td>
+                    <td tab="" class="AORA-td-searchtype" searchtype="day"     >일자별</td>
+                    <td tab="" class="AORA-td-searchtype" searchtype="search"  >주문검색</td>
+                    <td tab="space"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ----- -->
+        <!-- 검색상세 (월별) -->
+        <!-- ----- -->
+        <table class="AORA-tbl-common AORA-div-searchtypeTop" searchtype="month">
+            <tbody>
+                <tr>
+                    <td>
+                        <select id="AORA-select-searchByMonth-year"  class="common-select-outline"></select>
+                        <select id="AORA-select-searchByMonth-month" class="common-select-outline"></select>
+                        <button class="AORA-btn-search common-btn-inline">조회</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ----- -->
+        <!-- 검색상세 (일자별) -->
+        <!-- ----- -->
+        <table class="AORA-tbl-common AORA-div-searchtypeTop" searchtype="day">
+            <tbody>
+                <tr>
+                    <td>
+                        <select id="AORA-select-searchByDay-year"  class="common-select-outline"></select>
+                        <select id="AORA-select-searchByDay-month" class="common-select-outline"></select>
+                        <select id="AORA-select-searchByDay-day"   class="common-select-outline"></select>
+                        <button class="AORA-btn-search common-btn-inline">조회</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ----- -->
+        <!-- 검색상세 (검색) -->
+        <!-- ----- -->
+        <table class="AORA-tbl-common AORA-div-searchtypeTop" searchtype="search">
+            <tbody>
+                <tr>
+                    <td>
+                        <input
+                            id="AORA-inputText-orderno"
+                            type="text"
+                            class="common-text-insertPage common-input-text"
+                            style="min-width:10em; max-width:50%;"
+                            maxlength="20"
+                            placeholder="주문번호"
+                        >
+                        <button class="AORA-btn-search common-btn-inline">조회</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 주문 리스트 -->
+    <!-- ========================= -->
+    <div id="AORA-div-orderDetail"></div>
+
+    <script>
+        var AORA =
+        {
+            code : "AORA",
+
+            /* --------------- */
+            /* 페이지 데이터 */
+            /*
+                searchtype      : [month, day, search] 월별 / 일자별 / 검색
+                datetimeYear    : 검색하고자 하는 연월일
+                datetimeMonth   : 검색하고자 하는 연월일
+                datetimeDay     : 검색하고자 하는 연월일
+            */
+            /* --------------- */
+            Data : {},
+
+            show()
+            {
+                /* init AORA.Data */
+                if(AORA.Data.searchtype      == undefined) AORA.Data.searchtype       = "month";
+                if(AORA.Data.datetimeYear    == undefined) AORA.Data.datetimeYear     = "";
+                if(AORA.Data.datetimeMonth   == undefined) AORA.Data.datetimeMonth    = "";
+                if(AORA.Data.datetimeDay     == undefined) AORA.Data.datetimeDay      = "";
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* year,month options */
+                    let yearOptionHtml  = GGhtml.makeYearOption();
+                    let monthOptionHtml = GGhtml.makeMonthOption();
+                    $("#AORA-select-searchByMonth-year")  .html(yearOptionHtml);
+                    $("#AORA-select-searchByMonth-month") .html(monthOptionHtml);
+                    $("#AORA-select-searchByDay-year")    .html(yearOptionHtml);
+                    $("#AORA-select-searchByDay-month")   .html(monthOptionHtml);
+                    $("#AORA-select-searchByDay-month").change();
+
+                    /* --------------- */
+                    /* recovery page */
+                    /* --------------- */
+                    let searchType      = AORA.Data.searchtype;
+                    let datetimeYear    = AORA.Data.datetimeYear
+                    let datetimeMonth   = AORA.Data.datetimeMonth
+                    let datetimeDay     = AORA.Data.datetimeDay
+                    $(`.AORA-td-searchtype[searchtype=${searchType}]`).click();
+
+                    /* swtich */
+                    switch(searchType)
+                    {
+                        case "day":
+                        {
+                            $("#AORA-select-searchByDay-year")  .val(datetimeYear);
+                            $("#AORA-select-searchByDay-month") .val(datetimeMonth);
+                            $("#AORA-select-searchByDay-day")   .val(datetimeDay);
+                            AORA.searchOrders();
+                        }
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* 주문 검색 */
+            /* ========================= */
+            searchOrders()
+            {
+                /* --------------- */
+                /* make search data */
+                /* --------------- */
+                let searchtype = AORA.Data.searchtype;
+                let ajaxData =
+                {
+                    CONDITION : AORA.Data.searchtype,
+                }
+
+                switch(searchtype)
+                {
+                    case "lastday":
+                    {
+                        break;
+                    }
+                    case "month":
+                    {
+                        ajaxData.DATETIME_YEAR   = $("#AORA-select-searchByMonth-year").val();
+                        ajaxData.DATETIME_MONTH  = $("#AORA-select-searchByMonth-month").val();
+                        break;
+                    }
+                    case "day":
+                    {
+                        ajaxData.DATETIME_YEAR  = $("#AORA-select-searchByDay-year").val();
+                        ajaxData.DATETIME_MONTH = $("#AORA-select-searchByDay-month").val();
+                        ajaxData.DATETIME_DAY   = $("#AORA-select-searchByDay-day").val();
+                        break;
+                    }
+                    case "search":
+                    {
+                        ajaxData.ORDERNO = $("#AORA-inputText-orderno").val();
+                        break;
+                    }
+                    default :
+                    {
+                        return;
+                        break;
+                    }
+                }
+
+                /* --------------- */
+                /* execute api */
+                /* --------------- */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let MClss = Api.Ordera.selectSearch(ajaxData, "none", "toast");
+                    // MClss.makeOrders("#AORA-div-orderDetail");
+                    MClss.makeOrderSimple("#AORA-div-orderDetail");
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* --------------- */
+            /* 검색타입 탭 선택 */
+            /* --------------- */
+            $(".AORA-td-searchtype").click(function()
+            {
+                let searchtype = $(this).attr("searchtype");
+                $(".AORA-div-searchtypeTop").each(function()
+                {
+                    if($(this).attr("searchtype") == searchtype)
+                        $(this).show();
+                    else
+                        $(this).hide();
+                });
+                AORA.Data.searchtype = searchtype;
+
+                if(AORA.Data.searchtype == "lastday")
+                    AORA.searchOrders();
+            });
+
+            /* --------------- */
+            /* 월 변경 시, 일자 업데이트 */
+            /* --------------- */
+            $("#AORA-select-searchByDay-month, #AORA-select-searchByDay-year").change(function()
+            {
+                let year    = $("#AORA-select-searchByDay-year").val();
+                let month   = $("#AORA-select-searchByDay-month").val();
+                let dayHtml = GGhtml.makeDayOption(year, month);
+                $("#AORA-select-searchByDay-day").html(dayHtml);
+            });
+
+            /* --------------- */
+            /* 검색버튼 클릭 */
+            /* --------------- */
+            $(".AORA-btn-search").click(function()
+            {
+                AORA.searchOrders();
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                AORA.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                AORA.close(true);
+            }
+
+            /* localizing */
+            /* $("#AORA").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

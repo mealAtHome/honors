@@ -1,0 +1,10 @@
+{
+    "ios": {
+        "debug": {
+            "codeSignIdentity": "yogimoim",
+            "developmentTeam": "QTC49K8J3X",
+            "packageType": "development",
+            "automaticProvisioning": true
+        }
+    }
+}

@@ -1,0 +1,74 @@
+/* Customize the label (the container) */
+.common-label-radio
+{
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    /* margin-bottom: 12px; */
+    cursor: pointer;
+    height:26px;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.common-label-radio > input[type=radio]
+{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom radio button */
+.common-label-radio > span
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 26px;
+    width: 26px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.common-label-radio:hover input[type=radio] ~ span
+{
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.common-label-radio > input[type=radio]:checked ~ span
+{
+    background-color: rgba(2, 6, 84, 1.0);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.common-label-radio > span:after
+{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.common-label-radio > input[type=radio]:checked ~ span:after
+{
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.common-label-radio > span:after
+{
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}

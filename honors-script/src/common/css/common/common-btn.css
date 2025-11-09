@@ -1,0 +1,255 @@
+/* ============================== */
+/* ============================== */
+/* common-btn */
+
+/* 큐션감 추가 */
+.common-btn-cushion
+{
+    margin:0.3em;
+}
+
+/* 모델 끝에 붙이는 더 보기 */
+.common-btn-more
+{
+    display:block;
+    margin:0.5em auto;
+}
+
+/* POP 페이지용 버튼 */
+.common-btn-pop-menu
+{
+    position:absolute;
+    top:0.5em;
+}
+
+/* ============================== */
+/* square button */
+/* ============================== */
+.common-btn-square
+{
+    display:inline-block;
+    padding:0.6em;
+    background-color:transparent;
+    border-radius: 0em;
+    white-space: nowrap;
+    line-height:1.4;
+    text-decoration: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+.common-btn-square:hover  { outline:none; cursor: pointer; }
+.common-btn-square:active { background-color: rgba(2, 6, 84, 0.3); }
+
+/* ============================== */
+/* main button */
+/* ============================== */
+.common-btn-outline,
+.common-btn-inline,
+.common-btn-round,
+.common-btn-radio
+{
+    display:inline-block;
+    padding:0.4em 0.5em;
+    border-radius: 0em;
+    white-space: nowrap;
+    line-height:1.4;
+    text-decoration: none;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    background-color: white;
+}
+.common-btn-outline:hover,
+.common-btn-inline:hover,
+.common-btn-round:hover,
+.common-btn-radio:hover
+{
+    outline:none;
+    cursor: pointer;
+}
+.common-btn-round { border-radius: 100%; }
+/*
+    .common-btn-radio
+    {
+        border-radius: 2.5em;
+        box-shadow: none;
+    }
+*/
+
+/* round, outline */
+.common-btn-round                             ,.common-btn-outline                              { border: 1px solid rgba(2, 6, 84, 1.0);     color:rgba(2, 6, 84, 1.0);     }
+.common-btn-round[btn-type="choosed"]         ,.common-btn-outline[btn-type="choosed"]          { background-color: rgba(2, 6, 84, 1.0);     color:white;                   }
+.common-btn-round[btn-type="cancel"]          ,.common-btn-outline[btn-type="cancel"]           { border: 1px solid rgba(255, 116, 21, 1.0); color:rgba(255, 116, 21, 1.0); }
+.common-btn-round[btn-type="warning"]         ,.common-btn-outline[btn-type="warning"]          { border: 1px solid rgba(255, 116, 21, 1.0); color:rgba(255, 116, 21, 1.0); }
+.common-btn-round[btn-type="error"]           ,.common-btn-outline[btn-type="error"]            { border: 1px solid rgba(255, 51, 51, 1.0);    color:rgba(255, 51, 51, 1.0);    }
+.common-btn-round[btn-type="error"]           ,.common-btn-outline[btn-type="delete"]           { border: 1px solid rgba(255, 51, 51, 1.0);    color:rgba(255, 51, 51, 1.0);    }
+.common-btn-round:active                      ,.common-btn-outline:active                       { background-color: rgba(2, 6, 84, 0.3);     }
+.common-btn-round[btn-type="choosed"]:active  ,.common-btn-outline[btn-type="choosed"]:active   { background-color: rgba(2, 6, 84, 0.3);     }
+.common-btn-round[btn-type="cancel"]:active   ,.common-btn-outline[btn-type="cancel"]:active    { background-color: rgba(255, 116, 21, 0.3); }
+.common-btn-round[btn-type="warning"]:active  ,.common-btn-outline[btn-type="warning"]:active   { background-color: rgba(255, 116, 21, 0.3); }
+.common-btn-round[btn-type="error"]:active    ,.common-btn-outline[btn-type="error"]:active     { background-color: rgba(255, 51, 51, 0.3);    }
+.common-btn-round[btn-type="error"]:active    ,.common-btn-outline[btn-type="delete"]:active    { background-color: rgba(255, 51, 51, 0.3);    }
+.common-btn-outline[btn-size="large"] { display:block; margin:1em auto; padding:0.8em; width:12em; max-width:90%; }
+
+/* inline */
+.common-btn-inline                           { border:1px solid rgba(2, 6, 84, 1.0);     ; background-color: rgba(2, 6, 84, 1.0);     color: white; }
+.common-btn-inline:active                    { border:1px solid rgba(2, 6, 84, 0.3);     ; background-color: rgba(2, 6, 84, 0.3);                     }
+.common-btn-inline[btn-type="cancel"]        { border:1px solid rgba(255, 116, 21, 1.0); ; background-color: rgba(255, 116, 21, 1.0); color: white; }
+.common-btn-inline[btn-type="cancel"]:active { border:1px solid rgba(255, 116, 21, 0.3); ; background-color: rgba(255, 116, 21, 0.3); color: white; }
+.common-btn-inline[btn-type="delete"]        { border:1px solid rgba(180, 0, 0, 1.0);    ; background-color: rgba(180, 0, 0, 1.0);    color: white; }
+.common-btn-inline[btn-type="delete"]:active { border:1px solid rgba(100, 0, 0, 1.0);    ; background-color: rgba(100, 0, 0, 1.0);    color: white; }
+.common-btn-inline[btn-size="large"]         { display:block; margin:1em auto; padding:0.8em; min-width:12em; max-width:90%; white-space:nowrap; }
+
+/* tab */
+.common-btn-radio[tab=""]                       { border:1px solid rgba(2, 6, 84, 1.0);     background-color: rgba(255, 255, 255, 1.0); color: rgba(2, 6, 84, 1.0); }
+.common-btn-radio[tab="tab"]                    { border:1px solid rgba(2, 6, 84, 1.0);     background-color: rgba(2, 6, 84, 1.0);      color: white; }
+.common-btn-radio[btn-type="cancel"][tab=""]    { border:1px solid rgba(255, 116, 21, 1.0); background-color: rgba(255, 255, 255, 1.0); color: rgba(255, 116, 21, 1.0); }
+.common-btn-radio[btn-type="cancel"][tab="tab"] { border:1px solid rgba(255, 116, 21, 1.0); background-color: rgba(255, 116, 21, 1.0);  color: white; }
+.common-btn-radio:disabled[tab=""]                       { border:1px solid rgba(100, 100, 100, 1.0); background-color: rgba(255, 255, 255, 1.0); color: rgba(100, 100, 100, 1.0); }
+.common-btn-radio:disabled[tab="tab"]                    { border:1px solid rgba(100, 100, 100, 1.0); background-color: rgba(100, 100, 100, 1.0); color: white; }
+.common-btn-radio:disabled[btn-type="cancel"][tab=""]    { border:1px solid rgba(100, 100, 100, 1.0); background-color: rgba(255, 255, 255, 1.0); color: rgba(100, 100, 100, 1.0); }
+.common-btn-radio:disabled[btn-type="cancel"][tab="tab"] { border:1px solid rgba(100, 100, 100, 1.0); background-color: rgba(100, 100, 100, 1.0); color: white; }
+
+/* outline:disabled */
+.common-btn-outline[disabled]        { border: 1px solid rgba(150,150,150, 1.0); color:rgba(150,150,150, 1.0); background-color: rgba(150,150,150, 0.3); }
+.common-btn-outline[disabled]:active { border: 1px solid rgba(150,150,150, 1.0); color:rgba(150,150,150, 1.0); background-color: rgba(150,150,150, 0.3); }
+
+/* -------------------- */
+/* noline */
+/* -------------------- */
+.common-btn-noline,
+.common-btn-nolineSave
+{
+    display:inline-block;
+    padding:0.5em;
+    background-color:transparent;
+    border-radius: 0.5em;
+    white-space: nowrap;
+    border: none;
+    line-height:1.4;
+}
+.common-btn-nolineSave:hover,
+.common-btn-noline:hover
+{
+    outline:none;
+    cursor: pointer;
+}
+
+.common-btn-noline                            { color:rgba(2, 6, 84, 1.0);     }
+.common-btn-noline[btn-type="cancel"]         { color:rgba(255, 116, 21, 1.0); }
+.common-btn-noline[btn-type="warning"]        { color:rgba(255, 116, 21, 1.0); }
+.common-btn-noline[btn-type="error"]          { color:rgba(255, 51, 51, 1.0);    }
+.common-btn-noline:active                     { color: rgba(2, 6, 84, 0.3);   background-color:rgba(2, 6, 84, 0.3);     }
+.common-btn-noline:active[btn-type="cancel"]  {                                 background-color:rgba(255, 116, 21, 0.3); }
+.common-btn-noline:active[btn-type="warning"] {                                 background-color:rgba(255, 116, 21, 0.3); }
+.common-btn-noline:active[btn-type="error"]   {                                 background-color:rgba(255, 51, 51, 0.3);    }
+
+/* -------------------- */
+/* gradi button */
+/* -------------------- */
+.common-btn-gradient
+{
+    display:inline-block;
+    padding:0.6em 1em;
+    background-color:transparent;
+    border-radius: 0.5em;
+    white-space: nowrap;
+    line-height:1;
+}
+.common-btn-gradientBig
+{
+    display:inline-block;
+    padding:1em 3em;
+    background-color:transparent;
+    border-radius: 0.5em;
+    white-space: nowrap;
+    line-height:1;
+}
+
+.common-btn-gradientBig,
+.common-btn-gradient
+{
+    color: white;
+    border:none;
+    background: linear-gradient(to right, #ffdc15, #ffa115, #ffa115);
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+
+    border-radius: 1.8em;
+    font-weight: bold;
+}
+.common-btn-gradientBig:active,
+.common-btn-gradient:active
+{
+    animation: common-btn-gradient 0.5s linear;
+}
+@keyframes common-btn-gradient
+{
+    0%   { background-position: 0% 0%; }
+    50%  { background-position: 100% 0%; }
+    100% { background-position: 0% 0%; }
+}
+.common-btn-gradientBig:hover,
+.common-btn-gradient:hover
+{
+    cursor:pointer;
+}
+
+/* -------------------- */
+/* 페이지 바닥에 깔리는 버튼 */
+/* -------------------- */
+.common-btn-footer
+{
+    display:inline-block;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    width:100%;
+    background-color:rgba(2, 6, 84, 1.0);
+    color: white;
+    font-size:1.1em;
+    line-height: 1.1em;
+    padding:0.8em 0.4em;
+    border:none;
+}
+.common-btn-footer:hover
+{
+    cursor:pointer;
+}
+.common-btn-footer:active
+{
+    background-color:rgba(2, 6, 84, 0.4);
+}
+
+/* -------------------- */
+/* visited */
+/* -------------------- */
+.common-btn-icon
+{
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    width: 56px;
+    height: 56px;
+    text-decoration: none;
+    /* line-height: 56px; */
+    /* letter-spacing: 0; */
+    color: #ffffff;
+    vertical-align: middle;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background-color: rgba(2, 6, 84, 1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+    /* transition: all 0.1s linear; */
+}
+
+.common-btn-liner
+{
+    display:block;
+    max-width: 80%;
+    width:20em;
+    margin:1em auto;
+    padding:1em;
+}

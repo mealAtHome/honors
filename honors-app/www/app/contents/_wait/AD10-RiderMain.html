@@ -1,0 +1,131 @@
+<ons-page id="RMAN">
+
+    <!-- ========================= -->
+    <!-- 경고모음 -->
+    <!-- ========================= -->
+    <div id="RMAN-div-warnings"></div>
+
+    <!-- ========================= -->
+    <!-- 공지사항 -->
+    <!-- ========================= -->
+    <table class="common-tbl-subtitle">
+        <tbody>
+            <tr>
+                <td><span data-i18n="">공지사항</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="common-div-cushion" id="RMAN-div-systemBoard"></div>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <hr class="common-hr-padding"/>
+
+    <p class="common-p-subtitle">
+        <span data-i18n="">메뉴</span>
+    </p>
+    <style>
+        /* .common-icon-delivery
+        {
+            background-image: url('res/icon/delivery.png');
+            background-size: cover;
+            display: inline-block;
+            margin-right: 0.5em;
+            vertical-align: middle;
+        } */
+        .RMAN-btn-menu
+        {
+            width: 9em;
+            height: 3em;
+            margin: 0.6em 0.6em;
+        }
+    </style>
+    <!-- <div class="common-icon-delivery"><img src="res/icon/delivery.png" style="height:100%;"/></div> -->
+    <div class="common-div-cushion">
+        <button class="common-btn-square RMAN-btn-menu" id="RMAN-btn-delivery" >배달시작</button>
+        <button class="common-btn-square RMAN-btn-menu" id="RMAN-btn-history"  >배달이력</button>
+        <button class="common-btn-square RMAN-btn-menu" id="RMAN-btn-settle"   >정산</button>
+        <button class="common-btn-square RMAN-btn-menu" id="RMAN-btn-setting"  >설정</button>
+    </div>
+    <hr class="common-hr-padding"/>
+    <p class="common-p-subtitle">
+        <span data-i18n="">라이더 정보</span>
+    </p>
+    <div id="RMAN-div-riderInfo"></div>
+    <script>
+        var RMAN =
+        {
+            code: "RMAN",
+            Data : {},
+
+
+            show()
+            {
+                /* --------------- */
+                /* vars */
+                /* --------------- */
+
+                /* --------------- */
+                /* init */
+                /* --------------- */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* ----- */
+                    /* 라이더 등록 조회 (없으면 라이더 등록) */
+                    /* ----- */
+                    let mRider = Api.Rider.selectMe();
+                    if(mRider == null)
+                    {
+                        Navigation.moveFrontPage(Navigation.Page.D10RiderUpdate, {option:GGF.Page.Option.insert});
+                        return;
+                    }
+
+                    /* 라이더 인포 */
+                    $("#RMAN-div-riderInfo").html(mRider.makeRiderCard());
+
+                    /* ----- */
+                    /* validation */
+                    /* ----- */
+                    $("#RMAN-div-warnings").html("");
+
+                    /* ----- */
+                    /* 공지사항 조회 */
+                    /* ----- */
+                    let mSystemBoards = Api.SystemBoard.selectMain();
+                    mSystemBoards.makeMainBanners("#RMAN-div-systemBoard");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+        };
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* set event */
+            /* ======================== */
+            $("#RMAN-btn-delivery") .click(function() { Navigation.moveFrontPage(Navigation.Page.D22RiderDelivery, {}); });
+            $("#RMAN-btn-settle")   .click(function() { Navigation.moveFrontPage(Navigation.Page.D90RiderSalesSettle, {}); });
+            $("#RMAN-btn-setting")  .click(function() { Navigation.moveFrontPage(Navigation.Page.D30RiderManage, {}); });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+
+            /* get data from Config */
+            try
+            {
+                RMAN.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                RMAN.close(true);
+            }
+
+        }); /* end ready */
+    </script>
+</ons-page>

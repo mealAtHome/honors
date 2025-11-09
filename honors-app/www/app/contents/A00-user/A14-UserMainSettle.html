@@ -1,0 +1,173 @@
+<ons-page id="UMST">
+
+    <!-- ----- -->
+    <!-- 선택 탭 -->
+    <!-- ----- -->
+    <div class="common-div-cushion">
+        <table class="UMST-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="UMST-td-searchtype" val="yet" tab=""    >미입금</td>
+                    <td class="UMST-td-searchtype" val="tmp" tab=""    >임시완료</td>
+                    <td class="UMST-td-searchtype" val="cmp" tab=""    >완료</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- 미입금 -->
+    <!-- ========================= -->
+    <div class="UMST-div-tab" tab="yet" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">미입금</p>
+            <ul class="common-ul-announce">
+                <li>입금이 완료되지 않은 리스트를 표시합니다. 모임이 원활하게 운영될 수 있도록 입금 부탁드립니다.</li>
+            </ul>
+        </div>
+        <div id="UMST-div-yetList"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 임시완료 -->
+    <!-- ========================= -->
+    <div class="UMST-div-tab" tab="tmp" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">임시완료</p>
+            <ul class="common-ul-announce">
+                <li>입금완료하였다고 체크한 항목을 표시합니다. 관리자가 곧 확인하여 최종완료 처리합니다.</li>
+            </ul>
+        </div>
+        <div id="UMST-div-tmpList"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 완료 -->
+    <!-- ========================= -->
+    <div class="UMST-div-tab" tab="cmp" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">완료</p>
+            <ul class="common-ul-announce">
+                <li>최근 1년간의 입금처리가 완료된 항목만 조회합니다.</li>
+            </ul>
+        </div>
+        <div id="UMST-div-cmpList"></div>
+    </div>
+
+    <script>
+        var UMST =
+        {
+            code : "UMST",
+            Data: {},
+
+            show()
+            {
+                /* validation param */
+                if(UMST.Data.searchtype == undefined) { UMST.Data.searchtype = "yet"; } /* 기본값 */
+
+                /* set tab */
+                $(`.UMST-td-searchtype[val='${UMST.Data.searchtype}']`).click();
+            },
+
+            search()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmExit();
+            },
+
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            $(".UMST-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("val");
+                $(".UMST-td-searchtype").removeAttr("tab");
+                $(this).attr("tab", "tab");
+
+                /* save selected */
+                UMST.Data.searchtype = searchtype;
+
+                /* process */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* 탭별표시 */
+                        switch(searchtype)
+                        {
+                            case "yet":
+                            {
+                                let mClssettles = Api.Clssettle.selectYetByUsernoForUsr(GGF.none, GGF.toast);
+                                mClssettles.make("#UMST-div-yetList");
+                                break;
+                            }
+                            case "tmp":
+                            {
+                                let mClssettles = Api.Clssettle.selectTmpByUsernoForUsr(GGF.none, GGF.toast);
+                                mClssettles.make("#UMST-div-tmpList");
+                                break;
+                            }
+                            case "cmp":
+                            {
+                                let mClssettles = Api.Clssettle.selectCmpByUsernoForUsr(GGF.none, GGF.toast);
+                                mClssettles.make("#UMST-div-cmpList");
+                                break;
+                            }
+                        }
+                        /* show / hide */
+                        $(".UMST-div-tab").hide();
+                        $(`.UMST-div-tab[tab='${searchtype}']`).show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UMST.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UMST.close(true);
+            }
+
+        }); /* end function */
+
+    </script>
+</ons-page>

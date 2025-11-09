@@ -1,0 +1,306 @@
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src: 'self' 'unsafe-inline' 'unsafe-eval'">-->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'"> -->
+
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <title>모임은야구</title>
+
+        <!-- ========================= -->
+        <!--필수 라이브러리-->
+        <!-- ========================= -->
+
+        <!--cordova-->
+        <script type="text/javascript" src="cordova.js"></script>
+
+        <!-- load library -->
+        <link rel="stylesheet" href="./lib/OnsenUI-dist-2.11.2/css/onsenui.css">
+        <link rel="stylesheet" href="./lib/OnsenUI-dist-2.11.2/css/onsen-css-components.css">
+        <script src="./lib/OnsenUI-dist-2.11.2/js/onsenui.js"></script>
+        <script src="./lib/jquery-3.3.1.min.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.messagestore.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.fallbacks.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.parser.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.emitter.js"></script>
+        <script src="./lib/i18n/src/jquery.i18n.language.js"></script>
+        <script src="./lib/hammer.min.js"></script>
+        <script src="./lib/keyframes.js"></script>
+        <!-- <script src="./lib/jquery.doubletap.js"></script> -->
+
+        <!-- toast -->
+        <link rel='stylesheet' type='text/css' href='./lib/jquery-toast-plugin-master/src/jquery.toast.css'/>
+        <script src='./lib/jquery-toast-plugin-master/src/jquery.toast.js'></script>
+        <link rel='stylesheet' type='text/css' href='./lib/jquery-confirm-master/css/jquery-confirm.css'/>
+        <script src='./lib/jquery-confirm-master/js/jquery-confirm.js'></script>
+
+        <script>
+            var versionCl = "1.0.10";
+            var versionSv = "10010";
+            var scriptloaded = false;
+            var localmode = false;
+            var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
+            var initApp = function()
+            {
+                /* ==================== */
+                /* set event */
+                /* ==================== */
+
+                /* ------------ */
+                /* 각 페이지에서 사용되는 공통된 이벤트를 바인딩 해줌. */
+                /* ------------ */
+                CommonEvent.init();
+
+                /* ------------ */
+                /* template 페이지 이동 시, 탭 위치를 설정하기 위한 이벤트 */
+                /* ------------ */
+                // $('ons-navigator').on('postpush', function(e)
+                // {
+                //     let toPage = e.originalEvent.enterPage.id;
+                //     let pageParam = Navigation.getPageParam();
+                //     if(pageParam == null || pageParam.lastTabIndex == undefined || pageParam.lastTabIndex == null)
+                //         return;
+
+                //     switch(toPage)
+                //     {
+                //         case Navigation.Page.AA00UserMain : document.querySelector("#UMAN-tabbar").setActiveTab(pageParam.lastTabIndex); break;
+                //     }
+                // });
+
+                /* ------------ */
+                /* 원본이미지 뷰어 닫기 */
+                /* ------------ */
+                $("#index-div-imageViewerMask").click(function()
+                {
+                    $("#index-div-imageViewerMask").hide();
+                    $("#index-div-imageViewer").hide();
+                });
+                $("#index-div-imageViewer").click(function()
+                {
+                    $("#index-div-imageViewerMask").hide();
+                    $("#index-div-imageViewer").hide();
+                });
+
+                /* ==================== */
+                /* start application */
+                /* ==================== */
+                let startLogin = function(result)
+                {
+                    /* 페이지 스택 초기화 */
+                    GGstorage.clearPageStack();
+
+                    /* --------------- */
+                    /*
+                        언어나 지역이 선택되지 않았으면, 선택하는 화면으로
+                        선택되어져 있다면, 로그인 화면으로
+
+                        현재는 한국어만 지원
+                    */
+                    /* --------------- */
+                    if(GGstorage.getLang() == null || GGstorage.getRegion() == null)
+                    {
+                        GGstorage.setLang('kr');
+                        GGstorage.setRegion('kr');
+                    }
+                    $.i18n({locale:GGstorage.getLang()});
+                    Navigation.moveFrontPage(Navigation.Page.A00UserLogin);
+                }
+                GGstorage.setLoginInfoFromFile(startLogin);
+            }
+
+            ons.ready(function () {
+                ons.disableDeviceBackButtonHandler();
+            });
+
+            /* ======================================================= */
+            /* 어플리케이션 시작지점 (코르도바 초기화) */
+            /* ======================================================= */
+            document.addEventListener('deviceready', onDeviceReady, false);
+            function onDeviceReady()
+            {
+                if (cordova.platformId === "android")
+                {
+                    document.addEventListener("backbutton", function (event) {
+                        event.preventDefault();
+                        Navigation.executeMoveBack();
+                    }, false);
+                }
+
+                // app start
+                let interval = setInterval(() =>
+                {
+                    if(scriptloaded)
+                    {
+                        clearInterval(interval);
+                        initApp();
+                    }
+                }, 100);
+            }
+
+
+            /* ======================= */
+            /* page life cycle */
+            /* ======================= */
+            document.addEventListener('show', function(event)
+            {
+                if     (event.target.matches("#"+Navigation.Page.A11UserMainHome))      { Common.showFooterUsr(Navigation.Page.A11UserMainHome); }
+                else if(event.target.matches("#"+Navigation.Page.A12UserMainGrp))       { Common.showFooterUsr(Navigation.Page.A12UserMainGrp); }
+                else if(event.target.matches("#"+Navigation.Page.A13UserMainCls))       { Common.showFooterUsr(Navigation.Page.A13UserMainCls); }
+                else if(event.target.matches("#"+Navigation.Page.A14UserMainSettle))    { Common.showFooterUsr(Navigation.Page.A14UserMainSettle); }
+                else if(event.target.matches("#"+Navigation.Page.A15UserMainManage))    { Common.showFooterUsr(Navigation.Page.A15UserMainManage); }
+                else
+                {
+                    $("#index-div-footerUsr").hide();
+                }
+            }, false);
+
+            window.onload = function()
+            {
+                /* ========================= */
+                /* load script first */
+                /* ========================= */
+                let head      = document.getElementsByTagName('head')[0];
+                let now       = Date.now();
+                let scriptArr = [];
+                scriptArr.push(`./js/script/base-GGF/GGF.js?${now}`);
+                scriptArr.push(`./js/script/base/serverinfo.js?${now}`);
+                scriptArr.push(`./js/script/base/gg-storage.js?${now}`);
+                scriptArr.push(`./js/script/base/gg-base.js?${now}`);
+
+                /* recursive for load js */
+                let scriptLoad = function(scriptArr, index)
+                {
+                    if(scriptArr[index] == undefined)
+                    {
+                        /* ========================= */
+                        /* set deviceKind */
+                        /* ========================= */
+                        let filter = "win16|win32|win64|mac|macintel";
+                        if(navigator.platform)
+                        {
+                            /* mobile */
+                            if(filter.indexOf(navigator.platform.toLowerCase()) < 0)
+                            {
+                                GGstorage.setDeviceKind(GGF.System.DeviceKind.MOBILE);
+
+                                if(navigator.platform.indexOf("Linux") < 0)
+                                    GGstorage.setDeviceKindSmall(GGF.System.DeviceKindSmall.IOS);
+                                else
+                                    GGstorage.setDeviceKindSmall(GGF.System.DeviceKindSmall.AND);
+                            }
+                            /* pc */
+                            else
+                            {
+                                // localmode = true;
+                                GGstorage.setDeviceKind(GGF.System.DeviceKind.PC);
+                                GGstorage.setDeviceKindSmall(GGF.System.DeviceKindSmall.PC);
+                            }
+                        }
+
+                        /* ========================= */
+                        /* load javascript/css */
+                        /* ========================= */
+                        GGbase.load(initApp);
+                        return;
+                    }
+
+                    let script = null;
+                    script = document.createElement('script');
+                    script.type = 'text/javascript';
+                    script.src = scriptArr[index];
+                    head.append(script);
+
+                    script.addEventListener('load', () => {
+                        scriptLoad(scriptArr, index+1);
+                    });
+                }
+                scriptLoad(scriptArr, 0);
+            }
+        </script>
+    </head>
+    <body>
+        <ons-navigator id="index-dom">
+
+            <!-- =================== -->
+            <!-- (z-index:995) toast -->
+            <!-- =================== -->
+            <div id="index-div-toast"></div>
+
+            <!-- =================== -->
+            <!-- (z-index:995) fabs -->
+            <!-- =================== -->
+            <gg-cart
+                id="index-ggCart"
+                class="commonEvent-tag-hyperlink"
+                hyperlink="ODCD"
+                hyperlink-viewmode="page"
+                style="display:none;"
+            >
+            </gg-cart>
+
+            <!-- =================== -->
+            <!-- (z-index:995) fabs -->
+            <!-- =================== -->
+            <div id="index-div-footerUsr" class="index-div-footer" style="display:none;">
+                <table class="common-tbl-normal" tbl-type="noborder">
+                    <tbody>
+                        <tr>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMHM" hyperlink-viewmode="page" tab="">홈</td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMGP" hyperlink-viewmode="page" tab="">그룹</td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMCL" hyperlink-viewmode="page" tab="">일정</td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMST" hyperlink-viewmode="page" tab="">정산</td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMMG" hyperlink-viewmode="page" tab="">설정</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- =================== -->
+            <!-- side menu -->
+            <!-- =================== -->
+            <div id="index-div-sidemenuMask" style="display:none" onclick="GGsidemenu.close()">&nbsp;</div>
+            <div id="index-div-sidemenu"></div>
+
+            <!-- =================== -->
+            <!-- origin image viewer : 원본 이미지 사진을 보기위함. -->
+            <!-- =================== -->
+            <div id="index-div-imageViewerMask" style="display:none">&nbsp;</div>
+            <div id="index-div-imageViewer" style="display:none">
+                <img id="index-img-image" src=""/>
+            </div>
+
+            <!-- =================== -->
+            <!-- dialog -->
+            <!-- =================== -->
+            <!-- z-index:997 --><div class="common-div-dialogMask" id="index-dialog-mask" style="display:none;">&nbsp;</div>
+            <!-- z-index:998 --><div class="common-div-fullDialogContainer" id="index-dialog-container"></div>
+            <!-- z-index:998 --><div class="common-div-fullDialogContainer" id="index-dialog-containerFake"></div>
+
+            <!-- =================== -->
+            <!-- progress -->
+            <!-- =================== -->
+            <!-- z-index:999 -->  <div id="index-progress-mask" class="common-div-progressMask" style="display:none;">&nbsp;</div>
+            <!-- z-index:1000 --> <div id="index-progress" class="common-div-progress" style="display:none;">
+                <svg style="display:inline-block; margin:0em auto;" class="progress-circular progress-circular--indeterminate">
+                    <circle class="progress-circular__background"/>
+                    <circle class="progress-circular__primary progress-circular--indeterminate__primary"/>
+                    <circle class="progress-circular__secondary progress-circular--indeterminate__secondary"/>
+                </svg>
+            </div>
+
+        </ons-navigator>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<ons-page id="OPMD">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="OPMD.close(true);"></gg-backbtn></div>
+        <div class="center">오송금반환신청 상세</div>
+    </ons-toolbar>
+
+
+    <!-- ======================== -->
+    <!-- 상세 -->
+    <!-- ======================== -->
+    <div id="OPMD-div-detail" class="common-div-cushion"></div>
+
+    <script>
+        var OPMD =
+        {
+            code : "OPMD",
+            Data : {},
+
+            show()
+            {
+                /* init OPMD.Data */
+                if(OPMD.Data.userno == undefined) OPMD.Data.userno = "";
+                if(OPMD.Data.reqno == undefined) OPMD.Data.reqno = "";
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* get detail */
+                    let mPaymentMissedreq = Api.PaymentMissedreq.selectByPk(OPMD.Data.userno, OPMD.Data.reqno);
+                    mPaymentMissedreq.makeDetail("#OPMD-div-detail");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                OPMD.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                OPMD.close(true);
+            }
+
+            /* localizing */
+            /* $("#OPMD").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

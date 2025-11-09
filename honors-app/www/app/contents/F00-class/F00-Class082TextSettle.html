@@ -1,0 +1,201 @@
+<ons-page id="CLDS">
+
+    <style>
+        .CLDS-tbl-clslineup2 { white-space: nowrap; }
+        .CLDS-tbl-clslineup2 > tbody > tr > td { text-align: center; }
+        .CLDS-input-username { width: 6em; vertical-align: middle;}
+        #CLDS-tbl-clssettle  { white-space: nowrap; }
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="CLDS.close(true);"></gg-backbtn></div>
+        <div class="center">일정상세 &gt; 정산요약</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion common-tag-fontsize09">
+        <button id="CLDS-btn-copyContent" class="common-btn-outline">내용복사</button>
+        <hr class="common-hr-paddingTop"/>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 일정요약 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <pre id="CLDS-pre-summary"></pre>
+    </div>
+
+    <script>
+        var CLDS =
+        {
+            code : "CLDS",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(CLDS.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CLDS.close(); return; }
+                if(CLDS.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CLDS.close(); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* html */
+                        let html = "";
+
+                        /* get var */
+                        let clsno = CLDS.Data.clsno;
+                        let grpno = CLDS.Data.grpno;
+
+                        /* 기본정보 */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        html += `<정산> ${mCls.getClsPeriod()} ${mCls.getClsground()}`;
+
+                        /* 미입금 */
+                        html += `\n\n■ 미입금`;
+                        let mClssettleNotDeposited = Api.Clssettle.selectNotDepositedAllByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                        let notDeposited = mClssettleNotDeposited.getModels();
+                        let notDepositedCnt = 0;
+                        for(let i in notDeposited)
+                        {
+                            let model = notDeposited[i];
+
+                            /* clsno 가 일치하지 않는 레코드만 */
+                            if(model.getClsno() == clsno) continue;
+
+                            /* add row */
+                            html += `\n${model.getUsername()} : ${model.getBillfinalWon()} (${model.getClsPeriod()} ${model.getClsground()})`;
+                            notDepositedCnt++;
+                        }
+                        if(notDepositedCnt == 0)
+                            html += `\n--없음--`;
+
+                        /* 정산 */
+                        html += `\n\n■ 정산 (기준액 : ${mCls.getClsapplybillpriceWon()})`;
+                        let mClssettles = Api.Clssettle.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        let settles = mClssettles.getModels();
+                        for(let i in settles)
+                        {
+                            let model = settles[i];
+
+                            /* discount */
+                            let discountHtml = "";
+                            if(model.getBilldiscount() >= 1)
+                                discountHtml = ` (할인:${model.getBilldiscountWon()}${model.getBillmemo() != "" ? " - " + model.getBillmemo() : ""})`;
+
+                            /* point */
+                            let pointHtml = "";
+                            if(model.getBillpointed() >= 1)
+                                pointHtml = ` (잔금:${model.getBillpointedWon()})`;
+
+                            /* is deposited */
+                            let isDeposited = model.isManagerdepositflgYes() ? " [입금완료]" : "";
+
+                            /* add row */
+                            html += `\n${model.getUsername()} : ${model.getBillfinalWon()}${discountHtml}${pointHtml}${isDeposited}`;
+                        }
+
+                        /* 잔여금내역 */
+                        html += `\n\n■ 잔여금내역`;
+                        let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                        let members = mGrpMembers.getModels();
+                        let membersCnt = 0;
+                        for(let i in members)
+                        {
+                            let model = members[i];
+                            if(model.getPoint() == 0) continue;
+
+                            /* add row */
+                            html += `\n${model.getMUser().getName()} : ${model.getPointWon()}`;
+                            membersCnt++;
+                        }
+                        if(membersCnt == 0)
+                            html += `\n--없음--`;
+
+                        /* 입금처 */
+                        let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
+                        html += `\n\n■ 입금처`;
+                        html += `\n${mGrp.getBankname()} ${mGrp.getBaccacct()} ${mGrp.getBaccname()}`;
+
+                        /* thank */
+                        html += `\n\n감사합니다.`;
+
+                        $("#CLDS-pre-summary").html(html);
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#CLDS-btn-copyContent").on("click", function()
+            {
+                /* copy content */
+                let content = $("#CLDS-pre-summary").html();
+                Common.copyToClipboard(content);
+            });
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CLDS.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CLDS.close(true);
+            }
+
+            /* localizing */
+            /* $("#CLDS").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

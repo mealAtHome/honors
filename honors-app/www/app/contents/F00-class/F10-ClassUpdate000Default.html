@@ -1,0 +1,762 @@
+<ons-page id="CUDE">
+
+    <div id="CUDE-div-slideformParent" class="common-div-slideformParent">
+
+        <div class="common-div-header">
+            <div header="back"><gg-backbtn onclick="CUDE.close()"></gg-backbtn></div>
+            <div header="title"><span>일정등록</span></div>
+        </div>
+        <div class="common-div-headerPadding"></div>
+        <div class="common-div-progressContainer">
+            <div class="common-div-progressBar" id="CUDE-div-progress" style="width:16%;"></div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 일정소개 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="open" id="CUDE-div-formIntro" slideform-next="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>일정 소개</span>
+                <div class="common-div-cushionUD">
+                    <button id="CUDE-btn-chooseRecentCls" class="common-btn-outline" style="font-size:0.9em;">최근 일정 불러오기</button>
+                </div>
+            </div>
+
+            <!-- 일정유형 -->
+            <div class="common-div-formField">
+                <span>일정유형</span>
+                <span>[필수] 아래 유형에서 선택해주세요.</span>
+                <style>
+                    #CUDE-tbl-clstype > tbody > tr > th { text-align:left; }
+                    #CUDE-tbl-clstype > tbody > tr > th > button { min-width:6.5em; }
+                    #CUDE-tbl-clstype > tbody > tr > td { font-size:0.9em; color:rgb(100, 100, 100); }
+                </style>
+                <table id="CUDE-tbl-clstype" class="common-tbl-vertical common-tag-fontsize09" tbl-type="rowborder">
+                    <tbody>
+                        <tr><th><button class="CUDE-btn-clstype commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clstype" val="lineup1" tab="tab" >라인업(1팀)</button></th><td>1개팀 라인업 기재</td></tr>
+                        <tr><th><button class="CUDE-btn-clstype commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clstype" val="lineup2" tab=""    >라인업(1시합)</button></th><td>1시합 양 팀 라인업 기재</td></tr>
+                        <tr><th><button class="CUDE-btn-clstype commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clstype" val="lineup4" tab=""    >라인업(2시합)</button></th><td>2시합 양 팀 라인업 기재</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 일정명 -->
+            <div class="common-div-formField">
+                <span>일정제목</span>
+                <span>[필수] 필수, 50글자이내</span>
+                <input id="CUDE-input-clstitle" type="text" class="common-input-field" placeholder="일정제목" value="">
+            </div>
+
+            <!-- 참가비 -->
+            <div class="common-div-formField">
+                <span>참가비</span>
+                <span>[필수] 기본 참가비와 단위입니다</span>
+                <table class="common-tbl-normal">
+                    <tbody>
+                        <tr>
+                            <td><input id="CUDE-input-clsbillapplyunit"  type="text"   class="common-input-field" style="width:5em;" value="시합" placeholder="단위"></td>
+                            <td><input id="CUDE-input-clsbillapplyprice" type="number" class="common-input-field" style="width:7em;" value="0"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span id="CUDE-span-clsbillapplypricePretty" class="common-tag-block common-tag-fontsize09"></span>
+            </div>
+
+            <!-- 일정상세 -->
+            <div class="common-div-formField">
+                <span>일정상세</span>
+                <span>[필수] 복장, 신발, 규칙 등 (50글자 이내)</span>
+                <textarea id="CUDE-textarea-clscontent" type="text" class="common-textarea-field" rows="4"></textarea>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+                <tbody>
+                    <tr>
+                        <td><button class="CUDE-btn-formNext common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 일정장소 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formPlace" slideform-next="#CUDE-div-formDate" slideform-prev="#CUDE-div-formIntro" slideform-progress="#CUDE-div-progress" slideform-progressval="32">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>일정장소</span>
+            </div>
+
+            <!-- 일정장소 -->
+            <div class="common-div-formField">
+                <span>일정장소</span>
+                <span>[필수] 50글자이내</span>
+                <input id="CUDE-input-clsground" type="text" class="common-input-field" placeholder="일정장소" value="방천4구장">
+            </div>
+
+            <!-- 일정상세주소(네비용) -->
+            <div class="common-div-formField">
+                <span>일정상세주소(네비용)</span>
+                <span>[필수] 50글자이내</span>
+                <input id="CUDE-input-clsgroundaddr" type="text" class="common-input-field" placeholder="일정주소" value="">
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
+                <tbody>
+                    <tr>
+                        <td><button class="CUDE-btn-formPrev common-btn-outline">뒤로</button></td>
+                        <td><button class="CUDE-btn-formNext common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 일정일시 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formDate" slideform-next="#CUDE-div-formApply" slideform-prev="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="49">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>일정일시</span>
+            </div>
+
+            <!-- 시작 -->
+            <div class="common-div-formField">
+                <span>일정시작일시</span>
+                <span>[필수] 일정의 시작일시입니다.</span>
+                <div id="CUDE-div-clsstartdt" class="common-div-yearToMin">
+                    <input type="date"    class="common-input-field">
+                    <input type="number"  class="common-input-field" value="00">
+                    <input type="number"  class="common-input-field" value="00">
+                </div>
+                <span class="common-tag-block common-tag-fontsize09" id="CUDE-span-clsstartdtPretty"></span>
+                <!-- <div class="common-div-cushionUD">
+                    <button class="common-btn-outline">이번주 토요일</button>
+                    <button class="common-btn-outline">다음주 토요일</button>
+                </div> -->
+            </div>
+
+            <!-- 종료 -->
+            <div class="common-div-formField">
+                <span>일정종료일시</span>
+                <span>[필수] 일정의 종료일시입니다.</span>
+                <div id="CUDE-div-clsclosedt" class="common-div-yearToMin">
+                    <input type="date"    class="common-input-field">
+                    <input type="number"  class="common-input-field" value="00">
+                    <input type="number"  class="common-input-field" value="00">
+                </div>
+                <span class="common-tag-block common-tag-fontsize09" id="CUDE-span-clsclosedtPretty"></span>
+                <!-- <div class="common-div-cushionUD">
+                    <button class="common-btn-outline">일정시작일시와 동일</button>
+                </div> -->
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
+                <tbody>
+                    <tr>
+                        <td><button class="CUDE-btn-formPrev common-btn-outline">뒤로</button></td>
+                        <td><button class="CUDE-btn-formNext common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 참가모집일시 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formApply" slideform-next="#CUDE-div-formMng" slideform-prev="#CUDE-div-formDate" slideform-progress="#CUDE-div-progress" slideform-progressval="65">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>참가모집일시</span>
+            </div>
+
+            <!-- 모집시작 -->
+            <div class="common-div-formField">
+                <span>모집시작일시</span>
+                <span>[필수] 모집일시 이전에 기명 불가능</span>
+                <div id="CUDE-div-clsapplystartdt" class="common-div-yearToMin">
+                    <input type="date"    class="common-input-field">
+                    <input type="number"  class="common-input-field" value="00">
+                    <input type="number"  class="common-input-field" value="00">
+                </div>
+                <span class="common-tag-block common-tag-fontsize09" id="CUDE-span-clsapplystartdtPretty"></span>
+                <!-- <div class="common-div-cushionUD">
+                    <button class="common-btn-outline">일정시작일시와 동일</button>
+                </div> -->
+            </div>
+
+            <!-- 모집종료 -->
+            <div class="common-div-formField">
+                <span>모집종료일시</span>
+                <span>[필수] 모집일시 이후에 기명 불가능</span>
+                <div id="CUDE-div-clsapplyclosedt" class="common-div-yearToMin">
+                    <input type="date"    class="common-input-field">
+                    <input type="number"  class="common-input-field" value="00">
+                    <input type="number"  class="common-input-field" value="00">
+                </div>
+                <span class="common-tag-block common-tag-fontsize09" id="CUDE-span-clsapplyclosedtPretty"></span>
+                <!-- <div class="common-div-cushionUD">
+                    <button class="common-btn-outline">일정시작일시와 동일</button>
+                </div> -->
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
+                <tbody>
+                    <tr>
+                        <td><button class="CUDE-btn-formPrev common-btn-outline">뒤로</button></td>
+                        <td><button class="CUDE-btn-formNext common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 일정주관 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formMng" slideform-next="#CUDE-div-formComplete" slideform-prev="#CUDE-div-formApply" slideform-progress="#CUDE-div-progress" slideform-progressval="83">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>일정주관</span>
+            </div>
+
+            <!-- 모집시작 -->
+            <div class="common-div-formField">
+                <span>일정주관</span>
+                <span>[필수] 이 일정을 주관하는 멤버를 선택해주세요.</span>
+                <div class="common-div-cushionUD">
+                    <button id="CUDE-btn-usernoadmMe" class="common-btn-outline">본인</button>
+                    <button id="CUDE-btn-usernoadmOther" class="common-btn-outline">다른멤버</button>
+                </div>
+                <div id="CUDE-div-usernoadm"></div>
+            </div>
+
+            <!-- 모집종료 -->
+            <div class="common-div-formField">
+                <span>일정주관(부)</span>
+                <span>[선택] 대리, 혹은 진행을 돕는 부주관자를 선택해주세요.</span>
+                <div class="common-div-cushionUD">
+                    <button id="CUDE-btn-usernosubMe" class="common-btn-outline">본인</button>
+                    <button id="CUDE-btn-usernosubOther" class="common-btn-outline">다른멤버</button>
+                    <button id="CUDE-btn-usernosubCancel" class="common-btn-outline" btn-type="cancel">지우기</button>
+                </div>
+                <div id="CUDE-div-usernosub"></div>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
+                <tbody>
+                    <tr>
+                        <td><button class="CUDE-btn-formPrev common-btn-outline">뒤로</button></td>
+                        <td><button class="CUDE-btn-formNext common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 일정생성 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formComplete" slideform-prev="#CUDE-div-formMng" slideform-progress="#CUDE-div-progress" slideform-progressval="100">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>입력확인</span>
+            </div>
+
+            <!-- 유저 입력사항 -->
+            <div class="common-div-formField">
+                <span>입력하신 내용이 맞나요?</span>
+                <span>아래 내용을 확인하시고, 이상이 없으면 '저장하기' 버튼을 눌러주세요.</span>
+                <div class="common-div-empty"></div>
+                <table class="common-tbl-vertical" tbl-type="rowborder">
+                    <tbody>
+                        <tr><th>일정유형</th><td><div id="CUDE-div-summaryClstype"></div></td></tr>
+                        <tr><th>일정제목</th><td><div id="CUDE-div-summaryClstitle"></div></td></tr>
+                        <tr><th>참가비</th><td><div id="CUDE-div-summaryClsbillapply"></div></td></tr>
+                        <tr><th>일정상세</th><td><div id="CUDE-div-summaryClscontent"></div></td></tr>
+                        <tr><th>일정장소</th><td><div id="CUDE-div-summaryClsground"></div></td></tr>
+                        <tr><th>일정일시</th><td><div id="CUDE-div-summaryClsdt"></div></td></tr>
+                        <tr><th>모집일시</th><td><div id="CUDE-div-summaryClsapplydt"></div></td></tr>
+                        <tr><th>일정관리자</th><td><div id="CUDE-div-summaryUsernoadm"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
+                <tbody>
+                    <tr>
+                        <td><button class="CUDE-btn-formPrev common-btn-outline">뒤로</button></td>
+                        <td><button id="CUDE-btn-save" class="common-btn-inline">저장하기</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        /* =============================== */
+        /* page obj */
+        /* =============================== */
+        var CUDE =
+        {
+            code : "CUDE",
+            Data: {},
+
+            /* -------------------- */
+            /* show */
+            /* -------------------- */
+            show()
+            {
+                /* validation */
+                if(CUDE.Data.option == undefined) CUDE.Data.option   = "insert";
+                if(CUDE.Data.clsno  == undefined) CUDE.Data.clsno    = "";
+                if(CUDE.Data.grpno  == undefined) { Common.toast("잘못된 접근입니다."); CUDE.close(true); return; }
+
+                /* recovery */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let option = CUDE.Data.option;
+                    let clsno = CUDE.Data.clsno;
+                    let grpno = CUDE.Data.grpno;
+
+                    switch(option)
+                    {
+                        case "insert":
+                        {
+                            /* init */
+                            let now = new Date();
+                            now.setHours(0);
+                            now.setMinutes(0);
+                            now.setSeconds(0);
+                            GGdate.toDivYearToMin("#CUDE-div-clsstartdt", now);
+                            GGdate.toDivYearToMin("#CUDE-div-clsclosedt", now);
+                            GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", now);
+                            GGdate.toDivYearToMin("#CUDE-div-clsapplyclosedt", now);
+                            CUDE.keyup();
+                            break;
+                        }
+                        case "update":
+                        {
+                            let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
+                            $(`.CUDE-btn-clstype[val='${mCls.getClstype()}']`).click();
+                            $("#CUDE-input-clstitle").val(mCls.getClstitle());
+                            $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
+                            $("#CUDE-input-clsground").val(mCls.getClsground());
+                            $("#CUDE-input-clsgroundaddr").val(mCls.getClsgroundaddr());
+                            $("#CUDE-input-clsbillapplyprice").val(mCls.getClsbillapplyprice());
+                            GGdate.toDivYearToMin("#CUDE-div-clsstartdt", new Date(mCls.getClsstartdt()));
+                            GGdate.toDivYearToMin("#CUDE-div-clsclosedt", new Date(mCls.getClsclosedt()));
+                            GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", new Date(mCls.getClsapplystartdt()));
+                            GGdate.toDivYearToMin("#CUDE-div-clsapplyclosedt", new Date(mCls.getClsapplyclosedt()));
+                            CUDE.keyup();
+
+                            /* ----- */
+                            /* clsstatus 상태에 따라, 수정가능한 항목 제한 */
+                            /* ----- */
+
+                            /* 생성 이후에는 편집불가 */
+                            $(`.CUDE-btn-clstype`).prop("disabled", true);
+                            switch(mCls.getClsstatus())
+                            {
+                                case GGF.Cls.Clsstatus.EDIT:
+                                {
+                                    $(`.CUDE-btn-clstype`).prop("disabled", false);
+                                    break;
+                                }
+                                case GGF.Cls.Clsstatus.ING:
+                                case GGF.Cls.Clsstatus.ENDCLS:
+                                case GGF.Cls.Clsstatus.ENDSETTLE:
+                                {
+                                    $(`.CUDE-btn-clstype`).prop("disabled", true);
+                                    $("#CUDE-input-clstitle").prop("disabled", true);
+                                    $("#CUDE-input-clsbillapplyprice").prop("disabled", true);
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            keyup()
+            {
+                $("#CUDE-div-clsstartdt > input:last").change();
+                $("#CUDE-div-clsclosedt > input:last").change();
+                $("#CUDE-div-clsapplystartdt > input:last").change();
+                $("#CUDE-div-clsapplyclosedt > input:last").change();
+                $("#CUDE-input-clsbillapplyprice").keyup();
+            },
+
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        };
+
+
+        $(document).ready(function()
+        {
+            /* =============================== */
+            /* events */
+            /* =============================== */
+
+            $("#CUDE-btn-chooseRecentCls").click(function()
+            {
+                /* 이 다이얼로그를 닫을 때, show를 실행하지 않음. */
+                CUDE.Data.executeShowWhenClose = false;
+
+                /* 다이얼로그 */
+                let grpno = CUDE.Data.grpno;
+                let data =
+                {
+                    option : "chooseFromF10",
+                    grpno : grpno,
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S11ChooseCls, data);
+            });
+
+            $("#CUDE-div-clsstartdt > input")      .change (function() { console.log("change"); $("#CUDE-span-clsstartdtPretty")      .html(GGdate.toYMDDHI(new Date(GGdate.fromDivYearToMin("#CUDE-div-clsstartdt")))); });
+            $("#CUDE-div-clsclosedt > input")      .change (function() { console.log("change"); $("#CUDE-span-clsclosedtPretty")      .html(GGdate.toYMDDHI(new Date(GGdate.fromDivYearToMin("#CUDE-div-clsclosedt")))); });
+            $("#CUDE-div-clsapplystartdt > input") .change (function() { console.log("change"); $("#CUDE-span-clsapplystartdtPretty") .html(GGdate.toYMDDHI(new Date(GGdate.fromDivYearToMin("#CUDE-div-clsapplystartdt")))); });
+            $("#CUDE-div-clsapplyclosedt > input") .change (function() { console.log("change"); $("#CUDE-span-clsapplyclosedtPretty") .html(GGdate.toYMDDHI(new Date(GGdate.fromDivYearToMin("#CUDE-div-clsapplyclosedt")))); });
+            $("#CUDE-input-clsbillapplyunit").keyup(function()
+            {
+                let unit = $("#CUDE-input-clsbillapplyunit").val();
+                let bill = GGC.Common.priceWon($("#CUDE-input-clsbillapplyprice").val());
+                $("#CUDE-span-clsbillapplypricePretty").html(`${unit} 당, ${bill}`);
+            });
+            $("#CUDE-input-clsbillapplyprice").keyup(function()
+            {
+                let unit = $("#CUDE-input-clsbillapplyunit").val();
+                let bill = GGC.Common.priceWon($("#CUDE-input-clsbillapplyprice").val());
+                $("#CUDE-span-clsbillapplypricePretty").html(`${unit} 당, ${bill}`);
+            });
+
+            $(".CUDE-btn-formPrev").click(function() { GGslideform.prev("#CUDE-div-slideformParent"); });
+            $(".CUDE-btn-formNext").click(function()
+            {
+                /* get slideformChild's id */
+                let id = $(this).closest(".common-div-slideformChild").attr("id");
+
+                /* validation by id */
+                switch(id)
+                {
+                    case "CUDE-div-formIntro":
+                    {
+                        let clstype = $(".CUDE-btn-clstype[tab=tab]").attr("val");
+                        let clstitle = $("#CUDE-input-clstitle").val();
+                        let clscontent = $("#CUDE-textarea-clscontent").val();
+                        let clsbillapplyprice = $("#CUDE-input-clsbillapplyprice").val();
+                        let clsbillapplyunit = $("#CUDE-input-clsbillapplyunit").val();
+
+                        if(Common.isEmpty(clstype))      { Common.toastError("일정유형을 선택해주세요."); return; }
+                        if(Common.isEmpty(clstitle))     { Common.toastError("일정제목을 입력해주세요."); $("#CUDE-input-clstitle").focus(); return; }
+                        if(Common.isEmpty(clscontent))   { Common.toastError("일정상세를 입력해주세요."); $("#CUDE-textarea-clscontent").focus(); return; }
+                        if(Common.isEmpty(clsbillapplyprice)) { Common.toastError("참가비를 올바르게 입력해주세요."); $("#CUDE-input-clsbillapplyprice").focus(); return; }
+                        if(Common.isEmpty(clsbillapplyunit)) { Common.toastError("참가비단위를 올바르게 입력해주세요."); $("#CUDE-input-clsbillapplyunit").focus(); return; }
+                        break;
+                    }
+                    case "CUDE-div-formPlace":
+                    {
+                        let clsground = $("#CUDE-input-clsground").val();
+                        let clsgroundaddr = $("#CUDE-input-clsgroundaddr").val();
+
+                        if(Common.isEmpty(clsground))     { Common.toastError("일정장소를 입력해주세요."); $("#CUDE-input-clsground").focus(); return; }
+                        if(Common.isEmpty(clsgroundaddr)) { Common.toastError("일정상세주소(네비용)를 입력해주세요."); $("#CUDE-input-clsgroundaddr").focus(); return; }
+                        break;
+
+                    }
+                    case "CUDE-div-formDate":
+                    {
+                        let clsstartdt = GGdate.fromDivYearToMin("#CUDE-div-clsstartdt");
+                        let clsclosedt = GGdate.fromDivYearToMin("#CUDE-div-clsclosedt");
+                        if(Common.isEmpty(clsstartdt)) { Common.toastError("일정시작일시가 올바르지 않거나 입력되지 않았습니다."); return; }
+                        if(Common.isEmpty(clsclosedt)) { Common.toastError("일정종료일시가 올바르지 않거나 입력되지 않았습니다."); return; }
+
+                        let clsstartdtDate = new Date(clsstartdt);
+                        let clsclosedtDate = new Date(clsclosedt);
+                        if(clsclosedtDate <= clsstartdtDate)
+                        {
+                            Common.toastError("일정종료일시는 일정시작일시 이후로 입력해주세요.");
+                            return;
+                        }
+                        break;
+
+                    }
+                    case "CUDE-div-formApply":
+                    {
+                        let clsapplystartdt = GGdate.fromDivYearToMin("#CUDE-div-clsapplystartdt");
+                        let clsapplyclosedt = GGdate.fromDivYearToMin("#CUDE-div-clsapplyclosedt");
+                        if(Common.isEmpty(clsapplystartdt)) { Common.toastError("신청시작일시가 올바르지 않거나 입력되지 않았습니다."); return; }
+                        if(Common.isEmpty(clsapplyclosedt)) { Common.toastError("신청종료일시가 올바르지 않거나 입력되지 않았습니다."); return; }
+
+                        let clsapplystartdtDate = new Date(clsapplystartdt);
+                        let clsapplyclosedtDate = new Date(clsapplyclosedt);
+                        if(clsapplyclosedtDate <= clsapplystartdtDate)
+                        {
+                            Common.toastError("신청종료일시는 신청시작일시 이후로 입력해주세요.");
+                            return;
+                        }
+                        break;
+
+                    }
+                    case "CUDE-div-formMng":
+                    {
+                        let userno = $("#CUDE-div-usernoadm").attr("userno");
+                        if(Common.isEmpty(userno)) { Common.toastError("일정주관자를 선택해주세요."); return; }
+
+                        /* 내용요약 */
+                        const clstype             = $(".CUDE-btn-clstype[tab=tab]").html();
+                        const clstitle            = $("#CUDE-input-clstitle").val();
+                        const clscontent          = $("#CUDE-textarea-clscontent").val();
+                        const clsbillapplyprice   = $("#CUDE-span-clsbillapplypricePretty").html();
+                        const clsstartdt          = $("#CUDE-span-clsstartdtPretty").html();
+                        const clsclosedt          = $("#CUDE-span-clsclosedtPretty").html();
+                        const clsground           = $("#CUDE-input-clsground").val();
+                        const clsgroundaddr       = $("#CUDE-input-clsgroundaddr").val();
+                        const clsapplystartdt     = $("#CUDE-span-clsapplystartdtPretty").html();
+                        const clsapplyclosedt     = $("#CUDE-span-clsapplyclosedtPretty").html();
+                        const clsusernoadm        = GGC.Common.char($("#CUDE-div-usernoadm").attr("name"));
+                        const clsusernosub        = GGC.Common.char($("#CUDE-div-usernosub").attr("name"));
+                        $("#CUDE-div-summaryClstype").html(clstype);
+                        $("#CUDE-div-summaryClstitle").html(clstitle);
+                        $("#CUDE-div-summaryClscontent").html(clscontent);
+                        $("#CUDE-div-summaryClsbillapply").html(clsbillapplyprice);
+                        $("#CUDE-div-summaryClsground").html(`${clsground}<br/>${clsgroundaddr}`);
+                        $("#CUDE-div-summaryClsdt").html(`시작 : ${clsstartdt}<br/>종료 : ${clsclosedt}`);
+                        $("#CUDE-div-summaryClsapplydt").html(`시작 : ${clsapplystartdt}<br/>종료 : ${clsapplyclosedt}`);
+                        $("#CUDE-div-summaryUsernoadm").html(`정:${clsusernoadm}<br/>부:${clsusernosub}`);
+                        break;
+                    }
+                    case "CUDE-div-formComplete":
+                    {
+                        break;
+                    }
+                    default:
+                    {
+                        Common.toast("유효하지 않은 입력입니다.");
+                        return;
+                    }
+                }
+
+                /* to next */
+                GGslideform.next("#CUDE-div-slideformParent");
+            });
+
+            /* =============== */
+            /* 일정주관자 : 본인 */
+            /* =============== */
+            $("#CUDE-btn-usernoadmMe").click(function()
+            {
+                let grpno = CUDE.Data.grpno;
+                let mGrpMember = Api.GrpMember.selectMeByGrpno(grpno, GGF.none, GGF.toast);
+                if(mGrpMember == null)
+                    return Common.toast("해당 그룹의 멤버가 아닙니다.");
+
+                let mUser = mGrpMember.getMUser();
+                $("#CUDE-div-usernoadm").html(mGrpMember.make());
+                $("#CUDE-div-usernoadm").attr("grpno", grpno);
+                $("#CUDE-div-usernoadm").attr("userno", mGrpMember.getUserno());
+                $("#CUDE-div-usernoadm").attr("name", mUser.getName());
+            });
+
+            /* =============== */
+            /* 일정주관자(부) : 본인 */
+            /* =============== */
+            $("#CUDE-btn-usernosubMe").click(function()
+            {
+                let grpno = CUDE.Data.grpno;
+                let mGrpMember = Api.GrpMember.selectMeByGrpno(grpno, GGF.none, GGF.toast);
+                if(mGrpMember == null)
+                    return Common.toast("해당 그룹의 멤버가 아닙니다.");
+
+                let mUser = mGrpMember.getMUser();
+                $("#CUDE-div-usernosub").html(mGrpMember.make());
+                $("#CUDE-div-usernosub").attr("grpno", grpno);
+                $("#CUDE-div-usernosub").attr("userno", mGrpMember.getUserno());
+                $("#CUDE-div-usernosub").attr("name", mUser.getName());
+            });
+
+            /* =============== */
+            /* 일정주관자 : 다른 사용자 선택 */
+            /* =============== */
+            $("#CUDE-btn-usernoadmOther").click(function()
+            {
+                /* 이 다이얼로그를 닫을 때, show를 실행하지 않음. */
+                CUDE.Data.executeShowWhenClose = false;
+
+                /* 다이얼로그 */
+                let grpno = CUDE.Data.grpno;
+                let data =
+                {
+                    option : "makeToEl",
+                    grpno : grpno,
+                    el : "#CUDE-div-usernoadm",
+                    regmember : GGF.N,
+                    title : "일정주관 선택",
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
+            });
+
+            /* =============== */
+            /* 일정주관자(부) : 다른 사용자 선택 */
+            /* =============== */
+            $("#CUDE-btn-usernosubOther").click(function()
+            {
+                /* 이 다이얼로그를 닫을 때, show를 실행하지 않음. */
+                CUDE.Data.executeShowWhenClose = false;
+
+                /* 다이얼로그 */
+                let grpno = CUDE.Data.grpno;
+                let data =
+                {
+                    option : "makeToEl",
+                    grpno : grpno,
+                    el : "#CUDE-div-usernosub",
+                    regmember : GGF.N,
+                    title : "일정주관(부) 선택",
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
+            });
+
+            /* =============== */
+            /* 일정주관자(부) : 지우기 */
+            /* =============== */
+            $("#CUDE-btn-usernosubCancel").click(function()
+            {
+                $("#CUDE-div-usernosub").html("");
+                $("#CUDE-div-usernosub").attr("grpno", "");
+                $("#CUDE-div-usernosub").attr("userno", "");
+                $("#CUDE-div-usernosub").attr("name", "");
+            });
+
+            $("#CUDE-btn-save").click(function()
+            {
+                let process = function()
+                {
+                    /* insert or update */
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        const option                = CUDE.Data.option;
+                        const grpno                 = CUDE.Data.grpno;
+                        const clsno                 = CUDE.Data.clsno;
+                        const clstype               = $(".CUDE-btn-clstype[tab=tab]").attr("val");
+                        const clstitle              = $("#CUDE-input-clstitle").val();
+                        const clscontent            = $("#CUDE-textarea-clscontent").val();
+                        const clsstartdt            = GGdate.fromDivYearToMin("#CUDE-div-clsstartdt");
+                        const clsclosedt            = GGdate.fromDivYearToMin("#CUDE-div-clsclosedt");
+                        const clsground             = $("#CUDE-input-clsground").val();
+                        const clsgroundaddr         = $("#CUDE-input-clsgroundaddr").val();
+                        const clsbillapplyunit      = $("#CUDE-input-clsbillapplyunit").val();
+                        const clsbillapplyprice     = $("#CUDE-input-clsbillapplyprice").val();
+                        const clsapplystartdt       = GGdate.fromDivYearToMin("#CUDE-div-clsapplystartdt");
+                        const clsapplyclosedt       = GGdate.fromDivYearToMin("#CUDE-div-clsapplyclosedt");
+                        const clsusernoadm          = GGC.Common.char($("#CUDE-div-usernoadm").attr("userno"));
+                        const clsusernosub          = GGC.Common.char($("#CUDE-div-usernosub").attr("userno"));
+
+                        let mApiResponse = Api.Cls.updateFromPage(
+                            option
+                            , grpno
+                            , clsno
+                            , clstype
+                            , clstitle
+                            , clscontent
+                            , clsstartdt
+                            , clsclosedt
+                            , clsground
+                            , clsgroundaddr
+                            , clsbillapplyunit
+                            , clsbillapplyprice
+                            , clsapplystartdt
+                            , clsapplyclosedt
+                            , clsusernoadm
+                            , clsusernosub
+                            , GGF.none
+                            , GGF.toast
+                        );
+                        if(mApiResponse.isSuccess())
+                        {
+                            if(CUDE.Data.option == "insert")
+                                CUDE.Data.clsno = mApiResponse.getData();
+
+                            let pageCode = null;
+                            switch(clstype)
+                            {
+                                case GGF.Cls.Clstype.LINEUP1: pageCode = Navigation.Page.F10ClassUpdate010TypeLineup; break;
+                                case GGF.Cls.Clstype.LINEUP2: pageCode = Navigation.Page.F10ClassUpdate010TypeLineup; break;
+                                case GGF.Cls.Clstype.LINEUP4: pageCode = Navigation.Page.F10ClassUpdate010TypeLineup; break;
+                            }
+                            switch(CUDE.Data.option)
+                            {
+                                case "insert":
+                                {
+                                    Common.toastSuccess("일정이 생성되었습니다.");
+                                    Navigation.removeLastPageData(); /* 현재 페이지 제거 */
+                                    Navigation.moveFrontPage(pageCode, {option:option, grpno:grpno, clsno: CUDE.Data.clsno, });
+                                    break;
+                                }
+                                case "update":
+                                {
+                                    Common.toastSuccess("일정이 수정되었습니다.");
+                                    CUDE.close(true);
+                                    break;
+                                }
+                            }
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("일정을 저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CUDE.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CUDE.close(true);
+            }
+
+            /* localizing */
+            /* $("#CUDE").i18n(); */
+
+        });
+
+    </script>
+</ons-page>

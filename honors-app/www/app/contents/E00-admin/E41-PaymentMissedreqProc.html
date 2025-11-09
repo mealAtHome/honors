@@ -1,0 +1,137 @@
+<ons-page id="APMP">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="APMP.close(true);"></gg-backbtn></div>
+        <div class="center">오송금반환신청 처리</div>
+    </ons-toolbar>
+
+    <!-- ================ -->
+    <!-- 상세 HTML -->
+    <!-- ================ -->
+    <div class="common-div-cushion">
+        <div id="APMP-div-detail"></div>
+
+        <!-- ================ -->
+        <!-- status 업데이트 -->
+        <!-- ================ -->
+        <div class="common-div-title">상태변경</div>
+        <select id="APMP-select-status" class="common-select-outline common-tag-cushionL">
+            <option value="req">대기</option>
+            <option value="ing">처리중</option>
+            <option value="okwait">반환대기</option>
+            <option value="ok">반환완료</option>
+            <option value="ng">반환불가</option>
+        </select>
+        <hr class="common-hr-normal"/>
+
+        <!-- ================ -->
+        <!-- 시스템코멘트 -->
+        <!-- ================ -->
+        <div class="common-div-title">시스템 안내</div>
+        <textarea id="APMP-textarea-sysmsg" class="common-textarea common-tag-cushionL" rows="5" style="display:block; min-width:15em;"></textarea>
+        <hr class="common-hr-normal"/>
+
+        <!-- ================ -->
+        <!-- 제출하기 -->
+        <!-- ================ -->
+        <button id="APMP-btn-save" class="common-btn-gradientBig common-tag-blockCenter" data-i18n="(common)save">제출하기</button>
+        <div class="common-div-cushionFooter"></div>
+
+    </div>
+
+
+    <script>
+        var APMP =
+        {
+            code : "APMP",
+            Data : {},
+
+            show()
+            {
+                /* init APMP.Data */
+                if(APMP.Data.userno == undefined) APMP.Data.userno = "";
+                if(APMP.Data.reqno == undefined) APMP.Data.reqno = "";
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* get detail */
+                    let mPaymentMissedreq = Api.PaymentMissedreq.selectByPk(APMP.Data.userno, APMP.Data.reqno);
+                    mPaymentMissedreq.makeDetail("#APMP-div-detail");
+
+                    /* set to el */
+                    $("#APMP-select-status").val(mPaymentMissedreq.getStatus());
+                    $("#APMP-textarea-sysmsg").val(mPaymentMissedreq.getSysmsg());
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* ----- */
+            /* 저장 */
+            /* ----- */
+            $("#APMP-btn-save").click(function()
+            {
+                /* save */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let userno = APMP.Data.userno;
+                    let reqno  = APMP.Data.reqno;
+                    let status = $("#APMP-select-status").val();
+                    let sysmsg = $("#APMP-textarea-sysmsg").val();
+                    let rslt = Api.PaymentMissedreq.updateByAdmin(userno, reqno, status, sysmsg, "toast", "toast");
+                    if(rslt)
+                        APMP.show();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                APMP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                APMP.close(true);
+            }
+
+            /* localizing */
+            /* $("#APMP").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

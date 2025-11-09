@@ -1,0 +1,318 @@
+<ons-page id="UINT" style="overflow-x: hidden;">
+
+    <!-- ======================== -->
+    <!-- main page -->
+    <!-- ======================== -->
+    <div id="UINT-div-slideformParent" class="common-div-slideformParent">
+
+        <div class="common-div-header">
+            <div header="back"><gg-backbtn onclick="UINT.close()"></gg-backbtn></div>
+            <div header="title"><span>회원가입</span></div>
+        </div>
+        <div class="common-div-headerPadding"></div>
+        <div class="common-div-progressContainer">
+            <div class="common-div-progressBar" id="UINT-div-progress" style="width:25%;"></div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 로그인정보 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="open" id="UINT-div-id" slideform-next="#UINT-div-personal1" slideform-progress="#UINT-div-progress" slideform-progressval="25">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>로그인 정보</span>
+            </div>
+
+            <!-- 아이디 -->
+            <div class="common-div-formField">
+                <span>로그인 아이디</span>
+                <span>영문숫자조합, 30글자이내</span>
+                <input id="UINT-input-id" type="text" class="common-input-field" placeholder="아이디">
+            </div>
+
+            <!-- 로그인정보 -->
+            <div class="common-div-formField">
+                <span>비밀번호</span>
+                <input id="UINT-input-pw" class="common-input-field" type="password" placeholder="비밀번호">
+                <button class="common-btn-outline common-tag-cushionUD" id="UINT-btn-pwShow">비밀번호 보기</button>
+                <button class="common-btn-outline common-tag-cushionUD" id="UINT-btn-pwHide" style="display:none;">비밀번호 숨기기</button>
+            </div>
+
+            <!-- 로그인정보 -->
+            <div id="UINT-div-pwViewer" class="common-div-formField" style="display:none;">
+                <span>비밀번호확인</span>
+                <input id="UINT-input-pwRe" class="common-input-field" type="text" disabled>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+                <tbody>
+                    <tr>
+                        <td><button id="UINT-btn-nextFromLogin" class="common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 개인정보1 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="UINT-div-personal1" slideform-next="#UINT-div-personal2" slideform-prev="#UINT-div-id" slideform-progress="#UINT-div-progress" slideform-progressval="50">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>개인정보-1</span>
+            </div>
+
+            <!-- 이름 -->
+            <div class="common-div-formField">
+                <span>이름</span>
+                <span>(실명으로 입력해주세요)</span>
+                <input id="UINT-input-name" type="text" class="common-input-field" placeholder="이름">
+            </div>
+
+            <!-- 출생년도 -->
+            <div class="common-div-formField">
+                <span>출생년도</span>
+                <span>(선택입력)</span>
+                <input id="UINT-input-birthYear" type="number" class="common-input-field" placeholder="예: 1980">
+            </div>
+
+            <!-- 휴대전화번호 -->
+            <div class="common-div-formField">
+                <span>휴대전화번호</span>
+                <span>(선택입력)</span>
+                <input id="UINT-input-phone" class="common-input-field" type="text" placeholder="휴대전화번호">
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
+                <tbody>
+                    <tr>
+                        <td><button id="UINT-btn-prevFromPersonal1" class="common-btn-outline">뒤로</button></td>
+                        <td><button id="UINT-btn-nextFromPersonal1" class="common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 개인정보2 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="UINT-div-personal2" slideform-next="#UINT-div-thanks" slideform-prev="#UINT-div-personal1" slideform-progress="#UINT-div-progress" slideform-progressval="75">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>개인정보-2</span>
+            </div>
+
+            <!-- 지역 -->
+            <div class="common-div-formField">
+                <span>주소</span>
+                <span>(선택입력, 예:북구 복현동)</span>
+                <input id="UINT-input-address" class="common-input-field" placeholder="북구 복현동">
+            </div>
+
+            <!-- 자차여부 -->
+            <div class="common-div-formField">
+                <span>자차여부</span>
+                <span>(모임수집정보)</span>
+                <table style="margin-bottom:0.5em;">
+                    <tbody>
+                        <tr>
+                            <td><label class="common-label-radio"><input type="radio" class="UINT-radio-hascarflg" name="UINT-radio-hascarflg" value="y" checked/><span></span></label></td><td style="padding-right:1.2em;"><span>🚗자차있음</span></td>
+                            <td><label class="common-label-radio"><input type="radio" class="UINT-radio-hascarflg" name="UINT-radio-hascarflg" value="n"/><span></span></label></td><td style="padding-right:0.2em;"><span>자차없음</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 활동중인 팀 -->
+            <div class="common-div-formField">
+                <span>활동중인 팀</span>
+                <span>(필수)</span>
+                <input id="UINT-input-teamname" class="common-input-field" placeholder="활동중인 팀 이름">
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
+                <tbody>
+                    <tr>
+                        <td><button id="UINT-btn-prevFromPersonal2" class="common-btn-outline">뒤로</button></td>
+                        <td><button id="UINT-btn-nextFromPersonal2" class="common-btn-inline">회원가입</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 감사합니다 -->
+        <!-- ======================== -->
+        <div class="common-div-slideformChild" slideform-status="wait" id="UINT-div-thanks" slideform-prev="#UINT-div-personal2" slideform-progress="#UINT-div-progress" slideform-progressval="100">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>감사합니다!</span>
+                <span>회원가입이 완료되었습니다.</span>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+                <tbody>
+                    <tr>
+                        <td><button id="UINT-btn-nextFromThanks" class="common-btn-inline">메인으로 이동</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
+        <!-- 저장하기 -->
+        <!-- ======================== -->
+        <!-- <button id="UINT-btn-save" class="common-btn-footer">회원가입</button>
+        <div class="common-div-cushionFooter"></div> -->
+    </div>
+
+
+
+    <script>
+
+        /* =============================== */
+        /* page obj */
+        /* =============================== */
+        var UINT =
+        {
+            code : "UINT",
+            userImgUri: null,
+            Data: {},
+
+            /* -------------------- */
+            /* show */
+            /* -------------------- */
+            show()
+            {
+
+
+            },
+
+            close()
+            {
+                Common.confirmClose();
+            },
+        };
+
+
+        $(document).ready(function()
+        {
+            /* =============================== */
+            /* events */
+            /* =============================== */
+
+            /* 비밀번호 보기 */
+            $("#UINT-btn-pwShow").click(function() { $("#UINT-div-pwViewer").show(); $("#UINT-btn-pwShow").hide(); $("#UINT-btn-pwHide").show(); });
+            $("#UINT-btn-pwHide").click(function() { $("#UINT-div-pwViewer").hide(); $("#UINT-btn-pwShow").show(); $("#UINT-btn-pwHide").hide(); });
+            $("#UINT-input-pw").keyup(function() {
+                $("#UINT-input-pwRe").val($(this).val());
+            });
+
+            /* --------------- */
+            /* 입력폼 : 로그인 */
+            /* --------------- */
+            $("#UINT-btn-nextFromLogin").click(function()
+            {
+                /* 입력체크 */
+                if(!Validation.User.id("#UINT-input-id", GGF.toast)) return;
+                if(!Validation.User.pw("#UINT-input-pw", GGF.toast)) return;
+
+                /* 아이디 중복체크 */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let id = $("#UINT-input-id").val();
+                    let mUsers = Api.User.selectCntById(id);
+                    if(mUsers.getCnt() == "0") {
+                        GGslideform.next("#UINT-div-slideformParent");
+                    }
+                    else {
+                        Common.toast("이미 사용중인 아이디입니다.");
+                        $("#UINT-input-id").focus();
+                        $("#UINT-input-id").select();
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* --------------- */
+            /* 개인정보1 */
+            /* --------------- */
+            $("#UINT-btn-nextFromPersonal1").click(function() {
+                if(!Validation.User.name("#UINT-input-name", GGF.toast))
+                    return;
+                GGslideform.next("#UINT-div-slideformParent");
+            });
+            $("#UINT-btn-prevFromPersonal1").click(function() { GGslideform.prev("#UINT-div-slideformParent"); });
+
+            /* --------------- */
+            /* 개인정보2 */
+            /* --------------- */
+            $("#UINT-btn-nextFromPersonal2").click(function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let id          = $("#UINT-input-id").val();
+                    let pw          = $("#UINT-input-pw").val();
+                    let name        = $("#UINT-input-name").val();
+                    let birthYear   = $("#UINT-input-birthYear").val();
+                    let phone       = $("#UINT-input-phone").val();
+                    let email       = ""; /* $("#UINT-input-email").val(); */
+                    let adrcvflg    = "n"; /* $(".UINT-radio-adrcvflg:checked").val(); */
+                    let hascar      = $(".UINT-radio-hascarflg:checked").val();
+                    let address     = $("#UINT-input-address").val();
+                    let teamname    = $("#UINT-input-teamname").val();
+                    let rslt = Api.User.insert(id, pw, name, birthYear, phone, email, adrcvflg, hascar, address, teamname, GGF.toast, GGF.alert);
+                    if(rslt == false) {
+                        Common.hideProgress();
+                        return;
+                    }
+
+                    /* 등록에 성공했다면, 다음 슬라이드로 이동 */
+                    if(GGstorage.isLogin()) {
+                        GGslideform.next("#UINT-div-slideformParent");
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+                // GGslideform.next("#UINT-div-slideformParent");
+            });
+            $("#UINT-btn-prevFromPersonal2").click(function() { GGslideform.prev("#UINT-div-slideformParent"); });
+
+            /* --------------- */
+            /* 감사합니다 */
+            /* --------------- */
+            $("#UINT-btn-nextFromThanks").click(function()
+            {
+                Navigation.moveAfterLogin();
+            });
+
+
+            /* =============================== */
+            /* page process */
+            /* =============================== */
+
+            /* ------------- */
+            /* set pageParam */
+            /* ------------- */
+            let pageDat = Navigation.getPageParam();
+
+            /* localizing */
+            $("#UINT").i18n();
+
+        });
+
+    </script>
+</ons-page>

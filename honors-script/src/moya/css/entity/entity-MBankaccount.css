@@ -1,0 +1,12 @@
+/* ==================== */
+/* ==================== */
+.MBankaccount-make-div-top
+{
+    position: relative;
+}
+.MBankaccount-make-table-top
+{
+    display:block;
+    border-collapse: collapse;
+    white-space: normal;
+}

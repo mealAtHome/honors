@@ -1,0 +1,43 @@
+<ons-page id="UMAP">
+
+
+    <!-- ========================= -->
+    <!-- list -->
+    <!-- ========================= -->
+    <div id="UMAP-div-list" class="common-div-cushionUD"></div>
+
+    <script>
+
+        var UMAP =
+        {
+            code: "UMAP",
+
+
+            show()
+            {
+                /* ------------- */
+                /* 선택사항 복구 */
+                /* ------------- */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* get mines */
+                    let MClss = Api.Ordera.selectMine();
+                    MClss.make("#UMAP-div-orders");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+        };
+
+        $(document).ready(function()
+        {
+            /* ============================== */
+            /* 페이지 이벤트 */
+            /* ============================== */
+            $("#UMAP-btn-addOrder").click(function() {Navigation.moveFrontPage(Navigation.Page.F00OrderApply000Entrance, {}); });
+        });
+
+    </script>
+</ons-page>

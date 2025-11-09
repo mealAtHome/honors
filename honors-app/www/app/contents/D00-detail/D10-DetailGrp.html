@@ -1,0 +1,181 @@
+<ons-page id="DGRP">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="DGRP.close(true);"></gg-backbtn></div>
+        <div class="center">그룹상세</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 선택 탭 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <table class="DGRP-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="DGRP-td-searchtype" val="detail" tab="tab" >기본정보</td>
+                    <td class="DGRP-td-searchtype" val="cls"    tab=""    >일정</td>
+                    <td class="DGRP-td-searchtype" val="member" tab=""    >멤버</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- 기본정보 -->
+    <!-- ========================= -->
+    <div class="DGRP-div-tab" tab="detail">
+        <div class="common-div-cushion">
+            <p class="common-p-title">기본정보</p>
+        </div>
+        <div id="DGRP-div-info" class="common-div-card"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 일정 -->
+    <!-- ========================= -->
+    <div class="DGRP-div-tab" tab="cls" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">일정</p>
+        </div>
+        <div id="DGRP-div-clsList"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 멤버 -->
+    <!-- ========================= -->
+    <div class="DGRP-div-tab" tab="member" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">멤버</p>
+        </div>
+        <div id="DGRP-div-memberList"></div>
+    </div>
+
+    <script>
+        var DGRP =
+        {
+            code : "DGRP",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(DGRP.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); DGRP.close(); return; }
+                if(DGRP.Data.searchtype == undefined) { DGRP.Data.searchtype = "detail"; } /* 기본값 */
+
+                /* init */
+                $(`.DGRP-td-searchtype[val='${DGRP.Data.searchtype}']`).click();
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            $(".DGRP-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("val");
+                $(".DGRP-td-searchtype").removeAttr("tab");
+                $(this).attr("tab", "tab");
+
+                /* save selected */
+                DGRP.Data.searchtype = searchtype;
+
+                /* process */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let grpno = DGRP.Data.grpno;
+                        let userno = DGRP.Data.userno;
+
+                        /* 탭별표시 */
+                        switch(searchtype)
+                        {
+                            case "detail":
+                            {
+                                let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
+                                $("#DGRP-div-info").html(mGrp.make());
+                                break;
+                            }
+                            case "cls":
+                            {
+                                let mClss = Api.Cls.selectFor1YearByGrpnoForAll(grpno, GGF.none, GGF.toast);
+                                mClss.make("#DGRP-div-clsList");
+                                break;
+                            }
+                            case "member":
+                            {
+                                let mGrpMembers = Api.GrpMember.selectByGrpnoForAll(grpno, GGF.none, GGF.toast);
+                                mGrpMembers.make("#DGRP-div-memberList");
+                                break;
+                            }
+                        }
+                        /* show / hide */
+                        $(".DGRP-div-tab").hide();
+                        $(`.DGRP-div-tab[tab='${searchtype}']`).show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                DGRP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                DGRP.close(true);
+            }
+
+            /* localizing */
+            /* $("#DGRP").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

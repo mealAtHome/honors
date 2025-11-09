@@ -1,0 +1,246 @@
+<ons-page id="UAUP">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="UAUP.close(true);"></gg-backbtn></div>
+        <div class="center"><span>주소입력</span></div>
+    </ons-toolbar>
+
+    <style>
+        .UAUP-btn-quickname
+        {
+            padding-left:0.6em;
+            padding-right:0.6em;
+            margin-right:0.3em;
+        }
+    </style>
+
+    <!-- ================ -->
+    <!-- 주소명칭 -->
+    <!-- ================ -->
+    <div class="common-div-mass" style="text-align:center;">
+        <p class="common-p-insertTitle">
+            <span data-i18n="">주소명칭</span>
+        </p>
+        <input
+            id="UAUP-inputText-addrName"
+            type="text"
+            class="common-text-insertPage common-input-text"
+            style="width:80%; max-width:22em;"
+            placeholder="집"
+            value=""
+        >
+        <div class="common-div-cushionUD" style="text-align:center;">
+            <button class="UAUP-btn-quickname common-btn-outline">집</button>
+            <button class="UAUP-btn-quickname common-btn-outline">회사</button>
+            <button class="UAUP-btn-quickname common-btn-outline">사무실</button>
+        </div>
+    </div>
+
+    <!-- ================ -->
+    <!-- 주소입력 -->
+    <!-- ================ -->
+    <div class="common-div-mass">
+        <p class="common-p-insertTitle">
+            <span data-i18n="">주소입력</span>
+        </p>
+
+        <button id="UAUP-btn-chooseAddr" class="common-btn-outline" data-i18n="(common)choose area">주소선택</button>
+        <div
+            id="UAUP-div-address"
+            class="common-div-mass"
+            zipcode=""
+            road_addr=""
+            jibun_addr=""
+        ></div>
+
+        <p>상세주소</p>
+        <input
+            id="UAUP-inputText-addrDetail"
+            type="text"
+            class="common-text-insertPage common-input-text"
+            style="width:80%; max-width:22em;"
+            value="휴엔하임퍼스트 101동 106호"
+        >
+    </div>
+
+    <!-- ================ -->
+    <!-- 저장 -->
+    <!-- ================ -->
+    <div class="common-div-mass">
+        <button id="UAUP-btn-save" class="common-btn-gradientBig">주소 저장하기</button>
+    </div>
+
+    <script>
+        var UAUP =
+        {
+            code : "UAUP",
+
+            /* 페이지 데이터 */
+            /*
+                option :
+                    - update  : 업데이트
+                    - insert  : 새로운 주소
+                    - newuser : 새로운 유저를 위한 모드
+             */
+            Data : {},
+
+            show()
+            {
+                if(UAUP.Data.option    == undefined) UAUP.Data.option    = "";
+                if(UAUP.Data.addrIndex == undefined) UAUP.Data.addrIndex = "";
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    switch(UAUP.Data.option)
+                    {
+                        case "update" :
+                        {
+                            let mUserAddrs = Api.UserAddr.selectByAddrIndex(UAUP.Data.addrIndex);
+                            if(mUserAddrs.getModels().length == 1)
+                            {
+                                let mUserAddr = mUserAddrs.getModel();
+                                $("#UAUP-inputText-addrName").val(mUserAddr.getAddrName());
+                                $("#UAUP-inputText-addrDetail").val(mUserAddr.getAddrDetail());
+                            }
+                            break;
+                        }
+                    }
+
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* --------------- */
+            /*  */
+            /* --------------- */
+            $("#UAUP-btn-chooseAddr").click(function()
+            {
+                let data =
+                {
+                    fromPageCode         : UAUP.code,
+                    fromPageElement      : "UAUP-div-address",
+                    executeShowWhenClose : false,
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S31CommonChooseAddr, data);
+            });
+
+            $(".UAUP-btn-quickname").click(function()
+            {
+                let name = $(this).html();
+                $("#UAUP-inputText-addrName").val(name);
+            });
+
+            /* --------------- */
+            /*  */
+            /* --------------- */
+            $("#UAUP-btn-save").click(function()
+            {
+                let dataEl = $("#UAUP-div-address > .entity-MGovAddr-tbl-label");
+                if(dataEl.length == 0)
+                {
+                    Common.toast("주소를 입력해주세요.");
+                    return;
+                }
+
+                /* --------------- */
+                /* make main data */
+                /* --------------- */
+                let ajaxData =
+                {
+                    OPTION              : UAUP.Data.option,
+                    ADDR_INDEX          : UAUP.Data.addrIndex,
+                    ADDR_NAME           : $("#UAUP-inputText-addrName").val(),
+                    ADDR_ZIPCODE        : dataEl.attr("zip_no"),
+                    ADDR_SIDO           : dataEl.attr("si_nm"),
+                    ADDR_SIGUNGU        : dataEl.attr("sgg_nm"),
+                    ADDR_EMD            : dataEl.attr("emd_nm"),
+                    ADDR_ROAD           : dataEl.attr("road_addr"),
+                    ADDR_JIBUN          : dataEl.attr("jibun_addr"),
+                    ADDR_ROADENG        : dataEl.attr("eng_addr"),
+                    ADDR_ADMCD          : dataEl.attr("adm_cd"),
+                    ADDR_RNMGTSN        : dataEl.attr("rn_mgt_sn"),
+                    ADDR_UDRTYN         : dataEl.attr("udrt_yn"),
+                    ADDR_BULDMNNM       : dataEl.attr("buld_mnnm"),
+                    ADDR_BULDSLNO       : dataEl.attr("buld_slno"),
+                    ADDR_DETAIL         : $("#UAUP-inputText-addrDetail").val(),
+                };
+
+                /* --------------- */
+                /* validation */
+                /* --------------- */
+                /* execute api */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let rslt = Api.UserAddr.updateUserAddrByOption(ajaxData, "none", "none");
+                    if(rslt)
+                    {
+                        switch(UAUP.Data.option)
+                        {
+                            case GGF.Page.UserAddrUpdate.Option.NEWUSER:
+                            {
+                                Navigation.moveAfterLogin();
+                                break;
+                            }
+                        }
+                    }
+                    // if(rslt)
+                    // {
+                    //     Common.hideProgress();
+                    //     UAUP.close();
+                    //     return;
+                    // }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UAUP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UAUP.close(true);
+            }
+
+            /* localizing */
+            /* $("#UAUP").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

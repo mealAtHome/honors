@@ -1,0 +1,217 @@
+<ons-page id="CCAD">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar id="CCAD-toolbar">
+        <div class="left"><gg-backbtn onclick="CCAD.close(true);"></gg-backbtn></div>
+        <div class="center"><span>주소검색</span></div>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- 검색 -->
+    <!-- ======================== -->
+    <style>
+        #CCAD-input-searchKeyword
+        {
+            display: block;
+            margin:0.5em auto;
+            max-width:22em;
+            width:80%;
+        }
+        #CCAD-btn-searchAddr
+        {
+            display: block;
+            margin:0.5em auto;
+            padding:0.5em 1em;
+        }
+    </style>
+    <div class="common-div-mass common-div-noPad">
+        <input
+            type="text"
+            id="CCAD-input-searchKeyword"
+            class="common-text-insertPage common-input-text"
+            value="천북면 동산3길 23-59"/>
+        <button id="CCAD-btn-searchAddr" class="common-btn-outline">주소검색</button>
+    </div>
+
+    <!-- ======================== -->
+    <!-- 검색결과 -->
+    <!-- ======================== -->
+    <div class="common-div-cushion">
+        <div id="CCAD-div-addrList" class="common-div-scrollX"></div>
+    </div>
+
+    <script>
+        var CCAD =
+        {
+            code : "CCAD",
+
+            /* ===================== */
+            /* 페이지 파라메터
+
+                CCAD.Data =
+                {
+                    [*] viewMode      : string      다이어로그에서 열었음을 의미 (다이어로그용 헤더를 표시한다.)
+                        - dialog : 다이어로그로 호출
+                        - page   : 페이지에서 호출
+                    [*] fromPageCode : [MS]
+                        - MS : main-search.html 페이지로부터 호출
+                }
+            /* ===================== */
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(CCAD.Data.pagenum      == undefined) CCAD.Data.pagenum = 1;
+                if(CCAD.Data.fromPageCode == undefined) CCAD.Data.fromPageCode = "";
+            },
+
+            /* ============================== */
+            /* Area1 요소 선택 시, Area2 조회 */
+            /* ============================== */
+            search()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* ---------------- */
+                    /* validation : 검색어체크 */
+                    /* ---------------- */
+                    let keywordObj = $("#CCAD-input-searchKeyword")[0];
+                    if(keywordObj.value.length >= 2)
+                    {
+                        /* 특수문자 제거 */
+                        let expText = /[%=><]/ ;
+                        if(expText.test(keywordObj.value) == true)
+                        {
+                            alert("특수문자를 입력 할수 없습니다.");
+                            keywordObj.value = keywordObj.value.split(expText).join("");
+                            Common.hideProgress();
+                            return;
+                        }
+
+                        /* 특정문자열(sql예약어의 앞뒤공백포함) 제거 */
+                        let sqlArray = new Array(
+                            "OR",
+                            "SELECT",
+                            "INSERT",
+                            "DELETE",
+                            "UPDATE",
+                            "CREATE",
+                            "DROP",
+                            "EXEC",
+                            "UNION",
+                            "FETCH",
+                            "DECLARE",
+                            "TRUNCATE"
+                        );
+
+                        let regex;
+                        for(let i = 0; i < sqlArray.length; i++)
+                        {
+                            regex = new RegExp( sqlArray[i] ,"gi") ;
+                            if(regex.test(keywordObj.value))
+                            {
+                                alert("\"" + sqlArray[i]+"\"와(과) 같은 특정문자로 검색할 수 없습니다.");
+                                keywordObj.value = keywordObj.value.replace(regex, "");
+                                Common.hideProgress();
+                                return;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        alert("두 글자 이상 입력해주세요.");
+                        Common.hideProgress();
+                    }
+
+                    /* 페이네이션 정보 업데이트 */
+                    // $("#CCAD-input-countPerPage").val(CCAD.countPerPage);
+                    // $("#CCAD-input-currentPage").val(CCAD.currentPage);
+
+                    /* sendData */
+                    let searchKeyword = $("#CCAD-input-searchKeyword").val();
+                    let mGovAddrs     = Api.GovAddr.selectByKeyword(searchKeyword, CCAD.Data.pagenum);
+                    mGovAddrs.makeForSearch("#CCAD-div-addrList");
+
+                    /* 페이지네이션 */
+                    $("#CCAD-div-addrList .common-btn-pagenationBtn").click(function()
+                    {
+                        CCAD.Data.pagenum = $(this).attr("to_page");
+                        CCAD.search();
+                    });
+
+                    /* 선택버튼 누를 시 */
+                    $("#CCAD-div-addrList .MGovAddr-makeForSearch-btn-address").click(function()
+                    {
+                        let mGovAddr = MGovAddr.getModelFromEl($(this))
+                        let html = mGovAddr.make();
+                        $("#"+CCAD.Data.fromPageElement).html(html);
+                        CCAD.close();
+                    });
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            }, /* search */
+
+            /* ===================== */
+            /* 페이지 종료 */
+            /* ===================== */
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        } /* end CCAD */
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 검색 */
+            $("#CCAD-btn-searchAddr").click(function()
+            {
+                CCAD.Data.pagenum = 1;
+                CCAD.search();
+            });
+
+            /* ======================== */
+            /* page initialize */
+            /* ======================== */
+
+            /* ----------- */
+            /* 변수 초기화, 유효성검사 */
+            /* ----------- */
+            let pageDat = Navigation.getPageParam();
+            if(
+                pageDat.viewMode     == undefined ||
+                pageDat.fromPageCode == undefined
+            )
+            {
+                Common.ciriticalError();
+                return;
+            }
+            else
+            {
+                CCAD.Data = pageDat;
+            }
+
+        }); /* end ready */
+
+    </script>
+
+
+</ons-page>

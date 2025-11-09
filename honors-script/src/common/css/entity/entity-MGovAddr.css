@@ -1,0 +1,32 @@
+/* ======================= */
+/* 주소검색 리스트 */
+/* ======================= */
+.MGovAddrs-makeForSearch-tbl-top
+{
+    width:100%;
+}
+.MGovAddrs-makeForSearch-tbl-top > tbody > tr > td:nth-child(1) { width: 3%; }
+.MGovAddrs-makeForSearch-tbl-top > tbody > tr > td:nth-child(2) { width: 3%; }
+.MGovAddrs-makeForSearch-tbl-top > tbody > tr > td:nth-child(3)
+{
+    text-align:left;
+    font-size:0.9em;
+    line-height:1.4;
+    white-space:normal;
+}
+
+
+/* ======================= */
+/* 주소라벨 */
+/* ======================= */
+.MGovAddr-make-tbl-label
+{
+    margin:0.5em auto;
+    border-collapse: collapse;
+}
+.MGovAddr-make-tbl-label > tbody > tr > td
+{
+    padding: 0.4em;
+    border: 1px solid #777;
+    white-space: normal;
+}

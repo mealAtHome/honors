@@ -1,0 +1,14 @@
+.common-select-outline
+{
+    max-width:15em;
+    padding: 0.2em 1em 0.2em 0.2em;
+    outline: none;
+    text-align-last: center;
+    vertical-align: middle;
+    font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+    border-radius: 0.5em;
+    line-height: 1.2em;
+    text-align: center;
+    height: 2.2em;
+    background-color:white;
+}

@@ -1,0 +1,114 @@
+
+/* 주문진행상태 */
+.MCls-orderProcessingStatus-tbl-top
+{
+}
+
+/* 현재 진행중인 주문 리스트 > 엔티티 */
+.MClss-makeOrderingList-div-model
+{
+    display:inline-block;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+    width:12em;
+    background-color: white;
+    box-shadow: 2px 2px 4px 1px #aaa;
+    vertical-align: top;
+}
+.MClss-makeOrderingList-div-model > table
+{
+    white-space: nowrap;
+    width:100%;
+}
+.MClss-makeOrderingList-div-model > table > tbody > tr > td
+{
+    padding:0.2em;
+}
+.MClss-makeOrderingList-div-model > table > tbody > tr > td[col=store_img]         { width:1%;  }
+.MClss-makeOrderingList-div-model > table > tbody > tr > td[col=store_name]        { width:99%; white-space:normal; word-break:break-all;}
+
+
+/* ========================= */
+/* 주문 상세정보 */
+/* ========================= */
+.MCls-makeOrderDetail-div-top
+{
+    margin:0.5em;
+}
+.MCls-makeOrderDetail-tbl-common,
+.MCls-makeOrderDetail-div-top > table
+{
+    margin-left:0.5em;
+    margin-bottom:0.3em;
+    line-height:1.6;
+}
+
+/* ========================= */
+/* 주문진행상태 */
+/* ========================= */
+.MCls-makeClsstatus-tbl-top
+{
+    border-collapse: collapse;
+    margin:0.5em 0em;
+}
+.MCls-makeClsstatus-tbl-top > tbody > tr > td
+{
+    text-align: center;
+    padding:0.3em 0.5em;
+    line-height: 1.2;
+}
+.MCls-makeClsstatus-tbl-top > tbody > tr:nth-child(1) > td
+{
+    border-top: 2px solid rgba(2, 6, 84, 1.0);
+}
+.MCls-makeClsstatus-tbl-top > tbody > tr:nth-last-child(1) > td
+{
+    border-bottom: 2px solid rgba(2, 6, 84, 1.0);
+    font-size:0.9em;
+}
+.MCls-makeClsstatus-tbl-top > tbody > tr > td[status="wait"]     { background-color: rgba(0,   0,   0,   0); }
+.MCls-makeClsstatus-tbl-top > tbody > tr > td[status="ing"]      { background-color: rgba(0,   100, 0,   0.2); }
+.MCls-makeClsstatus-tbl-top > tbody > tr > td[status="failed"]   { background-color: rgba(100, 0,   0,   0.2); }
+.MCls-makeClsstatus-tbl-top > tbody > tr > td[status="complete"] { background-color: rgba(2,   6,   84,  0.2); }
+
+/* ========================= */
+/* 주문정보 (simple + horizon) */
+/* ========================= */
+.MClss-makeOrderSimpleHorizon-div-top > div:nth-child(1) { border-top    : 1px solid #ccc; }
+.MClss-makeOrderSimpleHorizon-div-top > div              { border-bottom : 1px solid #ccc; }
+
+.MCls-makeOrderSimpleHorizon-div-top
+{
+    position:relative;
+    display:block;
+    width:100%;
+}
+.MCls-makeOrderSimpleHorizon-div-image
+{
+    /* width:100%; */
+    width:3.4em;
+    height:3.4em;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    margin-right:0.4em;
+}
+.MCls-makeOrderSimpleHorizon-table-info
+{
+    width:100%;
+    /* table-layout: fixed; */
+}
+.MCls-makeOrderSimpleHorizon-table-info > tbody > tr > td:nth-child(1) { width:10%; }
+.MCls-makeOrderSimpleHorizon-table-info > tbody > tr > td:nth-child(2) { width:90%; }
+
+.MCls-makeOrderSimpleHorizon-div-storeLike
+{
+    position: absolute;
+    bottom: 0.5em;
+    right: 0.5em;
+    width: 2em;
+    height: 2em;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0%;
+}

@@ -1,0 +1,235 @@
+<ons-page id="MMLY">
+
+    <!-- ======================== -->
+    <!-- 페이지 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="MMLY.close();"></gg-backbtn></div>
+        <div class="center"><span>멤버직위설정</span></div>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- 멤버 리스트 -->
+    <!-- ======================== -->
+    <style>
+        #MMLY-tbl-memberList
+        {
+            width: 100%;
+            white-space: nowrap;
+        }
+        #MMLY-tbl-memberList > tbody > tr > td { width: 3em; }
+        #MMLY-tbl-memberList > thead > tr > td { width: 3em; }
+        .MMLY-select-grpmtype
+        {
+            width: auto;
+            text-align-last: left;
+            text-align: left;
+        }
+        .MMLY-input-grpmposition
+        {
+            width: 7em;
+            text-align: left;
+        }
+    </style>
+    <div class="common-div-cushion">
+        <table id="MMLY-tbl-memberList" class="common-tbl-normal" tbl-type="normal">
+            <thead>
+                <tr>
+                    <th col="">계정</th>
+                    <th col="">멤버</th>
+                    <th col="">직급</th>
+                    <th col="">직책</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+        <!-- ======================== -->
+        <!-- 저장하기 -->
+        <!-- ======================== -->
+        <button id="MMLY-btn-save" class="common-btn-footer">적용하기</button>
+        <div class="common-div-cushionFooter"></div>
+
+
+    <script>
+        var MMLY =
+        {
+            code : "MMLY",
+
+            /* 페이지 데이터 */
+            Data : {},
+            originArr : [],
+
+            show()
+            {
+                if(Common.isEmpty(MMLY.Data.grpno)) { Common.toast("잘못된 접근입니다."); MMLY.close(); return; }
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* var */
+                    let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(MMLY.Data.grpno);
+                    let mGrpMemberModels = mGrpMembers.getModels();
+                    let $tbody = $("#MMLY-tbl-memberList > tbody");
+
+                    /* clear */
+                    $tbody.html("");
+                    MMLY.originArr = [];
+
+                    for(let i in mGrpMemberModels)
+                    {
+                        let model = mGrpMemberModels[i];
+                        let mUser = model.getMUser();
+
+                        /* member status */
+                        let memberStatus = "";
+                        let disabled = "";
+                        if(mUser.isUsertypeTemp())     { memberStatus += "[임시]"; disabled = "disabled"; }
+                        if(model.isGrpmstatusDelete()) { memberStatus += "[삭제]"; disabled = "disabled"; }
+
+                        /* html */
+                        let tr =
+                        `
+                            <tr ${model.getPk()}>
+                                <td col="">${memberStatus}</td>
+                                <td col="">${mUser.getName()}</td>
+                                <td col="">
+                                    <select class="common-select-outline MMLY-select-grpmtype" ${model.getPk()} ${disabled}>
+                                        <option value="mng"     ${model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNG     ? "selected" : ""}>매니저</option>
+                                        <option value="mngsub"  ${model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNGSUB  ? "selected" : ""}>부매니저</option>
+                                        <option value="member"  ${model.getGrpmtype() == GGF.GrpMember.Grpmtype.MEMBER  ? "selected" : ""}>멤버</option>
+                                    </select>
+                                </td>
+                                <td col=""><input type="text" class="common-input-text MMLY-input-grpmposition" value="${model.getGrpmposition()}" ${model.getPk()} ${disabled}/></td>
+                            </tr>;
+                        `;
+                        $tbody.append(tr);
+
+                        /* save to origin array */
+                        MMLY.saveToOriginArr(model.getUserno(), model.getGrpmtype(), model.getGrpmposition());
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            saveToOriginArr(userno, grpmtype, grpmposition)
+            {
+                let dat =
+                {
+                    USERNO       : userno,
+                    GRPMTYPE     : grpmtype,
+                    GRPMPOSITION : grpmposition,
+                };
+                MMLY.originArr.push(dat);
+            },
+
+            getChangedArr()
+            {
+                let data = [];
+                $("#MMLY-tbl-memberList > tbody > tr").each(function()
+                {
+                    let grpno = $(this).attr("grpno");
+                    let userno = $(this).attr("userno");
+                    let grpmtype = $(this).find("select.MMLY-select-grpmtype").val();
+                    let grpmposition = $(this).find("input.MMLY-input-grpmposition").val();
+                    let dat =
+                    {
+                        USERNO        : userno,
+                        GRPMTYPE      : grpmtype,
+                        GRPMPOSITION  : grpmposition,
+                    };
+                    data.push(dat);
+                });
+
+                for(let i in MMLY.originArr)
+                {
+                    let originDat = MMLY.originArr[i];
+                    for(let j in data)
+                    {
+                        let newDat = data[j];
+                        if(originDat.USERNO == newDat.USERNO)
+                        {
+                            if(originDat.GRPMTYPE == newDat.GRPMTYPE && originDat.GRPMPOSITION == newDat.GRPMPOSITION)
+                            {
+                                data.splice(j, 1);
+                                break;
+                            }
+                        }
+                    }
+                }
+                return data;
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                /* check changed */
+                let data = MMLY.getChangedArr();
+                if(data.length > 0 && force == false)
+                {
+                    Common.confirmClose("변경된 내용이 있습니다. 변경사항을 저장하지 않고 나가시겠습니까?");
+                    return;
+                }
+                Navigation.moveBack();
+            },
+
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#MMLY-btn-save").click(function()
+            {
+                let process = function()
+                {
+                    let data = MMLY.getChangedArr();
+                    if(data.length == 0)
+                    {
+                        Common.toast("변경된 내용이 없습니다.");
+                        return;
+                    }
+
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.GrpMember.updateGrpmpositionForMng(MMLY.Data.grpno, data);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.hideProgress();
+                            MMLY.show();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("멤버 직위 변경을 적용하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MMLY.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MMLY.close(true);
+            }
+
+            /* localizing */
+            /* $("#MMLY").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

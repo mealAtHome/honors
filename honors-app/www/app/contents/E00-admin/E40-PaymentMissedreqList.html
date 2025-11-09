@@ -1,0 +1,116 @@
+<ons-page id="APML">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="APML.close(true);"></gg-backbtn></div>
+        <div class="center">오송금신고 처리</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 검색옵션 탭 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+
+        <div class="common-div-radioBtn common-tag-fontsize09">
+            <button class="APML-btn-status commonEvent-btn-radio common-btn-radio" radio_name="APML-btn-status" val="req"     tab="">대기</button>
+            <button class="APML-btn-status commonEvent-btn-radio common-btn-radio" radio_name="APML-btn-status" val="ing"     tab="">처리중</button>
+            <button class="APML-btn-status commonEvent-btn-radio common-btn-radio" radio_name="APML-btn-status" val="okwait"  tab="">반환대기</button>
+            <button class="APML-btn-status commonEvent-btn-radio common-btn-radio" radio_name="APML-btn-status" val="ok"      tab="">반환완료</button>
+            <button class="APML-btn-status commonEvent-btn-radio common-btn-radio" radio_name="APML-btn-status" val="ng"      tab="">반환불가</button>
+        </div>
+        <hr class="common-hr-normal"/>
+        <div id="APML-div-list"></div>
+
+    </div>
+
+    <script>
+        var APML =
+        {
+            code : "APML",
+            Data : {},
+
+            show()
+            {
+                /* init APML.Data */
+                if(APML.Data.status  == undefined) APML.Data.status  = "req";
+                if(APML.Data.pagenum == undefined) APML.Data.pagenum = 1;
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    $(".APML-btn-status[val='"+APML.Data.status+"']").click();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* 검색 */
+            /* ========================= */
+            search()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mPaymentMissedreq = Api.PaymentMissedreq.selectByStatusForAdmin(APML.Data.status, APML.Data.pagenum, "none", "toast");
+                    mPaymentMissedreq.makeCard("#APML-div-list");
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* --------------- */
+            /* 검색타입 탭 선택 */
+            /* --------------- */
+            $(".APML-btn-status").click(function()
+            {
+                let status = $(this).attr("val");
+                APML.Data.status = status;
+                APML.search();
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                APML.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                APML.close(true);
+            }
+
+            /* localizing */
+            /* $("#APML").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

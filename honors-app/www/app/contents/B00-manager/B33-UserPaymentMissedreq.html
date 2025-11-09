@@ -1,0 +1,90 @@
+<ons-page id="UPMR">
+
+    <!-- ======================== -->
+    <!-- 페이지 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="UPMR.close(true);"></gg-backbtn></div>
+        <div class="center"><span>오송금 반환신청</span></div>
+    </ons-toolbar>
+
+    <div class="common-div-cushion">
+        <p class="common-p-title">오송금(오입금)반환신청</p>
+        <div class="common-div-announce common-tag-fontsize09">
+            <span class="common-tag-block">・모임은야구 계좌에 잘못된 금액을 송금</span>
+            <span class="common-tag-block">・모임은야구 계좌에 잘못된 입금자명 표기 실수</span>
+            <span class="common-tag-block">・결제처리가 안되는 경우</span>
+        </div>
+        <div class="common-tag-blockCenter">
+            <button class="common-btn-outline" id="UPMR-btn-paymentMissedreqUpdate">신고하기</button>&nbsp;
+            <button class="common-btn-outline" id="UPMR-btn-paymentMissedreqList">신고목록</button>
+        </div>
+    </div>
+
+    <script>
+        var UPMR =
+        {
+            code : "UPMR",
+
+            /* ========================= */
+            /* 페이지 데이터 */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* hide progress */
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#UPMR-btn-paymentMissedreqUpdate")       .click(function() { Navigation.moveFrontPage(Navigation.Page.F41PaymentMissedreqUpdate); });
+            $("#UPMR-btn-paymentMissedreqList")         .click(function() { Navigation.moveFrontPage(Navigation.Page.F43PaymentMissedreqList); });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UPMR.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UPMR.close(true);
+            }
+
+            /* localizing */
+            /* $("#UPMR").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

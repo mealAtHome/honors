@@ -1,0 +1,245 @@
+<ons-page id="ULGN">
+
+    <style>
+        /* ================ */
+        /* version / server */
+        /* ================ */
+        #ULGN-span-version
+        {
+            position:absolute;
+            left:0.5em;
+            top:0.5em;
+            font-size:0.9em;
+            color: rgb(150,150,150);
+        }
+        #ULGN-span-version::before
+        {
+            content: "v";
+        }
+        #ULGN-img-server
+        {
+            position:absolute;
+            height:1.5em;
+            right:0.5em;
+            top:0.5em;
+            border:1px solid rgb(220,220,220);
+        }
+
+        /* ================ */
+        /* logo */
+        /* ================ */
+        .ULGN-img-icon
+        {
+            display:block;
+            margin:0.3em auto;
+        }
+        #ULGN-span-title
+        {
+            display:inline-block;
+            font-size:1.5em;
+            font-weight:900;
+            color:rgba(2, 6, 84, 1.0);
+        }
+
+        /* ================ */
+        /* 로그인 input */
+        /* ================ */
+        .ULGN-div-input
+        {
+            display:block;
+            margin:0.7em auto;
+            padding:0.3em 0.5em;
+            width:15em;
+            height:2em;
+            border:none;
+            border-radius: 0.8em;
+            background-color: rgb(240,240,240);
+            font-size:1.1em;
+            text-align:left;
+            white-space: nowrap;
+        }
+        .ULGN-input-text
+        {
+            width:12em;
+            height:auto;
+            border:none;
+            font-size:1em;
+            text-align:left;
+            background: transparent;
+        }
+        .ULGN-input-text:focus
+        {
+            border:none;
+            box-shadow:none;
+        }
+        .ULGN-img-input
+        {
+            margin-top:0.4em;
+            height:1.2em;
+            vertical-align: top;
+        }
+
+        /* ================ */
+        /* 로그인 페이지 버튼들 */
+        /* ================ */
+        .ULGN-login-btn
+        {
+            display:block;
+            margin:0.8em auto;
+            width:18em;
+            height:3em;
+        }
+
+        #ULGN-tbl-bottomRight
+        {
+            position: absolute;
+            bottom: 1em;
+            right: 1em;
+            text-align: right;
+            font-size: 0.9em;
+        }
+    </style>
+
+    <!-- ======================== -->
+    <!-- main page -->
+    <!-- ======================== -->
+    <div class="common-div-noPad">
+
+        <!-- =============== -->
+        <!-- header -->
+        <!-- =============== -->
+        <div class="common-div-mass" style="padding-top:4em;">
+            <span id="ULGN-span-version"></span>
+            <img id="ULGN-img-server"/>
+            <span id="ULGN-span-title">모임은야구</span>
+        </div>
+
+        <!-- announce -->
+        <div class="common-div-announce common-tag-fontsize09">
+            <span class="common-tag-block common-tag-alignC">현재 필드테스트로 기능이 제한되어 있습니다.</span>
+        </div>
+
+        <!-- =============== -->
+        <!-- username / password -->
+        <!-- =============== -->
+        <div class="common-div-mass" style="padding-top:2em;">
+            <span>아이디</span>
+            <div class="ULGN-div-input">
+                <input id="ULGN-input-id" name="ID" class="ULGN-input-text common-input-text" type="text">
+            </div>
+            <span>비밀번호</span>
+            <div class="ULGN-div-input">
+                <input id="ULGN-input-pw" name="PW" class="ULGN-input-text common-input-text" type="password">
+            </div>
+        </div>
+
+        <!-- =============== -->
+        <!-- menu -->
+        <!-- =============== -->
+        <div class="common-div-mass">
+            <button id="ULGN-btn-signIn" class="common-btn-outline ULGN-login-btn">로그인</button>
+            <button id="ULGN-btn-signUp" class="common-btn-outline ULGN-login-btn">회원가입</button>
+        </div>
+
+        <!-- =============== -->
+        <!-- bottom menu -->
+        <!-- =============== -->
+        <table id="ULGN-tbl-bottomRight">
+            <tbody>
+                <tr>
+                    <td>
+                        <button id="ULGN-btn-privacyDelete" class="common-btn-outline">회원탈퇴</button>
+                        <button id="ULGN-btn-updateApp" class="common-btn-outline">앱 업데이트</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        var ULGN =
+        {
+            code: "ULGN",
+            Data: {},
+
+            show()
+            {
+                /* to next if login */
+                if(GGstorage.isLogin())
+                    Navigation.moveAfterLogin();
+
+                /* set version */
+                $("#ULGN-span-version").text(versionCl);
+            },
+
+            close()
+            {
+                Common.confirmExit();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* -------------- */
+            /* 로그인버튼 클릭 시 */
+            /* -------------- */
+            $("#ULGN-btn-signIn").click(function()
+            {
+                /* set var */
+                let id       = $("#ULGN-input-id").val();
+                let pw       = $("#ULGN-input-pw").val();
+                let usertype = $("#ULGN-input-usertype").val();
+
+                /* input check (is space?) */
+                if(id == "" || pw == "")
+                {
+                    Common.toastError("아이디와 비밀번호를 입력해주세요.");
+                    return;
+                }
+
+                /* start login */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    if(Api.User.login(id, pw, usertype))
+                        Navigation.moveAfterLogin();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* -------------- */
+            /* 유저등록 */
+            /* -------------- */
+            $("#ULGN-btn-signUp")        .click(function() { Navigation.moveFrontPage(Navigation.Page.A01UserInsert,        {isNew:true});  });
+            $("#ULGN-btn-privacyDelete") .click(function() { Navigation.moveFrontPage(Navigation.Page.A02UserPrivacyDelete, {});            });
+            $("#ULGN-btn-updateApp")     .click(function() { Navigation.moveFrontPage(Navigation.Page.Z00AppUpdateUrl,      {});            });
+
+            /* ========================= */
+            /* page initializing */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                ULGN.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                ULGN.close(true);
+            }
+
+            /* localizing */
+            $("#ULGN").i18n();
+
+        }); /* end document.ready */
+
+    </script>
+</ons-page>

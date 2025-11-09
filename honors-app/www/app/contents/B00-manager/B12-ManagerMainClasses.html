@@ -1,0 +1,123 @@
+<ons-page id="MMCL">
+
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="MMCL.close(true);"></gg-backbtn></div>
+        <div class="center">일정</div>
+        <div class="right" style="font-size:1em;">
+            <div class="common-div-cushion" style="text-align:right;">
+                <button id="MMCL-btn-addClass" class="common-btn-outline common-tag-fontsize09">＋일정등록</button>
+            </div>
+        </div>
+    </ons-toolbar>
+
+    <!-- ----- -->
+    <!-- 선택 탭 -->
+    <!-- ----- -->
+    <div class="common-div-cushion">
+        <table class="MMCL-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <!-- <td><gg-backbtn-simple onclick="MMCL.close(true);"></gg-backbtn-simple></td> -->
+                    <td class="MMCL-td-searchtype" searchtype="edit"      tab=""    >작성중</td>
+                    <td class="MMCL-td-searchtype" searchtype="ing"       tab=""    >진행중</td>
+                    <td class="MMCL-td-searchtype" searchtype="endcls"    tab=""    >정산중</td>
+                    <td class="MMCL-td-searchtype" searchtype="endsettle" tab=""    >완료</td>
+                    <td class="MMCL-td-searchtype" searchtype="cancel"    tab=""    >취소</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- list -->
+    <!-- ========================= -->
+    <div id="MMCL-div-list"></div>
+
+    <script>
+
+        var MMCL =
+        {
+            code: "MMCL",
+            Data: {},
+
+            show()
+            {
+                if(Common.isEmpty(MMCL.Data.grpno)) { Common.toast("잘못된 접근입니다."); MMCL.close(); return; }
+                if(Common.isEmpty(MMCL.Data.searchtype)) { MMCL.Data.searchtype = "edit"; }
+
+                /* 일정상태에 따른 조회 */
+                $(`.MMCL-td-searchtype[searchtype=${MMCL.Data.searchtype}]`).click();
+            },
+
+            /* ------------- */
+            /* 일정상태에 따른 조회 */
+            /* ------------- */
+            searchByClsstatus()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let grpno = MMCL.Data.grpno;
+                    let mSearchType = $(".MMCL-td-searchtype[tab='tab']").attr("searchtype");
+                    let mClss = Api.Cls.selectByClsstatusForMng(grpno, mSearchType, GGF.none, GGF.toast);
+                    mClss.make("#MMCL-div-list");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+
+        };
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+            $("#MMCL-btn-addClass").click(function() {Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate000Default, {grpno: MMCL.Data.grpno}); });
+
+            $(".MMCL-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("searchtype");
+                $(".MMCL-td-searchtype").removeAttr("tab");
+                $(this).attr("tab", "tab");
+
+                /* save selected */
+                MMCL.Data.searchtype = searchtype;
+
+                /* search */
+                MMCL.searchByClsstatus();
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MMCL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MMCL.close(true);
+            }
+
+            /* localizing */
+            /* $("#MMCL").i18n(); */
+        });
+
+    </script>
+</ons-page>

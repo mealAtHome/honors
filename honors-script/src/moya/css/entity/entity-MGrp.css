@@ -1,0 +1,22 @@
+/* ============================== */
+/* 매장 일반형 */
+/* ============================== */
+.Mgrp-make-div-top
+{
+    display:block;
+}
+.Mgrp-make-tbl-top
+{
+    width:100%;
+}
+.Mgrp-make-tbl-top > tbody > tr > td { padding:0.4em; vertical-align:middle; }
+.Mgrp-make-tbl-top > tbody > tr:nth-child(1) > td:nth-child(1) { width:3.4em; }
+
+.Mgrp-make-div-image
+{
+    width:3.4em;
+    height:3.4em;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}

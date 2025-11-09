@@ -1,0 +1,89 @@
+<ons-page id="SMMG">
+
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="SMMG.close(true);"></gg-backbtn></div>
+        <div class="center">매장 설정</div>
+    </ons-toolbar>
+
+    <style>
+        .SMMG-btn-common
+        {
+            display:block;
+            margin: 1em 1em;
+            padding: 0.8em 0.6em;
+        }
+    </style>
+
+    <div class="common-div-cushion">
+        <!-- <a id="SMMG-btn-updateStore"  class="SMMG-btn-common common-btn-outline">매장정보 설정</a> -->
+        <a id="SMMG-btn-salestatus"   class="SMMG-btn-common common-btn-outline">영업시간 살정</a>
+        <a id="SMMG-btn-ordertype"    class="SMMG-btn-common common-btn-outline">포장/배달 설정</a>
+        <a id="SMMG-btn-payment"      class="SMMG-btn-common common-btn-outline">결제방법 설정</a>
+        <a id="SMMG-btn-delivery"     class="SMMG-btn-common common-btn-outline">배달팁 설정</a>
+        <a id="SMMG-btn-bankaccount"  class="SMMG-btn-common common-btn-outline">정산계좌</a>
+        <a id="SMMG-btn-reviewList"   class="SMMG-btn-common common-btn-outline">주문후기 리스트</a>
+        <a id="SMMG-btn-sales"        class="SMMG-btn-common common-btn-outline">매출</a>
+    </div>
+
+    <script>
+        var SMMG =
+        {
+            code: "SMMG",
+            Data : null,
+
+
+            show()
+            {
+                /* set lastTab : 마지막으로 활성화시킨 탭 번호 저장 */
+                SMMG.Data.lastTabIndex = 4;
+
+                /* recovery */
+                Common.showProgress();
+                setTimeout(function()
+                {
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        };
+
+        $(document).ready(function()
+        {
+            $("#SMMG-btn-updateStore")    .click(function() { });
+            $("#SMMG-btn-salestatus")     .click(function() { Navigation.moveFrontPage(Navigation.Page.C21StoreManageSalestatus        , {}); });
+            $("#SMMG-btn-ordertype")      .click(function() { Navigation.moveFrontPage(Navigation.Page.C21StoreManageOrdertype          , {}); });
+            $("#SMMG-btn-payment")        .click(function() { Navigation.moveFrontPage(Navigation.Page.C21StoreManagePayment            , {}); });
+            $("#SMMG-btn-delivery")       .click(function() { Navigation.moveFrontPage(Navigation.Page.C21StoreManageDeliverycharge     , {}); });
+            $("#SMMG-btn-sales")          .click(function() { Navigation.moveFrontPage(Navigation.Page.C80StoreSalesHome                                , {}); });
+            $("#SMMG-btn-bankaccount")    .click(function() { Navigation.moveFrontPage(Navigation.Page.C21StoreManageBankaccount        , {}); });
+            $("#SMMG-btn-reviewList")     .click(function() { Navigation.moveFrontPage(Navigation.Page.C21StoreManageReviews                    , {}); });
+
+            /* ======================== */
+            /* page init */
+            /* ======================== */
+            try
+            {
+                SMMG.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                SMMG.close(true);
+            }
+        });
+    </script>
+</ons-page>

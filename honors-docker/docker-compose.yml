@@ -1,0 +1,68 @@
+version: '3.8'
+services:
+
+    db:
+        #platform: "linux/arm64/v8"
+        build: "./db"
+        container_name: "honors-mysql"
+        ports:
+            - "4809:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: "svwy@pf!"
+        volumes:
+            - "./db/data:/docker-entrypoint-initdb.d"
+
+    api:
+        #platform: "linux/arm64/v8"
+        build: "./api"
+        container_name: "honors-api"
+        volumes:
+            - ./api/conf/apache2:/etc/apache2
+            - ../honors-server:/var/www/html/honors-server
+            - ../honors-res:/var/www/html/honors-res
+        ports:
+            - 8080:80
+            - 3307:3307
+        links:
+            - "db:database"
+
+    res:
+        #platform: "linux/arm64/v8"
+        build: "./res"
+        container_name: "honors-res"
+        volumes:
+            - ./res/conf/apache2:/usr/local/apache2/conf
+            - ../honors-res:/var/www/html/honors-res
+        ports:
+            - 8081:80
+
+    script:
+        #platform: "linux/arm64/v8"
+        build: "./script"
+        container_name: "honors-script"
+        volumes:
+            - ./script/conf/apache2:/usr/local/apache2/conf
+            - ../honors-script:/var/www/html/honors-script
+        ports:
+            - 8084:80
+
+    main:
+        #platform: "linux/arm64/v8"
+        build: "./main"
+        container_name: "honors-main"
+        volumes:
+            - ./main/conf/apache2:/usr/local/apache2/conf
+            - ../honors-main:/var/www/html/honors-main
+        ports:
+            - 8083:80
+
+    # for develop
+    app:
+        #platform: "linux/arm64/v8"
+        build: "./app"
+        container_name: "honors-app"
+        volumes:
+            - ./app/conf/apache2:/usr/local/apache2/conf
+            - ../honors-app:/var/www/html/honors-app
+        ports:
+            - 8082:80

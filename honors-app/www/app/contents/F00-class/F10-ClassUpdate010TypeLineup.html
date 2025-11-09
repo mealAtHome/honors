@@ -1,0 +1,513 @@
+<ons-page id="CUTF">
+
+    <!-- ========================== -->
+    <!-- 회원등록 페이지 -->
+    <!-- ========================== -->
+    <ons-toolbar>
+        <ons-toolbar>
+            <div class="left"><gg-backbtn onclick="CUTF.close(true);"></gg-backbtn></div>
+            <div class="center"><span style="vertical-align:middle;">참가설정 - </span><span id="CUTF-span-clstypeForTitle"></span></div>
+        </ons-toolbar>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- main page -->
+    <!-- ======================== -->
+    <div class="common-div-cushion">
+        <div class="common-tag-fontsize09">
+            <button id="CUTF-btn-save"    class="common-btn-outline">💿저장</button>
+            <button id="CUTF-btn-rowAdd"  class="common-btn-outline">➕행추가</button>
+            <button id="CUTF-btn-rowAuto" class="common-btn-outline">🤖자동라인업</button>
+        </div>
+        <hr class="common-hr-paddingUD"/>
+        <div class="common-tag-fontsize09">
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀A --><span class="CUTF-span-teamnameSub" teamname="a"></span><!-- 1시합 --></button>
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀B --><span class="CUTF-span-teamnameSub" teamname="b"></span><!-- 1시합 --></button>
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="c" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀C --><span class="CUTF-span-teamnameSub" teamname="c"></span><!-- 2시합 --></button>
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="d" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀D --><span class="CUTF-span-teamnameSub" teamname="d"></span><!-- 2시합 --></button>
+        </div>
+        <hr class="common-hr-paddingUD"/>
+        <style>
+            .CUTF-input-common      { font-size: 1em; }
+            .CUDE-input-teamnick    { width: 10em; }
+            .CUTF-input-position    { width: 5em; }
+            .CUTF-input-user        { width: 5em; }
+            .CUTF-input-bill        { width: 5em; }
+            .CUTF-btn-delete        { font-size: 0.9em; }
+            .CUTF-tbl-lineup > tbody > tr > td { text-align: center; vertical-align: middle; }
+            .CUTF-tbl-lineup > tbody > tr > td[col="numb"] { width: 5%; }
+            .CUTF-tbl-lineup > tbody > tr > td[col="pstn"] { width: 15%; }
+            .CUTF-tbl-lineup > tbody > tr > td[col="user"] { width: 15%; }
+            .CUTF-tbl-lineup > tbody > tr > td[col="bill"] { width: 15%; }
+            .CUTF-tbl-lineup > tbody > tr > td[col="delt"] { width: 10%; }
+        </style>
+
+        <div class="CUTF-div-tabTeam" teamname="a" style="display:none;">
+            <p class="common-p-title">
+                <!-- 팀A --><span class="CUTF-span-teamnameSub" teamname="a"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="a" value="A">
+            </p>
+            <div class="common-div-scrollX">
+                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="a" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th>타순</th>
+                            <th>타격여부</th>
+                            <th>포지션</th>
+                            <th>참가자</th>
+                            <th>참가비</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 동적으로 행이 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CUTF-div-tabTeam" teamname="b" style="display:none;">
+            <p class="common-p-title">
+                <!-- 팀B --><span class="CUTF-span-teamnameSub" teamname="b"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="b" value="B">
+            </p>
+            <div class="common-div-scrollX">
+                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="b" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th>타순</th>
+                            <th>타격여부</th>
+                            <th>포지션</th>
+                            <th>참가자</th>
+                            <th>참가비</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 동적으로 행이 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CUTF-div-tabTeam" teamname="c" style="display:none;">
+            <p class="common-p-title">
+                <!-- 팀C --><span class="CUTF-span-teamnameSub" teamname="c"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="c" value="C">
+            </p>
+            <div class="common-div-scrollX">
+                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="c" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th>타순</th>
+                            <th>타격여부</th>
+                            <th>포지션</th>
+                            <th>참가자</th>
+                            <th>참가비</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 동적으로 행이 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CUTF-div-tabTeam" teamname="d" style="display:none;">
+            <p class="common-p-title">
+                <!-- 팀D --><span class="CUTF-span-teamnameSub" teamname="d"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="d" value="D">
+            </p>
+            <div class="common-div-scrollX">
+                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="d" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th>타순</th>
+                            <th>타격여부</th>
+                            <th>포지션</th>
+                            <th>참가자</th>
+                            <th>참가비</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 동적으로 행이 추가됩니다 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        /* =============================== */
+        /* page obj */
+        /* =============================== */
+        var CUTF =
+        {
+            code : "CUTF",
+            Data: {},
+            Temp :
+            {
+                teamname : "a",
+            },
+            El :
+            {
+                getTbl (teamname="") { return `.CUTF-tbl-lineup[teamname=${teamname == "" ? CUTF.Temp.teamname : teamname}]`; },
+                getTr  (teamname="") { return `.CUTF-tbl-lineup[teamname=${teamname == "" ? CUTF.Temp.teamname : teamname}] > tbody > tr`; },
+            },
+            isClsstatusWait () { return CUTF.Data.clsstatus == GGF.Cls.Clsstatus.WAIT; },
+            isClsstatusIng  () { return CUTF.Data.clsstatus == GGF.Cls.Clsstatus.ING; },
+
+            /* -------------------- */
+            /* show */
+            /* -------------------- */
+            show()
+            {
+                /* validation */
+                if(CUTF.Data.option == undefined) { Common.toast("잘못된 접근입니다."); CUTF.close(); return; }
+                if(CUTF.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CUTF.close(); return; }
+                if(CUTF.Data.clsno == undefined) CUTF.Data.clsno = "";
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* vars */
+                    let clsno = CUTF.Data.clsno;
+                    let grpno = CUTF.Data.grpno;
+
+                    /* ----- */
+                    /* get cls */
+                    /* ----- */
+                    let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
+                    CUTF.Data.clsstatus = mCls.getClsstatus();
+                    CUTF.Data.clsbillapplyprice = mCls.getClsbillapplyprice();
+
+                    /* show / hide */
+                    let isClsstatusIng = CUTF.isClsstatusIng();
+                    let isClsstatusWait = CUTF.isClsstatusWait();
+
+                    /* set title */
+                    $("#CUTF-span-clstypeForTitle").text(mCls.getClstypeCvrt());
+                    switch(mCls.getClstype())
+                    {
+                        case GGF.Cls.Clstype.LINEUP1:
+                        {
+                            $(".CUTF-span-teamnameSub[teamname=a]").text("라인업");
+                            $(".CUTF-btn-tabTeam[val=a]").show();
+                            break;
+                        }
+                        case GGF.Cls.Clstype.LINEUP2:
+                        {
+                            $(".CUTF-span-teamnameSub[teamname=a]").text("팀A");
+                            $(".CUTF-span-teamnameSub[teamname=b]").text("팀B");
+                            $(".CUTF-btn-tabTeam[val=a]").show();
+                            $(".CUTF-btn-tabTeam[val=b]").show();
+                            break;
+                        }
+                        case GGF.Cls.Clstype.LINEUP4:
+                        {
+                            $(".CUTF-span-teamnameSub[teamname=a]").text("시합1 - 팀A");
+                            $(".CUTF-span-teamnameSub[teamname=b]").text("시합1 - 팀B");
+                            $(".CUTF-span-teamnameSub[teamname=c]").text("시합2 - 팀C");
+                            $(".CUTF-span-teamnameSub[teamname=d]").text("시합2 - 팀D");
+                            $(".CUTF-btn-tabTeam[val=a]").show();
+                            $(".CUTF-btn-tabTeam[val=b]").show();
+                            $(".CUTF-btn-tabTeam[val=c]").show();
+                            $(".CUTF-btn-tabTeam[val=d]").show();
+                            break;
+                        }
+                    }
+
+                    /* ----- */
+                    /* get clslineup2 */
+                    /* ----- */
+                    let clslineup2s = Api.Clslineup2.selectByClsno(grpno, CUTF.Data.clsno);
+                    for(let i in clslineup2s.getModels())
+                    {
+                        let model = clslineup2s.getModels()[i];
+                        CUTF.Temp.teamname = model.getTeamname();
+                        CUTF.addRow(model);
+                    }
+
+                    /* recovery default values */
+                    CUTF.Temp.teamname = "a"; CUTF.updateRowNum();
+                    CUTF.Temp.teamname = "b"; CUTF.updateRowNum();
+                    CUTF.Temp.teamname = "c"; CUTF.updateRowNum();
+                    CUTF.Temp.teamname = "d"; CUTF.updateRowNum();
+
+                    /* recovery db values */
+                    for(let i in clslineup2s.getModels())
+                    {
+                        let model = clslineup2s.getModels()[i];
+
+                        /* set teamnick */
+                        $(`.CUDE-input-teamnick[teamname=${model.getTeamname()}]`).val(model.getTeamnick());
+
+                        /* set rows */
+                        let tr = $(`.CUTF-tbl-lineup[teamname=${model.getTeamname()}] > tbody > tr[orderno="${model.getOrderno()}"]`);
+                        tr.find(`.CUTF-select-orderno`).val(model.getOrderno());
+                        tr.find(`.CUTF-input-battingflg`).prop("checked", model.isBattingflgY());
+                        tr.find(`.CUTF-input-position`).val(model.getPosition());
+                        tr.find(`.CUTF-input-user`).val(model.getUsername()).attr("userno", model.getUserno());
+                        tr.find(`.CUTF-input-bill`).val(model.getBill());
+                        tr.attr("datatype", "old");
+
+                        /* if clsstatus is ING, disable inputs */
+                        if(isClsstatusIng)
+                        {
+                            tr.find(`.CUTF-input-battingflg`).prop("disabled", true);
+                            tr.find(`.CUTF-input-position`).prop("disabled", true);
+                            tr.find(`.CUTF-input-user`).prop("disabled", true);
+                            tr.find(`.CUTF-btn-delete`).prop("disabled", true);
+                        }
+                    }
+
+                    /* recovery */
+                    $(".CUTF-btn-tabTeam[val=a]").click();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            addRow(mClslineup2=null)
+            {
+                let isClsstatusIng = CUTF.isClsstatusIng();
+                let hasUser = mClslineup2 != null && Common.isEmpty(mClslineup2.getUserno()) == false;
+                let html =
+                `
+                    <tr class="CUTF-tr-lineup" orderno="" datatype="new">
+                        ${isClsstatusIng == false ? `<td col="numb"><select class="common-select-outline CUTF-select-orderno" orderno=""></select></td>` : ""}
+                        ${isClsstatusIng == true ? `<td col="numb"><span class="CUTF-span-orderno"></span></td>` : ""}
+                        <td col="batf"><label class="common-label-switch"><input type="checkbox" class="CUTF-input-battingflg" checked                                  orderno=""/><span></span></label></td>
+                        <td col="pstn"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-position"   value=""                                 orderno=""/></td>
+                        <td col="user"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-user"       value=""                                 orderno="" disabled/></td>
+                        <td col="bill"><input type="number"  class="common-input-text CUTF-input-common CUTF-input-bill"       value="${CUTF.Data.clsbillapplyprice}"   orderno=""/></td>
+                        <td col="delt"><button class="common-btn-outline CUTF-btn-delete" btn-type="cancel" orderno="">삭제</button></td>
+                    </tr>
+                `;
+                $(`${CUTF.El.getTbl()} > tbody`).append(html);
+            },
+
+            updateRowNum()
+            {
+                let isClsstatusIng = CUTF.isClsstatusIng();
+                let len = $(CUTF.El.getTr()).length;
+                $(CUTF.El.getTr()).each(function(orderno0)
+                {
+                    let orderno         = orderno0 + 1;
+                    let ordernoEl       = $(this).find('.CUTF-select-orderno');
+                    let battingflgEl    = $(this).find('.CUTF-input-battingflg');
+                    let positionEl      = $(this).find('.CUTF-input-position');
+                    let userEl          = $(this).find('.CUTF-input-user');
+                    let billEl          = $(this).find('.CUTF-input-bill');
+                    let deleteEl        = $(this).find('.CUTF-btn-delete');
+
+                    /* if clsstatus is ING, ordernoEl is "CUTF-span-orderno" */
+                    if(isClsstatusIng)
+                    {
+                        ordernoEl = $(this).find('.CUTF-span-orderno');
+                        ordernoEl.html(orderno);
+                    }
+                    else
+                    {
+                        ordernoEl.html("");
+                        for(let i = 1; i <= len; i++)
+                            ordernoEl.append(`<option value="${i}" ${orderno == i ? "selected" : ""}>${i}</option>`);
+                    }
+
+                    /* set orderno */
+                    $(this).attr("orderno", orderno);
+                    ordernoEl.attr("orderno", orderno);
+                    battingflgEl.attr("orderno", orderno);
+                    positionEl.attr("orderno", orderno);
+                    userEl.attr("orderno", orderno);
+                    billEl.attr("orderno", orderno);
+                    deleteEl.attr("orderno", orderno);
+                });
+                CUTF.setEvent();
+            },
+
+            setEvent()
+            {
+                $(".CUTF-btn-delete").off("click").on("click", function()
+                {
+                    let orderno = $(this).attr('orderno');
+                    $(`${CUTF.El.getTr()}[orderno="${orderno}"]`).remove();
+                    console.log(CUTF.El.getTr(), orderno);
+                    CUTF.updateRowNum();
+                });
+
+                /* change tr sort */
+                $(".CUTF-select-orderno").off("change").on("change", function()
+                {
+                    let orderno = $(this).attr('orderno');
+                    let val = $(this).val();
+                    if(orderno > val) /* move up */
+                        $(`${CUTF.El.getTr()}[orderno="${orderno}"]`).insertBefore($(`${CUTF.El.getTr()}[orderno="${val}"]`));
+                    else if(orderno < val) /* move down */
+                        $(`${CUTF.El.getTr()}[orderno="${orderno}"]`).insertAfter($(`${CUTF.El.getTr()}[orderno="${val}"]`));
+                    CUTF.updateRowNum();
+                });
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        };
+
+
+        $(document).ready(function()
+        {
+            /* =============================== */
+            /* events */
+            /* =============================== */
+
+            $(".CUTF-btn-tabTeam").click(function()
+            {
+                let teamname = $(this).attr('val');
+                $(".CUTF-div-tabTeam").hide();
+                $(`.CUTF-div-tabTeam[teamname="${teamname}"]`).show();
+
+                /* exchange teamname */
+                CUTF.Temp.teamname = teamname;
+            });
+
+            $("#CUTF-btn-rowAdd").click(function()
+            {
+                if($(CUTF.El.getTr()).length >= 30)
+                {
+                    Common.showAlert("최대 30명의 참가자를 등록할 수 있습니다.");
+                    return;
+                }
+                CUTF.addRow(null);
+                CUTF.updateRowNum();
+            });
+
+            $("#CUTF-btn-rowAuto").click(function()
+            {
+                /* add row */
+                if($(CUTF.El.getTr()).length == 0)
+                {
+                    for(let i = 1; i <= 11; i++)
+                        CUTF.addRow(null);
+                    CUTF.updateRowNum();
+                }
+
+                /* auto tr */
+                $(CUTF.El.getTr()).each(function()
+                {
+                    let ordernoEl     = $(this).find('.CUTF-select-orderno');
+                    let battingflgEl  = $(this).find('.CUTF-input-battingflg');
+                    let positionEl    = $(this).find('.CUTF-input-position');
+                    switch(ordernoEl.val())
+                    {
+                        case "1": positionEl.val("C");   battingflgEl.prop("checked", true); break;
+                        case "2": positionEl.val("DH");  battingflgEl.prop("checked", true); break;
+                        case "3": positionEl.val("RF");  battingflgEl.prop("checked", true); break;
+                        case "4": positionEl.val("CF");  battingflgEl.prop("checked", true); break;
+                        case "5": positionEl.val("LF");  battingflgEl.prop("checked", true); break;
+                        case "6": positionEl.val("1B");  battingflgEl.prop("checked", true); break;
+                        case "7": positionEl.val("2B");  battingflgEl.prop("checked", true); break;
+                        case "8": positionEl.val("3B");  battingflgEl.prop("checked", true); break;
+                        case "9": positionEl.val("SS");  battingflgEl.prop("checked", true); break;
+                        case "10": positionEl.val("SP"); battingflgEl.prop("checked", false); break;
+                        case "11": positionEl.val("RP"); battingflgEl.prop("checked", false); break;
+                    }
+                });
+            });
+
+            /* ---------------------- */
+            /* 등록 */
+            /* ---------------------- */
+            $("#CUTF-btn-save").click(function()
+            {
+                /* validation */
+                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=a]`).val())) { Common.toastError("팀 A의 팀명을 입력해주세요."); return; }
+                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=b]`).val())) { Common.toastError("팀 B의 팀명을 입력해주세요."); return; }
+                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=c]`).val())) { Common.toastError("팀 C의 팀명을 입력해주세요."); return; }
+                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=d]`).val())) { Common.toastError("팀 D의 팀명을 입력해주세요."); return; }
+
+                let data = [];
+                $(".CUTF-tbl-lineup").each(function()
+                {
+                    let teamname = $(this).attr('teamname');
+                    let teamnick = $(`.CUDE-input-teamnick[teamname=${teamname}]`).val();
+                    $(this).find("tbody").find("tr").each(function()
+                    {
+                        let datatype        = $(this).attr("datatype");
+                        let ordernoEl       = $(this).find('.CUTF-select-orderno');
+                        let battingflgEl    = $(this).find('.CUTF-input-battingflg');
+                        let positionEl      = $(this).find('.CUTF-input-position');
+                        let userEl          = $(this).find('.CUTF-input-user');
+                        let billEl          = $(this).find('.CUTF-input-bill');
+
+                        /* set orderno */
+                        let orderno = ordernoEl.val();
+                        let isClsstatusIng = CUTF.isClsstatusIng();
+                        if(isClsstatusIng)
+                            orderno = $(this).find('.CUTF-span-orderno').text();
+
+                        data.push
+                        ({
+                            DATATYPE    : datatype,
+                            TEAMNAME    : teamname,
+                            TEAMNICK    : teamnick,
+                            ORDERNO     : orderno,
+                            BATTINGFLG  : battingflgEl.is(':checked') ? "y" : "n",
+                            POSITION    : positionEl.val(),
+                            USERNAME    : userEl.val(),
+                            USERNO      : userEl.attr("userno"),
+                            BILL        : billEl.val(),
+                        });
+                    });
+                });
+
+                for(let i in data)
+                {
+                    let dat = data[i];
+                    if(dat.BILL == undefined || dat.BILL == "") { Common.toastError("참가비를 입력해주세요."); return; }
+                }
+
+                /* save */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mApiResponse = Api.Clslineup2.updateFromPage(CUTF.Data.grpno, CUTF.Data.clsno, data, GGF.toast, GGF.toast);
+                    // if(mApiResponse.isSuccess())
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CUTF.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CUTF.close(true);
+            }
+
+            /* localizing */
+            /* $("#CUTF").i18n(); */
+
+        });
+
+    </script>
+</ons-page>
