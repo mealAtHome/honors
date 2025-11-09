@@ -103,7 +103,7 @@
             {
                 /* validation */
                 let keyword = $("#GMMT-input-searchKeyword").val();
-                if(Validation.Common.hasSpecialChar(keyword))
+                if(GGvalid.Common.hasSpecialChar(keyword))
                     return Common.toast("검색어에 특수문자를 포함할 수 없습니다.", "warning");
 
                 /* search */

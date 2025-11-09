@@ -1,4 +1,4 @@
-Validation.User =
+GGvalid.User =
 {
     id(el, noticeFail)
     {
@@ -39,7 +39,7 @@ Validation.User =
         let rslt = true;
         if     (Common.isEmpty(val))               { Common.noticeFail(noticeFail, "이름을 입력해주세요."); rslt = false; }
         else if(val.length < 2)                    { Common.noticeFail(noticeFail, "이름은 2자 이상이어야 합니다."); rslt = false; }
-        else if(Validation.Common.hasSpecial(val)) { Common.noticeFail(noticeFail, "이름에 특수문자를 사용할 수 없습니다."); rslt = false; }
+        else if(GGvalid.Common.hasSpecial(val)) { Common.noticeFail(noticeFail, "이름에 특수문자를 사용할 수 없습니다."); rslt = false; }
 
         /* 포커스 및 선택 */
         if(rslt == false) {
@@ -60,6 +60,6 @@ Validation.User =
         validation['isAbleLength']          = {"val":val, "option":{min:1, max:100}, };
         validation['noSpaceBetweenString']  = {"val":val, };
         validation['isEmail']               = {"val":val, };
-        return Validation.validationBridge(validation, fieldname, noticeOK, noticeFail);
+        return GGvalid.validationBridge(validation, fieldname, noticeOK, noticeFail);
     },
 }

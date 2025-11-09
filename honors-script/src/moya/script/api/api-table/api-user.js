@@ -31,7 +31,7 @@ Api.User =
             TEAMNAME    : teamname,
         };
         let ajax = Api.execute(ajaxData, "Api.User.insert", noticeOK, noticeFail);
-        if(Validation.Api.isSucceed(ajax))
+        if(GGvalid.Api.isSucceed(ajax))
         {
             GGstorage.saveLoginInfoToFile(ajax.apikey, ajax.id, function(rslt) { /* console.log("write to file : ", rslt); */ });
             GGstorage.setUserid(ajax.id);
@@ -56,7 +56,7 @@ Api.User =
             "PLATFORM"  : GGstorage.getDeviceKindSmall(),
         };
         let ajax = Api.execute(ajaxData, "Api.User.login", noticeOK, noticeFail);
-        if(Validation.Api.isSucceed(ajax))
+        if(GGvalid.Api.isSucceed(ajax))
         {
             GGstorage.saveLoginInfoToFile(ajax.apikey, ajax.id, function(rslt) { /* console.log("write to file : ", rslt); */ });
             GGstorage.setUserid(ajax.id);
@@ -69,7 +69,7 @@ Api.User =
     deleteUserInfo(id, pw, noticeOK, noticeFail)
     {
         let ajax = Api.execute({ID: id, PW: pw, }, "Api.User.deleteUserInfo", noticeOK, noticeFail);
-        let rslt = Validation.Api.isSucceed(ajax);
+        let rslt = GGvalid.Api.isSucceed(ajax);
         return rslt;
     },
 

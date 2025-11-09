@@ -299,7 +299,7 @@ GGC.Common =
     zeroToHyphen(val=null)
     {
         /* 숫자인지 검사한다. */
-        let isNum = Validation.Common.isNumber(val)['code'];
+        let isNum = GGvalid.Common.isNumber(val)['code'];
 
         /* 숫자가 아닐경우 그냥 리턴 */
         if(!isNum)

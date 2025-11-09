@@ -201,7 +201,7 @@
                 let username = $("#CHGM-input-username").val().trim();
                 if(username == "")
                     return Common.toast("이름을 입력해주세요.");
-                if(Validation.Common.hasSpecialChar(username))
+                if(GGvalid.Common.hasSpecialChar(username))
                     return Common.toast("이름에 특수문자를 포함할 수 없습니다.");
 
                 /* check point */
@@ -233,7 +233,7 @@
             {
                 /* validation */
                 let keyword = $("#CHGM-input-searchKeyword").val();
-                if(Validation.Common.hasSpecialChar(keyword))
+                if(GGvalid.Common.hasSpecialChar(keyword))
                     return Common.toast("검색어에 특수문자를 포함할 수 없습니다.", "warning");
 
                 /* search */

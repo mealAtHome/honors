@@ -5,6 +5,7 @@ var GGbase =
         /* ==================== */
         /* set */
         /* ==================== */
+        let scriptHost = ServerInfo.getScriptHost();
         let scriptArr = [];
         let cssArr = [];
 
@@ -13,112 +14,101 @@ var GGbase =
         /* ==================== */
 
         // for product
-        $.i18n().load(
-            {
-                'jp' : "./js/script/i18n/jp.json?" + scriptver,
-                'kr' : "./js/script/i18n/kr.json?" + scriptver,
-            }
-        );
+        // $.i18n().load(
+        //     {
+        //         'jp' : "/common/script/i18n/jp.json?" + scriptver,
+        //         'kr' : "/common/script/i18n/kr.json?" + scriptver,
+        //     }
+        // );
 
         /* by device (common) */
-        scriptArr.push(`./js/script/api-pr/api-common/api-pr.js`);
-
-        scriptArr.push(`./js/script/api-pr/api-common/api-pr.js`);
-        scriptArr.push(`./js/script/api-pr/api-table/api-pr-cart.js`);
-        scriptArr.push(`./js/script/api/api-common/api.js`);
-        scriptArr.push(`./js/script/api/api-table/api-addressSido.js`);
-        scriptArr.push(`./js/script/api/api-table/api-addressSigungu.js`);
-        scriptArr.push(`./js/script/api/api-table/api-bank.js`);
-        scriptArr.push(`./js/script/api/api-table/api-bankaccount.js`);
-        scriptArr.push(`./js/script/api/api-table/api-cls.js`);
-        scriptArr.push(`./js/script/api/api-table/api-clslineup2.js`);
-        scriptArr.push(`./js/script/api/api-table/api-clssettle.js`);
-        scriptArr.push(`./js/script/api/api-table/api-systemBoard.js`);
-        scriptArr.push(`./js/script/api/api-table/api-user.js`);
-        scriptArr.push(`./js/script/api/api-table/api-grp.js`);
-        scriptArr.push(`./js/script/api/api-table/api-grpMember.js`);
-        scriptArr.push(`./js/script/api/api-table/api-grpMemberPointhist.js`);
-        scriptArr.push(`./js/script/base-GGF/GGF-page.js`);
-        scriptArr.push(`./js/script/base-html/gg-html.js`);
-        scriptArr.push(`./js/script/common/choseong.js`);
-        scriptArr.push(`./js/script/common/common-event.js`);
-        scriptArr.push(`./js/script/common/common.js`);
-        scriptArr.push(`./js/script/common/gg-alert.js`);
-        scriptArr.push(`./js/script/common/gg-settings.js`);
-        scriptArr.push(`./js/script/common/GGtoast.js`);
-        scriptArr.push(`./js/script/common/GGdate.js`);
-        scriptArr.push(`./js/script/common/GGdialog.js`);
-        scriptArr.push(`./js/script/common/GGslideform.js`);
-        scriptArr.push(`./js/script/common/GGpage.js`);
-        scriptArr.push(`./js/script/common/index-element.js`);
-        scriptArr.push(`./js/script/common/navigation.js`);
-        scriptArr.push(`./js/script/cvrt/_GGC.js`);
-        scriptArr.push(`./js/script/cvrt/GGC-comm.js`);
-        scriptArr.push(`./js/script/cvrt/GGC-cls.js`);
-        scriptArr.push(`./js/script/cvrt/GGC-store.js`);
-        scriptArr.push(`./js/script/cvrt/GGC-rider.js`);
-        scriptArr.push(`./js/script/cvrt/GGC-user.js`);
-        scriptArr.push(`./js/script/cvrt/GGC-grp.js`);
-        scriptArr.push(`./js/script/model/model-common/_MCommon.js`);
-        scriptArr.push(`./js/script/model/model-common/MApiResponse.js`);
-        scriptArr.push(`./js/script/model/model-common/MYear.js`);
-        scriptArr.push(`./js/script/model/model-common/MMonth.js`);
-        scriptArr.push(`./js/script/model/model-common/MYearMonth.js`);
-        scriptArr.push(`./js/script/model/model-system/MCount.js`);
-        scriptArr.push(`./js/script/model/model-table/MAddressSido.js`);
-        scriptArr.push(`./js/script/model/model-table/MAddressSigungu.js`);
-        scriptArr.push(`./js/script/model/model-table/MBank.js`);
-        scriptArr.push(`./js/script/model/model-table/MBankaccount.js`);
-        scriptArr.push(`./js/script/model/model-table/MCls.js`);
-        scriptArr.push(`./js/script/model/model-table/MClslineup2.js`);
-        scriptArr.push(`./js/script/model/model-table/MClssettle.js`);
-        scriptArr.push(`./js/script/model/model-table/MGrp.js`);
-        scriptArr.push(`./js/script/model/model-table/MGrpMember.js`);
-        scriptArr.push(`./js/script/model/model-table/MGrpMemberPointhist.js`);
-        scriptArr.push(`./js/script/model/model-table/MSystemBoard.js`);
-        scriptArr.push(`./js/script/model/model-table/MUser.js`);
-        scriptArr.push(`./js/script/utils/GGutils.js`);
-        scriptArr.push(`./js/script/validation/_validation.js`);
-        scriptArr.push(`./js/script/validation/validation-api.js`);
-        scriptArr.push(`./js/script/validation/validation-common_field.js`);
-        scriptArr.push(`./js/script/validation/validation-common.js`);
-        scriptArr.push(`./js/script/validation/validation-user.js`);
-        scriptArr.push(`http://api.yogimoim.com/plus.js`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/api.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/api-pr.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/choseong.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/common.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/common-class.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/common-event.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGC.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGdate.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGdialog.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGF.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGhtml.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGpage.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGslideform.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGtoast.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGutils.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGvalid/validation.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGvalid/validation-api.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/GGvalid/validation-common.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/api/api-ref/api-govAddr.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/model/model-common/_MCommon.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/model/model-common/MApiResponse.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/model/model-ref/MAddressSido.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/model/model-ref/MAddressSigungu.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/model/model-ref/MBank.js?v=${scriptVersion}`);
+        /* common  */ scriptArr.push(`${scriptHost}/src/common/script/model/model-ref/MGovAddr.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/_base/navigation.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/_base/GGC/GGC-all.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/_base/GGC/GGC-cls.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/_base/GGC/GGC-grp.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/_base/GGC/GGC-user.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/_base/GGF/GGF-all.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/_base/GGvalid/GGvalid-user.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-addressSido.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-addressSigungu.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-bank.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-bankaccount.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-cls.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-clslineup2.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-clssettle.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-grp.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-grpMember.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-grpMemberPointhist.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-systemBoard.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/api/api-table/api-user.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MBankaccount.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MCls.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MClslineup2.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MClssettle.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MGrp.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MGrpMember.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MGrpMemberPointhist.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MSystemBoard.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/moya/script/model/model-table/MUser.js?v=${scriptVersion}`);
 
         /* ==================== */
         /* add css */
         /* ==================== */
-        cssArr.push(`./js/css/common/common-btn.css`);
-        cssArr.push(`./js/css/common/common-div-backBtn.css`);
-        cssArr.push(`./js/css/common/common-div-dialog.css`);
-        cssArr.push(`./js/css/common/common-div.css`);
-        cssArr.push(`./js/css/common/common-hr.css`);
-        cssArr.push(`./js/css/common/common-img.css`);
-        cssArr.push(`./js/css/common/common-input.css`);
-        cssArr.push(`./js/css/common/common-label-checkbox.css`);
-        cssArr.push(`./js/css/common/common-p.css`);
-        cssArr.push(`./js/css/common/common-radio.css`);
-        cssArr.push(`./js/css/common/common-select.css`);
-        cssArr.push(`./js/css/common/common-span.css`);
-        cssArr.push(`./js/css/common/common-switch.css`);
-        cssArr.push(`./js/css/common/common-tag.css`);
-        cssArr.push(`./js/css/common/common-tbl.css`);
-        cssArr.push(`./js/css/common/common-td.css`);
-        cssArr.push(`./js/css/common/common-textarea.css`);
-        cssArr.push(`./js/css/common/common-ul.css`);
-        cssArr.push(`./js/css/common/common-user.css`);
-        cssArr.push(`./js/css/common/common.css`);
-        cssArr.push(`./js/css/entity/entity-common.css`);
-        cssArr.push(`./js/css/entity/entity-MArea.css`);
-        cssArr.push(`./js/css/entity/entity-MBank.css`);
-        cssArr.push(`./js/css/entity/entity-MBankaccount.css`);
-        cssArr.push(`./js/css/entity/entity-MCls.css`);
-        cssArr.push(`./js/css/entity/entity-MGrp.css`);
-        cssArr.push(`./js/css/entity/entity-MSystemBoard.css`);
-        cssArr.push(`./js/css/entity/entity.css`);
-        cssArr.push(`./js/css/pagecss/index.css`);
-        cssArr.push(`./js/css/pagecss/page.css`);
-
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-btn.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div-backBtn.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div-checkbox.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div-dialog.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-hr.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-img.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-input.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-label-checkbox.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-p.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-radio.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-select.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-span.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-switch.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-tag.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-tbl.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-textarea.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-ul.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-user.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-common.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MBank.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MGovAddr.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MSystemBoard.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/page/page.css?v=${scriptVersion}`);
+        /* project */ cssArr.push(`${scriptHost}/src/moya/css/entity/entity-MBankaccount.css?v=${scriptVersion}`);
+        /* project */ cssArr.push(`${scriptHost}/src/moya/css/entity/entity-MCls.css?v=${scriptVersion}`);
+        /* project */ cssArr.push(`${scriptHost}/src/moya/css/entity/entity-MGrp.css?v=${scriptVersion}`);
+        /* project */ cssArr.push(`${scriptHost}/src/moya/css/page/index.css?v=${scriptVersion}`);
 
         /* ==================== */
         /* add css / script */

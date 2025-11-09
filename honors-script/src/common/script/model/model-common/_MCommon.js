@@ -2,7 +2,7 @@ class _MCommon
 {
     constructor(ajax)
     {
-        this.isSucceed       = Validation.Api.isSucceed(ajax);
+        this.isSucceed       = GGvalid.Api.isSucceed(ajax);
         this.code            = ajax.CODE;
         this.msg             = ajax.MSG;
         this.data            = ajax.DATA != undefined ? ajax.DATA : [];

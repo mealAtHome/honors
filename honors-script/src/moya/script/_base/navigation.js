@@ -200,15 +200,6 @@ var Navigation =
     /* ======================= */
     executeShow()
     {
-        /* --------------- */
-        /* reload if web */
-        /* --------------- */
-        if(GGstorage.isWeb())
-        {
-            window.location.reload();
-            return;
-        }
-
         /* ------------- */
         /* get pageStack */
         /* ------------- */
@@ -449,9 +440,7 @@ var Navigation =
             viewMode = Navigation.getLastViewMode();
 
         /* (모바일 전용) 혹시 러닝중이면 1초뒤에 다시 실시 */
-        if(
-            GGstorage.isWeb() == false &&
-            $("#index-dom").attr("_is-running") == "true")
+        if($("#index-dom").attr("_is-running") == "true")
         {
             setTimeout(function()
             {
@@ -516,56 +505,30 @@ var Navigation =
         {
             case "page":
             {
-                /* console.log(GGstorage.isWeb(), GGstorage.getDeviceKind()); */
-                if(GGstorage.isWeb())
+                /* 다음 이동해야할 페이지의 viewMode이 "page"라면, 다이어로그는 숨긴다. */
+                if(Navigation.getLastViewMode() == "dialog")
+                    GGdialog.hide();
+
+                /* 이미 페이지가 엘리먼트로 존재하면, bringPageTop 함수를 사용 */
+                if($("#"+movePage).length > 0)
                 {
-                    /* make get */
-                    let param = GGutils.Navigation.makeGetFromObject(nextPageParam);
-
-                    /* return url only */
-                    if(url == true)
-                        return Navigation.getURL(movePage) + param;
-
-                    /* move page */
-                    window.location.href = Navigation.getURL(movePage) + param;
+                    $('#index-dom')[0].bringPageTop(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
+                    {
+                        $("#index-dom > ons-page[id!="+movePage+"]").remove();
+                    });
                 }
                 else
                 {
-                    /* 다음 이동해야할 페이지의 viewMode이 "page"라면, 다이어로그는 숨긴다. */
-                    if(Navigation.getLastViewMode() == "dialog")
-                        GGdialog.hide();
-
-                    /* 이미 페이지가 엘리먼트로 존재하면, bringPageTop 함수를 사용 */
-                    if($("#"+movePage).length > 0)
+                    $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
                     {
-                        $('#index-dom')[0].bringPageTop(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
-                        {
-                            $("#index-dom > ons-page[id!="+movePage+"]").remove();
-                        });
-                    }
-                    else
-                    {
-                        $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
-                        {
-                            $("#index-dom > ons-page[id!="+movePage+"]").remove();
-                        });
-                    }
+                        $("#index-dom > ons-page[id!="+movePage+"]").remove();
+                    });
                 }
                 break;
             }
             case "dialog":
             {
-                if(GGstorage.isWeb())
-                {
-                    nextPageParam.page     = movePage;
-                    nextPageParam.viewMode = viewMode;
-                    let param = GGutils.Navigation.makeGetFromObject(nextPageParam);
-                    GGdialog.show(Navigation.getURL(movePage) + param);
-                }
-                else
-                {
-                    GGdialog.show(Navigation.getURL(movePage));
-                }
+                GGdialog.show(Navigation.getURL(movePage));
                 break;
             }
         } /* end case (viewMode) */
@@ -586,7 +549,7 @@ var Navigation =
     moveBack(param={})
     {
         /* (모바일 전용) 혹시 러닝중이면 1초뒤에 다시 실시 */
-        if(GGstorage.isWeb() == false && $("#index-dom").attr("_is-running") == "true")
+        if($("#index-dom").attr("_is-running") == "true")
         {
             setTimeout(function()
             {
@@ -604,28 +567,11 @@ var Navigation =
         if(param.executeShowWhenClose != undefined)
             executeShowWhenClose = param.executeShowWhenClose;
 
-        /* 뒤로가기를 할 때, 몇 개 페이지를 뒤로가기 할 것인지? */
-        let moveBackTimes = 1;
-        if(param.moveBackTimes != undefined)
-            moveBackTimes = param.moveBackTimes;
-
         /* ---------- */
         /* 변수설정 && 복귀페이지 설정 */
         /* ---------- */
         let pageStack = GGstorage.getPageStack();
-
-        /* 웹 상태에서 pageStack의 길이가 0 이라면, 뒤로가기를 해야함. */
-        if(GGstorage.isWeb() && pageStack.length == 0)
-        {
-            window.history.back();
-            return;
-        }
-
-        /* moveBackTimes 만큼 pop 실시 */
-        let lastPageStack = null;
-        for(let i = 0; i < moveBackTimes; i++)
-            lastPageStack = pageStack.pop();
-
+        let lastPageStack = pageStack.pop();
         let lastPageViewMode = lastPageStack.data.viewMode;
 
         /* 현재페이지의 데이터를 빼낸 후의 스택을 저장 */
@@ -640,12 +586,6 @@ var Navigation =
             page     = pageStack[pageStack.length-1];
             viewMode = page.data.viewMode;              /* 복귀해야할 페이지의 viewMode */
             movePage = page.page;                       /* 복귀해야할 페이지코드 */
-        }
-        else if(GGstorage.isWeb())
-        {
-            /* pop한 pageStack 에 데이터가 없다는 것은 페이지에서 다이어로그를 띄운 상태임 */
-            GGdialog.hide();
-            return;
         }
 
         /* ---------- */
@@ -766,7 +706,7 @@ var Navigation =
     /* ============================== */
     moveAfterLogin()
     {
-        GGstorage.clearGrpmtype();
+        GGstorage.Prj.clearGrpmtype();
         let appMode = GGstorage.getAppmode();
         switch(appMode)
         {

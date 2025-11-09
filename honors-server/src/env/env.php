@@ -22,24 +22,24 @@ $mode = isset($_POST['MODE']) ? $_POST['MODE'] : false;
 if($mode == "true")
 {
     /* docker */
-    // define("DB_IP"     , "db");
-    // define("DB_USER"   , "sadmin");
-    // define("DB_PW"     , "svwy@pf!");
-    // define("DB_NAME"   , "honors");
-    // define("DB_PORT"   , "3306");
-    // define("ROOT_RES"  , "$documentRoot/honors-res");
-    // define("ROOT"      , "$documentRoot/honors-server");
-    // define("LOG_ROOT"  , "$documentRoot/honors-server/src/.log");
-
-    /* docker + server */
-    define("DB_IP"     , "host.docker.internal");
+    define("DB_IP"     , "db");
     define("DB_USER"   , "sadmin");
     define("DB_PW"     , "svwy@pf!");
-    define("DB_NAME"   , "honors".VERSIONDB);
-    define("DB_PORT"   , 3307);
+    define("DB_NAME"   , "honors");
+    define("DB_PORT"   , "3306");
     define("ROOT_RES"  , "$documentRoot/honors-res");
     define("ROOT"      , "$documentRoot/honors-server");
     define("LOG_ROOT"  , "$documentRoot/honors-server/src/.log");
+
+    /* docker + server */
+    // define("DB_IP"     , "host.docker.internal");
+    // define("DB_USER"   , "sadmin");
+    // define("DB_PW"     , "svwy@pf!");
+    // define("DB_NAME"   , "honors".VERSIONDB);
+    // define("DB_PORT"   , 3307);
+    // define("ROOT_RES"  , "$documentRoot/honors-res");
+    // define("ROOT"      , "$documentRoot/honors-server");
+    // define("LOG_ROOT"  , "$documentRoot/honors-server/src/.log");
     /* ssh -f -N -L 3307:127.0.0.1:3306 -i C:\Users\ghen4\projects\_keys\yogimoim-production.pem ec2-user@yogimoim.com */
 }
 else

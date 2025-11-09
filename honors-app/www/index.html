@@ -51,7 +51,8 @@
             var versionCl = "1.0.10";
             var versionSv = "10010";
             var scriptloaded = false;
-            var localmode = false;
+            var localmode = true;
+            var ajaxDelayTime = 300; /* ajax 지연시간 */
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
             var ServerInfo =
             {
@@ -180,11 +181,14 @@
                 /* ========================= */
                 let scriptHost = ServerInfo.getScriptHost();
                 let head = document.getElementsByTagName('head')[0];
+                let now = Date.now();
                 let scriptArr = [];
-                scriptArr.push(`./js/script/base/version.js?${Date.now().getTime()}`);
-                scriptArr.push(`./js/script/base-GGF/GGF.js?${now}`);
-                scriptArr.push(`./js/script/base/gg-storage.js?${now}`);
-                scriptArr.push(`./js/script/base/gg-base.js?${now}`);
+                scriptArr.push(`${scriptHost}/src/moya/script/_base/version.js?v=${now}`);
+                scriptArr.push(`${scriptHost}/src/common/script/_base/GGF.js`);
+                scriptArr.push(`${scriptHost}/src/moya/script/_base/GGF/GGF-all.js`);
+                scriptArr.push(`${scriptHost}/src/moya/script/_base/GGbase.js`);
+                scriptArr.push(`${scriptHost}/src/common/script/_base/GGstorage.js`);
+                scriptArr.push(`${scriptHost}/src/moya/script/_base/GGstorage.js`);
 
                 /* recursive for load js */
                 let scriptLoad = function(scriptArr, index)
@@ -223,12 +227,18 @@
                         return;
                     }
 
+                    /* url with version */
+                    let url = scriptArr[index];
+                    let urlSplit = url.split('?');
+                    if(urlSplit.length < 2)
+                        url += `?v=${scriptVersion}`;
+
+                    /* load script */
                     let script = null;
                     script = document.createElement('script');
                     script.type = 'text/javascript';
-                    script.src = scriptArr[index];
+                    script.src = url;
                     head.append(script);
-
                     script.addEventListener('load', () => {
                         scriptLoad(scriptArr, index+1);
                     });

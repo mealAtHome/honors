@@ -30,21 +30,10 @@ var GGdialog =
         /* 현재 다이어로그가 아니라면, 페이지 로드 후, 다이어로그 끌어올리기 */
         $("#index-dialog-container").load(page, ()=>
         {
-            if(GGstorage.isWeb())
-            {
-                $("#index-dialog-mask").show();
-                $("#index-dialog-container").removeClass("index-dialog-pullDown");
-                $("#index-dialog-container").removeClass("index-dialog-pullDownFast");
-                $("#index-dialog-container").addClass("web-index-dialog-bringUp");
-            }
-            else
-            {
-                $("#index-dialog-mask").show();
-                $("#index-dialog-container").removeClass("index-dialog-pullDown");
-                $("#index-dialog-container").removeClass("index-dialog-pullDownFast");
-                $("#index-dialog-container").addClass("index-dialog-bringUp");
-                // Navigation.executeShow();
-            }
+            $("#index-dialog-mask").show();
+            $("#index-dialog-container").removeClass("index-dialog-pullDown");
+            $("#index-dialog-container").removeClass("index-dialog-pullDownFast");
+            $("#index-dialog-container").addClass("index-dialog-bringUp");
         });
     },
 

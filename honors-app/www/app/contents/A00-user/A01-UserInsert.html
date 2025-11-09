@@ -226,8 +226,8 @@
             $("#UINT-btn-nextFromLogin").click(function()
             {
                 /* 입력체크 */
-                if(!Validation.User.id("#UINT-input-id", GGF.toast)) return;
-                if(!Validation.User.pw("#UINT-input-pw", GGF.toast)) return;
+                if(!GGvalid.User.id("#UINT-input-id", GGF.toast)) return;
+                if(!GGvalid.User.pw("#UINT-input-pw", GGF.toast)) return;
 
                 /* 아이디 중복체크 */
                 Common.showProgress();
@@ -251,7 +251,7 @@
             /* 개인정보1 */
             /* --------------- */
             $("#UINT-btn-nextFromPersonal1").click(function() {
-                if(!Validation.User.name("#UINT-input-name", GGF.toast))
+                if(!GGvalid.User.name("#UINT-input-name", GGF.toast))
                     return;
                 GGslideform.next("#UINT-div-slideformParent");
             });
