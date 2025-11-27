@@ -183,12 +183,12 @@
                 let head = document.getElementsByTagName('head')[0];
                 let now = Date.now();
                 let scriptArr = [];
-                scriptArr.push(`${scriptHost}/src/moya/script/_base/version.js?v=${now}`);
+                scriptArr.push(`${scriptHost}/src/prj/script/_base/version.js?v=${now}`);
                 scriptArr.push(`${scriptHost}/src/common/script/_base/GGF.js`);
-                scriptArr.push(`${scriptHost}/src/moya/script/_base/GGF/GGF-all.js`);
-                scriptArr.push(`${scriptHost}/src/moya/script/_base/GGbase.js`);
+                scriptArr.push(`${scriptHost}/src/prj/script/_base/GGF/GGF-all.js`);
+                scriptArr.push(`${scriptHost}/src/prj/script/_base/GGbase.js`);
                 scriptArr.push(`${scriptHost}/src/common/script/_base/GGstorage.js`);
-                scriptArr.push(`${scriptHost}/src/moya/script/_base/GGstorage.js`);
+                scriptArr.push(`${scriptHost}/src/prj/script/_base/GGstorage.js`);
 
                 /* recursive for load js */
                 let scriptLoad = function(scriptArr, index)

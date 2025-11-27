@@ -74,18 +74,6 @@ var Navigation =
         Z00AppUpdateUrl : "SAPP",
         Z21SystemBoardList : "SBLI",
         Z22SystemBoardDetail : "SBDL",
-
-        /* 웹에만 존재하는 */
-        Web :
-        {
-            INDEX       : "web.index",
-            STORE       : "web.store",
-            ORDER       : "web.cls",
-            MENU        : "web.menu",
-            SUMMARY     : "web.summary",
-            SETTINGS    : "web.settings",
-            LOGIN       : "web.login",
-        }
     },
 
 
@@ -188,12 +176,6 @@ var Navigation =
         rslt = data;
         return rslt;
     },
-
-    showLastPage()
-    {
-        Navigation.executeShow();
-    },
-
 
     /* ======================= */
     /* 페이지 가장 최근 스택의 show 함수를 실행시킨다. */
@@ -421,6 +403,40 @@ var Navigation =
         return true;
     },
 
+    /* ============================== */
+    /* 마지막 pageData 삭제 */
+    /* ============================== */
+    removeLastPageData()
+    {
+        let pageStack = GGstorage.getPageStack();
+        pageStack.splice(pageStack.length-1);
+        GGstorage.setPageStack(pageStack);
+    },
+
+    /* ================== */
+    /* get last pagecode */
+    /* ================== */
+    getLastPagecode()
+    {
+        let pageStack = GGstorage.getPageStack();
+        let code = "";
+        if(pageStack[pageStack.length-1] != undefined)
+            code = pageStack[pageStack.length-1].page;
+        return code;
+    },
+
+    /* ================== */
+    /* get last viewMode */
+    /* ================== */
+    getLastViewMode()
+    {
+        let pageStack = GGstorage.getPageStack();
+        let viewMode = "";
+        if(pageStack[pageStack.length-1] != undefined)
+            viewMode = pageStack[pageStack.length-1].data.viewMode;
+        return viewMode;
+    },
+
     /* ================== */
     /* 다음 페이지로 이동 (페이지 혹은 다이어로그) */
     /*
@@ -432,7 +448,6 @@ var Navigation =
     /* ================== */
     moveFrontPage   (movePage, nextPageParam, url=false) { Navigation.moveFront("page"   , movePage, nextPageParam, url); },
     moveFrontDialog (movePage, nextPageParam, url=false) { Navigation.moveFront("dialog" , movePage, nextPageParam, url); },
-
     moveFront(viewMode=null, movePage, nextPageParam={}, url=false)
     {
         /* viewMode 가 null 이면 가장 마지막 데이터에서 viewMode를 불러옴 */
@@ -559,15 +574,6 @@ var Navigation =
         }
 
         /* ---------- */
-        /* 파라미터 세팅 */
-        /* ---------- */
-
-        /* 이전 페이지에서 show 함수를 실행하지 않도록 설정했다면, executeShow를 덮어쓴다. */
-        let executeShowWhenClose = true;
-        if(param.executeShowWhenClose != undefined)
-            executeShowWhenClose = param.executeShowWhenClose;
-
-        /* ---------- */
         /* 변수설정 && 복귀페이지 설정 */
         /* ---------- */
         let pageStack = GGstorage.getPageStack();
@@ -665,40 +671,6 @@ var Navigation =
     {
         GGstorage.clearPageStack();
         Navigation.moveFrontPage(Navigation.Page.A00UserLogin);
-    },
-
-    /* ============================== */
-    /* 마지막 pageData 삭제 */
-    /* ============================== */
-    removeLastPageData()
-    {
-        let pageStack = GGstorage.getPageStack();
-        pageStack.splice(pageStack.length-1);
-        GGstorage.setPageStack(pageStack);
-    },
-
-    /* ================== */
-    /* get last pagecode */
-    /* ================== */
-    getLastPagecode()
-    {
-        let pageStack = GGstorage.getPageStack();
-        let code = "";
-        if(pageStack[pageStack.length-1] != undefined)
-            code = pageStack[pageStack.length-1].page;
-        return code;
-    },
-
-    /* ================== */
-    /* get last viewMode */
-    /* ================== */
-    getLastViewMode()
-    {
-        let pageStack = GGstorage.getPageStack();
-        let viewMode = "";
-        if(pageStack[pageStack.length-1] != undefined)
-            viewMode = pageStack[pageStack.length-1].data.viewMode;
-        return viewMode;
     },
 
     /* ============================== */
