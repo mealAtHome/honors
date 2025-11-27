@@ -42,15 +42,7 @@ class MBanks extends _MCommon
     /* ================================ */
     makeBankForChoose(el, chosenBankcode)
     {
-        /* opt validation */
-        let html = this.validation();
-        if(html != "")
-            return html;
-
-        /* ------------------------ */
-        /* set variables */
-        /* ------------------------ */
-        /* set header */
+        let html = "";
         html +=
         `
             <table class="MBank-makeBankForChoose-tbl-forChoose commonEvent-tbl-tab">
@@ -79,13 +71,6 @@ class MBanks extends _MCommon
             i++;
         }
         html += `</tbody></table>`;
-
-
-        /* ------------------------ */
-        /* set html */
-        /* ------------------------ */
         $(el).html(html);
-
-        return true;
     }
 }

@@ -25,21 +25,7 @@ class MAddressSidos extends _MCommon
 
     makeOption(el="")
     {
-        /* --------------- */
-        /* opt validation */
-        /* --------------- */
-        let html = this.validation();
-        if(html != "")
-        {
-            $(el).html(html);
-            return false;
-        }
-
-        /* --------------- */
-        /* make html */
-        /* --------------- */
-        html = ``;
-
+        let html = "";
         let isFirst = true;
         let models = this.getModels();
         for(let i in models)

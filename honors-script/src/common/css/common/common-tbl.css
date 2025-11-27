@@ -313,6 +313,7 @@
 .common-tbl-normal
 {
     border-collapse:collapse;
+    line-height: 1.6;
 }
 .common-tbl-normal > thead > tr > th,
 .common-tbl-normal > tbody > tr > th

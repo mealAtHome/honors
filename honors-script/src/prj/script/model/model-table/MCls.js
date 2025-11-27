@@ -132,7 +132,7 @@ class MClss extends _MCommon
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            let isManager = GGstorage.isManagerOfGrp(model.getGrpno());
+            let isManager = GGstorage.Prj.isManagerOfGrp(model.getGrpno());
 
             /* ----- */
             /* clsstatus 에 따른 버튼표시 */

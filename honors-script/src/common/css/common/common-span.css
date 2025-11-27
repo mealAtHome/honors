@@ -127,21 +127,23 @@
 .common-span-mini[span-type="failed"]   , .common-span-card[span-type="failed"]   { color:red;        border:2px solid lightcoral;       background-color: rgb(255,200,200); }
 .common-span-mini[span-type="nodata"]   , .common-span-card[span-type="nodata"]   { color:darkorange; border:2px solid rgb(255,163,26);  background-color: rgb(255,224,179); }
 
-/* 매장상태에 따른 표시 */
-.common-span-mini[store_status="open"]  , .common-span-card[store_status="open"]  { color:blue;       border:2px solid rgb(110,110,255); background-color: rgb(200,200,255); }
-.common-span-mini[store_status="pause"] , .common-span-card[store_status="pause"] { color:darkorange; border:2px solid rgb(255,163,26);  background-color: rgb(255,224,179); }
-.common-span-mini[store_status="close"] , .common-span-card[store_status="close"] { color:red;        border:2px solid lightcoral;       background-color: rgb(255,200,200); }
-
-/* 일정상태에 따른 표시 */
-.common-span-card[clsstatus="edit"]       { color:rgb(212 , 173 , 0   ); border:2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
-.common-span-card[clsstatus="ing"]        { color:rgb(  3 , 154 , 0   ); border:2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
-.common-span-card[clsstatus="endcls"]     { color:rgb( 10 ,  95 , 0   ); border:2px solid rgb( 10 ,  95 , 0   ); background-color: rgb( 10 ,  95 , 0   , 0.3); }
-.common-span-card[clsstatus="endsettle"]  { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
-.common-span-card[clsstatus="cancel"]     { color:rgb(120 ,   0 , 0   ); border:2px solid rgb(120 ,   0 , 0   ); background-color: rgb(120 ,   0 , 0   , 0.3); }
-
 /* 주문상태에 따른 표시 */
-.common-span-card[bankaccount-defaultflg="y"] { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
-.common-span-card[bankaccount-defaultflg="n"] { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
+.common-span-card[orderstatus="apply"]           { color:rgb(212 , 173 , 0   ); border:2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); } /* 견적의뢰작성중 */
+.common-span-card[orderstatus="estimate"]        { color:rgb(170 , 182 , 0   ); border:2px solid rgb(170 , 182 , 0   ); background-color: rgb(170 , 182 , 0   , 0.3); } /* 견적중 */
+.common-span-card[orderstatus="deciding"]        { color:rgb(118 , 182 , 0   ); border:2px solid rgb(118 , 182 , 0   ); background-color: rgb(118 , 182 , 0   , 0.3); } /* 견적마감 */
+.common-span-card[orderstatus="decided"]         { color:rgb( 64 , 154 , 0   ); border:2px solid rgb( 64 , 154 , 0   ); background-color: rgb( 64 , 154 , 0   , 0.3); } /* 업체확정 */
+.common-span-card[orderstatus="working"]         { color:rgb(  3 , 154 , 0   ); border:2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); } /* 공사중 */
+.common-span-card[orderstatus="workend"]         { color:rgb( 10 ,  95 , 0   ); border:2px solid rgb( 10 ,  95 , 0   ); background-color: rgb( 10 ,  95 , 0   , 0.3); } /* 공사완료 */
+.common-span-card[orderstatus="claim"]           { color:rgb(144 ,  19 , 0   ); border:2px solid rgb(144 ,  19 , 0   ); background-color: rgb(144 ,  19 , 0   , 0.3); } /* 클레임확인대기 */
+.common-span-card[orderstatus="adminworking"]    { color:rgb(175 ,  76 , 0   ); border:2px solid rgb(175 ,  76 , 0   ); background-color: rgb(175 ,  76 , 0   , 0.3); } /* 관리자공사중 */
+.common-span-card[orderstatus="reworking"]       { color:rgb(175 ,  76 , 0   ); border:2px solid rgb(175 ,  76 , 0   ); background-color: rgb(175 ,  76 , 0   , 0.3); } /* 재공사중 */
+.common-span-card[orderstatus="reconfirm"]       { color:rgb(175 ,  76 , 0   ); border:2px solid rgb(175 ,  76 , 0   ); background-color: rgb(175 ,  76 , 0   , 0.3); } /* 고객재확인중 */
+.common-span-card[orderstatus="complete"]        { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); } /* 확인완료 */
+.common-span-card[orderstatus="cancel"]          { color:rgb(120 ,   0 , 0   ); border:2px solid rgb(120 ,   0 , 0   ); background-color: rgb(120 ,   0 , 0   , 0.3); } /* 취소 */
+
+/* 견적상태에 따른 표시 */
+.common-span-card[eststatus="ing"]               { color:rgb(  3 , 154 , 0   ); border:2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); } /* 공사중 */
+.common-span-card[eststatus="submit"]            { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); } /* 확인완료 */
 
 /* rgb( 173 , 216 , 230 ) Light Blue */
 /* rgb( 135 , 206 , 235 ) Sky Blue */

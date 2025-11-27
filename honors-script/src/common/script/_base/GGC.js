@@ -16,6 +16,8 @@ GGC.Common =
     varchar   (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.varchar  , def); },
     date      (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.date     , def); },
     datetime  (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.datetime , def); },
+    time      (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.time     , def); },
+    bigint    (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.bigint   , def); },
     int       (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.int      , def); },
     tinyint   (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.tinyint  , def); },
     double    (value, def="") { return GGC.Common.data(value, GGF.Server.FieldType.double   , def); },
@@ -31,6 +33,8 @@ GGC.Common =
                 case GGF.Server.FieldType.varchar   : def = def; break;
                 case GGF.Server.FieldType.date      : def = def; break;
                 case GGF.Server.FieldType.datetime  : def = def; break;
+                case GGF.Server.FieldType.time      : def = def; break;
+                case GGF.Server.FieldType.bigint    : if(def=="") def = 0; else def = def*1; break;
                 case GGF.Server.FieldType.int       : if(def=="") def = 0; else def = def*1; break;
                 case GGF.Server.FieldType.tinyint   : if(def=="") def = 0; else def = def*1; break;
                 case GGF.Server.FieldType.double    : if(def=="") def = 0; else def = def*1; break;
@@ -45,6 +49,8 @@ GGC.Common =
             case GGF.Server.FieldType.varchar   : value = value; break;
             case GGF.Server.FieldType.date      : value = value; break;
             case GGF.Server.FieldType.datetime  : value = value; break;
+            case GGF.Server.FieldType.time      : value = value; break;
+            case GGF.Server.FieldType.bigint    : value = 1*value; break;
             case GGF.Server.FieldType.int       : value = 1*value; break;
             case GGF.Server.FieldType.tinyint   : value = 1*value; break;
             case GGF.Server.FieldType.double    : value = 1*value; break;

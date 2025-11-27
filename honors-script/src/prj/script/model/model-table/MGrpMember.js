@@ -11,7 +11,7 @@ class MGrpMember
         /* data */      this.deletedt           = GGC.Common.datetime(dat.deletedt);
         /* data */      this.regidt             = GGC.Common.datetime(dat.regidt);
         /* data */      this.grpmanagerid       = GGC.Common.char(dat.grpmanagerid);
-        /* custom */    this.mUser              = _MCommon.makeInstanceFromDat(dat, MUser);
+        /* custom */    this.mUser              = _MCommon.fromDat(dat, MUser);
         /* custom */    this.pointWon           = GGC.Common.priceWon(dat.point);
         /* custom */    this.grpmtypeCvrt       = GGC.GrpMember.grpmtypeCvrt(this.grpmtype);
         /* custom */    this.pk                 = `grpno="${this.grpno}" userno="${this.userno}"`;
@@ -124,7 +124,7 @@ class MGrpMembers extends _MCommon
         {
             let model = this.getModels()[i];
             let mUser = model.getMUser();
-            let isManager = GGstorage.isManagerOfGrp(model.getGrpno());
+            let isManager = GGstorage.Prj.isManagerOfGrp(model.getGrpno());
 
             /* --------------- */
             /* button */

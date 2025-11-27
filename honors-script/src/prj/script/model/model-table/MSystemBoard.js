@@ -12,7 +12,7 @@ class MSystemBoard
         /* dat */     this.url            = GGC.Common.char(dat.url);
         /* dat */     this.modidt         = GGC.Common.datetime(dat.modidt);
         /* dat */     this.regidt         = GGC.Common.datetime(dat.regidt);
-        /* custom */  this.fullUrl        = `${ServerInfo.getResourceHost()}/_system_board/${this.getUrl()}`;
+        /* custom */  this.fullUrl        = `${ServerInfo.getServerHost()}/src/z-res/_system_board/${this.getUrl()}`;
         /* custom */  this.regidtPretty   = GGdate.toYMDDHI(new Date(this.getRegidt()));
         /* pk */      this.pk             = `sb_index="${this.sb_index}"`;
     }
@@ -98,14 +98,10 @@ class MSystemBoards extends _MCommon
 
     makeMainBanners(el="")
     {
-        /* opt validation */
-        let html = this.validation();
-        if(html != "")
-            return html;
-
         /* =============== */
         /* get each model's html */
         /* =============== */
+        let html = "";
         for(let i in this.getModels())
             html += this.getModels()[i].makeMainBanner();
 
@@ -135,14 +131,10 @@ class MSystemBoards extends _MCommon
 
     makeHorizon(el="")
     {
-        /* opt validation */
-        let html = this.validation();
-        if(html != "")
-            return html;
-
         /* =============== */
         /* get each model's html */
         /* =============== */
+        let html = "";
         for(let i in this.getModels())
             html += this.getModels()[i].makeHorizon();
 

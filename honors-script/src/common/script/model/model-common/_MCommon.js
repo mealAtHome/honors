@@ -14,7 +14,8 @@ class _MCommon
         this.allcnt          = ajax.ALLCNT  != undefined ? ajax.ALLCNT  : 0;                    /* 총 모델 수 */
         this.cnt             = ajax.CNT     != undefined ? ajax.CNT     : 0;                    /* 현재 조회 수 */
     }
-    getCount() { return this.count; }
+    isSuccess() { return this.isSucceed; }
+    getSucceed() { return this.isSucceed; }
     getCode() { return this.code; }
     getMsg() { return this.msg; }
     getData() { return this.data; }
@@ -25,104 +26,37 @@ class _MCommon
     getAllcnt() { return this.allcnt; }
     getCnt() { return this.cnt; }
 
-    isSuccess() { return this.isSucceed; }
 
-    /**
-     * 클래스 안에서 클래스를 정의할 때 사용
-     *
-     * @param {*} arr
-     * @param {*} clz
-     * @returns
-     */
-    static makeInstance(dat, propname, clz=null)
+
+    /* 변환 함수 */
+    static getAjaxSucceed(arr=[])
     {
-        let arr = [];
-        if(dat[propname] != undefined)
-            arr = dat[propname];
-
         let ajax =
         {
             CODE  : Api.succeed,
-            MSG : "",
+            MSG   : "",
             COUNT : arr.length,
             DATA  : arr,
         }
-        let rslt = new clz(ajax);
-        return rslt;
+        return ajax;
     }
+    static fromArr   (arr=[] , clz=null) { return new clz(_MCommon.getAjaxSucceed(arr)); }
+    static fromDat   (dat={} , clz=null) { return new clz(dat); }
+    static fromModel (model  , clz=null) { return new clz(model); }
 
-    /**
-     * 클래스 안에서 클래스를 정의할 때 사용
-     * 조회한 레코드 자체에 다른 인스턴스를 정의할 수 있을 때 사용
-     * @param {*} arr
-     * @param {*} clz
-     * @returns
-     */
-    static makeInstanceFromDat(dat, clz=null)
-    {
-        let rslt = new clz(dat);
-        return rslt;
-    }
-
-    /* 모델만 단독으로 리턴 (확정적으로 1레코드를 조회하였을 때 사용) - 데이터가 없다면 null 반환 */
-    static makeInstanceModel(dat, propname, clz=null)
-    {
-        let models = _MCommon.makeInstance(dat, propname, clz);
-        let model  = models.getModel();
-        return model;
-    }
-
-    /**
-     * 클래스 안에서 클래스를 정의할 때 사용
-     *
-     * @param {*} arr
-     * @param {*} clz
-     * @returns
-     */
-    static makeInstanceArr(arr, clz=null)
-    {
-        if(arr == undefined)
-            arr = [];
-
-        let ajax =
-        {
-            CODE  : Api.succeed,
-            MSG : "",
-            COUNT : arr.length,
-            DATA  : arr,
-        }
-        let rslt = new clz(ajax);
-        return rslt;
-    }
-
+    /* 모델 반환 및 체크 */
     getModels()
     {
         if(this.models == undefined || this.models == null)
             this.models = [];
         return this.models;
     }
-    getModel()
-    {
-        if(this.getModels() == null)     return null;
-        if(this.getModels().length == 0) return null;
-        return this.getModels()[0];
-    }
-    hasModels() { return this.hasModel(); }
+    hasModels() { return this.getModels().length > 0; }
+    getModel() { return this.getModels().length == 0 ? null : this.getModels()[0]; }
     hasModel()
     {
-        if(this.getModels() == null)      return false;
         if(this.getModels().length == 0)  return false;
         return true;
-    }
-
-    /* ================================ */
-    /* API 결과 확인 */
-    /* ================================ */
-    validation()
-    {
-        if(!this.isSucceed)
-            return GGhtml.getCard('failed', this.msg);
-        return "";
     }
 
     /* ================================ */

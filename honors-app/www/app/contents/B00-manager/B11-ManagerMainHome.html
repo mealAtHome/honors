@@ -76,7 +76,7 @@
                     $("#MMHM-div-grp").html(mGrp.make());
 
                     /* 이 그룹의 매니저인지 여부를 확인 */
-                    if(GGstorage.isManagerOfGrp(MMHM.Data.grpno) == false)
+                    if(GGstorage.Prj.isManagerOfGrp(MMHM.Data.grpno) == false)
                     {
                         Common.toast("매니저 권한이 없습니다.");
                         Navigation.moveHome();

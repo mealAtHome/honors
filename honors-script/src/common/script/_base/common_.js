@@ -3,11 +3,7 @@ var Common =
     /* ================ */
     /* 프로그래스 관련 */
     /* ================ */
-    ajaxDelayTime : 400, /* showProgress 후 멈추는 시간 */
-    sleep()
-    {
-        return new Promise(resolve => setTimeout(resolve, Common.ajaxDelayTime));
-    },
+    sleep()      { return new Promise(resolve => setTimeout(resolve, ajaxDelayTime)); },
     showCircle() { $("#index-progress").show(); $("#index-progress-mask").show(); return this.sleep(); },
     hideCircle() { $("#index-progress").hide(); $("#index-progress-mask").hide(); return this.sleep(); },
 
@@ -26,40 +22,12 @@ var Common =
         $(`#index-div-footerUsr > table > tbody > tr > td`).attr("tab", "");
     },
 
-    isNotEmpty(val) { return !Common.isEmpty(val); },
-    isEmpty(val)
-    {
-        if(val == undefined || val == null || val == "")
-            return true;
-        return false;
-    },
-
-
-
-    ifEmpty(val, defaultVal)
-    {
-        if(Common.isEmpty(val))
-            return defaultVal;
-        return val;
-    },
+    /* isEmpty */
+    isEmpty (val)             { return (val == undefined || val == null || val == "") ? true : false; },
+    ifEmpty (val, defaultVal) { return Common.isEmpty(val) ? defaultVal : val; },
 
     /* ================ */
     /* 크리티컬 에러 발생 시 */
-    /*
-        각 상황
-            - 페이지 이동간 자동으로 전달되야할 파라메터가 부족할 때,
-    */
-    /* ================ */
-    criticalError()
-    {
-        Common.alertError($.i18n('(common)unexpected error'));
-        Navigation.moveBack();
-    },
-
-    /* ================ */
-    /* 크리티컬 에러 발생 시 */
-    /*
-    */
     /* ================ */
     catchProc(e)
     {
@@ -68,7 +36,6 @@ var Common =
         Common.toast("예기치 못한 에러가 발생하였습니다. 잠시 후 다시 시도해주세요.");
         Navigation.moveBack();
     },
-
 
     /* ================ */
     /* 진행할 수 없는 에러 */
@@ -133,11 +100,11 @@ var Common =
     confirm(option={})
     {
         /* confirm parameter */
-        let title       = option.title      != undefined ? option.title       : $.i18n("(common.js)do you want to run?");
-        let msg         = option.msg        != undefined ? option.msg         : $.i18n('(common.js)confirm');
+        let title       = option.title      != undefined ? option.title       : $.i18n("실행하시겠습니까?");
+        let msg         = option.msg        != undefined ? option.msg         : $.i18n('확인');
         let okCallback  = option.okCallback != undefined ? option.okCallback  : function(){};
         let noCallback  = option.noCallback != undefined ? option.noCallback  : function(){};
-        let btn         = option.btn        != undefined ? option.btn         : [$.i18n('(common.js)cancel'), $.i18n('(common.js)ok')];
+        let btn         = option.btn        != undefined ? option.btn         : [$.i18n('취소'), $.i18n('확인')];
 
         /* execute confirm */
         let deviceKind = GGstorage.getDeviceKind();
@@ -173,7 +140,7 @@ var Common =
                     {
                         cancel:
                         {
-                            text : `${$.i18n('(common.js)cancel')}`,
+                            text : `${$.i18n('취소')}`,
                             btnClass: 'btn-orange',
                             action: function() {
                                 noCallback();
@@ -181,7 +148,7 @@ var Common =
                         },
                         ok:
                         {
-                            text : `&nbsp;&nbsp;&nbsp;${$.i18n('(common.js)ok')}&nbsp;&nbsp;&nbsp;`,
+                            text : `&nbsp;&nbsp;&nbsp;${$.i18n('확인')}&nbsp;&nbsp;&nbsp;`,
                             btnClass: 'btn-blue',
                             action: function() {
                                 okCallback();
@@ -193,33 +160,6 @@ var Common =
             } /* end case */
         } /* deviceKind */
     }, /* function */
-
-    /* ================ */
-    /* confirm 공통화 */
-    /*
-        parameter
-            [선택] str      title      : confirm 에 표시할 타이틀
-            [필수] str      msg        : confirm 에 표시할 메시지
-            [필수] function callback   : 확인을 클릭하면 실시할 함수
-
-        return
-            null
-    */
-    /* ================ */
-    msg(msg, callback)
-    {
-        /* execute confirm */
-        ons.notification.confirm
-        ({
-            "title" : "알림",
-            "message": msg,
-            "buttonLabels": [$.i18n('(common.js)ok')],
-            "callback": function(ans)
-            {
-                callback();
-            }
-        });
-    }, /* confirm */
 
     /* ========================= */
     /* icon : info, warning, error, success */
@@ -307,12 +247,12 @@ var Common =
     /* ================ */
     /* 버튼을 딜레이 시킴 */
     /* ================ */
-    delayBtn(Elid="", delayTime=btnDelayTime)
+    delayBtn(el="", delayTime=btnDelayTime)
     {
-        $("#"+Elid).prop("disabled", true);
+        $(el).prop("disabled", true);
         setTimeout(function()
         {
-            $("#"+Elid).prop("disabled", false);
+            $(el).prop("disabled", false);
         }, delayTime);
     },
 

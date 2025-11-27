@@ -139,14 +139,10 @@ class MBankaccounts extends _MCommon
 
     make(el, chooseEl="")
     {
-        /* validation */
-        let html = this.validation();
-        if(html != "")
-            return html;
-
         /* ========================= */
         /* make html */
         /* ========================= */
+        let html = "";
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];

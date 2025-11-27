@@ -63,9 +63,9 @@ var GGF =
         /* 앱 접속모드 */
         AppMode :
         {
-            CUS : "cus", /* GGF.System.AppMode.CUS : customer */
-            MNG : "mng", /* GGF.System.AppMode.MNG : leader */
-            ADM : "adm", /* GGF.System.AppMode.ADM : admin */
+            CUS : "cus", /* GGF.Project.Appmode.CUS : customer */
+            MNG : "mng", /* GGF.Project.Appmode.MNG : leader */
+            ADM : "adm", /* GGF.Project.Appmode.ADM : admin */
         },
 
         /* 기기종류 > 대분류 */

@@ -132,10 +132,8 @@
     margin  : 0.4em;
     padding : 0.0em;
 }
-.common-div-indent > span
-{
-    display:block;
-}
+.common-div-indent > span { display:block; }
+.common-div-indent > span::before { content:"・"; vertical-align: middle;}
 
 /* ============================== */
 /* 라디오 버튼을 위한 DIV */
@@ -340,6 +338,7 @@
 
 .common-div-cushion     { display: block; margin: 0.6em;                   padding: 0.0em;                   overflow-x: auto; box-sizing: content-box; text-align: left;    }
 .common-div-cushionULR  { display: block; margin: 0.3em 0.3em 0.0em 0.3em; padding: 0.3em 0.3em 0.0em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
+.common-div-cushionTLR  { display: block; margin: 0.3em 0.3em 0.0em 0.3em; padding: 0.3em 0.3em 0.0em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
 .common-div-cushionTop  { display: block; margin: 0.0em 0.3em 0.3em 0.3em; padding: 0.0em 0.3em 0.3em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
 .common-div-cushionUp   { display: block; margin: 0.3em 0.0em 0.0em 0.0em; padding: 0.3em 0.0em 0.0em 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
 .common-div-cushionUD   { display: block; margin: 0.3em 0.0em;             padding: 0.3em 0.0em;             overflow-x: auto; box-sizing: content-box; text-align: inherit; }

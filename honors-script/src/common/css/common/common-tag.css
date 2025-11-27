@@ -30,6 +30,10 @@
 .common-tag-alignR { text-align: right; }
 .common-tag-alignL { text-align: left; }
 
+/* ============================== */
+/* 색칠 */
+/* ============================== */
+.common-tag-bgcolorGray { background-color: rgba(2, 6, 84, 0.2); }
 
 /* ============================== */
 /* 아래 보더라인 */

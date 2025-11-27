@@ -110,7 +110,7 @@ class MClssettles extends _MCommon
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            let isManager = GGstorage.isManagerOfGrp(model.getGrpno());
+            let isManager = GGstorage.Prj.isManagerOfGrp(model.getGrpno());
 
             /* ----- */
             /* 상태에 따른 버튼표시 */

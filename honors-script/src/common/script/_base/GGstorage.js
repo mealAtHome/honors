@@ -169,9 +169,11 @@ var GGstorage =
             let appmode = new URLSearchParams(window.location.search).get("type");
             if(appmode == null)
                 return "cus";
+            return appmode;
         }
         catch(e)
         {
+            console.error(e);
             return "cus";
         }
     },
@@ -229,12 +231,6 @@ var GGstorage =
     removeDeviceKindSmall()     { return GGstorage.removeItem("deviceKindSmall"); },
 
     /* ========================= */
-    /* 앱 모드 구분 */
-    /* ========================= */
-    isCustomer() { return GGstorage.getAppmode() == GGF.System.AppMode.CUS; },
-    isAdmin()    { return GGstorage.getAppmode() == GGF.System.AppMode.ADM; },
-
-    /* ========================= */
     /* 휴일 리스트 */
     /* ========================= */
     setHolidayUpdated(val=null) { return GGstorage.setVal("holidayUpdated", val); },
@@ -281,7 +277,7 @@ var GGstorage =
         /* make instance */
         /* ----- */
         let holidaysArr = $.parseJSON(holidays);
-        let mRefHolidays = _MCommon.makeInstanceArr(holidaysArr, MRefHolidays);
+        let mRefHolidays = _MCommon.fromArr(holidaysArr, MRefHolidays);
         return mRefHolidays;
     },
     refreshHolidays()

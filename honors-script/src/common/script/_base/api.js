@@ -16,7 +16,7 @@
         {
             let rslt = Api.Store.update(ajaxData, "toast", "toast");
             if(rslt)
-                Navigation.showLastPage();
+                Navigation.executeShow();
         }, ajaxDelayTime);
     }
     Common.confirm2("실행하시겠습니까?", process);

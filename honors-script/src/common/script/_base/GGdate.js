@@ -17,6 +17,24 @@ var GGdate =
         return d;
     },
 
+    /* 2024-xx-xx xx:xx:xx */
+    /* 0123456789012345678 */
+    fromStrYMD(str)
+    {
+        if(Common.isEmpty(str))
+            return null;
+
+        let d = new Date();
+        d.setFullYear   (str.substring(0,4));
+        d.setMonth      (str.substring(5,7));
+        d.setDate       (str.substring(8,10));
+        d.setHours      (0);
+        d.setMinutes    (0);
+        d.setSeconds    (0);
+        return d;
+    },
+    getDdddFromYmd(str) { return GGdate.getDDDD(GGdate.fromStrYMD(str)); },
+
     /* 2024-xx-xxTxx:xx */
     /* 0123456789012345 */
     fromDatetimeLocal(str)
@@ -63,20 +81,20 @@ var GGdate =
         return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     },
 
-    getYYYY             (d) { return d.getFullYear(); },
-    getYY               (d) { return d.getFullYear().toString().slice(-2); },
-    getMM               (d) { return String(d.getMonth() + 1 ).padStart(2, '0'); },
-    getDD               (d) { return String(d.getDate()      ).padStart(2, '0'); },
-    getHH               (d) { return String(d.getHours()     ).padStart(2, '0'); },
-    getII               (d) { return String(d.getMinutes()   ).padStart(2, '0'); },
-    getSS               (d) { return String(d.getSeconds()   ).padStart(2, '0'); },
-    getDDDD             (d) { return ["일","월","화","수","목","금","토"][d.getDay()]; },
-    toYMDDHI            (d) { return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)} (${GGdate.getDDDD(d)}) ${GGdate.getHH(d)}:${GGdate.getII(d)}`; },
-    toMMDDddot          (d) { return `${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)})`; },
-    toYYMMDDddot        (d) { return `${GGdate.getYY(d)}.${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)})`; },
-    toYYMMDDdHHIIdot    (d) { return `${GGdate.getYY(d)}.${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)}) ${GGdate.getHH(d)}:${GGdate.getII(d)}`; },
-    toYYYYMMDD          (d) { return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)}`; },
-    toYYYYMMDDHHIISS    (d) { return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)} ${GGdate.getHH(d)}:${GGdate.getII(d)}:${GGdate.getSS(d)}`; },
+    getYYYY             (d) { if(d == null) return ""; return d.getFullYear(); },
+    getYY               (d) { if(d == null) return ""; return d.getFullYear().toString().slice(-2); },
+    getMM               (d) { if(d == null) return ""; return String(d.getMonth() + 1 ).padStart(2, '0'); },
+    getDD               (d) { if(d == null) return ""; return String(d.getDate()      ).padStart(2, '0'); },
+    getHH               (d) { if(d == null) return ""; return String(d.getHours()     ).padStart(2, '0'); },
+    getII               (d) { if(d == null) return ""; return String(d.getMinutes()   ).padStart(2, '0'); },
+    getSS               (d) { if(d == null) return ""; return String(d.getSeconds()   ).padStart(2, '0'); },
+    getDDDD             (d) { if(d == null) return ""; return ["日","月","火","水","木","金","土"][d.getDay()]; },
+    toYMDDHI            (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)} (${GGdate.getDDDD(d)}) ${GGdate.getHH(d)}:${GGdate.getII(d)}`; },
+    toMMDDddot          (d) { if(d == null) return ""; return `${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)})`; },
+    toYYMMDDddot        (d) { if(d == null) return ""; return `${GGdate.getYY(d)}.${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)})`; },
+    toYYMMDDdHHIIdot    (d) { if(d == null) return ""; return `${GGdate.getYY(d)}.${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)}) ${GGdate.getHH(d)}:${GGdate.getII(d)}`; },
+    toYYYYMMDD          (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)}`; },
+    toYYYYMMDDHHIISS    (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)} ${GGdate.getHH(d)}:${GGdate.getII(d)}:${GGdate.getSS(d)}`; },
 
     isHolidayToday()
     {
@@ -104,8 +122,7 @@ var GGdate =
     },
 
     /**
-     * 두 개의 날짜를 받아서 기간을 표시합니다.
-     * 두 날짜는 스트링 형식
+     * period format
      * @param {*} startdt
      * @param {*} closedt
      */
