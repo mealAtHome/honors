@@ -14,12 +14,12 @@ var GGbase =
         /* ==================== */
 
         // for product
-        // $.i18n().load(
-        //     {
-        //         'jp' : "/common/script/i18n/jp.json?" + scriptver,
-        //         'kr' : "/common/script/i18n/kr.json?" + scriptver,
-        //     }
-        // );
+        $.i18n().load(
+            {
+                'jp' : `${scriptHost}/src/prj/script/_base/i18n/jp.json?v=${scriptVersion}`,
+                'kr' : `${scriptHost}/src/prj/script/_base/i18n/kr.json?v=${scriptVersion}`,
+            }
+        );
 
         /* by device (common) */
         /* common  */ scriptArr.push(`${scriptHost}/src/common/script/_base/api.js?v=${scriptVersion}`);
@@ -105,6 +105,7 @@ var GGbase =
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MGovAddr.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MSystemBoard.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/page/page.css?v=${scriptVersion}`);
+        /* project */ cssArr.push(`${scriptHost}/src/prj/css/prj/prj-span.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MBankaccount.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MCls.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MGrp.css?v=${scriptVersion}`);

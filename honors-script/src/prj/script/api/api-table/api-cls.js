@@ -82,7 +82,7 @@ Api.Cls =
     update(ajaxData={}, noticeOK=GGF.TOAST, noticeFail=GGF.TOAST)
     {
         let ajax = Api.execute(ajaxData, "Api.Cls.update", noticeOK, noticeFail);
-        let model = new MApiResponse(rslt);
+        let model = new MApiResponse(ajax);
         return model;
     },
 };

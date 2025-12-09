@@ -57,7 +57,7 @@
             var ServerInfo =
             {
                 getServerHost()   { return localmode ? 'http://localhost:8080/honors-server' : 'http://api.yogimoim.com/honors-server'; },
-                getResourceHost() { return localmode ? 'http://localhost:8081'               : 'http://res.yogimoim.com'; },
+                getResourceHost() { return localmode ? 'http://res.yogimoim.com'             : 'http://res.yogimoim.com'; }, /* http://localhost:8081 */
                 getScriptHost()   { return localmode ? 'http://localhost:8084'               : 'http://script.yogimoim.com'; },
             };
             var initApp = function()

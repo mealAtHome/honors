@@ -124,7 +124,7 @@ class MSystemBoards extends _MCommon
         /* 공지사항 더 보기 */
         $(`${el} .MSystemBoards-makeMainBanners-btn-more`).click(function()
         {
-            Navigation.moveFrontPage(Navigation.Page.Z22SystemBoardList, {});
+            Navigation.moveFrontPage(Navigation.Page.Z21SystemBoardList, {});
         });
 
     }
