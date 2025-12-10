@@ -37,7 +37,7 @@ class MSystemBoard
         `
             <div
                 class="MSystemBoard-makeMainBanner-div-top commonEvent-tag-hyperlink common-tap"
-                hyperlink="${Navigation.Page.Z21SystemBoardDetail}"
+                hyperlink="${Navigation.Page.Z22SystemBoardDetail}"
                 hyperlink-viewmode="page"
                 ${this.getPk()}
             >
@@ -60,7 +60,7 @@ class MSystemBoard
         `
             <div
                 class="MSystemBoard-makeHorizon-div-top commonEvent-tag-hyperlink common-tap"
-                hyperlink="${Navigation.Page.Z21SystemBoardDetail}"
+                hyperlink="${Navigation.Page.Z22SystemBoardDetail}"
                 hyperlink-viewmode="page"
                 ${this.getPk()}
             >
