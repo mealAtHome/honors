@@ -1,36 +1,35 @@
 <ons-page id="UMHM">
 
     <!-- =============== -->
-    <!-- 로그아웃 -->
+    <!-- 헤더 -->
     <!-- =============== -->
     <div class="common-div-cushion">
         <table style="width:100%;">
             <tbody>
                 <tr>
                     <td style="text-align:left;">
-                        <button id="UMHM-btn-logout" class="common-btn-outline common-tag-fontsize09">로그아웃</button>
+                        <div>안녕하세요, <span id="UMHM-span-username" class="common-tag-strong" style="vertical-align:bottom;"></span>&nbsp;님</div>
                     </td>
                     <td style="text-align:right;">
                         <button id="UMHM-btn-toManager" class="common-btn-inline  common-tag-fontsize09" style="display:none;">매니저 홈</button>
                         <button id="UMHM-btn-toAdmin"   class="common-btn-inline  common-tag-fontsize09" style="display:none;">관리자 홈</button>
+                        <button id="UMHM-btn-logout" class="common-btn-outline common-tag-fontsize09">로그아웃</button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
-<!--
-    <div class="common-div-cushion">
-        <button id="UMHM-btn-test-newCls" class="common-btn-outline">일정등록</button>
-    </div>
- -->
+
     <!-- =============== -->
-    <!-- 내 정보 -->
+    <!-- 공지사항 -->
     <!-- =============== -->
     <hr class="common-hr-padding"/>
     <div class="common-div-cushion">
-        <p class="common-p-title">내 정보</p>
-        <div id="UMHM-div-userInfo"></div>
+        <p class="common-p-title">내 스케줄</p>
+        <div id="UMHM-div-"></div>
+        <button id="UMHM-btn-manageSchedule" class="common-btn-outline common-tag-fontsize09">일정입력</button>
     </div>
+
 
     <!-- =============== -->
     <!-- 공지사항 -->
@@ -71,8 +70,9 @@
                         $("#UMHM-btn-toManager").show();
 
                     /* 내 정보 조회 */
-                    let mUsers = Api.User.selectMe();
-                    mUsers.make("#UMHM-div-userInfo");
+                    let mUser = Api.User.selectMe().getModel();
+                    $("#UMHM-span-username").text(`${mUser.getName()}`);
+                    // mUsers.make("#UMHM-div-userInfo");
 
                     Common.hideProgress();
                 }, ajaxDelayTime);

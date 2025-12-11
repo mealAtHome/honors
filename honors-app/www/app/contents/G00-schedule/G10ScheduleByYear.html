@@ -1,0 +1,170 @@
+<ons-page id="GSCY">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="GSCY.close(true);"></gg-backbtn></div>
+        <div class="center">스케줄(주간)</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 연도별 -->
+    <!-- ========================= -->
+<!--     <div class="common-div-cushion">
+        <p class="common-p-title">
+            <span></span>
+        </p>
+        <table class="common-tbl-vertical common-tag-cushionUp common-tag-fontsize09" tbl-type="normal">
+            <tbody>
+                <tr><th>모임시간</th><td><span id="GSCY-span-clsdt"></span></td></tr>
+                <tr><th>모집일정</th><td><span id="GSCY-span-clsapplydt"></span></td></tr>
+                <tr><th>집합장소</th><td><span id="GSCY-span-clsgroundaddr"></span> (<span id="GSCY-span-clsground"></span>)</td></tr>
+                <tr><th>참가비</th><td><span id="GSCY-span-clsapplybill"></span></td></tr>
+                <tr><th>상세</th><td><span id="GSCY-span-clscontent"></span></td></tr>
+                <tr>
+                    <th>담당자</th>
+                    <td>
+                        <div class="common-tag-block">작성자 : <span id="GSCY-span-clsusernoregname"></span></div>
+                        <div class="common-tag-block">주관(정) : <span id="GSCY-span-clsusernoadmname"></span></div>
+                        <div class="common-tag-block">주관(부) : <span id="GSCY-span-clsusernosubname"></span></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+    <!-- ========================= -->
+    <!-- 연도별 -->
+    <!-- ========================= -->
+     <hr class="common-hr-padding">
+     <div class="common-div-cushion">
+        <p class="common-p-title">
+            <span>스케줄 입력현황</span>
+        </p>
+    </div>
+
+
+    <script>
+        var GSCY =
+        {
+            code : "GSCY",
+            Data : {},
+            isManager : false,
+
+            show()
+            {
+                /* validation param */
+                if(GSCY.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); GSCY.close(); return; }
+                if(GSCY.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); GSCY.close(); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let clsno = GSCY.Data.clsno;
+                        let grpno = GSCY.Data.grpno;
+
+                        /* 기본정보 */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        $("#GSCY-span-clstitle")            .text(mCls.getClstitle());
+                        $("#GSCY-span-clsdt")               .text(mCls.getClsPeriod());
+                        $("#GSCY-span-clsground")           .text(mCls.getClsground());
+                        $("#GSCY-span-clsgroundaddr")       .text(mCls.getClsgroundaddr());
+                        $("#GSCY-span-clsapplybill")        .text(mCls.getClsapplybillpriceWon());
+                        $("#GSCY-span-clsapplydt")          .text(mCls.getClsapplyPeriod());
+                        $("#GSCY-span-clscontent")          .text(mCls.getClscontent());
+                        $("#GSCY-span-clsusernoregname")    .text(mCls.getClsusernoregname());
+                        $("#GSCY-span-clsusernoadmname")    .text(mCls.getClsusernoadmname());
+                        $("#GSCY-span-clsusernosubname")    .text(mCls.getClsusernosubname());
+                        $(`.GSCY-div-clssub[tab=${mCls.getClstype()}]`).show();
+                        $(`.GSCY-div-clssub[tab!=${mCls.getClstype()}]`).hide();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+            $("#CUDE-btn-clscancel").click(function()
+            {
+                /* set var */
+                let clsno = GSCY.Data.clsno;
+                let grpno = GSCY.Data.grpno;
+                let clscancelreason = $("#CUDE-textarea-clscancelreason").val().trim();
+
+                /* input check */
+                if(clscancelreason == "") { Common.toastError("취소사유를 입력해주세요."); return; }
+                if(clscancelreason.length > 50) { Common.toastError("취소사유는 50글자 이내로 입력해주세요."); return; }
+
+                /* process */
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.Cls.updateClsstatusToCancel(grpno, clsno, clscancelreason, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("일정이 취소되었습니다.");
+                            GSCY.close();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("일정을 취소하시겠습니까?", process);
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GSCY.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GSCY.close(true);
+            }
+
+            /* localizing */
+            /* $("#GSCY").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

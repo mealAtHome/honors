@@ -67,6 +67,8 @@ Navigation.Page =
     F10ClassUpdate010TypeLineup : "CUTF",
     F10ClassUpdate020Settle : "CUST",
     F10ClassUpdate030Cancel : "CUCC",
+    G10ScheduleByYear : "GSCY",
+    G20ScheduleByWeek : "GSCW",
     S10ChooseGrpMember : "CHGM",
     S11ChooseCls : "CHCL",
     Z00AppUpdateUrl : "SAPP",
@@ -115,6 +117,8 @@ Navigation.getURL = function(str)
         case Navigation.Page.F10ClassUpdate010TypeLineup                   : url = "./app/contents/F00-class/F10-ClassUpdate010TypeLineup.html"; break;
         case Navigation.Page.F10ClassUpdate020Settle                       : url = "./app/contents/F00-class/F10-ClassUpdate020Settle.html"; break;
         case Navigation.Page.F10ClassUpdate030Cancel                       : url = "./app/contents/F00-class/F10-ClassUpdate030Cancel.html"; break;
+        case Navigation.Page.G10ScheduleByYear                             : url = "./app/contents/G00-schedule/G10ScheduleByYear.html"; break;
+        case Navigation.Page.G20ScheduleByWeek                             : url = "./app/contents/G00-schedule/G20ScheduleByWeek.html"; break;
         case Navigation.Page.S10ChooseGrpMember                            : url = "./app/contents/S00-common/S10-ChooseGrpMember.html"; break;
         case Navigation.Page.S11ChooseCls                                  : url = "./app/contents/S00-common/S11-ChooseCls.html"; break;
         case Navigation.Page.Z00AppUpdateUrl                               : url = "./app/contents/Z00-system/Z00-AppUpdateUrl.html"; break;
@@ -165,6 +169,8 @@ Navigation.getData = function(code)
         case Navigation.Page.F10ClassUpdate010TypeLineup            : data = CUTF.Data; break;
         case Navigation.Page.F10ClassUpdate020Settle                : data = CUST.Data; break;
         case Navigation.Page.F10ClassUpdate030Cancel                : data = CUCC.Data; break;
+        case Navigation.Page.G10ScheduleByYear                      : data = GSCY.Data; break;
+        case Navigation.Page.G20ScheduleByWeek                      : data = GSCW.Data; break;
         case Navigation.Page.S10ChooseGrpMember                     : data = CHGM.Data; break;
         case Navigation.Page.S11ChooseCls                           : data = CHCL.Data; break;
         case Navigation.Page.Z00AppUpdateUrl                        : data = SAPP.Data; break;
@@ -242,6 +248,8 @@ Navigation.executeShow = function()
         case Navigation.Page.F10ClassUpdate010TypeLineup              : CUTF.show(); break;
         case Navigation.Page.F10ClassUpdate020Settle                  : CUST.show(); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.show(); break;
+        case Navigation.Page.G10ScheduleByYear                        : GSCY.show(); break;
+        case Navigation.Page.G20ScheduleByWeek                        : GSCW.show(); break;
         case Navigation.Page.S10ChooseGrpMember                       : CHGM.show(); break;
         case Navigation.Page.S11ChooseCls                             : CHCL.show(); break;
         case Navigation.Page.Z00AppUpdateUrl                          : SAPP.show(); break;
@@ -303,6 +311,8 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.F10ClassUpdate010TypeLineup              : CUTF.close(true); break;
         case Navigation.Page.F10ClassUpdate020Settle                  : CUST.close(true); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.close(true); break;
+        case Navigation.Page.G10ScheduleByYear                        : GSCY.close(true); break;
+        case Navigation.Page.G20ScheduleByWeek                        : GSCW.close(true); break;
         case Navigation.Page.S10ChooseGrpMember                       : CHGM.close(true); break;
         case Navigation.Page.S11ChooseCls                             : CHCL.close(true); break;
         case Navigation.Page.Z00AppUpdateUrl                          : SAPP.close(true); break;

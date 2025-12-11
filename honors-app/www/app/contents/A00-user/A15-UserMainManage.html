@@ -15,6 +15,15 @@
         <span id="UMMG-span-version" class="common-tag-block"></span>
     </div>
 
+    <!-- =============== -->
+    <!-- 내 정보 -->
+    <!-- =============== -->
+    <hr class="common-hr-padding"/>
+    <div class="common-div-cushion">
+        <p class="common-p-title">내 정보</p>
+        <div id="UMMG-div-userInfo"></div>
+    </div>
+
     <div class="common-div-cushion common-div-manages">
         <button id="UMMG-btn-privacyDelete" class="common-btn-outline">회원탈퇴</button>
         <!-- <button id="UMMG-btn-manageUserAcctList" class="common-btn-outline">은행계좌관리</button> -->
@@ -38,6 +47,18 @@
             {
                 /* set version */
                 $("#UMMG-span-version").text(versionCl);
+
+                /* recovery */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 내 정보 조회 */
+                    let mUsers = Api.User.selectMe();
+                    mUsers.make("#UMMG-div-userInfo");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
             },
 
 

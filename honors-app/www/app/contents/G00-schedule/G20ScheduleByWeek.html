@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>약 복용 일정</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .date-cards {
+            display: grid;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .date-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .date-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .date-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .date-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .date-day {
+            font-size: 1.8em;
+        }
+
+        .date-month {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .date-title {
+            flex: 1;
+        }
+
+        .date-title h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .date-title .weekday {
+            color: #667eea;
+            font-size: 1em;
+        }
+
+        .medication-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .medication-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 15px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .medication-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .medication-item.checked {
+            background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+        }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .medication-item.checked .checkbox {
+            background: #667eea;
+        }
+
+        .checkbox::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            display: none;
+        }
+
+        .medication-item.checked .checkbox::after {
+            display: block;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #667eea;
+            min-width: 120px;
+            font-size: 1.1em;
+        }
+
+        .medication-item.checked .time {
+            color: #2d8659;
+        }
+
+        .description {
+            color: #555;
+            flex: 1;
+            font-size: 1em;
+        }
+
+        .medication-item.checked .description {
+            color: #333;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .add-button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .add-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .date-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .time {
+                min-width: 100px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💊 약 복용 일정</h1>
+            <p>건강한 하루를 위한 약 관리</p>
+        </div>
+
+        <div class="date-cards" id="dateCards">
+            <!-- 동적으로 생성됩니다 -->
+        </div>
+
+        <button class="add-button" onclick="addNewDate()">+ 새 일정 추가</button>
+    </div>
+
+    <script>
+        const schedules = [
+            {
+                date: '12월 11일',
+                day: '11',
+                month: '12월',
+                weekday: '수요일',
+                medications: [
+                    { time: '10:00 - 12:00', description: '약과 하고짜버요' }
+                ]
+            },
+            {
+                date: '12월 12일',
+                day: '12',
+                month: '12월',
+                weekday: '목요일',
+                medications: [
+                    { time: '19:00 - 20:00', description: '저녁 의인요' }
+                ]
+            }
+        ];
+
+        function renderSchedules() {
+            const container = document.getElementById('dateCards');
+            container.innerHTML = '';
+
+            schedules.forEach((schedule, scheduleIndex) => {
+                const card = document.createElement('div');
+                card.className = 'date-card';
+
+                const medicationItems = schedule.medications.map((med, medIndex) => `
+                    <div class="medication-item" onclick="toggleCheck(${scheduleIndex}, ${medIndex})">
+                        <div class="checkbox"></div>
+                        <div class="time">${med.time}</div>
+                        <div class="description">${med.description}</div>
+                    </div>
+                `).join('');
+
+                card.innerHTML = `
+                    <div class="date-header">
+                        <div class="date-icon">
+                            <div class="date-day">${schedule.day}</div>
+                            <div class="date-month">${schedule.month}</div>
+                        </div>
+                        <div class="date-title">
+                            <h2>${schedule.date}</h2>
+                            <div class="weekday">${schedule.weekday}</div>
+                        </div>
+                    </div>
+                    <div class="medication-list">
+                        ${medicationItems}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function toggleCheck(scheduleIndex, medIndex) {
+            const items = document.querySelectorAll('.medication-item');
+            let currentIndex = 0;
+
+            schedules.forEach((schedule, sIndex) => {
+                schedule.medications.forEach((med, mIndex) => {
+                    if (sIndex === scheduleIndex && mIndex === medIndex) {
+                        items[currentIndex].classList.toggle('checked');
+                    }
+                    currentIndex++;
+                });
+            });
+        }
+
+        function addNewDate() {
+            const newDate = prompt('날짜를 입력하세요 (예: 12월 13일):');
+            const newTime = prompt('시간을 입력하세요 (예: 09:00 - 10:00):');
+            const newDesc = prompt('설명을 입력하세요:');
+
+            if (newDate && newTime && newDesc) {
+                const dayMatch = newDate.match(/(\d+)월\s*(\d+)일/);
+                if (dayMatch) {
+                    schedules.push({
+                        date: newDate,
+                        day: dayMatch[2],
+                        month: dayMatch[1] + '월',
+                        weekday: '추가됨',
+                        medications: [
+                            { time: newTime, description: newDesc }
+                        ]
+                    });
+                    renderSchedules();
+                }
+            }
+        }
+
+        renderSchedules();
+    </script>
+</body>
+</html>

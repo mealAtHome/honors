@@ -253,3 +253,26 @@
     margin:1em auto;
     padding:1em;
 }
+
+/* ========================= */
+/* 새로운 버튼 */
+/* ========================= */
+.common-btn-bottom
+{
+    display: block;
+    margin: 0em auto 0.7em;
+    background: white;
+    color: #667eea;
+    border: none;
+    padding: 0.8em 1.6em;
+    border-radius: 1em;
+    font-size: 1;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+/* .common-btn-bottom:hover{
+    transform: scale(1.05);
+    box-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+} */
