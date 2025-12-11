@@ -7,27 +7,28 @@ Navigation.getApiUrlByFuncName = function(funcName="")
     let serverHost  = ServerInfo.getServerHost();
     switch(funcName)
     {
-        /* SystemBoard */                                   case "Api.SystemBoard.select"                               : url = serverHost + "/src/data/systemBoard/selectSystemBoard.php"; break;
-        /* User */                                          case "Api.User.login"                                       : url = serverHost + "/src/data/user/login.php"; break;
-        /* User */                                          case "Api.User.select"                                      : url = serverHost + "/src/data/user/selectUser.php"; break;
-        /* User */                                          case "Api.User.insert"                                      : url = serverHost + "/src/data/user/insertUser.php"; break;
-        /* User */                                          case "Api.User.update"                                      : url = serverHost + "/src/data/user/updateUser.php"; break;
-        /* User */                                          case "Api.User.deleteUserInfo"                              : url = serverHost + "/src/data/user/deleteUserInfo.php"; break;
-        /* Grp  */                                          case "Api.Grp.select"                                       : url = serverHost + "/src/data/grp/selectGrp.php"; break;
-        /* cls  */                                          case "Api.Cls.select"                                       : url = serverHost + "/src/data/cls/selectCls.php"; break;
-        /* cls  */                                          case "Api.Cls.update"                                       : url = serverHost + "/src/data/cls/updateCls.php"; break;
-        /* clslineup2  */                                   case "Api.Clslineup2.select"                                : url = serverHost + "/src/data/clslineup2/selectClslineup2.php"; break;
-        /* clslineup2  */                                   case "Api.Clslineup2.update"                                : url = serverHost + "/src/data/clslineup2/updateClslineup2.php"; break;
-        /* clssettle  */                                    case "Api.Clssettle.select"                                 : url = serverHost + "/src/data/clssettle/selectClssettle.php"; break;
-        /* clssettle  */                                    case "Api.Clssettle.update"                                 : url = serverHost + "/src/data/clssettle/updateClssettle.php"; break;
-        /* GrpMember */                                     case "Api.GrpMember.select"                                 : url = serverHost + "/src/data/grpMember/selectGrpMember.php"; break;
-        /* GrpMember */                                     case "Api.GrpMember.update"                                 : url = serverHost + "/src/data/grpMember/updateGrpMember.php"; break;
-        /* GrpMemberPointhist */                            case "Api.GrpMemberPointhist.select"                        : url = serverHost + "/src/data/grpMemberPointhist/selectGrpMemberPointhist.php"; break;
-        /* GrpMemberPointhist */                            case "Api.GrpMemberPointhist.update"                        : url = serverHost + "/src/data/grpMemberPointhist/updateGrpMemberPointhist.php"; break;
-        /* Bank */                                          case "Api.Bank.select"                                      : url = serverHost + "/src/data/bank/selectBank.php"; break;
-        /* Bankaccount */                                   case "Api.Bankaccount.select"                               : url = serverHost + "/src/data/bankaccount/selectBankaccount.php"; break;
-        /* Bankaccount */                                   case "Api.Bankaccount.update"                               : url = serverHost + "/src/data/bankaccount/updateBankaccount.php"; break;
-        /* System.Check */                                  case "Api.System.Check.check"                               : url = serverHost + "/src/data/system/check.php"; break;
+        /* SystemBoard */               case "Api.SystemBoard.select"                               : url = serverHost + "/src/data/systemBoard/selectSystemBoard.php"; break;
+        /* User */                      case "Api.User.login"                                       : url = serverHost + "/src/data/user/login.php"; break;
+        /* User */                      case "Api.User.select"                                      : url = serverHost + "/src/data/user/selectUser.php"; break;
+        /* User */                      case "Api.User.insert"                                      : url = serverHost + "/src/data/user/insertUser.php"; break;
+        /* User */                      case "Api.User.update"                                      : url = serverHost + "/src/data/user/updateUser.php"; break;
+        /* User */                      case "Api.User.deleteUserInfo"                              : url = serverHost + "/src/data/user/deleteUserInfo.php"; break;
+        /* Grp  */                      case "Api.Grp.select"                                       : url = serverHost + "/src/data/grp/selectGrp.php"; break;
+        /* cls  */                      case "Api.Cls.select"                                       : url = serverHost + "/src/data/cls/selectCls.php"; break;
+        /* cls  */                      case "Api.Cls.update"                                       : url = serverHost + "/src/data/cls/updateCls.php"; break;
+        /* clslineup2  */               case "Api.Clslineup2.select"                                : url = serverHost + "/src/data/clslineup2/selectClslineup2.php"; break;
+        /* clslineup2  */               case "Api.Clslineup2.update"                                : url = serverHost + "/src/data/clslineup2/updateClslineup2.php"; break;
+        /* clssettle  */                case "Api.Clssettle.select"                                 : url = serverHost + "/src/data/clssettle/selectClssettle.php"; break;
+        /* clssettle  */                case "Api.Clssettle.update"                                 : url = serverHost + "/src/data/clssettle/updateClssettle.php"; break;
+        /* GrpMember */                 case "Api.GrpMember.select"                                 : url = serverHost + "/src/data/grpMember/selectGrpMember.php"; break;
+        /* GrpMember */                 case "Api.GrpMember.update"                                 : url = serverHost + "/src/data/grpMember/updateGrpMember.php"; break;
+        /* GrpMemberPointhist */        case "Api.GrpMemberPointhist.select"                        : url = serverHost + "/src/data/grpMemberPointhist/selectGrpMemberPointhist.php"; break;
+        /* GrpMemberPointhist */        case "Api.GrpMemberPointhist.update"                        : url = serverHost + "/src/data/grpMemberPointhist/updateGrpMemberPointhist.php"; break;
+        /* Scheduleall */               case "Api.Scheduleall.select"                               : url = serverHost + "/src/data/scheduleall/selectScheduleall.php"; break;
+        /* Bank */                      case "Api.Bank.select"                                      : url = serverHost + "/src/data/bank/selectBank.php"; break;
+        /* Bankaccount */               case "Api.Bankaccount.select"                               : url = serverHost + "/src/data/bankaccount/selectBankaccount.php"; break;
+        /* Bankaccount */               case "Api.Bankaccount.update"                               : url = serverHost + "/src/data/bankaccount/updateBankaccount.php"; break;
+        /* System.Check */              case "Api.System.Check.check"                               : url = serverHost + "/src/data/system/check.php"; break;
 
     } /* end switch */
     return url;

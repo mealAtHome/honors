@@ -79,7 +79,7 @@ class ScheduleallBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectBySclyear : { $from = "(select * from scheduleall where sclyear = '$SCLYEAR') t"; break; }
+            case self::selectBySclyear : { $from = "(select * from scheduleall where sclyear = $SCLYEAR) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");

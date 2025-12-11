@@ -55,8 +55,6 @@
             show()
             {
                 /* validation param */
-                if(GSCY.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); GSCY.close(); return; }
-                if(GSCY.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); GSCY.close(); return; }
 
                 /* init */
                 Common.showProgress();
@@ -64,24 +62,7 @@
                 {
                     try
                     {
-                        /* get var */
-                        let clsno = GSCY.Data.clsno;
-                        let grpno = GSCY.Data.grpno;
 
-                        /* 기본정보 */
-                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
-                        $("#GSCY-span-clstitle")            .text(mCls.getClstitle());
-                        $("#GSCY-span-clsdt")               .text(mCls.getClsPeriod());
-                        $("#GSCY-span-clsground")           .text(mCls.getClsground());
-                        $("#GSCY-span-clsgroundaddr")       .text(mCls.getClsgroundaddr());
-                        $("#GSCY-span-clsapplybill")        .text(mCls.getClsapplybillpriceWon());
-                        $("#GSCY-span-clsapplydt")          .text(mCls.getClsapplyPeriod());
-                        $("#GSCY-span-clscontent")          .text(mCls.getClscontent());
-                        $("#GSCY-span-clsusernoregname")    .text(mCls.getClsusernoregname());
-                        $("#GSCY-span-clsusernoadmname")    .text(mCls.getClsusernoadmname());
-                        $("#GSCY-span-clsusernosubname")    .text(mCls.getClsusernosubname());
-                        $(`.GSCY-div-clssub[tab=${mCls.getClstype()}]`).show();
-                        $(`.GSCY-div-clssub[tab!=${mCls.getClstype()}]`).hide();
                     }
                     catch(e)
                     {
@@ -116,32 +97,32 @@
             /* =============== */
             $("#CUDE-btn-clscancel").click(function()
             {
-                /* set var */
-                let clsno = GSCY.Data.clsno;
-                let grpno = GSCY.Data.grpno;
-                let clscancelreason = $("#CUDE-textarea-clscancelreason").val().trim();
+                // /* set var */
+                // let clsno = GSCY.Data.clsno;
+                // let grpno = GSCY.Data.grpno;
+                // let clscancelreason = $("#CUDE-textarea-clscancelreason").val().trim();
 
-                /* input check */
-                if(clscancelreason == "") { Common.toastError("취소사유를 입력해주세요."); return; }
-                if(clscancelreason.length > 50) { Common.toastError("취소사유는 50글자 이내로 입력해주세요."); return; }
+                // /* input check */
+                // if(clscancelreason == "") { Common.toastError("취소사유를 입력해주세요."); return; }
+                // if(clscancelreason.length > 50) { Common.toastError("취소사유는 50글자 이내로 입력해주세요."); return; }
 
-                /* process */
-                let process = function()
-                {
-                    Common.showProgress();
-                    setTimeout(function()
-                    {
-                        let mApiResponse = Api.Cls.updateClsstatusToCancel(grpno, clsno, clscancelreason, GGF.none, GGF.toast);
-                        if(mApiResponse.isSuccess())
-                        {
-                            Common.toastSuccess("일정이 취소되었습니다.");
-                            GSCY.close();
-                            return;
-                        }
-                        Common.hideProgress();
-                    }, ajaxDelayTime);
-                };
-                Common.confirm2("일정을 취소하시겠습니까?", process);
+                // /* process */
+                // let process = function()
+                // {
+                //     Common.showProgress();
+                //     setTimeout(function()
+                //     {
+                //         let mApiResponse = Api.Cls.updateClsstatusToCancel(grpno, clsno, clscancelreason, GGF.none, GGF.toast);
+                //         if(mApiResponse.isSuccess())
+                //         {
+                //             Common.toastSuccess("일정이 취소되었습니다.");
+                //             GSCY.close();
+                //             return;
+                //         }
+                //         Common.hideProgress();
+                //     }, ajaxDelayTime);
+                // };
+                // Common.confirm2("일정을 취소하시겠습니까?", process);
             });
 
 

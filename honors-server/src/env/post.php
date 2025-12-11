@@ -86,6 +86,11 @@
     $options["USERREGDT"]                                           = get("USERREGDT");
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
     $options["CLSCANCELREASON"]                                     = get("CLSCANCELREASON");
+    $options["SCLYEAR"]                                             = get("SCLYEAR");
+    $options["SCLMONTH"]                                            = get("SCLMONTH");
+    $options["SCLWEEK"]                                             = get("SCLWEEK");
+    $options["SCLSTARTDATE"]                                        = get("SCLSTARTDATE");
+    $options["SCLCLOSEDATE"]                                        = get("SCLCLOSEDATE");
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))
