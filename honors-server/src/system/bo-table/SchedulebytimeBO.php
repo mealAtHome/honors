@@ -1,6 +1,6 @@
 <?php
 
-class ScheduleallBO extends _CommonBO
+class SchedulebytimeBO extends _CommonBO
 {
     /* ----- */
     /* singleton */
@@ -28,11 +28,16 @@ class ScheduleallBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__SCLYEAR            = "sclyear";            /* (pk) int     / NO */
-    const FIELD__SCLMONTH           = "sclmonth";           /* (pk) tinyint / NO */
-    const FIELD__SCLWEEK            = "sclweek";            /* (pk) tinyint / NO */
-    const FIELD__SCLSTARTDATE       = "sclstartdate";       /* (  ) date    / NO */
-    const FIELD__SCLCLOSEDATE       = "sclclosedate";       /* (  ) date    / NO */
+    const FIELD__USERNO             = "userno";             /* (PK) char(30)        / NO */
+    const FIELD__SCLYEAR            = "sclyear";            /* (PK) int             / NO */
+    const FIELD__SCLMONTH           = "sclmonth";           /* (PK) tinyint         / NO */
+    const FIELD__SCLWEEK            = "sclweek";            /* (PK) tinyint         / NO */
+    const FIELD__SCLDATE            = "scldate";            /* (PK) date            / NO */
+    const FIELD__SCLSTARTTIME       = "sclstarttime";       /* (PK) time            / NO */
+    const FIELD__SCLCLOSETIME       = "sclclosetime";       /* (PK) time            / NO */
+    const FIELD__SCLFREELEVEL       = "sclfreelevel";       /* (  ) tinyint         / YES */
+    const FIELD__MODIDT             = "modidt";             /* (  ) datetime        / YES */
+    const FIELD__REGDT              = "regdt";              /* (  ) datetime        / YES */
 
     /* ========================= */
     /* select > sub > sub */
@@ -47,8 +52,7 @@ class ScheduleallBO extends _CommonBO
     /* ========================= */
     /* select */
     /* ========================= */
-    const selectBySclyear = "selectBySclyear";
-    const selectByPM3month = "selectByPM3month";
+    const selectByYMW = "selectByYMW";
     protected function select($options, $option="")
     {
         /* --------------- */
@@ -68,39 +72,26 @@ class ScheduleallBO extends _CommonBO
         $from   = "";
         $select =
         "
-              t.sclyear
+              t.userno
+            , t.sclyear
             , t.sclmonth
             , t.sclweek
-            , t.sclstartdate
-            , t.sclclosedate
+            , t.scldate
+            , t.sclstarttime
+            , t.sclclosetime
+            , t.sclfreelevel
+            , t.modidt
+            , t.regdt
+            , scla.sclstartdate
+            , scla.sclclosedate
         ";
-        $additionalSelect = "";
-        $additionalJoin = "";
 
         /* --------------- */
         /* from */
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectBySclyear  : { $from = "(select * from scheduleall where sclyear = $SCLYEAR) t"; break; }
-            case self::selectByPM3month :
-            {
-                $additionalSelect =
-                "
-                    , sclw.sclsubmit
-                ";
-                $additionalJoin =
-                "
-                    left join schedulebyweek sclw
-                        on
-                            sclw.userno = '$EXECUTOR' and
-                            t.sclyear = sclw.sclyear and
-                            t.sclmonth = sclw.sclmonth and
-                            t.sclweek  = sclw.sclweek
-                ";
-                $from = "(select * from scheduleall where sclstartdate > DATE_SUB(CURDATE(), INTERVAL 3 MONTH) and sclclosedate < DATE_ADD(CURDATE(), INTERVAL 3 MONTH)) t";
-                break;
-            }
+            case self::selectByYMW : { $from = "(select * from schedulebytime where sclyear = $SCLYEAR and sclmonth = $SCLMONTH and sclweek = $SCLWEEK) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -114,14 +105,21 @@ class ScheduleallBO extends _CommonBO
         "
             select
                 $select
-                $additionalSelect
             from
                 $from
-                $additionalJoin
+                left join scheduleall scla
+                    on
+                        t.sclyear  = scla.sclyear and
+                        t.sclmonth = scla.sclmonth and
+                        t.sclweek  = scla.sclweek
             order by
-                  t.sclyear
+                  t.userno
+                , t.sclyear
                 , t.sclmonth
                 , t.sclweek
+                , t.scldate
+                , t.sclstarttime
+                , t.sclclosetime
         ";
         $result = GGsql::select($query, $from, $options);
         return $result;

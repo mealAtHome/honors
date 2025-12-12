@@ -84,7 +84,9 @@ var GGdate =
     getYYYY             (d) { if(d == null) return ""; return d.getFullYear(); },
     getYY               (d) { if(d == null) return ""; return d.getFullYear().toString().slice(-2); },
     getMM               (d) { if(d == null) return ""; return String(d.getMonth() + 1 ).padStart(2, '0'); },
+    getM                (d) { if(d == null) return ""; return String(d.getMonth() + 1 ); },
     getDD               (d) { if(d == null) return ""; return String(d.getDate()      ).padStart(2, '0'); },
+    getD                (d) { if(d == null) return ""; return String(d.getDate()      ); },
     getHH               (d) { if(d == null) return ""; return String(d.getHours()     ).padStart(2, '0'); },
     getII               (d) { if(d == null) return ""; return String(d.getMinutes()   ).padStart(2, '0'); },
     getSS               (d) { if(d == null) return ""; return String(d.getSeconds()   ).padStart(2, '0'); },
@@ -95,6 +97,7 @@ var GGdate =
     toYYMMDDdHHIIdot    (d) { if(d == null) return ""; return `${GGdate.getYY(d)}.${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)}) ${GGdate.getHH(d)}:${GGdate.getII(d)}`; },
     toYYYYMMDD          (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)}`; },
     toYYYYMMDDHHIISS    (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)} ${GGdate.getHH(d)}:${GGdate.getII(d)}:${GGdate.getSS(d)}`; },
+    toMDdddd            (d) { if(d == null) return ""; return `${GGdate.getM(d)}/${GGdate.getD(d)}(${GGdate.getDDDD(d)})`; },
 
     isHolidayToday()
     {
@@ -239,5 +242,27 @@ var GGdate =
         $(`${el} > input[type=date]`).val(yyyymmdd);
         $(`${el} > input[type=number]:nth-child(2)`).val(hh);
         $(`${el} > input[type=number]:nth-child(3)`).val(ii);
+    },
+
+    /**
+     * Determine whether the target date is within, passed, or upcoming the from-to date range.
+     * @param {*} tg target
+     * @param {*} fr from
+     * @param {*} to to
+     * @returns
+     */
+    getPointOfDate(tg, fr, to)
+    {
+        /* get date only */
+        tg = new Date(tg.getFullYear(), tg.getMonth(), tg.getDate()).getTime();
+        fr = new Date(fr.getFullYear(), fr.getMonth(), fr.getDate()).getTime();
+        to = new Date(to.getFullYear(), to.getMonth(), to.getDate()).getTime();
+
+        if(tg >= fr && tg <= to)
+            return GGF.GGdate.PointOfDate.WITHIN;
+        if(tg > fr)
+            return GGF.GGdate.PointOfDate.PASSED;
+        if(tg < to)
+            return GGF.GGdate.PointOfDate.UPCOMING;
     },
 }

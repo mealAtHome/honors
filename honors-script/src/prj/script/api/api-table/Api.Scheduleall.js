@@ -3,7 +3,8 @@ Api.Scheduleall =
     /* ========================= */
     /* select */
     /* ========================= */
-    selectBySclyear(sclyear, noticeOK, noticeFail) { return Api.Scheduleall.select({OPTION:"selectBySclyear" , SCLYEAR: sclyear }, noticeOK, noticeFail); },
+    selectBySclyear  (sclyear, noticeOK, noticeFail) { return Api.Scheduleall.select({OPTION:"selectBySclyear" , SCLYEAR: sclyear }, noticeOK, noticeFail); },
+    selectByPM3month (         noticeOK, noticeFail) { return Api.Scheduleall.select({OPTION:"selectByPM3month" }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* update */

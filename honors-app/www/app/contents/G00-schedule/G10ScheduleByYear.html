@@ -5,43 +5,17 @@
     <!-- ======================== -->
     <ons-toolbar>
         <div class="left"><gg-backbtn onclick="GSCY.close(true);"></gg-backbtn></div>
-        <div class="center">스케줄(주간)</div>
+        <div class="center">스케줄(일별)</div>
     </ons-toolbar>
 
     <!-- ========================= -->
     <!-- 연도별 -->
     <!-- ========================= -->
-<!--     <div class="common-div-cushion">
-        <p class="common-p-title">
-            <span></span>
-        </p>
-        <table class="common-tbl-vertical common-tag-cushionUp common-tag-fontsize09" tbl-type="normal">
-            <tbody>
-                <tr><th>모임시간</th><td><span id="GSCY-span-clsdt"></span></td></tr>
-                <tr><th>모집일정</th><td><span id="GSCY-span-clsapplydt"></span></td></tr>
-                <tr><th>집합장소</th><td><span id="GSCY-span-clsgroundaddr"></span> (<span id="GSCY-span-clsground"></span>)</td></tr>
-                <tr><th>참가비</th><td><span id="GSCY-span-clsapplybill"></span></td></tr>
-                <tr><th>상세</th><td><span id="GSCY-span-clscontent"></span></td></tr>
-                <tr>
-                    <th>담당자</th>
-                    <td>
-                        <div class="common-tag-block">작성자 : <span id="GSCY-span-clsusernoregname"></span></div>
-                        <div class="common-tag-block">주관(정) : <span id="GSCY-span-clsusernoadmname"></span></div>
-                        <div class="common-tag-block">주관(부) : <span id="GSCY-span-clsusernosubname"></span></div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div> -->
-
-    <!-- ========================= -->
-    <!-- 연도별 -->
-    <!-- ========================= -->
-     <hr class="common-hr-padding">
      <div class="common-div-cushion">
         <p class="common-p-title">
             <span>스케줄 입력현황</span>
         </p>
+        <div id="GSCY-div-scheduleall"></div>
     </div>
 
 
@@ -62,7 +36,8 @@
                 {
                     try
                     {
-
+                        let mSchedulealls = Api.Scheduleall.selectByPM6month();
+                        mSchedulealls.makeWeekList("#GSCY-div-scheduleall");
                     }
                     catch(e)
                     {

@@ -544,3 +544,56 @@
     margin:0.5em auto;
     max-width:500px;
 }
+
+/* ============================== */
+/* 캘린더 달력용 DIV */
+/* ============================== */
+.common-div-calendarSquareYear
+{
+    font-size:1.2em;
+    font-weight:bold;
+    color: rgb(2, 6, 84);
+}
+
+.common-div-calendarSquare
+{
+    background: linear-gradient(135deg, #020654 0%, #0a2472 100%);
+    color: white;
+    width: 3.6em;
+    height: 3.6em;
+    padding: 0.4em;
+    border-radius: 1em;
+    white-space: nowrap;
+    box-shadow: 0px 2px 4px rgba(2, 6, 84, 0.4);
+}
+.common-div-calendarSquare > div:nth-child(1) { display:block; font-size: 0.9em; line-height:0.9em; text-align: center; font-weight: normal; }
+.common-div-calendarSquare > div:nth-child(2) { display:block; font-size: 1.4em; line-height:1.4em; text-align: center; font-weight: bold; }
+
+/* ByPoint */   .common-div-calendarSquare[point-of-date="passed"]    { background: #f0f0f0; color: #999; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date="within"]    { background: rgb(2, 6, 84); color: white; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date="upcoming"]  { background: white; color: #666; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; padding: 0.3em; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { display:block; line-height:2.6em; font-size: 1em; text-align: center; font-weight: bold; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { font-size: 1.2em; }
+
+.common-div-calendarSquareWeekTop > button
+{
+    background: white;
+    border: 2px solid #e0e0e0;
+    color: #666;
+    padding: 0.5em 0.8em;
+    border-radius: 0.8em;
+    font-size: 1em;
+    font-weight: normal;
+    cursor: pointer;
+    /* transition: all 0.3s ease; */
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    margin-left:0.3em;
+}
+.common-div-calendarSquareWeekTop > button:nth-child(1) { margin-left:0em; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date="passed"]   { background: #f0f0f0; color: #999;          border: 2px solid #d0d0d0; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date="within"]   {                        color: rgb(2, 6, 84); border: 2px solid rgb(2, 6, 84); }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date="upcoming"] {                        color: #666;          border: 2px solid #e0e0e0; }

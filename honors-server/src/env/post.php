@@ -35,6 +35,7 @@
     $options["CLSAPPLYSTARTDT"]                                     = get("CLSAPPLYSTARTDT");
     $options["CLSBILLAPPLYPRICE"]                                   = get("CLSBILLAPPLYPRICE");
     $options["CLSBILLAPPLYUNIT"]                                    = get("CLSBILLAPPLYUNIT");
+    $options["CLSCANCELREASON"]                                     = get("CLSCANCELREASON");
     $options["CLSCLOSEDT"]                                          = get("CLSCLOSEDT");
     $options["CLSCONTENT"]                                          = get("CLSCONTENT");
     $options["CLSGROUND"]                                           = get("CLSGROUND");
@@ -62,6 +63,7 @@
     $options["IS_ADMIN"]                                            = get("IS_ADMIN");
     $options["KEYWORD"]                                             = get("KEYWORD");
     $options["MODIDT"]                                              = get("MODIDT");
+    $options["MONTH"]                                               = get("MONTH"); /* abstract */
     $options["NAME"]                                                = get("NAME");
     $options["NICK"]                                                = get("NICK");
     $options["OPTION"]                                              = get("OPTION"); /* abstract */
@@ -75,6 +77,11 @@
     $options["PW"]                                                  = get("PW");
     $options["REGIDT"]                                              = get("REGIDT");
     $options["SBINDEX"]                                             = get("SBINDEX");
+    $options["SCLCLOSEDATE"]                                        = get("SCLCLOSEDATE");
+    $options["SCLMONTH"]                                            = get("SCLMONTH");
+    $options["SCLSTARTDATE"]                                        = get("SCLSTARTDATE");
+    $options["SCLWEEK"]                                             = get("SCLWEEK");
+    $options["SCLYEAR"]                                             = get("SCLYEAR");
     $options["SERVICE_LAYER"]                                       = get("SERVICE_LAYER");
     $options["TARGET"]                                              = get("TARGET"); /* abstract */
     $options["TEAMNAME"]                                            = get("TEAMNAME");
@@ -85,12 +92,8 @@
     $options["USERNO"]                                              = get("USERNO");
     $options["USERREGDT"]                                           = get("USERREGDT");
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
-    $options["CLSCANCELREASON"]                                     = get("CLSCANCELREASON");
-    $options["SCLYEAR"]                                             = get("SCLYEAR");
-    $options["SCLMONTH"]                                            = get("SCLMONTH");
-    $options["SCLWEEK"]                                             = get("SCLWEEK");
-    $options["SCLSTARTDATE"]                                        = get("SCLSTARTDATE");
-    $options["SCLCLOSEDATE"]                                        = get("SCLCLOSEDATE");
+    $options["WEEK"]                                                = get("WEEK"); /* abstract */
+    $options["YEAR"]                                                = get("YEAR"); /* abstract */
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))

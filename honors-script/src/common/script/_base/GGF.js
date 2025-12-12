@@ -33,6 +33,16 @@ var GGF =
         }
     },
 
+    GGdate:
+    {
+        PointOfDate :
+        {
+            WITHIN   : "within",    /* GGF.GGdate.PointOfDate.WITHIN */
+            PASSED   : "passed",    /* GGF.GGdate.PointOfDate.PASSED */
+            UPCOMING : "upcoming",  /* GGF.GGdate.PointOfDate.UPCOMING */
+        }
+    },
+
     /* ========================= */
     /* DB아님, 시스템에서 사용하는 값 */
     /* ========================= */
