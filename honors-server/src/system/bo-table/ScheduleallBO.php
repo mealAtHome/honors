@@ -37,17 +37,18 @@ class ScheduleallBO extends _CommonBO
     /* ========================= */
     /* select > sub > sub */
     /* ========================= */
-    // public function getByPk($GRPNO, $CLSNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO)); }
+    public function getByPk($SCLYEAR, $SCLMONTH, $SCLWEEK) { return Common::getDataOne($this->selectByPkForInside($SCLYEAR, $SCLMONTH, $SCLWEEK)); }
 
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    // public function selectByPkForInside($GRPNO, $CLSNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside($SCLYEAR, $SCLMONTH, $SCLWEEK) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
     /* ========================= */
-    const selectBySclyear = "selectBySclyear";
+    const selectByPk = "selectByPk";
+    const selectByPkForInside = "selectByPkForInside";
     const selectByPM3month = "selectByPM3month";
     protected function select($options, $option="")
     {
@@ -82,7 +83,8 @@ class ScheduleallBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectBySclyear  : { $from = "(select * from scheduleall where sclyear = $SCLYEAR) t"; break; }
+            case self::selectByPk          : { $from = "(select * from scheduleall where sclyear = $SCLYEAR and sclmonth = $SCLMONTH and sclweek = $SCLWEEK) t"; break; }
+            case self::selectByPkForInside : { $from = "(select * from scheduleall where sclyear = $SCLYEAR and sclmonth = $SCLMONTH and sclweek = $SCLWEEK) t"; break; }
             case self::selectByPM3month :
             {
                 $additionalSelect =

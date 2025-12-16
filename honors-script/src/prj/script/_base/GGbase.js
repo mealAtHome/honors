@@ -67,6 +67,7 @@ var GGbase =
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/api/api-table/api-systemBoard.js?v=${scriptVersion}`);
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/api/api-table/api-user.js?v=${scriptVersion}`);
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/api/api-table/Api.Scheduleall.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/prj/script/api/api-table/Api.Schedulebyweek.js?v=${scriptVersion}`);
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MBankaccount.js?v=${scriptVersion}`);
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MCls.js?v=${scriptVersion}`);
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MClslineup2.js?v=${scriptVersion}`);
@@ -77,6 +78,8 @@ var GGbase =
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MSystemBoard.js?v=${scriptVersion}`);
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MUser.js?v=${scriptVersion}`);
         /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MScheduleall.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MSchedulebyweek.js?v=${scriptVersion}`);
+        /* project */ scriptArr.push(`${scriptHost}/src/prj/script/model/model-table/MSchedulebytime.js?v=${scriptVersion}`);
 
         /* ==================== */
         /* add css */

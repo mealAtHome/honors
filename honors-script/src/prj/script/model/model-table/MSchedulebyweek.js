@@ -1,4 +1,4 @@
-class MSchedulebytime
+class MSchedulebyweek
 {
     constructor(dat)
     {
@@ -6,16 +6,13 @@ class MSchedulebytime
         /* data */      this.sclyear                = GGC.Common.int(dat.sclyear);
         /* data */      this.sclmonth               = GGC.Common.tinyint(dat.sclmonth);
         /* data */      this.sclweek                = GGC.Common.tinyint(dat.sclweek);
-        /* data */      this.scldate                = GGC.Common.date(dat.scldate);
-        /* data */      this.sclstarttime           = GGC.Common.time(dat.sclstarttime);
-        /* data */      this.sclclosetime           = GGC.Common.time(dat.sclclosetime);
-        /* data */      this.sclfreelevel           = GGC.Common.tinyint(dat.sclfreelevel);
+        /* data */      this.scletc                 = GGC.Common.varchar(dat.scletc);
+        /* data */      this.sclsubmit              = GGC.Common.enum(dat.sclsubmit);
         /* data */      this.modidt                 = GGC.Common.datetime(dat.modidt);
-        /* data */      this.regdt                  = GGC.Common.datetime(dat.sclstartdate);
+        /* data */      this.regdt                  = GGC.Common.datetime(dat.regdt);
         /* data */      this.sclstartdate           = GGC.Common.date(dat.sclstartdate);
         /* data */      this.sclclosedate           = GGC.Common.date(dat.sclclosedate);
-        /* custom */    this.pointOfDate            = GGdate.getPointOfDate(new Date(), new Date(this.sclstartdate), new Date(this.sclclosedate));
-        /* custom */    this.pk                     = `sclyear="${this.sclyear}" sclmonth="${this.sclmonth}" sclweek="${this.sclweek}"`;
+        /* custom */    this.pk                     = `userno="${this.userno}" sclyear="${this.sclyear}" sclmonth="${this.sclmonth}" sclweek="${this.sclweek}"`;
     }
 
     /* ========================= */
@@ -25,15 +22,12 @@ class MSchedulebytime
     /* data */          getSclyear() { return this.sclyear; }
     /* data */          getSclmonth() { return this.sclmonth; }
     /* data */          getSclweek() { return this.sclweek; }
-    /* data */          getScldate() { return this.scldate; }
-    /* data */          getSclstarttime() { return this.sclstarttime; }
-    /* data */          getSclclosetime() { return this.sclclosetime; }
-    /* data */          getSclfreelevel() { return this.sclfreelevel; }
+    /* data */          getScletc() { return this.scletc; }
+    /* data */          getSclsubmit() { return this.sclsubmit; }
     /* data */          getModidt() { return this.modidt; }
     /* data */          getRegdt() { return this.regdt; }
     /* data */          getSclstartdate() { return this.sclstartdate; }
     /* data */          getSclclosedate() { return this.sclclosedate; }
-    /* custom */        getPointOfDate() { return this.pointOfDate; }
     /* custom */        getPk() { return this.pk; }
 
     /* ========================= */
@@ -48,7 +42,7 @@ class MSchedulebytime
 
 }
 
-class MSchedulebytimes extends _MCommon
+class MSchedulebyweeks extends _MCommon
 {
     constructor(ajax)
     {
@@ -56,7 +50,7 @@ class MSchedulebytimes extends _MCommon
         for(let i in this.data)
         {
             let dat  = this.data[i];
-            this.models.push(new MSchedulebytime(dat));
+            this.models.push(new MSchedulebyweek(dat));
         }
     }
 
@@ -70,8 +64,8 @@ class MSchedulebytimes extends _MCommon
         /* =============== */
         /* make html */
         /* =============== */
-        let modelF = this.models[0];
-        let sclstartdate = modelF.getSclstartdate();
+        let modelFirst = this.models[0];
+        let sclstartdate = new Date(modelFirst.getSclstartdate());
         let weekhtml = "";
         let timeArr = [];
         let timehtml = "";
@@ -80,8 +74,8 @@ class MSchedulebytimes extends _MCommon
         for(let i = 0; i < 7; i++)
         {
             let date = new Date(sclstartdate);
-            weekhtml += `<th date-day="${date.getDay()}">${GGdate.toMDdddd(date)}</th>`;
-            sclstartdate = GGdate.addDays(sclstartdate, 1);
+            date = new Date(date.setDate(sclstartdate.getDate() + i));
+            weekhtml += `<th date-day="${date.getDay()}">${GGdate.getD(date)}<br>${GGdate.getDDDD(date)}</th>`;
 
             /* loop 6 to 23 */
             timeArr[i] = [];

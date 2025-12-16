@@ -37,21 +37,28 @@ class SchedulebyweekBO extends _CommonBO
     const FIELD__MODIDT             = "modidt";             /* (  ) datetime        / YES */
     const FIELD__REGDT              = "regdt";              /* (  ) datetime        / YES */
 
+
+    /* ========================= */
+    /* select */
+    /*
+    */
+    /* ========================= */
+
     /* ========================= */
     /* select > sub > sub */
     /* ========================= */
-    // public function getByPk($GRPNO, $CLSNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO)); }
+    public function getByPk($USERNO, $SCLYEAR, $SCLMONTH, $SCLWEEK) { return Common::getDataOne($this->selectByPkForInside($USERNO, $SCLYEAR, $SCLMONTH, $SCLWEEK)); }
 
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    // public function selectByPkForInside($GRPNO, $CLSNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside($USERNO, $SCLYEAR, $SCLMONTH, $SCLWEEK) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
-    /* ========================= */
-    /* select */
-    /* ========================= */
     // const selectBySclyear = "selectBySclyear";
     // const selectByPM3month = "selectByPM3month";
+    const selectByPk = "selectByPk";
+    const selectByPkForInside = "selectByPkForInside";
+    const selectByPkInsertIfNotExists = "selectByPkInsertIfNotExists";
     protected function select($options, $option="")
     {
         /* --------------- */
@@ -79,6 +86,8 @@ class SchedulebyweekBO extends _CommonBO
             , t.sclsubmit
             , t.modidt
             , t.regdt
+            , scla.sclstartdate
+            , scla.sclclosedate
         ";
 
         /* --------------- */
@@ -86,7 +95,20 @@ class SchedulebyweekBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            // case self::selectBy : { $from = "(select * from schedulebyweek where sclyear = $SCLYEAR) t"; break; }
+            case self::selectByPk                  : { $from = "(select * from schedulebyweek where userno = '$EXECUTOR' and sclyear = $SCLYEAR and sclmonth = $SCLMONTH and sclweek = $SCLWEEK) t"; break; }
+            case self::selectByPkForInside         : { $from = "(select * from schedulebyweek where userno = '$USERNO'   and sclyear = $SCLYEAR and sclmonth = $SCLMONTH and sclweek = $SCLWEEK) t"; break; }
+            case self::selectByPkInsertIfNotExists :
+            {
+                /* TODO : validation */
+
+                /* 데이터가 존재하지 않으면 insert */
+                $record = $this->getByPk($EXECUTOR, $SCLYEAR, $SCLMONTH, $SCLWEEK);
+                if($record == null)
+                    $this->insertByPkForInside($EXECUTOR, $SCLYEAR, $SCLMONTH, $SCLWEEK);
+
+                $from = "(select * from schedulebyweek where userno = '$EXECUTOR' and sclyear = $SCLYEAR and sclmonth = $SCLMONTH and sclweek = $SCLWEEK) t";
+                break;
+            }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -102,6 +124,11 @@ class SchedulebyweekBO extends _CommonBO
                 $select
             from
                 $from
+                left join scheduleall scla
+                    on
+                        t.sclyear  = scla.sclyear and
+                        t.sclmonth = scla.sclmonth and
+                        t.sclweek  = scla.sclweek
             order by
                   t.userno
                 , t.sclyear
@@ -110,6 +137,75 @@ class SchedulebyweekBO extends _CommonBO
         ";
         $result = GGsql::select($query, $from, $options);
         return $result;
+    }
+
+    /* ========================= */
+    /* update */
+    /*
+    */
+    /* ========================= */
+    public function insertByPkForInside($USERNO, $SCLYEAR, $SCLMONTH, $SCLWEEK) { return $this->update(get_defined_vars(), __FUNCTION__); }
+
+    const insertByPkForInside = "insertByPkForInside";
+    protected function update($options, $option="")
+    {
+        /* --------------- */
+        /* init vars */
+        /* --------------- */
+        extract($options);
+        // extract(self::getConsts());
+
+        /* orderride option */
+        if($option != "")
+            $OPTION = $option;
+
+        /* result */
+        $rslt = Common::getReturn();
+
+        /* ==================== */
+        /* process */
+        /* ==================== */
+        switch($OPTION)
+        {
+            case self::insertByPkForInside:
+            {
+                /* check scheduleall */
+                GGnavi::getScheduleallBO();
+                $record = ScheduleallBO::getInstance()->getByPk($SCLYEAR, $SCLMONTH, $SCLWEEK);
+                if($record == null)
+                    throw new GGexception("(server) scheduleall record not found");
+
+                /* insert */
+                $query =
+                "
+                    insert into schedulebyweek
+                    (
+                          userno
+                        , sclyear
+                        , sclmonth
+                        , sclweek
+                        , modidt
+                        , regdt
+                    )
+                    values
+                    (
+                          '$USERNO'
+                        ,  $SCLYEAR
+                        ,  $SCLMONTH
+                        ,  $SCLWEEK
+                        ,  now()
+                        ,  now()
+                    )
+                ";
+                $result = GGsql::exeQuery($query);
+                break;
+            }
+            default:
+            {
+                throw new GGexception("(server) no option defined");
+            }
+        }
+        return $rslt;
     }
 
 } /* end class */

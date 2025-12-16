@@ -82,6 +82,8 @@ class GGnavi
     static public function getStoreOrderproctimeResultBO()                          { require_once ROOT."/src/system/bo-table/StoreOrderproctimeResultBO.php"; }
     static public function getStoreSalestatusBO()                                   { require_once ROOT."/src/system/bo-table/StoreSalestatusBO.php"; }
     static public function getScheduleallBO()                                       { require_once ROOT."/src/system/bo-table/ScheduleallBO.php"; }
+    static public function getSchedulebyweekBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebyweekBO.php"; }
+    static public function getSchedulebytimeBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebytimeBO.php"; }
 
     static public function getUserAddrBO()                                          { require_once ROOT."/src/system/bo-table/UserAddrBO.php"; }
     static public function getUserBO()                                              { require_once ROOT."/src/system/bo-table/UserBO.php"; }

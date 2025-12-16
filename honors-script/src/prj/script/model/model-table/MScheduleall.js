@@ -35,6 +35,12 @@ class MScheduleall
     /* ========================= */
     // getClsstatusCard() { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
 
+    makeTimeTable()
+    {
+
+    }
+
+
 }
 
 class MSchedulealls extends _MCommon
@@ -53,12 +59,7 @@ class MSchedulealls extends _MCommon
     /* ========================= */
     makeWeekList(el="")
     {
-        let html =
-        `
-            <table class="common-tbl-normal" tbl-type="noborder">
-                <tbody>
-        `;
-
+        let tbody = "";
         let now = new Date();
         let nowY = null;
         for(let i = 0; i < this.models.length; i++)
@@ -70,7 +71,7 @@ class MSchedulealls extends _MCommon
             if(nowY != model.getSclyear())
             {
                 nowY = model.getSclyear();
-                html +=
+                tbody +=
                 `
                     <tr>
                         <td colspan="2">
@@ -85,7 +86,7 @@ class MSchedulealls extends _MCommon
             /* by month */
             if(model.isSameYearMonth(nowY, now.getMonth() + 1))
                 pointOfDate = GGF.GGdate.PointOfDate.WITHIN;
-            html +=
+            tbody +=
             `
                 <tr>
                     <td>
@@ -107,23 +108,44 @@ class MSchedulealls extends _MCommon
                     break;
 
                 /* set type */
-                html += `<button class="common-btn-outline" point-of-date="${modelJ.getPointOfDate()}">${modelJ.getSclweek()}주</button>`;
+                tbody +=
+                `
+                    <button
+                        class="MScheduleall-btn-week common-btn-outline commonEvent-tag-hyperlink"
+                        point-of-date="${modelJ.getPointOfDate()}"
+                        ${modelJ.getPk()}
+                        hyperlink="${Navigation.Page.G20ScheduleByWeek}"
+                        hyperlink-viewmode="page"
+                    >
+                        ${modelJ.getSclweek()}주
+                    </button>
+                `;
 
                 skipCount++;
             }
             i += skipCount - 1;
 
             /* close tr */
-            html += "</div></td></tr>";
+            tbody += "</div></td></tr>";
         }
 
         /* close table */
-        html +=
+        let html =
         `
+            <table class="common-tbl-normal" tbl-type="noborder">
+                <tbody>
+                    ${tbody}
                 </tbody>
             </table>
         `;
         $(el).html(html);
+
+        /* ========================= */
+        /* set event */
+        /* ========================= */
+        // $(`${el} .MScheduleall-btn-week`).click(function()
+        // {
+        // });
     }
 
 }

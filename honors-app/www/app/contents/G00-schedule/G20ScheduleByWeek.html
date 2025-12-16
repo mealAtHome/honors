@@ -15,7 +15,7 @@
         <p class="common-p-title">
             <span>스케줄 입력현황</span>
         </p>
-        <div id="GSCW-div-scheduleall"></div>
+        <div id="GSCW-div-schedulebyweek"></div>
     </div>
 
     <script>
@@ -38,8 +38,20 @@
                 {
                     try
                     {
-                        let mSchedulealls = Api.Scheduleall.selectByPM3month();
-                        mSchedulealls.makeWeekList("#GSCW-div-scheduleall");
+                        let sclyear  = GSCW.Data.sclyear;
+                        let sclmonth = GSCW.Data.sclmonth;
+                        let sclweek  = GSCW.Data.sclweek;
+
+                        /* get time records */
+
+
+                        /* get week if time record not exists */
+                        let mSchedulebyweeks = Api.Schedulebyweek.selectByPkInsertIfNotExists(sclyear, sclmonth, sclweek);
+                        if(mSchedulebyweeks.getModels().length == 0)
+                            throw new Error("조회된 데이터가 없습니다.");
+
+                        mSchedulebyweeks.makeTimeTable("#GSCW-div-schedulebyweek");
+                        // mSchedulealls.makeWeekList("#GSCW-div-scheduleall");
                     }
                     catch(e)
                     {

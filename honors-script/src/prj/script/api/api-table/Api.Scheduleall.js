@@ -3,8 +3,8 @@ Api.Scheduleall =
     /* ========================= */
     /* select */
     /* ========================= */
-    selectBySclyear  (sclyear, noticeOK, noticeFail) { return Api.Scheduleall.select({OPTION:"selectBySclyear" , SCLYEAR: sclyear }, noticeOK, noticeFail); },
-    selectByPM3month (         noticeOK, noticeFail) { return Api.Scheduleall.select({OPTION:"selectByPM3month" }, noticeOK, noticeFail); },
+    selectByPk       (sclyear, sclmonth, sclweek, noticeOK, noticeFail) { return Api.Scheduleall.select({OPTION:"selectByPk"       , SCLYEAR: sclyear, SCLMONTH: sclmonth, SCLWEEK: sclweek }, noticeOK, noticeFail); },
+    selectByPM3month (                            noticeOK, noticeFail) { return Api.Scheduleall.select({OPTION:"selectByPM3month" }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* update */

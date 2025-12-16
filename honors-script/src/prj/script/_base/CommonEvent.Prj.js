@@ -26,6 +26,7 @@ CommonEvent.Prj =
             case Navigation.Page.Z22SystemBoardDetail         : { pageData = {                                 sbindex : target.attr("sbindex") , }; break; }
             case Navigation.Page.F10ClassUpdate010TypeLineup  : { pageData = { option : target.attr("option"), grpno   : target.attr("grpno")   , clsno : target.attr("clsno"), }; break; }
             case Navigation.Page.F10ClassUpdate030Cancel      : { pageData = {                                 grpno   : target.attr("grpno")   , clsno : target.attr("clsno"), }; break; }
+            case Navigation.Page.G20ScheduleByWeek            : { pageData = {sclyear : target.attr("sclyear"), sclmonth : target.attr("sclmonth"), sclweek : target.attr("sclweek") }; break; }
         }
         if(validation)
             Navigation.moveFront(viewMode, pageCode, pageData);

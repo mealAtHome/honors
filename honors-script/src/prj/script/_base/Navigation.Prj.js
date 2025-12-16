@@ -25,6 +25,7 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* GrpMemberPointhist */        case "Api.GrpMemberPointhist.select"                        : url = serverHost + "/src/data/grpMemberPointhist/selectGrpMemberPointhist.php"; break;
         /* GrpMemberPointhist */        case "Api.GrpMemberPointhist.update"                        : url = serverHost + "/src/data/grpMemberPointhist/updateGrpMemberPointhist.php"; break;
         /* Scheduleall */               case "Api.Scheduleall.select"                               : url = serverHost + "/src/data/scheduleall/selectScheduleall.php"; break;
+        /* Schedulebyweek */            case "Api.Schedulebyweek.select"                            : url = serverHost + "/src/data/schedulebyweek/selectSchedulebyweek.php"; break;
         /* Bank */                      case "Api.Bank.select"                                      : url = serverHost + "/src/data/bank/selectBank.php"; break;
         /* Bankaccount */               case "Api.Bankaccount.select"                               : url = serverHost + "/src/data/bankaccount/selectBankaccount.php"; break;
         /* Bankaccount */               case "Api.Bankaccount.update"                               : url = serverHost + "/src/data/bankaccount/updateBankaccount.php"; break;
