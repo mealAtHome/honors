@@ -30,6 +30,8 @@
 .common-tag-alignR { text-align: right; }
 .common-tag-alignL { text-align: left; }
 
+.common-tag-fontLight { color:#666; font-weight:normal; }
+
 /* ============================== */
 /* 색칠 */
 /* ============================== */

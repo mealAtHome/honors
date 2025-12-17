@@ -114,6 +114,7 @@ var GGbase =
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MBankaccount.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MCls.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MGrp.css?v=${scriptVersion}`);
+        /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MSchedulebyweek.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/page/index.css?v=${scriptVersion}`);
 
         /* ==================== */

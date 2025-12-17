@@ -222,7 +222,7 @@
 .common-tbl-lineTab > tbody > tr > td[tab=""]:active,
 .common-tbl-lineTab > tbody > tr > td[tab="tab"]:active
 {
-    background-color:rgb(220,220,220);
+    background-color:#e9ecef;
 }
 
 /* ============================== */
@@ -284,13 +284,13 @@
 {
     border-collapse:collapse;
 }
-.common-tbl-sort { border:1px solid rgb(180,180,180); }
+.common-tbl-sort { border:1px solid #dee2e6; }
 .common-tbl-sort > thead > tr > th,
 .common-tbl-sort > tbody > tr > th
 {
     padding:0.4em;
-    background-color:rgb(230,230,230);
-    border:1px solid rgb(180,180,180);
+    background-color:#e9ecef;
+    border:1px solid #dee2e6;
     white-space: nowrap;
     text-align:center;
 }
@@ -299,7 +299,7 @@
 .common-tbl-sort > tbody > tr > td
 {
     padding:0.4em;
-    border:1px solid rgb(180,180,180);
+    border:1px solid #dee2e6;
 }
 
 /* 정렬 상태에 따른 컨텐츠 */
@@ -319,7 +319,7 @@
 .common-tbl-normal > tbody > tr > th
 {
     padding:0.4em;
-    background-color:rgb(230,230,230);
+    background-color:#e9ecef;
     white-space: nowrap;
     text-align:center;
 }
@@ -333,20 +333,20 @@
 /*
     class="common-tbl-normal" tbl-type="noborder"
 */
-.common-tbl-normal[tbl-type="normal"]                       { border:1px solid rgb(180,180,180); }
-.common-tbl-normal[tbl-type="normal"]    > thead > tr > th  { border:1px solid rgb(180,180,180); }
-.common-tbl-normal[tbl-type="normal"]    > tbody > tr > th  { border:1px solid rgb(180,180,180); }
-.common-tbl-normal[tbl-type="normal"]    > tbody > tr > td  { border:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="normal"]                       { border:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="normal"]    > thead > tr > th  { border:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="normal"]    > tbody > tr > th  { border:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="normal"]    > tbody > tr > td  { border:1px solid #dee2e6; }
 
 .common-tbl-normal[tbl-type="noborder"]                     { border:none; }
 .common-tbl-normal[tbl-type="noborder"]  > thead > tr > th  { border:none; }
 .common-tbl-normal[tbl-type="noborder"]  > tbody > tr > th  { border:none; }
 .common-tbl-normal[tbl-type="noborder"]  > tbody > tr > td  { border:none; }
 
-.common-tbl-normal[tbl-type="rowborder"]                    { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
-.common-tbl-normal[tbl-type="rowborder"] > thead > tr > th  { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
-.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
-.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid rgb(180,180,180); border-bottom:1px solid rgb(180,180,180); }
+.common-tbl-normal[tbl-type="rowborder"]                    { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="rowborder"] > thead > tr > th  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
 
 /* ============================== */
 /* 슬라이드 입력폼용 테이블 */
@@ -362,7 +362,7 @@
 .common-tbl-slideformFooterBtn > tbody > tr > th
 {
     padding:0em;
-    background-color:rgb(230,230,230);
+    background-color:#e9ecef;
     white-space: nowrap;
     text-align:center;
 }
@@ -399,7 +399,7 @@
 .common-tbl-summary > tbody > tr > th
 {
     font-weight: normal;
-    background-color: rgb(230,230,230);
+    background-color: #e9ecef;
 }
 
 /* ============================== */
@@ -412,7 +412,7 @@
 }
 
 .common-tbl-horizon > tbody > tr > * { padding:0.4em; border: 1px solid rgb(150,150,150); }
-.common-tbl-horizon > tbody > tr > th { text-align:right; background-color: rgb(230,230,230); }
+.common-tbl-horizon > tbody > tr > th { text-align:right; background-color: #e9ecef; }
 .common-tbl-horizon > tbody > tr > td { text-align:center; }
 
 /* tr line */
@@ -437,10 +437,10 @@
 {
     padding:0.4em;
 }
-.common-tbl-vertical[tbl-type="normal"]   { border:1px solid rgb(180,180,180); }
-.common-tbl-vertical[tbl-type="normal"]   > tbody > tr > th { background-color:rgb(230,230,230); border:1px solid rgb(180,180,180); }
+.common-tbl-vertical[tbl-type="normal"]   { border:1px solid #dee2e6; }
+.common-tbl-vertical[tbl-type="normal"]   > tbody > tr > th { background-color:#e9ecef; border:1px solid #dee2e6; }
 .common-tbl-vertical[tbl-type="normal"]   > tbody > tr > th { width: 5%;  text-align:right; font-weight:bold; }
-.common-tbl-vertical[tbl-type="normal"]   > tbody > tr > td { width: 95%; text-align:left;  border:1px solid rgb(180,180,180); white-space:normal;}
+.common-tbl-vertical[tbl-type="normal"]   > tbody > tr > td { width: 95%; text-align:left;  border:1px solid #dee2e6; white-space:normal;}
 
 .common-tbl-vertical[tbl-type="noborder"] { border:none; }
 .common-tbl-vertical[tbl-type="noborder"] > thead > tr > th { background-color: rgba(0,0,0,0); }

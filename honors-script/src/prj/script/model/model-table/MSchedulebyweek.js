@@ -71,35 +71,46 @@ class MSchedulebyweeks extends _MCommon
         let timehtml = "";
 
         /* loop 7 days */
-        for(let i = 0; i < 7; i++)
+        for(let i = -1; i < 7; i++)
         {
-            let date = new Date(sclstartdate);
-            date = new Date(date.setDate(sclstartdate.getDate() + i));
-            weekhtml += `<th date-day="${date.getDay()}">${GGdate.getD(date)}<br>${GGdate.getDDDD(date)}</th>`;
+            if(i == -1)
+            {
+                weekhtml += `<th>시간</th>`;
+                continue;
+            }
+            if(i >= 0)
+            {
+                let date = new Date(sclstartdate);
+                date = new Date(date.setDate(sclstartdate.getDate() + i));
+                weekhtml += `<th date-day="${date.getDay()}">${GGdate.getD(date)}<br>${GGdate.getDDDD(date)}</th>`;
+            }
 
             /* loop 6 to 23 */
             timeArr[i] = [];
-            for(let j = 0; j < 36; j++)
-            {
-                let hour = 6 + Math.floor(j / 2);
-                let min  = (j % 2) * 30;
-                timeArr[i][j] = `<td date-day="${i}" time-hour="${hour}" time-min="${min}"></td>`;
-            }
+            for(let j = 0; j < 18; j++)
+                timeArr[i][j] = `<td date-day="${i}" time-hour="${j+6}"></td>`;
         }
 
         /* make timehtml */
-        for(let j = 0; j < 36; j++)
+        for(let j = 0; j < 18; j++)
         {
             timehtml += "<tr>";
-            for(let i = 0; i < 7; i++)
+            for(let i = -1; i < 7; i++)
+            {
+                if(i == -1)
+                {
+                    timehtml += `<th>${j+6}:00</th>`;
+                    continue;
+                }
                 timehtml += timeArr[i][j];
+            }
             timehtml += "</tr>";
         }
 
         /* make html */
         let html =
         `
-            <table class="common-tbl-normal" tbl-type="noborder">
+            <table class="MSchedulebyweek-makeTimeTable-tbl-top common-tbl-normal" tbl-type="normal">
                 <thead>
                     <tr>
                         ${weekhtml}

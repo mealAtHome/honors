@@ -1,13 +1,13 @@
 /* ============================== */
 /* screen background */
 /* ============================== */
-.page { background-color: #ffffff; }
+.page { background-color: #f8f9fa; }
 .page__content
 {
     line-height: 1.6;
     vertical-align: middle;
-    background-color: #ffffff;
+    background-color: #f8f9fa;
 }
-.page__background { background-color: #ffffff; }
+.page__background { background-color: #f8f9fa; }
 
 input { line-height: 1.5; }
