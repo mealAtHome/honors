@@ -12,11 +12,6 @@ class SystemCheckBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function __construct()
-    {
-    }
-    // private $userBO;
-    // public function getUserBO() { GGnavi::getUserBO(); $this->userBO = UserBO::getInstance(); }
 
     /* ========================= */
     /* select */

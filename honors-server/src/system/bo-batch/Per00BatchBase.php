@@ -2,10 +2,12 @@
 
 abstract class Per00BatchBase
 {
-    private $systemBatchBO;
-    public function __construct()
+    public function setBO()
     {
-
+        GGnavi::getSystemBatchBO();
+        $arr = array();
+        $arr['systemBatchBO'] = SystemBatchBO::getInstance();
+        return $arr;
     }
 
     public function beforeProcess()
@@ -20,9 +22,8 @@ abstract class Per00BatchBase
         $GLOBALS['LOG_ROOT_FINAL'] = $logRootBatch;
 
         /* set batch start */
-        GGnavi::getSystemBatchBO();
-        $this->systemBatchBO = SystemBatchBO::getInstance();
-        $this->systemBatchBO->insertByBatchnameForInside($batchname);
+        extract($this->setBO());
+        $systemBatchBO->insertByBatchnameForInside($batchname);
     }
 
     public function afterProcess()
@@ -33,7 +34,11 @@ abstract class Per00BatchBase
 
     public function lock($batchname="")
     {
-        $lockSucceed = $this->systemBatchBO->doLock($batchname);
+        /* set BO */
+        extract($this->setBO());
+
+        /* do lock */
+        $lockSucceed = $systemBatchBO->doLock($batchname);
         if(!$lockSucceed)
             throw new GGexception("이미 실행중입니다. 잠시 후 다시 시도해주세요.");
         return true;
@@ -41,7 +46,11 @@ abstract class Per00BatchBase
 
     public function unlock($batchname="")
     {
-        $this->systemBatchBO->updateUnlockForInside($batchname);
+        /* set BO */
+        extract($this->setBO());
+
+        /* do unlock */
+        $systemBatchBO->updateUnlockForInside($batchname);
     }
 }
 

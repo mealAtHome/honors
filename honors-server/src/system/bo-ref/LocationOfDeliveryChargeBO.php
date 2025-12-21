@@ -12,10 +12,7 @@ class LocationOfDeliveryChargeBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-
-    public function __construct()
-    {
-    }
+    public function setBO() {}
 
 } /* end class */
 ?>

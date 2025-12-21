@@ -20,7 +20,7 @@ class Per30MinOrderingToOrdera extends Per00BatchBase
     }
     public $batchname = "per-30-min-orderingToOrdera";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getOrderaBO();
         GGnavi::getOrderingBO();
@@ -32,6 +32,17 @@ class Per30MinOrderingToOrdera extends Per00BatchBase
         GGnavi::getUserAddrBO();
         GGnavi::getReorderpctLogBO();
         GGnavi::getOrdermenuBO();
+        $arr = array();
+        $arr['orderaBO'] = OrderaBO::getInstance();
+        $arr['orderingBO'] = OrderingBO::getInstance();
+        $arr['reviewBO'] = ReviewBO::getInstance();
+        $arr['reviewMenuBO'] = ReviewMenuBO::getInstance();
+        $arr['settleStoreBO'] = SettleStoreBO::getInstance();
+        $arr['settleRiderBO'] = SettleRiderBO::getInstance();
+        $arr['userAddrBO'] = UserAddrBO::getInstance();
+        $arr['reorderpctLogBO'] = ReorderpctLogBO::getInstance();
+        $arr['ordermenuBO'] = OrdermenuBO::getInstance();
+        return $arr;
     }
 
     public function process()
@@ -40,12 +51,6 @@ class Per30MinOrderingToOrdera extends Per00BatchBase
         /* init */
         /* ========================= */
         $this->beforeProcess();
-        $orderingBO = OrderingBO::getInstance();
-        $ordermenuBO = OrdermenuBO::getInstance();
-        $userAddrBO = UserAddrBO::getInstance();
-        $settleStoreBO = SettleStoreBO::getInstance();
-        $settleRiderBO = SettleRiderBO::getInstance();
-        $reorderpctLogBO = ReorderpctLogBO::getInstance();
 
         /* set autoCommit false */
         GGsql::autoCommitFalse();
@@ -53,6 +58,7 @@ class Per30MinOrderingToOrdera extends Per00BatchBase
         /* ========================= */
         /* process */
         /* ========================= */
+        extract($this->setBO());
 
         /* --------------- */
         /* 현재시간 보다 3시간 전으로 기준일자 생성 */

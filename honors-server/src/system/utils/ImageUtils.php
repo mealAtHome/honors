@@ -2,10 +2,6 @@
 
 class ImageUtils
 {
-    public function __construct() {
-
-    }
-
     /* ===================== */
     /* res 이미지폴더 세팅 */
     /* ===================== */

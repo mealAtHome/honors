@@ -3,7 +3,7 @@
 class Lang
 {
     private $lang     = null;
-        const KR = "kr";
+    const KR = "kr";
     const JP = "jp";
 
     /* =================== */

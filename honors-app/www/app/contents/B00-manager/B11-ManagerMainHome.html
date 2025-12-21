@@ -39,6 +39,7 @@
             <tbody>
                 <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-classes" >일정</button></td><td style="line-height:1.6em;">일정생성 및 관리</td></tr>
                 <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-settle"  >정산</button></td><td style="line-height:1.6em;">실제 일정 후, 정산 및 현황확인</td></tr>
+                <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-finance" >재무</button></td><td style="line-height:1.6em;">전체 재무현황</td></tr>
                 <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-members" >멤버</button></td><td style="line-height:1.6em;">멤버정보 확인, 포인트 투여</td></tr>
                 <tr><td><button class="common-btn-outline MMHM-btn-menu" id="MMHM-btn-manage"  >설정</button></td><td style="line-height:1.6em;">정산 후 입금처 등 상세설정</td></tr>
             </tbody>
@@ -111,8 +112,9 @@
             /* ======================== */
             $("#MMHM-btn-toUser")  .click(function() { GGstorage.clearPageStack(); Navigation.moveFrontPage(Navigation.Page.A11UserMainHome, {}); });
             $("#MMHM-btn-classes") .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B12ManagerMainClasses, {grpno: MMHM.Data.grpno}); });
-            $("#MMHM-btn-members") .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B13ManagerMainMembers, {grpno: MMHM.Data.grpno}); });
             $("#MMHM-btn-settle")  .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B14ManagerMainSettle, {grpno: MMHM.Data.grpno}); });
+            $("#MMHM-btn-finance") .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B14ManagerMainSettle, {grpno: MMHM.Data.grpno}); });
+            $("#MMHM-btn-members") .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B13ManagerMainMembers, {grpno: MMHM.Data.grpno}); });
             $("#MMHM-btn-manage")  .click(function() {                             Navigation.moveFrontPage(Navigation.Page.B15ManagerMainManage, {grpno: MMHM.Data.grpno}); });
 
             /* ------------ */

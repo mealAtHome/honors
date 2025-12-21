@@ -12,12 +12,17 @@ class StoreValidator
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct() {
+    function setBO() {
         GGnavi::getStoreBO();
+        $arr = array();
+        $arr['storeBO'] = StoreBO::getInstance();
+        return $arr;
     }
 
     function validation($fieldname, $value="")
     {
+        extract($this->setBO());
+
         switch($fieldname)
         {
             case StoreBO::FIELD__PAYMENTTYPE_PICKUP_CASH :

@@ -14,9 +14,6 @@ class UserAddrBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function __construct()
-    {
-    }
 
     const FIELD__USERNO               = "userno";
     const FIELD__ADDR_INDEX           = "addr_index";
@@ -373,7 +370,7 @@ class UserAddrBO extends _CommonBO
 
     public function getNewIndex($EXECUTOR)
     {
-        $query    = "select coalesce(max(addr_index),0)+1 max from user_addr where userno = '$EXECUTOR'";
+        $query = "select coalesce(max(addr_index),0)+1 max from user_addr where userno = '$EXECUTOR'";
         $maxIndex = intval(GGsql::selectCnt($query));
         return $maxIndex;
     }

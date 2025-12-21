@@ -20,41 +20,6 @@ class Per30MinOrderingToOrdera extends Per00BatchBase
     }
     public $batchname = "per-30-min-orderingToOrdera";
 
-    public function __construct()
-    {
-        GGnavi::getOrderaBO();
-        GGnavi::getOrderingBO();
-        GGnavi::getSummaryStoreorderAllBO();
-        GGnavi::getSummaryStoreorderAllMenuBO();
-        GGnavi::getSummaryStoreorderAllMenuRecommendBO();
-        GGnavi::getSummaryStoreorderAllMenuoptBO();
-        GGnavi::getSummaryStoreorderAllMenuoptDetailBO();
-        GGnavi::getSummaryStoreorderAllUserBO();
-        GGnavi::getSummaryStoreorderBeeYearBO();
-        GGnavi::getSummaryStoreorderBeeYearMenuBO();
-        GGnavi::getSummaryStoreorderBeeYearMenuRecommendBO();
-        GGnavi::getSummaryStoreorderBeeYearMenuoptBO();
-        GGnavi::getSummaryStoreorderBeeYearMenuoptDetailBO();
-        GGnavi::getSummaryStoreorderCeeMonthBO();
-        GGnavi::getSummaryStoreorderCeeMonthMenuBO();
-        GGnavi::getSummaryStoreorderCeeMonthMenuRecommendBO();
-        GGnavi::getSummaryStoreorderCeeMonthMenuoptBO();
-        GGnavi::getSummaryStoreorderCeeMonthMenuoptDetailBO();
-        GGnavi::getSummaryStoreorderDeeDayBO();
-        GGnavi::getSummaryStoreorderDeeDayMenuBO();
-        GGnavi::getSummaryStoreorderDeeDayMenuRecommendBO();
-        GGnavi::getSummaryStoreorderDeeDayMenuoptBO();
-        GGnavi::getSummaryStoreorderDeeDaymenuoptDetailBO();
-        GGnavi::getSummaryUserorderAllBO();
-        GGnavi::getSummaryUserorderAllMenuBO();
-        GGnavi::getSummaryUserorderAllMenuRecommendBO();
-        GGnavi::getSummaryUserorderAllMenuoptBO();
-        GGnavi::getSummaryUserorderAllMenuoptDetailBO();
-        GGnavi::getSummaryUserorderAllStoreBO();
-        GGnavi::getReviewBO();
-        GGnavi::getReviewMenuBO();
-    }
-
     public function process()
     {
         /* ========================= */

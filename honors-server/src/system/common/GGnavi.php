@@ -29,7 +29,7 @@ class GGnavi
     static public function getClsBO()                                               { require_once ROOT."/src/system/bo-table/ClsBO.php"; }
     static public function getClzcancelBO()                                         { require_once ROOT."/src/system/bo-table/ClzcancelBO.php"; }
     static public function getClslineup2BO()                                        { require_once ROOT."/src/system/bo-table/Clslineup2BO.php"; }
-    static public function getClssettleBO()                                         { require_once ROOT."/src/system/bo-table/ClssettleBO.php"; }
+    static public function getGrpfSettleBO()                                         { require_once ROOT."/src/system/bo-table/GrpfSettleBO.php"; }
     static public function getCartBO()                                              { require_once ROOT."/src/system/bo-table/CartBO.php"; }
     static public function getCartmenuBO()                                          { require_once ROOT."/src/system/bo-table/CartmenuBO.php"; }
     static public function getCartmenuoptBO()                                       { require_once ROOT."/src/system/bo-table/CartmenuoptBO.php"; }

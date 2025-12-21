@@ -12,36 +12,26 @@ class ClsBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct()
+    function setBO()
     {
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
         GGnavi::getClslineup2BO();
         GGnavi::getPaymentABO();
         GGnavi::getGrpMemberBO();
-        GGnavi::getClssettleBO();
+        GGnavi::getGrpfSettleBO();
         GGnavi::getClzcancelBO();
+        $arr = array();
+        $arr['ggAuth']       = GGauth::getInstance();
+        $arr['idxBO']        = IdxBO::getInstance();
+        $arr['grpBO']        = GrpBO::getInstance();
+        $arr['clslineup2BO'] = Clslineup2BO::getInstance();
+        $arr['paymentABO']   = PaymentABO::getInstance();
+        $arr['grpMemberBO']  = GrpMemberBO::getInstance();
+        $arr['grpfSettleBO'] = GrpfSettleBO::getInstance();
+        $arr['clzcancelBO']  = ClzcancelBO::getInstance();
+        return $arr;
     }
-    function setBO()
-    {
-        $this->ggAuth = GGauth::getInstance();
-        $this->idxBO = IdxBO::getInstance();
-        $this->grpBO = GrpBO::getInstance();
-        $this->clslineup2BO = Clslineup2BO::getInstance();
-        $this->paymentABO = PaymentABO::getInstance();
-        $this->grpMemberBO = GrpMemberBO::getInstance();
-        $this->clssettleBO = ClssettleBO::getInstance();
-        $this->clzcancelBO = ClzcancelBO::getInstance();
-    }
-    private $ggAuth;
-    private $idxBO;
-    private $grpBO;
-    private $clslineup2BO;
-    private $paymentABO;
-    private $grpMemberBO;
-    private $clssettleBO;
-    private $clzcancelBO;
-
     /* ========================= */
     /* field */
     /*
@@ -126,7 +116,7 @@ class ClsBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract(ClsBO::getConsts());
         extract(GrpMemberBO::getConsts());
         extract($options);
@@ -281,7 +271,7 @@ class ClsBO extends _CommonBO
         $result = Common::getReturn();
 
         /* get vars */
-        $this->setBO();
+        extract($this->setBO());
         extract(ClsBO::getConsts());
         extract($options);
 
@@ -335,10 +325,10 @@ class ClsBO extends _CommonBO
             case self::insert:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
 
                 /* set var */
-                $clsno = $this->idxBO->makeClsno();
+                $clsno = $idxBO->makeClsno();
                 $CLSUSERNOADM = $CLSUSERNOADM === null ? "null" : "'$CLSUSERNOADM'";
                 $CLSUSERNOSUB = $CLSUSERNOSUB === null ? "null" : "'$CLSUSERNOSUB'";
 
@@ -399,13 +389,13 @@ class ClsBO extends _CommonBO
             case self::update:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $this->ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
 
                 /* clstype is changed? */
                 $clstypeOrigin = Common::getField($this->getByPk($GRPNO, $CLSNO), self::FIELD__CLSTYPE);
                 if($clstypeOrigin != $CLSTYPE)
-                    $this->clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
+                    $clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
 
                 /* update cls info */
                 $query   =
@@ -435,8 +425,8 @@ class ClsBO extends _CommonBO
             case self::updateClsstatusEditToIng:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $this->ggAuth->isClsEdit($GRPNO, $CLSNO, true); /* is edit status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isClsEdit($GRPNO, $CLSNO, true); /* is edit status? */
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusIng', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -446,8 +436,8 @@ class ClsBO extends _CommonBO
             case self::updateClsstatusIngToEndcls:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $this->ggAuth->isClsIng($GRPNO, $CLSNO, true); /* is ing status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isClsIng($GRPNO, $CLSNO, true); /* is ing status? */
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusEndcls', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -457,11 +447,11 @@ class ClsBO extends _CommonBO
             case self::updateClsstatusIngToEndsettle:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $this->ggAuth->isClsEndcls($GRPNO, $CLSNO, true); /* is endcls status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isClsEndcls($GRPNO, $CLSNO, true); /* is endcls status? */
 
                 /* regist settle */
-                $this->clssettleBO->insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
+                $grpfSettleBO->insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusEndsettle', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -471,26 +461,26 @@ class ClsBO extends _CommonBO
             case self::updateClsstatusToCancel:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $this->ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusCancel', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
 
                 /* insert clzcancel */
-                $this->clzcancelBO->insertForInside($GRPNO, $CLSNO, $CLSCANCELREASON);
+                $clzcancelBO->insertForInside($GRPNO, $CLSNO, $CLSCANCELREASON);
                 break;
             }
             case self::copyClsForMng:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
 
                 /* copy cls */
                 $cls = $this->getByPk($GRPNO, $CLSNO);
                 $clstype = Common::getField($cls, ClsBO::FIELD__CLSTYPE);
-                $clsno = $this->idxBO->makeClsno();
+                $clsno = $idxBO->makeClsno();
                 $query =
                 "
                     insert into cls
@@ -540,20 +530,20 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
 
                 /* copy lineup */
-                $this->clslineup2BO->copyFromClsnoForInside($GRPNO, $CLSNO, $clsno);
+                $clslineup2BO->copyFromClsnoForInside($GRPNO, $CLSNO, $clsno);
                 break;
             }
             case self::deleteByPkForMng:
             {
                 /* validation */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
 
                 /* delete cls */
                 $query = "delete from cls where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
 
                 /* delete lineup */
-                $this->clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
+                $clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
                 break;
             }
             default:

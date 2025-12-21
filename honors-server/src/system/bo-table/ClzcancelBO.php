@@ -12,12 +12,7 @@ class ClzcancelBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct()
-    {
-    }
-    function setBO()
-    {
-    }
+    function setBO() {}
 
     /* ========================= */
     /* field */
@@ -72,7 +67,7 @@ class ClzcancelBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract(ClzcancelBO::getConsts());
         extract($options);
 
@@ -135,7 +130,7 @@ class ClzcancelBO extends _CommonBO
         $rslt = Common::getReturn();
 
         /* get vars */
-        $this->setBO();
+        extract($this->setBO());
         extract(ClzcancelBO::getConsts());
         extract($options);
 

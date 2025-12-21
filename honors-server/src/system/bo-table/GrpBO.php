@@ -12,8 +12,11 @@ class GrpBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct() {
+    function setBO() {
         GGnavi::getGrpMemberBO();
+        $arr = array();
+        $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        return $arr;
     }
 
     /* ========================= */
@@ -57,6 +60,7 @@ class GrpBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
+        extract($this->setBO());
         extract(GrpMemberBO::getConsts());
         extract($options);
 
@@ -147,6 +151,9 @@ class GrpBO extends _CommonBO
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
     protected function update($options, $option="")
     {
+        /* set BO */
+        extract($this->setBO());
+
         /* vars */
         $ggAuth = GGauth::getInstance();
         $storeno = null;

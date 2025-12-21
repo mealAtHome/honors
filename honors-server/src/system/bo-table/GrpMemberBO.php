@@ -12,24 +12,20 @@ class GrpMemberBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function __construct() {
+    public function setBO()
+    {
         GGnavi::getUserBO();
         GGnavi::getGrpMemberPointhistBO();
         GGnavi::getClslineup2BO();
-        GGnavi::getClssettleBO();
+        GGnavi::getGrpfSettleBO();
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        $arr['userBO'] = UserBO::getInstance();
+        $arr['grpMemberPointhistBO'] = GrpMemberPointhistBO::getInstance();
+        $arr['clslineup2BO'] = Clslineup2BO::getInstance();
+        $arr['grpfSettleBO'] = GrpfSettleBO::getInstance();
+        return $arr;
     }
-    public function setBO() {
-        $this->userBO = UserBO::getInstance();
-        $this->ggAuth = GGauth::getInstance();
-        $this->grpMemberPointhistBO = GrpMemberPointhistBO::getInstance();
-        $this->clslineup2BO = Clslineup2BO::getInstance();
-        $this->clssettleBO = ClssettleBO::getInstance();
-    }
-    private $userBO;
-    private $ggAuth;
-    private $grpMemberPointhistBO;
-    private $clslineup2BO;
-    private $clssettleBO;
 
     /* ========================= */
     /* field */
@@ -93,7 +89,7 @@ class GrpMemberBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract($options);
 
         /* orderride option */
@@ -172,8 +168,8 @@ class GrpMemberBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByGrpnoForMng : { $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); break; }
-            case self::selectByPkForMng    : { $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); break; }
+            case self::selectByGrpnoForMng : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); break; }
+            case self::selectByPkForMng    : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); break; }
         }
 
         /* --------------- */
@@ -248,7 +244,7 @@ class GrpMemberBO extends _CommonBO
         $rslt = Common::getReturn();
 
         /* get vars */
-        $this->setBO();
+        extract($this->setBO());
         extract($options);
         extract(self::getConsts());
 
@@ -262,7 +258,7 @@ class GrpMemberBO extends _CommonBO
             case self::updateToDeleteForMng:
             {
                 /* is grpmanager? */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* execute */
                 $query =
@@ -307,13 +303,13 @@ class GrpMemberBO extends _CommonBO
             case self::updateInjectPointForMng:
             {
                 /* is grpmanager? */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* update point */
                 $this->updatePointForInside($GRPNO, $USERNO, $POINT);
 
                 /* insert to history */
-                $this->grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, null);
+                $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, null);
                 break;
             }
             case self::insertTempForInside:
@@ -339,7 +335,7 @@ class GrpMemberBO extends _CommonBO
             case self::updateGrpmpositionForMng:
             {
                 /* is gprowner? */
-                $this->ggAuth->isGrpowner($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpowner($GRPNO, $EXECUTOR, true);
 
                 /* check var */
                 if($ARR == null || count($ARR) == 0)
@@ -372,10 +368,10 @@ class GrpMemberBO extends _CommonBO
             case self::makeTempUserForMng:
             {
                 /* is grpmanager? */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* make temp user */
-                $userInfo = $this->userBO->insertTempForInside($USERNAME);
+                $userInfo = $userBO->insertTempForInside($USERNAME);
                 $userno = Common::getField($userInfo, GGF::USERNO);
 
                 /* insert grp_member */
@@ -401,7 +397,7 @@ class GrpMemberBO extends _CommonBO
                 if($point > 0)
                 {
                     $this->updatePointForInside($GRPNO, $userno, $POINT);
-                    $this->grpMemberPointhistBO->insertForInside($GRPNO, $userno, $POINT, "임시멤버 등록화면에서 투여", null);
+                    $grpMemberPointhistBO->insertForInside($GRPNO, $userno, $POINT, "임시멤버 등록화면에서 투여", null);
                 }
 
                 /* return */
@@ -411,7 +407,7 @@ class GrpMemberBO extends _CommonBO
             case self::mergeTempToMemberForMng:
             {
                 /* is grpmanager? */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* get point left */
                 $pointLeft = Common::getField($this->getByPk($GRPNO, $USERNO), GrpMemberBO::FIELD__POINT);
@@ -422,16 +418,16 @@ class GrpMemberBO extends _CommonBO
                     if($pointLeft > 0)
                     {
                         $this->updatePointForInside($GRPNO, $TARGET, $pointLeft);
-                        $this->grpMemberPointhistBO->insertForInside($GRPNO, $TARGET, $pointLeft, "멤버병합으로 인한 포인트 이전", null);
+                        $grpMemberPointhistBO->insertForInside($GRPNO, $TARGET, $pointLeft, "멤버병합으로 인한 포인트 이전", null);
                     }
                 }
 
                 /* update && delete */
-                $this->clslineup2BO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
-                $this->clssettleBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
-                $this->grpMemberPointhistBO->deleteRecordByGrpnoUsernoForInside($GRPNO, $USERNO);
+                $clslineup2BO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $grpfSettleBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $grpMemberPointhistBO->deleteRecordByGrpnoUsernoForInside($GRPNO, $USERNO);
                 $this->deleteRecordByPkForInside($GRPNO, $USERNO);
-                $this->userBO->deleteRecordByPkForInside($USERNO);
+                $userBO->deleteRecordByPkForInside($USERNO);
                 break;
             }
             case self::deleteRecordByPkForInside:

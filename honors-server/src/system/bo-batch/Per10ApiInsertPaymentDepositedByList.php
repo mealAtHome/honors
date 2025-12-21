@@ -17,9 +17,12 @@ class Per10ApiInsertPaymentDepositedByList extends Per00BatchBase
     }
     public $batchname = "per-10-api-insertPaymentDepositedByList";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getPaymentDepositedBO();
+        $arr = array();
+        $arr['paymentDepositedBO'] = PaymentDepositedBO::getInstance();
+        return $arr;
     }
 
     /**
@@ -36,6 +39,7 @@ class Per10ApiInsertPaymentDepositedByList extends Per00BatchBase
         $rslt = Common::getReturn();
 
         /* BO */
+        extract($this->setBO());
         $paymentDepositedBO = PaymentDepositedBO::getInstance();
 
         /* ========================= */

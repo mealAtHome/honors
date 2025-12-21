@@ -12,16 +12,6 @@ class SchedulebyweekBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct()
-    {
-        // GGnavi::getIdxBO();
-        // GGnavi::getGrpBO();
-        // GGnavi::getClslineup2BO();
-        // GGnavi::getPaymentABO();
-        // GGnavi::getGrpMemberBO();
-        // GGnavi::getClssettleBO();
-        // GGnavi::getClzcancelBO();
-    }
 
     /* ========================= */
     /* field */

@@ -17,10 +17,13 @@ class Per30MinOrderCancelNotConfirmed extends Per00BatchBase
     }
     public $batchname = "per-30-min-orderCancelNotConfirmed";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getSystemBatchBO();
         GGnavi::getOrderingBO();
+        $arr = array();
+        $arr['orderingBO'] = OrderingBO::getInstance();
+        return $arr;
     }
 
     public function process()

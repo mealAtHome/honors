@@ -14,13 +14,15 @@ class BankaccountBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function __construct()
-    {
-    }
+
     public function setBO()
     {
         GGnavi::getUserBO();
         GGnavi::getGrpBO();
+        $arr = array();
+        $arr['userBO'] = UserBO::getInstance();
+        $arr['grpBO'] = GrpBO::getInstance();
+        return $arr;
     }
 
     /* fields */
@@ -81,7 +83,7 @@ class BankaccountBO extends _CommonBO
         /* -------------- */
         /* vars */
         /* -------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract(self::getConsts());
         extract($options);
 
@@ -170,7 +172,7 @@ class BankaccountBO extends _CommonBO
         /* -------------- */
         /* vars */
         /* -------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract(self::getConsts());
         extract($options);
 

@@ -21,7 +21,7 @@ class Per40HouPartitions extends Per00BatchBase
     }
     public $batchname = "per-40-hou-partitions";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getInformationSchemaPartitionsBO();
         GGnavi::getStoreOrderproctimeLogBO();

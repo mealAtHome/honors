@@ -19,7 +19,7 @@ class Per50DaySalesSummary extends Per00BatchBase
     }
     public $batchname = "per-50-day-salesSummary";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getSummaryStoreOrderaBO();
         GGnavi::getSummaryStoreOrderyBO();

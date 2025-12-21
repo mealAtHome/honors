@@ -17,10 +17,14 @@ class Per30MinOrderCancelNotPaid extends Per00BatchBase
     }
     public $batchname = "per-30-min-orderCancelNotPaid";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getPaymentQueueBO();
         GGnavi::getOrderingBO();
+        $arr = array();
+        $arr['paymentQueueBO'] = PaymentQueueBO::getInstance();
+        $arr['orderingBO'] = OrderingBO::getInstance();
+        return $arr;
     }
 
     public function process()

@@ -21,7 +21,7 @@ class Per50DaySummaryStoreorderRecent extends Per00BatchBase
     }
     public $batchname = "per-50-day-summaryStoreorderRecent";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getSummaryStoreorderEeeRecent030BO();
         GGnavi::getSummaryStoreorderEeeRecent030MenuBO();

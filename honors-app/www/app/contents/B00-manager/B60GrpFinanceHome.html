@@ -1,0 +1,186 @@
+<ons-page id="MMST">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="MMST.close(true);"></gg-backbtn></div>
+        <div class="center">재무현황</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 재무현황 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <table class="MMST-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="MMST-td-searchtype" val="nodepositall"   tab="tab" >전체</td> <!-- 미입금 + 임시완료 -->
+                    <td class="MMST-td-searchtype" val="memberdeposit"  tab=""    >임시완료</td>
+                    <td class="MMST-td-searchtype" val="nodeposit"      tab=""    >미입금</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- 전체 -->
+    <!-- ========================= -->
+    <div class="MMST-div-tab" tab="nodepositall" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">전체</p>
+            <ul class="common-ul-announce">
+                <li>입금처리가 완료되지 않은 전체건을 조회합니다.</li>
+            </ul>
+        </div>
+        <div id="MMST-div-nodepositallList"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 임시완료 -->
+    <!-- ========================= -->
+    <div class="MMST-div-tab" tab="memberdeposit" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">임시완료</p>
+            <ul class="common-ul-announce">
+                <li>멤버 본인이 입금완료했다고 표시한 리스트를 표시합니다.</li>
+                <li>실제로 완료되었는지 확인 후, 입금완료로 처리하면 됩니다.</li>
+            </ul>
+        </div>
+        <div id="MMST-div-memberdepositList"></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 미입금 -->
+    <!-- ========================= -->
+    <div class="MMST-div-tab" tab="nodeposit" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">미입금</p>
+            <ul class="common-ul-announce">
+                <li>멤버 본인이 입금완료했다고 표시하지 않았고, 입금완료처리도 진행되지 않은 건을 조회힙니다.</li>
+            </ul>
+        </div>
+        <div id="MMST-div-nodepositList"></div>
+    </div>
+
+    <script>
+        var MMST =
+        {
+            code : "MMST",
+            Data: {},
+
+            show()
+            {
+                /* validation param */
+                if(MMST.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); MMST.close(); return; }
+                if(MMST.Data.searchtype == undefined) { MMST.Data.searchtype = "nodepositall"; } /* 기본값 */
+
+                /* set tab */
+                $(`.MMST-td-searchtype[val='${MMST.Data.searchtype}']`).click();
+
+                // Common.showProgress();
+                // setTimeout(function()
+                // {
+                // }, ajaxDelayTime);
+            },
+
+            search()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            $(".MMST-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("val");
+                $(".MMST-td-searchtype").removeAttr("tab");
+                $(this).attr("tab", "tab");
+
+                /* save selected */
+                MMST.Data.searchtype = searchtype;
+
+                /* process */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let grpno = MMST.Data.grpno;
+
+                        /* 탭별표시 */
+                        switch(searchtype)
+                        {
+                            case "nodepositall":
+                            {
+                                let mClssettles = Api.Clssettle.selectNotDepositedAllByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                                mClssettles.make("#MMST-div-nodepositallList");
+                                break;
+                            }
+                            case "memberdeposit":
+                            {
+                                let mClssettles = Api.Clssettle.selectMemberdepositflgYesByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                                mClssettles.make("#MMST-div-memberdepositList");
+                                break;
+                            }
+                            case "nodeposit":
+                            {
+                                let mClssettles = Api.Clssettle.selectNotDepositedByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                                mClssettles.make("#MMST-div-nodepositList");
+                                break;
+                            }
+                        }
+                        /* show / hide */
+                        $(".MMST-div-tab").hide();
+                        $(`.MMST-div-tab[tab='${searchtype}']`).show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MMST.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MMST.close(true);
+            }
+
+        }); /* end function */
+
+    </script>
+</ons-page>

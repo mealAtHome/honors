@@ -7,10 +7,6 @@
 
 class _CommonBO
 {
-    public function __construct()
-    {
-    }
-
     /*
         selectByOption 의 기본 반환형
         validation 체크 등으로 인해 빈 값을 돌려줘야할 때도 쓴다

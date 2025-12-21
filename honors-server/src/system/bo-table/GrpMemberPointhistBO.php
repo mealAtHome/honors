@@ -12,15 +12,14 @@ class GrpMemberPointhistBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct() {
-        GGnavi::getGrpMemberBO();
-    }
     function setBO() {
-        $this->ggAuth = GGauth::getInstance();
-        $this->grpMemberBO = GrpMemberBO::getInstance();
+        $ggAuth = GGauth::getInstance();
+        $grpMemberBO = GrpMemberBO::getInstance();
+        $arr = array();
+        $arr['ggAuth'] = $ggAuth;
+        $arr['grpMemberBO'] = $grpMemberBO;
+        return $arr;
     }
-    private $ggAuth;
-    private $grpMemberBO;
 
     /* ========================= */
     /* field */
@@ -74,7 +73,7 @@ class GrpMemberPointhistBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract(GrpMemberPointhistBO::getConsts());
         extract($options);
 
@@ -158,7 +157,7 @@ class GrpMemberPointhistBO extends _CommonBO
         $pointhistno = null;
 
         /* get vars */
-        $this->setBO();
+        extract($this->setBO());
         extract(GrpMemberPointhistBO::getConsts());
         extract($options);
 
@@ -182,7 +181,7 @@ class GrpMemberPointhistBO extends _CommonBO
             case self::insertForInside:
             {
                 /* get pointleft */
-                $grpmPoint = Common::getField($this->grpMemberBO->getByPk($GRPNO, $USERNO), GrpMemberBO::FIELD__POINT);
+                $grpmPoint = Common::getField($grpMemberBO->getByPk($GRPNO, $USERNO), GrpMemberBO::FIELD__POINT);
 
                 /* get pointhistdt */
                 $pointhistdt = GGdate::getYMDhyphen();

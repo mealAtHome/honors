@@ -19,7 +19,7 @@ class Per50DayUpdateReorderpct extends Per00BatchBase
     }
     public $batchname = "per-50-day-updateReorderpct";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getStoreBO();
         GGnavi::getMenuBO();

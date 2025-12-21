@@ -12,6 +12,11 @@ class SystemBoardBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    public function setBO()
+    {
+        $arr = array();
+        return $arr;
+    }
 
     /* ========================= */
     /* field */
@@ -33,9 +38,8 @@ class SystemBoardBO extends _CommonBO
     const selectOpenByPk = "selectOpenByPk";   /* 인덱스로 선택 */
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* set */
+        extract($this->setBO());
         extract($options);
 
         /* orderride option */

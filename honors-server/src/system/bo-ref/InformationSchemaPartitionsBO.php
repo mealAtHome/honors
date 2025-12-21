@@ -13,7 +13,7 @@ class InformationSchemaPartitionsBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function __construct()
+    public function setBO()
     {
         // GGnavi::getReorderpctResultBO();
     }

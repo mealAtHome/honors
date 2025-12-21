@@ -56,9 +56,24 @@
             </tbody>
         </table>
     </div>
-    <hr class="common-hr-padding">
-    <div class="common-div-cushionLRD">
-        <p class="common-p-title">참가명단</p>
+    <hr class="common-hr-paddingLR">
+
+    <!-- --------------- -->
+    <!-- 탭 -->
+    <!-- --------------- -->
+    <div class="common-div-cushion">
+        <div class="common-tag-fontsize09">
+            <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="settle"  tab="tab" style="padding-left:0.8em; padding-right:0.8em;">참가정산</button>
+            <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="consume" tab=""    style="padding-left:0.8em; padding-right:0.8em;">소비품목</button>
+        </div>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 참가정산 -->
+    <!-- --------------- -->
+    <div class="CUST-div-tab common-div-cushion" tab="settle">
+        <p class="common-p-title">참가정산</p>
+        <span class="common-tag-block common-tag-fontsize09">※참가자를 기반으로 청구금액을 계산하는 테이블입니다.</span>
         <div class="common-div-scrollX">
             <table id="CUST-tbl-settle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
                 <thead>
@@ -76,6 +91,11 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <td colspan="7">
+                            <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>합계</td>
                         <td><span id="CUST-span-billstandSummary"></span></td>
                         <td><span id="CUST-span-billfinalSummary"></span></td>
@@ -87,10 +107,39 @@
                 </tfoot>
             </table>
         </div>
-        <span class="common-tag-block common-tag-fontsize09">※옆으로 늘어나는 테이블입니다. 스크롤을 좌우로 움직여서 확인하세요.</span>
-        <div class="common-div-cushionUD">
-            <button id="CUST-btn-settleComplete" class="common-btn-inline" style="width:8em;">정산완료</button>
-        </div>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 소비품목 -->
+    <!-- --------------- -->
+    <div class="CUST-div-tab common-div-cushion" tab="consume">
+        <p class="common-p-title">소비품목</p>
+        <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
+        <table id="CUST-tbl-consume" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+            <thead>
+                <tr>
+                    <th>품목</th>
+                    <th>소비금액</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <button id="CUST-btn-addConsumeItem" class="common-btn-outline">＋품목추가</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>합계</td>
+                    <td><span id="CUST-span-billfinalSummary"></span></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="common-div-cushion">
+        <button id="CUST-btn-settleComplete" class="common-btn-inline" style="width:8em;">정산완료</button>
     </div>
 
     <script>

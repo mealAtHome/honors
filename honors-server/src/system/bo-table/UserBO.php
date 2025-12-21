@@ -12,21 +12,17 @@ class UserBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
         GGnavi::getGrpMemberBO();
+        $arr = array();
+        $arr['idxBO'] = IdxBO::getInstance();
+        $arr['grpBO'] = GrpBO::getInstance();
+        $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        return $arr;
     }
-    public function setBO()
-    {
-        $this->idxBO = IdxBO::getInstance();
-        $this->grpBO = GrpBO::getInstance();
-        $this->grpMemberBO = GrpMemberBO::getInstance();
-    }
-    private $idxBO;
-    private $grpBO;
-    private $grpMemberBO;
 
     /* ========================= */
     /* fields */
@@ -89,7 +85,7 @@ class UserBO extends _CommonBO
         /* --------------- */
         /* get vars */
         /* --------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract($options);
 
         /* overring option */
@@ -185,7 +181,7 @@ class UserBO extends _CommonBO
         /* -------------- */
         /* vars */
         /* -------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract($options);
 
         /* override option */
@@ -205,7 +201,7 @@ class UserBO extends _CommonBO
                 case self::insertForInside:
                 {
                     /* make userno */
-                    $userno = $this->idxBO->makeUserno();
+                    $userno = $idxBO->makeUserno();
 
                     /* ID : 영숫자만 사용가능 */
                     if(preg_match("/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]/", $ID) == false)
@@ -286,7 +282,7 @@ class UserBO extends _CommonBO
                     ImageUtils::setImgUser($userno);
 
                     /* insert grp_member */
-                    $this->grpMemberBO->insertTempForInside($userno);
+                    $grpMemberBO->insertTempForInside($userno);
 
                     /* generate API key */
                     $rslt[GGF::ID] = $ID;
@@ -296,7 +292,7 @@ class UserBO extends _CommonBO
                 }
                 case self::insertTempForInside:
                 {
-                    $userno = $this->idxBO->makeUserno();
+                    $userno = $idxBO->makeUserno();
                     $id = "temp-".$this->generateTempId();
                     $pwHash = password_hash(Common::getRandomString(10), PASSWORD_BCRYPT);
 

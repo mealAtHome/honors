@@ -13,34 +13,13 @@ class GGauth
         return self::$bo;
     }
 
-    public function __construct()
-    {
-        GGnavi::getGrpBO();
-        GGnavi::getClsBO();
-        GGnavi::getUserBO();
-        GGnavi::getBankaccountBO();
-        GGnavi::getGrpMemberBO();
-    }
-    private $grpBO;
-    private $clsBO;
-    private $userBO;
-    private $bankaccountBO;
-    private $grpMemberBO;
-
-    public function getGrpBO()         { GGnavi::getGrpBO();             $this->grpBO = GrpBO::getInstance(); }
-    public function getClsBO()         { GGnavi::getClsBO();             $this->clsBO = ClsBO::getInstance(); }
-    public function getUserBO()        { GGnavi::getUserBO();            $this->userBO = UserBO::getInstance(); }
-    public function getBankaccountBO() { GGnavi::getBankaccountBO();     $this->bankaccountBO = BankaccountBO::getInstance(); }
-    public function getGrpMemberBO()   { GGnavi::getGrpMemberBO();       $this->grpMemberBO = GrpMemberBO::getInstance(); }
-
-
     /* ========================= */
     /* get record by key */
     /* ========================= */
-    public function getUser             ($USERNO)                      { $this->getUserBO();         $user        = $this->userBO->getByPk($USERNO);                              if($user         != null) { return $user;        } else { throw new GGexception("존재하지 않는 유저입니다."); } }
-    public function getGrp              ($GRPNO)                       { $this->getGrpBO();          $grp         = $this->grpBO->getByPk($GRPNO);                                if($grp          != null) { return $grp;         } else { throw new GGexception("존재하지 않는 그룹입니다."); } }
-    public function getCls              ($GRPNO, $CLSNO)               { $this->getClsBO();          $cls         = $this->clsBO->getByPk($GRPNO, $CLSNO);                        if($cls          != null) { return $cls;         } else { throw new GGexception("존재하지 않는 일정입니다."); } }
-    public function getBankaccount      ($BACCTYPE, $BACCKEY, $BACCNO) { $this->getBankaccountBO();  $bankaccount = $this->bankaccountBO->getByPk($BACCTYPE, $BACCKEY, $BACCNO);  if($bankaccount  != null) { return $bankaccount; } else { throw new GGexception("존재하지 않는 계좌입니다."); } }
+    public function getUser             ($USERNO)                      { GGnavi::getUserBO();        $userBO        = UserBO::getInstance();         $user        = $userBO->getByPk($USERNO);                              if($user         != null) { return $user;        } else { throw new GGexception("존재하지 않는 유저입니다."); } }
+    public function getGrp              ($GRPNO)                       { GGnavi::getGrpBO();         $grpBO         = GrpBO::getInstance();          $grp         = $grpBO->getByPk($GRPNO);                                if($grp          != null) { return $grp;         } else { throw new GGexception("존재하지 않는 그룹입니다."); } }
+    public function getCls              ($GRPNO, $CLSNO)               { GGnavi::getClsBO();         $clsBO         = ClsBO::getInstance();          $cls         = $clsBO->getByPk($GRPNO, $CLSNO);                        if($cls          != null) { return $cls;         } else { throw new GGexception("존재하지 않는 일정입니다."); } }
+    public function getBankaccount      ($BACCTYPE, $BACCKEY, $BACCNO) { GGnavi::getBankaccountBO(); $bankaccountBO = BankaccountBO::getInstance();  $bankaccount = $bankaccountBO->getByPk($BACCTYPE, $BACCKEY, $BACCNO);  if($bankaccount  != null) { return $bankaccount; } else { throw new GGexception("존재하지 않는 계좌입니다."); } }
 
     /* ========================= */
     /* auth functions */
@@ -48,8 +27,9 @@ class GGauth
     public function isGrpmanager($GRPNO, $USERNO, $errorflg=false)
     {
         /* get grpMember */
-        $this->getGrpMemberBO();
-        $grpMember = $this->grpMemberBO->getByPk($GRPNO, $USERNO);
+        GGnavi::getGrpMemberBO();
+        $grpMemberBO = GrpMemberBO::getInstance();
+        $grpMember = $grpMemberBO->getByPk($GRPNO, $USERNO);
 
         /* check grpmtype */
         $grpmtype = Common::getField($grpMember, GrpMemberBO::FIELD__GRPMTYPE);
@@ -64,8 +44,9 @@ class GGauth
     public function isGrpowner($GRPNO, $USERNO, $errorflg=false)
     {
         /* get grpMember */
-        $this->getGrpMemberBO();
-        $grpMember = $this->grpMemberBO->getByPk($GRPNO, $USERNO);
+        GGnavi::getGrpMemberBO();
+        $grpMemberBO = GrpMemberBO::getInstance();
+        $grpMember = $grpMemberBO->getByPk($GRPNO, $USERNO);
 
         /* check grpmtype */
         $grpmtype = Common::getField($grpMember, GrpMemberBO::FIELD__GRPMTYPE);
@@ -123,8 +104,6 @@ class GGauth
         }
         return true;
     }
-
-
 
     public function isClsInApplyDt($GRPNO, $CLSNO)
     {

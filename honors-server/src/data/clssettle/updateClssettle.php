@@ -4,10 +4,10 @@
     /* init */
     /* ============================ */
     include '../../env/env.php';
-    GGnavi::getClssettleBO();
+    GGnavi::getGrpfSettleBO();
 
     /* vars */
-    $clssettleBO = ClssettleBO::getInstance();
+    $grpfSettleBO = GrpfSettleBO::getInstance();
     $rslt = Common::getReturn();
 
     /* ============================ */
@@ -16,7 +16,7 @@
     GGsql::autoCommitFalse();
     try
     {
-        $clsno = $clssettleBO->updateByOption($options);
+        $clsno = $grpfSettleBO->updateByOption($options);
         $rslt[GGF::DATA] = $clsno;
     }
     catch(GGexception $e)

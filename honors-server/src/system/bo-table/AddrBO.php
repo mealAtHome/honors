@@ -11,9 +11,6 @@ class AddrBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function __construct()
-    {
-    }
 
     /* ========================= */
     /* fields */

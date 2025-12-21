@@ -13,7 +13,7 @@ class RefFeeBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct() {
+    function setBO() {
         // GGnavi::getStoreBO();
     }
 

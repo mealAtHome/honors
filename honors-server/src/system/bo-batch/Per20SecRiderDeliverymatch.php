@@ -17,10 +17,14 @@ class Per20SecRiderDeliverymatch extends Per00BatchBase
     }
     public $batchname = "per-20-sec-riderDeliverymatch";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getRiderDeliverymatchBO();
         GGnavi::getOrderingBO();
+        $arr = array();
+        $arr['riderDeliverymatchBO'] = RiderDeliverymatchBO::getInstance();
+        $arr['orderingBO'] = OrderingBO::getInstance();
+        return $arr;
     }
 
     public function process()
@@ -29,12 +33,11 @@ class Per20SecRiderDeliverymatch extends Per00BatchBase
         /* init */
         /* ========================= */
         $this->beforeProcess();
-        $orderingBO = OrderingBO::getInstance();
-        $riderDeliverymatchBO = RiderDeliverymatchBO::getInstance();
 
         /* ========================= */
         /* process */
         /* ========================= */
+        extract($this->setBO());
         $hasData = true;
         do
         {

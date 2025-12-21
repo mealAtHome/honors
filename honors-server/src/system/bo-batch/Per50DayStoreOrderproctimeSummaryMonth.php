@@ -21,7 +21,7 @@ class Per50DayStoreOrderproctimeSummaryMonth extends Per00BatchBase
     }
     public $batchname = "per-50-day-storeOrderproctimeSummaryMonth";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getStoreOrderproctimeResultBO();
     }

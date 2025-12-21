@@ -20,7 +20,7 @@ class Per40HouStoreOrderproctimeSummaryToday extends Per00BatchBase
     }
     public $batchname = "per-40-hou-storeOrderproctimeSummaryToday";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getSystemBatchBO();
         GGnavi::getStoreOrderproctimeResultBO();

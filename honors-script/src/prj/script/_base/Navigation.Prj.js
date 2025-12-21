@@ -52,7 +52,8 @@ Navigation.Page =
     B12ManagerMainClasses : "MMCL",
     B13ManagerMainMembers : "MMMB",
     B14ManagerMainSettle : "MMST",
-    B15ManagerMainManage : "MMMG",
+    B60GrpFinanceHome : "GFHM",
+    B80GrpManageHome : "MMMG",
     B85ManagerMemberLayering : "MMLY",
     B71GrpMemberDetail : "GMDT",
     B72GrpMemberMergeTemp : "GMMT",
@@ -102,10 +103,11 @@ Navigation.getURL = function(str)
         case Navigation.Page.B12ManagerMainClasses                         : url = "./app/contents/B00-manager/B12-ManagerMainClasses.html"; break;
         case Navigation.Page.B13ManagerMainMembers                         : url = "./app/contents/B00-manager/B13-ManagerMainMembers.html"; break;
         case Navigation.Page.B14ManagerMainSettle                          : url = "./app/contents/B00-manager/B14-ManagerMainSettle.html"; break;
-        case Navigation.Page.B15ManagerMainManage                          : url = "./app/contents/B00-manager/B15-ManagerMainManage.html"; break;
+        case Navigation.Page.B60GrpFinanceHome                             : url = "./app/contents/B00-manager/B60GrpFinanceHome.html"; break;
         case Navigation.Page.B85ManagerMemberLayering                      : url = "./app/contents/B00-manager/B85-ManagerMemberLayering.html"; break;
         case Navigation.Page.B71GrpMemberDetail                            : url = "./app/contents/B00-manager/B71-GrpMemberDetail.html"; break;
         case Navigation.Page.B72GrpMemberMergeTemp                         : url = "./app/contents/B00-manager/B72-GrpMemberMergeTemp.html"; break;
+        case Navigation.Page.B80GrpManageHome                              : url = "./app/contents/B00-manager/B80GrpManageHome.html"; break;
         case Navigation.Page.B81ManagerBankacctList                        : url = "./app/contents/B00-manager/B81-ManagerBankacctList.html"; break;
         case Navigation.Page.B82ManagerBankacctUpdate                      : url = "./app/contents/B00-manager/B82-ManagerBankacctUpdate.html"; break;
         case Navigation.Page.C00AdminChooseUser                            : url = "./app/contents/C00-admin/C00-AdminChooseUser.html"; break;
@@ -154,7 +156,8 @@ Navigation.getData = function(code)
         case Navigation.Page.B12ManagerMainClasses                  : data = MMCL.Data; break;
         case Navigation.Page.B13ManagerMainMembers                  : data = MMMB.Data; break;
         case Navigation.Page.B14ManagerMainSettle                   : data = MMST.Data; break;
-        case Navigation.Page.B15ManagerMainManage                   : data = MMMG.Data; break;
+        case Navigation.Page.B60GrpFinanceHome                      : data = GFHM.Data; break;
+        case Navigation.Page.B80GrpManageHome                       : data = MMMG.Data; break;
         case Navigation.Page.B85ManagerMemberLayering               : data = MMLY.Data; break;
         case Navigation.Page.B71GrpMemberDetail                     : data = GMDT.Data; break;
         case Navigation.Page.B72GrpMemberMergeTemp                  : data = GMMT.Data; break;
@@ -233,7 +236,8 @@ Navigation.executeShow = function()
         case Navigation.Page.B12ManagerMainClasses                    : MMCL.show(); break;
         case Navigation.Page.B13ManagerMainMembers                    : MMMB.show(); break;
         case Navigation.Page.B14ManagerMainSettle                     : MMST.show(); break;
-        case Navigation.Page.B15ManagerMainManage                     : MMMG.show(); break;
+        case Navigation.Page.B60GrpFinanceHome                        : GFHM.show(); break;
+        case Navigation.Page.B80GrpManageHome                         : MMMG.show(); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.show(); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.show(); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.show(); break;
@@ -296,7 +300,8 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B12ManagerMainClasses                    : MMCL.close(true); break;
         case Navigation.Page.B13ManagerMainMembers                    : MMMB.close(true); break;
         case Navigation.Page.B14ManagerMainSettle                     : MMST.close(true); break;
-        case Navigation.Page.B15ManagerMainManage                     : MMMG.close(true); break;
+        case Navigation.Page.B60GrpFinanceHome                        : GFHM.close(true); break;
+        case Navigation.Page.B80GrpManageHome                         : MMMG.close(true); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.close(true); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.close(true); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.close(true); break;

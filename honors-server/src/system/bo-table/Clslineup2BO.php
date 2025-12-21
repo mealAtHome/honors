@@ -12,22 +12,18 @@ class Clslineup2BO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function __construct() {
+    function setBO()
+    {
         GGnavi::getUserBO();
         GGnavi::getPaymentABO();
         GGnavi::getClsBO();
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        $arr['userBO'] = UserBO::getInstance();
+        $arr['paymentABO'] = PaymentABO::getInstance();
+        $arr['clsBO'] = ClsBO::getInstance();
+        return $arr;
     }
-    function setBO()
-    {
-        $this->ggAuth = GGauth::getInstance();
-        $this->userBO = UserBO::getInstance();
-        $this->paymentABO = PaymentABO::getInstance();
-        $this->clsBO = ClsBO::getInstance();
-    }
-    private $ggAuth;
-    private $userBO;
-    private $paymentABO;
-    private $clsBO;
 
     /* ========================= */
     /* field */
@@ -96,7 +92,7 @@ class Clslineup2BO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        $this->setBO();
+        extract($this->setBO());
         extract(Clslineup2BO::getConsts());
         extract($options);
 
@@ -236,7 +232,7 @@ class Clslineup2BO extends _CommonBO
         $clsno = null;
 
         /* get vars */
-        $this->setBO();
+        extract($this->setBO());
         extract(Clslineup2BO::getConsts());
         extract($options);
 
@@ -290,13 +286,13 @@ class Clslineup2BO extends _CommonBO
             case self::updateFromPage:
             {
                 /* check is manager */
-                $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* is grp manager, no exception */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* is grp manager, no exception */
 
                 /* validation */
-                $this->ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
 
                 /* get cls info */
-                $cls = $this->clsBO->getByPk($GRPNO, $CLSNO);
+                $cls = $clsBO->getByPk($GRPNO, $CLSNO);
                 if($cls == null)
                     throw new GGexception("존재하지 않는 일정입니다. 다시 시도하여 주세요.");
 
@@ -375,17 +371,17 @@ class Clslineup2BO extends _CommonBO
             case self::updateApplyRegist:
             {
                 /* validation */
-                $this->ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
 
                 /* check cls info */
                 /* is cls ing */
-                $this->ggAuth->isClsIng($GRPNO, $CLSNO);
+                $ggAuth->isClsIng($GRPNO, $CLSNO);
 
                 /* is in cls apply period */
                 /* 관리자의 경우, 예외 처리 없음 */
-                $isGrpmanager = $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR); /* is grp manager */
+                $isGrpmanager = $ggAuth->isGrpmanager($GRPNO, $EXECUTOR); /* is grp manager */
                 if($isGrpmanager != true) {
-                    $this->ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
+                    $ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
                 }
 
                 /* 해당 포지션에 이미 다른 유저가 기입하였는지 확인 */
@@ -395,7 +391,7 @@ class Clslineup2BO extends _CommonBO
                     throw new GGexception("이미 신청된 일정입니다.");
 
                 /* get username if not exists */
-                $username = $this->userBO->getUsername($EXECUTOR);
+                $username = $userBO->getUsername($EXECUTOR);
                 $USERNAME = Common::isEmpty($USERNAME) ? $username : $USERNAME;
 
                 /* update */
@@ -420,13 +416,13 @@ class Clslineup2BO extends _CommonBO
             case self::updateApplyRegistStead:
             {
                 /* validation */
-                $this->ggAuth->isClsIng($GRPNO, $CLSNO); /* is cls ing */
+                $ggAuth->isClsIng($GRPNO, $CLSNO); /* is cls ing */
 
                 /* is in cls apply period */
                 /* 관리자의 경우, 예외 처리 없음 */
-                $isGrpmanager = $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* is grp manager */
+                $isGrpmanager = $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* is grp manager */
                 if($isGrpmanager != true)
-                    $this->ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
+                    $ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
 
                 /* 해당 포지션에 이미 다른 유저가 기입하였는지 확인 */
                 $clslineup2 = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO));
@@ -435,7 +431,7 @@ class Clslineup2BO extends _CommonBO
                     throw new GGexception("이미 신청된 일정입니다.");
 
                 /* get username from userno */
-                $USERNAME = $this->userBO->getUsername($USERNO);
+                $USERNAME = $userBO->getUsername($USERNO);
 
                 /* update */
                 $query =
@@ -459,7 +455,7 @@ class Clslineup2BO extends _CommonBO
             case self::updateApplyCancel:
             {
                 /* check cls info */
-                $this->ggAuth->isClsIng($GRPNO, $CLSNO);
+                $ggAuth->isClsIng($GRPNO, $CLSNO);
 
                 /* check already canceled */
                 $clslineup2 = $this->getByPk($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO);
@@ -468,7 +464,7 @@ class Clslineup2BO extends _CommonBO
                     throw new GGexception("이미 취소되어 있습니다.");
 
                 /* validation */
-                $isGrpmanager = $this->ggAuth->isGrpmanager($GRPNO, $EXECUTOR); /* is grpmanager */
+                $isGrpmanager = $ggAuth->isGrpmanager($GRPNO, $EXECUTOR); /* is grpmanager */
                 if($isGrpmanager == false)
                 {
                     /* check userno */
@@ -492,7 +488,7 @@ class Clslineup2BO extends _CommonBO
                 /* is in cls apply period */
                 /* 관리자의 경우, 예외 처리 없음 */
                 if($isGrpmanager == false)
-                    $this->ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
+                    $ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
 
                 /* update */
                 $query =

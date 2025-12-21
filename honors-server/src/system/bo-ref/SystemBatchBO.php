@@ -14,7 +14,7 @@ class SystemBatchBO extends _CommonBO
         return self::$bo;
     }
 
-    public function __construct()
+    public function setBO()
     {
     }
 

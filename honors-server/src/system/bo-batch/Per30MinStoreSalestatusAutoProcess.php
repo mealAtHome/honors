@@ -17,12 +17,18 @@ class Per30MinStoreSalestatusAutoProcess extends Per00BatchBase
     }
     public $batchname = "per-30-min-storeSalestatusAutoProcess";
 
-    public function __construct()
+    public function setBO()
     {
         GGnavi::getStoreSalestatusBO();
         GGnavi::getSystemBatchBO();
         GGnavi::getRefHolidayBO();
         GGnavi::getStoreBO();
+        $arr = array();
+        $arr['storeSalestatusBO'] = StoreSalestatusBO::getInstance();
+        $arr['systemBatchBO'] = SystemBatchBO::getInstance();
+        $arr['refHolidayBO'] = RefHolidayBO::getInstance();
+        $arr['storeBO'] = StoreBO::getInstance();
+        return $arr;
     }
 
     public function process()
