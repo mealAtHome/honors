@@ -337,6 +337,46 @@
             });
 
             /* =============== */
+            /* 참가자추가 */
+            /* =============== */
+            $("#CUST-btn-addSettleItem").click(function()
+            {
+                // Navigation.push("F00-class/F11-ClassSelect020SettleUser.html", { grpno : CUST.Data.grpno, clsno : CUST.Data.clsno }, false);
+                // let grpno = CUST.Data.grpno;
+                // let clsno = CUST.Data.clsno;
+                // let teamname = "for-settle";
+                // let orderno = "-";
+                // let teamnick = "정산용참가자";
+                // let position = "-";
+                // let bill = "-";
+                // let pageData =
+                // {
+                //     grpno : grpno,
+                //     clsno : clsno,
+                //     teamname : teamname,
+                //     orderno : orderno,
+                //     teamnick : teamnick,
+                //     position : position,
+                //     bill : bill,
+                // };
+                // Navigation.moveFrontDialog(Navigation.Page.F00Class001DetailApplyDialog, pageData);
+                let grpno = CUST.Data.grpno;
+                let clsno = CUST.Data.clsno;
+                let teamname = "for-settle";
+                let orderno = 0;
+                let data =
+                {
+                    option : "F00-applyToClslineup2",
+                    grpno : grpno,
+                    clsno : clsno,
+                    teamname : teamname,
+                    orderno : orderno,
+                    regmember : GGF.Y,
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
+            });
+
+            /* =============== */
             /* 저장 */
             /* =============== */
             $("#CUST-btn-settleComplete").click(function()
