@@ -11,14 +11,14 @@
         #CUST-tbl-settle > tbody > tr > td[col="username"]          { text-align:left; }
         #CUST-tbl-settle > tbody > tr > td[col="billstand"]         { text-align:right; }
         #CUST-tbl-settle > tbody > tr > td[col="billfinal"]         { text-align:center; }
-        #CUST-tbl-settle > tbody > tr > td[col="billadjustment"]      { text-align:center; }
+        #CUST-tbl-settle > tbody > tr > td[col="billadjustment"]    { text-align:center; }
         #CUST-tbl-settle > tbody > tr > td[col="billmemo"]          { text-align:center; }
         #CUST-tbl-settle > tbody > tr > td[col="memberpoint"]       { text-align:right; }
         #CUST-tbl-settle > tbody > tr > td[col="billpointed"]       { text-align:center; }
         #CUST-tbl-settle > tfoot > tr > td { text-align:right; }
 
         .CUST-input-billfinal         { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
-        .CUST-input-billadjustment      { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
+        .CUST-input-billadjustment    { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
         .CUST-input-memberpoint       { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
         .CUST-input-billpointed       { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
         .CUST-input-billmemo          { font-size:1em; width: 8em; vertical-align: middle; text-align: left; }
@@ -91,7 +91,7 @@
                         <th>청구감가</th>
                         <th>잔여금</th>
                         <th>잔여금사용</th>
-                        <th>비고(감액사유등)</th>
+                        <th>비고(보정사유등)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -241,22 +241,26 @@
 
             setEvent()
             {
-                /* 감액 */
+                /* --------------- */
+                /* 청구보정 */
+                /* --------------- */
                 $(".CUST-input-billadjustment").off("keyup").on("keyup", function()
                 {
-                    let userno = $(this).attr("userno");
-                    let billfinalEl = $(`.CUST-input-billfinal[userno=${userno}]`);
-                    let billadjustmentEl = $(this);
-                    let billpointedEl = $(`.CUST-input-billpointed[userno=${userno}]`);
-                    let billfinal = parseInt(billfinalEl.attr("subval"));
-                    let billfinalOri = parseInt(billfinalEl.attr("subvalori"));
-                    let billadjustment = parseInt(billadjustmentEl.val());
-                    let billpointed = parseInt(billpointedEl.val());
+                    /* vars */
+                    let userno              = $(this).attr("userno");
+                    let billfinalEl         = $(`.CUST-input-billfinal[userno=${userno}]`);
+                    let billadjustmentEl    = $(this);
+                    let billpointedEl       = $(`.CUST-input-billpointed[userno=${userno}]`);
+                    let billfinal           = parseInt(billfinalEl.attr("subval"));
+                    let billfinalOri        = parseInt(billfinalEl.attr("subvalori"));
+                    let billadjustment      = parseInt(billadjustmentEl.val());
+                    let billpointed         = parseInt(billpointedEl.val());
 
-                    if(isNaN(billadjustment)) return;
-                    if(billfinalOri < (billadjustment + billpointed)) { Common.toast("감액이 청구비용보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
+                    /* validation */
+                    if(isNaN(billadjustment))
+                        return;
 
-                    let result = billfinalOri - billadjustment - billpointed;
+                    let result = billfinalOri + billadjustment - billpointed;
                     billfinalEl.attr("subval", result);
                     billfinalEl.val(GGC.Common.priceWon(result));
                     CUST.calSummary();
@@ -265,21 +269,21 @@
                 /* 잔여금 */
                 $(".CUST-input-billpointed").off("keyup").on("keyup", function()
                 {
-                    let userno = $(this).attr("userno");
-                    let billfinalEl = $(`.CUST-input-billfinal[userno=${userno}]`);
-                    let billadjustmentEl = $(`.CUST-input-billadjustment[userno=${userno}]`);
-                    let billpointedEl = $(this);
-                    let billfinal = parseInt(billfinalEl.attr("subval"));
-                    let billfinalOri = parseInt(billfinalEl.attr("subvalori"));
-                    let billadjustment = parseInt(billadjustmentEl.val());
-                    let billpointed = parseInt(billpointedEl.val());
-                    let memberpoint = parseInt($(`.CUST-input-memberpoint[userno=${userno}]`).attr("subval"));
+                    let userno              = $(this).attr("userno");
+                    let billfinalEl         = $(`.CUST-input-billfinal[userno=${userno}]`);
+                    let billadjustmentEl    = $(`.CUST-input-billadjustment[userno=${userno}]`);
+                    let billpointedEl       = $(this);
+                    let billfinal           = parseInt(billfinalEl.attr("subval"));
+                    let billfinalOri        = parseInt(billfinalEl.attr("subvalori"));
+                    let billadjustment      = parseInt(billadjustmentEl.val());
+                    let billpointed         = parseInt(billpointedEl.val());
+                    let memberpoint         = parseInt($(`.CUST-input-memberpoint[userno=${userno}]`).attr("subval"));
 
                     if(isNaN(billpointed)) return;
                     if(billfinalOri < (billadjustment + billpointed)) { Common.toast("잔여금 사용금액이 청구비용보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
                     if(billpointed > memberpoint)                   { Common.toast("잔여금 사용금액이 잔여금보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
 
-                    let result = billfinalOri - billadjustment - billpointed;
+                    let result = billfinalOri + billadjustment - billpointed;
                     billfinalEl.attr("subval", result);
                     billfinalEl.val(GGC.Common.priceWon(result));
                     CUST.calSummary();
@@ -300,10 +304,10 @@
                 /* 합계 */
                 $("#CUST-tbl-settle > tbody > tr").each(function()
                 {
-                    let billstand    = parseInt($(this).find("td[col=billstand]").attr("subval"));
-                    let billfinal    = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
-                    let billadjustment = parseInt($(this).find("td[col=billadjustment] > input").val());
-                    let billpointed  = parseInt($(this).find("td[col=billpointed] > input").val());
+                    let billstand       = parseInt($(this).find("td[col=billstand]").attr("subval"));
+                    let billfinal       = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
+                    let billadjustment  = parseInt($(this).find("td[col=billadjustment] > input").val());
+                    let billpointed     = parseInt($(this).find("td[col=billpointed] > input").val());
 
                     if(isNaN(billstand)) return;
                     if(isNaN(billfinal)) return;
@@ -375,12 +379,12 @@
                         /* 정산정보수집 */
                         $("#CUST-tbl-settle > tbody > tr").each(function()
                         {
-                            let userno       = $(this).attr("userno");
-                            let billstand    = parseInt($(this).find("td[col=billstand]").attr("subval"));
-                            let billfinal    = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
-                            let billadjustment = parseInt($(this).find("td[col=billadjustment] > input").val());
-                            let billpointed  = parseInt($(this).find("td[col=billpointed] > input").val());
-                            let billmemo     = $(this).find("td[col=billmemo] > input").val();
+                            let userno              = $(this).attr("userno");
+                            let billstand           = parseInt($(this).find("td[col=billstand]").attr("subval"));
+                            let billfinal           = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
+                            let billadjustment      = parseInt($(this).find("td[col=billadjustment] > input").val());
+                            let billpointed         = parseInt($(this).find("td[col=billpointed] > input").val());
+                            let billmemo            = $(this).find("td[col=billmemo] > input").val();
                             let dat =
                             {
                                 USERNO        : userno,

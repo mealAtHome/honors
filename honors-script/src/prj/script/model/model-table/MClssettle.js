@@ -6,8 +6,7 @@ class MClssettle
         /* data */      this.clsno                  = GGC.Common.char(dat.clsno);
         /* data */      this.userno                 = GGC.Common.char(dat.userno);
         /* data */      this.billstandard           = GGC.Common.int(dat.billstandard);
-        /* data */      this.billaddition           = GGC.Common.int(dat.billaddition);
-        /* data */      this.billadjustment           = GGC.Common.int(dat.billadjustment);
+        /* data */      this.billadjustment         = GGC.Common.int(dat.billadjustment);
         /* data */      this.billpointed            = GGC.Common.int(dat.billpointed);
         /* data */      this.billfinal              = GGC.Common.int(dat.billfinal);
         /* data */      this.billmemo               = GGC.Common.varchar(dat.billmemo);
@@ -40,7 +39,6 @@ class MClssettle
     getClsno() { return this.clsno; }
     getUserno() { return this.userno; }
     getBillstandard() { return this.billstandard; }
-    getBilladdition() { return this.billaddition; }
     getBilladjustment() { return this.billadjustment; }
     getBillpointed() { return this.billpointed; }
     getBillfinal() { return this.billfinal; }
@@ -69,7 +67,6 @@ class MClssettle
 
     /* custom > custom */
     getBillstandardWon() { return GGC.Common.priceWon(this.billstandard); }
-    getBilladditionWon() { return GGC.Common.priceWon(this.billaddition); }
     getBilladjustmentWon() { return GGC.Common.priceWon(this.billadjustment); }
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }
     getBillfinalWon() { return GGC.Common.priceWon(this.billfinal); }
