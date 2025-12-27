@@ -1,6 +1,6 @@
 <?php
 
-class GrpfPurchaseBO extends _CommonBO
+class ClspurchaseBO extends _CommonBO
 {
     /* ----- */
     /* singleton */
@@ -18,14 +18,13 @@ class GrpfPurchaseBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30)  / NO */
-    const FIELD__PURCHASEDATE               = "purchasedate";               /* (PK) date      / NO */
-    const FIELD__PURCHASEIDX                = "purchaseidx";                /* (PK) int       / NO */
-    const FIELD__PURCHASECLSNO              = "purchaseclsno";              /* (  ) char(14)  / YES */
-    const FIELD__PRODUCTNAME                = "productname";                /* (  ) int       / YES */
-    const FIELD__PRODUCTQTTY                = "productqtty";                /* (  ) int       / YES */
-    const FIELD__PRODUCTBILL                = "productbill";                /* (  ) int       / YES */
-    const FIELD__REGDT                      = "regdt";                      /* (  ) datetime  / YES */
+    const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30) */
+    const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14) */
+    const FIELD__PURCHASEIDX                = "purchaseidx";                /* (PK) int */
+    const FIELD__PRODUCTNAME                = "productname";                /* (  ) int */
+    const FIELD__PRODUCTQTTY                = "productqtty";                /* (  ) int */
+    const FIELD__PRODUCTBILL                = "productbill";                /* (  ) int */
+    const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
     /* enum */
@@ -64,7 +63,7 @@ class GrpfPurchaseBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        extract(GrpfPurchaseBO::getConsts());
+        extract(ClspurchaseBO::getConsts());
         extract($options);
 
         /* orderride option */
@@ -81,9 +80,8 @@ class GrpfPurchaseBO extends _CommonBO
         "
             null as head
             , t.grpno
-            , t.purchasedate
+            , t.clsno
             , t.purchaseidx
-            , t.purchaseclsno
             , t.productname
             , t.productqtty
             , t.productbill
@@ -112,15 +110,13 @@ class GrpfPurchaseBO extends _CommonBO
         /* --------------- */
         // switch($OPTION)
         // {
-        //     case self::selectByPkForInside                          : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and settleclsno = '$SETTLECLSNO' and userno = '$USERNO') t"; break; }
-        //     case self::selectByClsno                                : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and settleclsno = '$SETTLECLSNO') t"; break; }
-        //     case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and userno = '$USERNO' and managerdepositflg = 'n') t"; break; }
-        //     case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and managerdepositflg = 'n') t"; break; }
-        //     case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-        //     case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-        //     case self::selectYetByUsernoForUsr                      : { $from = "(select * from grpf_settle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-        //     case self::selectTmpByUsernoForUsr                      : { $from = "(select * from grpf_settle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-        //     case self::selectCmpByUsernoForUsr                      : { $from = "(select * from grpf_settle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
+        //     case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from clspurchase where grpno = '$GRPNO' and userno = '$USERNO' and managerdepositflg = 'n') t"; break; }
+        //     case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from clspurchase where grpno = '$GRPNO' and managerdepositflg = 'n') t"; break; }
+        //     case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from clspurchase where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+        //     case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from clspurchase where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+        //     case self::selectYetByUsernoForUsr                      : { $from = "(select * from clspurchase where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+        //     case self::selectTmpByUsernoForUsr                      : { $from = "(select * from clspurchase where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+        //     case self::selectCmpByUsernoForUsr                      : { $from = "(select * from clspurchase where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
         //     default:
         //     {
         //         throw new GGexception("(server) no option defined");
@@ -144,7 +140,6 @@ class GrpfPurchaseBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    // public function insertForInside($GRPNO, $SETTLECLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
     // public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
@@ -157,7 +152,7 @@ class GrpfPurchaseBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* get vars */
-        extract(GrpfPurchaseBO::getConsts());
+        extract(ClspurchaseBO::getConsts());
         extract($options);
 
         /* override option */
@@ -181,8 +176,8 @@ class GrpfPurchaseBO extends _CommonBO
                 {
                     /* vars */
                     $USERNO         = $dat['USERNO'];
-                    $BILLSTARDARD   = intval($dat['BILLSTARDARD']);
-                    $BILLDISCOUNT   = intval($dat['BILLDISCOUNT']);
+                    $BILLSTANDARD   = intval($dat['BILLSTANDARD']);
+                    $BILLADJUSTMENT   = intval($dat['BILLADJUSTMENT']);
                     $BILLPOINTED    = intval($dat['BILLPOINTED']);
                     $BILLFINAL      = intval($dat['BILLFINAL']);
                     $BILLMEMO       = $dat['BILLMEMO'];
@@ -191,7 +186,7 @@ class GrpfPurchaseBO extends _CommonBO
                     if($BILLPOINTED > 0)
                     {
                         $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$BILLPOINTED));
-                        $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $SETTLECLSNO);
+                        $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $CLSNO);
                     }
 
                     /* if billfinal == 0 ?, deposit complete */
@@ -203,15 +198,15 @@ class GrpfPurchaseBO extends _CommonBO
                     /* insert */
                     $query =
                     "
-                        insert into grpf_settle
+                        insert into clspurchase
                         (
                               grpno
                             , userno
                             , settledate
                             , settleidx
-                            , settleclsno
-                            , billstardard
-                            , billdiscount
+                            , clsno
+                            , billstandard
+                            , billadjustment
                             , billpointed
                             , billfinal
                             , billmemo
@@ -227,9 +222,9 @@ class GrpfPurchaseBO extends _CommonBO
                             , '$USERNO'
                             ,  now()
                             ,  1
-                            , '$SETTLECLSNO'
-                            ,  $BILLSTARDARD
-                            ,  $BILLDISCOUNT
+                            , '$CLSNO'
+                            ,  $BILLSTANDARD
+                            ,  $BILLADJUSTMENT
                             ,  $BILLPOINTED
                             ,  $BILLFINAL
                             , '$BILLMEMO'

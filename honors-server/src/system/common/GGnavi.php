@@ -14,14 +14,8 @@ class GGnavi
     static public function getAddressSigunguBO()                                    { require_once ROOT."/src/system/bo-ref/AddressSigunguBO.php"; }
     static public function getBankBO()                                              { require_once ROOT."/src/system/bo-ref/BankBO.php"; }
     static public function getSystemBoardBO()                                       { require_once ROOT."/src/system/bo-ref/SystemBoardBO.php"; }
-    static public function getRefFeeBO()                                            { require_once ROOT.'/src/system/bo-ref/RefFeeBO.php'; }
     static public function getRefHolidayBO()                                        { require_once ROOT.'/src/system/bo-ref/RefHolidayBO.php'; }
     static public function getSystemBatchBO()                                       { require_once ROOT."/src/system/bo-ref/SystemBatchBO.php"; }
-    static public function getSystemStatusBO()                                      { require_once ROOT."/src/system/bo-ref/SystemStatusBO.php"; }
-    static public function getLocationOfDeliveryChargeBO()                          { require_once ROOT."/src/system/bo-ref/LocationOfDeliveryChargeBO.php"; }
-    static public function getInformationSchemaPartitionsBO()                       { require_once ROOT."/src/system/bo-ref/InformationSchemaPartitionsBO.php"; }
-    static public function getRefDeliverychargeDiscountBO()                         { require_once ROOT.'/src/system/bo-ref/RefDeliverychargeDiscountBO.php'; }
-    static public function getRefDeliverychargeWeatherBO()                          { require_once ROOT.'/src/system/bo-ref/RefDeliverychargeWeatherBO.php'; }
 
     /* BO : for users */
     static public function getAddrBO()                                              { require_once ROOT."/src/system/bo-table/AddrBO.php"; }
@@ -29,62 +23,14 @@ class GGnavi
     static public function getClsBO()                                               { require_once ROOT."/src/system/bo-table/ClsBO.php"; }
     static public function getClzcancelBO()                                         { require_once ROOT."/src/system/bo-table/ClzcancelBO.php"; }
     static public function getClslineup2BO()                                        { require_once ROOT."/src/system/bo-table/Clslineup2BO.php"; }
-    static public function getGrpfSettleBO()                                         { require_once ROOT."/src/system/bo-table/GrpfSettleBO.php"; }
-    static public function getCartBO()                                              { require_once ROOT."/src/system/bo-table/CartBO.php"; }
-    static public function getCartmenuBO()                                          { require_once ROOT."/src/system/bo-table/CartmenuBO.php"; }
-    static public function getCartmenuoptBO()                                       { require_once ROOT."/src/system/bo-table/CartmenuoptBO.php"; }
-    static public function getCartmenuoptDetailBO()                                 { require_once ROOT."/src/system/bo-table/CartmenuoptDetailBO.php"; }
-    static public function getCartmenuRecommendBO()                                 { require_once ROOT."/src/system/bo-table/CartmenuRecommendBO.php"; }
-    static public function getCategoryBO()                                          { require_once ROOT."/src/system/bo-table/CategoryBO.php"; }
-    static public function getCntStoreOrderstatusBO()                               { require_once ROOT."/src/system/bo-table/CntStoreOrderstatusBO.php"; }
-    static public function getCntYmUserorderBO()                                    { require_once ROOT."/src/system/bo-table/CntYmUserorderBO.php"; }
-    static public function getDelivererBO()                                         { require_once ROOT."/src/system/bo-table/DelivererBO.php"; }
+    static public function getClssettleBO()                                         { require_once ROOT."/src/system/bo-table/ClssettleBO.php"; }
     static public function getIdxBO()                                               { require_once ROOT."/src/system/bo-table/_IdxBO.php"; }
-    static public function getMenuBO()                                              { require_once ROOT."/src/system/bo-table/MenuBO.php"; }
-    static public function getMenuCategoryBO()                                      { require_once ROOT."/src/system/bo-table/MenuCategoryBO.php"; }
-    static public function getMenuoptBO()                                           { require_once ROOT."/src/system/bo-table/MenuoptBO.php"; }
-    static public function getMenuoptDetailBO()                                     { require_once ROOT."/src/system/bo-table/MenuoptDetailBO.php"; }
-    static public function getMenuPicBO()                                           { require_once ROOT."/src/system/bo-table/MenuPicBO.php"; }
-    static public function getMenuRecommendBO()                                     { require_once ROOT."/src/system/bo-table/MenuRecommendBO.php"; }
-    static public function getOrderaBO()                                            { self::getOrderBO(); require_once ROOT."/src/system/bo-table/OrderaBO.php"; }
-    static public function getOrderBO()                                             { require_once ROOT."/src/system/bo-table/OrderBO.php"; }
-    static public function getOrderingBO()                                          { self::getOrderBO(); require_once ROOT."/src/system/bo-table/OrderingBO.php"; }
-    static public function getOrdermenuBO()                                         { require_once ROOT."/src/system/bo-table/OrdermenuBO.php"; }
-    static public function getOrdermenuoptBO()                                      { require_once ROOT."/src/system/bo-table/OrdermenuoptBO.php"; }
-    static public function getOrdermenuoptDetailBO()                                { require_once ROOT."/src/system/bo-table/OrdermenuoptDetailBO.php"; }
-    static public function getOrdermenuRecommendBO()                                { require_once ROOT."/src/system/bo-table/OrdermenuRecommendBO.php"; }
-    static public function getOrdersAddrBO()                                        { require_once ROOT."/src/system/bo-table/OrdersAddrBO.php"; }
-    static public function getOrdersCancelBO()                                      { require_once ROOT."/src/system/bo-table/OrdersCancelBO.php"; }
-    static public function getOrdersClaimBO()                                       { require_once ROOT."/src/system/bo-table/OrdersClaimBO.php"; }
-    static public function getOrderzUserlastBO()                                    { require_once ROOT."/src/system/bo-table/OrderzUserlastBO.php"; }
-    static public function getPaymentAccountBO()                                    { require_once ROOT."/src/system/bo-table/PaymentAccountBO.php"; }
-    static public function getPaymentDepositedBO()                                  { require_once ROOT."/src/system/bo-table/PaymentDepositedBO.php"; }
-    static public function getPaymentMissedreqBO()                                  { require_once ROOT."/src/system/bo-table/PaymentMissedreqBO.php"; }
-    static public function getPaymentQueueBO()                                      { require_once ROOT."/src/system/bo-table/PaymentQueueBO.php"; }
-    static public function getPaymentQueueFailedBO()                                { require_once ROOT."/src/system/bo-table/PaymentQueueFailedBO.php"; }
-    static public function getPaymentLogBO()                                        { require_once ROOT."/src/system/bo-table/PaymentLogBO.php"; }
-    static public function getReorderpctCalBO()                                     { require_once ROOT.'/src/system/bo-table/ReorderpctCalBO.php'; }
-    static public function getReorderpctLogBO()                                     { require_once ROOT.'/src/system/bo-table/ReorderpctLogBO.php'; }
-    static public function getReorderpctResultBO()                                  { require_once ROOT.'/src/system/bo-table/ReorderpctResultBO.php'; }
-    static public function getReviewBO()                                            { require_once ROOT."/src/system/bo-table/ReviewBO.php"; }
-    static public function getReviewMenuBO()                                        { require_once ROOT."/src/system/bo-table/ReviewMenuBO.php"; }
-    static public function getRiderBO()                                             { require_once ROOT.'/src/system/bo-table/RiderBO.php'; }
-    static public function getRiderDeliverymatchBO()                                { require_once ROOT."/src/system/bo-table/RiderDeliverymatchBO.php"; }
-    static public function getSettleRiderBO()                                       { require_once ROOT."/src/system/bo-table/SettleRiderBO.php"; }
-    static public function getSettleStoreBO()                                       { require_once ROOT."/src/system/bo-table/SettleStoreBO.php"; }
-    static public function getSidedetailBO()                                        { require_once ROOT."/src/system/bo-table/SidedetailBO.php"; }
-    static public function getSidemenuBO()                                          { require_once ROOT."/src/system/bo-table/SidemenuBO.php"; }
     static public function getGrpBO()                                               { require_once ROOT."/src/system/bo-table/GrpBO.php"; }
     static public function getGrpMemberBO()                                         { require_once ROOT."/src/system/bo-table/GrpMemberBO.php"; }
     static public function getGrpMemberPointhistBO()                                { require_once ROOT."/src/system/bo-table/GrpMemberPointhistBO.php"; }
-    static public function getStoreDeliverychargeBO()                               { require_once ROOT."/src/system/bo-table/StoreDeliverychargeBO.php"; }
-    static public function getStoreOrderproctimeLogBO()                             { require_once ROOT."/src/system/bo-table/StoreOrderproctimeLogBO.php"; }
-    static public function getStoreOrderproctimeResultBO()                          { require_once ROOT."/src/system/bo-table/StoreOrderproctimeResultBO.php"; }
-    static public function getStoreSalestatusBO()                                   { require_once ROOT."/src/system/bo-table/StoreSalestatusBO.php"; }
     static public function getScheduleallBO()                                       { require_once ROOT."/src/system/bo-table/ScheduleallBO.php"; }
     static public function getSchedulebyweekBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebyweekBO.php"; }
     static public function getSchedulebytimeBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebytimeBO.php"; }
-
     static public function getUserAddrBO()                                          { require_once ROOT."/src/system/bo-table/UserAddrBO.php"; }
     static public function getUserBO()                                              { require_once ROOT."/src/system/bo-table/UserBO.php"; }
     static public function getUserEtcBO()                                           { require_once ROOT."/src/system/bo-table/UserEtcBO.php"; }

@@ -5,11 +5,11 @@ class MClssettle
         /* data */      this.grpno                  = GGC.Common.char(dat.grpno);
         /* data */      this.clsno                  = GGC.Common.char(dat.clsno);
         /* data */      this.userno                 = GGC.Common.char(dat.userno);
-        /* data */      this.billstardard           = GGC.Common.int(dat.billstardard);
-        /* data */      this.billdiscount           = GGC.Common.int(dat.billdiscount);
+        /* data */      this.billstandard           = GGC.Common.int(dat.billstandard);
+        /* data */      this.billaddition           = GGC.Common.int(dat.billaddition);
+        /* data */      this.billadjustment           = GGC.Common.int(dat.billadjustment);
         /* data */      this.billpointed            = GGC.Common.int(dat.billpointed);
         /* data */      this.billfinal              = GGC.Common.int(dat.billfinal);
-        /* data */      this.billaddpoint           = GGC.Common.int(dat.billaddpoint);
         /* data */      this.billmemo               = GGC.Common.varchar(dat.billmemo);
         /* data */      this.memberdepositflg       = GGC.Common.enum(dat.memberdepositflg);
         /* data */      this.memberdepositflgdt     = GGC.Common.datetime(dat.memberdepositflgdt);
@@ -39,11 +39,11 @@ class MClssettle
     getGrpno() { return this.grpno; }
     getClsno() { return this.clsno; }
     getUserno() { return this.userno; }
-    getBillstardard() { return this.billstardard; }
-    getBilldiscount() { return this.billdiscount; }
+    getBillstandard() { return this.billstandard; }
+    getBilladdition() { return this.billaddition; }
+    getBilladjustment() { return this.billadjustment; }
     getBillpointed() { return this.billpointed; }
     getBillfinal() { return this.billfinal; }
-    getBilladdpoint() { return this.billaddpoint; }
     getBillmemo() { return this.billmemo; }
     getMemberdepositflg() { return this.memberdepositflg; }
     getMemberdepositflgdt() { return this.memberdepositflgdt; }
@@ -68,11 +68,11 @@ class MClssettle
     getPk() { return this.pk; }
 
     /* custom > custom */
-    getBillstardardWon() { return GGC.Common.priceWon(this.billstardard); }
-    getBilldiscountWon() { return GGC.Common.priceWon(this.billdiscount); }
+    getBillstandardWon() { return GGC.Common.priceWon(this.billstandard); }
+    getBilladditionWon() { return GGC.Common.priceWon(this.billaddition); }
+    getBilladjustmentWon() { return GGC.Common.priceWon(this.billadjustment); }
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }
     getBillfinalWon() { return GGC.Common.priceWon(this.billfinal); }
-    getBilladdpointWon() { return GGC.Common.priceWon(this.billaddpoint); }
     getClsPeriod() { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getClssettleStatusPretty() { return GGC.Clssettle.clssettleStatusPretty(this.getMemberdepositflg(), this.getManagerdepositflg()); }
 
@@ -153,8 +153,8 @@ class MClssettles extends _MCommon
                     <span class="common-tag-block ">${model.getClstitle()}</span>
                     <span class="common-tag-block common-tag-colorGrey common-tag-fontsize08">${model.getClsPeriod()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-bold">${model.getBillfinalWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">기준금액:${model.getBillstardardWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">할인금액:${model.getBilldiscountWon()}</span>
+                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">기준금액:${model.getBillstandardWon()}</span>
+                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">할인금액:${model.getBilladjustmentWon()}</span>
                     ${model.getBillpointed() >= 1  ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">사전정산:${model.getBillpointedWon()}</span>` : ""}
                     ${model.getBillmemo()    != "" ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">할인사유:${model.getBillmemo()}</span>` : ""}
                     <span class="common-tag-block common-tag-marginUp common-tag-fontsize09">

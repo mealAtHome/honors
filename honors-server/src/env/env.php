@@ -84,9 +84,6 @@ set_time_limit(60);
 /* -------------- */
 /* check system status */
 /* -------------- */
-GGnavi::getSystemStatusBO();
-$systemStatusBO = SystemStatusBO::getInstance();
-
 /* hard maintenance */
 if(MAINTENANCE == true)
     Common::returnCode("maintenance", "시스템 정비중입니다.");
@@ -140,11 +137,6 @@ else
         }
     }
 }
-
-/* -------------- */
-/* check system status (maintenance) */
-/* -------------- */
-// $systemStatusBO->checkMaintenance();
 
 /* 리퀘스트 입구 */
 require_once ROOT.'/src/env/post.php';

@@ -316,12 +316,15 @@
     line-height: 1.6;
 }
 .common-tbl-normal > thead > tr > th,
-.common-tbl-normal > tbody > tr > th
+.common-tbl-normal > tbody > tr > th,
+.common-tbl-normal > tfoot > tr > th,
+.common-tbl-normal > tfoot > tr > td
 {
     padding:0.4em;
     background-color:#e9ecef;
     white-space: nowrap;
     text-align:center;
+    font-weight: bold;
 }
 .common-tbl-normal > thead > tr > td,
 .common-tbl-normal > tfoot > tr > td,
@@ -337,16 +340,19 @@
 .common-tbl-normal[tbl-type="normal"]    > thead > tr > th  { border:1px solid #dee2e6; }
 .common-tbl-normal[tbl-type="normal"]    > tbody > tr > th  { border:1px solid #dee2e6; }
 .common-tbl-normal[tbl-type="normal"]    > tbody > tr > td  { border:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="normal"]    > tfoot > tr > td  { border:1px solid #dee2e6; }
 
 .common-tbl-normal[tbl-type="noborder"]                     { border:none; }
 .common-tbl-normal[tbl-type="noborder"]  > thead > tr > th  { border:none; }
 .common-tbl-normal[tbl-type="noborder"]  > tbody > tr > th  { border:none; }
 .common-tbl-normal[tbl-type="noborder"]  > tbody > tr > td  { border:none; }
+.common-tbl-normal[tbl-type="noborder"]  > tfoot > tr > td  { border:none; }
 
 .common-tbl-normal[tbl-type="rowborder"]                    { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
 .common-tbl-normal[tbl-type="rowborder"] > thead > tr > th  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > th  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
 .common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
-.common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="rowborder"] > tfoot > tr > td  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
 
 /* ============================== */
 /* 슬라이드 입력폼용 테이블 */

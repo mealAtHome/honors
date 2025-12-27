@@ -1,6 +1,6 @@
 <?php
 
-class GrpfSettleBO extends _CommonBO
+class ClssettleBO extends _CommonBO
 {
     /* ----- */
     /* singleton */
@@ -18,21 +18,19 @@ class GrpfSettleBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30)       /  NO */
-    const FIELD__USERNO                     = "userno";                     /* (PK) char(30)       /  NO */
-    const FIELD__SETTLEDATE                 = "settledate";                 /* (PK) date           /  NO */
-    const FIELD__SETTLEIDX                  = "settleidx";                  /* (PK) int            /  NO */
-    const FIELD__SETTLECLSNO                = "settleclsno";                /* (  ) char(14)       /  YES */
-    const FIELD__BILLSTARDARD               = "billstardard";               /* (  ) int            /  YES */
-    const FIELD__BILLDISCOUNT               = "billdiscount";               /* (  ) int            /  YES */
-    const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int            /  YES */
-    const FIELD__BILLFINAL                  = "billfinal";                  /* (  ) int            /  YES */
-    const FIELD__BILLMEMO                   = "billmemo";                   /* (  ) varchar(100)   /  YES */
-    const FIELD__MEMBERDEPOSITFLG           = "memberdepositflg";           /* (  ) enum('y','n')  /  YES */
-    const FIELD__MEMBERDEPOSITFLGDT         = "memberdepositflgdt";         /* (  ) datetime       /  YES */
-    const FIELD__MANAGERDEPOSITFLG          = "managerdepositflg";          /* (  ) enum('y','n')  /  YES */
-    const FIELD__MANAGERDEPOSITFLGDT        = "managerdepositflgdt";        /* (  ) datetime       /  YES */
-    const FIELD__REGDT                      = "regdt";                      /* (  ) datetime       /  YES */
+    const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30) */
+    const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14) */
+    const FIELD__USERNO                     = "userno";                     /* (PK) char(30) */
+    const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
+    const FIELD__BILLADJUSTMENT               = "billadjustment";               /* (  ) int */
+    const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
+    const FIELD__BILLFINAL                  = "billfinal";                  /* (  ) int */
+    const FIELD__BILLMEMO                   = "billmemo";                   /* (  ) varchar(100) */
+    const FIELD__MEMBERDEPOSITFLG           = "memberdepositflg";           /* (  ) enum('y','n') */
+    const FIELD__MEMBERDEPOSITFLGDT         = "memberdepositflgdt";         /* (  ) datetime */
+    const FIELD__MANAGERDEPOSITFLG          = "managerdepositflg";          /* (  ) enum('y','n') */
+    const FIELD__MANAGERDEPOSITFLGDT        = "managerdepositflgdt";        /* (  ) datetime */
+    const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
     /* enum */
@@ -56,12 +54,12 @@ class GrpfSettleBO extends _CommonBO
     /* ========================= */
     /* select > sub > sub */
     /* ========================= */
-    public function getByPk($GRPNO, $SETTLECLSNO, $USERNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $SETTLECLSNO, $USERNO)); }
+    public function getByPk($GRPNO, $CLSNO, $USERNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $USERNO)); }
 
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    public function selectByPkForInside($GRPNO, $SETTLECLSNO, $USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside($GRPNO, $CLSNO, $USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
@@ -80,7 +78,7 @@ class GrpfSettleBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        extract(GrpfSettleBO::getConsts());
+        extract(ClssettleBO::getConsts());
         extract($options);
 
         /* orderride option */
@@ -97,12 +95,10 @@ class GrpfSettleBO extends _CommonBO
         "
             null as head
             , t.grpno
+            , t.clsno
             , t.userno
-            , t.settledate
-            , t.settleidx
-            , t.settleclsno
-            , t.billstardard
-            , t.billdiscount
+            , t.billstandard
+            , t.billadjustment
             , t.billpointed
             , t.billfinal
             , t.billmemo
@@ -145,15 +141,15 @@ class GrpfSettleBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside                          : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and settleclsno = '$SETTLECLSNO' and userno = '$USERNO') t"; break; }
-            case self::selectByClsno                                : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and settleclsno = '$SETTLECLSNO') t"; break; }
-            case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and userno = '$USERNO' and managerdepositflg = 'n') t"; break; }
-            case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and managerdepositflg = 'n') t"; break; }
-            case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from grpf_settle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectYetByUsernoForUsr                      : { $from = "(select * from grpf_settle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectTmpByUsernoForUsr                      : { $from = "(select * from grpf_settle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectCmpByUsernoForUsr                      : { $from = "(select * from grpf_settle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
+            case self::selectByPkForInside                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
+            case self::selectByClsno                                : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO' and managerdepositflg = 'n') t"; break; }
+            case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n') t"; break; }
+            case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+            case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+            case self::selectYetByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+            case self::selectTmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+            case self::selectCmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -175,7 +171,7 @@ class GrpfSettleBO extends _CommonBO
                 left join cls
                     on
                         t.grpno = cls.grpno and
-                        t.settleclsno = cls.clsno
+                        t.clsno = cls.clsno
                 left join grp
                     on
                         t.grpno = grp.grpno
@@ -192,10 +188,8 @@ class GrpfSettleBO extends _CommonBO
                         bank.bankcode = bacc.bacccode
             order by
                   t.grpno
-                , t.settleclsno
+                , t.clsno
                 , t.userno
-                , t.settledate
-                , t.settleidx
         ";
         $result = GGsql::select($query, $from, $options);
         return $result;
@@ -204,7 +198,7 @@ class GrpfSettleBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function insertForInside($GRPNO, $SETTLECLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
@@ -217,7 +211,7 @@ class GrpfSettleBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* get vars */
-        extract(GrpfSettleBO::getConsts());
+        extract(ClssettleBO::getConsts());
         extract($options);
 
         /* override option */
@@ -243,8 +237,8 @@ class GrpfSettleBO extends _CommonBO
                 {
                     /* vars */
                     $USERNO         = $dat['USERNO'];
-                    $BILLSTARDARD   = intval($dat['BILLSTARDARD']);
-                    $BILLDISCOUNT   = intval($dat['BILLDISCOUNT']);
+                    $BILLSTANDARD   = intval($dat['BILLSTANDARD']);
+                    $BILLADJUSTMENT   = intval($dat['BILLADJUSTMENT']);
                     $BILLPOINTED    = intval($dat['BILLPOINTED']);
                     $BILLFINAL      = intval($dat['BILLFINAL']);
                     $BILLMEMO       = $dat['BILLMEMO'];
@@ -253,7 +247,7 @@ class GrpfSettleBO extends _CommonBO
                     if($BILLPOINTED > 0)
                     {
                         $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$BILLPOINTED));
-                        $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $SETTLECLSNO);
+                        $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $CLSNO);
                     }
 
                     /* if billfinal == 0 ?, deposit complete */
@@ -265,15 +259,13 @@ class GrpfSettleBO extends _CommonBO
                     /* insert */
                     $query =
                     "
-                        insert into grpf_settle
+                        insert into clssettle
                         (
                               grpno
+                            , clsno
                             , userno
-                            , settledate
-                            , settleidx
-                            , settleclsno
-                            , billstardard
-                            , billdiscount
+                            , billstandard
+                            , billadjustment
                             , billpointed
                             , billfinal
                             , billmemo
@@ -286,12 +278,10 @@ class GrpfSettleBO extends _CommonBO
                         values
                         (
                               '$GRPNO'
+                            , '$CLSNO'
                             , '$USERNO'
-                            ,  now()
-                            ,  1
-                            , '$SETTLECLSNO'
-                            ,  $BILLSTARDARD
-                            ,  $BILLDISCOUNT
+                            ,  $BILLSTANDARD
+                            ,  $BILLADJUSTMENT
                             ,  $BILLPOINTED
                             ,  $BILLFINAL
                             , '$BILLMEMO'
@@ -316,14 +306,14 @@ class GrpfSettleBO extends _CommonBO
                 $query =
                 "
                     update
-                        grpf_settle
+                        clssettle
                     set
                         memberdepositflg = 'y',
                         memberdepositflgdt = now()
                     where
                         grpno = '$GRPNO' and
-                        userno = '$USERNO' and
-                        settleclsno = '$SETTLECLSNO'
+                        clsno = '$CLSNO' and
+                        userno = '$USERNO'
                 ";
                 GGsql::exeQuery($query);
                 break;
@@ -337,21 +327,21 @@ class GrpfSettleBO extends _CommonBO
                 $query =
                 "
                     update
-                        grpf_settle
+                        clssettle
                     set
                         managerdepositflg = 'y',
                         managerdepositflgdt = now()
                     where
                         grpno = '$GRPNO' and
-                        userno = '$USERNO' and
-                        settleclsno = '$SETTLECLSNO'
+                        clsno = '$CLSNO' and
+                        userno = '$USERNO'
                 ";
                 GGsql::exeQuery($query);
                 break;
             }
             case self::updateUsernoToTargetForInside:
             {
-                $query = "update grpf_settle set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
+                $query = "update clssettle set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
                 break;
             }

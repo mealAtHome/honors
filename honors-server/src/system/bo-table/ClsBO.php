@@ -19,7 +19,7 @@ class ClsBO extends _CommonBO
         GGnavi::getClslineup2BO();
         GGnavi::getPaymentABO();
         GGnavi::getGrpMemberBO();
-        GGnavi::getGrpfSettleBO();
+        GGnavi::getClssettleBO();
         GGnavi::getClzcancelBO();
         $arr = array();
         $arr['ggAuth']       = GGauth::getInstance();
@@ -28,7 +28,7 @@ class ClsBO extends _CommonBO
         $arr['clslineup2BO'] = Clslineup2BO::getInstance();
         $arr['paymentABO']   = PaymentABO::getInstance();
         $arr['grpMemberBO']  = GrpMemberBO::getInstance();
-        $arr['grpfSettleBO'] = GrpfSettleBO::getInstance();
+        $arr['clssettleBO'] = ClssettleBO::getInstance();
         $arr['clzcancelBO']  = ClzcancelBO::getInstance();
         return $arr;
     }
@@ -451,7 +451,7 @@ class ClsBO extends _CommonBO
                 $ggAuth->isClsEndcls($GRPNO, $CLSNO, true); /* is endcls status? */
 
                 /* regist settle */
-                $grpfSettleBO->insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
+                $clssettleBO->insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusEndsettle', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";

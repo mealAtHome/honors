@@ -42,7 +42,6 @@
     $options["CLSGROUNDADDR"]                                       = get("CLSGROUNDADDR");
     $options["CLSMODIDT"]                                           = get("CLSMODIDT");
     $options["CLSNO"]                                               = get("CLSNO");
-    $options["SETTLECLSNO"]                                         = get("SETTLECLSNO");
     $options["CLSREGDT"]                                            = get("CLSREGDT");
     $options["CLSSETTLEFLG"]                                        = get("CLSSETTLEFLG");
     $options["CLSSTARTDT"]                                          = get("CLSSTARTDT");

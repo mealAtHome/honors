@@ -4,10 +4,10 @@
     /* init */
     /* ============================ */
     include '../../env/env.php';
-    GGnavi::getGrpfSettleBO();
+    GGnavi::getClssettleBO();
 
     /* vars */
-    $grpfSettleBO = GrpfSettleBO::getInstance();
+    $clssettleBO = ClssettleBO::getInstance();
     $rslt = array();
 
     /* ============================ */
@@ -15,7 +15,7 @@
     /* ============================ */
     try
     {
-        $rslt = $grpfSettleBO->selectByOption($options);
+        $rslt = $clssettleBO->selectByOption($options);
     }
     catch(GGexception $e)
     {

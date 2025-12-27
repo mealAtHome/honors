@@ -94,8 +94,8 @@
 
                             /* discount */
                             let discountHtml = "";
-                            if(model.getBilldiscount() >= 1)
-                                discountHtml = ` (할인:${model.getBilldiscountWon()}${model.getBillmemo() != "" ? " - " + model.getBillmemo() : ""})`;
+                            if(model.getBilladjustment() >= 1)
+                                discountHtml = ` (할인:${model.getBilladjustmentWon()}${model.getBillmemo() != "" ? " - " + model.getBillmemo() : ""})`;
 
                             /* point */
                             let pointHtml = "";
