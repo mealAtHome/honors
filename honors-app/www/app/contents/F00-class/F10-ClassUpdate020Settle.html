@@ -33,52 +33,33 @@
         <div class="center">정산</div>
     </ons-toolbar>
 
-    <!-- --------------- -->
+    <!-- ========================= -->
+    <!-- 일정상세 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <span class="common-tag-block" id="CUST-span-clstitle"></span>
+    </div>
+
+    <!-- ========================= -->
     <!-- 탭 -->
-    <!-- --------------- -->
+    <!-- ========================= -->
     <div class="common-div-cushion">
         <div class="common-tag-fontsize09">
-            <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="detail"   tab="tab" style="padding-left:0.8em; padding-right:0.8em;">일정상세</button>
-            <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="settle"   tab=""    style="padding-left:0.8em; padding-right:0.8em;">참가정산</button>
+            <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="settle"   tab="tab" style="padding-left:0.8em; padding-right:0.8em;">참가정산</button>
             <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="purchase" tab=""    style="padding-left:0.8em; padding-right:0.8em;">소비품목</button>
         </div>
     </div>
     <hr class="common-hr-paddingLR">
 
-    <!-- ========================= -->
-    <!-- 일정상세 -->
-    <!-- ========================= -->
-    <div class="CUST-div-tab common-div-cushion" tab="detail">
-        <p class="common-p-title">
-            <span id="CUST-span-clstitle"></span>
-        </p>
-        <table class="common-tbl-normal common-tag-cushionUp common-tag-fontsize09" tbl-type="normal">
-            <tbody>
-                <tr><th>시간</th><td><span id="CUST-span-clsdt"></span></td></tr>
-                <tr><th>장소</th><td><span id="CUST-span-clsground"></span></td></tr>
-                <tr><th>주소</th><td><span id="CUST-span-clsgroundaddr"></span></td></tr>
-                <tr><th>참가비</th><td><span id="CUST-span-clsapplybill"></span></td></tr>
-                <tr><th>기간</th>
-                    <td>
-                        <span class="common-tag-block" >・참가등록기간</span>
-                        <span class="common-tag-block common-tag-indent08" id="CUST-span-clsapplydt"></span>
-                    </td>
-                </tr>
-                <tr><th>상세</th><td><span id="CUST-span-clscontent"></span></td></tr>
-            </tbody>
-        </table>
-    </div>
-
     <!-- --------------- -->
     <!-- 참가정산 -->
     <!-- --------------- -->
-    <div class="CUST-div-tab common-div-cushion" tab="settle" style="display:none;">
+    <div class="CUST-div-tab common-div-cushion" tab="settle">
         <p class="common-p-title">참가정산</p>
         <span class="common-tag-block common-tag-fontsize09">※참가자를 기반으로 청구금액을 계산하는 테이블입니다.</span>
         <div class="common-div-cushionUD">
             <div class="common-tag-fontsize09">
                 <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
-                <button id="CUST-btn-addSettleItem" class="common-btn-outline">잔여금일괄적용</button>
             </div>
         </div>
         <div class="common-div-scrollX">
@@ -86,9 +67,9 @@
                 <thead>
                     <tr>
                         <th>참가자</th>
-                        <th>청구합계</th>
                         <th>청구최종</th>
-                        <th>청구감가</th>
+                        <th>청구금액</th>
+                        <th>청구보정</th>
                         <th>잔여금</th>
                         <th>잔여금사용</th>
                         <th>비고(보정사유등)</th>
@@ -99,8 +80,8 @@
                 <tfoot>
                     <tr>
                         <td>합계</td>
-                        <td><span id="CUST-span-billstandSummary"></span></td>
                         <td><span id="CUST-span-billfinalSummary"></span></td>
+                        <td><span id="CUST-span-billstandSummary"></span></td>
                         <td><span id="CUST-span-billadjustmentSummary"></span></td>
                         <td>-</span></td>
                         <td><span id="CUST-span-billpointedSummary"></span></td>
@@ -185,13 +166,7 @@
 
                         /* 기본정보 */
                         let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
-                        $("#CUST-span-clstitle")       .text(mCls.getClstitle());
-                        $("#CUST-span-clsdt")          .text(mCls.getClsPeriod());
-                        $("#CUST-span-clsground")      .text(mCls.getClsground());
-                        $("#CUST-span-clsgroundaddr")  .text(mCls.getClsgroundaddr());
-                        $("#CUST-span-clsapplybill")   .text(mCls.getClsapplybillpriceWon());
-                        $("#CUST-span-clsapplydt")     .text(mCls.getClsapplyPeriod());
-                        $("#CUST-span-clscontent")     .text(mCls.getClscontent());
+                        $("#CUST-span-clstitle").text(mCls.getClstitle());
 
                         /* 참가정보 : clstype 에 따라 다르게 대응 */
                         let clstype = mCls.getClstype();
@@ -227,13 +202,13 @@
                 let html =
                 `
                     <tr userno="${model.getUserno()}">
-                        <td col="username"         userno="${model.getUserno()}" >${model.getUsername()}</td>
-                        <td col="billstand"        subval="${model.getBill()}"   >${model.getBillWon()}</td>
-                        <td col="billfinal"        ><input type="text"   class="common-input-text CUST-input-billfinal"      userno="${model.getUserno()}" value="${model.getBillWon()}" subvalori="${model.getBill()}" subval="${model.getBill()}" disabled></td>
-                        <td col="billadjustment"   ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
-                        <td col="memberpoint"      ><input type="text"   class="common-input-text CUST-input-memberpoint"    userno="${model.getUserno()}" value="${model.getMemberpointWon()}" subval="${model.getMemberpoint()}" disabled></td>
-                        <td col="billpointed"      ><input type="number" class="common-input-text CUST-input-billpointed"    userno="${model.getUserno()}" value="0"></td>
-                        <td col="billmemo"         ><input type="text"   class="common-input-text CUST-input-billmemo"       userno="${model.getUserno()}" value=""></td>
+                        <td col="username"         userno="${model.getUserno()}"    >${model.getUsername()}</td>
+                        <td col="billfinal"                                         ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillWon()}" subvalori="${model.getBill()}" subval="${model.getBill()}" disabled></td>
+                        <td col="billstand"        subval="${model.getBill()}"      >${model.getBillWon()}</td>
+                        <td col="billadjustment"                                    ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
+                        <td col="memberpoint"                                       ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getMemberpointWon()}" subval="${model.getMemberpoint()}" disabled></td>
+                        <td col="billpointed"                                       ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="0"></td>
+                        <td col="billmemo"                                          ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value=""></td>
                     </tr>
                 `;
                 $(`#CUST-tbl-settle > tbody`).append(html);
@@ -280,8 +255,7 @@
                     let memberpoint         = parseInt($(`.CUST-input-memberpoint[userno=${userno}]`).attr("subval"));
 
                     if(isNaN(billpointed)) return;
-                    if(billfinalOri < (billadjustment + billpointed)) { Common.toast("잔여금 사용금액이 청구비용보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
-                    if(billpointed > memberpoint)                   { Common.toast("잔여금 사용금액이 잔여금보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
+                    if(billpointed > memberpoint) { Common.toast("잔여금 사용금액이 잔여금보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
 
                     let result = billfinalOri + billadjustment - billpointed;
                     billfinalEl.attr("subval", result);
