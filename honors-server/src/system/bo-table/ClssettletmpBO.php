@@ -1,6 +1,6 @@
 <?php
 
-class ClssettleBO extends _CommonBO
+class ClssettletmpBO extends _CommonBO
 {
     /* ----- */
     /* singleton */
@@ -54,31 +54,23 @@ class ClssettleBO extends _CommonBO
     /* ========================= */
     /* select > sub > sub */
     /* ========================= */
-    public function getByPk($GRPNO, $CLSNO, $USERNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $USERNO)); }
+    // public function getByPk($GRPNO, $CLSNO, $USERNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $USERNO)); }
 
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    public function selectByPkForInside($GRPNO, $CLSNO, $USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    // public function selectByPkForInside($GRPNO, $CLSNO, $USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
     /* ========================= */
-    const selectByPkForInside = "selectByPkForInside";
     const selectByClsno = "selectByClsno";
-    const selectNotDepositedByUsernoForMng = "selectNotDepositedByUsernoForMng";
-    const selectNotDepositedAllByGrpnoForMng = "selectNotDepositedAllByGrpnoForMng";
-    const selectMemberdepositflgYesByGrpnoForMng = "selectMemberdepositflgYesByGrpnoForMng";
-    const selectNotDepositedByGrpnoForMng = "selectNotDepositedByGrpnoForMng";
-    const selectYetByUsernoForUsr = "selectYetByUsernoForUsr"; /* 유저메인 : 미입금전체 */
-    const selectTmpByUsernoForUsr = "selectTmpByUsernoForUsr"; /* 유저메인 : 임시완료만 */
-    const selectCmpByUsernoForUsr = "selectCmpByUsernoForUsr"; /* 유저메인 : 완료 */
     protected function select($options, $option="")
     {
         /* --------------- */
         /* init vars */
         /* --------------- */
-        extract(ClssettleBO::getConsts());
+        extract(self::getConsts());
         extract($options);
 
         /* orderride option */
@@ -118,6 +110,7 @@ class ClssettleBO extends _CommonBO
             , bank.bankname
             , bacc.baccacct
             , bacc.baccname
+            , grpm.point as grpm_point
         ";
 
         /* --------------- */
@@ -125,10 +118,7 @@ class ClssettleBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectNotDepositedByUsernoForMng:
-            case self::selectNotDepositedAllByGrpnoForMng:
-            case self::selectMemberdepositflgYesByGrpnoForMng:
-            case self::selectNotDepositedByGrpnoForMng:
+            case self::selectByClsno:
             {
                 /* is grpmanager? */
                 GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
@@ -141,15 +131,7 @@ class ClssettleBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
-            case self::selectByClsno                                : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO' and managerdepositflg = 'n') t"; break; }
-            case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n') t"; break; }
-            case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectYetByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectTmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectCmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
+            case self::selectByClsno : { $from = "(select * from clssettletmp where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -186,10 +168,14 @@ class ClssettleBO extends _CommonBO
                 left join _bank bank
                     on
                         bank.bankcode = bacc.bacccode
+                left join grp_member grpm
+                    on
+                        grpm.grpno = t.grpno and
+                        grpm.userno = t.userno
             order by
                   t.grpno
                 , t.clsno
-                , t.userno
+                , u.name
         ";
         $result = GGsql::select($query, $from, $options);
         return $result;
@@ -198,20 +184,19 @@ class ClssettleBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    // public function insertByArr($GRPNO, $CLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
     /* ========================= */
-    const insertForInside = "insertForInside";
-    const updateMemberdepositflgYesForUsr = "updateMemberdepositflgYesForUsr";
-    const updateManagerdepositflgYesForMng = "updateManagerdepositflgYesForMng";
-    const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
+    const insertByArr = "insertByArr";
+    const deleteByClsno = "deleteByClsno";
+    const deleteByClsnoForInside = "deleteByClsnoForInside";
     protected function update($options, $option="")
     {
         /* get vars */
-        extract(ClssettleBO::getConsts());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
@@ -223,32 +208,26 @@ class ClssettleBO extends _CommonBO
         /* =============== */
         switch($OPTION)
         {
-            case self::insertForInside:
+            case self::insertByArr:
             {
-                /* set bo */
-                GGnavi::getGrpMemberBO();
-                GGnavi::getGrpMemberPointhistBO();
-                $grpMemberBO = GrpMemberBO::getInstance();
-                $grpMemberPointhistBO = GrpMemberPointhistBO::getInstance();
+                /* TODO : is finance charge */
+                /* validation */
+                GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
 
-                /* insert */
+                /* delete before insert */
+                $this->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
+
+                /* process */
                 $arr = json_decode($ARR, true);
                 foreach($arr as $dat)
                 {
                     /* vars */
                     $USERNO         = $dat['USERNO'];
                     $BILLSTANDARD   = intval($dat['BILLSTANDARD']);
-                    $BILLADJUSTMENT   = intval($dat['BILLADJUSTMENT']);
+                    $BILLADJUSTMENT = intval($dat['BILLADJUSTMENT']);
                     $BILLPOINTED    = intval($dat['BILLPOINTED']);
                     $BILLFINAL      = intval($dat['BILLFINAL']);
                     $BILLMEMO       = $dat['BILLMEMO'];
-
-                    /* is pointed? */
-                    if($BILLPOINTED > 0)
-                    {
-                        $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$BILLPOINTED));
-                        $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $CLSNO);
-                    }
 
                     /* if billfinal == 0 ?, deposit complete */
                     $memberdepositflg     = ($BILLFINAL == 0) ? "'y'"   : "'n'";
@@ -259,7 +238,7 @@ class ClssettleBO extends _CommonBO
                     /* insert */
                     $query =
                     "
-                        insert into clssettle
+                        insert into clssettletmp
                         (
                               grpno
                             , clsno
@@ -296,52 +275,22 @@ class ClssettleBO extends _CommonBO
                 }
                 break;
             }
-            case self::updateMemberdepositflgYesForUsr:
+            case self::deleteByClsnoForInside:
+            case self::deleteByClsno:
             {
-                /* is user and executor is same? */
-                if($EXECUTOR != $USERNO)
-                    throw new GGexception("예기치 못한 에러가 발생하였습니다.");
-
-                /* update */
-                $query =
-                "
-                    update
-                        clssettle
-                    set
-                        memberdepositflg = 'y',
-                        memberdepositflgdt = now()
-                    where
-                        grpno = '$GRPNO' and
-                        clsno = '$CLSNO' and
-                        userno = '$USERNO'
-                ";
-                GGsql::exeQuery($query);
-                break;
-            }
-            case self::updateManagerdepositflgYesForMng:
-            {
-                /* is manager? */
+                /* TODO : is finance charge */
+                /* validation */
                 GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
 
-                /* update */
+                /* process */
                 $query =
                 "
-                    update
-                        clssettle
-                    set
-                        managerdepositflg = 'y',
-                        managerdepositflgdt = now()
+                    delete from
+                        clssettletmp
                     where
                         grpno = '$GRPNO' and
-                        clsno = '$CLSNO' and
-                        userno = '$USERNO'
+                        clsno = '$CLSNO'
                 ";
-                GGsql::exeQuery($query);
-                break;
-            }
-            case self::updateUsernoToTargetForInside:
-            {
-                $query = "update clssettle set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
                 break;
             }

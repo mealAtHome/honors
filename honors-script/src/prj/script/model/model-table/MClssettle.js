@@ -26,6 +26,7 @@ class MClssettle
         /* data */      this.bankname               = GGC.Common.char(dat.bankname);
         /* data */      this.baccacct               = GGC.Common.char(dat.baccacct);
         /* data */      this.baccname               = GGC.Common.char(dat.baccname);
+        /* data */      this.grpm_point             = GGC.Common.int(dat.grpm_point);
         /* custom */    this.memberdepositflgCvrt   = GGC.Clssettle.memberdepositflg(dat.memberdepositflg);
         /* custom */    this.managerdepositflgCvrt  = GGC.Clssettle.managerdepositflg(dat.managerdepositflg);
         /* custom */    this.pk                     = `grpno="${this.grpno}" clsno="${this.clsno}" userno="${this.userno}"`;
@@ -59,6 +60,7 @@ class MClssettle
     getBankname() { return this.bankname; }
     getBaccacct() { return this.baccacct; }
     getBaccname() { return this.baccname; }
+    getGrpmPoint() { return this.grpm_point; }
 
     /* custom */
     getMemberdepositflgCvrt() { return this.memberdepositflgCvrt; }
@@ -70,6 +72,7 @@ class MClssettle
     getBilladjustmentWon() { return GGC.Common.priceWon(this.billadjustment); }
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }
     getBillfinalWon() { return GGC.Common.priceWon(this.billfinal); }
+    getGrpmPointWon() { return GGC.Common.priceWon(this.grpm_point); }
     getClsPeriod() { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getClssettleStatusPretty() { return GGC.Clssettle.clssettleStatusPretty(this.getMemberdepositflg(), this.getManagerdepositflg()); }
 

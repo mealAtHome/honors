@@ -47,7 +47,7 @@ class MClslineup2
     /* ========================= */
     /* fields - additional */
     /* ========================= */
-    /* data */      getBillWon() { return GGC.Common.priceWon(this.bill); }
+    /* data */ getBillWon() { return GGC.Common.priceWon(this.bill); }
 
     /* ========================= */
     /* fields - flg */

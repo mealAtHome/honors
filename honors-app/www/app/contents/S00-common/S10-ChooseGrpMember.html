@@ -11,11 +11,11 @@
     <!-- --------------- -->
     <!-- 탭 -->
     <!-- --------------- -->
-    <div id="CHGM-div-tabBtn" class="common-div-cushion" style="display:none;">
-        <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="origin" tab="tab">기존멤버에서</button>
-        <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="temp"   tab="">임시멤버생성</button>
-        <hr class="common-hr-paddingUD"/>
-    </div>
+    <!-- <div id="CHGM-div-tabBtn" class="common-div-cushion" style="display:none;"> -->
+    <!--     <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="origin" tab="tab">기존멤버에서</button> -->
+    <!--     <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="temp"   tab="">임시멤버생성</button> -->
+    <!--     <hr class="common-hr-paddingUD"/> -->
+    <!-- </div> -->
 
     <!-- --------------- -->
     <!-- 기존멤버 -->
@@ -40,16 +40,14 @@
         </style>
         <div class="common-div-cushion">
             <input type="text" id="CHGM-input-searchKeyword" class="common-input-text"/>
-            <button id="CHGM-btn-search" class="common-btn-outline">검색</button>
+            <button id="CHGM-btn-search" class="common-btn-outline" btn-size="search">🔍 검색</button>
         </div>
 
         <!-- ======================== -->
         <!-- 검색결과 -->
         <!-- ======================== -->
         <hr class="common-hr-padding"/>
-        <div class="common-div-cushion">
-            <div id="CHGM-div-searchResult" class="common-div-scrollX"></div>
-        </div>
+        <div id="CHGM-div-searchResult"></div>
     </div>
 
     <!-- --------------- -->
@@ -123,12 +121,18 @@
             /* ===================== */
             actionByOption(userno, forceflg=false)
             {
+                /* vars */
+                let grpno = CHGM.Data.grpno;
+                let clsno = CHGM.Data.clsno;
+                let teamname = CHGM.Data.teamname;
+                let orderno = CHGM.Data.orderno;
+
+                /* process */
                 let process = null;
                 switch(CHGM.Data.option)
                 {
                     case "makeToEl":
                     {
-                        let grpno = CHGM.Data.grpno;
                         let mGrpMember = Api.GrpMember.selectByPkForAll(grpno, userno);
                         if(mGrpMember == null)
                             return Common.toast("해당 그룹의 멤버가 아닙니다.");
@@ -143,10 +147,6 @@
                     }
                     case "F00-applyToClslineup2":
                     {
-                        let grpno = CHGM.Data.grpno;
-                        let clsno = CHGM.Data.clsno;
-                        let teamname = CHGM.Data.teamname;
-                        let orderno = CHGM.Data.orderno;
                         let etc = "관라자에 의한 대리접수";
                         process = function()
                         {
@@ -161,6 +161,36 @@
                             }, ajaxDelayTime);
                         };
                         Common.confirm2(`참가신청하시겠습니까?`, process);
+                        break;
+                    }
+                    case "F10ClassUpdate020Settle-addSettleUser":
+                    {
+                        /* check duplicate user */
+                        if(CUST.checkDuplicateSettleUser(userno)) { Common.toast("이미 추가된 참가자입니다."); return; }
+
+                        /* get userinfo */
+                        let mGrpMember = Api.GrpMember.selectByPkForMng(grpno, userno);
+                        if(mGrpMember == null)
+                            return Common.toast("해당 그룹의 멤버가 아닙니다.");
+
+                        /* get mCls */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+
+                        /* make model */
+                        let mUser = mGrpMember.getMUser();
+                        let dat =
+                        {
+                            grpno       : grpno,
+                            clsno       : clsno,
+                            teamname    : teamname,
+                            userno      : userno,
+                            username    : mUser.getName(),
+                            bill        : mCls.getClsbillapplyprice(),
+                            memberpoint : mUser.getPoint(),
+                        }
+                        let mClslineup2 = new MClslineup2(dat);
+                        CUST.addRowForSettle(mClslineup2);
+                        Navigation.moveBack();
                         break;
                     }
                 }

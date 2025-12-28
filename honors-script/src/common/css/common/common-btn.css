@@ -87,7 +87,10 @@
 .common-btn-round[btn-type="warning"]:active  ,.common-btn-outline[btn-type="warning"]:active   { background-color: rgba(255, 116, 21, 0.3); }
 .common-btn-round[btn-type="error"]:active    ,.common-btn-outline[btn-type="error"]:active     { background-color: rgba(255, 51, 51, 0.3);    }
 .common-btn-round[btn-type="error"]:active    ,.common-btn-outline[btn-type="delete"]:active    { background-color: rgba(255, 51, 51, 0.3);    }
-.common-btn-outline[btn-size="large"] { display:block; margin:1em auto; padding:0.8em; width:12em; max-width:90%; }
+
+/* button size */
+.common-btn-outline[btn-size="large"]  { display:block;        margin:1em auto; padding:0.8em;       width:12em; max-width:90%; }
+.common-btn-outline[btn-size="search"] { display:inline-block;                  padding:0.3em 0.5em; }
 
 /* inline */
 .common-btn-inline                           { border:1px solid rgba(2, 6, 84, 1.0);     ; background-color: rgba(2, 6, 84, 1.0);     color: white; }

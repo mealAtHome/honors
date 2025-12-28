@@ -1,4 +1,22 @@
 /*=================================*/
+/* table to footer */
+/*=================================*/
+.common-tbl-footer
+{
+    /* display:block; */
+    position:fixed;
+    border-collapse: collapse;
+    bottom:0px;
+    left:0px;
+    width:100%;
+    border:none;
+}
+.common-tbl-footer > tbody > tr > td { text-align: center; padding:0.5em; border-width: 0; background-color:rgba(2, 6, 84, 1.0); }
+.common-tbl-footer > tbody > tr > td               { width:  5%; text-align:  left; }
+.common-tbl-footer > tbody > tr > td[td-type=last] { width: 95%; text-align: right; }
+
+
+/*=================================*/
 /* table to center */
 /*=================================*/
 .common-tbl-center

@@ -18,8 +18,12 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* cls  */                      case "Api.Cls.update"                                       : url = serverHost + "/src/data/cls/updateCls.php"; break;
         /* clslineup2  */               case "Api.Clslineup2.select"                                : url = serverHost + "/src/data/clslineup2/selectClslineup2.php"; break;
         /* clslineup2  */               case "Api.Clslineup2.update"                                : url = serverHost + "/src/data/clslineup2/updateClslineup2.php"; break;
-        /* clssettle  */                case "Api.Clssettle.select"                                 : url = serverHost + "/src/data/clssettle/selectClssettle.php"; break;
-        /* clssettle  */                case "Api.Clssettle.update"                                 : url = serverHost + "/src/data/clssettle/updateClssettle.php"; break;
+        /* clspurchase */               case "Api.Clspurchase.select"                               : url = serverHost + "/src/data/clspurchase/selectClspurchase.php"; break;
+        /* clspurchase */               case "Api.Clspurchase.update"                               : url = serverHost + "/src/data/clspurchase/updateClspurchase.php"; break;
+        /* clssettle */                 case "Api.Clssettle.select"                                 : url = serverHost + "/src/data/clssettle/selectClssettle.php"; break;
+        /* clssettle */                 case "Api.Clssettle.update"                                 : url = serverHost + "/src/data/clssettle/updateClssettle.php"; break;
+        /* clssettletmp */              case "Api.Clssettletmp.select"                              : url = serverHost + "/src/data/clssettletmp/selectClssettletmp.php"; break;
+        /* clssettletmp */              case "Api.Clssettletmp.update"                              : url = serverHost + "/src/data/clssettletmp/updateClssettletmp.php"; break;
         /* GrpMember */                 case "Api.GrpMember.select"                                 : url = serverHost + "/src/data/grpMember/selectGrpMember.php"; break;
         /* GrpMember */                 case "Api.GrpMember.update"                                 : url = serverHost + "/src/data/grpMember/updateGrpMember.php"; break;
         /* GrpMemberPointhist */        case "Api.GrpMemberPointhist.select"                        : url = serverHost + "/src/data/grpMemberPointhist/selectGrpMemberPointhist.php"; break;

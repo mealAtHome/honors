@@ -94,6 +94,8 @@
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
     $options["WEEK"]                                                = get("WEEK"); /* abstract */
     $options["YEAR"]                                                = get("YEAR"); /* abstract */
+    $options["ARR1"]                                                = get("ARR1"); /* abstract */
+    $options["ARR2"]                                                = get("ARR2"); /* abstract */
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))
