@@ -71,11 +71,10 @@
             <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
                 <thead>
                     <tr>
+                        <th>상세</th>
                         <th>접수자</th>
-                        <th>정산금액</th>
-                        <th>할인금액</th>
-                        <th>사전정산</th>
-                        <th>참가비고</th>
+                        <th>최종금액</th>
+                        <th>비고</th>
                         <th>입금여부</th>
                     </tr>
                 </thead>
@@ -346,10 +345,9 @@
                                 let html =
                                 `
                                     <tr>
+                                        <td><button class="common-btn-outline CLSD-btn-settleDetail" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">상세</button></td>
                                         <td class="common-tag-alignC">${model.getUsername()}</td>
                                         <td class="common-tag-alignR">${model.getBillfinalWon()}</td>
-                                        <td class="common-tag-alignR">${model.getBilladjustmentWon()}</td>
-                                        <td class="common-tag-alignR">${model.getBillpointedWon()}</td>
                                         <td class="common-tag-alignL">${model.getBillmemo()}</td>
                                         <td class="common-tag-alignC">${model.getManagerdepositflgCvrt()}</td>
                                     </tr>
@@ -357,6 +355,21 @@
                                 $("#CLSD-tbl-clssettle > tbody").append(html);
                             }
                             $("#CLSD-div-clssettleTop").show();
+
+                            /* 정산상세 버튼 이벤트 */
+                            $(".CLSD-btn-settleDetail").off("click").on("click", function()
+                            {
+                                let grpno = $(this).attr("grpno");
+                                let clsno = $(this).attr("clsno");
+                                let userno = $(this).attr("userno");
+                                let pageData =
+                                {
+                                    grpno : grpno,
+                                    clsno : clsno,
+                                    userno : userno,
+                                };
+                                Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate020SettleDetailDialog, pageData);
+                            });
                         }
 
                         /* 참가정보 : clstype에 따라 다르게 대응 */

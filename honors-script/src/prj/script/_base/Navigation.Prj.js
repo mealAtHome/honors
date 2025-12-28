@@ -65,6 +65,7 @@ Navigation.Page =
     B82ManagerBankacctUpdate : "MBKU",
     C00AdminChooseUser : "AACU",
     D10DetailGrp : "DGRP",
+    D21DetailClssettle : "DCLS",
     F00Class000Detail : "CLSD",
     F00Class001DetailApplyDialog : "CLSA",
     F00Class080TextCls : "CLDC",

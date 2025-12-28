@@ -1,0 +1,145 @@
+<ons-page id="DCLS">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="DCLS.close(true);"></gg-backbtn></div>
+        <div class="center">정산상세</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 정산상세 -->
+    <!-- ========================= -->
+    <div class="DCLS-div-tab" tab="detail">
+        <div class="common-div-cushion">
+            <p class="common-p-title">정산상세</p>
+        </div>
+        <div id="DCLS-div-detail" class="common-div-card"></div>
+    </div>
+
+    <script>
+        var DCLS =
+        {
+            code : "DCLS",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(DCLS.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); DCLS.close(); return; }
+                if(DCLS.Data.searchtype == undefined) { DCLS.Data.searchtype = "detail"; } /* 기본값 */
+
+                /* init */
+                $(`.DCLS-td-searchtype[val='${DCLS.Data.searchtype}']`).click();
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            $(".DCLS-td-searchtype").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let searchtype = $(this).attr("val");
+                $(".DCLS-td-searchtype").removeAttr("tab");
+                $(this).attr("tab", "tab");
+
+                /* save selected */
+                DCLS.Data.searchtype = searchtype;
+
+                /* process */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let grpno = DCLS.Data.grpno;
+                        let userno = DCLS.Data.userno;
+
+                        /* 탭별표시 */
+                        switch(searchtype)
+                        {
+                            case "detail":
+                            {
+                                let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
+                                $("#DCLS-div-info").html(mGrp.make());
+                                break;
+                            }
+                            case "cls":
+                            {
+                                let mClss = Api.Cls.selectFor1YearByGrpnoForAll(grpno, GGF.none, GGF.toast);
+                                mClss.make("#DCLS-div-clsList");
+                                break;
+                            }
+                            case "member":
+                            {
+                                let mGrpMembers = Api.GrpMember.selectByGrpnoForAll(grpno, GGF.none, GGF.toast);
+                                mGrpMembers.make("#DCLS-div-memberList");
+                                break;
+                            }
+                        }
+                        /* show / hide */
+                        $(".DCLS-div-tab").hide();
+                        $(`.DCLS-div-tab[tab='${searchtype}']`).show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* =============== */
+            /* 저장 */
+            /* =============== */
+
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                DCLS.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                DCLS.close(true);
+            }
+
+            /* localizing */
+            /* $("#DCLS").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>
