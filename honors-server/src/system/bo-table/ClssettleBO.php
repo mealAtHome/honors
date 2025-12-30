@@ -70,6 +70,10 @@ class ClssettleBO extends _CommonBO
     const selectNotDepositedAllByGrpnoForMng = "selectNotDepositedAllByGrpnoForMng";
     const selectMemberdepositflgYesByGrpnoForMng = "selectMemberdepositflgYesByGrpnoForMng";
     const selectNotDepositedByGrpnoForMng = "selectNotDepositedByGrpnoForMng";
+    const selectNotDepositedAllByGrpnoClsnoForMng = "selectNotDepositedAllByGrpnoClsnoForMng"; /* [GRPNO, CLSNO] */
+    const selectMemberdepositflgYesByGrpnoClsnoForMng = "selectMemberdepositflgYesByGrpnoClsnoForMng"; /* [GRPNO, CLSNO] */
+    const selectNotDepositedByGrpnoClsnoForMng = "selectNotDepositedByGrpnoClsnoForMng"; /* [GRPNO, CLSNO] */
+
     const selectYetByUsernoForUsr = "selectYetByUsernoForUsr"; /* 유저메인 : 미입금전체 */
     const selectTmpByUsernoForUsr = "selectTmpByUsernoForUsr"; /* 유저메인 : 임시완료만 */
     const selectCmpByUsernoForUsr = "selectCmpByUsernoForUsr"; /* 유저메인 : 완료 */
@@ -129,6 +133,9 @@ class ClssettleBO extends _CommonBO
             case self::selectNotDepositedAllByGrpnoForMng:
             case self::selectMemberdepositflgYesByGrpnoForMng:
             case self::selectNotDepositedByGrpnoForMng:
+            case self::selectNotDepositedAllByGrpnoClsnoForMng:
+            case self::selectMemberdepositflgYesByGrpnoClsnoForMng:
+            case self::selectNotDepositedByGrpnoClsnoForMng:
             {
                 /* is grpmanager? */
                 GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
@@ -141,12 +148,15 @@ class ClssettleBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
-            case self::selectByClsno                                : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO' and managerdepositflg = 'n') t"; break; }
-            case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n') t"; break; }
-            case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from clssettle where grpno = '$GRPNO' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+            case self::selectByPkForInside                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and userno = '$USERNO') t"; break; }
+            case self::selectByClsno                                : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
+            case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO'   and managerdepositflg = 'n') t"; break; }
+            case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n') t"; break; }
+            case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+            case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+            case self::selectNotDepositedAllByGrpnoClsnoForMng      : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n') t"; break; }
+            case self::selectMemberdepositflgYesByGrpnoClsnoForMng  : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+            case self::selectNotDepositedByGrpnoClsnoForMng         : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
             case self::selectYetByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
             case self::selectTmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
             case self::selectCmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
@@ -189,7 +199,7 @@ class ClssettleBO extends _CommonBO
             order by
                   t.grpno
                 , t.clsno
-                , t.userno
+                , u.name
         ";
         $result = GGsql::select($query, $from, $options);
         return $result;

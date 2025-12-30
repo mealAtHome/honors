@@ -66,6 +66,7 @@ Navigation.Page =
     C00AdminChooseUser : "AACU",
     D10DetailGrp : "DGRP",
     D21DetailClssettle : "DCLS",
+    D22DetailClssettleByClsno : "DCSC",
     F00Class000Detail : "CLSD",
     F00Class001DetailApplyDialog : "CLSA",
     F00Class080TextCls : "CLDC",
@@ -117,6 +118,8 @@ Navigation.getURL = function(str)
         case Navigation.Page.B82ManagerBankacctUpdate                      : url = "./app/contents/B00-manager/B82-ManagerBankacctUpdate.html"; break;
         case Navigation.Page.C00AdminChooseUser                            : url = "./app/contents/C00-admin/C00-AdminChooseUser.html"; break;
         case Navigation.Page.D10DetailGrp                                  : url = "./app/contents/D00-detail/D10-DetailGrp.html"; break;
+        case Navigation.Page.D21DetailClssettle                            : url = "./app/contents/D00-detail/D21-DetailClssettle.html"; break;
+        case Navigation.Page.D22DetailClssettleByClsno                     : url = "./app/contents/D00-detail/D22-DetailClssettleByClsno.html"; break;
         case Navigation.Page.F00Class000Detail                             : url = "./app/contents/F00-class/F00-Class000Detail.html"; break;
         case Navigation.Page.F00Class001DetailApplyDialog                  : url = "./app/contents/F00-class/F00-Class001DetailApplyDialog.html"; break;
         case Navigation.Page.F00Class080TextCls                            : url = "./app/contents/F00-class/F00-Class080TextCls.html"; break;
@@ -170,6 +173,8 @@ Navigation.getData = function(code)
         case Navigation.Page.B82ManagerBankacctUpdate               : data = MBKU.Data; break;
         case Navigation.Page.C00AdminChooseUser                     : data = AACU.Data; break;
         case Navigation.Page.D10DetailGrp                           : data = DGRP.Data; break;
+        case Navigation.Page.D21DetailClssettle                     : data = DCLS.Data; break;
+        case Navigation.Page.D22DetailClssettleByClsno              : data = DCSC.Data; break;
         case Navigation.Page.F00Class000Detail                      : data = CLSD.Data; break;
         case Navigation.Page.F00Class001DetailApplyDialog           : data = CLSA.Data; break;
         case Navigation.Page.F00Class080TextCls                     : data = CLDC.Data; break;
@@ -250,6 +255,8 @@ Navigation.executeShow = function()
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.show(); break;
         case Navigation.Page.C00AdminChooseUser                       : AACU.show(); break;
         case Navigation.Page.D10DetailGrp                             : DGRP.show(); break;
+        case Navigation.Page.D21DetailClssettle                       : DCLS.show(); break;
+        case Navigation.Page.D22DetailClssettleByClsno                : DCSC.show(); break;
         case Navigation.Page.F00Class000Detail                        : CLSD.show(); break;
         case Navigation.Page.F00Class001DetailApplyDialog             : CLSA.show(); break;
         case Navigation.Page.F00Class080TextCls                       : CLDC.show(); break;
@@ -314,6 +321,8 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.close(true); break;
         case Navigation.Page.C00AdminChooseUser                       : AACU.close(true); break;
         case Navigation.Page.D10DetailGrp                             : DGRP.close(true); break;
+        case Navigation.Page.D21DetailClssettle                       : DCLS.close(true); break;
+        case Navigation.Page.D22DetailClssettleByClsno                : DCSC.close(true); break;
         case Navigation.Page.F00Class000Detail                        : CLSD.close(true); break;
         case Navigation.Page.F00Class001DetailApplyDialog             : CLSA.close(true); break;
         case Navigation.Page.F00Class080TextCls                       : CLDC.close(true); break;

@@ -61,8 +61,26 @@ Api.Cls =
     updateClsstatusIngToEndcls    (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusIngToEndcls"      , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
     updateClsstatusIngToEndsettle (grpno, clsno, arr1, arr2      , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusIngToEndsettle"   , GRPNO:grpno, CLSNO:clsno, ARR1:arr1, ARR2:arr2, }, noticeOK, noticeFail); },
     updateClsstatusToCancel       (grpno, clsno, clscancelreason , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusToCancel"         , GRPNO:grpno, CLSNO:clsno, CLSCANCELREASON:clscancelreason }, noticeOK, noticeFail); },
-    copyClsForMng                 (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "copyClsForMng"                   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
     deleteByPkForMng              (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "deleteByPkForMng"                , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+
+
+    /*
+        $("#CLSD-btn-copyCls").click(function()
+        {
+            let process = function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mApiResponse = Api.Cls.copyClsForMng(CLSD.Data.grpno, CLSD.Data.clsno, GGF.toast, GGF.toast);
+                    // if(mApiResponse.isSuccess())
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            }
+            Common.confirm2(`일정을 복사하시겠습니까?`, process);
+        });
+     */
+    copyClsForMng                 (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "copyClsForMng"                   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main */

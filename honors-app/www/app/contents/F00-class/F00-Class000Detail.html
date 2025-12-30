@@ -30,7 +30,7 @@
         <button id="CLSD-btn-textCls"    class="common-btn-outline">일정요약</button>
         <button id="CLSD-btn-textApply"  class="common-btn-outline">참가요약</button>
         <button id="CLSD-btn-textSettle" class="common-btn-outline" style="display:none;">정산요약</button>
-        <button id="CLSD-btn-copyCls"    class="common-btn-outline" style="display:none;">일정복사</button>
+        <button id="CLSD-btn-settleList" class="common-btn-outline" style="display:none;">정산목록</button>
         <hr class="common-hr-paddingTop"/>
     </div>
 
@@ -71,11 +71,10 @@
             <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
                 <thead>
                     <tr>
-                        <th>상세</th>
+                        <th>입금여부</th>
                         <th>접수자</th>
                         <th>최종금액</th>
                         <th>비고</th>
-                        <th>입금여부</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -268,7 +267,7 @@
                 /* init el */
                 $(".CLSD-tbl-clslineup2 > tbody").empty();
                 $("#CLSD-btn-textSettle").hide();
-                $("#CLSD-btn-copyCls").hide();
+                $("#CLSD-btn-settleList").hide();
                 $("#CLSD-tr-clscancelreason").hide();
 
                 /* tab */
@@ -328,8 +327,11 @@
                         CLSD.isManager = GGstorage.Prj.isManagerOfGrp(grpno);
                         if(CLSD.isManager)
                         {
-                            $("#CLSD-btn-textSettle").show();
-                            $("#CLSD-btn-copyCls").show();
+                            switch(mCls.getClsstatus())
+                            {
+                                case GGF.Cls.Clsstatus.ENDCLS       : $("#CLSD-btn-textSettle").show(); break;
+                                case GGF.Cls.Clsstatus.ENDSETTLE    : $("#CLSD-btn-settleList").show(); break;
+                            }
                         }
 
                         /* ----- */
@@ -342,14 +344,17 @@
                             for(let i in models)
                             {
                                 let model = models[i];
+                                let managerDepositflgHtml = model.getManagerdepositflgCvrt();
+                                if(CLSD.isManager && model.isManagerdepositflgYes() == false)
+                                    managerDepositflgHtml = `<button class="common-btn-outline CLSD-btn-managerdepositflgToY" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">입금완료</button>`;
+
                                 let html =
                                 `
                                     <tr>
-                                        <td><button class="common-btn-outline CLSD-btn-settleDetail" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">상세</button></td>
+                                        <td class="common-tag-alignC">${managerDepositflgHtml}</td>
                                         <td class="common-tag-alignC">${model.getUsername()}</td>
                                         <td class="common-tag-alignR">${model.getBillfinalWon()}</td>
                                         <td class="common-tag-alignL">${model.getBillmemo()}</td>
-                                        <td class="common-tag-alignC">${model.getManagerdepositflgCvrt()}</td>
                                     </tr>
                                 `;
                                 $("#CLSD-tbl-clssettle > tbody").append(html);
@@ -357,18 +362,23 @@
                             $("#CLSD-div-clssettleTop").show();
 
                             /* 정산상세 버튼 이벤트 */
-                            $(".CLSD-btn-settleDetail").off("click").on("click", function()
+                            $(".CLSD-btn-managerdepositflgToY").off("click").on("click", function()
                             {
                                 let grpno = $(this).attr("grpno");
                                 let clsno = $(this).attr("clsno");
                                 let userno = $(this).attr("userno");
-                                let pageData =
+                                let process = function()
                                 {
-                                    grpno : grpno,
-                                    clsno : clsno,
-                                    userno : userno,
-                                };
-                                Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate020SettleDetailDialog, pageData);
+                                    Common.showProgress();
+                                    setTimeout(function()
+                                    {
+                                        Api.Clssettle.updateManagerdepositflgYesForMng(grpno, clsno, userno, GGF.TOAST, GGF.TOAST);
+                                        Navigation.executeShow();
+
+                                        Common.hideProgress();
+                                    }, ajaxDelayTime);
+                                }
+                                Common.confirm2("입금이 확인되셨습니까?", process);
                             });
                         }
 
@@ -599,24 +609,10 @@
             /* ========================= */
             /* event */
             /* ========================= */
-            $("#CLSD-btn-textCls")      .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class080TextCls,    {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
-            $("#CLSD-btn-textApply")    .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class081TextApply,  {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
-            $("#CLSD-btn-textSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class082TextSettle, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
-            $("#CLSD-btn-copyCls").click(function()
-            {
-                let process = function()
-                {
-                    Common.showProgress();
-                    setTimeout(function()
-                    {
-                        let mApiResponse = Api.Cls.copyClsForMng(CLSD.Data.grpno, CLSD.Data.clsno, GGF.toast, GGF.toast);
-                        // if(mApiResponse.isSuccess())
-
-                        Common.hideProgress();
-                    }, ajaxDelayTime);
-                }
-                Common.confirm2(`일정을 복사하시겠습니까?`, process);
-            });
+            $("#CLSD-btn-textCls")      .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class080TextCls,        {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-textApply")    .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class081TextApply,      {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-textSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class082TextSettle,     {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-settleList")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.D22DetailClssettleByClsno, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
 
             /* 팀 선택 */
             $(".CLSD-btn-tabTeam").click(function()

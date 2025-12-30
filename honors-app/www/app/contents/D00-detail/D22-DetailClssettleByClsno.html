@@ -1,0 +1,158 @@
+<ons-page id="DCSC">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="DCSC.close(true);"></gg-backbtn></div>
+        <div class="center">정산목록</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 일정상세 -->
+    <!-- ========================= -->
+    <!-- <div class="common-div-cushion"> -->
+    <!--     <span class="common-tag-block" id="DCSC-span-clstitle"></span> -->
+    <!-- </div> -->
+
+    <!-- ========================= -->
+    <!-- 정산목록 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <table class="DCSC-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="DCSC-td-searchtype" val="nodeposit"      tab="tab" >미입금</td>
+                    <td class="DCSC-td-searchtype" val="memberdeposit"  tab=""    >임시완료</td>
+                    <td class="DCSC-td-searchtype" val="nodepositall"   tab=""    >전체</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+    <div id="DCSC-div-list"></div>
+
+    <script>
+        var DCSC =
+        {
+            code : "DCSC",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(DCSC.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); DCSC.close(); return; }
+                if(DCSC.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); DCSC.close(); return; }
+                if(DCSC.Data.searchtype == undefined) { DCSC.Data.searchtype = "nodeposit"; } /* 기본값 */
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* get var */
+                    let clsno = DCSC.Data.clsno;
+                    let grpno = DCSC.Data.grpno;
+
+                    /* api */
+                    try
+                    {
+                        /* 일정정보 */
+                        /* let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast); */
+                        /* $("#DCSC-span-clstitle").text(mCls.getClstitle()); */
+
+                        /* set tab */
+                        $(`.DCSC-td-searchtype[val='${DCSC.Data.searchtype}']`).click();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                        Navigation.moveBack();
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            $(".DCSC-td-searchtype").click(function()
+            {
+                /* save selected */
+                let searchtype = $(this).attr("val");
+                DCSC.Data.searchtype = searchtype;
+
+                /* process */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let grpno = DCSC.Data.grpno;
+                        let clsno = DCSC.Data.clsno;
+                        let mClssettles = null;
+
+                        /* 탭별표시 */
+                        switch(searchtype)
+                        {
+                            case "nodepositall"     : { mClssettles = Api.Clssettle.selectNotDepositedAllByGrpnoClsnoForMng     (grpno, clsno, GGF.none, GGF.toast); break; }
+                            case "memberdeposit"    : { mClssettles = Api.Clssettle.selectMemberdepositflgYesByGrpnoClsnoForMng (grpno, clsno, GGF.none, GGF.toast); break; }
+                            case "nodeposit"        : { mClssettles = Api.Clssettle.selectNotDepositedByGrpnoClsnoForMng        (grpno, clsno, GGF.none, GGF.toast); break; }
+                        }
+                        mClssettles.make("#DCSC-div-list");
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                DCSC.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                DCSC.close(true);
+            }
+
+            /* localizing */
+            /* $("#DCSC").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>
