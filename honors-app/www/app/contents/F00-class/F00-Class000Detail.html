@@ -62,10 +62,36 @@
     </div>
 
     <!-- ========================= -->
-    <!-- 정산 -->
+    <!-- 소비목록 -->
+    <!-- ========================= -->
+    <div id="CLSD-div-clspurchase" style="display:none;">
+        <hr class="common-hr-padding"/>
+        <div class="common-div-cushionLRD">
+            <p class="common-p-title">소비목록</p>
+            <table id="CLSD-tbl-clspurchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                <thead>
+                    <tr>
+                        <th>품목</th>
+                        <th>가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>합계</th>
+                        <th id="CLSD-th-billtotalpriceWon" class="common-tag-alignR"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 정산현황 -->
     <!-- ========================= -->
     <div id="CLSD-div-clssettleTop" style="display:none;">
-        <hr class="common-hr-padding">
+        <hr class="common-hr-padding"/>
         <div class="common-div-cushionLRD">
             <p class="common-p-title">정산현황</p>
             <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
@@ -334,10 +360,10 @@
                             }
                         }
 
-                        /* ----- */
+                        /* =============== */
                         /* 정산현황 */
-                        /* ----- */
-                        if(mCls.isEndsettle())
+                        /* =============== */
+                        if(CLSD.isManager && mCls.isEndsettle())
                         {
                             let mClssettles = Api.Clssettle.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
                             let models = mClssettles.getModels();
@@ -345,7 +371,7 @@
                             {
                                 let model = models[i];
                                 let managerDepositflgHtml = model.getManagerdepositflgCvrt();
-                                if(CLSD.isManager && model.isManagerdepositflgYes() == false)
+                                if(model.isManagerdepositflgYes() == false)
                                     managerDepositflgHtml = `<button class="common-btn-outline CLSD-btn-managerdepositflgToY" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">입금완료</button>`;
 
                                 let html =
@@ -382,7 +408,36 @@
                             });
                         }
 
+                        /* =============== */
+                        /* 소비목록 */
+                        /* =============== */
+                        let mClspurchases = Api.Clspurchase.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        if(CLSD.isManager && mCls.isEndsettle())
+                        {
+                            let models = mClspurchases.getModels();
+                            let billtotalprice = 0;
+                            for(let i in models)
+                            {
+                                let model = models[i];
+                                let html =
+                                `
+                                    <tr>
+                                        <td class="common-tag-alignL">${model.getProductname()}</td>
+                                        <td class="common-tag-alignR">${model.getProductbillWon()}</td>
+                                    </tr>
+                                `;
+                                $("#CLSD-tbl-clspurchase > tbody").append(html);
+                                billtotalprice += model.getProductbill();
+                            }
+                            $("#CLSD-th-billtotalpriceWon").text(GGC.Common.priceWon(billtotalprice));
+                            if(models.length == 0)
+                                $("#CLSD-tbl-clspurchase > tbody").append("<tr><td colspan='2' class='common-tag-alignC'>소비내역이 없습니다.</td></tr>");
+                            $("#CLSD-div-clspurchase").show();
+                        }
+
+                        /* =============== */
                         /* 참가정보 : clstype에 따라 다르게 대응 */
+                        /* =============== */
                         CLSD.clstype = mCls.getClstype();
                         switch(CLSD.clstype)
                         {

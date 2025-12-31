@@ -25,6 +25,10 @@ class MCls
         /* data */      this.clsusernoregname       = GGC.Common.char(dat.clsusernoregname);
         /* data */      this.clsusernoadmname       = GGC.Common.char(dat.clsusernoadmname);
         /* data */      this.clsusernosubname       = GGC.Common.char(dat.clsusernosubname);
+        /* data */      this.clsbillsales           = GGC.Common.int(dat.clsbillsales);
+        /* data */      this.clsbillpurchase        = GGC.Common.int(dat.clsbillpurchase);
+        /* data */      this.clsbillfinal           = GGC.Common.int(dat.clsbillfinal);
+        /* data */      this.grpfinancereflectflg   = GGC.Common.enum(dat.grpfinancereflectflg);
         /* data */      this.clscancelreason        = GGC.Common.char(dat.clscancelreason);
         /* custom */    this.grpimgPath             = GGC.Grp.grpimgPath(this.getGrpno(), this.getGrpimg(), false);
         /* custom */    this.pk                     = `grpno="${this.grpno}" clsno="${this.clsno}"`;
@@ -56,6 +60,10 @@ class MCls
     /* data */      getClsusernoregname() { return this.clsusernoregname; }
     /* data */      getClsusernoadmname() { return this.clsusernoadmname; }
     /* data */      getClsusernosubname() { return this.clsusernosubname; }
+    /* data */      getClsbillsales() { return this.clsbillsales; }
+    /* data */      getClsbillpurchase() { return this.clsbillpurchase; }
+    /* data */      getClsbillfinal() { return this.clsbillfinal; }
+    /* data */      getGrpfinancereflectflg() { return this.grpfinancereflectflg; }
     /* data */      getClscancelreason() { return this.clscancelreason; }
     /* custom */    getGrpimgPath() { return this.grpimgPath; }
     /* custom */    getPk() { return this.pk; }
@@ -68,6 +76,10 @@ class MCls
     getClsPeriod()               { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getClsapplyPeriod()          { return GGdate.period(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
     getClsapplybillpriceWon()    { return this.getClsbillapplyunit() + " 당, " + GGC.Common.priceWon(this.getClsbillapplyprice()); }
+    getClsbillsalesWon()         { return GGC.Common.priceWon(this.getClsbillsales()); }
+    getClsbillpurchaseWon()      { return GGC.Common.priceWon(this.getClsbillpurchase()); }
+    getClsbillfinalWon()         { return GGC.Common.priceWon(this.getClsbillfinal()); }
+    // getGrpfinancereflectflg
 
     /* ========================= */
     /* is */

@@ -37,26 +37,30 @@ class ClsBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__GRPNO              = "grpno";              /* (PK) char(30)       / NO  */
-    const FIELD__CLSNO              = "clsno";              /* (PK) char(14)       / NO  */
-    const FIELD__CLSSTATUS          = "clsstatus";          /* (  ) char(30)       / NO  */
-    const FIELD__CLSTYPE            = "clstype";            /* (  ) char(30)       / NO  */
-    const FIELD__CLSTITLE           = "clstitle";           /* (  ) char(50)       / NO  */
-    const FIELD__CLSCONTENT         = "clscontent";         /* (  ) varchar(255)   / YES  */
-    const FIELD__CLSSTARTDT         = "clsstartdt";         /* (  ) datetime       / NO  */
-    const FIELD__CLSCLOSEDT         = "clsclosedt";         /* (  ) datetime       / NO  */
-    const FIELD__CLSGROUND          = "clsground";          /* (  ) char(50)       / NO  */
-    const FIELD__CLSGROUNDADDR      = "clsgroundaddr";      /* (  ) char(50)       / YES */
-    const FIELD__CLSBILLAPPLYPRICE  = "clsbillapplyprice";  /* (  ) int            / NO  */
-    const FIELD__CLSBILLAPPLYUNIT   = "clsbillapplyunit";   /* (  ) int            / NO  */
-    const FIELD__CLSAPPLYSTARTDT    = "clsapplystartdt";    /* (  ) datetime       / NO  */
-    const FIELD__CLSAPPLYCLOSEDT    = "clsapplyclosedt";    /* (  ) datetime       / NO  */
-    const FIELD__CLSSETTLEFLG       = "clssettleflg";       /* (  ) enum('y','n')  / YES */
-    const FIELD__CLSUSERNOREG       = "clsusernoreg";       /* (  ) char(30)       / YES */
-    const FIELD__CLSUSERNOADM       = "clsusernoadm";       /* (  ) char(30)       / YES */
-    const FIELD__CLSUSERNOSUB       = "clsusernosub";       /* (  ) char(30)       / YES */
-    const FIELD__CLSMODIDT          = "clsmodidt";          /* (  ) datetime       / YES */
-    const FIELD__CLSREGDT           = "clsregdt";           /* (  ) datetime       / YES */
+    const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30)              / NO  */
+    const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14)              / NO  */
+    const FIELD__CLSSTATUS                  = "clsstatus";                  /* (  ) char(30)              / NO  */
+    const FIELD__CLSTYPE                    = "clstype";                    /* (  ) char(30)              / NO  */
+    const FIELD__CLSTITLE                   = "clstitle";                   /* (  ) char(50)              / NO  */
+    const FIELD__CLSCONTENT                 = "clscontent";                 /* (  ) varchar(255)          / YES  */
+    const FIELD__CLSSTARTDT                 = "clsstartdt";                 /* (  ) datetime              / NO  */
+    const FIELD__CLSCLOSEDT                 = "clsclosedt";                 /* (  ) datetime              / NO  */
+    const FIELD__CLSGROUND                  = "clsground";                  /* (  ) char(50)              / NO  */
+    const FIELD__CLSGROUNDADDR              = "clsgroundaddr";              /* (  ) char(50)              / YES */
+    const FIELD__CLSBILLAPPLYPRICE          = "clsbillapplyprice";          /* (  ) int                   / NO  */
+    const FIELD__CLSBILLAPPLYUNIT           = "clsbillapplyunit";           /* (  ) int                   / NO  */
+    const FIELD__CLSAPPLYSTARTDT            = "clsapplystartdt";            /* (  ) datetime              / NO  */
+    const FIELD__CLSAPPLYCLOSEDT            = "clsapplyclosedt";            /* (  ) datetime              / NO  */
+    const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) enum('y','n')         / YES */
+    const FIELD__CLSUSERNOREG               = "clsusernoreg";               /* (  ) char(30)              / YES */
+    const FIELD__CLSUSERNOADM               = "clsusernoadm";               /* (  ) char(30)              / YES */
+    const FIELD__CLSUSERNOSUB               = "clsusernosub";               /* (  ) char(30)              / YES */
+    const FIELD__CLSBILLSALES               = "clsbillsales";               /* (  ) int(11)               / YES */
+    const FIELD__CLSBILLPURCHASE            = "clsbillpurchase";            /* (  ) int(11)               / YES */
+    const FIELD__CLSBILLFINAL               = "clsbillfinal";               /* (  ) int(11)               / YES */
+    const FIELD__GRPFINANCEREFLECTFLG       = "grpfinancereflectflg";       /* (  ) enum('y','n','skip')  / YES */
+    const FIELD__CLSMODIDT                  = "clsmodidt";                  /* (  ) datetime              / YES */
+    const FIELD__CLSREGDT                   = "clsregdt";                   /* (  ) datetime              / YES */
 
     /* ========================= */
     /* enum */
@@ -161,19 +165,38 @@ class ClsBO extends _CommonBO
             , u3.name clsusernosubname
             , clzc.clscancelreason
         ";
+        $selectForMng =
+        "
+            , t.clsbillsales
+            , t.clsbillpurchase
+            , t.clsbillfinal
+            , t.grpfinancereflectflg
+        ";
 
         /* --------------- */
         /* validation */
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForMng :
-            case self::selectByClsstatusForMng :
+            case self::selectByPkForMng:
+            case self::selectByGrpnoForMng:
+            case self::selectByClsstatusForMng:
             {
-                /* TODO : is executor manager equals? */
-                /* TODO : is correct clsstatus */
+                GGauth::isGrpmanager($GRPNO, $EXECUTOR, true);
                 break;
             }
+        }
+
+        /* --------------- */
+        /* add column to mng */
+        /* --------------- */
+        if(
+            (isset($GRPNO)    && Common::isNotEmpty($GRPNO)) &&
+            (isset($EXECUTOR) && Common::isNotEmpty($EXECUTOR))
+        )
+        {
+            if(GGauth::isGrpmanager($GRPNO, $EXECUTOR, false))
+                $select .= $selectForMng;
         }
 
         /* --------------- */
@@ -181,10 +204,10 @@ class ClsBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside              : { $from = "(select * from cls where grpno = '$GRPNO' and clsno     = '$CLSNO') t"; break; }
-            case self::selectByPkForAll                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno     = '$CLSNO') t"; break; }
-            case self::selectByPkForMng                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno     = '$CLSNO') t"; break; }
-            case self::selectByGrpnoForMng              : { $from = "(select * from cls where grpno = '$GRPNO' order by clsstartdt desc) t"; break; }
+            case self::selectByPkForInside              : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByPkForAll                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByPkForMng                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByGrpnoForMng              : { $from = "(select * from cls where grpno = '$GRPNO') t"; break; }
             case self::selectByClsstatusForMng          : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$CLSSTATUS') t"; break; }
             case self::selectByClsstatusForUser         : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$CLSSTATUS') t"; break; }
             case self::selectFor1YearByGrpnoForAll      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstartdt >= date_sub(now(), interval 1 year)) t"; break; }
