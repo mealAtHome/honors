@@ -48,17 +48,48 @@
                 <tr><th>집합장소</th><td><span id="CLSD-span-clsgroundaddr"></span> (<span id="CLSD-span-clsground"></span>)</td></tr>
                 <tr><th>참가비</th><td><span id="CLSD-span-clsapplybill"></span></td></tr>
                 <tr><th>상세</th><td><span id="CLSD-span-clscontent"></span></td></tr>
-                <tr>
+                <tr id="CLSD-tr-clsManagers">
                     <th>담당자</th>
-                    <td>
+                    <td id="CLSD-td-clsManagers">
                         <div class="common-tag-block">주관(정) : <span id="CLSD-span-clsusernoadmname"></span></div>
                         <div class="common-tag-block">주관(부) : <span id="CLSD-span-clsusernosubname"></span></div>
+                    </td>
+                </tr>
+                <tr id="CLSD-tr-clsbill" style="display:none;">
+                    <th>정산결과</th>
+                    <td>
+                        <div class="common-tag-block"><span>합계 : </span><span id="CLSD-span-clsbillsales"></span></div>
+                        <div class="common-tag-block"><span>소비 : </span><span id="CLSD-span-clsbillpurchase"></span></div>
+                        <div class="common-tag-block"><span>최종 : </span><span id="CLSD-span-clsbillfinal"></span></div>
+                        <div class="common-tag-block"><span>그룹재무반영여부 : </span><span id="CLSD-div-grpfinancereflectflg"></span></div>
                     </td>
                 </tr>
                 <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
             </tbody>
         </table>
         <div class="common-tag-block common-tag-fontsize09">일정작성자 : <span id="CLSD-span-clsusernoregname"></span></div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 정산현황 -->
+    <!-- ========================= -->
+    <div id="CLSD-div-clssettleTop" style="display:none;">
+        <hr class="common-hr-padding"/>
+        <div class="common-div-cushionLRD">
+            <p class="common-p-title">정산현황</p>
+            <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                <thead>
+                    <tr>
+                        <th>입금여부</th>
+                        <th>접수자</th>
+                        <th>최종금액</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- ========================= -->
@@ -83,28 +114,6 @@
                         <th id="CLSD-th-billtotalpriceWon" class="common-tag-alignR"></th>
                     </tr>
                 </tfoot>
-            </table>
-        </div>
-    </div>
-
-    <!-- ========================= -->
-    <!-- 정산현황 -->
-    <!-- ========================= -->
-    <div id="CLSD-div-clssettleTop" style="display:none;">
-        <hr class="common-hr-padding"/>
-        <div class="common-div-cushionLRD">
-            <p class="common-p-title">정산현황</p>
-            <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
-                <thead>
-                    <tr>
-                        <th>입금여부</th>
-                        <th>접수자</th>
-                        <th>최종금액</th>
-                        <th>비고</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
             </table>
         </div>
     </div>
@@ -146,7 +155,7 @@
             <hr class="common-hr-paddingUD"/>
 
             <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
-                <p class="common-p-titlesub"><span>팀A - </span><span class="CLSD-span-teamnick" teamname="a"></span></p>
+                <p class="common-p-titlesub"><span class="CLSD-span-teamnick" teamname="a"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
                         <thead>
@@ -164,7 +173,7 @@
                 </div>
             </div>
             <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
-                <p class="common-p-titlesub"><span>팀B - </span><span class="CLSD-span-teamnick" teamname="b"></span></p>
+                <p class="common-p-titlesub"><span class="CLSD-span-teamnick" teamname="b"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
                         <thead>
@@ -195,7 +204,7 @@
             </div>
             <hr class="common-hr-paddingUD"/>
             <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
-                <p class="common-p-titlesub"><span>1시합 팀A - </span><span class="CLSD-span-teamnick" teamname="a"></span></p>
+                <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-teamnick" teamname="a"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
                         <thead>
@@ -213,7 +222,7 @@
                 </div>
             </div>
             <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
-                <p class="common-p-titlesub"><span>1시합 팀B - </span><span class="CLSD-span-teamnick" teamname="b"></span></p>
+                <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-teamnick" teamname="b"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
                         <thead>
@@ -231,7 +240,7 @@
                 </div>
             </div>
             <div class="CLSD-div-tabTeam" teamname="c" style="display:none;">
-                <p class="common-p-titlesub"><span>2시합 팀C - </span><span class="CLSD-span-teamnick" teamname="c"></span></p>
+                <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-teamnick" teamname="c"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="c">
                         <thead>
@@ -249,7 +258,7 @@
                 </div>
             </div>
             <div class="CLSD-div-tabTeam" teamname="d" style="display:none;">
-                <p class="common-p-titlesub"><span>2시합 팀D - </span><span class="CLSD-span-teamnick" teamname="d"></span></p>
+                <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-teamnick" teamname="d"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="d">
                         <thead>
@@ -311,17 +320,21 @@
 
                         /* 기본정보 */
                         let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
-                        $("#CLSD-span-clstitle")            .text(mCls.getClstitle());
-                        $("#CLSD-span-clsdt")               .text(mCls.getClsPeriod());
-                        $("#CLSD-span-clsground")           .text(mCls.getClsground());
-                        $("#CLSD-span-clsgroundaddr")       .text(mCls.getClsgroundaddr());
-                        $("#CLSD-span-clsapplybill")        .text(mCls.getClsapplybillpriceWon());
-                        $("#CLSD-span-clsapplydt")          .text(mCls.getClsapplyPeriod());
-                        $("#CLSD-span-clscontent")          .text(mCls.getClscontent());
-                        $("#CLSD-span-clsusernoregname")    .text(mCls.getClsusernoregname());
-                        $("#CLSD-span-clsusernoadmname")    .text(mCls.getClsusernoadmname());
-                        $("#CLSD-span-clsusernosubname")    .text(mCls.getClsusernosubname());
-                        $("#CLSD-span-clscancelreason")     .text(mCls.getClscancelreason());
+                        $("#CLSD-span-clstitle")              .text(mCls.getClstitle());
+                        $("#CLSD-span-clsdt")                 .text(mCls.getClsPeriod());
+                        $("#CLSD-span-clsground")             .text(mCls.getClsground());
+                        $("#CLSD-span-clsgroundaddr")         .text(mCls.getClsgroundaddr());
+                        $("#CLSD-span-clsapplybill")          .text(mCls.getClsapplybillpriceWon());
+                        $("#CLSD-span-clsapplydt")            .text(mCls.getClsapplyPeriod());
+                        $("#CLSD-span-clscontent")            .text(mCls.getClscontent());
+                        $("#CLSD-span-clsusernoregname")      .text(mCls.getClsusernoregname());
+                        $("#CLSD-span-clsusernoadmname")      .text(mCls.getClsusernoadmname());
+                        $("#CLSD-span-clsusernosubname")      .text(mCls.getClsusernosubname());
+                        $("#CLSD-span-clscancelreason")       .text(mCls.getClscancelreason());
+                        $("#CLSD-span-clsbillsales")          .text(mCls.getClsbillsalesWon());
+                        $("#CLSD-span-clsbillpurchase")       .text(mCls.getClsbillpurchaseWon());
+                        $("#CLSD-span-clsbillfinal")          .text(mCls.getClsbillfinalWon());
+                        $("#CLSD-div-grpfinancereflectflg")   .html(mCls.getGrpfinancereflectflgColor());
 
                         /* ----- */
                         /* show / hide */
@@ -359,6 +372,9 @@
                                 case GGF.Cls.Clsstatus.ENDSETTLE    : $("#CLSD-btn-settleList").show(); break;
                             }
                         }
+
+                        /* clsbill */
+                        (CLSD.isManager && mCls.isEndsettle()) ? $("#CLSD-tr-clsbill").show() : $("#CLSD-tr-clsbill").hide();
 
                         /* =============== */
                         /* 정산현황 */

@@ -33,6 +33,30 @@ GGC.Cls =
         return rslt;
     },
 
+    getGrpfinancereflectflgCvrt(val)
+    {
+        let rslt = "";
+        switch(val)
+        {
+            case GGF.Cls.Grpfinancereflectflg.Y         : rslt = "반영"; break;
+            case GGF.Cls.Grpfinancereflectflg.N         : rslt = "미반영"; break;
+            case GGF.Cls.Grpfinancereflectflg.UNABLE    : rslt = "반영불가"; break;
+        }
+        return rslt;
+    },
+    getGrpfinancereflectflgColor(val)
+    {
+        let rslt = "";
+        let text = GGC.Cls.getGrpfinancereflectflgCvrt(val);
+        switch(val)
+        {
+            case GGF.Cls.Grpfinancereflectflg.Y         : rslt = `<span class="common-tag-colorPstv">${text}</span>`; break;
+            case GGF.Cls.Grpfinancereflectflg.N         : rslt = `<span class="common-tag-colorWarn">${text}</span>`; break;
+            case GGF.Cls.Grpfinancereflectflg.UNABLE    : rslt = `<span class="common-tag-colorNgtv">${text}</span>`; break;
+        }
+        return rslt;
+    }
+
 }
 
 GGC.Clssettle =

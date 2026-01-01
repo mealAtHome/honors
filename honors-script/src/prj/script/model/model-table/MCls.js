@@ -71,15 +71,15 @@ class MCls
     /* ========================= */
     /* fields - additional */
     /* ========================= */
-    getClstypeCvrt()             { return GGC.Cls.clstypeCvrt(this.getClstype()); }
-    getClsstatusCard()           { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
-    getClsPeriod()               { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
-    getClsapplyPeriod()          { return GGdate.period(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
-    getClsapplybillpriceWon()    { return this.getClsbillapplyunit() + " 당, " + GGC.Common.priceWon(this.getClsbillapplyprice()); }
-    getClsbillsalesWon()         { return GGC.Common.priceWon(this.getClsbillsales()); }
-    getClsbillpurchaseWon()      { return GGC.Common.priceWon(this.getClsbillpurchase()); }
-    getClsbillfinalWon()         { return GGC.Common.priceWon(this.getClsbillfinal()); }
-    // getGrpfinancereflectflg
+    getClstypeCvrt()                { return GGC.Cls.clstypeCvrt(this.getClstype()); }
+    getClsstatusCard()              { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
+    getClsPeriod()                  { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
+    getClsapplyPeriod()             { return GGdate.period(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
+    getClsapplybillpriceWon()       { return this.getClsbillapplyunit() + " 당, " + GGC.Common.priceWon(this.getClsbillapplyprice()); }
+    getClsbillsalesWon()            { return GGC.Common.priceWon(this.getClsbillsales()); }
+    getClsbillpurchaseWon()         { return GGC.Common.priceWon(this.getClsbillpurchase()); }
+    getClsbillfinalWon()            { return GGC.Common.priceWon(this.getClsbillfinal()); }
+    getGrpfinancereflectflgColor()  { return GGC.Cls.getGrpfinancereflectflgColor(this.getGrpfinancereflectflg()); }
 
     /* ========================= */
     /* is */

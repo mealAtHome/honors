@@ -37,6 +37,12 @@ GGF.Cls =
         ENDSETTLE       : "endsettle",          /* GGF.Cls.Clsstatus.ENDSETTLE : 정산완료 */
         CANCEL          : "cancel",             /* GGF.Cls.Clsstatus.CANCEL : 일정취소 */
     },
+    Grpfinancereflectflg :
+    {
+        Y               : "y",                  /* GGF.Cls.Grpfinancereflectflg.Y : 반영 */
+        N               : "n",                  /* GGF.Cls.Grpfinancereflectflg.N : 미반영 */
+        UNABLE          : "unable",             /* GGF.Cls.Grpfinancereflectflg.UNABLE : 반영불가 */
+    },
 };
 
 GGF.PaymentMissedreq =
