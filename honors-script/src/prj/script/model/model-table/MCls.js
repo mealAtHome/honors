@@ -74,13 +74,16 @@ class MCls
     getClstypeCvrt()                { return GGC.Cls.clstypeCvrt(this.getClstype()); }
     getClsstatusCard()              { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
     getClsstatusFont()              { return GGC.Cls.clsstatusFont(this.getClsstatus()); }
+    getClssettleflgCvrt()           { return GGC.Cls.clssettleflgCvrt(this.getClssettleflg()); }
+    getClssettleflgCard()           { return GGC.Cls.clssettleflgCard(this.getClssettleflg()); }
+    getClssettleflgFont()           { return GGC.Cls.clssettleflgFont(this.getClssettleflg()); }
     getClsPeriod()                  { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getClsapplyPeriod()             { return GGdate.period(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
     getClsapplybillpriceWon()       { return this.getClsbillapplyunit() + " 당, " + GGC.Common.priceWon(this.getClsbillapplyprice()); }
     getClsbillsalesWon()            { return GGC.Common.priceWon(this.getClsbillsales()); }
     getClsbillpurchaseWon()         { return GGC.Common.priceWon(this.getClsbillpurchase()); }
     getClsbillfinalWon()            { return GGC.Common.priceWon(this.getClsbillfinal()); }
-    getGrpfinancereflectflgColor()  { return GGC.Cls.getGrpfinancereflectflgColor(this.getGrpfinancereflectflg()); }
+    getGrpfinancereflectflgFont()   { return GGC.Cls.getGrpfinancereflectflgFont(this.getGrpfinancereflectflg()); }
 
     /* ========================= */
     /* is */
@@ -98,9 +101,6 @@ class MCls
         html +=
         `
             <div class="MClss-make-div-modelTop common-div-card">
-                <div class="common-div-cushionUD">
-                    <span class="common-tag-fontsize12">${model.getClsstatusFont()}</span>
-                </div>
                 <table class="common-tbl-label" label-size="3rd">
                     <tbody>
                         <tr>
@@ -109,13 +109,19 @@ class MCls
                         </tr>
                     </tbody>
                 </table>
-                <div class="common-tag-block">
-                    <span class="common-tag-fontsize11 common-tag-strong">일정</span>
-                    <span class="common-tag-fontsize09">${model.getClstypeCvrt()}</span>
-                </div>
-                <span class="common-tag-block">${model.getClstitle()}</span>
-                <div class="common-div-cushionUD common-div-btnList common-tag-fontsize09">
-                    ${btnHtml}
+                <div class="common-div-cushionUp">
+                    <div class="common-tag-block">
+                        <span class="common-tag-fontsize11 common-tag-strong">일정</span>
+                        <span class="common-tag-fontsize09">${model.getClstypeCvrt()}</span>
+                    </div>
+                    <span class="common-tag-block">${model.getClstitle()}</span>
+                    <div class="common-div-cushionUD">
+                        ${true         ? `<span class="common-tag-inlineBlock">${model.getClsstatusCard()}</span>` : ""}
+                        ${this.isEnd() ? `<span class="common-tag-inlineBlock">${model.getClssettleflgCard()}</span>` : ""}
+                    </div>
+                    <div class="common-div-cushionUp common-div-btnList common-tag-fontsize09">
+                        ${btnHtml}
+                    </div>
                 </div>
             </div>
         `;

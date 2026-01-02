@@ -2,6 +2,7 @@
 /* 라벨 */
 /* ============================== */
 .common-tbl-label { display:block; }
+.common-tbl-label[label-size="3rd"] > tbody > tr > td:nth-child(1) { padding-left: 0em; }
 .common-tbl-label[label-size="3rd"] > tbody > tr > td { padding:0.2em; vertical-align:middle; }
 .common-tbl-label[label-size="3rd"] > tbody > tr:nth-child(1) > td:nth-child(1) { width:2em; }
 .common-tbl-label[label-size="3rd"] > tbody > tr:nth-child(1) > td:nth-child(1) > .common-img-label { width: 2.0em; height: 2.0em; background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; }

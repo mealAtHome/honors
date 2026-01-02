@@ -117,6 +117,13 @@
 .common-tag-font[font-color="pstv"]      { color:rgb(  0 ,   2 , 120 ); border: none; background-color: none; }
 .common-tag-font[font-color="ngtv"]      { color:rgb(120 ,   0 , 0   ); border: none; background-color: none; }
 
+.common-tag-card
+{
+    display     : inline-block;
+    font-size   : 1em;
+    font-weight : 600;
+    padding     : 0.3em 0.6em;
+}
 .common-tag-card[card-color="hold"]      { color:rgb(212 , 173 , 0   ); border:2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
 .common-tag-card[card-color="prog"]      { color:rgb(  3 , 154 , 0   ); border:2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
 .common-tag-card[card-color="pstv"]      { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }

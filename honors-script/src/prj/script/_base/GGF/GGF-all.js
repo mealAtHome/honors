@@ -36,6 +36,11 @@ GGF.Cls =
         END             : "end",                /* GGF.Cls.Clsstatus.END : 일정완료 */
         CANCEL          : "cancel",             /* GGF.Cls.Clsstatus.CANCEL : 일정취소 */
     },
+    Clssettleflg :
+    {
+        YET             : "yet",                /* GGF.Cls.Clssettleflg.YET : 미정산 */
+        DONE            : "done",               /* GGF.Cls.Clssettleflg.DONE : 정산완료 */
+    },
     Grpfinancereflectflg :
     {
         Y               : "y",                  /* GGF.Cls.Grpfinancereflectflg.Y : 반영 */

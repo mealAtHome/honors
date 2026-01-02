@@ -11,7 +11,6 @@ Api.Cls =
     selectFor1YearByGrpnoForAll         (grpno            , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectFor1YearByGrpnoForAll"     , GRPNO: grpno,                        }, noticeOK, noticeFail); },
 
     selectForUserByClsstatusIng         (                   noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForUserByClsstatusIng"                     }, noticeOK, noticeFail); },
-    selectForUserByClssettleflgN        (                   noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForUserByClssettleflgN"                    }, noticeOK, noticeFail); },
     selectForUserByClsstatusEnd         (                   noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForUserByClsstatusEnd"                     }, noticeOK, noticeFail); },
     selectForUserByClsstatusCancel      (                   noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForUserByClsstatusCancel"                  }, noticeOK, noticeFail); },
     selectForMngrByClsstatusEdit        (grpno,             noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForMngrByClsstatusEdit"    , GRPNO: grpno, }, noticeOK, noticeFail); },

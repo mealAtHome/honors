@@ -1,5 +1,8 @@
 GGC.Cls =
 {
+    /* ----- */
+    /* clstype */
+    /* ----- */
     clstypeCvrt(val)
     {
         let rslt = "";
@@ -12,6 +15,9 @@ GGC.Cls =
         return rslt;
     },
 
+    /* ----- */
+    /* clsstatus */
+    /* ----- */
     clsstatusCvrt(val)
     {
         let rslt = "";
@@ -19,7 +25,7 @@ GGC.Cls =
         {
             case GGF.Cls.Clsstatus.EDIT   : rslt = "작성중"; break;
             case GGF.Cls.Clsstatus.ING    : rslt = "진행중"; break;
-            case GGF.Cls.Clsstatus.END    : rslt = "정산중"; break;
+            case GGF.Cls.Clsstatus.END    : rslt = "완료"; break;
             case GGF.Cls.Clsstatus.CANCEL : rslt = "취소"; break;
         }
         return rslt;
@@ -39,6 +45,36 @@ GGC.Cls =
     clsstatusCard(val) { return `<span class="common-tag-card" card-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
     clsstatusFont(val) { return `<span class="common-tag-font" font-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
 
+    /* ----- */
+    /* clssettleflg */
+    /* ----- */
+    clssettleflgCvrt(val)
+    {
+        let rslt = "";
+        switch(val)
+        {
+            case GGF.Cls.Clssettleflg.YET     : rslt = "미정산"; break;
+            case GGF.Cls.Clssettleflg.DONE    : rslt = "정산완료"; break;
+        }
+        return rslt;
+    },
+    clssettleflgFeel(val)
+    {
+        let rslt = "";
+        switch(val)
+        {
+            case GGF.Cls.Clssettleflg.YET     : rslt = "hold"; break;
+            case GGF.Cls.Clssettleflg.DONE    : rslt = "pstv"; break;
+        }
+        return rslt;
+    },
+    clssettleflgCard(val) { return `<span class="common-tag-card" card-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
+    clssettleflgFont(val) { return `<span class="common-tag-font" font-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
+
+
+    /* ----- */
+    /* clstype */
+    /* ----- */
     getGrpfinancereflectflgCvrt(val)
     {
         let rslt = "";
@@ -50,18 +86,20 @@ GGC.Cls =
         }
         return rslt;
     },
-    getGrpfinancereflectflgColor(val)
+    getGrpfinancereflectflgFeel(val)
     {
         let rslt = "";
-        let text = GGC.Cls.getGrpfinancereflectflgCvrt(val);
         switch(val)
         {
-            case GGF.Cls.Grpfinancereflectflg.Y         : rslt = `<span class="common-tag-colorPstv">${text}</span>`; break;
-            case GGF.Cls.Grpfinancereflectflg.N         : rslt = `<span class="common-tag-colorWarn">${text}</span>`; break;
-            case GGF.Cls.Grpfinancereflectflg.UNABLE    : rslt = `<span class="common-tag-colorNgtv">${text}</span>`; break;
+            case GGF.Cls.Grpfinancereflectflg.Y         : rslt = "pstv"; break;
+            case GGF.Cls.Grpfinancereflectflg.N         : rslt = "hold"; break;
+            case GGF.Cls.Grpfinancereflectflg.UNABLE    : rslt = "ngtv"; break;
         }
         return rslt;
-    }
+    },
+    getGrpfinancereflectflgCard(val) { return `<span class="common-tag-card" card-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
+    getGrpfinancereflectflgFont(val) { return `<span class="common-tag-font" font-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
+
 
 }
 

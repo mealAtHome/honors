@@ -74,6 +74,7 @@
     <!-- 메인 탭 -->
     <!-- ========================= -->
     <div id="CLSD-div-tabmain" class="common-div-cushion" style="display:none;">
+        <hr class="common-hr-marginSUDw"/>
         <table class="common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
@@ -83,13 +84,13 @@
                 </tr>
             </tbody>
         </table>
+        <hr class="common-hr-marginSUDw"/>
     </div>
 
     <!-- ========================= -->
     <!-- 참가자목록 -->
     <!-- ========================= -->
     <div class="common-div-cushion CLSD-div-tabmain" tabval="clslineup">
-        <hr class="common-hr-paddingUD"/>
         <p class="common-p-title">참가현황</p>
 
         <!-- --------------- -->
@@ -249,7 +250,6 @@
     <!-- 정산현황 -->
     <!-- ========================= -->
     <div id="CLSD-div-clssettleTop" class="common-div-cushion CLSD-div-tabmain" tabval="clssettle" style="display:none;">
-        <hr class="common-hr-paddingUD"/>
         <p class="common-p-title">정산현황</p>
         <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
             <thead>
@@ -269,7 +269,6 @@
     <!-- 소비목록 -->
     <!-- ========================= -->
     <div id="CLSD-div-clspurchase" class="common-div-cushion CLSD-div-tabmain" tabval="clspurchase" style="display:none;">
-        <hr class="common-hr-paddingUD"/>
         <p class="common-p-title">소비목록</p>
         <table id="CLSD-tbl-clspurchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
             <thead>
@@ -368,7 +367,7 @@
                         $("#CLSD-span-clsbillsales")          .text(mCls.getClsbillsalesWon());
                         $("#CLSD-span-clsbillpurchase")       .text(mCls.getClsbillpurchaseWon());
                         $("#CLSD-span-clsbillfinal")          .text(mCls.getClsbillfinalWon());
-                        $("#CLSD-div-grpfinancereflectflg")   .html(mCls.getGrpfinancereflectflgColor());
+                        $("#CLSD-div-grpfinancereflectflg")   .html(mCls.getGrpfinancereflectflgFont());
 
                         /* ----- */
                         /* show / hide */
