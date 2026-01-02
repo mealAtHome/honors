@@ -17,11 +17,10 @@
         <table class="MMCL-tbl-common common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <!-- <td><gg-backbtn-simple onclick="MMCL.close(true);"></gg-backbtn-simple></td> -->
                     <td class="MMCL-td-searchtype" searchtype="edit"      tab=""    >작성중</td>
                     <td class="MMCL-td-searchtype" searchtype="ing"       tab=""    >진행중</td>
-                    <td class="MMCL-td-searchtype" searchtype="endcls"    tab=""    >정산중</td>
-                    <td class="MMCL-td-searchtype" searchtype="endsettle" tab=""    >완료</td>
+                    <td class="MMCL-td-searchtype" searchtype="settle"    tab=""    >정산중</td>
+                    <td class="MMCL-td-searchtype" searchtype="end"       tab=""    >완료</td>
                     <td class="MMCL-td-searchtype" searchtype="cancel"    tab=""    >취소</td>
                 </tr>
             </tbody>
@@ -60,7 +59,14 @@
                 {
                     let grpno = MMCL.Data.grpno;
                     let mSearchType = $(".MMCL-td-searchtype[tab='tab']").attr("searchtype");
-                    let mClss = Api.Cls.selectByClsstatusForMng(grpno, mSearchType, GGF.none, GGF.toast);
+                    switch(searchtype)
+                    {
+                        case "edit"     : mClss = Api.Cls.selectForMngrByClsstatusEdit   (grpno); break;
+                        case "ing"      : mClss = Api.Cls.selectForMngrByClsstatusIng    (grpno); break;
+                        case "settle"   : mClss = Api.Cls.selectForMngrByClssettleflgN   (grpno); break;
+                        case "end"      : mClss = Api.Cls.selectForMngrByClsstatusEnd    (grpno); break;
+                        case "cancel"   : mClss = Api.Cls.selectForMngrByClsstatusCancel (grpno); break;
+                    }
                     mClss.make("#MMCL-div-list");
 
                     Common.hideProgress();

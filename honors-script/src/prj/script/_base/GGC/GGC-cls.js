@@ -17,21 +17,27 @@ GGC.Cls =
         let rslt = "";
         switch(val)
         {
-            case GGF.Cls.Clsstatus.EDIT          : rslt = "작성중"; break;
-            case GGF.Cls.Clsstatus.ING           : rslt = "진행중"; break;
-            case GGF.Cls.Clsstatus.ENDCLS        : rslt = "정산중"; break;
-            case GGF.Cls.Clsstatus.ENDSETTLE     : rslt = "완료"; break;
-            case GGF.Cls.Clsstatus.CANCEL        : rslt = "취소"; break;
+            case GGF.Cls.Clsstatus.EDIT   : rslt = "작성중"; break;
+            case GGF.Cls.Clsstatus.ING    : rslt = "진행중"; break;
+            case GGF.Cls.Clsstatus.END    : rslt = "정산중"; break;
+            case GGF.Cls.Clsstatus.CANCEL : rslt = "취소"; break;
         }
         return rslt;
     },
-
-    clsstatusCard(val)
+    clsstatusFeel(val)
     {
-        let converted = GGC.Cls.clsstatusCvrt(val);
-        let rslt = `<span class="common-span-card" clsstatus="${val}">${converted}</span>`;
+        let rslt = "";
+        switch(val)
+        {
+            case GGF.Cls.Clsstatus.EDIT   : rslt = "hold"; break;
+            case GGF.Cls.Clsstatus.ING    : rslt = "prog"; break;
+            case GGF.Cls.Clsstatus.END    : rslt = "pstv"; break;
+            case GGF.Cls.Clsstatus.CANCEL : rslt = "ngtv"; break;
+        }
         return rslt;
     },
+    clsstatusCard(val) { return `<span class="common-tag-card" card-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
+    clsstatusFont(val) { return `<span class="common-tag-font" font-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
 
     getGrpfinancereflectflgCvrt(val)
     {

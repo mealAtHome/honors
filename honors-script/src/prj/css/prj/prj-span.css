@@ -1,6 +1,0 @@
-/* 일정상태에 따른 표시 */
-.common-span-card[clsstatus="edit"]       { color:rgb(212 , 173 , 0   ); border:2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
-.common-span-card[clsstatus="ing"]        { color:rgb(  3 , 154 , 0   ); border:2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
-.common-span-card[clsstatus="endcls"]     { color:rgb( 10 ,  95 , 0   ); border:2px solid rgb( 10 ,  95 , 0   ); background-color: rgb( 10 ,  95 , 0   , 0.3); }
-.common-span-card[clsstatus="endsettle"]  { color:rgb(  0 ,   2 , 120 ); border:2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
-.common-span-card[clsstatus="cancel"]     { color:rgb(120 ,   0 , 0   ); border:2px solid rgb(120 ,   0 , 0   ); background-color: rgb(120 ,   0 , 0   , 0.3); }

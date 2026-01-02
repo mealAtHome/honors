@@ -69,7 +69,7 @@ class GGauth
 
     public function isClsEdit    ($GRPNO, $CLSNO, $errorflg=false) { return $this->isClsstatus($GRPNO, $CLSNO, ClsBO::CLSSTATUS__EDIT, $errorflg); }
     public function isClsIng     ($GRPNO, $CLSNO, $errorflg=false) { return $this->isClsstatus($GRPNO, $CLSNO, ClsBO::CLSSTATUS__ING, $errorflg); }
-    public function isClsEndcls  ($GRPNO, $CLSNO, $errorflg=false) { return $this->isClsstatus($GRPNO, $CLSNO, ClsBO::CLSSTATUS__ENDCLS, $errorflg); }
+    public function isClsEnd     ($GRPNO, $CLSNO, $errorflg=false) { return $this->isClsstatus($GRPNO, $CLSNO, ClsBO::CLSSTATUS__END, $errorflg); }
     public function isClsCancel  ($GRPNO, $CLSNO, $errorflg=false) { return $this->isClsstatus($GRPNO, $CLSNO, ClsBO::CLSSTATUS__CANCEL, $errorflg); }
     public function isClsstatus($GRPNO, $CLSNO, $CLSSTATUS, $errorflg=false)
     {
@@ -83,7 +83,7 @@ class GGauth
                 {
                     case ClsBO::CLSSTATUS__EDIT   : throw new GGexception("일정 수정중일 때만 가능합니다.");
                     case ClsBO::CLSSTATUS__ING    : throw new GGexception("일정이 진행중일 때만 가능합니다.");
-                    case ClsBO::CLSSTATUS__ENDCLS : throw new GGexception("일정종료 상태에서만 가능합니다.");
+                    case ClsBO::CLSSTATUS__END : throw new GGexception("일정종료 상태에서만 가능합니다.");
                     case ClsBO::CLSSTATUS__CANCEL : throw new GGexception("일정취소 상태에서만 가능합니다.");
                 }
             }

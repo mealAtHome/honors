@@ -33,8 +33,7 @@ GGF.Cls =
     {
         EDIT            : "edit",               /* GGF.Cls.Clsstatus.EDIT : 작성중 */
         ING             : "ing",                /* GGF.Cls.Clsstatus.ING : 진행중 */
-        ENDCLS          : "endcls",             /* GGF.Cls.Clsstatus.ENDCLS : 일정완료 */
-        ENDSETTLE       : "endsettle",          /* GGF.Cls.Clsstatus.ENDSETTLE : 정산완료 */
+        END             : "end",                /* GGF.Cls.Clsstatus.END : 일정완료 */
         CANCEL          : "cancel",             /* GGF.Cls.Clsstatus.CANCEL : 일정취소 */
     },
     Grpfinancereflectflg :

@@ -40,6 +40,7 @@ class ClsBO extends _CommonBO
     const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30)              / NO  */
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14)              / NO  */
     const FIELD__CLSSTATUS                  = "clsstatus";                  /* (  ) char(30)              / NO  */
+    const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) enum('yet','done')    / YES */
     const FIELD__CLSTYPE                    = "clstype";                    /* (  ) char(30)              / NO  */
     const FIELD__CLSTITLE                   = "clstitle";                   /* (  ) char(50)              / NO  */
     const FIELD__CLSCONTENT                 = "clscontent";                 /* (  ) varchar(255)          / YES  */
@@ -51,7 +52,6 @@ class ClsBO extends _CommonBO
     const FIELD__CLSBILLAPPLYUNIT           = "clsbillapplyunit";           /* (  ) int                   / NO  */
     const FIELD__CLSAPPLYSTARTDT            = "clsapplystartdt";            /* (  ) datetime              / NO  */
     const FIELD__CLSAPPLYCLOSEDT            = "clsapplyclosedt";            /* (  ) datetime              / NO  */
-    const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) enum('y','n')         / YES */
     const FIELD__CLSUSERNOREG               = "clsusernoreg";               /* (  ) char(30)              / YES */
     const FIELD__CLSUSERNOADM               = "clsusernoadm";               /* (  ) char(30)              / YES */
     const FIELD__CLSUSERNOSUB               = "clsusernosub";               /* (  ) char(30)              / YES */
@@ -67,14 +67,15 @@ class ClsBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const CLSTYPE__LINEUP1          = "lineup1";            /* 일반참가 */
-    const CLSTYPE__LINEUP2          = "lineup2";            /* 라인업1시합 */
-    const CLSTYPE__LINEUP4          = "lineup4";            /* 라인업2시합 */
-    const CLSSTATUS__EDIT           = "edit";               /* 작성중 */
-    const CLSSTATUS__ING            = "ing";                /* 진행중 */
-    const CLSSTATUS__ENDCLS         = "endcls";             /* 일정완료 */
-    const CLSSTATUS__ENDSETTLE      = "endsettle";          /* 정산완료 */
-    const CLSSTATUS__CANCEL         = "cancel";             /* 취소 */
+    const CLSTYPE__LINEUP1          = "lineup1";            /* clstype : 일반참가 */
+    const CLSTYPE__LINEUP2          = "lineup2";            /* clstype : 라인업1시합 */
+    const CLSTYPE__LINEUP4          = "lineup4";            /* clstype : 라인업2시합 */
+    const CLSSTATUS__EDIT           = "edit";               /* clsstatus : 작성중 */
+    const CLSSTATUS__ING            = "ing";                /* clsstatus : 진행중 */
+    const CLSSTATUS__END            = "end";                /* clsstatus : 일정완료 */
+    const CLSSTATUS__CANCEL         = "cancel";             /* clsstatus : 취소 */
+    const CLSSETTLEFLG__YET         = "yet";                /* clssettleflg : 미정산 */
+    const CLSSETTLEFLG__DONE        = "done";               /* clssettleflg : 정산완료 */
 
     /* ========================= */
     /* select options */
@@ -87,9 +88,10 @@ class ClsBO extends _CommonBO
         $arr['clstypeLineup4']                  = self::CLSTYPE__LINEUP4;       /* 라인업2시합 */
         $arr['clsstatusEdit']                   = self::CLSSTATUS__EDIT;        /* 일정상태 : 작성중 */
         $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
-        $arr['clsstatusEndcls']                 = self::CLSSTATUS__ENDCLS;      /* 일정상태 : 일정완료 */
-        $arr['clsstatusEndsettle']              = self::CLSSTATUS__ENDSETTLE;   /* 일정상태 : 정산완료 */
+        $arr['clsstatusEnd']                    = self::CLSSTATUS__END;         /* 일정상태 : 일정완료 */
         $arr['clsstatusCancel']                 = self::CLSSTATUS__CANCEL;      /* 일정상태 : 취소 */
+        $arr['clssettleflgYet']                 = self::CLSSETTLEFLG__YET;      /* 정산여부 : 미정산 */
+        $arr['clssettleflgDone']                = self::CLSSETTLEFLG__DONE;     /* 정산여부 : 정산완료 */
         return $arr;
     }
 
@@ -112,9 +114,18 @@ class ClsBO extends _CommonBO
     const selectByPkForMng = "selectByPkForMng";
     const selectByGrpnoForMng = "selectByGrpnoForMng"; /* GRPNO, PAGEFLG, PAGENUM */
     const selectByClsstatusForMng = "selectByClsstatusForMng";
-    const selectByClsstatusForUser = "selectByClsstatusForUser";
     const selectAppliedFor1YearByUserno = "selectAppliedFor1YearByUserno";
     const selectFor1YearByGrpnoForAll = "selectFor1YearByGrpnoForAll";
+
+    const selectForUserByClsstatusIng       = "selectForUserByClsstatusIng";        /* [user] [EXECUTOR]        : 탭검색 */
+    const selectForUserByClssettleflgN      = "selectForUserByClssettleflgN";       /* [user] [EXECUTOR]        : 탭검색 */
+    const selectForUserByClsstatusEnd       = "selectForUserByClsstatusEnd";        /* [user] [EXECUTOR]        : 탭검색 */
+    const selectForUserByClsstatusCancel    = "selectForUserByClsstatusCancel";     /* [user] [EXECUTOR]        : 탭검색 */
+    const selectForMngrByClsstatusEdit      = "selectForMngrByClsstatusEdit";       /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
+    const selectForMngrByClsstatusIng       = "selectForMngrByClsstatusIng";        /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
+    const selectForMngrByClssettleflgN      = "selectForMngrByClssettleflgN";       /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
+    const selectForMngrByClsstatusEnd       = "selectForMngrByClsstatusEnd";        /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
+    const selectForMngrByClsstatusCancel    = "selectForMngrByClsstatusCancel";     /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
     protected function select($options, $option="")
     {
         /* --------------- */
@@ -140,6 +151,7 @@ class ClsBO extends _CommonBO
               t.grpno
             , t.clsno
             , t.clsstatus
+            , t.clssettleflg
             , t.clstype
             , t.clstitle
             , t.clscontent
@@ -151,7 +163,6 @@ class ClsBO extends _CommonBO
             , t.clsbillapplyunit
             , t.clsapplystartdt
             , t.clsapplyclosedt
-            , t.clssettleflg
             , t.clsusernoreg
             , t.clsusernoadm
             , t.clsusernosub
@@ -181,6 +192,11 @@ class ClsBO extends _CommonBO
             case self::selectByPkForMng:
             case self::selectByGrpnoForMng:
             case self::selectByClsstatusForMng:
+            case self::selectForMngrByClsstatusEdit:
+            case self::selectForMngrByClsstatusIng:
+            case self::selectForMngrByClssettleflgN:
+            case self::selectForMngrByClsstatusEnd:
+            case self::selectForMngrByClsstatusCancel:
             {
                 GGauth::isGrpmanager($GRPNO, $EXECUTOR, true);
                 break;
@@ -209,8 +225,16 @@ class ClsBO extends _CommonBO
             case self::selectByPkForMng                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             case self::selectByGrpnoForMng              : { $from = "(select * from cls where grpno = '$GRPNO') t"; break; }
             case self::selectByClsstatusForMng          : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$CLSSTATUS') t"; break; }
-            case self::selectByClsstatusForUser         : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$CLSSTATUS') t"; break; }
             case self::selectFor1YearByGrpnoForAll      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstartdt >= date_sub(now(), interval 1 year)) t"; break; }
+            case self::selectForUserByClsstatusIng      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus    = '$clsstatusIng') t"; break; }
+            case self::selectForUserByClssettleflgN     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clssettleflg = '$clssettleflgYet') t"; break; }
+            case self::selectForUserByClsstatusEnd      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus    = '$clsstatusEnd') t"; break; }
+            case self::selectForUserByClsstatusCancel   : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus    = '$clsstatusCancel') t"; break; }
+            case self::selectForMngrByClsstatusEdit     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus    = '$clsstatusEdit') t"; break; }
+            case self::selectForMngrByClsstatusIng      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus    = '$clsstatusIng') t"; break; }
+            case self::selectForMngrByClssettleflgN     : { $from = "(select * from cls where grpno = '$GRPNO' and clssettleflg = '$clssettleflgYet') t"; break; }
+            case self::selectForMngrByClsstatusEnd      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus    = '$clsstatusEnd') t"; break; }
+            case self::selectForMngrByClsstatusCancel   : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus    = '$clsstatusCancel') t"; break; }
             case self::selectAppliedFor1YearByUserno    :
             {
                 $from =
@@ -283,8 +307,7 @@ class ClsBO extends _CommonBO
     const insert = "insert";
     const update = "update";
     const updateClsstatusEditToIng   = "updateClsstatusEditToIng";   /* 매니저 : 일정상태를 진행중으로 변경 */
-    const updateClsstatusIngToEndcls = "updateClsstatusIngToEndcls"; /* 매니저 : 일정상태를 종료로 변경 */
-    const updateClsstatusIngToEndsettle = "updateClsstatusIngToEndsettle"; /* 매니저 : 일정상태를 정산완료로 변경 */
+    const updateClsstatusIngToEnd = "updateClsstatusIngToEnd"; /* 매니저 : 일정상태를 종료로 변경 */
     const updateClsstatusToCancel = "updateClsstatusToCancel"; /* 매니저 : 일정상태를 취소로 변경 */
     const copyClsForMng = "copyClsForMng";
     const deleteByPkForMng = "deleteByPkForMng";
@@ -374,7 +397,6 @@ class ClsBO extends _CommonBO
                         , clsbillapplyunit
                         , clsapplystartdt
                         , clsapplyclosedt
-                        , clssettleflg
                         , clsusernoreg
                         , clsusernoadm
                         , clsusernosub
@@ -397,7 +419,6 @@ class ClsBO extends _CommonBO
                         , '$CLSBILLAPPLYUNIT'
                         , '$CLSAPPLYSTARTDT'
                         , '$CLSAPPLYCLOSEDT'
-                        , 'n'
                         , '$EXECUTOR'
                         ,  $CLSUSERNOADM
                         ,  $CLSUSERNOSUB
@@ -456,28 +477,28 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
                 break;
             }
-            case self::updateClsstatusIngToEndcls:
+            case self::updateClsstatusIngToEnd:
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
                 $ggAuth->isClsIng($GRPNO, $CLSNO, true); /* is ing status? */
 
                 /* update clsstatus */
-                $query = "update cls set clsstatus = '$clsstatusEndcls', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
+                $query = "update cls set clsstatus = '$clsstatusEnd', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
                 break;
             }
-            case self::updateClsstatusIngToEndsettle:
+            case self::updateClsSettleInfoByPk:
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $ggAuth->isClsEndcls($GRPNO, $CLSNO, true); /* is endcls status? */
+                $ggAuth->isClsEnd($GRPNO, $CLSNO, true); /* is end status? */
 
                 /* regist settle */
                 $clssettleBO->insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
 
                 /* update clsstatus */
-                $query = "update cls set clsstatus = '$clsstatusEndsettle', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
+                $query = "update cls set clssettleflg = '$clssettleflgDone', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
                 break;
             }
@@ -522,7 +543,6 @@ class ClsBO extends _CommonBO
                         , clsbillapplyunit
                         , clsapplystartdt
                         , clsapplyclosedt
-                        , clssettleflg
                         , clsmodidt
                         , clsregdt
                     )
@@ -541,7 +561,6 @@ class ClsBO extends _CommonBO
                         ,  clsbillapplyunit
                         ,  clsapplystartdt
                         ,  clsapplyclosedt
-                        ,  clssettleflg
                         ,  now()
                         ,  now()
                     from

@@ -8,8 +8,8 @@
             <tbody>
                 <tr>
                     <td class="UMCL-td-searchtype" searchtype="ing"       tab="tab" >진행중</td>
-                    <td class="UMCL-td-searchtype" searchtype="endcls"    tab=""    >정산중</td>
-                    <td class="UMCL-td-searchtype" searchtype="endsettle" tab=""    >완료</td>
+                    <td class="UMCL-td-searchtype" searchtype="settle"    tab=""    >미정산</td>
+                    <td class="UMCL-td-searchtype" searchtype="end"       tab=""    >완료</td>
                     <td class="UMCL-td-searchtype" searchtype="cancel"    tab=""    >취소</td>
                 </tr>
             </tbody>
@@ -71,7 +71,14 @@
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    let mClss = Api.Cls.selectByClsstatusForUser(searchtype, GGF.none, GGF.toast);
+                    let mClss = null;
+                    switch(searchtype)
+                    {
+                        case "ing"      : mClss = Api.Cls.selectForUserByClsstatusIng    (); break;
+                        case "settle"   : mClss = Api.Cls.selectForUserByClssettleflgN   (); break;
+                        case "end"      : mClss = Api.Cls.selectForUserByClsstatusEnd    (); break;
+                        case "cancel"   : mClss = Api.Cls.selectForUserByClsstatusCancel (); break;
+                    }
                     mClss.make("#UMCL-div-list");
 
                     Common.hideProgress();

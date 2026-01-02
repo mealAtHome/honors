@@ -659,7 +659,7 @@
                             let grpno = CUST.Data.grpno;
                             let arrForSettle = CUST.getArrForSettle();
                             let arrForPurchase = CUST.getArrForPurchase();
-                            let mApiResponse = Api.Cls.updateClsstatusIngToEndsettle(grpno, clsno, JSON.stringify(arrForSettle), JSON.stringify(arrForPurchase), GGF.toast, GGF.toast);
+                            let mApiResponse = Api.Cls.updateClsSettleInfoByPk(grpno, clsno, JSON.stringify(arrForSettle), JSON.stringify(arrForPurchase), GGF.toast, GGF.toast);
                             if(mApiResponse.isSuccess())
                                 Navigation.moveBack();
                         }

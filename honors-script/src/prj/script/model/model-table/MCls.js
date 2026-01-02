@@ -73,6 +73,7 @@ class MCls
     /* ========================= */
     getClstypeCvrt()                { return GGC.Cls.clstypeCvrt(this.getClstype()); }
     getClsstatusCard()              { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
+    getClsstatusFont()              { return GGC.Cls.clsstatusFont(this.getClsstatus()); }
     getClsPeriod()                  { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getClsapplyPeriod()             { return GGdate.period(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
     getClsapplybillpriceWon()       { return this.getClsbillapplyunit() + " 당, " + GGC.Common.priceWon(this.getClsbillapplyprice()); }
@@ -84,8 +85,8 @@ class MCls
     /* ========================= */
     /* is */
     /* ========================= */
-    isEndsettle() { return this.getClsstatus() === GGF.Cls.Clsstatus.ENDSETTLE; }
-    isCancel()    { return this.getClsstatus() === GGF.Cls.Clsstatus.CANCEL; }
+    isEnd() { return this.getClsstatus() === GGF.Cls.Clsstatus.END; }
+    isCancel() { return this.getClsstatus() === GGF.Cls.Clsstatus.CANCEL; }
 
     /* ========================= */
     /* make with buttons */
@@ -97,6 +98,9 @@ class MCls
         html +=
         `
             <div class="MClss-make-div-modelTop common-div-card">
+                <div class="common-div-cushionUD">
+                    <span class="common-tag-fontsize12">${model.getClsstatusFont()}</span>
+                </div>
                 <table class="common-tbl-label" label-size="3rd">
                     <tbody>
                         <tr>
@@ -110,9 +114,6 @@ class MCls
                     <span class="common-tag-fontsize09">${model.getClstypeCvrt()}</span>
                 </div>
                 <span class="common-tag-block">${model.getClstitle()}</span>
-                <div class="common-div-cushionUD">
-                    <span class="common-tag-inlineBlock">${model.getClsstatusCard()}</span>
-                </div>
                 <div class="common-div-cushionUD common-div-btnList common-tag-fontsize09">
                     ${btnHtml}
                 </div>
@@ -165,11 +166,11 @@ class MClss extends _MCommon
                     case GGF.Cls.Clsstatus.ING:
                     {
                         btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010TypeLineup}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-ingToEndcls" ${model.getPk()}>정산중으로 변경</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-ingToEnd" ${model.getPk()}>일정종료</button>`;
                         btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate030Cancel}" hyperlink-viewmode="page" btn-type="cancel" ${model.getPk()}>일정취소</button>`;
                         break;
                     }
-                    case GGF.Cls.Clsstatus.ENDCLS:
+                    case GGF.Cls.Clsstatus.END:
                     {
                         btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020Settle}" hyperlink-viewmode="page" option="update" ${model.getPk()}>정산</button>`;
                         break;
@@ -229,7 +230,7 @@ class MClss extends _MCommon
         });
 
         /* 정산중 */
-        $(`${el} .MClss-make-btn-ingToEndcls`).off("click").on("click", function()
+        $(`${el} .MClss-make-btn-ingToEnd`).off("click").on("click", function()
         {
             let grpno = $(this).attr("grpno");
             let clsno = $(this).attr("clsno");
@@ -238,7 +239,7 @@ class MClss extends _MCommon
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    let mApiResponse = Api.Cls.updateClsstatusIngToEndcls(grpno, clsno);
+                    let mApiResponse = Api.Cls.updateClsstatusIngToEnd(grpno, clsno);
                     if(mApiResponse.isSuccess())
                     {
                         Common.hideProgress();

@@ -50,8 +50,7 @@ class Clslineup2BO extends _CommonBO
     /* ========================= */
     // const CLSSTATUS__EDIT           = "edit";               /* 작성중 */
     // const CLSSTATUS__ING            = "ing";                /* 진행중 */
-    // const CLSSTATUS__ENDCLS         = "endcls";             /* 일정완료 */
-    // const CLSSTATUS__ENDSETTLE      = "endsettle";          /* 정산완료 */
+    // const CLSSTATUS__END         = "end";             /* 일정완료 */
 
     /* ========================= */
     /* select options */
@@ -61,8 +60,7 @@ class Clslineup2BO extends _CommonBO
         $arr = array();
         // $arr['clsstatusEdit']                   = self::CLSSTATUS__EDIT;        /* 일정상태 : 작성중 */
         // $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
-        // $arr['clsstatusEndcls']                 = self::CLSSTATUS__ENDCLS;      /* 일정상태 : 일정완료 */
-        // $arr['clsstatusEndsettle']              = self::CLSSTATUS__ENDSETTLE;   /* 일정상태 : 정산완료 */
+        // $arr['clsstatusEnd']                 = self::CLSSTATUS__END;      /* 일정상태 : 일정완료 */
         return $arr;
     }
 

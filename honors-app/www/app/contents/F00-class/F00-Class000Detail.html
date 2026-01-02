@@ -30,7 +30,7 @@
         <button id="CLSD-btn-textCls"    class="common-btn-outline">일정요약</button>
         <button id="CLSD-btn-textApply"  class="common-btn-outline">참가요약</button>
         <button id="CLSD-btn-textSettle" class="common-btn-outline" style="display:none;">정산요약</button>
-        <button id="CLSD-btn-settleList" class="common-btn-outline" style="display:none;">정산목록</button>
+        <button id="CLSD-btn-settleEdit" class="common-btn-outline" style="display:none;">정산수정</button>
         <hr class="common-hr-paddingTop"/>
     </div>
 
@@ -71,58 +71,25 @@
     </div>
 
     <!-- ========================= -->
-    <!-- 정산현황 -->
+    <!-- 메인 탭 -->
     <!-- ========================= -->
-    <div id="CLSD-div-clssettleTop" style="display:none;">
-        <hr class="common-hr-padding"/>
-        <div class="common-div-cushionLRD">
-            <p class="common-p-title">정산현황</p>
-            <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
-                <thead>
-                    <tr>
-                        <th>입금여부</th>
-                        <th>접수자</th>
-                        <th>최종금액</th>
-                        <th>비고</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <!-- ========================= -->
-    <!-- 소비목록 -->
-    <!-- ========================= -->
-    <div id="CLSD-div-clspurchase" style="display:none;">
-        <hr class="common-hr-padding"/>
-        <div class="common-div-cushionLRD">
-            <p class="common-p-title">소비목록</p>
-            <table id="CLSD-tbl-clspurchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
-                <thead>
-                    <tr>
-                        <th>품목</th>
-                        <th>가격</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>합계</th>
-                        <th id="CLSD-th-billtotalpriceWon" class="common-tag-alignR"></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+    <div id="CLSD-div-tabmain" class="common-div-cushion" style="display:none;">
+        <table class="common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="CLSD-td-tabmain" tabval="clslineup"    tab="tab" >참가자</td>
+                    <td class="CLSD-td-tabmain" tabval="clssettle"    tab=""    >정산</td>
+                    <td class="CLSD-td-tabmain" tabval="clspurchase"  tab=""    >소비</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- ========================= -->
     <!-- 참가자목록 -->
     <!-- ========================= -->
-    <hr class="common-hr-padding">
-    <div class="common-div-cushionLRD">
+    <div class="common-div-cushion CLSD-div-tabmain" tabval="clslineup">
+        <hr class="common-hr-paddingUD"/>
         <p class="common-p-title">참가현황</p>
 
         <!-- --------------- -->
@@ -149,12 +116,12 @@
         <!-- --------------- -->
         <div class="CLSD-div-clssub" tab="lineup2" style="display:none;">
             <div class="common-tag-fontsize09">
-                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀A</button>
-                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀B</button>
+                <button class="CLSD-btn-tabTeam2 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam2" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀A</button>
+                <button class="CLSD-btn-tabTeam2 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam2" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀B</button>
             </div>
             <hr class="common-hr-paddingUD"/>
 
-            <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
+            <div class="CLSD-div-tabTeam2" teamname="a" style="display:none;">
                 <p class="common-p-titlesub"><span class="CLSD-span-teamnick" teamname="a"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
@@ -172,7 +139,7 @@
                     </table>
                 </div>
             </div>
-            <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
+            <div class="CLSD-div-tabTeam2" teamname="b" style="display:none;">
                 <p class="common-p-titlesub"><span class="CLSD-span-teamnick" teamname="b"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
@@ -197,13 +164,13 @@
         <!-- --------------- -->
         <div class="CLSD-div-clssub" tab="lineup4" style="display:none;">
             <div class="common-tag-fontsize09">
-                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="a" tab="">시합1 - 팀A</button>
-                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="b" tab="">시합1 - 팀B</button>
-                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="c" tab="">시합2 - 팀C</button>
-                <button class="CLSD-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam" val="d" tab="">시합2 - 팀D</button>
+                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="a" tab="">시합1 - 팀A</button>
+                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="b" tab="">시합1 - 팀B</button>
+                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="c" tab="">시합2 - 팀C</button>
+                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="d" tab="">시합2 - 팀D</button>
             </div>
             <hr class="common-hr-paddingUD"/>
-            <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
+            <div class="CLSD-div-tabTeam4" teamname="a" style="display:none;">
                 <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-teamnick" teamname="a"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
@@ -221,7 +188,7 @@
                     </table>
                 </div>
             </div>
-            <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
+            <div class="CLSD-div-tabTeam4" teamname="b" style="display:none;">
                 <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-teamnick" teamname="b"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
@@ -239,7 +206,7 @@
                     </table>
                 </div>
             </div>
-            <div class="CLSD-div-tabTeam" teamname="c" style="display:none;">
+            <div class="CLSD-div-tabTeam4" teamname="c" style="display:none;">
                 <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-teamnick" teamname="c"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="c">
@@ -257,7 +224,7 @@
                     </table>
                 </div>
             </div>
-            <div class="CLSD-div-tabTeam" teamname="d" style="display:none;">
+            <div class="CLSD-div-tabTeam4" teamname="d" style="display:none;">
                 <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-teamnick" teamname="d"></span></p>
                 <div class="common-div-scrollX">
                     <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="d">
@@ -276,6 +243,50 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 정산현황 -->
+    <!-- ========================= -->
+    <div id="CLSD-div-clssettleTop" class="common-div-cushion CLSD-div-tabmain" tabval="clssettle" style="display:none;">
+        <hr class="common-hr-paddingUD"/>
+        <p class="common-p-title">정산현황</p>
+        <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+            <thead>
+                <tr>
+                    <th>입금여부</th>
+                    <th>접수자</th>
+                    <th>최종금액</th>
+                    <th>비고</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 소비목록 -->
+    <!-- ========================= -->
+    <div id="CLSD-div-clspurchase" class="common-div-cushion CLSD-div-tabmain" tabval="clspurchase" style="display:none;">
+        <hr class="common-hr-paddingUD"/>
+        <p class="common-p-title">소비목록</p>
+        <table id="CLSD-tbl-clspurchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+            <thead>
+                <tr>
+                    <th>품목</th>
+                    <th>가격</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>합계</th>
+                    <th id="CLSD-th-billtotalpriceWon" class="common-tag-alignR"></th>
+                </tr>
+            </tfoot>
+        </table>
     </div>
     <div class="common-div-cushionFooter"></div>
 
@@ -296,17 +307,40 @@
             show()
             {
                 /* validation param */
-                if(CLSD.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
-                if(CLSD.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
+                if(CLSD.Data.clsno      == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
+                if(CLSD.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
+                if(CLSD.Data.teamname   == undefined) { CLSD.Data.teamname = "a"; }
+                if(CLSD.Data.tabmain    == undefined) { CLSD.Data.tabmain  = "clslineup"; }
 
                 /* init el */
+                $("#CLSD-div-tabmain").hide();
                 $(".CLSD-tbl-clslineup2 > tbody").empty();
                 $("#CLSD-btn-textSettle").hide();
-                $("#CLSD-btn-settleList").hide();
+                $("#CLSD-btn-settleEdit").hide();
+                $("#CLSD-tr-clsbill").hide();
                 $("#CLSD-tr-clscancelreason").hide();
+                $("#CLSD-div-clssettleTop").hide();
+                $("#CLSD-div-clspurchase").hide();
 
-                /* tab */
-                $(`.CLSD-td-tab[val=decide]`).click();
+                /* recover tab */
+                $(`.CLSD-td-tabmain[tabval=${CLSD.Data.tabmain}]`).click();
+
+                // <button id="CLSD-btn-textSettle" class="common-btn-outline" style="display:none;">정산요약</button>
+                // <button id="CLSD-btn-settleEdit" class="common-btn-outline" style="display:none;">정산목록</button>
+                // <tr id="CLSD-tr-clsbill" style="display:none;">
+                // <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
+                // <div id="CLSD-div-tabmain" class="common-div-cushion" style="display:none;">
+                // <div class="CLSD-div-clssub" tab="lineup1" style="display:none;">
+                // <div class="CLSD-div-clssub" tab="lineup2" style="display:none;">
+                // <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
+                // <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
+                // <div class="CLSD-div-clssub" tab="lineup4" style="display:none;">
+                // <div class="CLSD-div-tabTeam" teamname="a" style="display:none;">
+                // <div class="CLSD-div-tabTeam" teamname="b" style="display:none;">
+                // <div class="CLSD-div-tabTeam" teamname="c" style="display:none;">
+                // <div class="CLSD-div-tabTeam" teamname="d" style="display:none;">
+                // <div id="CLSD-div-clssettleTop" class="common-div-cushion CLSD-div-tabmain" tabval="clssettle" style="display:none;">
+                // <div id="CLSD-div-clspurchase" class="common-div-cushion CLSD-div-tabmain" tabval="clspurchase" style="display:none;">
 
                 /* init */
                 Common.showProgress();
@@ -339,6 +373,12 @@
                         /* ----- */
                         /* show / hide */
                         /* ----- */
+                        /* is manager */
+                        CLSD.isManager = GGstorage.Prj.isManagerOfGrp(grpno);
+
+                        /* is manager and end */
+                        let isManagerAndEnd = (CLSD.isManager && mCls.isEnd());
+
                         /* clstype */
                         $(`.CLSD-div-clssub[tab=${mCls.getClstype()}]`).show();
                         $(`.CLSD-div-clssub[tab!=${mCls.getClstype()}]`).hide();
@@ -346,40 +386,27 @@
                         /* team tab */
                         switch(mCls.getClstype())
                         {
-                            case GGF.Cls.Clstype.LINEUP1:
-                            {
-                                break;
-                            }
-                            case GGF.Cls.Clstype.LINEUP2:
-                            case GGF.Cls.Clstype.LINEUP4:
-                            {
-                                $(`.CLSD-btn-tabTeam[val=a]`).click();
-                                break;
-                            }
+                            case GGF.Cls.Clstype.LINEUP2: { $(`.CLSD-btn-tabTeam2[val=${CLSD.Data.teamname}]`).click(); break; }
+                            case GGF.Cls.Clstype.LINEUP4: { $(`.CLSD-btn-tabTeam4[val=${CLSD.Data.teamname}]`).click(); break; }
                         }
 
                         /* cancel reason */
                         if(mCls.isCancel())
                             $("#CLSD-tr-clscancelreason").show();
 
-                        /* for manager */
-                        CLSD.isManager = GGstorage.Prj.isManagerOfGrp(grpno);
-                        if(CLSD.isManager)
+                        /* settle info */
+                        if(isManagerAndEnd)
                         {
-                            switch(mCls.getClsstatus())
-                            {
-                                case GGF.Cls.Clsstatus.ENDCLS       : $("#CLSD-btn-textSettle").show(); break;
-                                case GGF.Cls.Clsstatus.ENDSETTLE    : $("#CLSD-btn-settleList").show(); break;
-                            }
+                            $("#CLSD-div-tabmain").show();
+                            $("#CLSD-btn-textSettle").show();
+                            $("#CLSD-btn-settleEdit").show();
+                            $("#CLSD-tr-clsbill").show();
                         }
-
-                        /* clsbill */
-                        (CLSD.isManager && mCls.isEndsettle()) ? $("#CLSD-tr-clsbill").show() : $("#CLSD-tr-clsbill").hide();
 
                         /* =============== */
                         /* 정산현황 */
                         /* =============== */
-                        if(CLSD.isManager && mCls.isEndsettle())
+                        if(isManagerAndEnd)
                         {
                             let mClssettles = Api.Clssettle.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
                             let models = mClssettles.getModels();
@@ -401,7 +428,6 @@
                                 `;
                                 $("#CLSD-tbl-clssettle > tbody").append(html);
                             }
-                            $("#CLSD-div-clssettleTop").show();
 
                             /* 정산상세 버튼 이벤트 */
                             $(".CLSD-btn-managerdepositflgToY").off("click").on("click", function()
@@ -428,7 +454,7 @@
                         /* 소비목록 */
                         /* =============== */
                         let mClspurchases = Api.Clspurchase.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        if(CLSD.isManager && mCls.isEndsettle())
+                        if(isManagerAndEnd)
                         {
                             let models = mClspurchases.getModels();
                             let billtotalprice = 0;
@@ -448,7 +474,6 @@
                             $("#CLSD-th-billtotalpriceWon").text(GGC.Common.priceWon(billtotalprice));
                             if(models.length == 0)
                                 $("#CLSD-tbl-clspurchase > tbody").append("<tr><td colspan='2' class='common-tag-alignC'>소비내역이 없습니다.</td></tr>");
-                            $("#CLSD-div-clspurchase").show();
                         }
 
                         /* =============== */
@@ -525,8 +550,7 @@
                     switch(model.getClsstatus())
                     {
                         case GGF.Cls.Clsstatus.EDIT:
-                        case GGF.Cls.Clsstatus.ENDCLS:
-                        case GGF.Cls.Clsstatus.ENDSETTLE:
+                        case GGF.Cls.Clsstatus.END:
                         {
                             apply = `${model.getUsername()}`;
                             break;
@@ -546,10 +570,9 @@
                 {
                     switch(model.getClsstatus())
                     {
-                        case GGF.Cls.Clsstatus.EDIT       : apply = "-"; break;
-                        case GGF.Cls.Clsstatus.ENDCLS     : apply = "-"; break;
-                        case GGF.Cls.Clsstatus.ENDSETTLE  : apply = "-"; break;
-                        case GGF.Cls.Clsstatus.ING        :
+                        case GGF.Cls.Clsstatus.EDIT : apply = "-"; break;
+                        case GGF.Cls.Clsstatus.END  : apply = "-"; break;
+                        case GGF.Cls.Clsstatus.ING  :
                         {
                             apply =
                             `
@@ -683,7 +706,7 @@
             $("#CLSD-btn-textCls")      .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class080TextCls,        {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
             $("#CLSD-btn-textApply")    .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class081TextApply,      {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
             $("#CLSD-btn-textSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class082TextSettle,     {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
-            $("#CLSD-btn-settleList")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.D22DetailClssettleByClsno, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-settleEdit")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.D22DetailClssettleByClsno, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
 
             /* 팀 선택 */
             $(".CLSD-btn-tabTeam").click(function()
@@ -691,6 +714,14 @@
                 let teamname = $(this).attr('val');
                 $(".CLSD-div-tabTeam").hide();
                 $(`.CLSD-div-tabTeam[teamname="${teamname}"]`).show();
+            });
+
+            /* 탭 선택 */
+            $(".CLSD-td-tabmain").click(function()
+            {
+                let tabval = $(this).attr('tabval');
+                $(".CLSD-div-tabmain").hide();
+                $(`.CLSD-div-tabmain[tabval="${tabval}"]`).show();
             });
 
             /* =============== */
