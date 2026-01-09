@@ -8,6 +8,7 @@
             <tbody>
                 <tr>
                     <td class="UMCL-td-searchtype" searchtype="ing"       tab="tab" >진행중</td>
+                    <td class="UMCL-td-searchtype" searchtype="settle"    tab=""    >정산중</td>
                     <td class="UMCL-td-searchtype" searchtype="end"       tab=""    >완료</td>
                     <td class="UMCL-td-searchtype" searchtype="cancel"    tab=""    >취소</td>
                 </tr>
@@ -74,6 +75,7 @@
                     switch(searchtype)
                     {
                         case "ing"      : mClss = Api.Cls.selectForUserByClsstatusIng    (); break;
+                        case "settle"   : mClss = Api.Cls.selectForUserByClssettleflgN   (); break;
                         case "end"      : mClss = Api.Cls.selectForUserByClsstatusEnd    (); break;
                         case "cancel"   : mClss = Api.Cls.selectForUserByClsstatusCancel (); break;
                     }

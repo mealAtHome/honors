@@ -118,6 +118,7 @@ class ClsBO extends _CommonBO
     const selectFor1YearByGrpnoForAll = "selectFor1YearByGrpnoForAll";
 
     const selectForUserByClsstatusIng       = "selectForUserByClsstatusIng";        /* [user] [EXECUTOR]        : 탭검색 */
+    const selectForUserByClssettleflgN      = "selectForUserByClssettleflgN";       /* [user] [EXECUTOR]        : 탭검색 */
     const selectForUserByClsstatusEnd       = "selectForUserByClsstatusEnd";        /* [user] [EXECUTOR]        : 탭검색 */
     const selectForUserByClsstatusCancel    = "selectForUserByClsstatusCancel";     /* [user] [EXECUTOR]        : 탭검색 */
     const selectForMngrByClsstatusEdit      = "selectForMngrByClsstatusEdit";       /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
@@ -226,12 +227,13 @@ class ClsBO extends _CommonBO
             case self::selectByClsstatusForMng          : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$CLSSTATUS') t"; break; }
             case self::selectFor1YearByGrpnoForAll      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstartdt >= date_sub(now(), interval 1 year)) t"; break; }
             case self::selectForUserByClsstatusIng      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusIng') t"; break; }
-            case self::selectForUserByClsstatusEnd      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd') t"; break; }
+            case self::selectForUserByClssettleflgN     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgYet') t"; break; }
+            case self::selectForUserByClsstatusEnd      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
             case self::selectForUserByClsstatusCancel   : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusCancel') t"; break; }
             case self::selectForMngrByClsstatusEdit     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEdit') t"; break; }
             case self::selectForMngrByClsstatusIng      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
             case self::selectForMngrByClssettleflgN     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgYet') t"; break; }
-            case self::selectForMngrByClsstatusEnd      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd') t"; break; }
+            case self::selectForMngrByClsstatusEnd      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
             case self::selectForMngrByClsstatusCancel   : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
             case self::selectAppliedFor1YearByUserno    :
             {
@@ -302,13 +304,14 @@ class ClsBO extends _CommonBO
     /* ========================= */
     /* update */
     /* ========================= */
-    const insert = "insert";
-    const update = "update";
-    const updateClsstatusEditToIng   = "updateClsstatusEditToIng";   /* 매니저 : 일정상태를 진행중으로 변경 */
-    const updateClsstatusIngToEnd = "updateClsstatusIngToEnd"; /* 매니저 : 일정상태를 종료로 변경 */
-    const updateClsstatusToCancel = "updateClsstatusToCancel"; /* 매니저 : 일정상태를 취소로 변경 */
-    const copyClsForMng = "copyClsForMng";
-    const deleteByPkForMng = "deleteByPkForMng";
+    const insert                        = "insert";                         /* [mngr]  */
+    const update                        = "update";                         /* [mngr]  */
+    const updateClsstatusEditToIng      = "updateClsstatusEditToIng";       /* [mngr] [EXECUTOR, GRPNO, CLSNO]              : 일정상태를 진행중으로 변경 */
+    const updateClsstatusIngToEnd       = "updateClsstatusIngToEnd";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]              : 일정상태를 종료로 변경 */
+    const updateClsSettleInfoByPk       = "updateClsSettleInfoByPk";        /* [mngr] [EXECUTOR, GRPNO, CLSNO, ARR1, ARR2]  : 일정정산정보 등록 */
+    const updateClsstatusToCancel       = "updateClsstatusToCancel";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]              : 일정상태를 취소로 변경 */
+    const copyClsForMng                 = "copyClsForMng";                  /* [mngr]  */
+    const deleteByPkForMng              = "deleteByPkForMng";               /* [mngr]  */
     protected function update($options, $option="")
     {
         /* vars */
