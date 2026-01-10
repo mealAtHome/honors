@@ -1,0 +1,295 @@
+<ons-page id="CUPU">
+
+    <style>
+        #CUPU-tbl-purchase
+        {
+            white-space: nowrap;
+            width: 100%;
+        }
+        #CUPU-tbl-purchase > tbody > tr > td:nth-child(1) { width:10%; }
+        #CUPU-tbl-purchase > tbody > tr > td:nth-child(2) { width:50%; }
+        #CUPU-tbl-purchase > tbody > tr > td:nth-child(3) { width:40%; }
+        #CUPU-tbl-purchase > tfoot > tr > td { text-align: right; }
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="CUPU.close(true);"></gg-backbtn></div>
+        <div class="center">소비</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 일정상세 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <span class="common-tag-block common-tag-fontsize11" id="CUPU-span-clstitle"></span>
+    </div>
+
+    <!-- ========================= -->
+    <!-- 소비품목 -->
+    <!-- ========================= -->
+    <div class="CUPU-div-tab common-div-cushion" tab="purchase" style="display:none;">
+        <p class="common-p-title">소비품목</p>
+        <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
+        <div class="common-div-cushionUD">
+            <div class="common-tag-fontsize09">
+                <button id="CUPU-btn-addPurchaseRow" class="common-btn-outline">＋품목추가</button>
+            </div>
+        </div>
+        <div class="common-div-scrollX">
+            <table id="CUPU-tbl-purchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                <thead>
+                    <tr>
+                        <th colspan="2">품목</th>
+                        <th>금액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3">합계 : <span id="CUPU-span-productbillSummary">0원</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- footer -->
+    <!-- ======================== -->
+    <button id="CUPU-btn-savePurchase" class="common-btn-footer">저장</button>
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+        var CUPU =
+        {
+            code : "CUPU",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(CUPU.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CUPU.close(); return; }
+                if(CUPU.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CUPU.close(); return; }
+
+                /* tab */
+                $(`.CUPU-td-tab[val=decide]`).click();
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let clsno = CUPU.Data.clsno;
+                        let grpno = CUPU.Data.grpno;
+
+                        /* 기본정보 */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        $("#CUPU-span-clstitle").text(mCls.getClstitle());
+
+                        /* 구매초기화 */
+                        $("#CUPU-tbl-purchase > tbody").empty();
+                        let mClspurchases = Api.Clspurchase.selectByClsno(grpno, clsno);
+                        let purchaseModels = mClspurchases.getModels();
+                        for(let i in purchaseModels)
+                        {
+                            let model = purchaseModels[i];
+                            CUPU.addRowForPurchase(model);
+                        }
+                        CUPU.setEventForPurchase();
+                        CUPU.calSummaryPurchase();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            addRowForPurchase(mClspurchase)
+            {
+                let html =
+                `
+                    <tr purchaseidx="${mClspurchase.getPurchaseidx()}">
+                        <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outline" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
+                        <td col="productname"   ><input type="text"   class="common-input-text CUPU-input-productname" value="${mClspurchase.getProductname()}" style="width:100%;" /></td>
+                        <td col="productbill"   ><input type="number" class="common-input-text CUPU-input-productbill" value="${mClspurchase.getProductbill()}" style="width:100%;" /></td>
+                    </tr>
+                `;
+                $(`#CUPU-tbl-purchase > tbody`).append(html);
+            },
+
+            calSummaryPurchase()
+            {
+                let productbillTotal = 0;
+                $("#CUPU-tbl-purchase > tbody > tr").each(function()
+                {
+                    let productbill = parseInt($(this).find("td[col=productbill] > input").val());
+                    if(isNaN(productbill)) return;
+                    productbillTotal += productbill;
+                });
+                $("#CUPU-span-productbillSummary").text(GGC.Common.priceWon(productbillTotal));
+            },
+
+            setEventForPurchase()
+            {
+                /* --------------- */
+                /* purchase : 행삭제 */
+                /* --------------- */
+                $(".CUPU-btn-deleteRowForPurchase").off("click").on("click", function()
+                {
+                    let purchaseidx = $(this).attr("purchaseidx");
+                    let process = function()
+                    {
+                        /* remove row */
+                        $(`#CUPU-tbl-purchase > tbody > tr[purchaseidx=${purchaseidx}]`).remove();
+                        CUPU.calSummaryPurchase();
+                    }
+                    Common.confirm2("삭제하시겠습니까?", process);
+                });
+
+                /* --------------- */
+                /* purchase : 금액 */
+                /* --------------- */
+                $(".CUPU-input-productbill").off("keyup").on("keyup", function()
+                {
+                    CUPU.calSummaryPurchase();
+                });
+                /* 입력항목이 공백일 때 */
+                $(".CUPU-input-productbill").off("change").on("change", function() { if($(this).val() == "") $(this).val(0); $(this).keyup(); });
+            },
+
+            /* ========================= */
+            /* 구매정보수집 */
+            /* ========================= */
+            getArrForPurchase()
+            {
+                let arr = [];
+                $("#CUPU-tbl-purchase > tbody > tr").each(function()
+                {
+                    let productname = $(this).find("td[col=productname] > input").val();
+                    let productbill = $(this).find("td[col=productbill] > input").val();
+
+                    let productnameEmpty = Common.isEmpty(productname);
+                    let productbillEmpty = Common.isEmpty(productbill) || productbill == "0";
+                    if      (productnameEmpty && productbillEmpty)  { return; }
+                    else if (productnameEmpty)                      { Common.toast("품목명이 비어있는 행이 있습니다."); throw new Error("empty row"); }
+                    else if (productbillEmpty)                      { Common.toast("금액이 비어있는 행이 있습니다."); throw new Error("empty row"); }
+
+                    let dat =
+                    {
+                        PRODUCTNAME : productname,
+                        PRODUCTBILL : productbill,
+                    }
+                    arr.push(dat);
+                });
+                return arr;
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* =============== */
+            /* purchase : 소비품목추가 */
+            /* =============== */
+            $("#CUPU-btn-addPurchaseRow").click(function()
+            {
+                /* find next purchaseidx */
+                let purchaseidx = 1;
+                $("#CUPU-tbl-purchase > tbody > tr").each(function()
+                {
+                    let existPurchaseidx = parseInt($(this).attr("purchaseidx"));
+                    if(purchaseidx <= existPurchaseidx)
+                        purchaseidx = existPurchaseidx + 1;
+                });
+
+                let dat =
+                {
+                    PURCHASEIDX : purchaseidx,
+                    PRODUCTNAME : "",
+                    PRODUCTBILL : 0,
+                }
+                let mClspurchase = new MClspurchase(dat);
+                CUPU.addRowForPurchase(mClspurchase);
+                CUPU.setEventForPurchase();
+            });
+
+            /* =============== */
+            /* purchase : 임시저장 */
+            /* =============== */
+            $("#CUPU-btn-savePurchase").click(function()
+            {
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        try
+                        {
+                            let clsno = CUPU.Data.clsno;
+                            let grpno = CUPU.Data.grpno;
+                            let arr = CUPU.getArrForPurchase();
+                            let mApiResponse = Api.Clspurchase.insertByArr(grpno, clsno, JSON.stringify(arr), GGF.toast, GGF.toast);
+                        }
+                        catch(e)
+                        {
+                            Common.catchProc(e);
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CUPU.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CUPU.close(true);
+            }
+
+            /* localizing */
+            /* $("#CUPU").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

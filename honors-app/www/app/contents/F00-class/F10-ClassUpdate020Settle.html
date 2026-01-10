@@ -47,7 +47,7 @@
     <!-- 일정상세 -->
     <!-- ========================= -->
     <div class="common-div-cushion">
-        <span class="common-tag-block" id="CUST-span-clstitle"></span>
+        <span class="common-tag-block common-tag-fontsize11" id="CUST-span-clstitle"></span>
     </div>
 
     <!-- ========================= -->
@@ -658,8 +658,8 @@
                             let clsno = CUST.Data.clsno;
                             let grpno = CUST.Data.grpno;
                             let arrForSettle = CUST.getArrForSettle();
-                            let arrForPurchase = CUST.getArrForPurchase();
-                            let mApiResponse = Api.Cls.updateClsSettleInfoByPk(grpno, clsno, JSON.stringify(arrForSettle), JSON.stringify(arrForPurchase), GGF.toast, GGF.toast);
+                            // let arrForPurchase = CUST.getArrForPurchase();
+                            let mApiResponse = Api.Cls.updateClsSettleInfoByPk(grpno, clsno, JSON.stringify(arrForSettle), GGF.toast, GGF.toast);
                             if(mApiResponse.isSuccess())
                                 Navigation.moveBack();
                         }
