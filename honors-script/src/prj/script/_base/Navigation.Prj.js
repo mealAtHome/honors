@@ -75,6 +75,7 @@ Navigation.Page =
     F10ClassUpdate000Default : "CUDE",
     F10ClassUpdate010TypeLineup : "CUTF",
     F10ClassUpdate020Settle : "CUST",
+    F10ClassUpdate021Purchase : "CUPU",
     F10ClassUpdate030Cancel : "CUCC",
     G10ScheduleByYear : "GSCY",
     G20ScheduleByWeek : "GSCW",
@@ -128,6 +129,7 @@ Navigation.getURL = function(str)
         case Navigation.Page.F10ClassUpdate000Default                      : url = "./app/contents/F00-class/F10-ClassUpdate000Default.html"; break;
         case Navigation.Page.F10ClassUpdate010TypeLineup                   : url = "./app/contents/F00-class/F10-ClassUpdate010TypeLineup.html"; break;
         case Navigation.Page.F10ClassUpdate020Settle                       : url = "./app/contents/F00-class/F10-ClassUpdate020Settle.html"; break;
+        case Navigation.Page.F10ClassUpdate021Purchase                     : url = "./app/contents/F00-class/F10-ClassUpdate021Purchase.html"; break;
         case Navigation.Page.F10ClassUpdate030Cancel                       : url = "./app/contents/F00-class/F10-ClassUpdate030Cancel.html"; break;
         case Navigation.Page.G10ScheduleByYear                             : url = "./app/contents/G00-schedule/G10ScheduleByYear.html"; break;
         case Navigation.Page.G20ScheduleByWeek                             : url = "./app/contents/G00-schedule/G20ScheduleByWeek.html"; break;
@@ -183,6 +185,7 @@ Navigation.getData = function(code)
         case Navigation.Page.F10ClassUpdate000Default               : data = CUDE.Data; break;
         case Navigation.Page.F10ClassUpdate010TypeLineup            : data = CUTF.Data; break;
         case Navigation.Page.F10ClassUpdate020Settle                : data = CUST.Data; break;
+        case Navigation.Page.F10ClassUpdate021Purchase              : data = CUPU.Data; break;
         case Navigation.Page.F10ClassUpdate030Cancel                : data = CUCC.Data; break;
         case Navigation.Page.G10ScheduleByYear                      : data = GSCY.Data; break;
         case Navigation.Page.G20ScheduleByWeek                      : data = GSCW.Data; break;
@@ -265,6 +268,7 @@ Navigation.executeShow = function()
         case Navigation.Page.F10ClassUpdate000Default                 : CUDE.show(); break;
         case Navigation.Page.F10ClassUpdate010TypeLineup              : CUTF.show(); break;
         case Navigation.Page.F10ClassUpdate020Settle                  : CUST.show(); break;
+        case Navigation.Page.F10ClassUpdate021Purchase                : CUPU.show(); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.show(); break;
         case Navigation.Page.G10ScheduleByYear                        : GSCY.show(); break;
         case Navigation.Page.G20ScheduleByWeek                        : GSCW.show(); break;
@@ -331,6 +335,7 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.F10ClassUpdate000Default                 : CUDE.close(true); break;
         case Navigation.Page.F10ClassUpdate010TypeLineup              : CUTF.close(true); break;
         case Navigation.Page.F10ClassUpdate020Settle                  : CUST.close(true); break;
+        case Navigation.Page.F10ClassUpdate021Purchase                : CUPU.close(true); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.close(true); break;
         case Navigation.Page.G10ScheduleByYear                        : GSCY.close(true); break;
         case Navigation.Page.G20ScheduleByWeek                        : GSCW.close(true); break;

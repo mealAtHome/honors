@@ -162,7 +162,7 @@ var Navigation =
             let lastestViewMode  = lastestStack.data.viewMode; /* 현재 페이지의 viewMode */
 
             /* 현재 페이지의 선택사항과, viewMode을 저장 */
-            nowPageData = Navigation.getData(lastestPage);
+            let nowPageData = Navigation.getData(lastestPage);
             pageStack[pageStack.length - 1].data          = nowPageData;
             pageStack[pageStack.length - 1].data.viewMode = lastestViewMode;
         }
@@ -177,7 +177,7 @@ var Navigation =
         if(pageStack.length > 0 && pageStack[pageStack.length-1].page == movePage)
         {
             /* 현재 페이지의 선택사항을 저장 */
-            nowPageData = Navigation.getData(movePage);
+            let nowPageData = Navigation.getData(movePage);
             pageStack[pageStack.length - 1].data          = nowPageData;
             pageStack[pageStack.length - 1].data.viewMode = viewMode;
 

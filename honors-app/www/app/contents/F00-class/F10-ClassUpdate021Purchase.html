@@ -30,7 +30,7 @@
     <!-- ========================= -->
     <!-- 소비품목 -->
     <!-- ========================= -->
-    <div class="CUPU-div-tab common-div-cushion" tab="purchase" style="display:none;">
+    <div class="common-div-cushion">
         <p class="common-p-title">소비품목</p>
         <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
         <div class="common-div-cushionUD">
@@ -80,9 +80,6 @@
                 /* validation param */
                 if(CUPU.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CUPU.close(); return; }
                 if(CUPU.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CUPU.close(); return; }
-
-                /* tab */
-                $(`.CUPU-td-tab[val=decide]`).click();
 
                 /* init */
                 Common.showProgress();

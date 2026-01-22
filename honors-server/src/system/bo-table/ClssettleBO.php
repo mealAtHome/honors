@@ -65,6 +65,7 @@ class ClssettleBO extends _CommonBO
     /* ========================= */
     const selectByPkForInside = "selectByPkForInside";
     const selectByClsno = "selectByClsno";
+    const selectByClsnoForMng = "selectByClsnoForMng";
     const selectNotDepositedByUsernoForMng = "selectNotDepositedByUsernoForMng";
     const selectNotDepositedAllByGrpnoForMng = "selectNotDepositedAllByGrpnoForMng";
     const selectMemberdepositflgYesByGrpnoForMng = "selectMemberdepositflgYesByGrpnoForMng";
@@ -128,6 +129,7 @@ class ClssettleBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
+            case self::selectByClsnoForMng:
             case self::selectNotDepositedByUsernoForMng:
             case self::selectNotDepositedAllByGrpnoForMng:
             case self::selectMemberdepositflgYesByGrpnoForMng:
@@ -143,12 +145,28 @@ class ClssettleBO extends _CommonBO
         }
 
         /* --------------- */
+        /* sql by option */
+        /* --------------- */
+        switch($OPTION)
+        {
+            case self::selectByClsnoForMng:
+            {
+                $select .=
+                "
+                    , grpm.point grpm_point
+                ";
+                break;
+            }
+        }
+
+        /* --------------- */
         /* from */
         /* --------------- */
         switch($OPTION)
         {
             case self::selectByPkForInside                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and userno = '$USERNO') t"; break; }
             case self::selectByClsno                                : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
+            case self::selectByClsnoForMng                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
             case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO'   and managerdepositflg = 'n') t"; break; }
             case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n') t"; break; }
             case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
@@ -195,6 +213,10 @@ class ClssettleBO extends _CommonBO
                 left join _bank bank
                     on
                         bank.bankcode = bacc.bacccode
+                left join grp_member grpm
+                    on
+                        t.grpno = grpm.grpno and
+                        t.userno = grpm.userno
             order by
                   t.grpno
                 , t.clsno

@@ -75,10 +75,13 @@ class MClssettle
     getGrpmPointWon() { return GGC.Common.priceWon(this.grpm_point); }
     getClsPeriod() { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getClssettleStatusPretty() { return GGC.Clssettle.clssettleStatusPretty(this.getMemberdepositflg(), this.getManagerdepositflg()); }
+    getGrpmPointAfterSettle() { return this.getGrpmPoint() + this.getBillpointed();}
+    getGrpmPointAfterSettleWon() { return GGC.Common.priceWon(this.getGrpmPointAfterSettle()); }
 
     /* ========================= */
     /* fields - flg */
     /* ========================= */
+    isMemberdepositflgYes() { return this.getMemberdepositflg() === GGF.Y; }
     isManagerdepositflgYes() { return this.getManagerdepositflg() === GGF.Y; }
 
     /* ========================= */

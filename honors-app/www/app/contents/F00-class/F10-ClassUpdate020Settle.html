@@ -23,16 +23,6 @@
         .CUST-input-billpointed       { font-size:1em; width: 6em; vertical-align: middle; text-align: right; }
         .CUST-input-billmemo          { font-size:1em; width: 8em; vertical-align: middle; text-align: left; }
 
-        #CUST-tbl-purchase
-        {
-            white-space: nowrap;
-            width: 100%;
-        }
-        #CUST-tbl-purchase > tbody > tr > td:nth-child(1) { width:10%; }
-        #CUST-tbl-purchase > tbody > tr > td:nth-child(2) { width:50%; }
-        #CUST-tbl-purchase > tbody > tr > td:nth-child(3) { width:40%; }
-        #CUST-tbl-purchase > tfoot > tr > td { text-align: right; }
-
     </style>
 
     <!-- ======================== -->
@@ -47,24 +37,19 @@
     <!-- 일정상세 -->
     <!-- ========================= -->
     <div class="common-div-cushion">
-        <span class="common-tag-block common-tag-fontsize11" id="CUST-span-clstitle"></span>
+        <div class="common-tag-fontsize11" style="font-weight:bold;">
+            <span class="common-tag-fontsize10">일정 : </span>
+            <span class="common-tag-fontsize10" id="CUST-span-clstitle"></span>
+        </div>
     </div>
-
-    <!-- ========================= -->
-    <!-- 탭 -->
-    <!-- ========================= -->
-    <div class="common-div-cushion">
-        <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="settle"   tab="tab" style="padding-left:0.8em; padding-right:0.8em;"><span class="common-tag-fontsize09">참가정산</span></button>
-        <button class="CUST-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CUST-btn-tab" val="purchase" tab=""    style="padding-left:0.8em; padding-right:0.8em;"><span class="common-tag-fontsize09">소비품목</span></button>
-    </div>
-    <hr class="common-hr-paddingLR">
 
     <!-- --------------- -->
     <!-- 참가정산 -->
     <!-- --------------- -->
-    <div class="CUST-div-tab common-div-cushion" tab="settle">
+    <div class="common-div-cushion">
         <p class="common-p-title">참가정산</p>
         <span class="common-tag-block common-tag-fontsize09">※참가자를 기반으로 청구금액을 계산하는 테이블입니다.</span>
+        <span class="common-tag-block common-tag-fontsize09">※좌우로 스크롤을 움직여 정산정보를 입력할 수 있습니다.</span>
         <div class="common-div-cushionUD">
             <div class="common-tag-fontsize09">
                 <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
@@ -76,7 +61,8 @@
             <table id="CUST-tbl-settle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
                 <thead>
                     <tr>
-                        <th colspan="2">참가자</th>
+                        <th colspan="2">설정</th>
+                        <th>청구대상</th>
                         <th>청구최종</th>
                         <th>청구금액</th>
                         <th>청구보정</th>
@@ -89,7 +75,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="2">합계</td>
+                        <td colspan="3">합계</td>
                         <td><span id="CUST-span-billfinalSummary"></span></td>
                         <td><span id="CUST-span-billstandSummary"></span></td>
                         <td><span id="CUST-span-billadjustmentSummary"></span></td>
@@ -102,36 +88,6 @@
         </div>
     </div>
 
-    <!-- --------------- -->
-    <!-- 소비품목 -->
-    <!-- --------------- -->
-    <div class="CUST-div-tab common-div-cushion" tab="purchase" style="display:none;">
-        <p class="common-p-title">소비품목</p>
-        <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
-        <div class="common-div-cushionUD">
-            <div class="common-tag-fontsize09">
-                <button id="CUST-btn-addPurchaseRow" class="common-btn-outline">＋품목추가</button>
-                <button id="CUST-btn-savePurchase"   class="common-btn-outline">💿임시저장</button>
-            </div>
-        </div>
-        <div class="common-div-scrollX">
-            <table id="CUST-tbl-purchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
-                <thead>
-                    <tr>
-                        <th colspan="2">품목</th>
-                        <th>금액</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3">합계 : <span id="CUST-span-productbillSummary">0원</span></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </div>
 
     <!-- ======================== -->
     <!-- footer -->
@@ -157,9 +113,6 @@
                 if(CUST.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
                 if(CUST.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
 
-                /* tab */
-                $(`.CUST-td-tab[val=decide]`).click();
-
                 /* init */
                 Common.showProgress();
                 setTimeout(function()
@@ -176,18 +129,6 @@
 
                         /* 정산초기화 */
                         CUST.resetSettle();
-
-                        /* 구매초기화 */
-                        $("#CUST-tbl-purchase > tbody").empty();
-                        let mClspurchases = Api.Clspurchase.selectByClsno(grpno, clsno);
-                        let purchaseModels = mClspurchases.getModels();
-                        for(let i in purchaseModels)
-                        {
-                            let model = purchaseModels[i];
-                            CUST.addRowForPurchase(model);
-                        }
-                        CUST.setEventForPurchase();
-                        CUST.calSummaryPurchase();
                     }
                     catch(e)
                     {
@@ -203,8 +144,10 @@
                 let clsno = CUST.Data.clsno;
                 let grpno = CUST.Data.grpno;
 
-                /* 임시저장데이터가 있는지 확인 */
+                /* clear */
                 $("#CUST-tbl-settle > tbody").empty();
+
+                /* 임시저장데이터가 있는지 확인 */
                 let mClssettletmps = Api.Clssettletmp.selectByClsno(grpno, clsno);
                 for(let i in mClssettletmps.getModels())
                 {
@@ -212,36 +155,79 @@
                     CUST.addRowForSettleByClssettletmp(model);
                 }
 
-                /* 임시저장데이터가 없으면, 라인업으로부터 작성 */
+                /* 임시저장데이터가 없으면, 정산테이블로부터 작성 */
+                let mClssettles = null;
                 if(mClssettletmps.getModels().length == 0)
                 {
-                    let mClslineup2s = Api.Clslineup2.selectByClsnoForSettleForMng(grpno, clsno, GGF.none, GGF.toast);
-                    let lineups = mClslineup2s.getModels();
-                    for(let i in lineups)
-                        CUST.addRowForSettle(lineups[i]);
+                    mClssettles = Api.Clssettle.selectByClsnoForMng(grpno, clsno);
+                    for(let i in mClssettles.getModels())
+                    {
+                        let model = mClssettles.getModels()[i];
+                        CUST.addRowForSettleByClssettle(model);
+                    }
+
+                    /* 정산데이터가 없으면, 라인업으로부터 작성 */
+                    if(mClssettles.getModels().length == 0)
+                    {
+                        let mClslineup2s = Api.Clslineup2.selectByClsnoForSettleForMng(grpno, clsno);
+                        let lineups = mClslineup2s.getModels();
+                        for(let i in lineups)
+                            CUST.addRowForSettleByClslineup2(lineups[i]);
+                    }
                 }
                 CUST.setEventForSettle();
                 CUST.calSummarySettle();
             },
 
-            addRowForPurchase(mClspurchase)
-            {
-                let html =
-                `
-                    <tr purchaseidx="${mClspurchase.getPurchaseidx()}">
-                        <td col="btn"           ><button class="CUST-btn-deleteRowForPurchase common-btn-outline" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
-                        <td col="productname"   ><input type="text"   class="common-input-text CUST-input-productname" value="${mClspurchase.getProductname()}" style="width:100%;" /></td>
-                        <td col="productbill"   ><input type="number" class="common-input-text CUST-input-productbill" value="${mClspurchase.getProductbill()}" style="width:100%;" /></td>
-                    </tr>
-                `;
-                $(`#CUST-tbl-purchase > tbody`).append(html);
-            },
-
-            addRowForSettle(model)
+            addRowForSettleByClssettletmp(model)
             {
                 let html =
                 `
                     <tr userno="${model.getUserno()}">
+                        <td col="status"                                                    >임시</td>
+                        <td col="btn"                                                       ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
+                        <td col="username"         userno="${model.getUserno()}"            >${model.getUsername()}</td>
+                        <td col="billfinal"                                                 ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillstandardWon()}" subvalori="${model.getBillstandard()}" subval="${model.getBillstandard()}" disabled></td>
+                        <td col="billstand"        subval="${model.getBillstandard()}"      >${model.getBillstandardWon()}</td>
+                        <td col="billadjustment"                                            ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
+                        <td col="memberpoint"                                               ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointWon()}" subval="${model.getGrpmPoint()}" disabled></td>
+                        <td col="billpointed"                                               ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="0"></td>
+                        <td col="billmemo"                                                  ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value=""></td>
+                    </tr>
+                `;
+                $(`#CUST-tbl-settle > tbody`).append(html);
+            },
+
+            addRowForSettleByClssettle(model)
+            {
+                /* 납부확정일 시, 더 이상 청구금액 변경 불가 */
+                let disabled = (model.isMemberdepositflgYes() || model.isManagerdepositflgYes()) ? "disabled" : "";
+                let statusText = disabled ? "입완" : "미입";
+
+                /* 행 생산 */
+                let html =
+                `
+                    <tr userno="${model.getUserno()}">
+                        <td col="status"                                            >${statusText}</td>
+                        <td col="btn"                                               ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}" ${disabled}>삭제</button></td>
+                        <td col="username"         userno="${model.getUserno()}"    >${model.getUsername()}</td>
+                        <td col="billfinal"                                         ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillfinalWon()}" subvalori="${model.getBillfinal()}" subval="${model.getBillfinal()}" disabled></td>
+                        <td col="billstand"        subval="${model.getBillfinal()}" >${model.getBillfinalWon()}</td>
+                        <td col="billadjustment"                                    ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="${model.getBilladjustment()}" ${disabled}></td>
+                        <td col="memberpoint"                                       ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointAfterSettleWon()}" subval="${model.getGrpmPointAfterSettle()}" disabled></td>
+                        <td col="billpointed"                                       ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="${model.getBillpointed()}" ${disabled}></td>
+                        <td col="billmemo"                                          ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value="${model.getBillmemo()}" ${disabled}></td>
+                    </tr>
+                `;
+                $(`#CUST-tbl-settle > tbody`).append(html);
+            },
+
+            addRowForSettleByClslineup2(model)
+            {
+                let html =
+                `
+                    <tr userno="${model.getUserno()}">
+                        <td col="status"                                            >임시</td>
                         <td col="btn"                                               ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"    >${model.getUsername()}</td>
                         <td col="billfinal"                                         ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillWon()}" subvalori="${model.getBill()}" subval="${model.getBill()}" disabled></td>
@@ -255,23 +241,6 @@
                 $(`#CUST-tbl-settle > tbody`).append(html);
             },
 
-            addRowForSettleByClssettletmp(model)
-            {
-                let html =
-                `
-                    <tr userno="${model.getUserno()}">
-                        <td col="btn"                                                       ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
-                        <td col="username"         userno="${model.getUserno()}"            >${model.getUsername()}</td>
-                        <td col="billfinal"                                                 ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillstandardWon()}" subvalori="${model.getBillstandard()}" subval="${model.getBillstandard()}" disabled></td>
-                        <td col="billstand"        subval="${model.getBillstandard()}"      >${model.getBillstandardWon()}</td>
-                        <td col="billadjustment"                                            ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
-                        <td col="memberpoint"                                               ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointWon()}" subval="${model.getGrpmPoint()}" disabled></td>
-                        <td col="billpointed"                                               ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="0"></td>
-                        <td col="billmemo"                                                  ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value=""></td>
-                    </tr>
-                `;
-                $(`#CUST-tbl-settle > tbody`).append(html);
-            },
 
             checkDuplicateSettleUser(userno)
             {
@@ -315,18 +284,6 @@
                 $("#CUST-span-billfinalSummary").text(GGC.Common.priceWon(billfinalSummary));
                 $("#CUST-span-billadjustmentSummary").text(GGC.Common.priceWon(billadjustmentSummary));
                 $("#CUST-span-billpointedSummary").text(GGC.Common.priceWon(billpointedSummary));
-            },
-
-            calSummaryPurchase()
-            {
-                let productbillTotal = 0;
-                $("#CUST-tbl-purchase > tbody > tr").each(function()
-                {
-                    let productbill = parseInt($(this).find("td[col=productbill] > input").val());
-                    if(isNaN(productbill)) return;
-                    productbillTotal += productbill;
-                });
-                $("#CUST-span-productbillSummary").text(GGC.Common.priceWon(productbillTotal));
             },
 
             setEventForSettle()
@@ -399,35 +356,6 @@
                 $(".CUST-input-billpointed")    .off("change").on("change", function() { if($(this).val() == "") $(this).val(0); $(this).keyup(); });
             },
 
-            setEventForPurchase()
-            {
-
-                /* --------------- */
-                /* purchase : 행삭제 */
-                /* --------------- */
-                $(".CUST-btn-deleteRowForPurchase").off("click").on("click", function()
-                {
-                    let purchaseidx = $(this).attr("purchaseidx");
-                    let process = function()
-                    {
-                        /* remove row */
-                        $(`#CUST-tbl-purchase > tbody > tr[purchaseidx=${purchaseidx}]`).remove();
-                        CUST.calSummaryPurchase();
-                    }
-                    Common.confirm2("삭제하시겠습니까?", process);
-                });
-
-                /* --------------- */
-                /* purchase : 금액 */
-                /* --------------- */
-                $(".CUST-input-productbill").off("keyup").on("keyup", function()
-                {
-                    CUST.calSummaryPurchase();
-                });
-                /* 입력항목이 공백일 때 */
-                $(".CUST-input-productbill").off("change").on("change", function() { if($(this).val() == "") $(this).val(0); $(this).keyup(); });
-            },
-
             /* ========================= */
             /* 정산정보수집 */
             /* ========================= */
@@ -450,33 +378,6 @@
                         BILLPOINTED   : billpointed,
                         BILLFINAL     : billfinal,
                         BILLMEMO      : billmemo,
-                    }
-                    arr.push(dat);
-                });
-                return arr;
-            },
-
-            /* ========================= */
-            /* 구매정보수집 */
-            /* ========================= */
-            getArrForPurchase()
-            {
-                let arr = [];
-                $("#CUST-tbl-purchase > tbody > tr").each(function()
-                {
-                    let productname = $(this).find("td[col=productname] > input").val();
-                    let productbill = $(this).find("td[col=productbill] > input").val();
-
-                    let productnameEmpty = Common.isEmpty(productname);
-                    let productbillEmpty = Common.isEmpty(productbill) || productbill == "0";
-                    if      (productnameEmpty && productbillEmpty)  { return; }
-                    else if (productnameEmpty)                      { Common.toast("품목명이 비어있는 행이 있습니다."); throw new Error("empty row"); }
-                    else if (productbillEmpty)                      { Common.toast("금액이 비어있는 행이 있습니다."); throw new Error("empty row"); }
-
-                    let dat =
-                    {
-                        PRODUCTNAME : productname,
-                        PRODUCTBILL : productbill,
                     }
                     arr.push(dat);
                 });
@@ -596,54 +497,6 @@
             });
 
             /* =============== */
-            /* purchase : 소비품목추가 */
-            /* =============== */
-            $("#CUST-btn-addPurchaseRow").click(function()
-            {
-                /* find next purchaseidx */
-                let purchaseidx = 1;
-                $("#CUST-tbl-purchase > tbody > tr").each(function()
-                {
-                    let existPurchaseidx = parseInt($(this).attr("purchaseidx"));
-                    if(purchaseidx <= existPurchaseidx)
-                        purchaseidx = existPurchaseidx + 1;
-                });
-
-                let dat =
-                {
-                    PURCHASEIDX : purchaseidx,
-                    PRODUCTNAME : "",
-                    PRODUCTBILL : 0,
-                }
-                let mClspurchase = new MClspurchase(dat);
-                CUST.addRowForPurchase(mClspurchase);
-                CUST.setEventForPurchase();
-            });
-
-            /* =============== */
-            /* purchase : 임시저장 */
-            /* =============== */
-            $("#CUST-btn-savePurchase").click(function()
-            {
-                Common.showProgress();
-                setTimeout(function()
-                {
-                    try
-                    {
-                        let clsno = CUST.Data.clsno;
-                        let grpno = CUST.Data.grpno;
-                        let arr = CUST.getArrForPurchase();
-                        let mApiResponse = Api.Clspurchase.insertByArr(grpno, clsno, JSON.stringify(arr), GGF.toast, GGF.toast);
-                    }
-                    catch(e)
-                    {
-                        Common.catchProc(e);
-                    }
-                    Common.hideProgress();
-                }, ajaxDelayTime);
-            });
-
-            /* =============== */
             /* 저장 */
             /* =============== */
             $("#CUST-btn-settleComplete").click(function()
@@ -658,7 +511,6 @@
                             let clsno = CUST.Data.clsno;
                             let grpno = CUST.Data.grpno;
                             let arrForSettle = CUST.getArrForSettle();
-                            // let arrForPurchase = CUST.getArrForPurchase();
                             let mApiResponse = Api.Cls.updateClsSettleInfoByPk(grpno, clsno, JSON.stringify(arrForSettle), GGF.toast, GGF.toast);
                             if(mApiResponse.isSuccess())
                                 Navigation.moveBack();

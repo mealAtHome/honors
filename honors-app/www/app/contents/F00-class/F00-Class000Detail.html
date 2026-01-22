@@ -27,10 +27,11 @@
     <!-- 메뉴 -->
     <!-- ========================= -->
     <div class="common-div-cushion common-tag-fontsize09">
-        <button id="CLSD-btn-textCls"    class="common-btn-outline">일정요약</button>
-        <button id="CLSD-btn-textApply"  class="common-btn-outline">참가요약</button>
-        <button id="CLSD-btn-textSettle" class="common-btn-outline" style="display:none;">정산요약</button>
-        <button id="CLSD-btn-settleEdit" class="common-btn-outline" style="display:none;">정산수정</button>
+        <button id="CLSD-btn-textCls"      class="common-btn-outline">일정요약</button>
+        <button id="CLSD-btn-textApply"    class="common-btn-outline">참가요약</button>
+        <button id="CLSD-btn-textSettle"   class="common-btn-outline" style="display:none;">정산요약</button>
+        <button id="CLSD-btn-editSettle"   class="common-btn-outline" style="display:none;">정산</button>
+        <button id="CLSD-btn-editPurchase" class="common-btn-outline" style="display:none;">소비</button>
         <hr class="common-hr-paddingTop"/>
     </div>
 
@@ -315,7 +316,8 @@
                 $("#CLSD-div-tabmain").hide();
                 $(".CLSD-tbl-clslineup2 > tbody").empty();
                 $("#CLSD-btn-textSettle").hide();
-                $("#CLSD-btn-settleEdit").hide();
+                $("#CLSD-btn-editSettle").hide();
+                $("#CLSD-btn-editPurchase").hide();
                 $("#CLSD-tr-clsbill").hide();
                 $("#CLSD-tr-clscancelreason").hide();
                 $("#CLSD-div-clssettleTop").hide();
@@ -325,7 +327,7 @@
                 $(`.CLSD-td-tabmain[tabval=${CLSD.Data.tabmain}]`).click();
 
                 // <button id="CLSD-btn-textSettle" class="common-btn-outline" style="display:none;">정산요약</button>
-                // <button id="CLSD-btn-settleEdit" class="common-btn-outline" style="display:none;">정산목록</button>
+                // <button id="CLSD-btn-editSettle" class="common-btn-outline" style="display:none;">정산목록</button>
                 // <tr id="CLSD-tr-clsbill" style="display:none;">
                 // <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
                 // <div id="CLSD-div-tabmain" class="common-div-cushion" style="display:none;">
@@ -398,7 +400,8 @@
                         {
                             $("#CLSD-div-tabmain").show();
                             $("#CLSD-btn-textSettle").show();
-                            $("#CLSD-btn-settleEdit").show();
+                            $("#CLSD-btn-editSettle").show();
+                            $("#CLSD-btn-editPurchase").show();
                             $("#CLSD-tr-clsbill").show();
                         }
 
@@ -705,7 +708,8 @@
             $("#CLSD-btn-textCls")      .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class080TextCls,        {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
             $("#CLSD-btn-textApply")    .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class081TextApply,      {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
             $("#CLSD-btn-textSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class082TextSettle,     {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
-            $("#CLSD-btn-settleEdit")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate020Settle,   {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-editSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate020Settle,   {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-editPurchase") .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate021Purchase, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
 
             /* 팀 선택 */
             $(".CLSD-btn-tabTeam").click(function()

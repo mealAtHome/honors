@@ -4,6 +4,7 @@ Api.Clssettle =
     /* select */
     /* ========================= */
     selectByClsno                               (grpno, clsno   , noticeOK, noticeFail) { return Api.Clssettle.select({OPTION:"selectByClsno"                               , GRPNO:grpno, CLSNO:clsno   , }, noticeOK, noticeFail); },
+    selectByClsnoForMng                         (grpno, clsno   , noticeOK, noticeFail) { return Api.Clssettle.select({OPTION:"selectByClsnoForMng"                         , GRPNO:grpno, CLSNO:clsno   , }, noticeOK, noticeFail); },
     selectNotDepositedByUsernoForMng            (grpno, userno  , noticeOK, noticeFail) { return Api.Clssettle.select({OPTION:"selectNotDepositedByUsernoForMng"            , GRPNO:grpno, USERNO:userno , }, noticeOK, noticeFail); },
     selectNotDepositedAllByGrpnoForMng          (grpno          , noticeOK, noticeFail) { return Api.Clssettle.select({OPTION:"selectNotDepositedAllByGrpnoForMng"          , GRPNO:grpno,                 }, noticeOK, noticeFail); },
     selectMemberdepositflgYesByGrpnoForMng      (grpno          , noticeOK, noticeFail) { return Api.Clssettle.select({OPTION:"selectMemberdepositflgYesByGrpnoForMng"      , GRPNO:grpno,                 }, noticeOK, noticeFail); },
