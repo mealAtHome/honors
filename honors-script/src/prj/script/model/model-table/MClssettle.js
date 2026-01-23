@@ -157,9 +157,9 @@ class MClssettles extends _MCommon
                     <span class="common-tag-block common-tag-colorGrey common-tag-fontsize08">${model.getClsPeriod()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-bold">${model.getBillfinalWon()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">기준금액:${model.getBillstandardWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">할인금액:${model.getBilladjustmentWon()}</span>
+                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구보정:${model.getBilladjustmentWon()}</span>
                     ${model.getBillpointed() >= 1  ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">사전정산:${model.getBillpointedWon()}</span>` : ""}
-                    ${model.getBillmemo()    != "" ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">할인사유:${model.getBillmemo()}</span>` : ""}
+                    ${model.getBillmemo()    != "" ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">보정사유:${model.getBillmemo()}</span>` : ""}
                     <span class="common-tag-block common-tag-marginUp common-tag-fontsize09">
                         <button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>일정상세</button>
                         ${btnHtml}

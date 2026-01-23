@@ -3,7 +3,11 @@ class MClssettletmp extends MClssettle
     constructor(dat)
     {
         super(dat);
+        this.settledeleteflg = GGC.Common.enum(dat.settledeleteflg);
     }
+    getSettledeleteflg() { return this.settledeleteflg; }
+
+    isSettledelete() { return this.getSettledeleteflg() == GGF.Y; }
 }
 
 class MClssettletmps extends _MCommon

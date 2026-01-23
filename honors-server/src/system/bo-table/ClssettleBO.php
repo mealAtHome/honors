@@ -229,16 +229,18 @@ class ClssettleBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function upsertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function deleteByPkForInside($GRPNO, $CLSNO, $USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
     /* ========================= */
-    const insertForInside = "insertForInside";
+    const upsertForInside = "upsertForInside";
     const updateMemberdepositflgYesForUsr = "updateMemberdepositflgYesForUsr";
     const updateManagerdepositflgYesForMng = "updateManagerdepositflgYesForMng";
     const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
+    const deleteByPkForInside = "deleteByPkForInside";
     protected function update($options, $option="")
     {
         /* get vars */
@@ -254,25 +256,90 @@ class ClssettleBO extends _CommonBO
         /* =============== */
         switch($OPTION)
         {
-            case self::insertForInside:
+            case self::upsertForInside:
             {
                 /* set bo */
                 GGnavi::getGrpMemberBO();
                 GGnavi::getGrpMemberPointhistBO();
+                GGnavi::getClssettlehistBO();
+                GGnavi::getClssettletmpBO();
                 $grpMemberBO = GrpMemberBO::getInstance();
                 $grpMemberPointhistBO = GrpMemberPointhistBO::getInstance();
+                $clssettlehistBO = ClssettlehistBO::getInstance();
+                $clssettletmpBO = ClssettletmpBO::getInstance();
 
                 /* insert */
                 $arr = json_decode($ARR, true);
                 foreach($arr as $dat)
                 {
                     /* vars */
-                    $USERNO         = $dat['USERNO'];
-                    $BILLSTANDARD   = intval($dat['BILLSTANDARD']);
-                    $BILLADJUSTMENT   = intval($dat['BILLADJUSTMENT']);
-                    $BILLPOINTED    = intval($dat['BILLPOINTED']);
-                    $BILLFINAL      = intval($dat['BILLFINAL']);
-                    $BILLMEMO       = $dat['BILLMEMO'];
+                    $USERNO          = $dat['USERNO'];
+                    $ROW_STATUS      = $dat['ROW_STATUS'];
+                    $BILLSTANDARD    = intval($dat['BILLSTANDARD']);
+                    $BILLADJUSTMENT  = intval($dat['BILLADJUSTMENT']);
+                    $BILLPOINTED     = intval($dat['BILLPOINTED']);
+                    $BILLFINAL       = intval($dat['BILLFINAL']);
+                    $BILLMEMO        = $dat['BILLMEMO'];
+
+                    /* ===== */
+                    /* 이미 등록된 레코드의 삭제 */
+                    /* ===== */
+                    if($ROW_STATUS == "deleted")
+                    {
+                        $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__DELETE);
+                        $this->deleteByPkForInside($GRPNO, $CLSNO, $USERNO);
+                        continue;
+                    }
+
+                    /* ===== */
+                    /* 기존 정보를 조회하여, 존재한다면 비교하여 업데이트 할지 판단 */
+                    /* ===== */
+                    $existingSettle = $this->getByPk($GRPNO, $CLSNO, $USERNO);
+                    if($existingSettle != null)
+                    {
+                        /* 내용에 변경이 있는지 확인, 메모는 따로 비교 안함 */
+                        $existingBillAdjustment = intval(Common::getField($existingSettle, ClssettleBO::FIELD__BILLADJUSTMENT));
+                        $existingBillPointed    = intval(Common::getField($existingSettle, ClssettleBO::FIELD__BILLPOINTED));
+                        $existingBillFinal      = intval(Common::getField($existingSettle, ClssettleBO::FIELD__BILLFINAL));
+                        $existingBillmemo       =   trim(Common::getField($existingSettle, ClssettleBO::FIELD__BILLMEMO));
+
+                        /* 변경이 있다면, 업데이트 적용 */
+                        if(
+                            $BILLADJUSTMENT != $existingBillAdjustment ||
+                            $BILLPOINTED    != $existingBillPointed    ||
+                            $BILLFINAL      != $existingBillFinal      ||
+                            $BILLMEMO       != $existingBillmemo
+                        )
+                        {
+                            $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__UPDATE);
+                            $query =
+                            "
+                                update
+                                    clssettle
+                                set
+                                      billstandard          =  $BILLSTANDARD
+                                    , billadjustment        =  $BILLADJUSTMENT
+                                    , billpointed           =  $BILLPOINTED
+                                    , billfinal             =  $BILLFINAL
+                                    , billmemo              = '$BILLMEMO'
+                                    , memberdepositflg      = '${GGF::N}'
+                                    , memberdepositflgdt    =  now()
+                                    , managerdepositflg     = '${GGF::N}'
+                                    , managerdepositflgdt   =  now()
+                                where
+                                    grpno = '$GRPNO' and
+                                    clsno = '$CLSNO' and
+                                    userno = '$USERNO'
+                            ";
+                            GGsql::exeQuery($query);
+                        }
+                        else
+                        {
+                            /* 변경이 없으면, 다른 처리하지 않음. */
+                            /* skip to next */
+                            continue;
+                        }
+                    }
 
                     /* is pointed? */
                     if($BILLPOINTED > 0)
@@ -324,6 +391,9 @@ class ClssettleBO extends _CommonBO
                         )
                     ";
                     GGsql::exeQuery($query);
+
+                    /* delete tmp */
+                    $clssettletmpBO->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
                 }
                 break;
             }
@@ -373,6 +443,12 @@ class ClssettleBO extends _CommonBO
             case self::updateUsernoToTargetForInside:
             {
                 $query = "update clssettle set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::deleteByPkForInside:
+            {
+                $query = "delete from clssettle where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
                 break;
             }

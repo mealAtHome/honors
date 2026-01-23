@@ -189,8 +189,12 @@
                             memberpoint : mUser.getPoint(),
                         }
                         let mClslineup2 = new MClslineup2(dat);
-                        CUST.addRowForSettle(mClslineup2);
+                        CUST.addRowForSettleByClslineup2(mClslineup2);
                         Navigation.moveBack();
+
+                        /* event */
+                        CUST.setEventForSettle();
+                        CUST.calSummarySettle();
                         break;
                     }
                 }

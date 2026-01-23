@@ -53,15 +53,15 @@
         <div class="common-div-cushionUD">
             <div class="common-tag-fontsize09">
                 <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
-                <button id="CUST-btn-saveSettle"  class="common-btn-outline">💿임시저장</button>
-                <button id="CUST-btn-resetSettle" class="common-btn-outline">🔃초기화</button>
+                <button id="CUST-btn-saveSettle"    class="common-btn-outline">💿임시저장</button>
+                <button id="CUST-btn-resetSettle"   class="common-btn-outline" style="display:none;">🔃초기화</button>
             </div>
         </div>
         <div class="common-div-scrollX">
             <table id="CUST-tbl-settle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
                 <thead>
                     <tr>
-                        <th colspan="2">설정</th>
+                        <th colspan="2">청구상태</th>
                         <th>청구대상</th>
                         <th>청구최종</th>
                         <th>청구금액</th>
@@ -119,15 +119,6 @@
                 {
                     try
                     {
-                        /* get var */
-                        let clsno = CUST.Data.clsno;
-                        let grpno = CUST.Data.grpno;
-
-                        /* 기본정보 */
-                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
-                        $("#CUST-span-clstitle").text(mCls.getClstitle());
-
-                        /* 정산초기화 */
                         CUST.resetSettle();
                     }
                     catch(e)
@@ -144,55 +135,76 @@
                 let clsno = CUST.Data.clsno;
                 let grpno = CUST.Data.grpno;
 
+                /* ----- */
+                /* init */
+                /* ----- */
+                let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                let clssettleflg = mCls.getClssettleflg();
+                $("#CUST-span-clstitle").text(mCls.getClstitle());
+
                 /* clear */
                 $("#CUST-tbl-settle > tbody").empty();
+                $("#CUST-btn-resetSettle").hide();
 
-                /* 임시저장데이터가 있는지 확인 */
-                let mClssettletmps = Api.Clssettletmp.selectByClsno(grpno, clsno);
-                for(let i in mClssettletmps.getModels())
+                /* ----- */
+                /* cls : 미정산 */
+                /* ----- */
+                if(clssettleflg == GGF.Cls.Clssettleflg.YET)
                 {
-                    let model = mClssettletmps.getModels()[i];
-                    CUST.addRowForSettleByClssettletmp(model);
-                }
+                    /* 임시저장데이터 */
+                    let mClssettletmps = Api.Clssettletmp.selectByClsno(grpno, clsno);
+                    let mClssettletmpModels = mClssettletmps.getModels();
+                    for(let i in mClssettletmpModels)
+                        CUST.addRowForSettleByClssettletmp(mClssettletmpModels[i]);
 
-                /* 임시저장데이터가 없으면, 정산테이블로부터 작성 */
-                let mClssettles = null;
-                if(mClssettletmps.getModels().length == 0)
-                {
-                    mClssettles = Api.Clssettle.selectByClsnoForMng(grpno, clsno);
-                    for(let i in mClssettles.getModels())
-                    {
-                        let model = mClssettles.getModels()[i];
-                        CUST.addRowForSettleByClssettle(model);
-                    }
-
-                    /* 정산데이터가 없으면, 라인업으로부터 작성 */
-                    if(mClssettles.getModels().length == 0)
+                    /* 임시저장데이터가 없으면, 라인업으로부터 작성 */
+                    if(mClssettletmpModels.length == 0)
                     {
                         let mClslineup2s = Api.Clslineup2.selectByClsnoForSettleForMng(grpno, clsno);
                         let lineups = mClslineup2s.getModels();
                         for(let i in lineups)
                             CUST.addRowForSettleByClslineup2(lineups[i]);
                     }
+
+                    /* 초기화 : 미정산시, 초기화버튼 사용가능 */
+                    $("#CUST-btn-resetSettle").show();
                 }
+
+                /* ----- */
+                /* cls : 정산완료시, clssettle 에서 조회 */
+                /* ----- */
+                if(clssettleflg == GGF.Cls.Clssettleflg.DONE)
+                {
+                    let mClssettles = Api.Clssettle.selectByClsnoForMng(grpno, clsno);
+                    let mClssettleModels = mClssettles.getModels();
+                    for(let i in mClssettleModels)
+                        CUST.addRowForSettleByClssettle(mClssettleModels[i]);
+                }
+
+                /* event */
                 CUST.setEventForSettle();
                 CUST.calSummarySettle();
             },
 
             addRowForSettleByClssettletmp(model)
             {
+                /* 행이 이미 삭제되었는지 */
+                let isDeleted = model.getSettledeleteflg() == GGF.Y;
+                let rowStatus = isDeleted ? "deleted" : "active";
+                let display = isDeleted ? "display:none;" : "";
+
                 let html =
                 `
-                    <tr userno="${model.getUserno()}">
-                        <td col="status"                                                    >임시</td>
-                        <td col="btn"                                                       ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
-                        <td col="username"         userno="${model.getUserno()}"            >${model.getUsername()}</td>
-                        <td col="billfinal"                                                 ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillstandardWon()}" subvalori="${model.getBillstandard()}" subval="${model.getBillstandard()}" disabled></td>
-                        <td col="billstand"        subval="${model.getBillstandard()}"      >${model.getBillstandardWon()}</td>
-                        <td col="billadjustment"                                            ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
-                        <td col="memberpoint"                                               ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointWon()}" subval="${model.getGrpmPoint()}" disabled></td>
-                        <td col="billpointed"                                               ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="0"></td>
-                        <td col="billmemo"                                                  ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value=""></td>
+                    <tr userno="${model.getUserno()}" settle-status="temp" row-status="${rowStatus}" style="${display}">
+                        <td col="status"                                                 >임시</td>
+                        <td col="btn"                                                    ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
+                        <td col="username"         userno="${model.getUserno()}"         >${model.getUsername()}</td>
+                        <td col="billfinal"                                              ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillstandardWon()}" subvalori="${model.getBillstandard()}" subval="${model.getBillstandard()}" disabled></td>
+                        <td col="billstand"        subval="${model.getBillstandard()}"   >${model.getBillstandardWon()}</td>
+                        <td col="billadjustment"                                         ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
+                        <td col="memberpoint"                                            ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointWon()}" subval="${model.getGrpmPoint()}" disabled></td>
+                        <td col="billpointed"                                            ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="0"></td>
+                        <td col="billmemo"                                               ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value=""></td>
                     </tr>
                 `;
                 $(`#CUST-tbl-settle > tbody`).append(html);
@@ -207,16 +219,16 @@
                 /* 행 생산 */
                 let html =
                 `
-                    <tr userno="${model.getUserno()}">
-                        <td col="status"                                            >${statusText}</td>
-                        <td col="btn"                                               ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}" ${disabled}>삭제</button></td>
-                        <td col="username"         userno="${model.getUserno()}"    >${model.getUsername()}</td>
-                        <td col="billfinal"                                         ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillfinalWon()}" subvalori="${model.getBillfinal()}" subval="${model.getBillfinal()}" disabled></td>
-                        <td col="billstand"        subval="${model.getBillfinal()}" >${model.getBillfinalWon()}</td>
-                        <td col="billadjustment"                                    ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="${model.getBilladjustment()}" ${disabled}></td>
-                        <td col="memberpoint"                                       ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointAfterSettleWon()}" subval="${model.getGrpmPointAfterSettle()}" disabled></td>
-                        <td col="billpointed"                                       ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="${model.getBillpointed()}" ${disabled}></td>
-                        <td col="billmemo"                                          ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value="${model.getBillmemo()}" ${disabled}></td>
+                    <tr userno="${model.getUserno()}" settle-status="settled" row-status="active">
+                        <td col="status"                                                >${statusText}</td>
+                        <td col="btn"                                                   ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}" ${disabled}>삭제</button></td>
+                        <td col="username"         userno="${model.getUserno()}"        >${model.getUsername()}</td>
+                        <td col="billfinal"                                             ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillfinalWon()}" subvalori="${model.getBillfinal()}" subval="${model.getBillfinal()}" disabled></td>
+                        <td col="billstand"        subval="${model.getBillstandard()}"  >${model.getBillstandardWon()}</td>
+                        <td col="billadjustment"                                        ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="${model.getBilladjustment()}" ${disabled}></td>
+                        <td col="memberpoint"                                           ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointAfterSettleWon()}" subval="${model.getGrpmPointAfterSettle()}" disabled></td>
+                        <td col="billpointed"                                           ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="${model.getBillpointed()}" ${disabled}></td>
+                        <td col="billmemo"                                              ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value="${model.getBillmemo()}" ${disabled}></td>
                     </tr>
                 `;
                 $(`#CUST-tbl-settle > tbody`).append(html);
@@ -226,8 +238,8 @@
             {
                 let html =
                 `
-                    <tr userno="${model.getUserno()}">
-                        <td col="status"                                            >임시</td>
+                    <tr userno="${model.getUserno()}" settle-status="temp" row-status="active">
+                        <td col="status"                                            >등록</td>
                         <td col="btn"                                               ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"    >${model.getUsername()}</td>
                         <td col="billfinal"                                         ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillWon()}" subvalori="${model.getBill()}" subval="${model.getBill()}" disabled></td>
@@ -264,10 +276,15 @@
                 /* 합계 */
                 $("#CUST-tbl-settle > tbody > tr").each(function()
                 {
+                    let settleStatus    = $(this).attr("settle-status");
+                    let rowStatus       = $(this).attr("row-status");
                     let billstand       = parseInt($(this).find("td[col=billstand]").attr("subval"));
                     let billfinal       = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
                     let billadjustment  = parseInt($(this).find("td[col=billadjustment] > input").val());
                     let billpointed     = parseInt($(this).find("td[col=billpointed] > input").val());
+
+                    if(rowStatus == "deleted")
+                        return;
 
                     if(isNaN(billstand)) return;
                     if(isNaN(billfinal)) return;
@@ -296,8 +313,17 @@
                     let userno = $(this).attr("userno");
                     let process = function()
                     {
-                        /* remove row */
-                        $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).remove();
+                        /* get settleStatus */
+                        let settleStatus = $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).attr("settle-status");
+                        if(settleStatus == "temp")
+                        {
+                            $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).remove();
+                        }
+                        else
+                        {
+                            $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).attr("row-status", "deleted");
+                            $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).hide();
+                        }
                         CUST.calSummarySettle();
                     }
                     Common.confirm2("삭제하시겠습니까?", process);
@@ -344,7 +370,7 @@
                     let memberpoint         = parseInt($(`.CUST-input-memberpoint[userno=${userno}]`).attr("subval"));
 
                     if(isNaN(billpointed)) return;
-                    if(billpointed > memberpoint) { Common.toast("잔여금 사용금액이 잔여금보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
+                    if(billpointed > memberpoint) { Common.toast("잔여금 사용액이 잔여금보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
 
                     let result = billfinalOri + billadjustment - billpointed;
                     billfinalEl.attr("subval", result);
@@ -365,6 +391,7 @@
                 $("#CUST-tbl-settle > tbody > tr").each(function()
                 {
                     let userno              = $(this).attr("userno");
+                    let rowStatus           = $(this).attr("row-status");
                     let billstand           = parseInt($(this).find("td[col=billstand]").attr("subval"));
                     let billfinal           = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
                     let billadjustment      = parseInt($(this).find("td[col=billadjustment] > input").val());
@@ -372,12 +399,13 @@
                     let billmemo            = $(this).find("td[col=billmemo] > input").val();
                     let dat =
                     {
-                        USERNO        : userno,
-                        BILLSTANDARD  : billstand,
+                        USERNO          : userno,
+                        ROW_STATUS      : rowStatus,
+                        BILLSTANDARD    : billstand,
                         BILLADJUSTMENT  : billadjustment,
-                        BILLPOINTED   : billpointed,
-                        BILLFINAL     : billfinal,
-                        BILLMEMO      : billmemo,
+                        BILLPOINTED     : billpointed,
+                        BILLFINAL       : billfinal,
+                        BILLMEMO        : billmemo,
                     }
                     arr.push(dat);
                 });
@@ -508,10 +536,26 @@
                     {
                         try
                         {
+                            /* vars */
                             let clsno = CUST.Data.clsno;
                             let grpno = CUST.Data.grpno;
                             let arrForSettle = CUST.getArrForSettle();
-                            let mApiResponse = Api.Cls.updateClsSettleInfoByPk(grpno, clsno, JSON.stringify(arrForSettle), GGF.toast, GGF.toast);
+
+                            /* validation */
+                            /* 최종청구금액이 0 미만인 행이 있는가 */
+                            for(let i in arrForSettle)
+                            {
+                                let dat = arrForSettle[i];
+                                if(dat.BILLFINAL < 0)
+                                {
+                                    Common.toast("최종청구금액이 0원 미만인 참가자가 있습니다. 청구금액을 확인해주세요.");
+                                    Common.hideProgress();
+                                    return;
+                                }
+                            }
+
+                            /* api */
+                            let mApiResponse = Api.Cls.updateClssettleflgDone(grpno, clsno, JSON.stringify(arrForSettle), GGF.toast, GGF.toast);
                             if(mApiResponse.isSuccess())
                                 Navigation.moveBack();
                         }
@@ -522,7 +566,7 @@
                         Common.hideProgress();
                     }, ajaxDelayTime);
                 }
-                Common.confirm2("처리 후 되돌릴 수 없습니다. 진행하시겠습니까?", process);
+                Common.confirm2("정산을 완료하시겠습니까? 추후에 수정가능합니다.", process);
             });
 
 

@@ -306,10 +306,10 @@ class ClsBO extends _CommonBO
     /* ========================= */
     const insert                        = "insert";                         /* [mngr]  */
     const update                        = "update";                         /* [mngr]  */
-    const updateClsstatusEditToIng      = "updateClsstatusEditToIng";       /* [mngr] [EXECUTOR, GRPNO, CLSNO]              : 일정상태를 진행중으로 변경 */
-    const updateClsstatusIngToEnd       = "updateClsstatusIngToEnd";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]              : 일정상태를 종료로 변경 */
-    const updateClsSettleInfoByPk       = "updateClsSettleInfoByPk";        /* [mngr] [EXECUTOR, GRPNO, CLSNO, ARR1, ARR2]  : 일정정산정보 등록 */
-    const updateClsstatusToCancel       = "updateClsstatusToCancel";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]              : 일정상태를 취소로 변경 */
+    const updateClsstatusEditToIng      = "updateClsstatusEditToIng";       /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 진행중으로 변경 */
+    const updateClsstatusIngToEnd       = "updateClsstatusIngToEnd";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 종료로 변경 */
+    const updateClssettleflgDone        = "updateClssettleflgDone";         /* [mngr] [EXECUTOR, GRPNO, CLSNO, ARR]  : 일정정산정보 등록 */
+    const updateClsstatusToCancel       = "updateClsstatusToCancel";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
     const copyClsForMng                 = "copyClsForMng";                  /* [mngr]  */
     const deleteByPkForMng              = "deleteByPkForMng";               /* [mngr]  */
     protected function update($options, $option="")
@@ -489,14 +489,14 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
                 break;
             }
-            case self::updateClsSettleInfoByPk:
+            case self::updateClssettleflgDone:
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
                 $ggAuth->isClsEnd($GRPNO, $CLSNO, true); /* is end status? */
 
                 /* regist settle */
-                $clssettleBO->insertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
+                $clssettleBO->upsertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
 
                 /* update clsstatus */
                 $query = "update cls set clssettleflg = '$clssettleflgDone', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";

@@ -21,6 +21,7 @@ class ClssettletmpBO extends _CommonBO
     const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30) */
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14) */
     const FIELD__USERNO                     = "userno";                     /* (PK) char(30) */
+    const FIELD__SETTLEDELETEFLG            = "settledeleteflg";            /* (  ) enum('y','n') */
     const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
     const FIELD__BILLADJUSTMENT             = "billadjustment";             /* (  ) int */
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
@@ -88,6 +89,7 @@ class ClssettletmpBO extends _CommonBO
             , t.grpno
             , t.clsno
             , t.userno
+            , t.settledeleteflg
             , t.billstandard
             , t.billadjustment
             , t.billpointed
@@ -222,6 +224,7 @@ class ClssettletmpBO extends _CommonBO
                 {
                     /* vars */
                     $USERNO         = $dat['USERNO'];
+                    $ROW_STATUS     = $dat['ROW_STATUS'];
                     $BILLSTANDARD   = intval($dat['BILLSTANDARD']);
                     $BILLADJUSTMENT = intval($dat['BILLADJUSTMENT']);
                     $BILLPOINTED    = intval($dat['BILLPOINTED']);
@@ -234,6 +237,9 @@ class ClssettletmpBO extends _CommonBO
                     $managerdepositflg    = ($BILLFINAL == 0) ? "'y'"   : "'n'";
                     $managerdepositflgdt  = ($BILLFINAL == 0) ? "now()" : "null";
 
+                    /* settledeleteflg */
+                    $settledeleteflg = $ROW_STATUS == 'deleted' ? "y" : "n";
+
                     /* insert */
                     $query =
                     "
@@ -242,6 +248,7 @@ class ClssettletmpBO extends _CommonBO
                               grpno
                             , clsno
                             , userno
+                            , settledeleteflg
                             , billstandard
                             , billadjustment
                             , billpointed
@@ -258,6 +265,7 @@ class ClssettletmpBO extends _CommonBO
                               '$GRPNO'
                             , '$CLSNO'
                             , '$USERNO'
+                            , '$settledeleteflg'
                             ,  $BILLSTANDARD
                             ,  $BILLADJUSTMENT
                             ,  $BILLPOINTED
