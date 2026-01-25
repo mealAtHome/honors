@@ -38,6 +38,7 @@ class ClssettlehistBO extends _CommonBO
     /* ========================= */
     const HISTTYPE__UPDATE                 = "update";                     /* 이력유형 : 수정 */
     const HISTTYPE__DELETE                 = "delete";                     /* 이력유형 : 삭제 */
+    const HISTTYPE__AFTER                  = "after";                      /* 이력유형 : 이후 */
 
     /* ========================= */
     /* select options */
@@ -58,6 +59,7 @@ class ClssettlehistBO extends _CommonBO
     /* select */
     /* ========================= */
     const selectByPkForInside = "selectByPkForInside";
+    const selectByClsno = "selectByClsno";
     protected function select($options, $option="")
     {
         /* --------------- */
@@ -90,6 +92,7 @@ class ClssettlehistBO extends _CommonBO
             , t.billfinal
             , t.billmemo
             , t.regdt
+            , u.name as username
         ";
 
         /* --------------- */
@@ -125,7 +128,8 @@ class ClssettlehistBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside : { $from = "(select * from clssettlehist where grpno = '$GRPNO' and clsno  = '$CLSNO' and histno = '$HISTNO') t"; break; }
+            case self::selectByPkForInside   : { $from = "(select * from clssettlehist where grpno = '$GRPNO' and clsno  = '$CLSNO' and histno = '$HISTNO') t"; break; }
+            case self::selectByClsno         : { $from = "(select * from clssettlehist where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -141,6 +145,9 @@ class ClssettlehistBO extends _CommonBO
                 $select
             from
                 $from
+                left join user u
+                    on
+                        t.userno = u.userno
             order by
                   t.grpno
                 , t.clsno

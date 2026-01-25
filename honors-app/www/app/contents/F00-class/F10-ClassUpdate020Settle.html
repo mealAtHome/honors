@@ -43,48 +43,79 @@
         </div>
     </div>
 
-    <!-- --------------- -->
-    <!-- 참가정산 -->
-    <!-- --------------- -->
+    <!-- ----- -->
+    <!-- 선택 탭 -->
+    <!-- ----- -->
     <div class="common-div-cushion">
-        <p class="common-p-title">참가정산</p>
-        <span class="common-tag-block common-tag-fontsize09">※참가자를 기반으로 청구금액을 계산하는 테이블입니다.</span>
-        <span class="common-tag-block common-tag-fontsize09">※좌우로 스크롤을 움직여 정산정보를 입력할 수 있습니다.</span>
-        <div class="common-div-cushionUD">
-            <div class="common-tag-fontsize09">
-                <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
-                <button id="CUST-btn-saveSettle"    class="common-btn-outline">💿임시저장</button>
-                <button id="CUST-btn-resetSettle"   class="common-btn-outline" style="display:none;">🔃초기화</button>
+        <table class="common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="CUST-td-maintab" tab-val="settle"   tab="tab" >정산입력</td>
+                    <td class="CUST-td-maintab" tab-val="history"  tab=""    >정산이력</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- --------------- -->
+    <!-- 정산입력 -->
+    <!-- --------------- -->
+    <div class="CUST-div-maintab" tab="settle">
+        <div class="common-div-cushion">
+            <p class="common-p-title">정산입력</p>
+            <span class="common-tag-block common-tag-fontsize09">※참가자를 기반으로 청구금액을 계산하는 테이블입니다.</span>
+            <span class="common-tag-block common-tag-fontsize09">※좌우로 스크롤을 움직여 정산정보를 입력할 수 있습니다.</span>
+            <div class="common-div-cushionUD">
+                <div class="common-tag-fontsize09">
+                    <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
+                    <button id="CUST-btn-saveSettle"    class="common-btn-outline">💿임시저장</button>
+                    <button id="CUST-btn-resetSettle"   class="common-btn-outline">🔃임시저장취소</button>
+                </div>
+            </div>
+            <div class="common-div-scrollX">
+                <table id="CUST-tbl-settle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th colspan="2">청구상태</th>
+                            <th>청구대상</th>
+                            <th>청구최종</th>
+                            <th>청구금액</th>
+                            <th>청구보정</th>
+                            <th>잔여금</th>
+                            <th>잔여금사용</th>
+                            <th>비고(보정사유등)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">합계</td>
+                            <td><span id="CUST-span-billfinalSummary"></span></td>
+                            <td><span id="CUST-span-billstandSummary"></span></td>
+                            <td><span id="CUST-span-billadjustmentSummary"></span></td>
+                            <td>-</span></td>
+                            <td><span id="CUST-span-billpointedSummary"></span></td>
+                            <td>-</td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
-        <div class="common-div-scrollX">
-            <table id="CUST-tbl-settle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
-                <thead>
-                    <tr>
-                        <th colspan="2">청구상태</th>
-                        <th>청구대상</th>
-                        <th>청구최종</th>
-                        <th>청구금액</th>
-                        <th>청구보정</th>
-                        <th>잔여금</th>
-                        <th>잔여금사용</th>
-                        <th>비고(보정사유등)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3">합계</td>
-                        <td><span id="CUST-span-billfinalSummary"></span></td>
-                        <td><span id="CUST-span-billstandSummary"></span></td>
-                        <td><span id="CUST-span-billadjustmentSummary"></span></td>
-                        <td>-</span></td>
-                        <td><span id="CUST-span-billpointedSummary"></span></td>
-                        <td>-</td>
-                    </tr>
-                </tfoot>
-            </table>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 정산이력 -->
+    <!-- --------------- -->
+    <div class="CUST-div-maintab" tab="history" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">정산이력</p>
+            <span class="common-tag-block common-tag-fontsize09">※첫 정산완료 시, 이력은 저장하지 않고, 이후 변경 시에만 저장합니다.</span>
+            <span class="common-tag-block common-tag-fontsize09">※표시되는 데이터는 변경직전의 데이터입니다.</span>
+            <div class="common-div-scrollX">
+                <div id="CUST-div-settlehist" class="common-tag-fontsize09"></div>
+            </div>
         </div>
     </div>
 
@@ -110,8 +141,9 @@
             show()
             {
                 /* validation param */
-                if(CUST.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
-                if(CUST.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
+                if(CUST.Data.clsno == undefined)   { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
+                if(CUST.Data.grpno == undefined)   { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
+                if(CUST.Data.maintab == undefined) { CUST.Data.maintab = "settle"; }
 
                 /* init */
                 Common.showProgress();
@@ -119,7 +151,14 @@
                 {
                     try
                     {
+                        /* 정산입력 */
                         CUST.resetSettle();
+
+                        /* 정산이력 */
+                        let clsno = CUST.Data.clsno;
+                        let grpno = CUST.Data.grpno;
+                        let mClssettlehists = Api.Clssettlehist.selectByClsno(grpno, clsno);
+                        mClssettlehists.makeTable("#CUST-div-settlehist");
                     }
                     catch(e)
                     {
@@ -144,7 +183,6 @@
 
                 /* clear */
                 $("#CUST-tbl-settle > tbody").empty();
-                $("#CUST-btn-resetSettle").hide();
 
                 /* ----- */
                 /* cls : 미정산 */
@@ -165,9 +203,6 @@
                         for(let i in lineups)
                             CUST.addRowForSettleByClslineup2(lineups[i]);
                     }
-
-                    /* 초기화 : 미정산시, 초기화버튼 사용가능 */
-                    $("#CUST-btn-resetSettle").show();
                 }
 
                 /* ----- */
@@ -436,16 +471,15 @@
             /* =============== */
             /* 탭 */
             /* =============== */
-            $(".CUST-btn-tab").click(function()
+            $(".CUST-td-maintab").click(function()
             {
                 /* 선택된 탭 표시 */
-                let tab = $(this).attr("val");
-                $(".CUST-btn-tab").removeAttr("tab");
-                $(this).attr("tab", "tab");
+                let val = $(this).attr("tab-val");
+                CUST.Data.maintab = val;
 
                 /* 탭별 표시 */
-                $(".CUST-div-tab").hide();
-                $(`.CUST-div-tab[tab=${tab}]`).show();
+                $(".CUST-div-maintab").hide();
+                $(`.CUST-div-maintab[tab=${val}]`).show();
             });
 
             /* =============== */
@@ -495,7 +529,7 @@
             });
 
             /* =============== */
-            /* settle : 초기화 */
+            /* settle : 임시저장삭제 */
             /* =============== */
             $("#CUST-btn-resetSettle").click(function()
             {
@@ -521,7 +555,7 @@
                         Common.hideProgress();
                     }, ajaxDelayTime);
                 }
-                Common.confirm2("정산정보를 초기화하시겠습니까?", process);
+                Common.confirm2("임시로 저장한 데이터가 삭제되며, 기존 데이터에는 영향이 없습니다. 진행하시겠습니까?", process);
             });
 
             /* =============== */
@@ -557,7 +591,7 @@
                             /* api */
                             let mApiResponse = Api.Cls.updateClssettleflgDone(grpno, clsno, JSON.stringify(arrForSettle), GGF.toast, GGF.toast);
                             if(mApiResponse.isSuccess())
-                                Navigation.moveBack();
+                                Navigation.executeShow();
                         }
                         catch(e)
                         {

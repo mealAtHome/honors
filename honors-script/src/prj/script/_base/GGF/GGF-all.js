@@ -48,6 +48,15 @@ GGF.Cls =
         UNABLE          : "unable",             /* GGF.Cls.Grpfinancereflectflg.UNABLE : 반영불가 */
     },
 };
+GGF.Clssettlehist =
+{
+    Histtype :
+    {
+        UPDATE  : "update", /* GGF.Clssettlehist.Histtype.UPDATE : 갱신 */
+        DELETE  : "delete", /* GGF.Clssettlehist.Histtype.DELETE : 삭제 */
+        AFTER   : "after",  /* GGF.Clssettlehist.Histtype.AFTER  : 추가 */
+    },
+};
 
 GGF.PaymentMissedreq =
 {

@@ -259,14 +259,23 @@ class ClssettleBO extends _CommonBO
             case self::upsertForInside:
             {
                 /* set bo */
+                GGnavi::getClsBO();
                 GGnavi::getGrpMemberBO();
                 GGnavi::getGrpMemberPointhistBO();
                 GGnavi::getClssettlehistBO();
                 GGnavi::getClssettletmpBO();
+                $clsBO = ClsBO::getInstance();
                 $grpMemberBO = GrpMemberBO::getInstance();
                 $grpMemberPointhistBO = GrpMemberPointhistBO::getInstance();
                 $clssettlehistBO = ClssettlehistBO::getInstance();
                 $clssettletmpBO = ClssettletmpBO::getInstance();
+
+                /* get cls info */
+                $clsInfo = $clsBO->getByPk($GRPNO, $CLSNO);
+                if($clsInfo == null)
+                    throw new GGexception("존재하지 않는 일정정보입니다.");
+                $clssettleflg = Common::getField($clsInfo, ClsBO::FIELD__CLSSETTLEFLG);
+                $isAfterSettle = ($clssettleflg == ClsBO::CLSSETTLEFLG__DONE) ? true : false;
 
                 /* insert */
                 $arr = json_decode($ARR, true);
@@ -297,6 +306,8 @@ class ClssettleBO extends _CommonBO
                     $existingSettle = $this->getByPk($GRPNO, $CLSNO, $USERNO);
                     if($existingSettle != null)
                     {
+                        Common::logDebug("existing settle found for GRPNO[$GRPNO] CLSNO[$CLSNO] USERNO[$USERNO]");
+
                         /* 내용에 변경이 있는지 확인, 메모는 따로 비교 안함 */
                         $existingBillAdjustment = intval(Common::getField($existingSettle, ClssettleBO::FIELD__BILLADJUSTMENT));
                         $existingBillPointed    = intval(Common::getField($existingSettle, ClssettleBO::FIELD__BILLPOINTED));
@@ -322,9 +333,9 @@ class ClssettleBO extends _CommonBO
                                     , billpointed           =  $BILLPOINTED
                                     , billfinal             =  $BILLFINAL
                                     , billmemo              = '$BILLMEMO'
-                                    , memberdepositflg      = '${GGF::N}'
+                                    , memberdepositflg      = 'n'
                                     , memberdepositflgdt    =  now()
-                                    , managerdepositflg     = '${GGF::N}'
+                                    , managerdepositflg     = 'n'
                                     , managerdepositflgdt   =  now()
                                 where
                                     grpno = '$GRPNO' and
@@ -332,13 +343,18 @@ class ClssettleBO extends _CommonBO
                                     userno = '$USERNO'
                             ";
                             GGsql::exeQuery($query);
+
+                            /* 포인트 사용 */
+                            $pointUsed = $existingBillPointed - $BILLPOINTED;
+                            if($pointUsed != 0)
+                            {
+                                $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$pointUsed));
+                                $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$pointUsed), "일정정산으로 인한 변동", $CLSNO);
+                            }
                         }
-                        else
-                        {
-                            /* 변경이 없으면, 다른 처리하지 않음. */
-                            /* skip to next */
-                            continue;
-                        }
+
+                        /* 레코드가 존재했었다면, 반복할 필요 없음 */
+                        continue;
                     }
 
                     /* is pointed? */
@@ -392,9 +408,14 @@ class ClssettleBO extends _CommonBO
                     ";
                     GGsql::exeQuery($query);
 
-                    /* delete tmp */
-                    $clssettletmpBO->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
-                }
+                    /* after settle 일 경우, 이후 이력 등록 */
+                    if($isAfterSettle)
+                        $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__AFTER);
+
+                } /* loop ARR */
+
+                /* delete tmp */
+                $clssettletmpBO->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
                 break;
             }
             case self::updateMemberdepositflgYesForUsr:

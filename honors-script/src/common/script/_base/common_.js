@@ -25,6 +25,7 @@ var Common =
     /* isEmpty */
     isEmpty (val)             { return (val == undefined || val == null || val == "") ? true : false; },
     ifEmpty (val, defaultVal) { return Common.isEmpty(val) ? defaultVal : val; },
+    ifempty (val, defaultVal) { return Common.isEmpty(val) ? defaultVal : val; },
 
     /* ================ */
     /* 크리티컬 에러 발생 시 */
