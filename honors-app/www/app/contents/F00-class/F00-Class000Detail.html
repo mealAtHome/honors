@@ -31,7 +31,7 @@
         <button id="CLSD-btn-textApply"    class="common-btn-outline">참가요약</button>
         <button id="CLSD-btn-textSettle"   class="common-btn-outline" style="display:none;">정산요약</button>
         <button id="CLSD-btn-editSettle"   class="common-btn-outline" style="display:none;">정산</button>
-        <button id="CLSD-btn-editPurchase" class="common-btn-outline" style="display:none;">소비</button>
+        <button id="CLSD-btn-editPurchase" class="common-btn-outline" style="display:none;">구매</button>
         <hr class="common-hr-paddingTop"/>
     </div>
 
@@ -60,7 +60,7 @@
                     <th>정산결과</th>
                     <td>
                         <div class="common-tag-block"><span>합계 : </span><span id="CLSD-span-clsbillsales"></span></div>
-                        <div class="common-tag-block"><span>소비 : </span><span id="CLSD-span-clsbillpurchase"></span></div>
+                        <div class="common-tag-block"><span>구매 : </span><span id="CLSD-span-clsbillpurchase"></span></div>
                         <div class="common-tag-block"><span>최종 : </span><span id="CLSD-span-clsbillfinal"></span></div>
                         <div class="common-tag-block"><span>재무반영여부 : </span><span id="CLSD-div-grpfinancereflectflg"></span></div>
                     </td>
@@ -81,7 +81,7 @@
                 <tr>
                     <td class="CLSD-td-tabmain" tabval="clslineup"    tab="tab" >참가자</td>
                     <td class="CLSD-td-tabmain" tabval="clssettle"    tab=""    >정산</td>
-                    <td class="CLSD-td-tabmain" tabval="clspurchase"  tab=""    >소비</td>
+                    <td class="CLSD-td-tabmain" tabval="clspurchase"  tab=""    >구매</td>
                 </tr>
             </tbody>
         </table>
@@ -267,10 +267,10 @@
     </div>
 
     <!-- ========================= -->
-    <!-- 소비목록 -->
+    <!-- 구매목록 -->
     <!-- ========================= -->
     <div id="CLSD-div-clspurchase" class="common-div-cushion CLSD-div-tabmain" tabval="clspurchase" style="display:none;">
-        <p class="common-p-title">소비목록</p>
+        <p class="common-p-title">구매목록</p>
         <table id="CLSD-tbl-clspurchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
             <thead>
                 <tr>
@@ -453,7 +453,7 @@
                         }
 
                         /* =============== */
-                        /* 소비목록 */
+                        /* 구매목록 */
                         /* =============== */
                         let mClspurchases = Api.Clspurchase.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
                         if(isManagerAndEnd)
@@ -475,7 +475,7 @@
                             }
                             $("#CLSD-th-billtotalpriceWon").text(GGC.Common.priceWon(billtotalprice));
                             if(models.length == 0)
-                                $("#CLSD-tbl-clspurchase > tbody").append("<tr><td colspan='2' class='common-tag-alignC'>소비내역이 없습니다.</td></tr>");
+                                $("#CLSD-tbl-clspurchase > tbody").append("<tr><td colspan='2' class='common-tag-alignC'>구매내역이 없습니다.</td></tr>");
                         }
 
                         /* =============== */

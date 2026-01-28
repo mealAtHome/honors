@@ -40,8 +40,8 @@ class ClspurchaseBO extends _CommonBO
 
     static public function validProductname($name)
     {
-        if(mb_strlen($name) > 100)
-            throw new GGexception("상품명은 100자 이하로 입력가능합니다.");
+        if(mb_strlen($name) > 50)
+            throw new GGexception("상품명은 50자 이하로 입력가능합니다.");
         if(mb_strlen($name) == 0)
             throw new GGexception("상품명을 입력하여 주세요.");
     }
@@ -72,11 +72,12 @@ class ClspurchaseBO extends _CommonBO
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    // public function selectBy($GRPNO, $PURCHASECLSNO, $USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside($GRPNO, $CLSNO, $PURCHASEIDX) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
     /* ========================= */
+    const selectByPkForInside = "selectByPkForInside";
     const selectByClsno = "selectByClsno";
     protected function select($options, $option="")
     {
@@ -129,7 +130,8 @@ class ClspurchaseBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByClsno : { $from = "(select * from clspurchase where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByPkForInside      : { $from = "(select * from clspurchase where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx = '$PURCHASEIDX') t"; break; }
+            case self::selectByClsno            : { $from = "(select * from clspurchase where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -196,20 +198,70 @@ class ClspurchaseBO extends _CommonBO
         {
             case self::insertByArr:
             {
-                /* delete before insert */
-                $this->deleteByClsnoForInside($GRPNO, $CLSNO);
+                /* bo */
+                GGnavi::getClspurchasehistBO();
+                $clspurchasehistBO = ClspurchasehistBO::getInstance();
 
-                /* process */
-                $purchaseidx = 1;
+                /* var */
                 $arr = json_decode($ARR, true);
+
+                /* get max */
+                $purchaseidx = 0;
                 foreach($arr as $dat)
                 {
+                    $PURCHASEIDX = intval($dat['PURCHASEIDX']);
+                    if($PURCHASEIDX > $purchaseidx)
+                        $purchaseidx = $PURCHASEIDX;
+                }
+
+                /* process */
+                foreach($arr as $dat)
+                {
+                    $PURCHASEIDX = intval($dat['PURCHASEIDX']);
+                    $DELETEFLG   = $dat['DELETEFLG'];
                     $PRODUCTNAME = $dat['PRODUCTNAME'];
                     $PRODUCTBILL = intval($dat['PRODUCTBILL']);
 
                     /* validation */
                     self::validProductname($PRODUCTNAME);
                     self::validProductbill($PRODUCTBILL);
+
+                    /* check clspurchase is exists */
+                    if($PURCHASEIDX > 0)
+                    {
+                        $clspurchaseOrigin = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $PURCHASEIDX));
+                        if($clspurchaseOrigin != null)
+                        {
+                            switch($DELETEFLG)
+                            {
+                                case "y":
+                                {
+                                    /* delete */
+                                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, ClspurchasehistBO::HISTTYPE__DELETE);
+                                    $query = "delete from clspurchase where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx =  $PURCHASEIDX";
+                                    GGsql::exeQuery($query);
+                                    break;
+                                }
+                                case "n":
+                                {
+                                    /* update */
+                                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, ClspurchasehistBO::HISTTYPE__UPDATE);
+                                    $query = "update clspurchase set productname = '$PRODUCTNAME', productbill =  $PRODUCTBILL where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx =  $PURCHASEIDX";
+                                    GGsql::exeQuery($query);
+                                    break;
+                                }
+                            }
+                            /* 삽입처리 하지 않음 */
+                            continue;
+                        }
+                    }
+
+                    /* skip if deleteflg == y */
+                    if($DELETEFLG == "y")
+                        continue;
+
+                    /* get purchaseidx lastest */
+                    $purchaseidx++;
 
                     /* insert */
                     $query =
@@ -234,6 +286,9 @@ class ClspurchaseBO extends _CommonBO
                         )
                     ";
                     GGsql::exeQuery($query);
+
+                    /* regist hist */
+                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $purchaseidx, ClspurchasehistBO::HISTTYPE__INSERT);
                 }
                 break;
             }

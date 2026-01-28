@@ -17,7 +17,7 @@
     <!-- ======================== -->
     <ons-toolbar>
         <div class="left"><gg-backbtn onclick="CUPU.close(true);"></gg-backbtn></div>
-        <div class="center">소비</div>
+        <div class="center">구매</div>
     </ons-toolbar>
 
     <!-- ========================= -->
@@ -31,10 +31,10 @@
     </div>
 
     <!-- ========================= -->
-    <!-- 소비품목 -->
+    <!-- 구매품목 -->
     <!-- ========================= -->
     <div class="common-div-cushion">
-        <p class="common-p-title">소비품목</p>
+        <p class="common-p-title">구매품목</p>
         <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
         <div class="common-div-cushionUD">
             <div class="common-tag-fontsize09">
@@ -122,7 +122,7 @@
             {
                 let html =
                 `
-                    <tr purchaseidx="${mClspurchase.getPurchaseidx()}">
+                    <tr purchaseidx="${mClspurchase.getPurchaseidx()}" deleteflg="n">
                         <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outline" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
                         <td col="productname"   ><input type="text"   class="common-input-text CUPU-input-productname" value="${mClspurchase.getProductname()}" style="width:100%;" /></td>
                         <td col="productbill"   ><input type="number" class="common-input-text CUPU-input-productbill" value="${mClspurchase.getProductbill()}" style="width:100%;" /></td>
@@ -136,8 +136,13 @@
                 let productbillTotal = 0;
                 $("#CUPU-tbl-purchase > tbody > tr").each(function()
                 {
+                    let deleteflg = $(this).attr("deleteflg");
+                    if(deleteflg == "y")
+                        return;
                     let productbill = parseInt($(this).find("td[col=productbill] > input").val());
-                    if(isNaN(productbill)) return;
+                    if(isNaN(productbill))
+                        return;
+
                     productbillTotal += productbill;
                 });
                 $("#CUPU-span-productbillSummary").text(GGC.Common.priceWon(productbillTotal));
@@ -154,7 +159,8 @@
                     let process = function()
                     {
                         /* remove row */
-                        $(`#CUPU-tbl-purchase > tbody > tr[purchaseidx=${purchaseidx}]`).remove();
+                        $(`#CUPU-tbl-purchase > tbody > tr[purchaseidx=${purchaseidx}]`).attr("deleteflg", "y");
+                        $(`#CUPU-tbl-purchase > tbody > tr[purchaseidx=${purchaseidx}]`).hide();
                         CUPU.calSummaryPurchase();
                     }
                     Common.confirm2("삭제하시겠습니까?", process);
@@ -179,17 +185,27 @@
                 let arr = [];
                 $("#CUPU-tbl-purchase > tbody > tr").each(function()
                 {
+                    let purchaseidx = $(this).attr("purchaseidx");
+                    let deleteflg   = $(this).attr("deleteflg");
                     let productname = $(this).find("td[col=productname] > input").val();
                     let productbill = $(this).find("td[col=productbill] > input").val();
 
                     let productnameEmpty = Common.isEmpty(productname);
-                    let productbillEmpty = Common.isEmpty(productbill) || productbill == "0";
+                    let productbillEmpty = Common.isEmpty(productbill) || productbill == 0;
                     if      (productnameEmpty && productbillEmpty)  { return; }
                     else if (productnameEmpty)                      { Common.toast("품목명이 비어있는 행이 있습니다."); throw new Error("empty row"); }
                     else if (productbillEmpty)                      { Common.toast("금액이 비어있는 행이 있습니다."); throw new Error("empty row"); }
 
+                    if(productbill * 1 < 0)
+                    {
+                        Common.toast("금액은 0원 미만으로 입력할 수 없습니다.");
+                        throw new Error("invalid productbill");
+                    }
+
                     let dat =
                     {
+                        PURCHASEIDX : purchaseidx,
+                        DELETEFLG   : deleteflg,
                         PRODUCTNAME : productname,
                         PRODUCTBILL : productbill,
                     }
@@ -219,22 +235,13 @@
             /* ========================= */
 
             /* =============== */
-            /* purchase : 소비품목추가 */
+            /* purchase : 구매품목추가 */
             /* =============== */
             $("#CUPU-btn-addPurchaseRow").click(function()
             {
-                /* find next purchaseidx */
-                let purchaseidx = 1;
-                $("#CUPU-tbl-purchase > tbody > tr").each(function()
-                {
-                    let existPurchaseidx = parseInt($(this).attr("purchaseidx"));
-                    if(purchaseidx <= existPurchaseidx)
-                        purchaseidx = existPurchaseidx + 1;
-                });
-
                 let dat =
                 {
-                    PURCHASEIDX : purchaseidx,
+                    PURCHASEIDX : 0,
                     PRODUCTNAME : "",
                     PRODUCTBILL : 0,
                 }
