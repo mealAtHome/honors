@@ -199,20 +199,17 @@ class ClspurchaseBO extends _CommonBO
             case self::insertByArr:
             {
                 /* bo */
+                GGnavi::getClsBO();
                 GGnavi::getClspurchasehistBO();
+                $clsBO = ClsBO::getInstance();
                 $clspurchasehistBO = ClspurchasehistBO::getInstance();
 
                 /* var */
                 $arr = json_decode($ARR, true);
 
                 /* get max */
-                $purchaseidx = 0;
-                foreach($arr as $dat)
-                {
-                    $PURCHASEIDX = intval($dat['PURCHASEIDX']);
-                    if($PURCHASEIDX > $purchaseidx)
-                        $purchaseidx = $PURCHASEIDX;
-                }
+                $cls = $clsBO->getByPk($GRPNO, $CLSNO);
+                $purchaseidxMaxused = intval(Common::getField($cls, ClsBO::FIELD__PURCHASEIDX_MAXUSED));
 
                 /* process */
                 foreach($arr as $dat)
@@ -230,6 +227,8 @@ class ClspurchaseBO extends _CommonBO
                     if($PURCHASEIDX > 0)
                     {
                         $clspurchaseOrigin = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $PURCHASEIDX));
+                        $clspurchaseOriginProductname =        Common::getField($clspurchaseOrigin, self::FIELD__PRODUCTNAME);
+                        $clspurchaseOriginProductbill = intval(Common::getField($clspurchaseOrigin, self::FIELD__PRODUCTBILL));
                         if($clspurchaseOrigin != null)
                         {
                             switch($DELETEFLG)
@@ -244,6 +243,10 @@ class ClspurchaseBO extends _CommonBO
                                 }
                                 case "n":
                                 {
+                                    /* check content is changed */
+                                    if($clspurchaseOriginProductname == $PRODUCTNAME && $clspurchaseOriginProductbill == $PRODUCTBILL)
+                                        continue;
+
                                     /* update */
                                     $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, ClspurchasehistBO::HISTTYPE__UPDATE);
                                     $query = "update clspurchase set productname = '$PRODUCTNAME', productbill =  $PRODUCTBILL where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx =  $PURCHASEIDX";
@@ -261,7 +264,7 @@ class ClspurchaseBO extends _CommonBO
                         continue;
 
                     /* get purchaseidx lastest */
-                    $purchaseidx++;
+                    $purchaseidxMaxused++;
 
                     /* insert */
                     $query =
@@ -279,7 +282,7 @@ class ClspurchaseBO extends _CommonBO
                         (
                               '$GRPNO'
                             , '$CLSNO'
-                            ,  $purchaseidx
+                            ,  $purchaseidxMaxused
                             , '$PRODUCTNAME'
                             ,  $PRODUCTBILL
                             ,  now()
@@ -288,7 +291,10 @@ class ClspurchaseBO extends _CommonBO
                     GGsql::exeQuery($query);
 
                     /* regist hist */
-                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $purchaseidx, ClspurchasehistBO::HISTTYPE__INSERT);
+                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $purchaseidxMaxused, ClspurchasehistBO::HISTTYPE__INSERT);
+
+                    /* update purchaseidx_maxused */
+                    $clsBO->updatePurchaseidxMaxused($GRPNO, $CLSNO, $purchaseidxMaxused);
                 }
                 break;
             }

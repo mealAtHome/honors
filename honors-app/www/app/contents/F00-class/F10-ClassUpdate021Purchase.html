@@ -20,9 +20,9 @@
         <div class="center">구매</div>
     </ons-toolbar>
 
-    <!-- ========================= -->
+    <!-- --------------- -->
     <!-- 일정상세 -->
-    <!-- ========================= -->
+    <!-- --------------- -->
     <div class="common-div-cushion">
         <div class="common-tag-fontsize11" style="font-weight:bold;">
             <span class="common-tag-fontsize10">일정 : </span>
@@ -30,39 +30,69 @@
         </div>
     </div>
 
-    <!-- ========================= -->
-    <!-- 구매품목 -->
-    <!-- ========================= -->
+    <!-- ----- -->
+    <!-- 선택 탭 -->
+    <!-- ----- -->
     <div class="common-div-cushion">
-        <p class="common-p-title">구매품목</p>
-        <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
-        <div class="common-div-cushionUD">
-            <div class="common-tag-fontsize09">
-                <button id="CUPU-btn-addPurchaseRow" class="common-btn-outline">＋품목추가</button>
+        <table class="common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="CUPU-td-maintab" tab-val="input"    tab="tab" >구매입력</td>
+                    <td class="CUPU-td-maintab" tab-val="history"  tab=""    >구매이력</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- --------------- -->
+    <!-- 구매품목 -->
+    <!-- --------------- -->
+    <div class="CUPU-div-maintab" tab="input">
+        <div class="common-div-cushion">
+            <p class="common-p-title">구매품목</p>
+            <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
+            <div class="common-div-cushionUD">
+                <div class="common-tag-fontsize09">
+                    <button id="CUPU-btn-addPurchaseRow" class="common-btn-outline">＋품목추가</button>
+                </div>
             </div>
-        </div>
-        <div class="common-div-scrollX">
-            <table id="CUPU-tbl-purchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
-                <thead>
-                    <tr>
-                        <th colspan="2">품목</th>
-                        <th>금액</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3">합계 : <span id="CUPU-span-productbillSummary">0원</span></td>
-                    </tr>
-                </tfoot>
-            </table>
+            <div class="common-div-scrollX">
+                <table id="CUPU-tbl-purchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th colspan="2">품목</th>
+                            <th>금액</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">합계 : <span id="CUPU-span-productbillSummary">0원</span></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- ======================== -->
+    <!-- --------------- -->
+    <!-- 구매이력 -->
+    <!-- --------------- -->
+    <div class="CUPU-div-maintab" tab="history" style="display:none;">
+        <div class="common-div-cushion">
+            <p class="common-p-title">구매이력</p>
+            <span class="common-tag-block common-tag-fontsize09">※표시되는 데이터는 변경직전의 데이터입니다.</span>
+            <div class="common-div-scrollX">
+                <div id="CUPU-div-purchasehist" class="common-tag-fontsize09"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- --------------- -->
     <!-- footer -->
-    <!-- ======================== -->
+    <!-- --------------- -->
     <button id="CUPU-btn-savePurchase" class="common-btn-footer">저장</button>
     <div class="common-div-cushionFooter"></div>
 
@@ -83,6 +113,7 @@
                 /* validation param */
                 if(CUPU.Data.clsno == undefined) { Common.toast("잘못된 접근입니다."); CUPU.close(); return; }
                 if(CUPU.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); CUPU.close(); return; }
+                if(CUPU.Data.maintab == undefined) { CUPU.Data.maintab = "input"; }
 
                 /* init */
                 Common.showProgress();
@@ -109,6 +140,13 @@
                         }
                         CUPU.setEventForPurchase();
                         CUPU.calSummaryPurchase();
+
+                        /* 구매이력 */
+                        let mClspurchasehists = Api.Clspurchasehist.selectByClsno(grpno, clsno);
+                        mClspurchasehists.makeTable("#CUPU-div-purchasehist");
+
+                        /* 탭 표시 */
+                        $(`.CUPU-td-maintab[tab-val=${CUPU.Data.maintab}]`).click();
                     }
                     catch(e)
                     {
@@ -155,9 +193,18 @@
                 /* --------------- */
                 $(".CUPU-btn-deleteRowForPurchase").off("click").on("click", function()
                 {
+                    let tr = $(this).closest("tr");
                     let purchaseidx = $(this).attr("purchaseidx");
                     let process = function()
                     {
+                        /* if purchaseidx == 0, delete real */
+                        if(purchaseidx * 1 == 0)
+                        {
+                            tr.remove();
+                            CUPU.calSummaryPurchase();
+                            return;
+                        }
+
                         /* remove row */
                         $(`#CUPU-tbl-purchase > tbody > tr[purchaseidx=${purchaseidx}]`).attr("deleteflg", "y");
                         $(`#CUPU-tbl-purchase > tbody > tr[purchaseidx=${purchaseidx}]`).hide();
@@ -233,6 +280,20 @@
             /* ========================= */
             /* event */
             /* ========================= */
+
+            /* =============== */
+            /* 탭 */
+            /* =============== */
+            $(".CUPU-td-maintab").click(function()
+            {
+                /* 선택된 탭 표시 */
+                let val = $(this).attr("tab-val");
+                CUPU.Data.maintab = val;
+
+                /* 탭별 표시 */
+                $(".CUPU-div-maintab").hide();
+                $(`.CUPU-div-maintab[tab=${val}]`).show();
+            });
 
             /* =============== */
             /* purchase : 구매품목추가 */

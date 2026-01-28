@@ -178,7 +178,8 @@ class MClss extends _MCommon
                     }
                     case GGF.Cls.Clsstatus.END:
                     {
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020Settle}" hyperlink-viewmode="page" option="update" ${model.getPk()}>정산</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020Settle}"   hyperlink-viewmode="page" ${model.getPk()}>정산</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate021Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매</button>`;
                         break;
                     }
                 }

@@ -57,6 +57,15 @@ GGF.Clssettlehist =
         AFTER   : "after",  /* GGF.Clssettlehist.Histtype.AFTER  : 추가 */
     },
 };
+GGF.Clspurchasehist =
+{
+    Histtype :
+    {
+        INSERT  : "insert", /* GGF.Clspurchasehist.Histtype.INSERT : 추가 */
+        UPDATE  : "update", /* GGF.Clspurchasehist.Histtype.UPDATE : 갱신 */
+        DELETE  : "delete", /* GGF.Clspurchasehist.Histtype.DELETE : 삭제 */
+    },
+};
 
 GGF.PaymentMissedreq =
 {

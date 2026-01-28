@@ -41,21 +41,6 @@ class ClspurchasehistBO extends _CommonBO
     /*
     */
     /* ========================= */
-    static public function validProductbill($bill)
-    {
-        if(!is_numeric($bill))
-            throw new GGexception("상품금액은 숫자만 입력가능합니다.");
-        if(intval($bill) < 0)
-            throw new GGexception("상품금액은 0원 이상만 입력가능합니다.");
-    }
-
-    static public function validProductname($name)
-    {
-        if(mb_strlen($name) > 50)
-            throw new GGexception("상품명은 50자 이하로 입력가능합니다.");
-        if(mb_strlen($name) == 0)
-            throw new GGexception("상품명을 입력하여 주세요.");
-    }
 
     /* ========================= */
     /* get consts */
@@ -169,7 +154,7 @@ class ClspurchasehistBO extends _CommonBO
     /* ========================= */
     /* update */
     /* ========================= */
-    const deleteByClsnoForInside = "deleteByClsnoForInside";
+    const copyFromClspurchaseForInside = "copyFromClspurchaseForInside";
     protected function update($options, $option="")
     {
         /* get vars */
@@ -217,7 +202,7 @@ class ClspurchasehistBO extends _CommonBO
                     select
                           grpno
                         , clsno
-                        , ifnull((select max(histno) from clspurchasehist where grpno = '$GRPNO' and clsno = '$CLSNO'), 0) + rownum as histno
+                        , ifnull((select max(histno) from clspurchasehist where grpno = '$GRPNO' and clsno = '$CLSNO'), 0) + 1 as histno
                         , '$HISTTYPE' as histtype
                         , purchaseidx
                         , productname

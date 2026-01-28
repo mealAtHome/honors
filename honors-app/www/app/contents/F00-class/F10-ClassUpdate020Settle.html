@@ -50,7 +50,7 @@
         <table class="common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="CUST-td-maintab" tab-val="settle"   tab="tab" >정산입력</td>
+                    <td class="CUST-td-maintab" tab-val="input"   tab="tab" >정산입력</td>
                     <td class="CUST-td-maintab" tab-val="history"  tab=""    >정산이력</td>
                 </tr>
             </tbody>
@@ -61,7 +61,7 @@
     <!-- --------------- -->
     <!-- 정산입력 -->
     <!-- --------------- -->
-    <div class="CUST-div-maintab" tab="settle">
+    <div class="CUST-div-maintab" tab="input">
         <div class="common-div-cushion">
             <p class="common-p-title">정산입력</p>
             <span class="common-tag-block common-tag-fontsize09">※참가자를 기반으로 청구금액을 계산하는 테이블입니다.</span>
@@ -143,7 +143,7 @@
                 /* validation param */
                 if(CUST.Data.clsno == undefined)   { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
                 if(CUST.Data.grpno == undefined)   { Common.toast("잘못된 접근입니다."); CUST.close(); return; }
-                if(CUST.Data.maintab == undefined) { CUST.Data.maintab = "settle"; }
+                if(CUST.Data.maintab == undefined) { CUST.Data.maintab = "input"; }
 
                 /* init */
                 Common.showProgress();
@@ -159,6 +159,9 @@
                         let grpno = CUST.Data.grpno;
                         let mClssettlehists = Api.Clssettlehist.selectByClsno(grpno, clsno);
                         mClssettlehists.makeTable("#CUST-div-settlehist");
+
+                        /* 탭 표시 */
+                        $(`.CUST-td-maintab[tab-val=${CUST.Data.maintab}]`).click();
                     }
                     catch(e)
                     {

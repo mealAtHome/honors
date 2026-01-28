@@ -59,6 +59,7 @@ class ClsBO extends _CommonBO
     const FIELD__CLSBILLPURCHASE            = "clsbillpurchase";            /* (  ) int(11)               / YES */
     const FIELD__CLSBILLFINAL               = "clsbillfinal";               /* (  ) int(11)               / YES */
     const FIELD__GRPFINANCEREFLECTFLG       = "grpfinancereflectflg";       /* (  ) enum('y','n','skip')  / YES */
+    const FIELD__PURCHASEIDX_MAXUSED        = "purchaseidx_maxused";        /* (  ) int(11)               / YES */
     const FIELD__CLSMODIDT                  = "clsmodidt";                  /* (  ) datetime              / YES */
     const FIELD__CLSREGDT                   = "clsregdt";                   /* (  ) datetime              / YES */
 
@@ -299,7 +300,7 @@ class ClsBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    // public function changeStoreStatus ($STORENO, $STORE_STATUS) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updatePurchaseidxMaxused($GRPNO, $CLSNO, $PURCHASEIDX_MAXUSED) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
@@ -312,6 +313,7 @@ class ClsBO extends _CommonBO
     const updateClsstatusToCancel       = "updateClsstatusToCancel";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
     const copyClsForMng                 = "copyClsForMng";                  /* [mngr]  */
     const deleteByPkForMng              = "deleteByPkForMng";               /* [mngr]  */
+    const updatePurchaseidxMaxused      = "updatePurchaseidxMaxused";       /* [null] [GRPNO, CLSNO, PURCHASEIDX_MAXUSED] */
     protected function update($options, $option="")
     {
         /* vars */
@@ -587,6 +589,12 @@ class ClsBO extends _CommonBO
 
                 /* delete lineup */
                 $clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
+                break;
+            }
+            case self::updatePurchaseidxMaxused:
+            {
+                $query = "update cls set purchaseidx_maxused =  $PURCHASEIDX_MAXUSED, clsmodidt =  now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
+                GGsql::exeQuery($query);
                 break;
             }
             default:

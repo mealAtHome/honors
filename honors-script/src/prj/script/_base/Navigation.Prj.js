@@ -20,6 +20,7 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* clslineup2  */               case "Api.Clslineup2.update"                                : url = serverHost + "/src/data/clslineup2/updateClslineup2.php"; break;
         /* clspurchase */               case "Api.Clspurchase.select"                               : url = serverHost + "/src/data/clspurchase/selectClspurchase.php"; break;
         /* clspurchase */               case "Api.Clspurchase.update"                               : url = serverHost + "/src/data/clspurchase/updateClspurchase.php"; break;
+        /* clspurchasehist */           case "Api.Clspurchasehist.select"                           : url = serverHost + "/src/data/clspurchasehist/selectClspurchasehist.php"; break;
         /* clssettle */                 case "Api.Clssettle.select"                                 : url = serverHost + "/src/data/clssettle/selectClssettle.php"; break;
         /* clssettle */                 case "Api.Clssettle.update"                                 : url = serverHost + "/src/data/clssettle/updateClssettle.php"; break;
         /* clssettlehist */             case "Api.Clssettlehist.select"                             : url = serverHost + "/src/data/clssettlehist/selectClssettlehist.php"; break;

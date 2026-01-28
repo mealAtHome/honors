@@ -20,6 +20,7 @@ CommonEvent.Prj =
             case Navigation.Page.F10ClassUpdate000Default     : { pageData = { option : target.attr("option"), grpno   : target.attr("grpno")   , clsno : target.attr("clsno"), }; break; }
             case Navigation.Page.F00Class000Detail            : { pageData = {                                 grpno   : target.attr("grpno")   , clsno : target.attr("clsno"), }; break; }
             case Navigation.Page.F10ClassUpdate020Settle      : { pageData = {                                 grpno   : target.attr("grpno")   , clsno : target.attr("clsno"), }; break; }
+            case Navigation.Page.F10ClassUpdate021Purchase    : { pageData = {                                 grpno   : target.attr("grpno")   , clsno : target.attr("clsno"), }; break; }
             case Navigation.Page.B71GrpMemberDetail           : { pageData = {                                 grpno   : target.attr("grpno")   , userno : target.attr("userno"), }; break; }
             case Navigation.Page.B72GrpMemberMergeTemp        : { pageData = {                                 grpno   : target.attr("grpno")   , userno : target.attr("userno"), }; break; }
             case Navigation.Page.D10DetailGrp                 : { pageData = {                                 grpno   : target.attr("grpno")   , }; break; }
