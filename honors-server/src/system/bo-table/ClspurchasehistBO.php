@@ -20,11 +20,12 @@ class ClspurchasehistBO extends _CommonBO
     /* ========================= */
     const FIELD__GRPNO              = "grpno";              /* (PK) char(30) */
     const FIELD__CLSNO              = "clsno";              /* (PK) char(14) */
+    const FIELD__PURCHASEIDX        = "purchaseidx";        /* (PK) int */
     const FIELD__HISTNO             = "histno";             /* (PK) int */
     const FIELD__HISTTYPE           = "histtype";           /* (  ) enum('insert','update','delete') */
-    const FIELD__PURCHASEIDX        = "purchaseidx";        /* (  ) int */
     const FIELD__PRODUCTNAME        = "productname";        /* (  ) varchar(50) */
     const FIELD__PRODUCTBILL        = "productbill";        /* (  ) int */
+    const FIELD__PRODUCTBILLAFTER   = "productbillafter";   /* (  ) int */
     const FIELD__REGDT              = "regdt";              /* (  ) datetime */
 
     /* ========================= */
@@ -96,6 +97,7 @@ class ClspurchasehistBO extends _CommonBO
             , t.purchaseidx
             , t.productname
             , t.productbill
+            , t.productbillafter
             , t.regdt
         ";
 
@@ -140,6 +142,7 @@ class ClspurchasehistBO extends _CommonBO
             order by
                 t.grpno,
                 t.clsno,
+                t.purchaseidx,
                 t.histno asc
         ";
         $result = GGsql::select($query, $from, $options);
@@ -149,7 +152,7 @@ class ClspurchasehistBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, $HISTTYPE) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, $HISTTYPE, $PRODUCTBILLAFTER) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
@@ -192,21 +195,23 @@ class ClspurchasehistBO extends _CommonBO
                     (
                           grpno
                         , clsno
+                        , purchaseidx
                         , histno
                         , histtype
-                        , purchaseidx
                         , productname
                         , productbill
+                        , productbillafter
                         , regdt
                     )
                     select
                           grpno
                         , clsno
-                        , ifnull((select max(histno) from clspurchasehist where grpno = '$GRPNO' and clsno = '$CLSNO'), 0) + 1 as histno
-                        , '$HISTTYPE' as histtype
                         , purchaseidx
+                        , ifnull((select max(histno) from clspurchasehist where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx = '$PURCHASEIDX'), 0) + 1 as histno
+                        , '$HISTTYPE' as histtype
                         , productname
                         , productbill
+                        , $PRODUCTBILLAFTER as productbillafter
                         , now() as regdt
                     from
                     (

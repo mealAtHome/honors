@@ -7,6 +7,7 @@ class MClspurchase
         /* data */      this.purchaseidx = GGC.Common.int(dat.purchaseidx);
         /* data */      this.productname = GGC.Common.char(dat.productname);
         /* data */      this.productbill = GGC.Common.int(dat.productbill);
+        /* data */      this.purchasememo = GGC.Common.varchar(dat.purchasememo);
         /* data */      this.regdt = GGC.Common.datetime(dat.regdt);
         /* custom */    this.pk = `grpno="${this.grpno}" clsno="${this.clsno}" purchaseidx="${this.purchaseidx}"`;
     }
@@ -19,9 +20,10 @@ class MClspurchase
     /* data */      getPurchaseidx() { return this.purchaseidx; }
     /* data */      getProductname() { return this.productname; }
     /* data */      getProductbill() { return this.productbill; }
+    /* data */      getPurchasememo() { return this.purchasememo; }
     /* data */      getRegdt() { return this.regdt; }
-    /* custom */    getPk() { return this.pk; }
     /* custom */    getProductbillWon() { return GGC.Common.priceWon(this.productbill); }
+    /* custom */    getPk() { return this.pk; }
 
     /* ========================= */
     /* fields - flg */

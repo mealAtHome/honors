@@ -9,6 +9,7 @@ class MClspurchasehist
         /* data */      this.purchaseidx = GGC.Common.int(dat.purchaseidx);
         /* data */      this.productname = GGC.Common.varchar(dat.productname);
         /* data */      this.productbill = GGC.Common.int(dat.productbill);
+        /* data */      this.productbillafter = GGC.Common.int(dat.productbillafter);
         /* data */      this.regdt = GGC.Common.datetime(dat.regdt);
         /* custom */    this.pk = `grpno="${this.grpno}" clsno="${this.clsno}" histno="${this.histno}"`;
     }
@@ -24,6 +25,7 @@ class MClspurchasehist
     getPurchaseidx() { return this.purchaseidx; }
     getProductname() { return this.productname; }
     getProductbill() { return this.productbill; }
+    getProductbillafter() { return this.productbillafter; }
     getRegdt() { return this.regdt; }
 
     /* custom */
@@ -32,6 +34,7 @@ class MClspurchasehist
     /* custom > custom */
     getHisttypeFont() { return GGC.Clspurchasehist.histtypeFont(this.getHisttype()); }
     getProductbillWon() { return GGC.Common.priceWon(this.productbill); }
+    getProductbillafterWon() { return GGC.Common.priceWon(this.productbillafter); }
 
     /* ========================= */
     /* fields - flg */
@@ -70,6 +73,7 @@ class MClspurchasehists extends _MCommon
                     <td col="histtype"           >${model.getHisttypeFont()}</td>
                     <td col="productname"        >${model.getProductname()}</td>
                     <td col="productbill"        >${model.getProductbillWon()}</td>
+                    <td col="productbillafter"   >${model.getProductbillafterWon()}</td>
                     <td col="regdt"              >${model.getRegdt()}</td>
                 </tr>
             `;
@@ -83,7 +87,8 @@ class MClspurchasehists extends _MCommon
                         <th>번호</th>
                         <th>이력타입</th>
                         <th>품목</th>
-                        <th>금액</th>
+                        <th>변경전</th>
+                        <th>변경후</th>
                         <th>등록일</th>
                     </tr>
                 </thead>

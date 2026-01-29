@@ -3,8 +3,9 @@
         line-height: 1.5;
         padding: 0.4em 0.6em;
 }
-.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="histno"]          { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
-.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="histtype"]        { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
-.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="productname"]     { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
-.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="productbill"]     { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
-.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="regdt"]           { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="histno"]               { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="histtype"]             { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="productname"]          { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="productbill"]          { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
+.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="productbillafter"]     { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
+.MClspurchasehist-makeTable-mainTable > tbody > tr > td[col="regdt"]                { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }

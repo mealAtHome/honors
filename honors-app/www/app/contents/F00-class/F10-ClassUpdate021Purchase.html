@@ -6,9 +6,10 @@
             white-space: nowrap;
             width: 100%;
         }
-        #CUPU-tbl-purchase > tbody > tr > td:nth-child(1) { width:10%; }
-        #CUPU-tbl-purchase > tbody > tr > td:nth-child(2) { width:50%; }
-        #CUPU-tbl-purchase > tbody > tr > td:nth-child(3) { width:40%; }
+        #CUPU-tbl-purchase > tbody > tr > td[col="btn"]             { width: 5%; }
+        #CUPU-tbl-purchase > tbody > tr > td[col="productname"]     { width:30%; }
+        #CUPU-tbl-purchase > tbody > tr > td[col="productbill"]     { width:30%; }
+        #CUPU-tbl-purchase > tbody > tr > td[col="purchasememo"]    { width:35%; }
         #CUPU-tbl-purchase > tfoot > tr > td { text-align: right; }
     </style>
 
@@ -63,13 +64,14 @@
                         <tr>
                             <th colspan="2">품목</th>
                             <th>금액</th>
+                            <th>비고</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3">합계 : <span id="CUPU-span-productbillSummary">0원</span></td>
+                            <td colspan="4">합계 : <span id="CUPU-span-productbillSummary">0원</span></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -161,9 +163,10 @@
                 let html =
                 `
                     <tr purchaseidx="${mClspurchase.getPurchaseidx()}" deleteflg="n">
-                        <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outline" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
-                        <td col="productname"   ><input type="text"   class="common-input-text CUPU-input-productname" value="${mClspurchase.getProductname()}" style="width:100%;" /></td>
-                        <td col="productbill"   ><input type="number" class="common-input-text CUPU-input-productbill" value="${mClspurchase.getProductbill()}" style="width:100%;" /></td>
+                        <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outline common-tag-fontsize09" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
+                        <td col="productname"   ><input type="text"   class="common-input-text CUPU-input-productname"    value="${mClspurchase.getProductname()}"  style="width:100%;" /></td>
+                        <td col="productbill"   ><input type="number" class="common-input-text CUPU-input-productbill"    value="${mClspurchase.getProductbill()}"  style="width:100%;" /></td>
+                        <td col="purchasememo"  ><input type="text"   class="common-input-text CUPU-input-purchasememo"   value="${mClspurchase.getPurchasememo()}" style="width:100%;" /></td>
                     </tr>
                 `;
                 $(`#CUPU-tbl-purchase > tbody`).append(html);
@@ -236,6 +239,7 @@
                     let deleteflg   = $(this).attr("deleteflg");
                     let productname = $(this).find("td[col=productname] > input").val();
                     let productbill = $(this).find("td[col=productbill] > input").val();
+                    let purchasememo = $(this).find("td[col=purchasememo] > input").val();
 
                     let productnameEmpty = Common.isEmpty(productname);
                     let productbillEmpty = Common.isEmpty(productbill) || productbill == 0;
@@ -255,6 +259,7 @@
                         DELETEFLG   : deleteflg,
                         PRODUCTNAME : productname,
                         PRODUCTBILL : productbill,
+                        PURCHASEMEMO : purchasememo,
                     }
                     arr.push(dat);
                 });
@@ -302,9 +307,10 @@
             {
                 let dat =
                 {
-                    PURCHASEIDX : 0,
-                    PRODUCTNAME : "",
-                    PRODUCTBILL : 0,
+                    purchaseidx : 0,
+                    productname : "",
+                    productbill : 0,
+                    purchasememo : "",
                 }
                 let mClspurchase = new MClspurchase(dat);
                 CUPU.addRowForPurchase(mClspurchase);
@@ -327,6 +333,8 @@
                             let grpno = CUPU.Data.grpno;
                             let arr = CUPU.getArrForPurchase();
                             let mApiResponse = Api.Clspurchase.insertByArr(grpno, clsno, JSON.stringify(arr), GGF.toast, GGF.toast);
+                            if(mApiResponse.isSuccess())
+                                Navigation.executeShow();
                         }
                         catch(e)
                         {

@@ -21,14 +21,15 @@ class ClssettlehistBO extends _CommonBO
     /* ========================= */
     const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30) */
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14) */
+    const FIELD__USERNO                     = "userno";                     /* (PK) char(30) */
     const FIELD__HISTNO                     = "histno";                     /* (PK) int */
     const FIELD__HISTTYPE                   = "histtype";                   /* (  ) enum('update','delete') */
-    const FIELD__USERNO                     = "userno";                     /* (  ) char(30) */
     const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
     const FIELD__BILLADJUSTMENT             = "billadjustment";             /* (  ) int */
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
     const FIELD__BILLFINAL                  = "billfinal";                  /* (  ) int */
     const FIELD__BILLMEMO                   = "billmemo";                   /* (  ) varchar(100) */
+    const FIELD__BILLFINALAFTER             = "billfinalafter";             /* (  ) int */
     const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
@@ -53,7 +54,7 @@ class ClssettlehistBO extends _CommonBO
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    public function selectByPkForInside($GRPNO, $CLSNO, $HISTNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside($GRPNO, $CLSNO, $USERNO, $HISTNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
@@ -91,6 +92,7 @@ class ClssettlehistBO extends _CommonBO
             , t.billpointed
             , t.billfinal
             , t.billmemo
+            , t.billfinalafter
             , t.regdt
             , u.name as username
         ";
@@ -128,7 +130,7 @@ class ClssettlehistBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside   : { $from = "(select * from clssettlehist where grpno = '$GRPNO' and clsno  = '$CLSNO' and histno = '$HISTNO') t"; break; }
+            case self::selectByPkForInside   : { $from = "(select * from clssettlehist where grpno = '$GRPNO' and clsno  = '$CLSNO' and userno = '$USERNO' and histno = '$HISTNO') t"; break; }
             case self::selectByClsno         : { $from = "(select * from clssettlehist where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
             default:
             {
@@ -151,6 +153,7 @@ class ClssettlehistBO extends _CommonBO
             order by
                   t.grpno
                 , t.clsno
+                , u.name asc
                 , t.histno asc
         ";
         $result = GGsql::select($query, $from, $options);
@@ -160,7 +163,7 @@ class ClssettlehistBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, $HISTTYPE) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, $HISTTYPE, $BILLFINALAFTER) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
@@ -190,27 +193,29 @@ class ClssettlehistBO extends _CommonBO
                     (
                           grpno
                         , clsno
+                        , userno
                         , histno
                         , histtype
-                        , userno
                         , billstandard
                         , billadjustment
                         , billpointed
                         , billfinal
                         , billmemo
+                        , billfinalafter
                         , regdt
                     )
                     select
                            grpno
                         ,  clsno
-                        ,  (select ifnull(max(clsh.histno), 0) + 1 from clssettlehist clsh where clsh.grpno = clss.grpno and clsh.clsno = clss.clsno) as histno
-                        , '$HISTTYPE' as histtype
                         ,  userno
+                        ,  (select ifnull(max(clsh.histno), 0) + 1 from clssettlehist clsh where clsh.grpno = clss.grpno and clsh.clsno = clss.clsno and clsh.userno = clss.userno) as histno
+                        , '$HISTTYPE' as histtype
                         ,  billstandard
                         ,  billadjustment
                         ,  billpointed
                         ,  billfinal
                         ,  billmemo
+                        ,  $BILLFINALAFTER as billfinalafter
                         ,  now() as regdt
                     from
                         clssettle clss

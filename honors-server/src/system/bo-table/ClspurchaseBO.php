@@ -23,6 +23,7 @@ class ClspurchaseBO extends _CommonBO
     const FIELD__PURCHASEIDX                = "purchaseidx";                /* (PK) int */
     const FIELD__PRODUCTNAME                = "productname";                /* (  ) int */
     const FIELD__PRODUCTBILL                = "productbill";                /* (  ) int */
+    const FIELD__PURCHASEMEMO               = "purchasememo";               /* (  ) varchar(100) */
     const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
@@ -105,6 +106,7 @@ class ClspurchaseBO extends _CommonBO
             , t.purchaseidx
             , t.productname
             , t.productbill
+            , t.purchasememo
             , t.regdt
         ";
 
@@ -218,6 +220,7 @@ class ClspurchaseBO extends _CommonBO
                     $DELETEFLG   = $dat['DELETEFLG'];
                     $PRODUCTNAME = $dat['PRODUCTNAME'];
                     $PRODUCTBILL = intval($dat['PRODUCTBILL']);
+                    $PURCHASEMEMO = $dat['PURCHASEMEMO'];
 
                     /* validation */
                     self::validProductname($PRODUCTNAME);
@@ -229,6 +232,7 @@ class ClspurchaseBO extends _CommonBO
                         $clspurchaseOrigin = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $PURCHASEIDX));
                         $clspurchaseOriginProductname =        Common::getField($clspurchaseOrigin, self::FIELD__PRODUCTNAME);
                         $clspurchaseOriginProductbill = intval(Common::getField($clspurchaseOrigin, self::FIELD__PRODUCTBILL));
+                        $clspurchaseOriginPurchasememo =       Common::getField($clspurchaseOrigin, self::FIELD__PURCHASEMEMO);
                         if($clspurchaseOrigin != null)
                         {
                             switch($DELETEFLG)
@@ -236,7 +240,7 @@ class ClspurchaseBO extends _CommonBO
                                 case "y":
                                 {
                                     /* delete */
-                                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, ClspurchasehistBO::HISTTYPE__DELETE);
+                                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, ClspurchasehistBO::HISTTYPE__DELETE, 0);
                                     $query = "delete from clspurchase where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx =  $PURCHASEIDX";
                                     GGsql::exeQuery($query);
                                     break;
@@ -244,12 +248,12 @@ class ClspurchaseBO extends _CommonBO
                                 case "n":
                                 {
                                     /* check content is changed */
-                                    if($clspurchaseOriginProductname == $PRODUCTNAME && $clspurchaseOriginProductbill == $PRODUCTBILL)
+                                    if($clspurchaseOriginProductname == $PRODUCTNAME && $clspurchaseOriginProductbill == $PRODUCTBILL && $clspurchaseOriginPurchasememo == $PURCHASEMEMO)
                                         continue;
 
                                     /* update */
-                                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, ClspurchasehistBO::HISTTYPE__UPDATE);
-                                    $query = "update clspurchase set productname = '$PRODUCTNAME', productbill =  $PRODUCTBILL where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx =  $PURCHASEIDX";
+                                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $PURCHASEIDX, ClspurchasehistBO::HISTTYPE__UPDATE, $PRODUCTBILL);
+                                    $query = "update clspurchase set productname = '$PRODUCTNAME', productbill = $PRODUCTBILL, purchasememo = '$PURCHASEMEMO' where grpno = '$GRPNO' and clsno = '$CLSNO' and purchaseidx =  $PURCHASEIDX";
                                     GGsql::exeQuery($query);
                                     break;
                                 }
@@ -276,6 +280,7 @@ class ClspurchaseBO extends _CommonBO
                             , purchaseidx
                             , productname
                             , productbill
+                            , purchasememo
                             , regdt
                         )
                         values
@@ -285,13 +290,14 @@ class ClspurchaseBO extends _CommonBO
                             ,  $purchaseidxMaxused
                             , '$PRODUCTNAME'
                             ,  $PRODUCTBILL
+                            , '$PURCHASEMEMO'
                             ,  now()
                         )
                     ";
                     GGsql::exeQuery($query);
 
                     /* regist hist */
-                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $purchaseidxMaxused, ClspurchasehistBO::HISTTYPE__INSERT);
+                    $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $purchaseidxMaxused, ClspurchasehistBO::HISTTYPE__INSERT, $PRODUCTBILL);
 
                     /* update purchaseidx_maxused */
                     $clsBO->updatePurchaseidxMaxused($GRPNO, $CLSNO, $purchaseidxMaxused);

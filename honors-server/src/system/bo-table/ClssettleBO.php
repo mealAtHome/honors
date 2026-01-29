@@ -295,7 +295,7 @@ class ClssettleBO extends _CommonBO
                     /* ===== */
                     if($ROW_STATUS == "deleted")
                     {
-                        $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__DELETE);
+                        $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__DELETE, 0);
                         $this->deleteByPkForInside($GRPNO, $CLSNO, $USERNO);
                         continue;
                     }
@@ -322,7 +322,7 @@ class ClssettleBO extends _CommonBO
                             $BILLMEMO       != $existingBillmemo
                         )
                         {
-                            $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__UPDATE);
+                            $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__UPDATE, $BILLFINAL);
                             $query =
                             "
                                 update
@@ -410,7 +410,7 @@ class ClssettleBO extends _CommonBO
 
                     /* after settle 일 경우, 이후 이력 등록 */
                     if($isAfterSettle)
-                        $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__AFTER);
+                        $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__AFTER, $BILLFINAL);
 
                 } /* loop ARR */
 

@@ -237,7 +237,7 @@
                         <td col="status"                                                 >임시</td>
                         <td col="btn"                                                    ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"         >${model.getUsername()}</td>
-                        <td col="billfinal"                                              ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillstandardWon()}" subvalori="${model.getBillstandard()}" subval="${model.getBillstandard()}" disabled></td>
+                        <td col="billfinal"                                              ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillstandardWon()}" billstandard="${model.getBillstandard()}" subval="${model.getBillstandard()}" disabled></td>
                         <td col="billstand"        subval="${model.getBillstandard()}"   >${model.getBillstandardWon()}</td>
                         <td col="billadjustment"                                         ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
                         <td col="memberpoint"                                            ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointWon()}" subval="${model.getGrpmPoint()}" disabled></td>
@@ -261,7 +261,7 @@
                         <td col="status"                                                >${statusText}</td>
                         <td col="btn"                                                   ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}" ${disabled}>삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"        >${model.getUsername()}</td>
-                        <td col="billfinal"                                             ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillfinalWon()}" subvalori="${model.getBillfinal()}" subval="${model.getBillfinal()}" disabled></td>
+                        <td col="billfinal"                                             ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillfinalWon()}" billstandard="${model.getBillstandard()}" subval="${model.getBillfinal()}" disabled></td>
                         <td col="billstand"        subval="${model.getBillstandard()}"  >${model.getBillstandardWon()}</td>
                         <td col="billadjustment"                                        ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="${model.getBilladjustment()}" ${disabled}></td>
                         <td col="memberpoint"                                           ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointAfterSettleWon()}" subval="${model.getGrpmPointAfterSettle()}" disabled></td>
@@ -280,7 +280,7 @@
                         <td col="status"                                            >등록</td>
                         <td col="btn"                                               ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"    >${model.getUsername()}</td>
-                        <td col="billfinal"                                         ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillWon()}" subvalori="${model.getBill()}" subval="${model.getBill()}" disabled></td>
+                        <td col="billfinal"                                         ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillWon()}" billstandard="${model.getBill()}" subval="${model.getBill()}" disabled></td>
                         <td col="billstand"        subval="${model.getBill()}"      >${model.getBillWon()}</td>
                         <td col="billadjustment"                                    ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
                         <td col="memberpoint"                                       ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getMemberpointWon()}" subval="${model.getMemberpoint()}" disabled></td>
@@ -378,7 +378,7 @@
                     let billadjustmentEl    = $(this);
                     let billpointedEl       = $(`.CUST-input-billpointed[userno=${userno}]`);
                     let billfinal           = parseInt(billfinalEl.attr("subval"));
-                    let billfinalOri        = parseInt(billfinalEl.attr("subvalori"));
+                    let billstandard        = parseInt(billfinalEl.attr("billstandard"));
                     let billadjustment      = parseInt(billadjustmentEl.val());
                     let billpointed         = parseInt(billpointedEl.val());
 
@@ -386,7 +386,7 @@
                     if(isNaN(billadjustment))
                         return;
 
-                    let result = billfinalOri + billadjustment - billpointed;
+                    let result = billstandard + billadjustment - billpointed;
                     billfinalEl.attr("subval", result);
                     billfinalEl.val(GGC.Common.priceWon(result));
                     CUST.calSummarySettle();
@@ -402,7 +402,7 @@
                     let billadjustmentEl    = $(`.CUST-input-billadjustment[userno=${userno}]`);
                     let billpointedEl       = $(this);
                     let billfinal           = parseInt(billfinalEl.attr("subval"));
-                    let billfinalOri        = parseInt(billfinalEl.attr("subvalori"));
+                    let billstandard        = parseInt(billfinalEl.attr("billstandard"));
                     let billadjustment      = parseInt(billadjustmentEl.val());
                     let billpointed         = parseInt(billpointedEl.val());
                     let memberpoint         = parseInt($(`.CUST-input-memberpoint[userno=${userno}]`).attr("subval"));
@@ -410,7 +410,7 @@
                     if(isNaN(billpointed)) return;
                     if(billpointed > memberpoint) { Common.toast("잔여금 사용액이 잔여금보다 많습니다."); $(this).val(0); $(this).keyup(); return; }
 
-                    let result = billfinalOri + billadjustment - billpointed;
+                    let result = billstandard + billadjustment - billpointed;
                     billfinalEl.attr("subval", result);
                     billfinalEl.val(GGC.Common.priceWon(result));
                     CUST.calSummarySettle();
