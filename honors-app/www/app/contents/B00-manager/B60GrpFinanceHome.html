@@ -1,23 +1,22 @@
-<ons-page id="MMST">
+<ons-page id="GFHM">
 
     <!-- ======================== -->
     <!-- 페이지용 타이틀 -->
     <!-- ======================== -->
     <ons-toolbar>
-        <div class="left"><gg-backbtn onclick="MMST.close(true);"></gg-backbtn></div>
+        <div class="left"><gg-backbtn onclick="GFHM.close(true);"></gg-backbtn></div>
         <div class="center">재무현황</div>
     </ons-toolbar>
 
     <!-- ========================= -->
-    <!-- 재무현황 -->
+    <!-- 탭 -->
     <!-- ========================= -->
     <div class="common-div-cushion">
-        <table class="MMST-tbl-common common-tbl-tab commonEvent-tbl-tab">
+        <table class="GFHM-tbl-common common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="MMST-td-searchtype" val="nodepositall"   tab="tab" >전체</td> <!-- 미입금 + 임시완료 -->
-                    <td class="MMST-td-searchtype" val="memberdeposit"  tab=""    >임시완료</td>
-                    <td class="MMST-td-searchtype" val="nodeposit"      tab=""    >미입금</td>
+                    <td class="GFHM-td-maintab" val="finance" tab="tab" >재무현황</td>
+                    <td class="GFHM-td-maintab" val="reflect" tab=""    >재무설정</td>
                 </tr>
             </tbody>
         </table>
@@ -25,64 +24,69 @@
     <hr class="common-hr-paddingLR"/>
 
     <!-- ========================= -->
-    <!-- 전체 -->
+    <!-- 재무현황 -->
     <!-- ========================= -->
-    <div class="MMST-div-tab" tab="nodepositall" style="display:none;">
+    <div class="GFHM-div-maintab" tab="finance" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">전체</p>
+            <p class="common-p-title">재무현황</p>
             <ul class="common-ul-announce">
-                <li>입금처리가 완료되지 않은 전체건을 조회합니다.</li>
+                <li>일정에서 정산과 구매내역을 종합한 결과입니다.</li>
+                <li>일정의 재무반영여부는 "재무설정" 탭에서 지정하거나 각 일정상세에서 설정할 수 있습니다.</li>
             </ul>
         </div>
-        <div id="MMST-div-nodepositallList"></div>
+        <table class="common-tbl-vertical" tbl-type="rowborder">
+            <tbody>
+                <tr>
+                    <th>자본금</th>
+                    <td id="GFHM-td-totalCapital">0원</td>
+                </tr>
+                <tr>
+                    <th>총 정산금액</th>
+                    <td id="GFHM-td-totalSettlebill">0원</td>
+                </tr>
+                <tr>
+                    <th>총 구매금액</th>
+                    <td id="GFHM-td-totalPurchasebill">0원</td>
+                </tr>
+                <tr>
+                    <th>최종 운영비 누적</th>
+                    <td id="GFHM-td-netProfitbill">0원</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <!-- ========================= -->
-    <!-- 임시완료 -->
+    <!-- 재무설정 (테이블, 재무반영여부설정가능) -->
     <!-- ========================= -->
-    <div class="MMST-div-tab" tab="memberdeposit" style="display:none;">
+    <div class="GFHM-div-maintab" tab="reflect" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">임시완료</p>
+            <p class="common-p-title">재무설정</p>
             <ul class="common-ul-announce">
-                <li>멤버 본인이 입금완료했다고 표시한 리스트를 표시합니다.</li>
-                <li>실제로 완료되었는지 확인 후, 입금완료로 처리하면 됩니다.</li>
+                <li>아래 테이블에서 재무반영여부를 지정할 수 있습니다.</li>
+                <li>모임 내에서 공식일정만 재무에 반영하는 기능입니다.</li>
             </ul>
         </div>
-        <div id="MMST-div-memberdepositList"></div>
-    </div>
-
-    <!-- ========================= -->
-    <!-- 미입금 -->
-    <!-- ========================= -->
-    <div class="MMST-div-tab" tab="nodeposit" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">미입금</p>
-            <ul class="common-ul-announce">
-                <li>멤버 본인이 입금완료했다고 표시하지 않았고, 입금완료처리도 진행되지 않은 건을 조회힙니다.</li>
-            </ul>
+            <div id="GFHM-div-clsListForFinanceReflect" class="common-tag-fontsize09"></div>
         </div>
-        <div id="MMST-div-nodepositList"></div>
     </div>
 
     <script>
-        var MMST =
+        var GFHM =
         {
-            code : "MMST",
+            code : "GFHM",
             Data: {},
 
             show()
             {
                 /* validation param */
-                if(MMST.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); MMST.close(); return; }
-                if(MMST.Data.searchtype == undefined) { MMST.Data.searchtype = "nodepositall"; } /* 기본값 */
+                if(GFHM.Data.grpno          == undefined) { Common.toast("잘못된 접근입니다."); GFHM.close(); return; }
+                if(GFHM.Data.pagenoForCls   == undefined) { GFHM.Data.pagenoForCls = 1; }
+                if(GFHM.Data.maintab        == undefined) { GFHM.Data.maintab = "finance"; }
 
                 /* set tab */
-                $(`.MMST-td-searchtype[val='${MMST.Data.searchtype}']`).click();
-
-                // Common.showProgress();
-                // setTimeout(function()
-                // {
-                // }, ajaxDelayTime);
+                $(`.GFHM-td-maintab[val='${GFHM.Data.maintab}']`).click();
             },
 
             search()
@@ -110,15 +114,15 @@
             /* event */
             /* ========================= */
 
-            $(".MMST-td-searchtype").click(function()
+            $(".GFHM-td-maintab").click(function()
             {
                 /* 선택된 탭 표시 */
-                let searchtype = $(this).attr("val");
-                $(".MMST-td-searchtype").removeAttr("tab");
+                let maintab = $(this).attr("val");
+                $(".GFHM-td-maintab").removeAttr("tab");
                 $(this).attr("tab", "tab");
 
                 /* save selected */
-                MMST.Data.searchtype = searchtype;
+                GFHM.Data.maintab = maintab;
 
                 /* process */
                 Common.showProgress();
@@ -126,34 +130,43 @@
                 {
                     try
                     {
-                        /* get var */
-                        let grpno = MMST.Data.grpno;
+                        /* var */
+                        let grpno = GFHM.Data.grpno;
+                        let pagenoForCls = GFHM.Data.pagenoForCls;
 
                         /* 탭별표시 */
-                        switch(searchtype)
+                        switch(maintab)
                         {
-                            case "nodepositall":
+                            case "finance":
                             {
-                                let mClssettles = Api.Clssettle.selectNotDepositedAllByGrpnoForMng(grpno, GGF.none, GGF.toast);
-                                mClssettles.make("#MMST-div-nodepositallList");
+                                /* reset html */
+                                $("#GFHM-td-totalCapital").html("-");
+                                $("#GFHM-td-totalSettlebill").html("-");
+                                $("#GFHM-td-totalPurchasebill").html("-");
+                                $("#GFHM-td-netProfitbill").html("-");
+
+                                /* get finance info */
+                                let mGrpformng = Api.Grpformng.selectByPk(grpno).getModel();
+                                if(mGrpformng != null)
+                                {
+                                    $("#GFHM-td-totalCapital").html(mGrpformng.getGrpfncCapitalWon());
+                                    $("#GFHM-td-totalSettlebill").html(mGrpformng.getGrpfncSalesWon());
+                                    $("#GFHM-td-totalPurchasebill").html(mGrpformng.getGrpfncPurchaseWon());
+                                    $("#GFHM-td-netProfitbill").html(mGrpformng.getGrpfncProfitWon());
+                                }
                                 break;
                             }
-                            case "memberdeposit":
+                            case "reflect":
                             {
-                                let mClssettles = Api.Clssettle.selectMemberdepositflgYesByGrpnoForMng(grpno, GGF.none, GGF.toast);
-                                mClssettles.make("#MMST-div-memberdepositList");
-                                break;
-                            }
-                            case "nodeposit":
-                            {
-                                let mClssettles = Api.Clssettle.selectNotDepositedByGrpnoForMng(grpno, GGF.none, GGF.toast);
-                                mClssettles.make("#MMST-div-nodepositList");
+                                /* get list with pagenation */
+                                let mClss = Api.Cls.selectByGrpnoForMng(grpno, pagenoForCls);
+                                mClss.makeTableForFinanceReflect("#GFHM-div-clsListForFinanceReflect");
                                 break;
                             }
                         }
                         /* show / hide */
-                        $(".MMST-div-tab").hide();
-                        $(`.MMST-div-tab[tab='${searchtype}']`).show();
+                        $(".GFHM-div-maintab").hide();
+                        $(`.GFHM-div-maintab[tab='${maintab}']`).show();
                     }
                     catch(e)
                     {
@@ -171,13 +184,13 @@
             /* get data from Config */
             try
             {
-                MMST.Data = Navigation.getPageParam();
+                GFHM.Data = Navigation.getPageParam();
                 Navigation.executeShow();
             }
             catch(e)
             {
                 console.error(e);
-                MMST.close(true);
+                GFHM.close(true);
             }
 
         }); /* end function */

@@ -1,5 +1,28 @@
 var GGdate =
 {
+    format(str, format, ifnull="-")
+    {
+        if(Common.isEmpty(str))
+            return ifnull;
+
+        let d = GGdate.fromStr(str);
+        if(d == null || isNaN(d))
+            return ifnull;
+
+        switch(format)
+        {
+            case "YYYY-MM-DD"          : return    GGdate.toYYYYMMDD(d);
+            case "YYYY-MM-DD(dd)"      : return `${GGdate.toYYYYMMDD(d)}(${GGdate.getDDDD(d)})`;
+            case "YYYY-MM-DD HH:II:SS" : return    GGdate.toYYYYMMDDHHIISS(d);
+            case "YY.MM.DD(dd)"        : return    GGdate.toYYMMDDddot(d);
+            case "YY.MM.DD(dd) HH:II"  : return    GGdate.toYYMMDDdHHIIdot(d);
+            case "MM.DD(dd)"           : return    GGdate.toMMDDddot(d);
+            case "YYYY.MM.DD HH:II"    : return `${GGdate.getYYYY(d)}.${GGdate.getMM(d)}.${GGdate.getDD(d)} ${GGdate.getHH(d)}:${GGdate.getII(d)}`;
+            default:
+                return str;
+        }
+    },
+
     /* 2024-xx-xx xx:xx:xx */
     /* 0123456789012345678 */
     fromStr(str)
@@ -26,7 +49,7 @@ var GGdate =
 
         let d = new Date();
         d.setFullYear   (str.substring(0,4));
-        d.setMonth      (str.substring(5,7));
+        d.setMonth      (str.substring(5,7) * 1 - 1); // month is 0-indexed
         d.setDate       (str.substring(8,10));
         d.setHours      (0);
         d.setMinutes    (0);

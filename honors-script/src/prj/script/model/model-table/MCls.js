@@ -85,6 +85,8 @@ class MCls
     getClsbillfinalWon()            { return GGC.Common.priceWon(this.getClsbillfinal()); }
     getGrpfinancereflectflgFont()   { return GGC.Cls.getGrpfinancereflectflgFont(this.getGrpfinancereflectflg()); }
 
+    getClsstartdtYMDdd() { return GGdate.format(this.getClsstartdt(), "YYYY-MM-DD(dd)"); }
+
     /* ========================= */
     /* is */
     /* ========================= */
@@ -273,6 +275,60 @@ class MClss extends _MCommon
             let btnHtml = `<button class="common-btn-inline MClss-make-btn-choose" ${model.getPk()}>선택하기</button>`;
             html += model.makeWithBtnHtml(btnHtml);
         }
+
+        /* pagenation */
+        if(this.getPagecnt() > 1)
+        {
+            let pagenation = this.getPagenation();
+            html = pagenation + html + pagenation;
+        }
+        $(el).html(html);
+    }
+
+    /* ========================= */
+    /* 선택용 */
+    /* ========================= */
+    makeTableForFinanceReflect(el="")
+    {
+        /* html */
+        let html = "";
+        for(let i in this.getModels())
+        {
+            let model = this.getModels()[i];
+            let grpfinancereflectflg = model.getGrpfinancereflectflg();
+            html +=
+            `
+                <tr>
+                    <td style="text-align:center;">
+                        <button class="common-btn-outline MClss-makeTableForFinanceReflect-btn-toY" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.N ? `style="display:none;"` : ``}>반영설정</button>
+                        <button class="common-btn-outline MClss-makeTableForFinanceReflect-btn-toN" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.Y ? `style="display:none;"` : ``}>반영해제</button>
+                    </td>
+                    <td style="text-align:center;">${model.getGrpfinancereflectflgFont()}</td>
+                    <td>${model.getClsstartdtYMDdd()}</td>
+                    <td>${model.getClstitle()}</td>
+                </tr>
+            `;
+        }
+
+        /* table */
+        html =
+        `
+            <div class="common-div-tableScrollX">
+                <table class="common-tbl-normal" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th>정산반영</th>
+                            <th>반영여부</th>
+                            <th>일정일자</th>
+                            <th>일정</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${html}
+                    </tbody>
+                </table>
+            </div>
+        `;
 
         /* pagenation */
         if(this.getPagecnt() > 1)

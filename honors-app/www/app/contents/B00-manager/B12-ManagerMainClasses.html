@@ -58,7 +58,7 @@
                 setTimeout(function()
                 {
                     let grpno = MMCL.Data.grpno;
-                    let mSearchType = $(".MMCL-td-searchtype[tab='tab']").attr("searchtype");
+                    let searchtype = $(".MMCL-td-searchtype[tab='tab']").attr("searchtype");
                     switch(searchtype)
                     {
                         case "edit"     : mClss = Api.Cls.selectForMngrByClsstatusEdit   (grpno); break;

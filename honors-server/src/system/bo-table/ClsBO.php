@@ -300,20 +300,22 @@ class ClsBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function updatePurchaseidxMaxused($GRPNO, $CLSNO, $PURCHASEIDX_MAXUSED) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updatePurchaseidxMaxusedForInside($GRPNO, $CLSNO, $PURCHASEIDX_MAXUSED) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updateBillByPkForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
     /* ========================= */
-    const insert                        = "insert";                         /* [mngr]  */
-    const update                        = "update";                         /* [mngr]  */
-    const updateClsstatusEditToIng      = "updateClsstatusEditToIng";       /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 진행중으로 변경 */
-    const updateClsstatusIngToEnd       = "updateClsstatusIngToEnd";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 종료로 변경 */
-    const updateClssettleflgDone        = "updateClssettleflgDone";         /* [mngr] [EXECUTOR, GRPNO, CLSNO, ARR]  : 일정정산정보 등록 */
-    const updateClsstatusToCancel       = "updateClsstatusToCancel";        /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
-    const copyClsForMng                 = "copyClsForMng";                  /* [mngr]  */
-    const deleteByPkForMng              = "deleteByPkForMng";               /* [mngr]  */
-    const updatePurchaseidxMaxused      = "updatePurchaseidxMaxused";       /* [null] [GRPNO, CLSNO, PURCHASEIDX_MAXUSED] */
+    const insert                                = "insert";                                 /* [mngr]  */
+    const update                                = "update";                                 /* [mngr]  */
+    const updateClsstatusEditToIng              = "updateClsstatusEditToIng";               /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 진행중으로 변경 */
+    const updateClsstatusIngToEnd               = "updateClsstatusIngToEnd";                /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 종료로 변경 */
+    const updateClssettleflgDone                = "updateClssettleflgDone";                 /* [mngr] [EXECUTOR, GRPNO, CLSNO, ARR]  : 일정정산정보 등록 */
+    const updateClsstatusToCancel               = "updateClsstatusToCancel";                /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
+    const copyClsForMng                         = "copyClsForMng";                          /* [mngr]  */
+    const deleteByPkForMng                      = "deleteByPkForMng";                       /* [mngr]  */
+    const updatePurchaseidxMaxusedForInside     = "updatePurchaseidxMaxusedForInside";      /* [null] [GRPNO, CLSNO, PURCHASEIDX_MAXUSED] */
+    const updateBillByPkForInside               = "updateBillByPkForInside";                /* [null] [GRPNO, CLSNO] */
     protected function update($options, $option="")
     {
         /* vars */
@@ -591,10 +593,36 @@ class ClsBO extends _CommonBO
                 $clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
                 break;
             }
-            case self::updatePurchaseidxMaxused:
+            case self::updatePurchaseidxMaxusedForInside:
             {
                 $query = "update cls set purchaseidx_maxused =  $PURCHASEIDX_MAXUSED, clsmodidt =  now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateBillByPkForInside:
+            {
+                /* bo */
+                GGnavi::getGrpformngBO();
+                $grpformngBO = GrpformngBO::getInstance();
+
+                /* process */
+                $query =
+                "
+                    update
+                        cls
+                    set
+                          clsbillsales    =  (select ifnull(sum(clss.billfinal),0)   from clssettle   clss where clss.grpno = cls.grpno and clss.clsno = cls.clsno)
+                        , clsbillpurchase =  (select ifnull(sum(clsp.productbill),0) from clspurchase clsp where clsp.grpno = cls.grpno and clsp.clsno = cls.clsno)
+                        , clsbillfinal    =  (clsbillsales - clsbillpurchase)
+                        , clsmodidt       =  now()
+                    where
+                        grpno = '$GRPNO' and
+                        clsno = '$CLSNO'
+                ";
+                GGsql::exeQuery($query);
+
+                /* recal grp finance */
+                $grpformngBO->recalGrpfncByPkForInside($GRPNO);
                 break;
             }
             default:

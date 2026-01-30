@@ -416,6 +416,9 @@ class ClssettleBO extends _CommonBO
 
                 /* delete tmp */
                 $clssettletmpBO->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
+
+                /* update clsbillsales */
+                $clsBO->updateBillByPkForInside($GRPNO, $CLSNO);
                 break;
             }
             case self::updateMemberdepositflgYesForUsr:

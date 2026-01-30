@@ -14,6 +14,7 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* User */                      case "Api.User.update"                                      : url = serverHost + "/src/data/user/updateUser.php"; break;
         /* User */                      case "Api.User.deleteUserInfo"                              : url = serverHost + "/src/data/user/deleteUserInfo.php"; break;
         /* Grp  */                      case "Api.Grp.select"                                       : url = serverHost + "/src/data/grp/selectGrp.php"; break;
+        /* Grpformng  */                case "Api.Grpformng.select"                                 : url = serverHost + "/src/data/grpformng/selectGrpformng.php"; break;
         /* cls  */                      case "Api.Cls.select"                                       : url = serverHost + "/src/data/cls/selectCls.php"; break;
         /* cls  */                      case "Api.Cls.update"                                       : url = serverHost + "/src/data/cls/updateCls.php"; break;
         /* clslineup2  */               case "Api.Clslineup2.select"                                : url = serverHost + "/src/data/clslineup2/selectClslineup2.php"; break;

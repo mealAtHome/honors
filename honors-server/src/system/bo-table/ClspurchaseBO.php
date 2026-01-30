@@ -299,9 +299,13 @@ class ClspurchaseBO extends _CommonBO
                     /* regist hist */
                     $clspurchasehistBO->copyFromClspurchaseForInside($GRPNO, $CLSNO, $purchaseidxMaxused, ClspurchasehistBO::HISTTYPE__INSERT, $PRODUCTBILL);
 
-                    /* update purchaseidx_maxused */
-                    $clsBO->updatePurchaseidxMaxused($GRPNO, $CLSNO, $purchaseidxMaxused);
-                }
+                } /* end foreach ($ARR) */
+
+                /* update purchaseidx_maxused */
+                $clsBO->updatePurchaseidxMaxusedForInside($GRPNO, $CLSNO, $purchaseidxMaxused);
+
+                /* update clsbillsales */
+                $clsBO->updateBillByPkForInside($GRPNO, $CLSNO);
                 break;
             }
             case self::deleteByClsnoForInside:
