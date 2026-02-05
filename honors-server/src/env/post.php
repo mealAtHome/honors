@@ -94,6 +94,16 @@
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
     $options["WEEK"]                                                = get("WEEK"); /* abstract */
     $options["YEAR"]                                                = get("YEAR"); /* abstract */
+    $options["COMMENT"]                                             = get("COMMENT"); /* abstract */
+    $options["GRPFNC_CAPITALTOTAL"]                                 = get("GRPFNC_CAPITALTOTAL");
+    $options["GRPFNC_SPONSORSHIPTOTAL"]                             = get("GRPFNC_SPONSORSHIPTOTAL");
+    $options["GRPFNC_PURCHASETOTAL"]                                = get("GRPFNC_PURCHASETOTAL");
+    $options["GRPFNC_LOSSTOTAL"]                                    = get("GRPFNC_LOSSTOTAL");
+    $options["GRPFNC_CLSSALESTOTAL"]                                = get("GRPFNC_CLSSALESTOTAL");
+    $options["GRPFNC_CLSSALESUNPAIDTOTAL"]                          = get("GRPFNC_CLSSALESUNPAIDTOTAL");
+    $options["GRPFNC_CLSSALESLOSSTOTAL"]                            = get("GRPFNC_CLSSALESLOSSTOTAL");
+    $options["GRPFNC_CLSPURCHASETOTAL"]                             = get("GRPFNC_CLSPURCHASETOTAL");
+    $options["GRPFNC_ALLTOTAL"]                                     = get("GRPFNC_ALLTOTAL");
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))

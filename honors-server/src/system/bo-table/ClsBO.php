@@ -622,7 +622,7 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
 
                 /* recal grp finance */
-                $grpformngBO->recalGrpfncByPkForInside($GRPNO);
+                $grpformngBO->recalByPkForInside($GRPNO);
                 break;
             }
             default:

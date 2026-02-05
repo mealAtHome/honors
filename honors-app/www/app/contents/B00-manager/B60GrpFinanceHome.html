@@ -1,5 +1,9 @@
 <ons-page id="GFHM">
 
+    <style>
+
+    </style>
+
     <!-- ======================== -->
     <!-- 페이지용 타이틀 -->
     <!-- ======================== -->
@@ -16,7 +20,7 @@
             <tbody>
                 <tr>
                     <td class="GFHM-td-maintab" val="finance" tab="tab" >재무현황</td>
-                    <td class="GFHM-td-maintab" val="reflect" tab=""    >재무설정</td>
+                    <td class="GFHM-td-maintab" val="reflect" tab=""    >일정현황</td>
                 </tr>
             </tbody>
         </table>
@@ -31,29 +35,69 @@
             <p class="common-p-title">재무현황</p>
             <ul class="common-ul-announce">
                 <li>일정에서 정산과 구매내역을 종합한 결과입니다.</li>
-                <li>일정의 재무반영여부는 "재무설정" 탭에서 지정하거나 각 일정상세에서 설정할 수 있습니다.</li>
+                <li>일정의 재무반영여부는 "일정현황" 탭에서 지정하거나 각 일정상세에서 설정할 수 있습니다.</li>
             </ul>
         </div>
-        <table class="common-tbl-vertical" tbl-type="rowborder">
-            <tbody>
-                <tr>
-                    <th>자본금</th>
-                    <td id="GFHM-td-totalCapital">0원</td>
-                </tr>
-                <tr>
-                    <th>총 정산금액</th>
-                    <td id="GFHM-td-totalSettlebill">0원</td>
-                </tr>
-                <tr>
-                    <th>총 구매금액</th>
-                    <td id="GFHM-td-totalPurchasebill">0원</td>
-                </tr>
-                <tr>
-                    <th>최종 운영비 누적</th>
-                    <td id="GFHM-td-netProfitbill">0원</td>
-                </tr>
-            </tbody>
-        </table>
+        <style>
+            #GFHM-tbl-grpfinance { width:100%; }
+            #GFHM-tbl-grpfinance > tbody > tr > th { text-align: left; white-space: nowrap; padding: 0.4em 0.6em; width:30%; }
+            #GFHM-tbl-grpfinance > tbody > tr > td { text-align: left; white-space: nowrap; padding: 0.4em 0.6em; }
+
+            #GFHM-tbl-grpfinance > tbody > tr > th:nth-child(1) { width:10%; white-space:nowrap;  }
+            #GFHM-tbl-grpfinance > tbody > tr > td:nth-child(2) { width:80%; white-space:nowrap; border-right: none; }
+            #GFHM-tbl-grpfinance > tbody > tr > td:nth-child(3) { width:10%; white-space:nowrap; border-left: none; }
+        </style>
+        <div class="common-div-cushion">
+            <table id="GFHM-tbl-grpfinance" class="common-tbl-normal" tbl-type="normal">
+                <tbody>
+                    <tr>
+                        <th><span>자본금</span></th>
+                        <td id="GFHM-td-capitaltotal">0원</td>
+                        <td><button id="GFHM-btn-capitaltotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>찬조누적</span></th>
+                        <td id="GFHM-td-totalSponsorship">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>구매누적</span></th>
+                        <td id="GFHM-td-totalPurchase">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>손실누적</span></th>
+                        <td id="GFHM-td-totalLoss">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>[일정]정산누적</span></th>
+                        <td id="GFHM-td-totalSettlebill">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>[일정]미입금 총액</span></th>
+                        <td id="GFHM-td-totalUnpaidNowAmount">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>[일정]미입금 손실</span></th>
+                        <td id="GFHM-td-totalUnpaidLossAmount">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>[일정]구매누적</span></th>
+                        <td id="GFHM-td-totalPurchasebill">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>최종누적금액</span></th>
+                        <td id="GFHM-td-netProfitbill">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- ========================= -->
@@ -113,6 +157,7 @@
             /* ========================= */
             /* event */
             /* ========================= */
+            $("#GFHM-btn-capitaltotalDetail").click(function() { Navigation.moveFrontPage(Navigation.Page.B61GrpFinanceCapitalDetail, {grpno:GFHM.Data.grpno, } ); });
 
             $(".GFHM-td-maintab").click(function()
             {
@@ -147,13 +192,13 @@
 
                                 /* get finance info */
                                 let mGrpformng = Api.Grpformng.selectByPk(grpno).getModel();
-                                if(mGrpformng != null)
-                                {
-                                    $("#GFHM-td-totalCapital").html(mGrpformng.getGrpfncCapitalWon());
-                                    $("#GFHM-td-totalSettlebill").html(mGrpformng.getGrpfncSalesWon());
-                                    $("#GFHM-td-totalPurchasebill").html(mGrpformng.getGrpfncPurchaseWon());
-                                    $("#GFHM-td-netProfitbill").html(mGrpformng.getGrpfncProfitWon());
-                                }
+                                // if(mGrpformng != null)
+                                // {
+                                //     $("#GFHM-td-totalCapital").html(mGrpformng.getGrpfncCapitalWon());
+                                //     $("#GFHM-td-totalSettlebill").html(mGrpformng.getGrpfncSalesWon());
+                                //     $("#GFHM-td-totalPurchasebill").html(mGrpformng.getGrpfncPurchaseWon());
+                                //     $("#GFHM-td-netProfitbill").html(mGrpformng.getGrpfncProfitWon());
+                                // }
                                 break;
                             }
                             case "reflect":

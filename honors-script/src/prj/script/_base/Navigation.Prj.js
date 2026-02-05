@@ -13,12 +13,14 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* User */                      case "Api.User.insert"                                      : url = serverHost + "/src/data/user/insertUser.php"; break;
         /* User */                      case "Api.User.update"                                      : url = serverHost + "/src/data/user/updateUser.php"; break;
         /* User */                      case "Api.User.deleteUserInfo"                              : url = serverHost + "/src/data/user/deleteUserInfo.php"; break;
-        /* Grp  */                      case "Api.Grp.select"                                       : url = serverHost + "/src/data/grp/selectGrp.php"; break;
-        /* Grpformng  */                case "Api.Grpformng.select"                                 : url = serverHost + "/src/data/grpformng/selectGrpformng.php"; break;
-        /* cls  */                      case "Api.Cls.select"                                       : url = serverHost + "/src/data/cls/selectCls.php"; break;
-        /* cls  */                      case "Api.Cls.update"                                       : url = serverHost + "/src/data/cls/updateCls.php"; break;
-        /* clslineup2  */               case "Api.Clslineup2.select"                                : url = serverHost + "/src/data/clslineup2/selectClslineup2.php"; break;
-        /* clslineup2  */               case "Api.Clslineup2.update"                                : url = serverHost + "/src/data/clslineup2/updateClslineup2.php"; break;
+        /* Grp */                       case "Api.Grp.select"                                       : url = serverHost + "/src/data/grp/selectGrp.php"; break;
+        /* Grpformng */                 case "Api.Grpformng.select"                                 : url = serverHost + "/src/data/grpformng/selectGrpformng.php"; break;
+        /* Grpformng */                 case "Api.Grpformng.update"                                 : url = serverHost + "/src/data/grpformng/updateGrpformng.php"; break;
+        /* Grpformnglog */              case "Api.Grpformnglog.select"                              : url = serverHost + "/src/data/grpformnglog/selectGrpformnglog.php"; break;
+        /* cls */                       case "Api.Cls.select"                                       : url = serverHost + "/src/data/cls/selectCls.php"; break;
+        /* cls */                       case "Api.Cls.update"                                       : url = serverHost + "/src/data/cls/updateCls.php"; break;
+        /* clslineup2 */                case "Api.Clslineup2.select"                                : url = serverHost + "/src/data/clslineup2/selectClslineup2.php"; break;
+        /* clslineup2 */                case "Api.Clslineup2.update"                                : url = serverHost + "/src/data/clslineup2/updateClslineup2.php"; break;
         /* clspurchase */               case "Api.Clspurchase.select"                               : url = serverHost + "/src/data/clspurchase/selectClspurchase.php"; break;
         /* clspurchase */               case "Api.Clspurchase.update"                               : url = serverHost + "/src/data/clspurchase/updateClspurchase.php"; break;
         /* clspurchasehist */           case "Api.Clspurchasehist.select"                           : url = serverHost + "/src/data/clspurchasehist/selectClspurchasehist.php"; break;
@@ -60,6 +62,7 @@ Navigation.Page =
     B13ManagerMainMembers : "MMMB",
     B14ManagerMainSettle : "MMST",
     B60GrpFinanceHome : "GFHM",
+    B61GrpFinanceCapitalDetail : "GFCP",
     B80GrpManageHome : "MMMG",
     B85ManagerMemberLayering : "MMLY",
     B71GrpMemberDetail : "GMDT",
@@ -114,6 +117,7 @@ Navigation.getURL = function(str)
         case Navigation.Page.B13ManagerMainMembers                         : url = "./app/contents/B00-manager/B13-ManagerMainMembers.html"; break;
         case Navigation.Page.B14ManagerMainSettle                          : url = "./app/contents/B00-manager/B14-ManagerMainSettle.html"; break;
         case Navigation.Page.B60GrpFinanceHome                             : url = "./app/contents/B00-manager/B60GrpFinanceHome.html"; break;
+        case Navigation.Page.B61GrpFinanceCapitalDetail                    : url = "./app/contents/B00-manager/B61GrpFinanceCapitalDetail.html"; break;
         case Navigation.Page.B85ManagerMemberLayering                      : url = "./app/contents/B00-manager/B85-ManagerMemberLayering.html"; break;
         case Navigation.Page.B71GrpMemberDetail                            : url = "./app/contents/B00-manager/B71-GrpMemberDetail.html"; break;
         case Navigation.Page.B72GrpMemberMergeTemp                         : url = "./app/contents/B00-manager/B72-GrpMemberMergeTemp.html"; break;
@@ -170,6 +174,7 @@ Navigation.getData = function(code)
         case Navigation.Page.B13ManagerMainMembers                  : data = MMMB.Data; break;
         case Navigation.Page.B14ManagerMainSettle                   : data = MMST.Data; break;
         case Navigation.Page.B60GrpFinanceHome                      : data = GFHM.Data; break;
+        case Navigation.Page.B61GrpFinanceCapitalDetail             : data = GFCP.Data; break;
         case Navigation.Page.B80GrpManageHome                       : data = MMMG.Data; break;
         case Navigation.Page.B85ManagerMemberLayering               : data = MMLY.Data; break;
         case Navigation.Page.B71GrpMemberDetail                     : data = GMDT.Data; break;
@@ -253,6 +258,7 @@ Navigation.executeShow = function()
         case Navigation.Page.B13ManagerMainMembers                    : MMMB.show(); break;
         case Navigation.Page.B14ManagerMainSettle                     : MMST.show(); break;
         case Navigation.Page.B60GrpFinanceHome                        : GFHM.show(); break;
+        case Navigation.Page.B61GrpFinanceCapitalDetail               : GFCP.show(); break;
         case Navigation.Page.B80GrpManageHome                         : MMMG.show(); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.show(); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.show(); break;
@@ -320,6 +326,7 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B13ManagerMainMembers                    : MMMB.close(true); break;
         case Navigation.Page.B14ManagerMainSettle                     : MMST.close(true); break;
         case Navigation.Page.B60GrpFinanceHome                        : GFHM.close(true); break;
+        case Navigation.Page.B61GrpFinanceCapitalDetail               : GFCP.close(true); break;
         case Navigation.Page.B80GrpManageHome                         : MMMG.close(true); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.close(true); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.close(true); break;

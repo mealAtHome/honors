@@ -18,12 +18,17 @@ class GrpformngBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__GRPNO                  = "grpno";                  /* (PK) char(30) */
-    const FIELD__GRPFNC_CAPITAL         = "grpfnc_capital";         /* (  ) int */
-    const FIELD__GRPFNC_SALES           = "grpfnc_sales";           /* (  ) int */
-    const FIELD__GRPFNC_PURCHASE        = "grpfnc_purchase";        /* (  ) int */
-    const FIELD__GRPFNC_PROFIT          = "grpfnc_profit";          /* (  ) int */
-    const FIELD__MODIDT                 = "modidt";                 /* (  ) datetime */
+    const FIELD__GRPNO                              = "grpno";                              /* (PK) char(30) */
+    const FIELD__GRPFNC_CAPITALTOTAL                = "grpfnc_capitaltotal";                /* (  ) bigint */
+    const FIELD__GRPFNC_SPONSORSHIPTOTAL            = "grpfnc_sponsorshiptotal";            /* (  ) bigint */
+    const FIELD__GRPFNC_PURCHASETOTAL               = "grpfnc_purchasetotal";               /* (  ) bigint */
+    const FIELD__GRPFNC_LOSSTOTAL                   = "grpfnc_losstotal";                   /* (  ) bigint */
+    const FIELD__GRPFNC_CLSSALESTOTAL               = "grpfnc_clssalestotal";               /* (  ) bigint */
+    const FIELD__GRPFNC_CLSSALESUNPAIDTOTAL         = "grpfnc_clssalesunpaidtotal";         /* (  ) bigint */
+    const FIELD__GRPFNC_CLSSALESLOSSTOTAL           = "grpfnc_clssaleslosstotal";           /* (  ) bigint */
+    const FIELD__GRPFNC_CLSPURCHASETOTAL            = "grpfnc_clspurchasetotal";            /* (  ) bigint */
+    const FIELD__GRPFNC_ALLTOTAL                    = "grpfnc_alltotal";                    /* (  ) bigint */
+    const FIELD__MODIDT                             = "modidt";                             /* (  ) datetime */
 
     /* ========================= */
     /* enum */
@@ -62,10 +67,15 @@ class GrpformngBO extends _CommonBO
         "
             null as head
             , t.grpno
-            , t.grpfnc_capital
-            , t.grpfnc_sales
-            , t.grpfnc_purchase
-            , t.grpfnc_profit
+            , t.grpfnc_capitaltotal
+            , t.grpfnc_sponsorshiptotal
+            , t.grpfnc_purchasetotal
+            , t.grpfnc_losstotal
+            , t.grpfnc_clssalestotal
+            , t.grpfnc_clssalesunpaidtotal
+            , t.grpfnc_clssaleslosstotal
+            , t.grpfnc_clspurchasetotal
+            , t.grpfnc_alltotal
             , t.modidt
         ";
 
@@ -101,16 +111,13 @@ class GrpformngBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function recalGrpfncByPkForInside($GRPNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function addGrpfncSalesByPkForInside($GRPNO, $SALES) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function addGrpfncPurchaseByPkForInside($GRPNO, $PURCHASE) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function recalByPkForInside($GRPNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
     /* ========================= */
-    const recalGrpfncByPkForInside = "recalGrpfncByPkForInside";
-    const addGrpfncSalesByPkForInside = "addGrpfncSalesByPkForInside";
-    const addGrpfncPurchaseByPkForInside = "addGrpfncPurchaseByPkForInside";
+    const recalByPkForInside = "recalByPkForInside";
+    const updateCapitaltotalByPk = "updateCapitaltotalByPk";
     protected function update($options, $option="")
     {
         /* vars */
@@ -127,7 +134,7 @@ class GrpformngBO extends _CommonBO
         /* sql execution */
         switch($OPTION)
         {
-            case self::recalGrpfncByPkForInside:
+            case self::recalByPkForInside:
             {
                 /* check has record */
                 $record = Common::getDataOne($this->selectByPkForInside($GRPNO));
@@ -141,27 +148,38 @@ class GrpformngBO extends _CommonBO
                 $query =
                 "
                     update
-                        grpformng
+                        grpformng gfm
                     set
-                          grpfnc_sales     = (select ifnull(sum(cls.clsbillsales), 0)    from cls where cls.grpno = grpformng.grpno and cls.grpfinancereflectflg = 'y')
-                        , grpfnc_purchase  = (select ifnull(sum(cls.clsbillpurchase), 0) from cls where cls.grpno = grpformng.grpno and cls.grpfinancereflectflg = 'y')
-                        , grpfnc_profit    = grpfnc_sales - grpfnc_purchase
+                          grpfnc_clssalestotal     = (select ifnull(sum(cls.clsbillsales), 0)    from cls where cls.grpno = gfm.grpno and cls.grpfinancereflectflg = 'y')
+                        , grpfnc_clspurchasetotal  = (select ifnull(sum(cls.clsbillpurchase), 0) from cls where cls.grpno = gfm.grpno and cls.grpfinancereflectflg = 'y')
+                        , grpfnc_alltotal          = grpfnc_clssalestotal - grpfnc_clspurchasetotal
                     where
-                        grpno = '$GRPNO'
+                        gfm.grpno = '$GRPNO'
                 ";
                 $result = GGsql::exeQuery($query);
                 break;
             }
-            case self::addGrpfncSalesByPkForInside:
+            case self::updateCapitaltotalByPk:
             {
-                $query = "update grpformng set grpfnc_sales = grpfnc_sales + $SALES where grpno = '$GRPNO'";
+                /* BO */
+                GGnavi::getGrpformnglogBO();
+                $grpformnglogBO = GrpformnglogBO::getInstance();
+
+                /* process */
+                $query =
+                "
+                    update
+                        grpformng gfm
+                    set
+                          grpfnc_capitaltotal = $GRPFNC_CAPITALTOTAL
+                        , modidt = now()
+                    where
+                        gfm.grpno = '$GRPNO'
+                ";
                 $result = GGsql::exeQuery($query);
-                break;
-            }
-            case self::addGrpfncPurchaseByPkForInside:
-            {
-                $query = "update grpformng set grpfnc_purchase = grpfnc_purchase + $PURCHASE where grpno = '$GRPNO'";
-                $result = GGsql::exeQuery($query);
+
+                /* logging */
+                $grpformnglogBO->insertOfGrpfncCapitaltotalForInside($GRPNO, $GRPFNC_CAPITALTOTAL, $COMMENT);
                 break;
             }
             default:
