@@ -99,8 +99,9 @@
             /* ===================== */
             show()
             {
-                if(Common.isEmpty(GFCP.Data.grpno)) { Common.toast("잘못된 접근입니다."); GFCP.close(true); return; }
-                if(Common.isEmpty(GFCP.Data.tab))   { GFCP.Data.tab = "input"; }
+                if(Common.isEmpty(GFCP.Data.grpno))             { Common.toast("잘못된 접근입니다."); GFCP.close(true); return; }
+                if(Common.isEmpty(GFCP.Data.tab))               { GFCP.Data.tab = "input"; }
+                if(Common.isEmpty(GFCP.Data.historyPagenum))    { GFCP.Data.historyPagenum = 1; }
 
                 /* init */
                 Common.showProgress();
@@ -187,8 +188,17 @@
                     {
                         /* get history all */
                         let grpno = GFCP.Data.grpno;
-                        let mGrpformnglogs = Api.Grpformnglog.selectGrpfncCapitaltotalByGrpno(grpno, 1);
+                        let historyPagenum = GFCP.Data.historyPagenum;
+                        let mGrpformnglogs = Api.Grpformnglog.selectGrpfncCapitaltotalByGrpno(grpno, historyPagenum);
                         mGrpformnglogs.makeTableForCapital("#GFCP-div-historyAll");
+
+                        /* pagenation event */
+                        $("#GFCP-div-historyAll .common-btn-pagenationBtn").click(function()
+                        {
+                            let pagenum = $(this).attr("pagenum");
+                            GFCP.Data.historyPagenum = pagenum;
+                            $(".GFCP-btn-tab[val='history']").click();
+                        });
                         break;
                     }
                 }

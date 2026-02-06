@@ -521,3 +521,10 @@
 {
     font-weight:normal;
 }
+
+/* ============================== */
+/* TABLE : 유형입력용 */
+/* ============================== */
+.common-tbl-type > tbody > tr > th           { text-align:left; }
+.common-tbl-type > tbody > tr > th > button  { min-width:6.5em; }
+.common-tbl-type > tbody > tr > td           { font-size:0.9em; color:rgb(100, 100, 100); }

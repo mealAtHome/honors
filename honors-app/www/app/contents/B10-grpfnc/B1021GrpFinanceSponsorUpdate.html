@@ -1,0 +1,224 @@
+<ons-page id="GFSU">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="GFSU-toolbar">
+        <div class="left"><gg-backbtn onclick="GFSU.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="GFSU-span-title">찬조추가</span></div>
+    </ons-toolbar>
+
+    <div class="common-div-formChild">
+
+        <!-- --------------- -->
+        <!-- 찬조추가 -->
+        <!-- --------------- -->
+        <div class="GFSU-div-tab" tab="input">
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>찬조추가</span>
+                <!-- <span class="GFSU-span-choosedPosition"></span> -->
+                <div class="common-div-cushionUD">
+                    <ul class="common-ul-announce">
+                        <li>모임의 찬조를 추가합니다.</li>
+                        <li>찬조의 형태가 금액이 아니더라도, 입력할 수 있습니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 찬조자 -->
+            <div class="common-div-formField">
+                <span>*찬조자</span>
+                <span>찬조자가 미가입 시, 이름만 입력해주세요.</span>
+                <div class="common-div-cushionUD">
+                    <table class="common-tbl-normal" tbl-type="noborder">
+                        <tbody>
+                            <tr>
+                                <td><button id="GFSU-btn-sponsorChoose" class="common-btn-outline">선택</button></td>
+                                <td><div id="GFSU-div-sponsor" userno=""></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <input id="GFSU-input-sponsorusername" type="text" class="common-input-field" placeholder="찬조자명"/>
+            </div>
+
+            <!-- 찬조유형 -->
+            <div class="common-div-formField">
+                <span>*찬조유형</span>
+                <div class="common-div-cushionUD">
+                    <table id="GFSU-tbl-spontype" class="common-tbl-vertical common-tbl-type common-tag-fontsize09" tbl-type="rowborder">
+                        <tbody>
+                            <tr><th><button class="GFSU-btn-spontype commonEvent-btn-radio common-btn-radio" radio_name="GFSU-btn-spontype" val="thing" tab="tab" >단발형</button></th><td>재무에 포함되지 않는 당일소모형</td></tr>
+                            <tr><th><button class="GFSU-btn-spontype commonEvent-btn-radio common-btn-radio" radio_name="GFSU-btn-spontype" val="money" tab=""    >금전형</button></th><td>재무에 포함되는 직접적인 금액</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 찬조품목 -->
+            <div class="common-div-formField">
+                <span>*찬조품목</span>
+                <span></span>
+                <input id="GFSU-input-sponitem" type="text" class="common-input-field" placeholder="찬조품목"/>
+            </div>
+
+            <!-- 찬조금액 -->
+            <div class="common-div-formField">
+                <span>*찬조금액</span>
+                <span>단발형인 경우, 대략의 액면가를 입력하세요. 값은 재무에 반영되지 않습니다.</span>
+                <input id="GFSU-input-sponcost" type="number" class="common-input-field" placeholder="찬조금액"/>
+                <div class="common-div-cushionUD">
+                    <div class="common-tag-block"><span>입력금액 : </span><span id="GFSU-span-sponcostWon"></span></div>
+                </div>
+            </div>
+
+            <!-- 코멘트 입력 -->
+            <div class="common-div-formField">
+                <span>기타</span>
+                <span></span>
+                <textarea id="GFSU-textarea-sponcomment" class="common-textarea-field" rows="5" placeholder="변경사유를 입력해주세요."></textarea>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+                <tbody>
+                    <tr>
+                        <td><button id="GFSU-btn-apply" class="common-btn-inline">적용하기</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div> <!-- 찬조추가 -->
+
+    </div> <!-- formChild -->
+
+    <script>
+        var GFSU =
+        {
+            code : "GFSU",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(GFSU.Data.grpno))             { Common.toast("잘못된 접근입니다."); GFSU.close(true); return; }
+                // if(Common.isEmpty(GFSU.Data.tab))               { GFSU.Data.tab = "input"; }
+                // if(Common.isEmpty(GFSU.Data.historyPagenum))    { GFSU.Data.historyPagenum = 1; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        // /* vars */
+                        // let grpno = GFSU.Data.grpno;
+
+                        // /* get capital */
+                        // let mGrpformng = Api.Grpformng.selectByPk(grpno).getModel();
+                        // if(mGrpformng == null)
+                        // {
+                        //     Common.toast("모임 정보를 불러올 수 없습니다.");
+                        //     GFSU.close(true);
+                        //     return;
+                        // }
+
+                        // /* init html */
+                        // $("#GFSU-input-capital").val(mGrpformng.getGrpfncCapitaltotal());
+                        // $("#GFSU-span-originalWon").html(mGrpformng.getGrpfncCapitaltotalWon());
+                        // $("#GFSU-span-originalWon").attr("number", mGrpformng.getGrpfncCapitaltotal());
+                        // $("#GFSU-input-capital").keyup();
+                    }
+                    catch(e)
+                    {
+                        Common.toast("오류가 발생했습니다.");
+                        GFSU.close(true);
+                        return;
+                    }
+                    finally
+                    {
+                        Common.hideProgress();
+                    }
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 금액 입력 시, 업데이트 */
+            $("#GFSU-input-sponcost").keyup(function()
+            {
+                let sponcost = Number($("#GFSU-input-sponcost").val().trim());
+                $("#GFSU-span-sponcostWon").html(GGC.Common.priceWon(sponcost) );
+            });
+
+            /* 저장 */
+            $("#GFSU-btn-apply").click(function()
+            {
+                let grpno = GFSU.Data.grpno;
+                let sponuserno = $("#GFSU-div-sponsor").attr("userno");
+                let sponusername = $("#GFSU-input-sponsorusername").val().trim();
+                let spontype = $(".GFSU-btn-spontype[tab=tab]").attr("val");
+                let sponitem = $("#GFSU-input-sponitem").val().trim();
+                let sponcost = $("#GFSU-input-sponcost").val().trim();
+                let sponcomment = $("#GFSU-textarea-sponcomment").val().trim();
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.Grpformng.updateCapitaltotalByPk(grpno, spontype, sponcost, sponcomment, GGF.toast, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.hideProgress();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2(`적용하시겠습니까?`, process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GFSU.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GFSU.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

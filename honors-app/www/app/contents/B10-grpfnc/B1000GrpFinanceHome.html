@@ -57,13 +57,13 @@
                     </tr>
                     <tr>
                         <th><span>찬조누적</span></th>
-                        <td id="GFHM-td-totalSponsorship">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                        <td id="GFHM-td-sponsorshiptotal">0원</td>
+                        <td><button id="GFHM-btn-sponsorshiptotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
                         <th><span>구매누적</span></th>
                         <td id="GFHM-td-totalPurchase">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                        <td><button id="GFHM-btn-totalPurchaseDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
                         <th><span>손실누적</span></th>
@@ -157,7 +157,8 @@
             /* ========================= */
             /* event */
             /* ========================= */
-            $("#GFHM-btn-capitaltotalDetail").click(function() { Navigation.moveFrontPage(Navigation.Page.B61GrpFinanceCapitalDetail, {grpno:GFHM.Data.grpno, } ); });
+            $("#GFHM-btn-capitaltotalDetail")       .click(function() { Navigation.moveFrontPage(Navigation.Page.B1010GrpFinanceCapitalDetail, {grpno:GFHM.Data.grpno, }); });
+            $("#GFHM-btn-sponsorshiptotalDetail")   .click(function() { Navigation.moveFrontPage(Navigation.Page.B1020GrpFinanceSponsorList,   {grpno:GFHM.Data.grpno, }); });
 
             $(".GFHM-td-maintab").click(function()
             {

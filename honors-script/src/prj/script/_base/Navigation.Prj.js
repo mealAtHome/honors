@@ -61,14 +61,16 @@ Navigation.Page =
     B12ManagerMainClasses : "MMCL",
     B13ManagerMainMembers : "MMMB",
     B14ManagerMainSettle : "MMST",
-    B60GrpFinanceHome : "GFHM",
-    B61GrpFinanceCapitalDetail : "GFCP",
     B80GrpManageHome : "MMMG",
     B85ManagerMemberLayering : "MMLY",
     B71GrpMemberDetail : "GMDT",
     B72GrpMemberMergeTemp : "GMMT",
     B81ManagerBankacctList : "MBKL",
     B82ManagerBankacctUpdate : "MBKU",
+    B1000GrpFinanceHome : "GFHM",
+    B1010GrpFinanceCapitalDetail : "GFCP",
+    B1020GrpFinanceSponsorList : "GFSL",
+    B1021GrpFinanceSponsorUpdate : "GFSU",
     C00AdminChooseUser : "AACU",
     D10DetailGrp : "DGRP",
     D21DetailClssettle : "DCLS",
@@ -116,14 +118,16 @@ Navigation.getURL = function(str)
         case Navigation.Page.B12ManagerMainClasses                         : url = "./app/contents/B00-manager/B12-ManagerMainClasses.html"; break;
         case Navigation.Page.B13ManagerMainMembers                         : url = "./app/contents/B00-manager/B13-ManagerMainMembers.html"; break;
         case Navigation.Page.B14ManagerMainSettle                          : url = "./app/contents/B00-manager/B14-ManagerMainSettle.html"; break;
-        case Navigation.Page.B60GrpFinanceHome                             : url = "./app/contents/B00-manager/B60GrpFinanceHome.html"; break;
-        case Navigation.Page.B61GrpFinanceCapitalDetail                    : url = "./app/contents/B00-manager/B61GrpFinanceCapitalDetail.html"; break;
         case Navigation.Page.B85ManagerMemberLayering                      : url = "./app/contents/B00-manager/B85-ManagerMemberLayering.html"; break;
         case Navigation.Page.B71GrpMemberDetail                            : url = "./app/contents/B00-manager/B71-GrpMemberDetail.html"; break;
         case Navigation.Page.B72GrpMemberMergeTemp                         : url = "./app/contents/B00-manager/B72-GrpMemberMergeTemp.html"; break;
         case Navigation.Page.B80GrpManageHome                              : url = "./app/contents/B00-manager/B80GrpManageHome.html"; break;
         case Navigation.Page.B81ManagerBankacctList                        : url = "./app/contents/B00-manager/B81-ManagerBankacctList.html"; break;
         case Navigation.Page.B82ManagerBankacctUpdate                      : url = "./app/contents/B00-manager/B82-ManagerBankacctUpdate.html"; break;
+        case Navigation.Page.B1000GrpFinanceHome                           : url = "./app/contents/B10-grpfnc/B1000GrpFinanceHome.html"; break;
+        case Navigation.Page.B1010GrpFinanceCapitalDetail                  : url = "./app/contents/B10-grpfnc/B1010GrpFinanceCapitalDetail.html"; break;
+        case Navigation.Page.B1020GrpFinanceSponsorList                    : url = "./app/contents/B10-grpfnc/B1020GrpFinanceSponsorList.html"; break;
+        case Navigation.Page.B1021GrpFinanceSponsorUpdate                  : url = "./app/contents/B10-grpfnc/B1021GrpFinanceSponsorUpdate.html"; break;
         case Navigation.Page.C00AdminChooseUser                            : url = "./app/contents/C00-admin/C00-AdminChooseUser.html"; break;
         case Navigation.Page.D10DetailGrp                                  : url = "./app/contents/D00-detail/D10-DetailGrp.html"; break;
         case Navigation.Page.D21DetailClssettle                            : url = "./app/contents/D00-detail/D21-DetailClssettle.html"; break;
@@ -173,14 +177,16 @@ Navigation.getData = function(code)
         case Navigation.Page.B12ManagerMainClasses                  : data = MMCL.Data; break;
         case Navigation.Page.B13ManagerMainMembers                  : data = MMMB.Data; break;
         case Navigation.Page.B14ManagerMainSettle                   : data = MMST.Data; break;
-        case Navigation.Page.B60GrpFinanceHome                      : data = GFHM.Data; break;
-        case Navigation.Page.B61GrpFinanceCapitalDetail             : data = GFCP.Data; break;
         case Navigation.Page.B80GrpManageHome                       : data = MMMG.Data; break;
         case Navigation.Page.B85ManagerMemberLayering               : data = MMLY.Data; break;
         case Navigation.Page.B71GrpMemberDetail                     : data = GMDT.Data; break;
         case Navigation.Page.B72GrpMemberMergeTemp                  : data = GMMT.Data; break;
         case Navigation.Page.B81ManagerBankacctList                 : data = MBKL.Data; break;
         case Navigation.Page.B82ManagerBankacctUpdate               : data = MBKU.Data; break;
+        case Navigation.Page.B1000GrpFinanceHome                    : data = GFHM.Data; break;
+        case Navigation.Page.B1010GrpFinanceCapitalDetail           : data = GFCP.Data; break;
+        case Navigation.Page.B1020GrpFinanceSponsorList             : data = GFSL.Data; break;
+        case Navigation.Page.B1021GrpFinanceSponsorUpdate           : data = GFSU.Data; break;
         case Navigation.Page.C00AdminChooseUser                     : data = AACU.Data; break;
         case Navigation.Page.D10DetailGrp                           : data = DGRP.Data; break;
         case Navigation.Page.D21DetailClssettle                     : data = DCLS.Data; break;
@@ -257,14 +263,16 @@ Navigation.executeShow = function()
         case Navigation.Page.B12ManagerMainClasses                    : MMCL.show(); break;
         case Navigation.Page.B13ManagerMainMembers                    : MMMB.show(); break;
         case Navigation.Page.B14ManagerMainSettle                     : MMST.show(); break;
-        case Navigation.Page.B60GrpFinanceHome                        : GFHM.show(); break;
-        case Navigation.Page.B61GrpFinanceCapitalDetail               : GFCP.show(); break;
         case Navigation.Page.B80GrpManageHome                         : MMMG.show(); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.show(); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.show(); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.show(); break;
         case Navigation.Page.B81ManagerBankacctList                   : MBKL.show(); break;
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.show(); break;
+        case Navigation.Page.B1000GrpFinanceHome                      : GFHM.show(); break;
+        case Navigation.Page.B1010GrpFinanceCapitalDetail             : GFCP.show(); break;
+        case Navigation.Page.B1020GrpFinanceSponsorList               : GFSL.show(); break;
+        case Navigation.Page.B1021GrpFinanceSponsorUpdate             : GFSU.show(); break;
         case Navigation.Page.C00AdminChooseUser                       : AACU.show(); break;
         case Navigation.Page.D10DetailGrp                             : DGRP.show(); break;
         case Navigation.Page.D21DetailClssettle                       : DCLS.show(); break;
@@ -325,14 +333,16 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B12ManagerMainClasses                    : MMCL.close(true); break;
         case Navigation.Page.B13ManagerMainMembers                    : MMMB.close(true); break;
         case Navigation.Page.B14ManagerMainSettle                     : MMST.close(true); break;
-        case Navigation.Page.B60GrpFinanceHome                        : GFHM.close(true); break;
-        case Navigation.Page.B61GrpFinanceCapitalDetail               : GFCP.close(true); break;
         case Navigation.Page.B80GrpManageHome                         : MMMG.close(true); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.close(true); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.close(true); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.close(true); break;
         case Navigation.Page.B81ManagerBankacctList                   : MBKL.close(true); break;
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.close(true); break;
+        case Navigation.Page.B1000GrpFinanceHome                      : GFHM.close(true); break;
+        case Navigation.Page.B1010GrpFinanceCapitalDetail             : GFCP.close(true); break;
+        case Navigation.Page.B1020GrpFinanceSponsorList               : GFSL.close(true); break;
+        case Navigation.Page.B1021GrpFinanceSponsorUpdate             : GFSU.close(true); break;
         case Navigation.Page.C00AdminChooseUser                       : AACU.close(true); break;
         case Navigation.Page.D10DetailGrp                             : DGRP.close(true); break;
         case Navigation.Page.D21DetailClssettle                       : DCLS.close(true); break;
