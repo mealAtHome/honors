@@ -1,39 +1,39 @@
-<ons-page id="GFSL">
+<ons-page id="GFPL">
 
     <!-- --------------- -->
     <!-- 페이지용 타이틀 -->
     <!-- --------------- -->
-    <ons-toolbar id="GFSL-toolbar">
-        <div class="left"><gg-backbtn onclick="GFSL.close(true);"></gg-backbtn></div>
-        <div class="center"><span id="GFSL-span-title">찬조이력</span></div>
+    <ons-toolbar id="GFPL-toolbar">
+        <div class="left"><gg-backbtn onclick="GFPL.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="GFPL-span-title">구매이력</span></div>
     </ons-toolbar>
 
-    <!-- 찬조이력 -->
+    <!-- 구매이력 -->
     <div class="common-div-cushion">
 
         <!-- 타이틀 -->
         <!-- <div class="common-div-formTitle"> -->
-            <!-- <span>찬조이력</span> -->
-            <!-- <span class="GFSL-span-choosedPosition"></span> -->
+            <!-- <span>구매이력</span> -->
+            <!-- <span class="GFPL-span-choosedPosition"></span> -->
         <!-- </div> -->
 
-        <!-- 찬조이력 -->
+        <!-- 구매이력 -->
         <div class="common-div-formField">
-            <span>찬조이력</span>
-            <span>모임의 찬조이력을 모두 표시합니다.</span>
+            <span>구매이력</span>
+            <span>모임의 구매이력을 모두 표시합니다.</span>
             <div class="common-div-cushionUD">
-                <button class="common-btn-inline" id="GFSL-btn-addSponsor">찬조추가</button>
+                <button class="common-btn-inline" id="GFPL-btn-addOne">구매추가</button>
             </div>
             <hr class="common-hr-paddingUD">
-            <div id="GFSL-div-list" class="common-tag-fontsize09"></div>
+            <div id="GFPL-div-list" class="common-tag-fontsize09"></div>
         </div>
 
     </div> <!-- common-div-cushion -->
 
     <script>
-        var GFSL =
+        var GFPL =
         {
-            code : "GFSL",
+            code : "GFPL",
             Data: {},
 
             /* ===================== */
@@ -41,8 +41,8 @@
             /* ===================== */
             show()
             {
-                if(Common.isEmpty(GFSL.Data.grpno))    { Common.toast("잘못된 접근입니다."); GFSL.close(true); return; }
-                if(Common.isEmpty(GFSL.Data.pagenum))  { GFSL.Data.pagenum = 1; }
+                if(Common.isEmpty(GFPL.Data.grpno))    { Common.toast("잘못된 접근입니다."); GFPL.close(true); return; }
+                if(Common.isEmpty(GFPL.Data.pagenum))  { GFPL.Data.pagenum = 1; }
 
                 /* init */
                 Common.showProgress();
@@ -51,18 +51,18 @@
                     try
                     {
                         /* vars */
-                        let grpno = GFSL.Data.grpno;
-                        let pagenum = GFSL.Data.pagenum;
+                        let grpno = GFPL.Data.grpno;
+                        let pagenum = GFPL.Data.pagenum;
 
                         /* get list */
-                        let mGrpfncSponsorships = Api.GrpfncSponsorship.selectByGrpnoPagenum(grpno, pagenum, GGF.none, GGF.toast);
-                        if(mGrpfncSponsorships.isSuccess())
+                        let mGrpfncPurchases = Api.GrpfncPurchase.selectByGrpnoPagenum(grpno, pagenum, GGF.none, GGF.toast);
+                        if(mGrpfncPurchases.isSuccess())
                         {
-                            mGrpfncSponsorships.makeTable("#GFSL-div-list");
-                            $("#GFSL-div-list .common-btn-pagenationBtn").click(function()
+                            mGrpfncPurchases.makeTable("#GFPL-div-list");
+                            $("#GFPL-div-list .common-btn-pagenationBtn").click(function()
                             {
-                                GFSL.Data.pagenum = $(this).attr("pagenum");
-                                GFSL.show();
+                                GFPL.Data.pagenum = $(this).attr("pagenum");
+                                GFPL.show();
                             });
                         }
                     }
@@ -70,7 +70,7 @@
                     {
                         console.error(e);
                         Common.toast("오류가 발생했습니다.");
-                        GFSL.close(true);
+                        GFPL.close(true);
                         return;
                     }
                     finally
@@ -99,7 +99,7 @@
             /* ======================== */
             /* event */
             /* ======================== */
-            $("#GFSL-btn-addSponsor").click(function() { Navigation.moveFrontPage(Navigation.Page.B1021GrpFinanceSponsorUpdate, { grpno: GFSL.Data.grpno, }); });
+            $("#GFPL-btn-addOne").click(function() { Navigation.moveFrontPage(Navigation.Page.B1031GrpFinancePurchaseUpdate, { grpno: GFPL.Data.grpno, }); });
 
             /* ========================= */
             /* page process */
@@ -108,13 +108,13 @@
             /* get data from Config */
             try
             {
-                GFSL.Data = Navigation.getPageParam();
+                GFPL.Data = Navigation.getPageParam();
                 Navigation.executeShow();
             }
             catch(e)
             {
                 console.error(e);
-                GFSL.close(true);
+                GFPL.close(true);
             }
 
         });

@@ -83,6 +83,10 @@
     $options["POINT"]                                               = get("POINT");
     $options["POINTMEMO"]                                           = get("POINTMEMO");
     $options["POSITION"]                                            = get("POSITION");
+    $options["PURCHASECOMMENT"]                                     = get("PURCHASECOMMENT");
+    $options["PURCHASECOST"]                                        = get("PURCHASECOST");
+    $options["PURCHASEIDX"]                                         = get("PURCHASEIDX");
+    $options["PURCHASEITEM"]                                        = get("PURCHASEITEM");
     $options["PUSHTOKEN"]                                           = get("PUSHTOKEN");
     $options["PW"]                                                  = get("PW");
     $options["REGDT"]                                               = get("REGDT");
@@ -98,6 +102,7 @@
     $options["SPONCOST"]                                            = get("SPONCOST");
     $options["SPONIDX"]                                             = get("SPONIDX");
     $options["SPONITEM"]                                            = get("SPONITEM");
+    $options["SPONSORTYPE"]                                         = get("SPONSORTYPE"); /* abstract */
     $options["SPONTYPE"]                                            = get("SPONTYPE");
     $options["SPONUSERNAME"]                                        = get("SPONUSERNAME");
     $options["SPONUSERNO"]                                          = get("SPONUSERNO");
@@ -112,7 +117,6 @@
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
     $options["WEEK"]                                                = get("WEEK"); /* abstract */
     $options["YEAR"]                                                = get("YEAR"); /* abstract */
-    $options["SPONSORTYPE"]                                         = get("SPONSORTYPE"); /* abstract */
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))

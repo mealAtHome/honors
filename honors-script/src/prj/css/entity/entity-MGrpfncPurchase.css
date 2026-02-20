@@ -1,0 +1,9 @@
+.MGrpfncPurchase-makeTable-mainTable > tbody > tr > td {text-align: center;
+        line-height: 1.5;
+        padding: 0.4em 0.6em;
+}
+.MGrpfncPurchase-makeTable-mainTable > tbody > tr > td[col="purchaseidx"]            { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MGrpfncPurchase-makeTable-mainTable > tbody > tr > td[col="regdt"]                  { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MGrpfncPurchase-makeTable-mainTable > tbody > tr > td[col="purchaseitem"]           { white-space:nowrap; word-break: keep-all; text-align: left;   font-weight: normal; }
+.MGrpfncPurchase-makeTable-mainTable > tbody > tr > td[col="purchasecost"]           { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
+.MGrpfncPurchase-makeTable-mainTable > tbody > tr > td[col="purchasecomment"]        { white-space:normal; word-break: keep-all; text-align: left;   font-weight: normal; }

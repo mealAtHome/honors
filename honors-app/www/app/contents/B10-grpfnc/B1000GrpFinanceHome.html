@@ -68,7 +68,7 @@
                     <tr>
                         <th><span>손실누적</span></th>
                         <td id="GFHM-td-totalLoss">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                        <td><button id="GFHM-btn-totalLossDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
                         <th><span>[일정]정산누적</span></th>
@@ -159,6 +159,7 @@
             /* ========================= */
             $("#GFHM-btn-capitaltotalDetail")       .click(function() { Navigation.moveFrontPage(Navigation.Page.B1010GrpFinanceCapitalDetail, {grpno:GFHM.Data.grpno, }); });
             $("#GFHM-btn-sponsorshiptotalDetail")   .click(function() { Navigation.moveFrontPage(Navigation.Page.B1020GrpFinanceSponsorList,   {grpno:GFHM.Data.grpno, }); });
+            $("#GFHM-btn-totalPurchaseDetail")      .click(function() { Navigation.moveFrontPage(Navigation.Page.B1030GrpFinancePurchaseList,  {grpno:GFHM.Data.grpno, }); });
 
             $(".GFHM-td-maintab").click(function()
             {

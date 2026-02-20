@@ -1,0 +1,188 @@
+<ons-page id="GFPU">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="GFPU-toolbar">
+        <div class="left"><gg-backbtn onclick="GFPU.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="GFPU-span-title">구매추가</span></div>
+    </ons-toolbar>
+
+    <div class="common-div-formChild">
+
+        <!-- --------------- -->
+        <!-- 구매추가 -->
+        <!-- --------------- -->
+        <div class="GFPU-div-tab" tab="input">
+
+            <!-- 타이틀 -->
+            <div class="common-div-formTitle">
+                <span>구매추가</span>
+                <!-- <span class="GFPU-span-choosedPosition"></span> -->
+                <div class="common-div-cushionUD">
+                    <ul class="common-ul-announce">
+                        <li>일정에서 구매한 것이 아닌, 모임에서 발생한 구매를 추가할 수 있습니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 구매품목 -->
+            <div id="GFPU-div-purchaseitem" class="common-div-formField">
+                <span>*구매품목</span>
+                <span></span>
+                <input id="GFPU-input-purchaseitem" type="text" class="common-input-field" placeholder="구매품목"/>
+            </div>
+
+            <!-- 구매금액 -->
+            <div class="common-div-formField">
+                <span>*구매금액</span>
+                <span>단발형인 경우, 대략의 액면가를 입력하세요. 값은 재무에 반영되지 않습니다.</span>
+                <input id="GFPU-input-purchasecost" type="number" class="common-input-field" placeholder="구매금액"/>
+                <div class="common-div-cushionUD">
+                    <div class="common-tag-block"><span>입력금액 : </span><span id="GFPU-span-purchasecostWon"></span></div>
+                </div>
+            </div>
+
+            <!-- 코멘트 입력 -->
+            <div class="common-div-formField">
+                <span>기타</span>
+                <span></span>
+                <textarea id="GFPU-textarea-purchasecomment" class="common-textarea-field" rows="5" placeholder="특이사항을 입력해주세요."></textarea>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+                <tbody>
+                    <tr>
+                        <td><button id="GFPU-btn-apply" class="common-btn-inline">적용하기</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div> <!-- 구매추가 -->
+
+    </div> <!-- formChild -->
+
+    <script>
+        var GFPU =
+        {
+            code : "GFPU",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(GFPU.Data.grpno)) { Common.toast("잘못된 접근입니다."); GFPU.close(true); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                    }
+                    catch(e)
+                    {
+                        console.error(e);
+                        Common.toast("오류가 발생했습니다.");
+                        GFPU.close(true);
+                        return;
+                    }
+                    finally
+                    {
+                        Common.hideProgress();
+                    }
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 구매타입 : 멤버선택 */
+            $("#GFPU-btn-purchaseChoose").click(function()
+            {
+                let grpno = $(this).attr("grpno");
+                let el = "#GFPU-div-purchaseMember";
+                let data =
+                {
+                    option : "makeToEl",
+                    grpno : GFPU.Data.grpno,
+                    el : el,
+                }
+                Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
+            });
+
+            /* 금액 입력 시, 업데이트 */
+            $("#GFPU-input-purchasecost").keyup(function()
+            {
+                let purchasecost = Number($("#GFPU-input-purchasecost").val().trim());
+                $("#GFPU-span-purchasecostWon").html(GGC.Common.priceWon(purchasecost) );
+            });
+
+            /* 저장 */
+            $("#GFPU-btn-apply").click(function()
+            {
+                let grpno = GFPU.Data.grpno;
+                let purchaseitem = $("#GFPU-input-purchaseitem").val().trim();
+                let purchasecost = $("#GFPU-input-purchasecost").val().trim();
+                let purchasecomment = $("#GFPU-textarea-purchasecomment").val().trim();
+
+                /* process */
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.GrpfncPurchase.insertFromPage(grpno, purchaseitem, purchasecost, purchasecomment, GGF.toast, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.hideProgress();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2(`적용하시겠습니까?`, process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GFPU.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GFPU.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>
