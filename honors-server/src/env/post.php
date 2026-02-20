@@ -50,10 +50,20 @@
     $options["CLSTYPE"]                                             = get("CLSTYPE");
     $options["CLSUSERNOADM"]                                        = get("CLSUSERNOADM");
     $options["CLSUSERNOSUB"]                                        = get("CLSUSERNOSUB");
+    $options["COMMENT"]                                             = get("COMMENT"); /* abstract */
     $options["COUNT"]                                               = get("COUNT"); /* abstract */
     $options["DELETED"]                                             = get("DELETED");
     $options["EMAIL"]                                               = get("EMAIL");
     $options["ETC"]                                                 = get("ETC");
+    $options["GRPFNC_ALLTOTAL"]                                     = get("GRPFNC_ALLTOTAL");
+    $options["GRPFNC_CAPITALTOTAL"]                                 = get("GRPFNC_CAPITALTOTAL");
+    $options["GRPFNC_CLSPURCHASETOTAL"]                             = get("GRPFNC_CLSPURCHASETOTAL");
+    $options["GRPFNC_CLSSALESLOSSTOTAL"]                            = get("GRPFNC_CLSSALESLOSSTOTAL");
+    $options["GRPFNC_CLSSALESTOTAL"]                                = get("GRPFNC_CLSSALESTOTAL");
+    $options["GRPFNC_CLSSALESUNPAIDTOTAL"]                          = get("GRPFNC_CLSSALESUNPAIDTOTAL");
+    $options["GRPFNC_LOSSTOTAL"]                                    = get("GRPFNC_LOSSTOTAL");
+    $options["GRPFNC_PURCHASETOTAL"]                                = get("GRPFNC_PURCHASETOTAL");
+    $options["GRPFNC_SPONSORSHIPTOTAL"]                             = get("GRPFNC_SPONSORSHIPTOTAL");
     $options["GRPMANAGER"]                                          = get("GRPMANAGER");
     $options["GRPNAME"]                                             = get("GRPNAME");
     $options["GRPNO"]                                               = get("GRPNO");
@@ -75,6 +85,7 @@
     $options["POSITION"]                                            = get("POSITION");
     $options["PUSHTOKEN"]                                           = get("PUSHTOKEN");
     $options["PW"]                                                  = get("PW");
+    $options["REGDT"]                                               = get("REGDT");
     $options["REGIDT"]                                              = get("REGIDT");
     $options["SBINDEX"]                                             = get("SBINDEX");
     $options["SCLCLOSEDATE"]                                        = get("SCLCLOSEDATE");
@@ -83,6 +94,13 @@
     $options["SCLWEEK"]                                             = get("SCLWEEK");
     $options["SCLYEAR"]                                             = get("SCLYEAR");
     $options["SERVICE_LAYER"]                                       = get("SERVICE_LAYER");
+    $options["SPONCOMMENT"]                                         = get("SPONCOMMENT");
+    $options["SPONCOST"]                                            = get("SPONCOST");
+    $options["SPONIDX"]                                             = get("SPONIDX");
+    $options["SPONITEM"]                                            = get("SPONITEM");
+    $options["SPONTYPE"]                                            = get("SPONTYPE");
+    $options["SPONUSERNAME"]                                        = get("SPONUSERNAME");
+    $options["SPONUSERNO"]                                          = get("SPONUSERNO");
     $options["TARGET"]                                              = get("TARGET"); /* abstract */
     $options["TEAMNAME"]                                            = get("TEAMNAME");
     $options["TEAMNICK"]                                            = get("TEAMNICK");
@@ -94,16 +112,7 @@
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
     $options["WEEK"]                                                = get("WEEK"); /* abstract */
     $options["YEAR"]                                                = get("YEAR"); /* abstract */
-    $options["COMMENT"]                                             = get("COMMENT"); /* abstract */
-    $options["GRPFNC_CAPITALTOTAL"]                                 = get("GRPFNC_CAPITALTOTAL");
-    $options["GRPFNC_SPONSORSHIPTOTAL"]                             = get("GRPFNC_SPONSORSHIPTOTAL");
-    $options["GRPFNC_PURCHASETOTAL"]                                = get("GRPFNC_PURCHASETOTAL");
-    $options["GRPFNC_LOSSTOTAL"]                                    = get("GRPFNC_LOSSTOTAL");
-    $options["GRPFNC_CLSSALESTOTAL"]                                = get("GRPFNC_CLSSALESTOTAL");
-    $options["GRPFNC_CLSSALESUNPAIDTOTAL"]                          = get("GRPFNC_CLSSALESUNPAIDTOTAL");
-    $options["GRPFNC_CLSSALESLOSSTOTAL"]                            = get("GRPFNC_CLSSALESLOSSTOTAL");
-    $options["GRPFNC_CLSPURCHASETOTAL"]                             = get("GRPFNC_CLSPURCHASETOTAL");
-    $options["GRPFNC_ALLTOTAL"]                                     = get("GRPFNC_ALLTOTAL");
+    $options["SPONSORTYPE"]                                         = get("SPONSORTYPE"); /* abstract */
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))

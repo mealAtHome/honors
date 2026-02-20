@@ -350,6 +350,9 @@
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
 .common-div-cushion > .common-div-cushionUD:nth-child(1) { margin : 0em 0.0em 0.3em 0.0em; padding : 0.0em 0.0em 0.3em 0.0em; }
 
+/* 쿠션 아래의 첫번째, formField 는 marginTop:0.4em; */
+.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: 0.4em; }
+
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter
 {

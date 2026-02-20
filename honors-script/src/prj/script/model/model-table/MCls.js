@@ -313,7 +313,7 @@ class MClss extends _MCommon
         /* table */
         html =
         `
-            <div class="common-div-tableScrollX">
+            <div class="common-div-scrollX">
                 <table class="common-tbl-normal" tbl-type="rowborder">
                     <thead>
                         <tr>

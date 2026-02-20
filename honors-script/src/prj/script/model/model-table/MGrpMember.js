@@ -90,6 +90,55 @@ class MGrpMember
         return html;
     }
 
+    /*
+        let mGrpMemberDummy = MGrpMember.makeDummy();
+        $("#GFSU-div-sponsorMember").html(mGrpMemberDummy);
+     */
+    static makeDummy()
+    {
+        let dat =
+        {
+            /* grpmember */
+            grpno: "G0000000001",
+            userno: "U0000000001",
+            grpmtype: GGF.GrpMember.Grpmtype.MEMBER,
+            grpmposition: "",
+            grpmstatus: GGF.GrpMember.Grpmstatus.ACTIVE,
+            point: 10000,
+            deletedt: "2024-01-01 00:00:00",
+            regidt: "2024-01-01 00:00:00",
+            grpmanagerid: "U0000000001",
+
+            /* user */
+            name: "홍길동",
+            birthyear: "1990",
+            phone: "010-1234-5678",
+            address: "서울시 강남구",
+            hascarflg: GGF.Y,
+            usertype: GGF.User.Usertype.NORMAL,
+        };
+        let model = new MGrpMember(dat);
+        let mUser = model.getMUser();
+
+        /* final html */
+        let html =
+        `
+            <div class="MGrpMembers-make-div-modelTop common-div-card">
+                <span class="common-tag-block common-tag-strong">
+                    ${model.getGrpmtypeCvrt()}
+                    ${Common.isEmpty(model.getGrpmposition()) ? "" : ` - ${model.getGrpmposition()}`}
+                    ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
+                <span class="common-tag-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
+                <span class="common-tag-block common-tag-fontsize09">
+                    ${mUser.getPhone()         != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getPhone()}</span>` : ""}
+                    ${mUser.getAddress()       != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getAddress()}</span>` : ""}
+                    ${mUser.getHascarflgCvrt() != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getHascarflgCvrt()}</span>` : ""}
+                </span>
+            </div>
+        `;
+        return html;
+    }
+
 }
 
 class MGrpMembers extends _MCommon

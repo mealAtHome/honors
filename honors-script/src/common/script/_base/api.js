@@ -28,6 +28,7 @@ var Api =
     /* define */
     /* ======================= */
     succeed : "S-0001", /* API성공 시, 반드시 아래의 코드를 반납하도록 되어있다. */
+    failed  : "E-0001", /* API실패 시, 반드시 아래의 코드를 반납하도록 되어있다. */
     defaultPagenum  : 1,
     defaultPerpage  : 50,
 
@@ -64,7 +65,7 @@ var Api =
         if(isSucceed)
             ajax.CODE = Api.succeed;
         else
-            ajax.CODE = "error";
+            ajax.CODE = Api.failed;
         return ajax;
     },
 
@@ -75,7 +76,7 @@ var Api =
     {
         let rslt =
         {
-            CODE  : "AX-0001",
+            CODE  : Api.failed,
             MSG : $.i18n('(ajax)failed to connect'),
             DATA  : null,
         }

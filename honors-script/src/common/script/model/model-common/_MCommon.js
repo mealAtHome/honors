@@ -26,8 +26,6 @@ class _MCommon
     getAllcnt() { return this.allcnt; }
     getCnt() { return this.cnt; }
 
-
-
     /* 변환 함수 */
     static getAjaxSucceed(arr=[])
     {
@@ -37,6 +35,17 @@ class _MCommon
             MSG   : "",
             COUNT : arr.length,
             DATA  : arr,
+        }
+        return ajax;
+    }
+    static getFailed(message="error")
+    {
+        let ajax =
+        {
+            CODE  : Api.failed,
+            MSG   : message,
+            COUNT : 0,
+            DATA  : [],
         }
         return ajax;
     }

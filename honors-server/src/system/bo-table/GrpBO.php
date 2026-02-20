@@ -156,7 +156,7 @@ class GrpBO extends _CommonBO
 
         /* vars */
         $ggAuth = GGauth::getInstance();
-        $storeno = null;
+        $data = null;
 
         /* get vars */
         extract($options);
@@ -179,7 +179,7 @@ class GrpBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $storeno;
+        return $data;
     }
 
 }

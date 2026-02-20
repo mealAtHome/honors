@@ -1,0 +1,10 @@
+.MGrpfncSponsorship-makeTable-mainTable > tbody > tr > td {text-align: center;
+        line-height: 1.5;
+        padding: 0.4em 0.6em;
+}
+.MGrpfncSponsorship-makeTable-mainTable > tbody > tr > td[col="sponidx"]                { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MGrpfncSponsorship-makeTable-mainTable > tbody > tr > td[col="regdt"]                  { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MGrpfncSponsorship-makeTable-mainTable > tbody > tr > td[col="username"]               { white-space:nowrap; word-break: keep-all; text-align: left;   font-weight: normal; }
+.MGrpfncSponsorship-makeTable-mainTable > tbody > tr > td[col="sponitem"]               { white-space:nowrap; word-break: keep-all; text-align: left;   font-weight: normal; }
+.MGrpfncSponsorship-makeTable-mainTable > tbody > tr > td[col="sponcost"]               { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
+.MGrpfncSponsorship-makeTable-mainTable > tbody > tr > td[col="sponcomment"]            { white-space:normal; word-break: keep-all; text-align: left;   font-weight: normal; }

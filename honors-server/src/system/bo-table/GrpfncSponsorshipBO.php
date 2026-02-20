@@ -13,9 +13,9 @@ class GrpfncSponsorshipBO extends _CommonBO
         return self::$bo;
     }
     function setBO() {
-        GGnavi::getGrpMemberBO();
+        // GGnavi::getGrpMemberBO();
         $arr = array();
-        $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        // $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         return $arr;
     }
 
@@ -24,37 +24,39 @@ class GrpfncSponsorshipBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__GRPNO         = "grpno";         /* (pk) char(30) */
-    const FIELD__GRPMANAGER    = "grpmanager";    /* (  ) char(30) */
-    const FIELD__GRPIMG        = "grpimg";        /* (  ) char(10) */
-    const FIELD__GRPNAME       = "grpname";       /* (  ) char(50) */
-    const FIELD__BACCNODEFAULT = "baccnodefault"; /* (  ) int */
-    const FIELD__MODIDT        = "modidt";        /* (  ) datetime */
-    const FIELD__REGIDT        = "regidt";        /* (  ) datetime */
+    const FIELD__GRPNO              = "grpno";              /* (PK) char(30) */
+    const FIELD__SPONIDX            = "sponidx";            /* (PK) int */
+    const FIELD__SPONUSERNO         = "sponuserno";         /* (  ) varchar(30) */
+    const FIELD__SPONUSERNAME       = "sponusername";       /* (  ) varchar(30) */
+    const FIELD__SPONTYPE           = "spontype";           /* (  ) enum('thing','money') */
+    const FIELD__SPONITEM           = "sponitem";           /* (  ) varchar(50) */
+    const FIELD__SPONCOST           = "sponcost";           /* (  ) int */
+    const FIELD__SPONCOMMENT        = "sponcomment";        /* (  ) varchar(255) */
+    const FIELD__REGDT              = "regdt";              /* (  ) datetime */
 
     /* ========================= */
     /* enum */
     /*
     */
     /* ========================= */
+    const SPONTYPE__THING = "thing"; /* 단발형 */
+    const SPONTYPE__MONEY = "money"; /* 금전형 */
 
     /* ========================= */
     /* select > sub > sub */
     /* ========================= */
-    public function getByPk($GRPNO) { return GGsql::selectOne("select * from grp where grpno = '$GRPNO'"); }
+    // public function getByPk($GRPNO) { return GGsql::selectOne("select * from grp where grpno = '$GRPNO'"); }
 
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    public function selectByPkForInside ($GRPNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    // public function selectByPkForInside ($GRPNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
     /* ========================= */
     const selectByPk = "selectByPk";
-    const selectByPkForInside = "selectByPkForInside";
-    const selectManaging = "selectManaging"; /* 그룹 : 내 그룹리스트를 가져옴 */
-    const selectActiveForUsr = "selectActiveForUsr";
+    const selectByGrpnoPagenum = "selectByGrpnoPagenum";
     protected function select($options, $option="")
     {
         /* --------------- */
@@ -76,24 +78,17 @@ class GrpfncSponsorshipBO extends _CommonBO
         $from   = "";
         $select =
         "
-              t.grpno
-            , t.grpmanager
-            , t.grpimg
-            , t.grpname
-            , t.baccnodefault
-            , t.modidt
-            , t.regidt
-            , u.id                  grpmanager_id
-            , u.name                grpmanager_name
-            , u.phone               grpmanager_phone
-            , bacc.bacctype         bacctype
-            , bacc.bacckey          bacckey
-            , bacc.baccno           baccno
-            , bacc.baccnickname     baccnickname
-            , bacc.bacccode         bacccode
-            , bacc.baccacct         baccacct
-            , bacc.baccname         baccname
-            , bank.bankname         bankname
+            null as head
+            , t.grpno
+            , t.sponidx
+            , t.sponuserno
+            , t.sponusername
+            , t.spontype
+            , t.sponitem
+            , t.sponcost
+            , t.sponcomment
+            , t.regdt
+            , u.name username
         ";
 
         /* --------------- */
@@ -101,10 +96,8 @@ class GrpfncSponsorshipBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPk          : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
-            case self::selectByPkForInside : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
-            case self::selectManaging      : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub'))) t"; break; }
-            case self::selectActiveForUsr  : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive')) t"; break; }
+            case self::selectByPk            : { $from = "(select * from grpfnc_sponsorship where grpno = '$GRPNO' and sponidx = $SPONIDX) t"; break; }
+            case self::selectByGrpnoPagenum  : { $from = "(select * from grpfnc_sponsorship where grpno = '$GRPNO') t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -122,17 +115,10 @@ class GrpfncSponsorshipBO extends _CommonBO
                 $from
                 left join user u
                     on
-                        u.userno = t.grpmanager
-                left join bankaccount bacc
-                    on
-                        bacc.bacctype = 'grp' and
-                        bacc.bacckey = t.grpno and
-                        bacc.baccno = t.baccnodefault
-                left join _bank bank
-                    on
-                        bank.bankcode = bacc.bacccode
+                        u.userno = t.sponuserno
             order by
-                t.grpname asc
+                  t.grpno asc
+                , t.sponidx desc
         ";
         $result = GGsql::select($query, $from, $options);
         return $result;
@@ -142,13 +128,13 @@ class GrpfncSponsorshipBO extends _CommonBO
     /* update (sub) */
     /* ========================= */
     /* public function changeStoreStatus($STORENO, $STORE_STATUS)     { return $this->update(get_defined_vars(), __FUNCTION__); } */
-    public function updateBaccnodefaultForInside($GRPNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    /* public function updateBaccnodefaultForInside($GRPNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); } */
 
     /* ========================= */
     /* update */
     /* ========================= */
-    /* const insert = "insert"; */
-    const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
+    const insertFromPage = "insertFromPage";
+    /* const updateBaccnodefaultForInside = "updateBaccnodefaultForInside"; */
     protected function update($options, $option="")
     {
         /* set BO */
@@ -156,7 +142,7 @@ class GrpfncSponsorshipBO extends _CommonBO
 
         /* vars */
         $ggAuth = GGauth::getInstance();
-        $storeno = null;
+        $data = null;
 
         /* get vars */
         extract($options);
@@ -168,9 +154,45 @@ class GrpfncSponsorshipBO extends _CommonBO
         /* sql execution */
         switch($OPTION)
         {
-            case self::updateBaccnodefaultForInside:
+            case self::insertFromPage:
             {
-                $query = "update grp set baccnodefault = $BACCNODEFAULT where grpno = '$GRPNO'";
+                /* validation */
+                if(Common::isEmpty($GRPNO))                                              { throw new GGexception("시스템 오류입니다."); }
+                if(Common::isEmpty($SPONSORTYPE))                                        { throw new GGexception("시스템 오류입니다."); }
+                if(Common::isEmpty($SPONTYPE))                                           { throw new GGexception("시스템 오류입니다."); }
+                if($SPONSORTYPE == "user" && Common::isEmpty($SPONUSERNO))               { throw new GGexception("찬조자가 선택되지 않았습니다."); }
+                if($SPONSORTYPE == "name" && Common::isEmpty($SPONUSERNAME))             { throw new GGexception("찬조자 이름이 입력되지 않았습니다."); }
+                if($SPONTYPE == self::SPONTYPE__THING && Common::isEmpty($SPONITEM))     { throw new GGexception("찬조품목이 공란입니다."); }
+                if($SPONTYPE == self::SPONTYPE__MONEY && Common::isEmpty($SPONCOST))     { throw new GGexception("찬조금액이 공란입니다."); }
+
+                /* process */
+                $query =
+                "
+                    insert into grpfnc_sponsorship
+                    (
+                          grpno
+                        , sponidx
+                        , sponuserno
+                        , sponusername
+                        , spontype
+                        , sponitem
+                        , sponcost
+                        , sponcomment
+                        , regdt
+                    )
+                    select
+                          '$GRPNO'
+                        ,  (select ifnull(max(sponidx), 0) + 1 from grpfnc_sponsorship where grpno = '$GRPNO')
+                        , '$SPONUSERNO'
+                        , '$SPONUSERNAME'
+                        , '$SPONTYPE'
+                        , '$SPONITEM'
+                        ,  $SPONCOST
+                        , '$SPONCOMMENT'
+                        , now()
+                    from
+                        dual
+                ";
                 $result = GGsql::exeQuery($query);
                 break;
             }
@@ -179,7 +201,7 @@ class GrpfncSponsorshipBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $storeno;
+        return $data;
     }
 
 }

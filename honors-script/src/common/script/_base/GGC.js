@@ -85,9 +85,10 @@ GGC.Common =
     /* ============================== */
     /* 가격 필드 */
     /* ============================== */
-    pricePretty (val=0) { return GGC.Common.numToHangul(val); },
-    priceWon    (val=0) { return GGC.Common.comma(val) + "원"; },
-    priceHan    (val=0) { return GGC.Common.numToHangul(val); },
+    pricePretty  (val=0) { return GGC.Common.numToHangul(val); },
+    priceWon     (val=0) { return GGC.Common.comma(val) + "원"; },
+    priceWonFont (val) { return `<span class="common-tag-font" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.comma(val)}원</span>`; },
+    priceHan     (val=0) { return GGC.Common.numToHangul(val); },
 
     /* 기호가 붙는 옵션가격 */
     optpriceWon(val=0)
@@ -99,6 +100,8 @@ GGC.Common =
             rslt = "-" + rslt;
         return rslt;
     },
+    priceFull(val) { return `<span class="common-tag-font" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */
+
 
     /* ============================== */
     /* 천 단위 콤마 */
@@ -118,6 +121,7 @@ GGC.Common =
 
         return rslt;
     },
+
 
     /* ============================== */
     /* 숫자를 만원으로 */

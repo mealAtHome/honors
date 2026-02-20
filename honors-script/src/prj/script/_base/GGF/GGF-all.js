@@ -95,3 +95,12 @@ GGF.GrpMember =
         DELETE      : 'delete',     /* GGF.GrpMember.Grpmstatus.DELETE */
     }
 };
+
+GGF.GrpfncSponsorship =
+{
+    Spontype :
+    {
+        THING : 'thing', /* GGF.GrpfncSponsorship.Spontype.THING : 단발형 */
+        MONEY : 'money', /* GGF.GrpfncSponsorship.Spontype.MONEY : 금전형 */
+    },
+};

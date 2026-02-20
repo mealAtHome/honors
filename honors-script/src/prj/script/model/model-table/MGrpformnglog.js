@@ -72,7 +72,7 @@ class MGrpformnglogs extends _MCommon
         /* table */
         html =
         `
-            <div class="common-div-tableScrollX">
+            <div class="common-div-scrollX">
                 <table class="MGrpformnglog-makeTableForCapital-tbl-top common-tbl-normal" tbl-type="rowborder">
                     <thead>
                         <tr>
