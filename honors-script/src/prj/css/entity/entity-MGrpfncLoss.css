@@ -1,0 +1,9 @@
+.MGrpfncLoss-makeTable-mainTable > tbody > tr > td {text-align: center;
+        line-height: 1.5;
+        padding: 0.4em 0.6em;
+}
+.MGrpfncLoss-makeTable-mainTable > tbody > tr > td[col="lossidx"]            { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MGrpfncLoss-makeTable-mainTable > tbody > tr > td[col="regdt"]              { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }
+.MGrpfncLoss-makeTable-mainTable > tbody > tr > td[col="lossitem"]           { white-space:nowrap; word-break: keep-all; text-align: left;   font-weight: normal; }
+.MGrpfncLoss-makeTable-mainTable > tbody > tr > td[col="losscost"]           { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
+.MGrpfncLoss-makeTable-mainTable > tbody > tr > td[col="losscomment"]        { white-space:normal; word-break: keep-all; text-align: left;   font-weight: normal; }

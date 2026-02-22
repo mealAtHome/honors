@@ -96,8 +96,6 @@ GGC.Common =
         let rslt = GGC.Common.comma(val) + "원";
         if(val >= 0)
             rslt = "+" + rslt;
-        else
-            rslt = "-" + rslt;
         return rslt;
     },
     priceFull(val) { return `<span class="common-tag-font" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */

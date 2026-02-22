@@ -1,43 +1,46 @@
-<ons-page id="GFPU">
+<ons-page id="GFLU">
 
     <!-- --------------- -->
     <!-- 페이지용 타이틀 -->
     <!-- --------------- -->
-    <ons-toolbar id="GFPU-toolbar">
-        <div class="left"><gg-backbtn onclick="GFPU.close(true);"></gg-backbtn></div>
-        <div class="center"><span id="GFPU-span-title">구매추가</span></div>
+    <ons-toolbar id="GFLU-toolbar">
+        <div class="left"><gg-backbtn onclick="GFLU.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="GFLU-span-title">손실추가</span></div>
     </ons-toolbar>
 
     <div class="common-div-formChild">
 
         <!-- --------------- -->
-        <!-- 구매추가 -->
+        <!-- 손실추가 -->
         <!-- --------------- -->
-        <div class="GFPU-div-tab" tab="input">
+        <div class="GFLU-div-tab" tab="input">
 
             <!-- 타이틀 -->
             <div class="common-div-formTitle">
-                <span>구매추가</span>
+                <span>손실추가</span>
+                <!-- <span class="GFLU-span-choosedPosition"></span> -->
                 <div class="common-div-cushionUD">
                     <ul class="common-ul-announce">
-                        <li>일정에서 구매한 것이 아닌, 모임에서 발생한 구매를 추가할 수 있습니다.</li>
+                        <li>특정 사유로 재무 손실을 추가할 수 있습니다.</li>
+                        <li>손실금액은 재무에 반영됩니다.</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- 구매품목 -->
-            <div id="GFPU-div-purchaseitem" class="common-div-formField">
-                <span>*구매품목</span>
+            <!-- 손실품목 -->
+            <div id="GFLU-div-lossitem" class="common-div-formField">
+                <span>*손실품목</span>
                 <span></span>
-                <input id="GFPU-input-purchaseitem" type="text" class="common-input-field" placeholder="구매품목"/>
+                <input id="GFLU-input-lossitem" type="text" class="common-input-field" placeholder="손실품목"/>
             </div>
 
-            <!-- 구매금액 -->
+            <!-- 손실금액 -->
             <div class="common-div-formField">
-                <span>*구매금액</span>
-                <input id="GFPU-input-purchasecost" type="number" class="common-input-field" placeholder="구매금액"/>
+                <span>*손실금액</span>
+                <span>단발형인 경우, 대략의 액면가를 입력하세요. 값은 재무에 반영되지 않습니다.</span>
+                <input id="GFLU-input-losscost" type="number" class="common-input-field" placeholder="손실금액"/>
                 <div class="common-div-cushionUD">
-                    <div class="common-tag-block"><span>입력금액 : </span><span id="GFPU-span-purchasecostWon"></span></div>
+                    <div class="common-tag-block"><span>입력금액 : </span><span id="GFLU-span-losscostWon"></span></div>
                 </div>
             </div>
 
@@ -45,26 +48,26 @@
             <div class="common-div-formField">
                 <span>기타</span>
                 <span></span>
-                <textarea id="GFPU-textarea-purchasecomment" class="common-textarea-field" rows="5" placeholder="특이사항을 입력해주세요."></textarea>
+                <textarea id="GFLU-textarea-losscomment" class="common-textarea-field" rows="5" placeholder="특이사항을 입력해주세요."></textarea>
             </div>
 
             <!-- 다음으로 -->
             <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
                 <tbody>
                     <tr>
-                        <td><button id="GFPU-btn-apply" class="common-btn-inline">적용하기</button></td>
+                        <td><button id="GFLU-btn-apply" class="common-btn-inline">적용하기</button></td>
                     </tr>
                 </tbody>
             </table>
 
-        </div> <!-- 구매추가 -->
+        </div> <!-- 손실추가 -->
 
     </div> <!-- formChild -->
 
     <script>
-        var GFPU =
+        var GFLU =
         {
-            code : "GFPU",
+            code : "GFLU",
             Data: {},
 
             /* ===================== */
@@ -72,7 +75,7 @@
             /* ===================== */
             show()
             {
-                if(Common.isEmpty(GFPU.Data.grpno)) { Common.toast("잘못된 접근입니다."); GFPU.close(true); return; }
+                if(Common.isEmpty(GFLU.Data.grpno)) { Common.toast("잘못된 접근입니다."); GFLU.close(true); return; }
 
                 /* init */
                 Common.showProgress();
@@ -85,7 +88,7 @@
                     {
                         console.error(e);
                         Common.toast("오류가 발생했습니다.");
-                        GFPU.close(true);
+                        GFLU.close(true);
                         return;
                     }
                     finally
@@ -115,34 +118,34 @@
             /* event */
             /* ======================== */
 
-            /* 구매타입 : 멤버선택 */
-            $("#GFPU-btn-purchaseChoose").click(function()
+            /* 손실타입 : 멤버선택 */
+            $("#GFLU-btn-lossChoose").click(function()
             {
                 let grpno = $(this).attr("grpno");
-                let el = "#GFPU-div-purchaseMember";
+                let el = "#GFLU-div-lossMember";
                 let data =
                 {
                     option : "makeToEl",
-                    grpno : GFPU.Data.grpno,
+                    grpno : GFLU.Data.grpno,
                     el : el,
                 }
                 Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
             });
 
             /* 금액 입력 시, 업데이트 */
-            $("#GFPU-input-purchasecost").keyup(function()
+            $("#GFLU-input-losscost").keyup(function()
             {
-                let purchasecost = Number($("#GFPU-input-purchasecost").val().trim());
-                $("#GFPU-span-purchasecostWon").html(GGC.Common.priceWon(purchasecost) );
+                let losscost = Number($("#GFLU-input-losscost").val().trim());
+                $("#GFLU-span-losscostWon").html(GGC.Common.priceWon(losscost) );
             });
 
             /* 저장 */
-            $("#GFPU-btn-apply").click(function()
+            $("#GFLU-btn-apply").click(function()
             {
-                let grpno = GFPU.Data.grpno;
-                let purchaseitem = $("#GFPU-input-purchaseitem").val().trim();
-                let purchasecost = $("#GFPU-input-purchasecost").val().trim();
-                let purchasecomment = $("#GFPU-textarea-purchasecomment").val().trim();
+                let grpno = GFLU.Data.grpno;
+                let lossitem = $("#GFLU-input-lossitem").val().trim();
+                let losscost = $("#GFLU-input-losscost").val().trim();
+                let losscomment = $("#GFLU-textarea-losscomment").val().trim();
 
                 /* process */
                 let process = function()
@@ -150,7 +153,7 @@
                     Common.showProgress();
                     setTimeout(function()
                     {
-                        let mApiResponse = Api.GrpfncPurchase.insertFromPage(grpno, purchaseitem, purchasecost, purchasecomment, GGF.toast, GGF.toast);
+                        let mApiResponse = Api.GrpfncLoss.insertFromPage(grpno, lossitem, losscost, losscomment, GGF.toast, GGF.toast);
                         if(mApiResponse.isSuccess())
                         {
                             Common.hideProgress();
@@ -169,13 +172,13 @@
             /* get data from Config */
             try
             {
-                GFPU.Data = Navigation.getPageParam();
+                GFLU.Data = Navigation.getPageParam();
                 Navigation.executeShow();
             }
             catch(e)
             {
                 console.error(e);
-                GFPU.close(true);
+                GFLU.close(true);
             }
 
         });

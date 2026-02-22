@@ -72,6 +72,10 @@
     $options["IMG"]                                                 = get("IMG");
     $options["IS_ADMIN"]                                            = get("IS_ADMIN");
     $options["KEYWORD"]                                             = get("KEYWORD");
+    $options["LOSSCOMMENT"]                                         = get("LOSSCOMMENT");
+    $options["LOSSCOST"]                                            = get("LOSSCOST");
+    $options["LOSSIDX"]                                             = get("LOSSIDX");
+    $options["LOSSITEM"]                                            = get("LOSSITEM");
     $options["MODIDT"]                                              = get("MODIDT");
     $options["MONTH"]                                               = get("MONTH"); /* abstract */
     $options["NAME"]                                                = get("NAME");

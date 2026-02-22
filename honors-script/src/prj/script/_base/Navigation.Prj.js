@@ -18,6 +18,8 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* GrpfncSponsorship */         case "Api.GrpfncSponsorship.update"                         : url = serverHost + "/src/data/grpfncSponsorship/updateGrpfncSponsorship.php"; break;
         /* GrpfncPurchase */            case "Api.GrpfncPurchase.select"                            : url = serverHost + "/src/data/grpfncPurchase/selectGrpfncPurchase.php"; break;
         /* GrpfncPurchase */            case "Api.GrpfncPurchase.update"                            : url = serverHost + "/src/data/grpfncPurchase/updateGrpfncPurchase.php"; break;
+        /* GrpfncLoss */                case "Api.GrpfncLoss.select"                                : url = serverHost + "/src/data/grpfncLoss/selectGrpfncLoss.php"; break;
+        /* GrpfncLoss */                case "Api.GrpfncLoss.update"                                : url = serverHost + "/src/data/grpfncLoss/updateGrpfncLoss.php"; break;
         /* Grpformng */                 case "Api.Grpformng.select"                                 : url = serverHost + "/src/data/grpformng/selectGrpformng.php"; break;
         /* Grpformng */                 case "Api.Grpformng.update"                                 : url = serverHost + "/src/data/grpformng/updateGrpformng.php"; break;
         /* Grpformnglog */              case "Api.Grpformnglog.select"                              : url = serverHost + "/src/data/grpformnglog/selectGrpformnglog.php"; break;
@@ -72,11 +74,14 @@ Navigation.Page =
     B81ManagerBankacctList : "MBKL",
     B82ManagerBankacctUpdate : "MBKU",
     B1000GrpFinanceHome : "GFHM",
-    B1010GrpFinanceCapitalDetail : "GFCP",
+    B1010GrpFinanceCapitalList : "GFCL",
+    B1011GrpFinanceCapitalUpdate : "GFCU",
     B1020GrpFinanceSponsorList : "GFSL",
     B1021GrpFinanceSponsorUpdate : "GFSU",
     B1030GrpFinancePurchaseList : "GFPL",
     B1031GrpFinancePurchaseUpdate : "GFPU",
+    B1040GrpFinanceLossList : "GFLL",
+    B1041GrpFinanceLossUpdate : "GFLU",
     C00AdminChooseUser : "AACU",
     D10DetailGrp : "DGRP",
     D21DetailClssettle : "DCLS",
@@ -131,11 +136,14 @@ Navigation.getURL = function(str)
         case Navigation.Page.B81ManagerBankacctList                        : url = "./app/contents/B00-manager/B81-ManagerBankacctList.html"; break;
         case Navigation.Page.B82ManagerBankacctUpdate                      : url = "./app/contents/B00-manager/B82-ManagerBankacctUpdate.html"; break;
         case Navigation.Page.B1000GrpFinanceHome                           : url = "./app/contents/B10-grpfnc/B1000GrpFinanceHome.html"; break;
-        case Navigation.Page.B1010GrpFinanceCapitalDetail                  : url = "./app/contents/B10-grpfnc/B1010GrpFinanceCapitalDetail.html"; break;
+        case Navigation.Page.B1010GrpFinanceCapitalList                   : url = "./app/contents/B10-grpfnc/B1010GrpFinanceCapitalList.html"; break;
+        case Navigation.Page.B1011GrpFinanceCapitalUpdate                 : url = "./app/contents/B10-grpfnc/B1011GrpFinanceCapitalUpdate.html"; break;
         case Navigation.Page.B1020GrpFinanceSponsorList                    : url = "./app/contents/B10-grpfnc/B1020GrpFinanceSponsorList.html"; break;
         case Navigation.Page.B1021GrpFinanceSponsorUpdate                  : url = "./app/contents/B10-grpfnc/B1021GrpFinanceSponsorUpdate.html"; break;
         case Navigation.Page.B1030GrpFinancePurchaseList                   : url = "./app/contents/B10-grpfnc/B1030GrpFinancePurchaseList.html"; break;
         case Navigation.Page.B1031GrpFinancePurchaseUpdate                 : url = "./app/contents/B10-grpfnc/B1031GrpFinancePurchaseUpdate.html"; break;
+        case Navigation.Page.B1040GrpFinanceLossList                       : url = "./app/contents/B10-grpfnc/B1040GrpFinanceLossList.html"; break;
+        case Navigation.Page.B1041GrpFinanceLossUpdate                     : url = "./app/contents/B10-grpfnc/B1041GrpFinanceLossUpdate.html"; break;
         case Navigation.Page.C00AdminChooseUser                            : url = "./app/contents/C00-admin/C00-AdminChooseUser.html"; break;
         case Navigation.Page.D10DetailGrp                                  : url = "./app/contents/D00-detail/D10-DetailGrp.html"; break;
         case Navigation.Page.D21DetailClssettle                            : url = "./app/contents/D00-detail/D21-DetailClssettle.html"; break;
@@ -192,11 +200,14 @@ Navigation.getData = function(code)
         case Navigation.Page.B81ManagerBankacctList                 : data = MBKL.Data; break;
         case Navigation.Page.B82ManagerBankacctUpdate               : data = MBKU.Data; break;
         case Navigation.Page.B1000GrpFinanceHome                    : data = GFHM.Data; break;
-        case Navigation.Page.B1010GrpFinanceCapitalDetail           : data = GFCP.Data; break;
+        case Navigation.Page.B1010GrpFinanceCapitalList             : data = GFCL.Data; break;
+        case Navigation.Page.B1011GrpFinanceCapitalUpdate           : data = GFCU.Data; break;
         case Navigation.Page.B1020GrpFinanceSponsorList             : data = GFSL.Data; break;
         case Navigation.Page.B1021GrpFinanceSponsorUpdate           : data = GFSU.Data; break;
         case Navigation.Page.B1030GrpFinancePurchaseList            : data = GFPL.Data; break;
         case Navigation.Page.B1031GrpFinancePurchaseUpdate          : data = GFPU.Data; break;
+        case Navigation.Page.B1040GrpFinanceLossList                : data = GFLL.Data; break;
+        case Navigation.Page.B1041GrpFinanceLossUpdate              : data = GFLU.Data; break;
         case Navigation.Page.C00AdminChooseUser                     : data = AACU.Data; break;
         case Navigation.Page.D10DetailGrp                           : data = DGRP.Data; break;
         case Navigation.Page.D21DetailClssettle                     : data = DCLS.Data; break;
@@ -280,11 +291,14 @@ Navigation.executeShow = function()
         case Navigation.Page.B81ManagerBankacctList                   : MBKL.show(); break;
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.show(); break;
         case Navigation.Page.B1000GrpFinanceHome                      : GFHM.show(); break;
-        case Navigation.Page.B1010GrpFinanceCapitalDetail             : GFCP.show(); break;
+        case Navigation.Page.B1010GrpFinanceCapitalList              : GFCL.show(); break;
+        case Navigation.Page.B1011GrpFinanceCapitalUpdate            : GFCU.show(); break;
         case Navigation.Page.B1020GrpFinanceSponsorList               : GFSL.show(); break;
         case Navigation.Page.B1021GrpFinanceSponsorUpdate             : GFSU.show(); break;
         case Navigation.Page.B1030GrpFinancePurchaseList              : GFPL.show(); break;
         case Navigation.Page.B1031GrpFinancePurchaseUpdate            : GFPU.show(); break;
+        case Navigation.Page.B1040GrpFinanceLossList                  : GFLL.show(); break;
+        case Navigation.Page.B1041GrpFinanceLossUpdate                : GFLU.show(); break;
         case Navigation.Page.C00AdminChooseUser                       : AACU.show(); break;
         case Navigation.Page.D10DetailGrp                             : DGRP.show(); break;
         case Navigation.Page.D21DetailClssettle                       : DCLS.show(); break;
@@ -352,11 +366,14 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B81ManagerBankacctList                   : MBKL.close(true); break;
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.close(true); break;
         case Navigation.Page.B1000GrpFinanceHome                      : GFHM.close(true); break;
-        case Navigation.Page.B1010GrpFinanceCapitalDetail             : GFCP.close(true); break;
+        case Navigation.Page.B1010GrpFinanceCapitalList               : GFCL.close(true); break;
+        case Navigation.Page.B1011GrpFinanceCapitalUpdate             : GFCU.close(true); break;
         case Navigation.Page.B1020GrpFinanceSponsorList               : GFSL.close(true); break;
         case Navigation.Page.B1021GrpFinanceSponsorUpdate             : GFSU.close(true); break;
         case Navigation.Page.B1030GrpFinancePurchaseList              : GFPL.close(true); break;
         case Navigation.Page.B1031GrpFinancePurchaseUpdate            : GFPU.close(true); break;
+        case Navigation.Page.B1040GrpFinanceLossList                  : GFLL.close(true); break;
+        case Navigation.Page.B1041GrpFinanceLossUpdate                : GFLU.close(true); break;
         case Navigation.Page.C00AdminChooseUser                       : AACU.close(true); break;
         case Navigation.Page.D10DetailGrp                             : DGRP.close(true); break;
         case Navigation.Page.D21DetailClssettle                       : DCLS.close(true); break;

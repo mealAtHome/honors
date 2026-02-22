@@ -43,14 +43,15 @@ class GGauth
     }
     public function isGrpowner($GRPNO, $USERNO, $errorflg=false)
     {
-        /* get grpMember */
+        /* bo */
+        GGnavi::getUserBO();
         GGnavi::getGrpMemberBO();
         $grpMemberBO = GrpMemberBO::getInstance();
-        $grpMember = $grpMemberBO->getByPk($GRPNO, $USERNO);
+        $userBO = UserBO::getInstance();
 
-        /* check grpmtype */
-        $grpmtype = Common::getField($grpMember, GrpMemberBO::FIELD__GRPMTYPE);
-        if($grpmtype == GrpMemberBO::GRPMTYPE__MNG) return true;
+        /* check */
+        if(Common::getField($grpMemberBO->getByPk($GRPNO, $USERNO)  , GrpMemberBO::FIELD__GRPMTYPE) == GrpMemberBO::GRPMTYPE__MNG   ) return true;
+        if(Common::getField($userBO->getByPk($USERNO)               , UserBO::FIELD__ADMINFLG)      == GGF::Y                       ) return true;
 
         /* return */
         if($errorflg)

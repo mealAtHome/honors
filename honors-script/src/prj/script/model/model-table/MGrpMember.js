@@ -6,6 +6,7 @@ class MGrpMember
         /* data */      this.userno             = GGC.Common.char(dat.userno);
         /* data */      this.grpmtype           = GGC.Common.enum(dat.grpmtype);
         /* data */      this.grpmposition       = GGC.Common.char(dat.grpmposition);
+        /* data */      this.grpmfinauth        = GGC.Common.enum(dat.grpmfinauth);
         /* data */      this.grpmstatus         = GGC.Common.enum(dat.grpmstatus);
         /* data */      this.point              = GGC.Common.int(dat.point);
         /* data */      this.deletedt           = GGC.Common.datetime(dat.deletedt);
@@ -24,6 +25,7 @@ class MGrpMember
     getUserno() { return this.userno; }
     getGrpmtype() { return this.grpmtype; }
     getGrpmposition() { return this.grpmposition; }
+    getGrpmfinauth() { return this.grpmfinauth; }
     getGrpmstatus() { return this.grpmstatus; }
     getDeletedt() { return this.deletedt; }
     getPoint() { return this.point; }

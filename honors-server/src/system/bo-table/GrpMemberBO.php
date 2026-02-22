@@ -32,15 +32,16 @@ class GrpMemberBO extends _CommonBO
     /*
     */
     /* ========================= */
-    CONST FIELD__GRPNO          = "grpno";         /* (pk) char(30) */
-    CONST FIELD__USERNO         = "userno";        /* (pk) char(30) */
-    CONST FIELD__GRPMTYPE       = "grpmtype";      /* (  ) enum('mng','mngsub','member') */
-    CONST FIELD__GRPMPOSITION   = "grpmposition";  /* (  ) char(20) */
-    CONST FIELD__GRPMSTATUS     = "grpmstatus";    /* (  ) enum('active','delete') */
-    CONST FIELD__POINT          = "point";         /* (  ) int */
-    CONST FIELD__DELETEDT       = "deletedt";      /* (  ) datetime */
-    CONST FIELD__MODIDT         = "modidt";        /* (  ) datetime */
-    CONST FIELD__REGIDT         = "regidt";        /* (  ) datetime */
+    const FIELD__GRPNO          = "grpno";         /* (pk) char(30) */
+    const FIELD__USERNO         = "userno";        /* (pk) char(30) */
+    const FIELD__GRPMTYPE       = "grpmtype";      /* (  ) enum('mng','mngsub','member') */
+    const FIELD__GRPMPOSITION   = "grpmposition";  /* (  ) char(20) */
+    const FIELD__GRPMFINAUTH    = "grpmfinauth";   /* (  ) enum('y','n') */
+    const FIELD__GRPMSTATUS     = "grpmstatus";    /* (  ) enum('active','delete') */
+    const FIELD__POINT          = "point";         /* (  ) int */
+    const FIELD__DELETEDT       = "deletedt";      /* (  ) datetime */
+    const FIELD__MODIDT         = "modidt";        /* (  ) datetime */
+    const FIELD__REGIDT         = "regidt";        /* (  ) datetime */
 
     /* ========================= */
     /* enum */
@@ -120,6 +121,7 @@ class GrpMemberBO extends _CommonBO
                     , t.userno
                     , t.grpmtype
                     , t.grpmposition
+                    , t.grpmfinauth
                     , t.grpmstatus
                     , t.point
                     , t.deletedt
@@ -145,6 +147,7 @@ class GrpMemberBO extends _CommonBO
                     , t.userno
                     , t.grpmtype
                     , t.grpmposition
+                    , t.grpmfinauth
                     , t.grpmstatus
                     , null as point
                     , t.deletedt
@@ -347,6 +350,13 @@ class GrpMemberBO extends _CommonBO
                     $USERNO        = Common::get($ROW, "USERNO", null);
                     $GRPMTYPE      = Common::get($ROW, "GRPMTYPE", null);
                     $GRPMPOSITION  = Common::get($ROW, "GRPMPOSITION", null);
+                    $GRPMFINAUTH   = Common::get($ROW, "GRPMFINAUTH", null);
+
+                    /* check */
+                    if(Common::isEmpty($USERNO)) { throw new GGexception("시스템 오류입니다."); }
+                    if(Common::isEmpty($GRPMTYPE)) { throw new GGexception("시스템 오류입니다."); }
+                    if(Common::isEmpty($GRPMPOSITION)) { throw new GGexception("시스템 오류입니다."); }
+                    if(Common::isEmpty($GRPMFINAUTH)) { throw new GGexception("시스템 오류입니다."); }
 
                     /* execute */
                     $query =
@@ -356,6 +366,7 @@ class GrpMemberBO extends _CommonBO
                         set
                             grpmtype = '$GRPMTYPE',
                             grpmposition = '$GRPMPOSITION',
+                            grpmfinauth = '$GRPMFINAUTH',
                             modidt = now()
                         where
                             grpno = '$GRPNO' and

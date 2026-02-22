@@ -1,0 +1,125 @@
+<ons-page id="GFLL">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="GFLL-toolbar">
+        <div class="left"><gg-backbtn onclick="GFLL.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="GFLL-span-title">손실이력</span></div>
+    </ons-toolbar>
+
+    <!-- 손실이력 -->
+    <div class="common-div-cushion">
+
+        <!-- 타이틀 -->
+        <!-- <div class="common-div-formTitle"> -->
+            <!-- <span>손실이력</span> -->
+            <!-- <span class="GFLL-span-choosedPosition"></span> -->
+        <!-- </div> -->
+
+        <!-- 손실이력 -->
+        <div class="common-div-formField">
+            <span>손실이력</span>
+            <span>모임의 손실이력을 모두 표시합니다.</span>
+            <div class="common-div-cushionUD">
+                <button class="common-btn-inline" id="GFLL-btn-addOne">손실추가</button>
+            </div>
+            <hr class="common-hr-paddingUD">
+            <div id="GFLL-div-list" class="common-tag-fontsize09"></div>
+        </div>
+
+    </div> <!-- common-div-cushion -->
+
+    <script>
+        var GFLL =
+        {
+            code : "GFLL",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(GFLL.Data.grpno))    { Common.toast("잘못된 접근입니다."); GFLL.close(true); return; }
+                if(Common.isEmpty(GFLL.Data.pagenum))  { GFLL.Data.pagenum = 1; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* vars */
+                        let grpno = GFLL.Data.grpno;
+                        let pagenum = GFLL.Data.pagenum;
+
+                        /* get list */
+                        let mGrpfncLosss = Api.GrpfncLoss.selectByGrpnoPagenum(grpno, pagenum, GGF.none, GGF.toast);
+                        if(mGrpfncLosss.isSuccess())
+                        {
+                            mGrpfncLosss.makeTable("#GFLL-div-list");
+                            $("#GFLL-div-list .common-btn-pagenationBtn").click(function()
+                            {
+                                GFLL.Data.pagenum = $(this).attr("pagenum");
+                                GFLL.show();
+                            });
+                        }
+                    }
+                    catch(e)
+                    {
+                        console.error(e);
+                        Common.toast("오류가 발생했습니다.");
+                        GFLL.close(true);
+                        return;
+                    }
+                    finally
+                    {
+                        Common.hideProgress();
+                    }
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+            $("#GFLL-btn-addOne").click(function() { Navigation.moveFrontPage(Navigation.Page.B1041GrpFinanceLossUpdate, { grpno: GFLL.Data.grpno, }); });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GFLL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GFLL.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

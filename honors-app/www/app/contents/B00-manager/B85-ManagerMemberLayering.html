@@ -5,7 +5,7 @@
     <!-- ======================== -->
     <ons-toolbar>
         <div class="left"><gg-backbtn onclick="MMLY.close();"></gg-backbtn></div>
-        <div class="center"><span>멤버직위설정</span></div>
+        <div class="center"><span>권한/직위설정</span></div>
     </ons-toolbar>
 
     <!-- ======================== -->
@@ -32,17 +32,27 @@
         }
     </style>
     <div class="common-div-cushion">
-        <table id="MMLY-tbl-memberList" class="common-tbl-normal" tbl-type="normal">
-            <thead>
-                <tr>
-                    <th col="">계정</th>
-                    <th col="">멤버</th>
-                    <th col="">직급</th>
-                    <th col="">직책</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+
+        <!-- 권한/직위 설정 -->
+        <div class="common-div-formField">
+            <span>권한/직위설정</span>
+            <span>멤버들의 각 권한과 직위를 설정할 수 있습니다.</span>
+        </div>
+        <hr class="common-hr-paddingUD">
+        <div class="common-div-scrollX">
+            <table id="MMLY-tbl-memberList" class="common-tbl-normal common-tag-fontsize09" tbl-type="normal">
+                <thead>
+                    <tr>
+                        <th col="">계정</th>
+                        <th col="">멤버</th>
+                        <th col="">직급</th>
+                        <th col="">직책</th>
+                        <th col="">재무권한</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
         <!-- ======================== -->
@@ -102,24 +112,31 @@
                                     </select>
                                 </td>
                                 <td col=""><input type="text" class="common-input-text MMLY-input-grpmposition" value="${model.getGrpmposition()}" ${model.getPk()} ${disabled}/></td>
+                                <td>
+                                    <label class="common-label-switch MMLY-input-grpmfinauth" ${model.getPk()} ${disabled}>
+                                        <input type="checkbox">
+                                        <span></span>
+                                    </label>
+                                </td>
                             </tr>;
                         `;
                         $tbody.append(tr);
 
                         /* save to origin array */
-                        MMLY.saveToOriginArr(model.getUserno(), model.getGrpmtype(), model.getGrpmposition());
+                        MMLY.saveToOriginArr(model.getUserno(), model.getGrpmtype(), model.getGrpmposition(), model.getGrpmfinauth());
                     }
                     Common.hideProgress();
                 }, ajaxDelayTime);
             },
 
-            saveToOriginArr(userno, grpmtype, grpmposition)
+            saveToOriginArr(userno, grpmtype, grpmposition, grpmfinauth)
             {
                 let dat =
                 {
                     USERNO       : userno,
                     GRPMTYPE     : grpmtype,
                     GRPMPOSITION : grpmposition,
+                    GRPMFINAUTH  : grpmfinauth,
                 };
                 MMLY.originArr.push(dat);
             },
@@ -133,11 +150,13 @@
                     let userno = $(this).attr("userno");
                     let grpmtype = $(this).find("select.MMLY-select-grpmtype").val();
                     let grpmposition = $(this).find("input.MMLY-input-grpmposition").val();
+                    let grpmfinauth = $(this).find("input.MMLY-input-grpmfinauth > input").is(":checked") == true ? "y" : "n";
                     let dat =
                     {
                         USERNO        : userno,
                         GRPMTYPE      : grpmtype,
                         GRPMPOSITION  : grpmposition,
+                        GRPMFINAUTH   : grpmfinauth,
                     };
                     data.push(dat);
                 });
@@ -150,7 +169,11 @@
                         let newDat = data[j];
                         if(originDat.USERNO == newDat.USERNO)
                         {
-                            if(originDat.GRPMTYPE == newDat.GRPMTYPE && originDat.GRPMPOSITION == newDat.GRPMPOSITION)
+                            if(
+                                originDat.GRPMTYPE == newDat.GRPMTYPE &&
+                                originDat.GRPMPOSITION == newDat.GRPMPOSITION &&
+                                originDat.GRPMFINAUTH == newDat.GRPMFINAUTH
+                            )
                             {
                                 data.splice(j, 1);
                                 break;

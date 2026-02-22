@@ -1,0 +1,145 @@
+<ons-page id="GFCL">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="GFCL-toolbar">
+        <div class="left"><gg-backbtn onclick="GFCL.close(true);"></gg-backbtn></div>
+        <div class="center"><span id="GFCL-span-title">자본금 변경이력</span></div>
+    </ons-toolbar>
+
+    <div class="common-div-cushion">
+
+        <!-- --------------- -->
+        <!-- 변경이력 -->
+        <!-- --------------- -->
+
+        <!-- 타이틀 -->
+        <!-- <div class="common-div-formTitle"> -->
+        <!--     <span>자본금 변경이력</span> -->
+        <!--     <span class="GFCL-span-choosedPosition"></span> -->
+        <!-- </div> -->
+
+        <!-- 변경이력 전체 -->
+        <div class="common-div-formField">
+            <span>자본금 변경이력</span>
+            <span>자본금의 변경이력을 표시합니다.</span>
+            <div class="common-div-cushionUD">
+                <button class="common-btn-inline" id="GFCL-btn-addOne">자본금변경</button>
+            </div>
+            <hr class="common-hr-paddingUD">
+            <div id="GFCL-div-historyAll"></div>
+        </div>
+
+    </div>
+
+    <script>
+        var GFCL =
+        {
+            code : "GFCL",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(GFCL.Data.grpno))    { Common.toast("잘못된 접근입니다."); GFCL.close(true); return; }
+                if(Common.isEmpty(GFCL.Data.pagenum))  { GFCL.Data.pagenum = 1; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* vars */
+                        let grpno = GFCL.Data.grpno;
+                        let pagenum = GFCL.Data.pagenum;
+
+                        /* get capital */
+                        let mGrpformng = Api.Grpformng.selectByPk(grpno).getModel();
+                        if(mGrpformng == null)
+                        {
+                            Common.toast("모임 정보를 불러올 수 없습니다.");
+                            GFCL.close(true);
+                            return;
+                        }
+
+                        /* search */
+                        GFCL.search();
+                    }
+                    catch(e)
+                    {
+                        Common.toast("오류가 발생했습니다.");
+                        GFCL.close(true);
+                        return;
+                    }
+                    finally
+                    {
+                        Common.hideProgress();
+                    }
+                }, ajaxDelayTime);
+            },
+
+            search()
+            {
+                /* vars */
+                let grpno = GFCL.Data.grpno;
+                let pagenum = GFCL.Data.pagenum;
+
+                /* get history */
+                let mGrpformnglogs = Api.Grpformnglog.selectGrpfncCapitaltotalByGrpno(grpno, pagenum);
+                mGrpformnglogs.makeTableForCapital("#GFCL-div-historyAll");
+
+                /* pagenation event */
+                $("#GFCL-div-historyAll .common-btn-pagenationBtn").click(function()
+                {
+                    GFCL.Data.pagenum = $(this).attr("pagenum");
+                    GFCL.search();
+                });
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+            $("#GFCL-btn-addOne").click(function() { Navigation.moveFrontPage(Navigation.Page.B1011GrpFinanceCapitalUpdate, { grpno: GFCL.Data.grpno, }); });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GFCL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GFCL.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>
