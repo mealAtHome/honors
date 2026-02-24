@@ -20,9 +20,9 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* GrpfncPurchase */            case "Api.GrpfncPurchase.update"                            : url = serverHost + "/src/data/grpfncPurchase/updateGrpfncPurchase.php"; break;
         /* GrpfncLoss */                case "Api.GrpfncLoss.select"                                : url = serverHost + "/src/data/grpfncLoss/selectGrpfncLoss.php"; break;
         /* GrpfncLoss */                case "Api.GrpfncLoss.update"                                : url = serverHost + "/src/data/grpfncLoss/updateGrpfncLoss.php"; break;
-        /* Grpformng */                 case "Api.Grpformng.select"                                 : url = serverHost + "/src/data/grpformng/selectGrpformng.php"; break;
-        /* Grpformng */                 case "Api.Grpformng.update"                                 : url = serverHost + "/src/data/grpformng/updateGrpformng.php"; break;
-        /* Grpformnglog */              case "Api.Grpformnglog.select"                              : url = serverHost + "/src/data/grpformnglog/selectGrpformnglog.php"; break;
+        /* Grpfnca */                   case "Api.Grpfnca.select"                                   : url = serverHost + "/src/data/grpfnca/selectGrpfnca.php"; break;
+        /* Grpfnca */                   case "Api.Grpfnca.update"                                   : url = serverHost + "/src/data/grpfnca/updateGrpfnca.php"; break;
+        /* Grpfnclog */                 case "Api.Grpfnclog.select"                                 : url = serverHost + "/src/data/grpfnclog/selectGrpfnclog.php"; break;
         /* cls */                       case "Api.Cls.select"                                       : url = serverHost + "/src/data/cls/selectCls.php"; break;
         /* cls */                       case "Api.Cls.update"                                       : url = serverHost + "/src/data/cls/updateCls.php"; break;
         /* clslineup2 */                case "Api.Clslineup2.select"                                : url = serverHost + "/src/data/clslineup2/selectClslineup2.php"; break;

@@ -1,5 +1,6 @@
 <?php
 
+/* grpfnc_sponsorship, gfsp */
 class GrpfncSponsorshipBO extends _CommonBO
 {
     /* ----- */

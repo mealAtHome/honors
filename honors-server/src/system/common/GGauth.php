@@ -27,14 +27,19 @@ class GGauth
     public function isGrpmanager($GRPNO, $USERNO, $errorflg=false)
     {
         /* get grpMember */
+        GGnavi::getUserBO();
         GGnavi::getGrpMemberBO();
         $grpMemberBO = GrpMemberBO::getInstance();
-        $grpMember = $grpMemberBO->getByPk($GRPNO, $USERNO);
+        $userBO = UserBO::getInstance();
+
+        /* records */
+        $grpmtype = Common::getField($grpMemberBO->getByPk($GRPNO, $USERNO), GrpMemberBO::FIELD__GRPMTYPE);
+        $adminflg = Common::getField($userBO->getByPk($USERNO), UserBO::FIELD__ADMINFLG);
 
         /* check grpmtype */
-        $grpmtype = Common::getField($grpMember, GrpMemberBO::FIELD__GRPMTYPE);
         if($grpmtype == GrpMemberBO::GRPMTYPE__MNG)    return true;
         if($grpmtype == GrpMemberBO::GRPMTYPE__MNGSUB) return true;
+        if($adminflg == GGF::Y) return true;
 
         /* return */
         if($errorflg)
@@ -49,13 +54,38 @@ class GGauth
         $grpMemberBO = GrpMemberBO::getInstance();
         $userBO = UserBO::getInstance();
 
+        /* vars */
+        $grpmtype = Common::getField($grpMemberBO->getByPk($GRPNO, $USERNO), GrpMemberBO::FIELD__GRPMTYPE);
+        $adminflg = Common::getField($userBO->getByPk($USERNO), UserBO::FIELD__ADMINFLG);
+
         /* check */
-        if(Common::getField($grpMemberBO->getByPk($GRPNO, $USERNO)  , GrpMemberBO::FIELD__GRPMTYPE) == GrpMemberBO::GRPMTYPE__MNG   ) return true;
-        if(Common::getField($userBO->getByPk($USERNO)               , UserBO::FIELD__ADMINFLG)      == GGF::Y                       ) return true;
+        if($grpmtype == GrpMemberBO::GRPMTYPE__MNG) return true;
+        if($adminflg == GGF::Y) return true;
 
         /* return */
         if($errorflg)
             throw new GGexception("그룹 소유자만 접근가능합니다.");
+        return false;
+    }
+    public function hasGrpmfinauth($GRPNO, $USERNO, $errorflg=false)
+    {
+        /* bo */
+        GGnavi::getUserBO();
+        GGnavi::getGrpMemberBO();
+        $grpMemberBO = GrpMemberBO::getInstance();
+        $userBO = UserBO::getInstance();
+
+        /* vars */
+        $grpmfinauth = Common::getField($grpMemberBO->getByPk($GRPNO, $USERNO), GrpMemberBO::FIELD__GRPMFINAUTH);
+        $adminflg   = Common::getField($userBO->getByPk($USERNO), UserBO::FIELD__ADMINFLG);
+
+        /* check */
+        if($grpmfinauth == GGF::Y) return true;
+        if($adminflg == GGF::Y) return true;
+
+        /* return */
+        if($errorflg)
+            throw new GGexception("그룹 재정 권한이 있는 사용자만 접근가능합니다.");
         return false;
     }
 

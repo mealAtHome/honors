@@ -4,19 +4,18 @@
     /* init */
     /* ============================ */
     include '../../env/env.php';
-    GGnavi::getGrpformngBO();
+    GGnavi::getGrpfncalogBO();
 
     /* vars */
-    $grpformngBO = GrpformngBO::getInstance();
-    $rslt = Common::getReturn();
+    $grpfncalogBO = GrpfncalogBO::getInstance();
+    $rslt = array();
 
     /* ============================ */
     /* process */
     /* ============================ */
-    GGsql::autoCommitFalse();
     try
     {
-        $rslt = $grpformngBO->updateByOption($options);
+        $rslt = $grpfncalogBO->selectByOption($options);
     }
     catch(GGexception $e)
     {
@@ -26,7 +25,8 @@
     {
         $rslt = Common::returnErrorObj($e);
     }
-    GGsql::commit();
+
+    /* print rslt */
     Common::returnRslt($rslt);
 
 ?>

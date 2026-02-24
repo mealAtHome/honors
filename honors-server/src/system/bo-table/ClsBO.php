@@ -602,8 +602,8 @@ class ClsBO extends _CommonBO
             case self::updateBillByPkForInside:
             {
                 /* bo */
-                GGnavi::getGrpformngBO();
-                $grpformngBO = GrpformngBO::getInstance();
+                GGnavi::getGrpfncaBO();
+                $grpfncaBO = GrpfncaBO::getInstance();
 
                 /* process */
                 $query =
@@ -622,7 +622,7 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
 
                 /* recal grp finance */
-                $grpformngBO->recalByPkForInside($GRPNO);
+                $grpfncaBO->recalByPkForInside($GRPNO);
                 break;
             }
             default:

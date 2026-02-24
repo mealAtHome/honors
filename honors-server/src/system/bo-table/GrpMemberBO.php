@@ -134,6 +134,7 @@ class GrpMemberBO extends _CommonBO
                     , u.phone
                     , u.hascarflg
                     , u.address
+                    , u.adminflg
                     , grpmngu.id as grpmanagerid
                 ";
                 break;
@@ -160,6 +161,7 @@ class GrpMemberBO extends _CommonBO
                     , u.phone
                     , u.hascarflg
                     , u.address
+                    , u.adminflg
                     , grpmngu.id as grpmanagerid
                 ";
                 break;

@@ -1,6 +1,6 @@
 <?php
 
-class GrpformnglogBO extends _CommonBO
+class GrpfnclogBO extends _CommonBO
 {
     /* ----- */
     /* singleton */
@@ -83,9 +83,9 @@ class GrpformnglogBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPk                           : { $from = "(select * from grpformnglog where grpno = '$GRPNO' and gfmlfield = '$GFMLFIELD' and gfmlkeyno = '$GFMLKEYNO' and gfmlhistno = '$GFMLHISTNO') t"; break; }
-            case self::selectByPkForInside                  : { $from = "(select * from grpformnglog where grpno = '$GRPNO' and gfmlfield = '$GFMLFIELD' and gfmlkeyno = '$GFMLKEYNO' and gfmlhistno = '$GFMLHISTNO') t"; break; }
-            case self::selectGrpfncCapitaltotalByGrpno      : { $from = "(select * from grpformnglog where grpno = '$GRPNO' and gfmlfield = 'GRPFNC_CAPITALTOTAL') t"; break; }
+            case self::selectByPk                           : { $from = "(select * from grpfnclog where grpno = '$GRPNO' and gfmlfield = '$GFMLFIELD' and gfmlkeyno = '$GFMLKEYNO' and gfmlhistno = '$GFMLHISTNO') t"; break; }
+            case self::selectByPkForInside                  : { $from = "(select * from grpfnclog where grpno = '$GRPNO' and gfmlfield = '$GFMLFIELD' and gfmlkeyno = '$GFMLKEYNO' and gfmlhistno = '$GFMLHISTNO') t"; break; }
+            case self::selectGrpfncCapitaltotalByGrpno      : { $from = "(select * from grpfnclog where grpno = '$GRPNO' and gfmlfield = 'GRPFNC_CAPITALTOTAL') t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -141,7 +141,7 @@ class GrpformnglogBO extends _CommonBO
                 $gfmlfield = "GRPFNC_CAPITALTOTAL";
                 $query =
                 "
-                    insert into grpformnglog
+                    insert into grpfnclog
                     (
                           grpno
                         , gfmlfield
@@ -158,7 +158,7 @@ class GrpformnglogBO extends _CommonBO
                           '$GRPNO'
                         , '$gfmlfield'
                         ,  1
-                        ,  (select ifnull(max(gfmlhistno), 0) + 1 from grpformnglog where grpno = '$GRPNO' and gfmlfield = '$gfmlfield' and gfmlkeyno = 1)
+                        ,  (select ifnull(max(gfmlhistno), 0) + 1 from grpfnclog where grpno = '$GRPNO' and gfmlfield = '$gfmlfield' and gfmlkeyno = 1)
                         , 'update'
                         , ''
                         ,  null

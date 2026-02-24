@@ -102,8 +102,8 @@
                         let grpno = GFCU.Data.grpno;
 
                         /* get capital */
-                        let mGrpformng = Api.Grpformng.selectByPk(grpno).getModel();
-                        if(mGrpformng == null)
+                        let mGrpfnca = Api.Grpfnca.selectByPk(grpno).getModel();
+                        if(mGrpfnca == null)
                         {
                             Common.toast("모임 정보를 불러올 수 없습니다.");
                             GFCU.close(true);
@@ -111,11 +111,10 @@
                         }
 
                         /* init html */
-                        $("#GFCU-input-capital").val(mGrpformng.getGrpfncCapitaltotal());
-                        $("#GFCU-span-originalWon").html(mGrpformng.getGrpfncCapitaltotalWon());
-                        $("#GFCU-span-originalWon").attr("number", mGrpformng.getGrpfncCapitaltotal());
+                        $("#GFCU-input-capital").val(mGrpfnca.getGrpfncCapitaltotal());
+                        $("#GFCU-span-originalWon").html(mGrpfnca.getGrpfncCapitaltotalWon());
+                        $("#GFCU-span-originalWon").attr("number", mGrpfnca.getGrpfncCapitaltotal());
                         $("#GFCU-input-capital").keyup();
-
                     }
                     catch(e)
                     {
@@ -172,7 +171,7 @@
                     Common.showProgress();
                     setTimeout(function()
                     {
-                        let mApiResponse = Api.Grpformng.updateCapitaltotalByPk(grpno, capital, comment, GGF.toast, GGF.toast);
+                        let mApiResponse = Api.Grpfnca.updateCapitaltotalByPk(grpno, capital, comment, GGF.toast, GGF.toast);
                         if(mApiResponse.isSuccess())
                         {
                             Common.hideProgress();

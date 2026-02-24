@@ -38,6 +38,7 @@
                 <li>일정의 재무반영여부는 "일정현황" 탭에서 지정하거나 각 일정상세에서 설정할 수 있습니다.</li>
             </ul>
         </div>
+
         <style>
             #GFHM-tbl-grpfinance { width:100%; }
             #GFHM-tbl-grpfinance > tbody > tr > th { text-align: left; white-space: nowrap; padding: 0.4em 0.6em; width:30%; }
@@ -71,18 +72,8 @@
                         <td><button id="GFHM-btn-totalLossDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
-                        <th><span>[일정]정산누적</span></th>
+                        <th><span>[일정]청구누적</span></th>
                         <td id="GFHM-td-totalSettlebill">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
-                    </tr>
-                    <tr>
-                        <th><span>[일정]미입금 총액</span></th>
-                        <td id="GFHM-td-totalUnpaidNowAmount">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
-                    </tr>
-                    <tr>
-                        <th><span>[일정]미입금 손실</span></th>
-                        <td id="GFHM-td-totalUnpaidLossAmount">0원</td>
                         <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
                     </tr>
                     <tr>
@@ -91,12 +82,23 @@
                         <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
                     </tr>
                     <tr>
-                        <th><span>최종누적금액</span></th>
+                        <th><span>[일정]미입금누적</span></th>
+                        <td id="GFHM-td-totalUnpaidNowAmount">0원</td>
+                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                    </tr>
+                    <tr>
+                        <th><span>최종이익금</span></th>
                         <td id="GFHM-td-netProfitbill">0원</td>
                         <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="common-div-cushionLRD">
+            <span id="GFHM-span-lastModified" class="common-tag-block"></span>
+        </div>
+        <div id="GFHM-div-commands" class="common-div-cushion" style="display:none;">
+            <button class="common-btn-inline" id="GFHM-btn-recalByPk">재무현황 재계산</button>
         </div>
     </div>
 
@@ -129,8 +131,30 @@
                 if(GFHM.Data.pagenoForCls   == undefined) { GFHM.Data.pagenoForCls = 1; }
                 if(GFHM.Data.maintab        == undefined) { GFHM.Data.maintab = "finance"; }
 
-                /* set tab */
+                /* init html */
+                $("#GFHM-div-commands").hide();
                 $(`.GFHM-td-maintab[val='${GFHM.Data.maintab}']`).click();
+
+                /* get */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* var */
+                        let grpno = GFHM.Data.grpno;
+
+                        /* get grpm info */
+                        let mGrpMember = Api.GrpMember.selectMeByGrpno(grpno);
+                        if(mGrpMember.hasGrpmfinauth())
+                            $("#GFHM-div-commands").show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
             },
 
             search()
@@ -194,14 +218,16 @@
                                 $("#GFHM-td-netProfitbill").html("-");
 
                                 /* get finance info */
-                                let mGrpformng = Api.Grpformng.selectByPk(grpno).getModel();
-                                // if(mGrpformng != null)
-                                // {
-                                //     $("#GFHM-td-totalCapital").html(mGrpformng.getGrpfncCapitalWon());
-                                //     $("#GFHM-td-totalSettlebill").html(mGrpformng.getGrpfncSalesWon());
-                                //     $("#GFHM-td-totalPurchasebill").html(mGrpformng.getGrpfncPurchaseWon());
-                                //     $("#GFHM-td-netProfitbill").html(mGrpformng.getGrpfncProfitWon());
-                                // }
+                                let mGrpfnca = Api.Grpfnca.selectByPk(grpno).getModel();
+                                if(mGrpfnca != null)
+                                {
+                                    // $("#GFHM-td-totalCapital").html(mGrpfnca.getGrpfncCapitalWon());
+                                    // $("#GFHM-td-totalSettlebill").html(mGrpfnca.getGrpfncSalesWon());
+                                    // $("#GFHM-td-totalPurchasebill").html(mGrpfnca.getGrpfncPurchaseWon());
+                                    // $("#GFHM-td-netProfitbill").html(mGrpfnca.getGrpfncProfitWon());
+                                    $("#GFHM-span-lastModified").html(`최근 업데이트: (${mGrpfnca.getModidtDiff()}) ${mGrpfnca.getModidt()}`);
+                                }
+
                                 break;
                             }
                             case "reflect":
@@ -222,6 +248,33 @@
                     }
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            });
+
+            /* 재무현황 재계산 */
+            $("#GFHM-btn-recalByPk").click(function()
+            {
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        try
+                        {
+                            let mApiResponse = Api.Grpfnca.recalByPk(GFHM.Data.grpno);
+                            if(mApiResponse.isSuccess())
+                            {
+                                Navigation.executeShow();
+                                return;
+                            }
+                        }
+                        catch(e)
+                        {
+                            Common.catchProc(e);
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("재무현황을 재계산하시겠습니까?", process);
             });
 
 

@@ -1,5 +1,6 @@
 <?php
 
+/* grpfnc_loss, gfls */
 class GrpfncLossBO extends _CommonBO
 {
     /* ----- */

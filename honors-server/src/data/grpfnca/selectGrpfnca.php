@@ -4,10 +4,10 @@
     /* init */
     /* ============================ */
     include '../../env/env.php';
-    GGnavi::getGrpformngBO();
+    GGnavi::getGrpfncaBO();
 
     /* vars */
-    $grpformngBO = GrpformngBO::getInstance();
+    $grpfncaBO = GrpfncaBO::getInstance();
     $rslt = array();
 
     /* ============================ */
@@ -15,12 +15,12 @@
     /* ============================ */
     try
     {
-        $rslt = $grpformngBO->selectByOption($options);
+        $rslt = $grpfncaBO->selectByOption($options);
 
         /* get data, if not exists, make new one */
         switch($OPTION)
         {
-            case GrpformngBO::selectByPk:
+            case GrpfncaBO::selectByPk:
             {
                 /* if has record, break */
                 $data = Common::getDataOne($rslt);
@@ -35,8 +35,8 @@
                     break;
 
                 /* make new record */
-                $grpformngBO->recalByPkForInside($GRPNO);
-                $rslt = $grpformngBO->selectByOption($options);
+                $grpfncaBO->makeRecordsIfNotExistsByPkForInside($GRPNO);
+                $rslt = $grpfncaBO->selectByOption($options);
                 break;
             }
         }

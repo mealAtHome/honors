@@ -58,8 +58,8 @@
                         let pagenum = GFCL.Data.pagenum;
 
                         /* get capital */
-                        let mGrpformng = Api.Grpformng.selectByPk(grpno).getModel();
-                        if(mGrpformng == null)
+                        let mGrpfnca = Api.Grpfnca.selectByPk(grpno).getModel();
+                        if(mGrpfnca == null)
                         {
                             Common.toast("모임 정보를 불러올 수 없습니다.");
                             GFCL.close(true);
@@ -89,8 +89,8 @@
                 let pagenum = GFCL.Data.pagenum;
 
                 /* get history */
-                let mGrpformnglogs = Api.Grpformnglog.selectGrpfncCapitaltotalByGrpno(grpno, pagenum);
-                mGrpformnglogs.makeTableForCapital("#GFCL-div-historyAll");
+                let mGrpfnclogs = Api.Grpfnclog.selectGrpfncCapitaltotalByGrpno(grpno, pagenum);
+                mGrpfnclogs.makeTableForCapital("#GFCL-div-historyAll");
 
                 /* pagenation event */
                 $("#GFCL-div-historyAll .common-btn-pagenationBtn").click(function()

@@ -48,6 +48,7 @@ class MGrpMember
     // hasApplyer()    { return !Common.isEmpty(this.getUsername()); }
     isGrpmstatusDelete() { return this.getGrpmstatus() === GGF.GrpMember.Grpmstatus.DELETE; }
     isUsertypeTemp() { return this.getMUser().isUsertypeTemp(); }
+    hasGrpmfinauth() { return this.getGrpmfinauth() === GGF.Y || this.getMUser().isAdmin(); }
 
     /* ========================= */
     /* fields - additional */

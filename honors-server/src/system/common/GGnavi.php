@@ -30,8 +30,8 @@ class GGnavi
     static public function getClssettletmpBO()                                      { require_once ROOT."/src/system/bo-table/ClssettletmpBO.php"; }
     static public function getIdxBO()                                               { require_once ROOT."/src/system/bo-table/_IdxBO.php"; }
     static public function getGrpBO()                                               { require_once ROOT."/src/system/bo-table/GrpBO.php"; }
-    static public function getGrpformngBO()                                         { require_once ROOT."/src/system/bo-table/GrpformngBO.php"; }
-    static public function getGrpformnglogBO()                                      { require_once ROOT."/src/system/bo-table/GrpformnglogBO.php"; }
+    static public function getGrpfncaBO()                                           { require_once ROOT."/src/system/bo-table/GrpfncaBO.php"; }
+    static public function getGrpfnclogBO()                                         { require_once ROOT."/src/system/bo-table/GrpfnclogBO.php"; }
     static public function getGrpfncLossBO()                                        { require_once ROOT."/src/system/bo-table/GrpfncLossBO.php"; }
     static public function getGrpfncPurchaseBO()                                    { require_once ROOT."/src/system/bo-table/GrpfncPurchaseBO.php"; }
     static public function getGrpfncSponsorshipBO()                                 { require_once ROOT."/src/system/bo-table/GrpfncSponsorshipBO.php"; }

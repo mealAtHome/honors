@@ -1,4 +1,4 @@
-class MGrpformnglog
+class MGrpfnclog
 {
     constructor(dat)
     {
@@ -37,7 +37,7 @@ class MGrpformnglog
 }
 
 
-class MGrpformnglogs extends _MCommon
+class MGrpfnclogs extends _MCommon
 {
     constructor(ajax)
     {
@@ -45,7 +45,7 @@ class MGrpformnglogs extends _MCommon
         for(let i in this.data)
         {
             let dat = this.data[i];
-            this.models.push(new MGrpformnglog(dat));
+            this.models.push(new MGrpfnclog(dat));
         }
     } /* constructor */
 
@@ -73,7 +73,7 @@ class MGrpformnglogs extends _MCommon
         html =
         `
             <div class="common-div-scrollX">
-                <table class="MGrpformnglog-makeTableForCapital-tbl-top common-tbl-normal" tbl-type="rowborder">
+                <table class="MGrpfnclog-makeTableForCapital-tbl-top common-tbl-normal" tbl-type="rowborder">
                     <thead>
                         <tr>
                             <th>변경일자</th>

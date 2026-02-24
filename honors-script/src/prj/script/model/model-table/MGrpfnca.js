@@ -1,4 +1,4 @@
-class MGrpformng
+class MGrpfnca
 {
     constructor(dat)
     {
@@ -44,11 +44,12 @@ class MGrpformng
     getGrpfncClssaleslosstotalWon() { return GGC.Common.priceWon(this.getGrpfncClssaleslosstotal()); }
     getGrpfncClspurchasetotalWon() { return GGC.Common.priceWon(this.getGrpfncClspurchasetotal()); }
     getGrpfncAlltotalWon() { return GGC.Common.priceWon(this.getGrpfncAlltotal()); }
+    getModidtDiff() { return GGC.Common.dateDiff(this.getModidt()); }
 
 }
 
 
-class MGrpformngs extends _MCommon
+class MGrpfncas extends _MCommon
 {
     constructor(ajax)
     {
@@ -56,7 +57,7 @@ class MGrpformngs extends _MCommon
         for(let i in this.data)
         {
             let dat = this.data[i];
-            this.models.push(new MGrpformng(dat));
+            this.models.push(new MGrpfnca(dat));
         }
     } /* constructor */
 

@@ -342,6 +342,7 @@ GGC.Common =
         return src;
     },
 
+    dateDiff(value) { return GGC.Common.datePretty(value); },
     datePretty(value)
     {
         if(value == null || value == "")

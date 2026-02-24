@@ -14,6 +14,7 @@ class MUser
         /* data */      this.hascarflg      = GGC.Common.enum(dat.hascarflg);
         /* data */      this.address        = GGC.Common.char(dat.address);
         /* data */      this.point          = GGC.Common.int(dat.point);
+        /* data */      this.adminflg       = GGC.Common.enum(dat.adminflg);
         /* data */      this.modidt         = GGC.Common.datetime(dat.modidt);
         /* data */      this.regidt         = GGC.Common.datetime(dat.regidt);
         /* custom */    this.hascarflgCvrt  = GGC.User.hascarflg(dat.hascarflg);
@@ -37,6 +38,7 @@ class MUser
     getHascarflg() { return this.hascarflg; }
     getAddress() { return this.address; }
     getPoint() { return this.point; }
+    getAdminflg() { return this.adminflg; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
 
@@ -57,7 +59,8 @@ class MUser
     /* ========================= */
     /* is ? */
     /* ========================= */
-    isUsertypeTemp() { return this.usertype === GGF.User.Usertype.TEMP; }
+    isUsertypeTemp() { return this.getUsertype() === GGF.User.Usertype.TEMP; }
+    isAdmin() { return this.getAdminflg() === GGF.Y; }
 
 }
 

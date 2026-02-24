@@ -1,5 +1,6 @@
 <?php
 
+/* grpfnc_purchase, gfpc */
 class GrpfncPurchaseBO extends _CommonBO
 {
     /* ----- */
