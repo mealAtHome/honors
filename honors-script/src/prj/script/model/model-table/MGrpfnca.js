@@ -2,17 +2,17 @@ class MGrpfnca
 {
     constructor(dat)
     {
-        /* data */      this.grpno                              = GGC.Common.char(dat.grpno);
-        /* data */      this.grpfnc_capitaltotal                = GGC.Common.bigint(dat.grpfnc_capitaltotal);
-        /* data */      this.grpfnc_sponsorshiptotal            = GGC.Common.bigint(dat.grpfnc_sponsorshiptotal);
-        /* data */      this.grpfnc_purchasetotal               = GGC.Common.bigint(dat.grpfnc_purchasetotal);
-        /* data */      this.grpfnc_losstotal                   = GGC.Common.bigint(dat.grpfnc_losstotal);
-        /* data */      this.grpfnc_clssalestotal               = GGC.Common.bigint(dat.grpfnc_clssalestotal);
-        /* data */      this.grpfnc_clssalesunpaidtotal         = GGC.Common.bigint(dat.grpfnc_clssalesunpaidtotal);
-        /* data */      this.grpfnc_clssaleslosstotal           = GGC.Common.bigint(dat.grpfnc_clssaleslosstotal);
-        /* data */      this.grpfnc_clspurchasetotal            = GGC.Common.bigint(dat.grpfnc_clspurchasetotal);
-        /* data */      this.grpfnc_alltotal                    = GGC.Common.bigint(dat.grpfnc_alltotal);
-        /* data */      this.modidt                             = GGC.Common.datetime(dat.modidt);
+        /* data */      this.grpno                              =      GGC.Common.char(dat.grpno);
+        /* data */      this.grpfnc_capitaltotal                =      GGC.Common.bigint(dat.grpfnc_capitaltotal);
+        /* data */      this.grpfnc_sponsorshiptotal            =      GGC.Common.bigint(dat.grpfnc_sponsorshiptotal);
+        /* data */      this.grpfnc_purchasetotal               = -1 * GGC.Common.bigint(dat.grpfnc_purchasetotal);
+        /* data */      this.grpfnc_losstotal                   = -1 * GGC.Common.bigint(dat.grpfnc_losstotal);
+        /* data */      this.grpfnc_clssalestotal               =      GGC.Common.bigint(dat.grpfnc_clssalestotal);
+        /* data */      this.grpfnc_clssalesunpaidtotal         = -1 * GGC.Common.bigint(dat.grpfnc_clssalesunpaidtotal);
+        /* data */      this.grpfnc_clssaleslosstotal           = -1 * GGC.Common.bigint(dat.grpfnc_clssaleslosstotal);
+        /* data */      this.grpfnc_clspurchasetotal            = -1 * GGC.Common.bigint(dat.grpfnc_clspurchasetotal);
+        /* data */      this.grpfnc_alltotal                    =      GGC.Common.bigint(dat.grpfnc_alltotal);
+        /* data */      this.modidt                             =      GGC.Common.datetime(dat.modidt);
         /* custom */    this.pk = `grpno="${this.grpno}"`;
     }
 
@@ -35,15 +35,15 @@ class MGrpfnca
     /* ========================= */
     /* make */
     /* ========================= */
-    getGrpfncCapitaltotalWon() { return GGC.Common.priceWon(this.getGrpfncCapitaltotal()); }
-    getGrpfncSponsorshiptotalWon() { return GGC.Common.priceWon(this.getGrpfncSponsorshiptotal()); }
-    getGrpfncPurchasetotalWon() { return GGC.Common.priceWon(this.getGrpfncPurchasetotal()); }
-    getGrpfncLosstotalWon() { return GGC.Common.priceWon(this.getGrpfncLosstotal()); }
-    getGrpfncClssalestotalWon() { return GGC.Common.priceWon(this.getGrpfncClssalestotal()); }
-    getGrpfncClssalesunpaidtotalWon() { return GGC.Common.priceWon(this.getGrpfncClssalesunpaidtotal()); }
-    getGrpfncClssaleslosstotalWon() { return GGC.Common.priceWon(this.getGrpfncClssaleslosstotal()); }
-    getGrpfncClspurchasetotalWon() { return GGC.Common.priceWon(this.getGrpfncClspurchasetotal()); }
-    getGrpfncAlltotalWon() { return GGC.Common.priceWon(this.getGrpfncAlltotal()); }
+    getGrpfncCapitaltotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncCapitaltotal()); }
+    getGrpfncSponsorshiptotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncSponsorshiptotal()); }
+    getGrpfncPurchasetotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncPurchasetotal()); }
+    getGrpfncLosstotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncLosstotal()); }
+    getGrpfncClssalestotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClssalestotal()); }
+    getGrpfncClssalesunpaidtotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClssalesunpaidtotal()); }
+    getGrpfncClssaleslosstotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClssaleslosstotal()); }
+    getGrpfncClspurchasetotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClspurchasetotal()); }
+    getGrpfncAlltotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncAlltotal()); }
     getModidtDiff() { return GGC.Common.dateDiff(this.getModidt()); }
 
 }

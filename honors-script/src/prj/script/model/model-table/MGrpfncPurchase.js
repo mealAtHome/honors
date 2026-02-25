@@ -25,7 +25,7 @@ class MGrpfncPurchase
     /* ========================= */
     /* make */
     /* ========================= */
-    /* custom */    getPurchasecostPriceFull() { return GGC.Common.priceFull(this.getPurchasecost()); }
+    /* custom */    getPurchasecostPriceColor() { return GGC.Common.priceColor(this.getPurchasecost()); }
     /* custom */    getPk() { return `grpno="${this.getGrpno()}" purchaseidx="${this.getPurchaseidx()}"`; }
 
 }
@@ -55,7 +55,7 @@ class MGrpfncPurchases extends _MCommon
                     <td col="purchaseidx"           >${model.getPurchaseidx()}</td>
                     <td col="regdt"                 >${model.getRegdt()}</td>
                     <td col="purchaseitem"          >${model.getPurchaseitem()}</td>
-                    <td col="purchasecost"          >${model.getPurchasecostPriceFull()}</td>
+                    <td col="purchasecost"          >${model.getPurchasecostPriceColor()}</td>
                     <td col="purchasecomment"       >${model.getPurchasecomment()}</td>
                 </tr>
             `;

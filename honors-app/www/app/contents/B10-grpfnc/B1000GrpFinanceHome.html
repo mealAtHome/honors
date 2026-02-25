@@ -44,52 +44,58 @@
             #GFHM-tbl-grpfinance > tbody > tr > th { text-align: left; white-space: nowrap; padding: 0.4em 0.6em; width:30%; }
             #GFHM-tbl-grpfinance > tbody > tr > td { text-align: left; white-space: nowrap; padding: 0.4em 0.6em; }
 
-            #GFHM-tbl-grpfinance > tbody > tr > th:nth-child(1) { width:10%; white-space:nowrap;  }
-            #GFHM-tbl-grpfinance > tbody > tr > td:nth-child(2) { width:80%; white-space:nowrap; border-right: none; }
-            #GFHM-tbl-grpfinance > tbody > tr > td:nth-child(3) { width:10%; white-space:nowrap; border-left: none; }
+            #GFHM-tbl-grpfinance > tbody > tr > th:nth-child(1) { width:10%; white-space:nowrap; }
+            #GFHM-tbl-grpfinance > tbody > tr > th:nth-child(1) > span { font-size:0.9em; }
+            #GFHM-tbl-grpfinance > tbody > tr > td:nth-child(2) { width:80%; white-space:nowrap; border-right : none; text-align: right; }
+            #GFHM-tbl-grpfinance > tbody > tr > td:nth-child(3) { width:10%; white-space:nowrap; border-left  : none; }
         </style>
         <div class="common-div-cushion">
             <table id="GFHM-tbl-grpfinance" class="common-tbl-normal" tbl-type="normal">
                 <tbody>
                     <tr>
                         <th><span>자본금</span></th>
-                        <td id="GFHM-td-capitaltotal">0원</td>
-                        <td><button id="GFHM-btn-capitaltotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                        <td><span id="GFHM-span-grpfncCapitaltotal">0원</span></td>
+                        <td><button id="GFHM-btn-grpfncCapitaltotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
                         <th><span>찬조누적</span></th>
-                        <td id="GFHM-td-sponsorshiptotal">0원</td>
-                        <td><button id="GFHM-btn-sponsorshiptotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                        <td><span id="GFHM-span-grpfncSponsorshiptotal">0원</span></td>
+                        <td><button id="GFHM-btn-grpfncSponsorshiptotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
                         <th><span>구매누적</span></th>
-                        <td id="GFHM-td-totalPurchase">0원</td>
-                        <td><button id="GFHM-btn-totalPurchaseDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                        <td><span id="GFHM-span-grpfncPurchasetotal">0원</span></td>
+                        <td><button id="GFHM-btn-grpfncPurchasetotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
                         <th><span>손실누적</span></th>
-                        <td id="GFHM-td-totalLoss">0원</td>
-                        <td><button id="GFHM-btn-totalLossDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
+                        <td><span id="GFHM-span-grpfncLosstotal">0원</span></td>
+                        <td><button id="GFHM-btn-grpfncLosstotalDetail" class="common-btn-outline common-tag-fontsize09">상세</button></td>
                     </tr>
                     <tr>
                         <th><span>[일정]청구누적</span></th>
-                        <td id="GFHM-td-totalSettlebill">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
-                    </tr>
-                    <tr>
-                        <th><span>[일정]구매누적</span></th>
-                        <td id="GFHM-td-totalPurchasebill">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                        <td><span id="GFHM-span-grpfncClssalestotal">0원</span></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th><span>[일정]미입금누적</span></th>
-                        <td id="GFHM-td-totalUnpaidNowAmount">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                        <td><span id="GFHM-span-grpfncClssalesunpaidtotal">0원</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th><span>[일정]손실누적</span></th>
+                        <td><span id="GFHM-span-grpfncClssaleslosstotal">0원</span></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th><span>[일정]구매누적</span></th>
+                        <td><span id="GFHM-span-grpfncClspurchasetotal">0원</span></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th><span>최종이익금</span></th>
-                        <td id="GFHM-td-netProfitbill">0원</td>
-                        <td><button class="common-btn-outline common-tag-fontsize09" style="visibility: hidden;">상세</button></td>
+                        <td><span id="GFHM-span-grpfncAlltotal">0원</span></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
@@ -181,10 +187,10 @@
             /* ========================= */
             /* event */
             /* ========================= */
-            $("#GFHM-btn-capitaltotalDetail")       .click(function() { Navigation.moveFrontPage(Navigation.Page.B1010GrpFinanceCapitalList,   {grpno:GFHM.Data.grpno, }); });
-            $("#GFHM-btn-sponsorshiptotalDetail")   .click(function() { Navigation.moveFrontPage(Navigation.Page.B1020GrpFinanceSponsorList,   {grpno:GFHM.Data.grpno, }); });
-            $("#GFHM-btn-totalPurchaseDetail")      .click(function() { Navigation.moveFrontPage(Navigation.Page.B1030GrpFinancePurchaseList,  {grpno:GFHM.Data.grpno, }); });
-            $("#GFHM-btn-totalLossDetail")          .click(function() { Navigation.moveFrontPage(Navigation.Page.B1040GrpFinanceLossList,      {grpno:GFHM.Data.grpno, }); });
+            $("#GFHM-btn-grpfncCapitaltotalDetail")       .click(function() { Navigation.moveFrontPage(Navigation.Page.B1010GrpFinanceCapitalList,   {grpno:GFHM.Data.grpno, }); });
+            $("#GFHM-btn-grpfncSponsorshiptotalDetail")   .click(function() { Navigation.moveFrontPage(Navigation.Page.B1020GrpFinanceSponsorList,   {grpno:GFHM.Data.grpno, }); });
+            $("#GFHM-btn-grpfncPurchasetotalDetail")      .click(function() { Navigation.moveFrontPage(Navigation.Page.B1030GrpFinancePurchaseList,  {grpno:GFHM.Data.grpno, }); });
+            $("#GFHM-btn-grpfncLosstotalDetail")          .click(function() { Navigation.moveFrontPage(Navigation.Page.B1040GrpFinanceLossList,      {grpno:GFHM.Data.grpno, }); });
 
             $(".GFHM-td-maintab").click(function()
             {
@@ -225,6 +231,15 @@
                                     // $("#GFHM-td-totalSettlebill").html(mGrpfnca.getGrpfncSalesWon());
                                     // $("#GFHM-td-totalPurchasebill").html(mGrpfnca.getGrpfncPurchaseWon());
                                     // $("#GFHM-td-netProfitbill").html(mGrpfnca.getGrpfncProfitWon());
+                                    $("#GFHM-span-grpfncCapitaltotal").html(mGrpfnca.getGrpfncCapitaltotalPriceColor());
+                                    $("#GFHM-span-grpfncSponsorshiptotal").html(mGrpfnca.getGrpfncSponsorshiptotalPriceColor());
+                                    $("#GFHM-span-grpfncPurchasetotal").html(mGrpfnca.getGrpfncPurchasetotalPriceColor());
+                                    $("#GFHM-span-grpfncLosstotal").html(mGrpfnca.getGrpfncLosstotalPriceColor());
+                                    $("#GFHM-span-grpfncClssalestotal").html(mGrpfnca.getGrpfncClssalestotalPriceColor());
+                                    $("#GFHM-span-grpfncClssalesunpaidtotal").html(mGrpfnca.getGrpfncClssalesunpaidtotalPriceColor());
+                                    $("#GFHM-span-grpfncClssaleslosstotal").html(mGrpfnca.getGrpfncClssaleslosstotalPriceColor());
+                                    $("#GFHM-span-grpfncClspurchasetotal").html(mGrpfnca.getGrpfncClspurchasetotalPriceColor());
+                                    $("#GFHM-span-grpfncAlltotal").html(mGrpfnca.getGrpfncAlltotalPriceColor());
                                     $("#GFHM-span-lastModified").html(`최근 업데이트: (${mGrpfnca.getModidtDiff()}) ${mGrpfnca.getModidt()}`);
                                 }
 

@@ -25,7 +25,7 @@ class MGrpfncLoss
     /* ========================= */
     /* make */
     /* ========================= */
-    /* custom */    getLosscostPriceFull() { return GGC.Common.priceFull(this.getLosscost()); }
+    /* custom */    getLosscostPriceColor() { return GGC.Common.priceColor(this.getLosscost()); }
     /* custom */    getPk() { return `grpno="${this.getGrpno()}" lossidx="${this.getLossidx()}"`; }
 
 }
@@ -55,7 +55,7 @@ class MGrpfncLosses extends _MCommon
                     <td col="lossidx"           >${model.getLossidx()}</td>
                     <td col="regdt"             >${model.getRegdt()}</td>
                     <td col="lossitem"          >${model.getLossitem()}</td>
-                    <td col="losscost"          >${model.getLosscostPriceFull()}</td>
+                    <td col="losscost"          >${model.getLosscostPriceColor()}</td>
                     <td col="losscomment"       >${model.getLosscomment()}</td>
                 </tr>
             `;

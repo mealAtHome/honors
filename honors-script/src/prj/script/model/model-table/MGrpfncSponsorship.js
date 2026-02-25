@@ -31,7 +31,7 @@ class MGrpfncSponsorship
     /* ========================= */
     /* make */
     /* ========================= */
-    /* custom */    getSponcostPriceFull() { return GGC.Common.priceFull(this.getSponcost()); }
+    /* custom */    getSponcostPriceColor() { return GGC.Common.priceColor(this.getSponcost()); }
     /* custom */    getSpontypeFont() { return GGC.GrpfncSponsorship.spontypeFont(this.getSpontype()); }
     /* custom */    getUsernameForDp() { return Common.isEmpty(this.getSponuserno()) ? this.getSponusername() : this.getUsername(); }
     /* custom */    getPk() { return `grpno="${this.getGrpno()}" sponidx="${this.getSponidx()}"`; }
@@ -73,7 +73,7 @@ class MGrpfncSponsorships extends _MCommon
                     <td col="regdt"             >${model.getRegdt()}</td>
                     <td col="username"          >${model.getUsernameForDp()}</td>
                     <td col="sponitem"          >${model.getSponitemFinal()}</td>
-                    <td col="sponcost"          >${model.getSponcostPriceFull()}</td>
+                    <td col="sponcost"          >${model.getSponcostPriceColor()}</td>
                     <td col="sponcomment"       >${model.getSponcomment()}</td>
                 </tr>
             `;
