@@ -31,7 +31,7 @@ class MGrpfncSponsorship
     /* ========================= */
     /* make */
     /* ========================= */
-    /* custom */    getSponcostPriceColor() { return GGC.Common.priceColor(this.getSponcost()); }
+    /* custom */    getSponcostWonColor() { return GGC.Common.wonColor(this.getSponcost()); }
     /* custom */    getSpontypeFont() { return GGC.GrpfncSponsorship.spontypeFont(this.getSpontype()); }
     /* custom */    getUsernameForDp() { return Common.isEmpty(this.getSponuserno()) ? this.getSponusername() : this.getUsername(); }
     /* custom */    getPk() { return `grpno="${this.getGrpno()}" sponidx="${this.getSponidx()}"`; }
@@ -69,11 +69,12 @@ class MGrpfncSponsorships extends _MCommon
             html +=
             `
                 <tr>
+                    <td col="delete"            ><button class="MGrpfncSponsorship-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()}>삭제</td>
                     <td col="sponidx"           >${model.getSponidx()}</td>
                     <td col="regdt"             >${model.getRegdt()}</td>
                     <td col="username"          >${model.getUsernameForDp()}</td>
                     <td col="sponitem"          >${model.getSponitemFinal()}</td>
-                    <td col="sponcost"          >${model.getSponcostPriceColor()}</td>
+                    <td col="sponcost"          >${model.getSponcostWonColor()}</td>
                     <td col="sponcomment"       >${model.getSponcomment()}</td>
                 </tr>
             `;
@@ -85,6 +86,7 @@ class MGrpfncSponsorships extends _MCommon
                 <table class="MGrpfncSponsorship-makeTable-mainTable common-tbl-normal" tbl-type="rowborder">
                     <thead>
                         <tr>
+                            <th>삭제</th>
                             <th>번호</th>
                             <th>등록일</th>
                             <th>찬조자</th>
@@ -104,6 +106,32 @@ class MGrpfncSponsorships extends _MCommon
         let pagenation = this.getPagenation();
         html = pagenation + html + pagenation;
         $(el).html(html);
+
+        /* event */
+        $(`${el} .MGrpfncSponsorship-makeTable-btn-delete`).off("click").on("click", function()
+        {
+            let grpno = $(this).attr("grpno");
+            let sponidx = $(this).attr("sponidx");
+            let process = function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        let mApiResponse = Api.GrpfncSponsorship.deleteByPk(grpno, sponidx);
+                        if(mApiResponse.isSuccess())
+                            Navigation.executeShow();
+                    }
+                    catch(e)
+                    {
+                        console.error(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            }
+            Common.confirm2("찬조 내역을 삭제하시겠습니까?", process);
+        });
     }
 
 }

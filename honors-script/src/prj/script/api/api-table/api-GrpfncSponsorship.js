@@ -33,6 +33,7 @@ Api.GrpfncSponsorship =
         };
         return Api.GrpfncSponsorship.update(ajaxData, noticeOK, noticeFail);
     },
+    deleteByPk(grpno, sponidx, noticeOK, noticeFail) { return Api.GrpfncSponsorship.update({ OPTION:"deleteByPk", GRPNO:grpno, SPONIDX:sponidx }, noticeOK, noticeFail); },
 
 
     /* ========================= */

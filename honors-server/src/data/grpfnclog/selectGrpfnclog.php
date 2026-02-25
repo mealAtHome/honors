@@ -4,10 +4,10 @@
     /* init */
     /* ============================ */
     include '../../env/env.php';
-    GGnavi::getGrpfncalogBO();
+    GGnavi::getGrpfnclogBO();
 
     /* vars */
-    $grpfncalogBO = GrpfncalogBO::getInstance();
+    $grpfnclogBO = GrpfnclogBO::getInstance();
     $rslt = array();
 
     /* ============================ */
@@ -15,7 +15,7 @@
     /* ============================ */
     try
     {
-        $rslt = $grpfncalogBO->selectByOption($options);
+        $rslt = $grpfnclogBO->selectByOption($options);
     }
     catch(GGexception $e)
     {

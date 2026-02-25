@@ -35,15 +35,16 @@ class MGrpfnca
     /* ========================= */
     /* make */
     /* ========================= */
-    getGrpfncCapitaltotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncCapitaltotal()); }
-    getGrpfncSponsorshiptotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncSponsorshiptotal()); }
-    getGrpfncPurchasetotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncPurchasetotal()); }
-    getGrpfncLosstotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncLosstotal()); }
-    getGrpfncClssalestotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClssalestotal()); }
-    getGrpfncClssalesunpaidtotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClssalesunpaidtotal()); }
-    getGrpfncClssaleslosstotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClssaleslosstotal()); }
-    getGrpfncClspurchasetotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncClspurchasetotal()); }
-    getGrpfncAlltotalPriceColor() { return GGC.Common.priceColor(this.getGrpfncAlltotal()); }
+    /* Won */      getGrpfncCapitaltotalWon() { return GGC.Common.priceWon(this.getGrpfncCapitaltotal()); }
+    /* wonColor */ getGrpfncCapitaltotalWonColor() { return GGC.Common.wonColor(this.getGrpfncCapitaltotal()); }
+    /* wonColor */ getGrpfncSponsorshiptotalWonColor() { return GGC.Common.wonColor(this.getGrpfncSponsorshiptotal()); }
+    /* wonColor */ getGrpfncPurchasetotalWonColor() { return GGC.Common.wonColor(this.getGrpfncPurchasetotal()); }
+    /* wonColor */ getGrpfncLosstotalWonColor() { return GGC.Common.wonColor(this.getGrpfncLosstotal()); }
+    /* wonColor */ getGrpfncClssalestotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClssalestotal()); }
+    /* wonColor */ getGrpfncClssalesunpaidtotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClssalesunpaidtotal()); }
+    /* wonColor */ getGrpfncClssaleslosstotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClssaleslosstotal()); }
+    /* wonColor */ getGrpfncClspurchasetotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClspurchasetotal()); }
+    /* wonColor */ getGrpfncAlltotalWonColor() { return GGC.Common.wonColor(this.getGrpfncAlltotal()); }
     getModidtDiff() { return GGC.Common.dateDiff(this.getModidt()); }
 
 }

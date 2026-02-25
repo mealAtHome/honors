@@ -14,8 +14,10 @@ class GrpfncLossBO extends _CommonBO
         return self::$bo;
     }
     function setBO() {
+        GGnavi::getGrpfncaBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
+        $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         return $arr;
     }
 
@@ -176,6 +178,9 @@ class GrpfncLossBO extends _CommonBO
                         dual
                 ";
                 $result = GGsql::exeQuery($query);
+
+                /* recal */
+                $grpfncBO->recalGrpfncLosstotalByPkForInside($GRPNO);
                 break;
             }
             case self::deleteByPk:
@@ -197,6 +202,9 @@ class GrpfncLossBO extends _CommonBO
                 /* process */
                 $query = "delete from grpfnc_loss where grpno = '$GRPNO' and lossidx = $LOSSIDX";
                 $result = GGsql::exeQuery($query);
+
+                /* recal */
+                $grpfncBO->recalGrpfncLosstotalByPkForInside($GRPNO);
                 break;
             }
             default:
@@ -204,6 +212,9 @@ class GrpfncLossBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
+
+
+
         return $result;
     }
 

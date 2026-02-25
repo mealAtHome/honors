@@ -25,7 +25,7 @@ class MGrpfncPurchase
     /* ========================= */
     /* make */
     /* ========================= */
-    /* custom */    getPurchasecostPriceColor() { return GGC.Common.priceColor(this.getPurchasecost()); }
+    /* custom */    getPurchasecostWonColor() { return GGC.Common.wonColor(this.getPurchasecost()); }
     /* custom */    getPk() { return `grpno="${this.getGrpno()}" purchaseidx="${this.getPurchaseidx()}"`; }
 
 }
@@ -52,10 +52,11 @@ class MGrpfncPurchases extends _MCommon
             html +=
             `
                 <tr>
+                    <td col="delete"                ><button class="MGrpfncPurchase-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()}>삭제</td>
                     <td col="purchaseidx"           >${model.getPurchaseidx()}</td>
                     <td col="regdt"                 >${model.getRegdt()}</td>
                     <td col="purchaseitem"          >${model.getPurchaseitem()}</td>
-                    <td col="purchasecost"          >${model.getPurchasecostPriceColor()}</td>
+                    <td col="purchasecost"          >${model.getPurchasecostWonColor()}</td>
                     <td col="purchasecomment"       >${model.getPurchasecomment()}</td>
                 </tr>
             `;
@@ -67,6 +68,7 @@ class MGrpfncPurchases extends _MCommon
                 <table class="MGrpfncPurchase-makeTable-mainTable common-tbl-normal" tbl-type="rowborder">
                     <thead>
                         <tr>
+                            <th>삭제</th>
                             <th>번호</th>
                             <th>등록일</th>
                             <th>품목</th>
@@ -85,6 +87,32 @@ class MGrpfncPurchases extends _MCommon
         let pagenation = this.getPagenation();
         html = pagenation + html + pagenation;
         $(el).html(html);
+
+        /* event */
+        $(`${el} .MGrpfncPurchase-makeTable-btn-delete`).off("click").on("click", function()
+        {
+            let grpno = $(this).attr("grpno");
+            let purchaseidx = $(this).attr("purchaseidx");
+            let process = function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        let mApiResponse = Api.GrpfncPurchase.deleteByPk(grpno, purchaseidx);
+                        if(mApiResponse.isSuccess())
+                            Navigation.executeShow();
+                    }
+                    catch(e)
+                    {
+                        console.error(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            }
+            Common.confirm2("구매 내역을 삭제하시겠습니까?", process);
+        });
     }
 
 }

@@ -86,9 +86,7 @@
                     }
                     catch(e)
                     {
-                        console.error(e);
-                        Common.toast("오류가 발생했습니다.");
-                        GFLU.close(true);
+                        Common.catchProc(e);
                         return;
                     }
                     finally

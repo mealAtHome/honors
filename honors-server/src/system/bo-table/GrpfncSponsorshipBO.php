@@ -14,9 +14,10 @@ class GrpfncSponsorshipBO extends _CommonBO
         return self::$bo;
     }
     function setBO() {
-        // GGnavi::getGrpMemberBO();
+        GGnavi::getGrpfncaBO();
         $arr = array();
-        // $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        $arr['ggAuth'] = GGauth::getInstance();
+        $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         return $arr;
     }
 
@@ -135,22 +136,17 @@ class GrpfncSponsorshipBO extends _CommonBO
     /* update */
     /* ========================= */
     const insertFromPage = "insertFromPage";
+    const deleteByPk = "deleteByPk";
     /* const updateBaccnodefaultForInside = "updateBaccnodefaultForInside"; */
     protected function update($options, $option="")
     {
         /* set BO */
         extract($this->setBO());
-
-        /* vars */
-        $ggAuth = GGauth::getInstance();
-        $result = Common::getReturn();
-
-        /* get vars */
         extract($options);
 
-        /* override option */
-        if($option != "")
-            $OPTION = $option;
+        /* set var */
+        $result = Common::getReturn();
+        $OPTION = $option != "" ? $option : $OPTION;
 
         /* process */
         switch($OPTION)
@@ -195,6 +191,33 @@ class GrpfncSponsorshipBO extends _CommonBO
                         dual
                 ";
                 $result = GGsql::exeQuery($query);
+
+                /* recal */
+                $grpfncBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
+                break;
+            }
+            case self::deleteByPk:
+            {
+                /* validation */
+                if(Common::isEmpty($GRPNO))    { throw new GGexception("시스템 오류입니다."); }
+                if(Common::isEmpty($SPONIDX))  { throw new GGexception("시스템 오류입니다."); }
+
+                /* validation logic */
+                $isAdmin = $ggAuth->isAdmin($EXECUTOR, false);
+                $hasAuth = $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+                if(!$isAdmin)
+                {
+                    $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $SPONIDX), self::FIELD__REGDT);
+                    if(GGdate::diffHour($regdt) > 72)
+                        throw new GGexception("찬조내역은 등록 후 72시간까지만 삭제할 수 있습니다.");
+                }
+
+                /* process */
+                $query = "delete from grpfnc_sponsorship where grpno = '$GRPNO' and sponidx = $SPONIDX";
+                $result = GGsql::exeQuery($query);
+
+                /* recal */
+                $grpfncBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
                 break;
             }
             default:

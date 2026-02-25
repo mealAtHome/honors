@@ -21,6 +21,7 @@ Api.GrpfncPurchase =
         };
         return Api.GrpfncPurchase.update(ajaxData, noticeOK, noticeFail);
     },
+    deleteByPk(grpno, purchaseidx, noticeOK, noticeFail) { return Api.GrpfncPurchase.update({ OPTION:"deleteByPk", GRPNO:grpno, PURCHASEIDX:purchaseidx }, noticeOK, noticeFail); },
 
 
     /* ========================= */

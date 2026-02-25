@@ -98,7 +98,7 @@ GGC.Common =
             rslt = "+" + rslt;
         return rslt;
     },
-    priceColor(val) { return `<span class="common-tag-font" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */
+    wonColor(val) { return `<span class="common-tag-font" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */
 
 
     /* ============================== */

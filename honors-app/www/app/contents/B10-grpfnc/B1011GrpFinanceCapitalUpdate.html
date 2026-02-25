@@ -118,8 +118,7 @@
                     }
                     catch(e)
                     {
-                        Common.toast("오류가 발생했습니다.");
-                        GFCU.close(true);
+                        Common.catchProc(e);
                         return;
                     }
                     finally
