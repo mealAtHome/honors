@@ -69,7 +69,7 @@ class Clslineup2logBO extends _CommonBO
         extract(Clslineup2logBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -187,7 +187,7 @@ class Clslineup2logBO extends _CommonBO
         }
 
         /* =============== */
-        /* sql execution */
+        /* process */
         /* =============== */
         switch($OPTION)
         {

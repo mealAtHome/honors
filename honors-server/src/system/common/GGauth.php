@@ -134,8 +134,8 @@ class GGauth
         return true;
     }
 
-    public function isAdmin       ($EXECUTOR) { if(Common::getDataOneField($this->getUser($EXECUTOR), UserBO::FIELD__IS_ADMIN) != GGF::Y) throw new GGexception("관리자만 접근가능합니다."); return true; }
-    public function isAdminYN     ($EXECUTOR) { if(Common::getDataOneField($this->getUser($EXECUTOR), UserBO::FIELD__IS_ADMIN) != GGF::Y) return false; return true; }
+    public function isAdmin($EXECUTOR, $errorflg=false) { if(Common::getField($this->getUser($EXECUTOR), UserBO::FIELD__ADMINFLG) != GGF::Y) { if($errorflg) throw new GGexception("관리자만 접근가능합니다."); return false; } return true; }
+
 
 
     /* ========================= */

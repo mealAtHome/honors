@@ -36,7 +36,7 @@ class AddressSidoBO extends _CommonBO
         /* --------------- */
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 

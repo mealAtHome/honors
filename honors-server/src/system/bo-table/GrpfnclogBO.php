@@ -53,7 +53,7 @@ class GrpfnclogBO extends _CommonBO
         /* --------------- */
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -133,7 +133,7 @@ class GrpfnclogBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
-        /* sql execution */
+        /* process */
         switch($OPTION)
         {
             case self::insertOfGrpfncCapitaltotalForInside:

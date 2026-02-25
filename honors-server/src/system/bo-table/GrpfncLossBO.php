@@ -14,9 +14,8 @@ class GrpfncLossBO extends _CommonBO
         return self::$bo;
     }
     function setBO() {
-        // GGnavi::getGrpMemberBO();
         $arr = array();
-        // $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        $arr['ggAuth'] = GGauth::getInstance();
         return $arr;
     }
 
@@ -46,23 +45,24 @@ class GrpfncLossBO extends _CommonBO
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    // public function selectByPkForInside ($GRPNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside ($GRPNO, $LOSSIDX) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
     /* ========================= */
     const selectByPk = "selectByPk";
+    const selectByPkForInside = "selectByPkForInside";
     const selectByGrpnoPagenum = "selectByGrpnoPagenum";
     protected function select($options, $option="")
     {
         /* --------------- */
         /* init vars */
         /* --------------- */
+        // extract(GrpMemberBO::getConsts());
         extract($this->setBO());
-        extract(GrpMemberBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -89,6 +89,7 @@ class GrpfncLossBO extends _CommonBO
         switch($OPTION)
         {
             case self::selectByPk            : { $from = "(select * from grpfnc_loss where grpno = '$GRPNO' and lossidx = $LOSSIDX) t"; break; }
+            case self::selectByPkForInside   : { $from = "(select * from grpfnc_loss where grpno = '$GRPNO' and lossidx = $LOSSIDX) t"; break; }
             case self::selectByGrpnoPagenum  : { $from = "(select * from grpfnc_loss where grpno = '$GRPNO') t"; break; }
             default:
             {
@@ -123,28 +124,27 @@ class GrpfncLossBO extends _CommonBO
     /* update */
     /* ========================= */
     const insertFromPage = "insertFromPage";
+    const deleteByPk = "deleteByPk";
     /* const updateBaccnodefaultForInside = "updateBaccnodefaultForInside"; */
     protected function update($options, $option="")
     {
         /* set BO */
         extract($this->setBO());
-
-        /* vars */
-        $ggAuth = GGauth::getInstance();
-        $data = null;
-
-        /* get vars */
         extract($options);
 
-        /* override option */
+        /* set var */
+        $result = Common::getReturn();
         if($option != "")
             $OPTION = $option;
 
-        /* sql execution */
+        /* process */
         switch($OPTION)
         {
             case self::insertFromPage:
             {
+                /* check auth */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
                 /* validation */
                 if(Common::isEmpty($GRPNO))        { throw new GGexception("시스템 오류입니다."); }
                 if(Common::isEmpty($LOSSITEM))     { throw new GGexception("손실품목이 공란입니다."); }
@@ -178,12 +178,33 @@ class GrpfncLossBO extends _CommonBO
                 $result = GGsql::exeQuery($query);
                 break;
             }
+            case self::deleteByPk:
+            {
+                /* validation */
+                if(Common::isEmpty($GRPNO))    { throw new GGexception("시스템 오류입니다."); }
+                if(Common::isEmpty($LOSSIDX))  { throw new GGexception("시스템 오류입니다."); }
+
+                /* validation logic */
+                $isAdmin = $ggAuth->isAdmin($EXECUTOR, false);
+                $hasAuth = $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+                if(!$isAdmin)
+                {
+                    $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $LOSSIDX), self::FIELD__REGDT);
+                    if(GGdate::diffHour($regdt) > 72)
+                        throw new GGexception("손실내역은 등록 후 72시간까지만 삭제할 수 있습니다.");
+                }
+
+                /* process */
+                $query = "delete from grpfnc_loss where grpno = '$GRPNO' and lossidx = $LOSSIDX";
+                $result = GGsql::exeQuery($query);
+                break;
+            }
             default:
             {
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $data;
+        return $result;
     }
 
 }

@@ -62,7 +62,7 @@ class GrpfncPurchaseBO extends _CommonBO
         extract(GrpMemberBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -131,7 +131,7 @@ class GrpfncPurchaseBO extends _CommonBO
 
         /* vars */
         $ggAuth = GGauth::getInstance();
-        $data = null;
+        $result = Common::getReturn();
 
         /* get vars */
         extract($options);
@@ -140,7 +140,7 @@ class GrpfncPurchaseBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
-        /* sql execution */
+        /* process */
         switch($OPTION)
         {
             case self::insertFromPage:
@@ -180,7 +180,7 @@ class GrpfncPurchaseBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $data;
+        return $result;
     }
 
 }

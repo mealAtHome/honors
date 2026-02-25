@@ -88,7 +88,7 @@ class ClspurchaseBO extends _CommonBO
         extract(ClspurchaseBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -194,7 +194,7 @@ class ClspurchaseBO extends _CommonBO
         }
 
         /* =============== */
-        /* sql execution */
+        /* process */
         /* =============== */
         switch($OPTION)
         {

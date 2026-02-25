@@ -137,7 +137,7 @@ class ClsBO extends _CommonBO
         extract(GrpMemberBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -369,7 +369,7 @@ class ClsBO extends _CommonBO
         }
 
         /* =============== */
-        /* sql execution */
+        /* process */
         /* =============== */
         switch($OPTION)
         {

@@ -93,7 +93,7 @@ class GrpMemberBO extends _CommonBO
         extract($this->setBO());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -257,7 +257,7 @@ class GrpMemberBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
-        /* sql execution */
+        /* process */
         switch($OPTION)
         {
             case self::updateToDeleteForMng:

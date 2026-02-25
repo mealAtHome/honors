@@ -42,7 +42,7 @@ class SystemBoardBO extends _CommonBO
         extract($this->setBO());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 

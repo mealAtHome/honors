@@ -127,5 +127,22 @@ class GGdate
         return true;
     }
 
+    public static function diffHour($start=null, $close=null)
+    {
+        /* validation */
+        $start = $start == null ? date('Y-m-d H:i:s') : $start;
+        $close = $close == null ? date('Y-m-d H:i:s') : $close;
+
+        /* make timestamp */
+        $tze = new DateTimeZone(self::TIMEZONE);
+        $dt1 = new DateTimeImmutable($start, $tze);
+        $dt2 = new DateTimeImmutable($close, $tze);
+
+        /* cal */
+        $seconds = $dt2->getTimestamp() - $dt1->getTimestamp();
+        $diff = round($seconds / 3600, 2);
+        return $diff;
+    }
+
 } /* end class */
 ?>

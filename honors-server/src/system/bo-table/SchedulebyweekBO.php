@@ -56,7 +56,7 @@ class SchedulebyweekBO extends _CommonBO
         /* --------------- */
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -145,7 +145,7 @@ class SchedulebyweekBO extends _CommonBO
         extract($options);
         // extract(self::getConsts());
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 

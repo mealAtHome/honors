@@ -21,7 +21,7 @@ Api.GrpfncLoss =
         };
         return Api.GrpfncLoss.update(ajaxData, noticeOK, noticeFail);
     },
-
+    deleteByPk(grpno, lossidx, noticeOK, noticeFail) { return Api.GrpfncLoss.update({ OPTION:"deleteByPk", GRPNO:grpno, LOSSIDX:lossidx }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* detail */

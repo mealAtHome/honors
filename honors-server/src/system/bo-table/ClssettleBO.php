@@ -85,7 +85,7 @@ class ClssettleBO extends _CommonBO
         extract(ClssettleBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -252,7 +252,7 @@ class ClssettleBO extends _CommonBO
             $OPTION = $option;
 
         /* =============== */
-        /* sql execution */
+        /* process */
         /* =============== */
         switch($OPTION)
         {

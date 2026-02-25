@@ -70,7 +70,7 @@ class ClzcancelBO extends _CommonBO
         extract(ClzcancelBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -152,7 +152,7 @@ class ClzcancelBO extends _CommonBO
         }
 
         /* =============== */
-        /* sql execution */
+        /* process */
         /* =============== */
         switch($OPTION)
         {

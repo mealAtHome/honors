@@ -53,7 +53,7 @@ class GrpfncaBO extends _CommonBO
         /* --------------- */
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -151,7 +151,7 @@ class GrpfncaBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
-        /* sql execution */
+        /* process */
         switch($OPTION)
         {
             case self::recalByPk: { $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true); $this->recalByPkForInside($GRPNO); break; }

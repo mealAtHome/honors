@@ -73,7 +73,7 @@ class ClssettletmpBO extends _CommonBO
         extract(self::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -205,7 +205,7 @@ class ClssettletmpBO extends _CommonBO
             $OPTION = $option;
 
         /* =============== */
-        /* sql execution */
+        /* process */
         /* =============== */
         switch($OPTION)
         {

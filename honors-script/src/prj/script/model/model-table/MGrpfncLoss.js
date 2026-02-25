@@ -52,6 +52,7 @@ class MGrpfncLosses extends _MCommon
             html +=
             `
                 <tr>
+                    <td col="delete"            ><button class="MGrpfncLoss-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()}>삭제</td>
                     <td col="lossidx"           >${model.getLossidx()}</td>
                     <td col="regdt"             >${model.getRegdt()}</td>
                     <td col="lossitem"          >${model.getLossitem()}</td>
@@ -67,6 +68,7 @@ class MGrpfncLosses extends _MCommon
                 <table class="MGrpfncLoss-makeTable-mainTable common-tbl-normal" tbl-type="rowborder">
                     <thead>
                         <tr>
+                            <th>삭제</th>
                             <th>번호</th>
                             <th>등록일</th>
                             <th>손실품목</th>
@@ -85,6 +87,32 @@ class MGrpfncLosses extends _MCommon
         let pagenation = this.getPagenation();
         html = pagenation + html + pagenation;
         $(el).html(html);
+
+        /* event */
+        $(`${el} .MGrpfncLoss-makeTable-btn-delete`).off("click").on("click", function()
+        {
+            let grpno = $(this).attr("grpno");
+            let lossidx = $(this).attr("lossidx");
+            let process = function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        let mApiResponse = Api.GrpfncLoss.deleteByPk(grpno, lossidx);
+                        if(mApiResponse.isSuccess())
+                            Navigation.executeShow();
+                    }
+                    catch(e)
+                    {
+                        console.error(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            }
+            Common.confirm2("손실 내역을 삭제하시겠습니까?", process);
+        });
     }
 
 }

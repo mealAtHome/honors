@@ -25,7 +25,7 @@ class SystemCheckBO extends _CommonBO
         $result = Common::getReturn();
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 

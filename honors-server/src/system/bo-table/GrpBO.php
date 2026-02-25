@@ -64,7 +64,7 @@ class GrpBO extends _CommonBO
         extract(GrpMemberBO::getConsts());
         extract($options);
 
-        /* orderride option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 
@@ -156,7 +156,7 @@ class GrpBO extends _CommonBO
 
         /* vars */
         $ggAuth = GGauth::getInstance();
-        $data = null;
+        $result = Common::getReturn();
 
         /* get vars */
         extract($options);
@@ -165,7 +165,7 @@ class GrpBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
-        /* sql execution */
+        /* process */
         switch($OPTION)
         {
             case self::updateBaccnodefaultForInside:
@@ -179,7 +179,7 @@ class GrpBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $data;
+        return $result;
     }
 
 }
