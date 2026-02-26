@@ -351,21 +351,6 @@ class ClsBO extends _CommonBO
         }
 
         /* =============== */
-        /* validation (key) */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::insert: break;
-            case self::update:
-            case self::updateClsstatusEditToIng:
-            {
-                if(Common::isEmpty(trim($GRPNO))) { throw new GGexception(); }
-                if(Common::isEmpty(trim($CLSNO))) { throw new GGexception(); }
-                break;
-            }
-        }
-
-        /* =============== */
         /* process */
         /* =============== */
         switch($OPTION)
@@ -373,7 +358,7 @@ class ClsBO extends _CommonBO
             case self::insert:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* set var */
                 $clsno = $idxBO->makeClsno();
@@ -435,8 +420,8 @@ class ClsBO extends _CommonBO
             case self::update:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO);
 
                 /* clstype is changed? */
                 $clstypeOrigin = Common::getField($this->getByPk($GRPNO, $CLSNO), self::FIELD__CLSTYPE);
@@ -471,8 +456,8 @@ class ClsBO extends _CommonBO
             case self::updateClsstatusEditToIng:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $ggAuth->isClsEdit($GRPNO, $CLSNO, true); /* is edit status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isClsEdit($GRPNO, $CLSNO, true);
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusIng', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -482,8 +467,8 @@ class ClsBO extends _CommonBO
             case self::updateClsstatusIngToEnd:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $ggAuth->isClsIng($GRPNO, $CLSNO, true); /* is ing status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isClsIng($GRPNO, $CLSNO, true);
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusEnd', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -493,8 +478,8 @@ class ClsBO extends _CommonBO
             case self::updateClssettleflgDone:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $ggAuth->isClsEnd($GRPNO, $CLSNO, true); /* is end status? */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+                $ggAuth->isClsEnd($GRPNO, $CLSNO, true);
 
                 /* regist settle */
                 $clssettleBO->upsertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
@@ -507,8 +492,8 @@ class ClsBO extends _CommonBO
             case self::updateClsstatusToCancel:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
-                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO);
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusCancel', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -521,7 +506,7 @@ class ClsBO extends _CommonBO
             case self::copyClsForMng:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* copy cls */
                 $cls = $this->getByPk($GRPNO, $CLSNO);
@@ -580,7 +565,7 @@ class ClsBO extends _CommonBO
             case self::deleteByPkForMng:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* am i manager? */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* delete cls */
                 $query = "delete from cls where grpno = '$GRPNO' and clsno = '$CLSNO'";
