@@ -131,6 +131,7 @@ class ClsBO extends _CommonBO
     protected function select($options, $option="")
     {
         /* vars */
+        $ggAuth = GGauth::getInstance();
         extract(self::getConsts());
         extract(GrpMemberBO::getConsts());
         extract($options);
@@ -197,7 +198,7 @@ class ClsBO extends _CommonBO
             case self::selectForMngrByClsstatusEnd:
             case self::selectForMngrByClsstatusCancel:
             {
-                GGauth::isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
                 break;
             }
         }
@@ -210,7 +211,7 @@ class ClsBO extends _CommonBO
             (isset($EXECUTOR) && Common::isNotEmpty($EXECUTOR))
         )
         {
-            if(GGauth::isGrpmanager($GRPNO, $EXECUTOR, false))
+            if($ggAuth->isGrpmanager($GRPNO, $EXECUTOR, false))
                 $select .= $selectForMng;
         }
 

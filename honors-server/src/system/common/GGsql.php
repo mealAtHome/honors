@@ -72,8 +72,8 @@ class GGsql
 
         /* execute query */
         $cnt = 0;
-        $rslt = self::exeQuery($query);
-        while($r = mysqli_fetch_assoc($rslt)) {
+        $rsltQuery = self::exeQuery($query);
+        while($r = mysqli_fetch_assoc($rsltQuery)) {
             $rslt[GGF::DATA][] = $r;
             $cnt++;
         }

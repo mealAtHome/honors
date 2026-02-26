@@ -53,6 +53,7 @@ class AddressSidoBO extends _CommonBO
     protected function select($options, $option="")
     {
         /* vars */
+        $ggAuth = GGauth::getInstance();
         extract(self::getConsts());
         extract($options);
 

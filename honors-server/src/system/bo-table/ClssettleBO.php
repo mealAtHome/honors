@@ -91,6 +91,7 @@ class ClssettleBO extends _CommonBO
     protected function select($options, $option="")
     {
         /* vars */
+        $ggAuth = GGauth::getInstance();
         extract(self::getConsts());
         extract($options);
 
@@ -134,38 +135,11 @@ class ClssettleBO extends _CommonBO
         ";
 
         /* --------------- */
-        /* validation */
-        /* --------------- */
-        switch($OPTION)
-        {
-            case self::selectByClsnoForMng:
-            case self::selectNotDepositedByUsernoForMng:
-            case self::selectNotDepositedAllByGrpnoForMng:
-            case self::selectMemberdepositflgYesByGrpnoForMng:
-            case self::selectNotDepositedByGrpnoForMng:
-            case self::selectNotDepositedAllByGrpnoClsnoForMng:
-            case self::selectMemberdepositflgYesByGrpnoClsnoForMng:
-            case self::selectNotDepositedByGrpnoClsnoForMng:
-            {
-                /* is grpmanager? */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-                break;
-            }
-        }
-
-        /* --------------- */
         /* sql by option */
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByClsnoForMng:
-            {
-                $select .=
-                "
-                    , grpm.point grpm_point
-                ";
-                break;
-            }
+            case self::selectByClsnoForMng: { $select .= ", grpm.point grpm_point"; break; }
         }
 
         /* --------------- */
@@ -173,19 +147,19 @@ class ClssettleBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and userno = '$USERNO') t"; break; }
-            case self::selectByClsno                                : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
-            case self::selectByClsnoForMng                          : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
-            case self::selectNotDepositedByUsernoForMng             : { $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO'   and managerdepositflg = 'n') t"; break; }
-            case self::selectNotDepositedAllByGrpnoForMng           : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n') t"; break; }
-            case self::selectMemberdepositflgYesByGrpnoForMng       : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectNotDepositedByGrpnoForMng              : { $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectNotDepositedAllByGrpnoClsnoForMng      : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n') t"; break; }
-            case self::selectMemberdepositflgYesByGrpnoClsnoForMng  : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectNotDepositedByGrpnoClsnoForMng         : { $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectYetByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectTmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectCmpByUsernoForUsr                      : { $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
+            case self::selectByPkForInside                          : {                                                 $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and userno = '$USERNO') t"; break; }
+            case self::selectByClsno                                : {                                                 $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
+            case self::selectByClsnoForMng                          : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
+            case self::selectNotDepositedByUsernoForMng             : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO'   and managerdepositflg = 'n') t"; break; }
+            case self::selectNotDepositedAllByGrpnoForMng           : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n') t"; break; }
+            case self::selectMemberdepositflgYesByGrpnoForMng       : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+            case self::selectNotDepositedByGrpnoForMng              : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+            case self::selectNotDepositedAllByGrpnoClsnoForMng      : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n') t"; break; }
+            case self::selectMemberdepositflgYesByGrpnoClsnoForMng  : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+            case self::selectNotDepositedByGrpnoClsnoForMng         : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+            case self::selectYetByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
+            case self::selectTmpByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
+            case self::selectCmpByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -445,7 +419,7 @@ class ClssettleBO extends _CommonBO
             case self::updateManagerdepositflgYesForMng:
             {
                 /* is manager? */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
 
                 /* update */
                 $query =

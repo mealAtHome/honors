@@ -12,8 +12,13 @@ class GrpBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function setBO() {
+    function readBO()
+    {
         GGnavi::getGrpMemberBO();
+    }
+    function setBO()
+    {
+        self::readBO();
         $arr = array();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['ggAuth'] = GGauth::getInstance();
@@ -67,6 +72,7 @@ class GrpBO extends _CommonBO
     protected function select($options, $option="")
     {
         /* vars */
+        self::readBO();
         extract(self::getConsts());
         extract(GrpMemberBO::getConsts());
         extract($options);
