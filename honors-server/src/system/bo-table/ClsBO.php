@@ -292,8 +292,8 @@ class ClsBO extends _CommonBO
             order by
                 t.clsstartdt desc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -318,7 +318,7 @@ class ClsBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
 
         /* get vars */
         extract($this->setBO());
@@ -431,7 +431,7 @@ class ClsBO extends _CommonBO
                     )
                 ";
                 GGsql::exeQuery($query);
-                $result[GGF::DATA] = $clsno;
+                $rslt[GGF::DATA] = $clsno;
                 break;
             }
             case self::update:
@@ -629,7 +629,7 @@ class ClsBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $result;
+        return $rslt;
     }
 
 } /* end class */

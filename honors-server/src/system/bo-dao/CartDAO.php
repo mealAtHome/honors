@@ -12,6 +12,19 @@ class CartDAO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
+
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /*  */
@@ -25,17 +38,15 @@ class CartDAO extends _CommonBO
     const deleteByPkForInside = "deleteByPkForInside";
     protected function update($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* result */
-        $rslt = Common::getReturn();
 
         /* ==================== */
         /* process */
@@ -67,19 +78,19 @@ class CartDAO extends _CommonBO
                     on duplicate key update
                         at_update = now()
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::updateCartSummaryForInside:
             {
                 $query = "update cart set cart_summary = $CART_SUMMARY, at_update = now() where userno = '$USERNO' and storeno = '$STORENO'";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::deleteByPkForInside:
             {
                 $query = "delete from cart where userno = '$USERNO' and storeno = '$STORENO'";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
         }

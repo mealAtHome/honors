@@ -127,13 +127,13 @@ class GGcoordinate
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data'));
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        $resultA = curl_exec($curl);
-        $resultB = trim($resultA, '()');
-        $resultX = json_decode($resultB, true);
+        $rsltA = curl_exec($curl);
+        $rsltB = trim($rsltA, '()');
+        $rsltX = json_decode($rsltB, true);
         curl_close($curl);
 
-        $juso       = isset($resultX['results']['juso'])     ? $resultX['results']['juso']    : [];
-        $common     = isset($resultX['results']['common'])   ? $resultX['results']['common']  : [];
+        $juso       = isset($rsltX['results']['juso'])     ? $rsltX['results']['juso']    : [];
+        $common     = isset($rsltX['results']['common'])   ? $rsltX['results']['common']  : [];
         $totalCount = isset($common['totalCount'])           ? $common['totalCount']          : [];
         $errorCode  = isset($common['errorCode'])            ? $common['errorCode']           : [];
 
@@ -256,11 +256,11 @@ class GGcoordinate
         /* --------------- */
         /* return result */
         /* --------------- */
-        $result['ADDR_GRS80X']  = $ADDR_GRS80X;
-        $result['ADDR_GRS80Y']  = $ADDR_GRS80Y;
-        $result['ADDR_LONGX']   = $ADDR_LONGX;
-        $result['ADDR_LATIY']   = $ADDR_LATIY;
-        return $result;
+        $rslt['ADDR_GRS80X']  = $ADDR_GRS80X;
+        $rslt['ADDR_GRS80Y']  = $ADDR_GRS80Y;
+        $rslt['ADDR_LONGX']   = $ADDR_LONGX;
+        $rslt['ADDR_LATIY']   = $ADDR_LATIY;
+        return $rslt;
     }
 
 }

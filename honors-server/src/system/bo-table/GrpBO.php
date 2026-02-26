@@ -143,8 +143,8 @@ class GrpBO extends _CommonBO
             order by
                 t.grpname asc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -165,7 +165,7 @@ class GrpBO extends _CommonBO
 
         /* vars */
         $ggAuth = GGauth::getInstance();
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
 
         /* get vars */
         extract($options);
@@ -180,7 +180,7 @@ class GrpBO extends _CommonBO
             case self::updateBaccnodefaultForInside:
             {
                 $query = "update grp set baccnodefault = $BACCNODEFAULT where grpno = '$GRPNO'";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             default:
@@ -188,7 +188,7 @@ class GrpBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $result;
+        return $rslt;
     }
 
 }

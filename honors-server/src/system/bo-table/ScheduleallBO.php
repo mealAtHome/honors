@@ -135,8 +135,8 @@ class ScheduleallBO extends _CommonBO
                 , t.sclmonth
                 , t.sclweek
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
 } /* end class */

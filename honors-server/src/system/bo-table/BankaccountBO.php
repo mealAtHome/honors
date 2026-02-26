@@ -240,7 +240,7 @@ class BankaccountBO extends _CommonBO
                             ,  now()
                         )
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
 
                     /* after process */
                     switch($OPTION)
@@ -288,7 +288,7 @@ class BankaccountBO extends _CommonBO
                             bacckey  = '$BACCKEY' and
                             baccno   =  $BACCNO
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
                     break;
                 }
                 default:

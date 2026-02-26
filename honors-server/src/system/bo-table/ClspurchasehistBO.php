@@ -150,8 +150,8 @@ class ClspurchasehistBO extends _CommonBO
                 t.purchaseidx,
                 t.histno asc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */

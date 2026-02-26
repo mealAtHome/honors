@@ -160,8 +160,8 @@ class ClssettlehistBO extends _CommonBO
                 , u.name asc
                 , t.histno asc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */

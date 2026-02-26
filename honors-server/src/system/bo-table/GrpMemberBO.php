@@ -222,8 +222,8 @@ class GrpMemberBO extends _CommonBO
             order by
                 u.name
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */

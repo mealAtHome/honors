@@ -284,7 +284,7 @@ class UserAddrBO extends _CommonBO
                             ,'$isDefault'
                         )
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
                     break;
                 }
                 case "updateDefaultUserAddr":
@@ -300,7 +300,7 @@ class UserAddrBO extends _CommonBO
                             userno = '$EXECUTOR' and
                             is_default = 'y'
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
 
                     /* 현재주소지 설정 */
                     $query =
@@ -313,7 +313,7 @@ class UserAddrBO extends _CommonBO
                             userno = '$EXECUTOR' and
                             addr_index = $ADDR_INDEX
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
                     break;
                 }
                 case _CommonBO::UPDATE:
@@ -346,7 +346,7 @@ class UserAddrBO extends _CommonBO
                             userno = '$EXECUTOR' and
                             addr_index = $ADDR_INDEX
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
                     break;
                 }
                 case _CommonBO::DELETE:
@@ -361,7 +361,7 @@ class UserAddrBO extends _CommonBO
                             userno = '$EXECUTOR' and
                             addr_index = $ADDR_INDEX
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
                     break;
                 }
                 case self::updateByCompletedOrderForInside:
@@ -379,7 +379,7 @@ class UserAddrBO extends _CommonBO
                             userno = '$USERNO' and
                             addr_index = $ADDR_INDEX
                     ";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
                     break;
                 }
             }

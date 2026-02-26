@@ -132,8 +132,8 @@ class GrpfncSponsorshipBO extends _CommonBO
                   t.grpno asc
                 , t.sponidx desc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -151,7 +151,7 @@ class GrpfncSponsorshipBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract(self::getConsts());
         extract($options);
@@ -202,7 +202,7 @@ class GrpfncSponsorshipBO extends _CommonBO
                     from
                         dual
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
@@ -226,7 +226,7 @@ class GrpfncSponsorshipBO extends _CommonBO
 
                 /* process */
                 $query = "delete from grpfnc_sponsorship where grpno = '$GRPNO' and sponidx = $SPONIDX";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
@@ -237,7 +237,7 @@ class GrpfncSponsorshipBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $result;
+        return $rslt;
     }
 
 }

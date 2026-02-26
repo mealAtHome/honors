@@ -3,38 +3,38 @@
 function getParam($param, $ifnull="")
 {
     /* get / post */
-    $result = "";
+    $rslt = "";
     if(isset($_GET[$param]))
-        $result = $_GET[$param];
+        $rslt = $_GET[$param];
     else if(isset($_POST[$param]))
-        $result = $_POST[$param];
+        $rslt = $_POST[$param];
 
     /* if param null */
-    if($result == "")
-        $result = $ifnull;
+    if($rslt == "")
+        $rslt = $ifnull;
 
     /* print */
-    if(is_numeric($result))
-        echo $result;
+    if(is_numeric($rslt))
+        echo $rslt;
     else
-        echo "'".$result."'";
+        echo "'".$rslt."'";
 }
 
 function returnParam($param, $ifnull="")
 {
     /* get / post */
-    $result = "";
+    $rslt = "";
     if(isset($_GET[$param]))
-        $result = $_GET[$param];
+        $rslt = $_GET[$param];
     else if(isset($_POST[$param]))
-        $result = $_POST[$param];
+        $rslt = $_POST[$param];
 
     /* if param null */
-    if($result == "")
-        $result = $ifnull;
+    if($rslt == "")
+        $rslt = $ifnull;
 
     /* print */
-    return $result;
+    return $rslt;
 }
 
 if(returnParam("viewMode", "") != "dialog")

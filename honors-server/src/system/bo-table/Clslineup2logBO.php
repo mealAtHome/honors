@@ -133,8 +133,8 @@ class Clslineup2logBO extends _CommonBO
                 , t.orderno
                 , t.logno
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */

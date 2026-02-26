@@ -122,8 +122,8 @@ class GrpfncLossBO extends _CommonBO
                   t.grpno asc
                 , t.lossidx desc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -141,7 +141,7 @@ class GrpfncLossBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract(self::getConsts());
         extract($options);
@@ -188,7 +188,7 @@ class GrpfncLossBO extends _CommonBO
                     from
                         dual
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncBO->recalGrpfncLosstotalByPkForInside($GRPNO);
@@ -212,7 +212,7 @@ class GrpfncLossBO extends _CommonBO
 
                 /* process */
                 $query = "delete from grpfnc_loss where grpno = '$GRPNO' and lossidx = $LOSSIDX";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncBO->recalGrpfncLosstotalByPkForInside($GRPNO);
@@ -226,7 +226,7 @@ class GrpfncLossBO extends _CommonBO
 
 
 
-        return $result;
+        return $rslt;
     }
 
 }

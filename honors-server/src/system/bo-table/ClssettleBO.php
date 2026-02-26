@@ -223,8 +223,8 @@ class ClssettleBO extends _CommonBO
                 , t.clsno
                 , u.name
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */

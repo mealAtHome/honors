@@ -174,8 +174,8 @@ class ClspurchaseBO extends _CommonBO
                 t.clsno,
                 t.purchaseidx asc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */

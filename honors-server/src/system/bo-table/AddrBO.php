@@ -169,7 +169,7 @@ class AddrBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract(self::getConsts());
         extract($options);
@@ -274,11 +274,11 @@ class AddrBO extends _CommonBO
                         ,'$ADDR_DETAIL'
                     )
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
         }
-        return $result;
+        return $rslt;
     }
 
 } /* end class */

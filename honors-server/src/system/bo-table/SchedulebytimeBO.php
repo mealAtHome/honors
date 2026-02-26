@@ -131,8 +131,8 @@ class SchedulebytimeBO extends _CommonBO
                 , t.sclstarttime
                 , t.sclclosetime
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
 } /* end class */

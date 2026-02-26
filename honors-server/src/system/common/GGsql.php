@@ -72,8 +72,8 @@ class GGsql
 
         /* execute query */
         $cnt = 0;
-        $result = self::exeQuery($query);
-        while($r = mysqli_fetch_assoc($result)) {
+        $rslt = self::exeQuery($query);
+        while($r = mysqli_fetch_assoc($rslt)) {
             $rslt[GGF::DATA][] = $r;
             $cnt++;
         }
@@ -99,8 +99,8 @@ class GGsql
         $rslt = Common::getReturn();
 
         /* execute query */
-        $result = self::exeQuery($query);
-        while($r = mysqli_fetch_assoc($result))
+        $rslt = self::exeQuery($query);
+        while($r = mysqli_fetch_assoc($rslt))
             $rslt[GGF::DATA][] = $r;
 
         /* return result */
@@ -110,8 +110,8 @@ class GGsql
     public static function selectCnt($query)
     {
         $cnt = 0;
-        $result = self::exeQuery($query);
-        $record = mysqli_fetch_assoc($result);
+        $rslt = self::exeQuery($query);
+        $record = mysqli_fetch_assoc($rslt);
         if(isset($record['cnt']))
             $cnt = intval($record['cnt']);
         return $cnt;
@@ -119,8 +119,8 @@ class GGsql
 
     public static function selectOne($query)
     {
-        $result = self::exeQuery($query);
-        $record = mysqli_fetch_assoc($result);
+        $rslt = self::exeQuery($query);
+        $record = mysqli_fetch_assoc($rslt);
         return $record;
     }
 
@@ -142,12 +142,12 @@ class GGsql
         /* execute query */
         /* ------------ */
         $mysqli = self::getConnection();
-        if (!$result = $mysqli->query($query))
+        if (!$rslt = $mysqli->query($query))
         {
             Common::logErr($query);
             throw new GGexception("(server) server failed.");
         }
-        return $result;
+        return $rslt;
     }
 
     /* ========================= */

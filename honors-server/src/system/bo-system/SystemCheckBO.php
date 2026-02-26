@@ -24,7 +24,7 @@ class SystemCheckBO extends _CommonBO
         /* --------------- */
         /* init vars */
         /* --------------- */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($options);
 
         /* override option */
@@ -47,7 +47,7 @@ class SystemCheckBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $result;
+        return $rslt;
     }
 
 }

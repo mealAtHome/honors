@@ -215,10 +215,10 @@ class Common
             $row = $selectResult[GGF::DATA][0];
 
         /* get field */
-        $result = null;
+        $rslt = null;
         if(isset($row[$fieldName]))
-            $result = $row[$fieldName];
-        return $result;
+            $rslt = $row[$fieldName];
+        return $rslt;
     }
 
     static function getPost($field, $ifnull="")

@@ -66,7 +66,7 @@ class GrpfncPurchaseBO extends _CommonBO
     protected function select($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract($options);
 
@@ -117,8 +117,8 @@ class GrpfncPurchaseBO extends _CommonBO
                   t.grpno asc
                 , t.purchaseidx desc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -136,7 +136,7 @@ class GrpfncPurchaseBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract(self::getConsts());
         extract($options);
@@ -177,7 +177,7 @@ class GrpfncPurchaseBO extends _CommonBO
                     from
                         dual
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);
@@ -201,7 +201,7 @@ class GrpfncPurchaseBO extends _CommonBO
 
                 /* process */
                 $query = "delete from grpfnc_purchase where grpno = '$GRPNO' and purchaseidx = $PURCHASEIDX";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);
@@ -212,7 +212,7 @@ class GrpfncPurchaseBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $result;
+        return $rslt;
     }
 
 }

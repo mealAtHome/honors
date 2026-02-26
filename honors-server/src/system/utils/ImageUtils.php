@@ -83,7 +83,7 @@ class ImageUtils
         {
             case "user" : $queryForUpdate = "update user set img = '$imgName', modidt = now() where userno = '$index1'"; break;
         }
-        $result = GGsql::exeQuery($queryForUpdate);
+        $rslt = GGsql::exeQuery($queryForUpdate);
         return $imgName;
     } /* setImg */
 

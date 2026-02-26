@@ -142,8 +142,8 @@ class SchedulebyweekBO extends _CommonBO
                 , t.sclmonth
                 , t.sclweek
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -204,7 +204,7 @@ class SchedulebyweekBO extends _CommonBO
                         ,  now()
                     )
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             default:

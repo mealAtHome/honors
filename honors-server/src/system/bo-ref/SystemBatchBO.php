@@ -214,7 +214,7 @@ class SystemBatchBO extends _CommonBO
                          at_update = now()
                         ,at_healthcheck = now()
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::upsertStartLockForInside:
@@ -236,7 +236,7 @@ class SystemBatchBO extends _CommonBO
                     where
                         batchname = '$BATCHNAME'
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::updateForInside:
@@ -263,7 +263,7 @@ class SystemBatchBO extends _CommonBO
                 if(isset($FREEFIELD4)       == true && $FREEFIELD4       != "") $query .= " ,freefield4        = '$FREEFIELD4'";
                 if(isset($FREEFIELD5)       == true && $FREEFIELD5       != "") $query .= " ,freefield5        = '$FREEFIELD5'";
                 $query .= " where batchname = '$BATCHNAME'";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::updateFreeField1ForInside:
@@ -279,7 +279,7 @@ class SystemBatchBO extends _CommonBO
                     where
                         batchname = '$BATCHNAME'
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::updateUnlockForInside:
@@ -295,7 +295,7 @@ class SystemBatchBO extends _CommonBO
                     where
                         batchname = '$BATCHNAME'
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             default:

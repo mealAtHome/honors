@@ -128,8 +128,8 @@ class GrpMemberPointhistBO extends _CommonBO
                 , t.pointhistdt desc
                 , t.pointhistno desc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */

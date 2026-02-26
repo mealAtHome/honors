@@ -122,8 +122,8 @@ class GrpfnclogBO extends _CommonBO
                 , t.gfmlkeyno
                 , t.gfmlhistno
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -138,7 +138,7 @@ class GrpfnclogBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract(self::getConsts());
         extract($options);
@@ -190,7 +190,7 @@ class GrpfnclogBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $result;
+        return $rslt;
     }
 
 }

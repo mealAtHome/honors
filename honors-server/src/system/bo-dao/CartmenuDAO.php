@@ -135,7 +135,7 @@ class CartmenuDAO extends _CommonBO
                         storeno = '$STORENO' and
                         menuno  =  $MENUNO
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::insertFromOrderForInside:
@@ -170,7 +170,7 @@ class CartmenuDAO extends _CommonBO
                         om.storeno = '$STORENO' and
                         om.orderno = '$ORDERNO'
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::updateCartmenuSummaryForInside:
@@ -189,13 +189,13 @@ class CartmenuDAO extends _CommonBO
                         storeno    = '$STORENO' and
                         cart_index =  $CART_INDEX
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
             case self::deleteByPkForInside:
             {
                 $query = "delete from cartmenu where userno = '$USERNO' and storeno = '$STORENO' and cart_index = $CART_INDEX";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
                 break;
             }
         }

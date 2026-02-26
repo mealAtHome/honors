@@ -118,8 +118,8 @@ class GrpfncaBO extends _CommonBO
             order by
                 t.grpno asc
         ";
-        $result = GGsql::select($query, $from, $options);
-        return $result;
+        $rslt = GGsql::select($query, $from, $options);
+        return $rslt;
     }
 
     /* ========================= */
@@ -155,7 +155,7 @@ class GrpfncaBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $result = Common::getReturn();
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract(self::getConsts());
         extract($options);
@@ -188,7 +188,7 @@ class GrpfncaBO extends _CommonBO
                     where
                         gfnc.grpno = '$GRPNO'
                 ";
-                $result = GGsql::exeQuery($query);
+                $rslt = GGsql::exeQuery($query);
 
                 /* logging */
                 $grpfnclogBO->insertOfGrpfncCapitaltotalForInside($GRPNO, $GRPFNC_CAPITALTOTAL, $COMMENT);
@@ -215,24 +215,24 @@ class GrpfncaBO extends _CommonBO
                 if($record == null)
                 {
                     $query = "insert into grpfnca (grpno, modidt) values ('$GRPNO', now())";
-                    $result = GGsql::exeQuery($query);
+                    $rslt = GGsql::exeQuery($query);
                 }
                 break;
             }
-            case self::recalGrpfncSponsorshiptotalByPkForInside      : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_sponsorshiptotal       = (select ifnull(sum(gfsp.sponcost)          , 0) from grpfnc_sponsorship gfsp where gfsp.grpno = gfnc.grpno and gfsp.spontype = 'money')                                           where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
-            case self::recalGrpfncPurchasetotalByPkForInside         : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_purchasetotal          = (select ifnull(sum(gfpc.purchasecost)      , 0) from grpfnc_purchase    gfpc where gfpc.grpno = gfnc.grpno)                                                                       where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
-            case self::recalGrpfncLosstotalByPkForInside             : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_losstotal              = (select ifnull(sum(gfls.losscost)          , 0) from grpfnc_loss        gfls where gfls.grpno = gfnc.grpno)                                                                       where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
-            case self::recalGrpfncClssalestotalByPkForInside         : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clssalestotal          = (select ifnull(sum(cls.clsbillsales)       , 0) from cls                     where cls.grpno  = gfnc.grpno and cls.grpfinancereflectflg = 'y')                                    where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
-            case self::recalGrpfncClssalesunpaidtotalByPkForInside   : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clssalesunpaidtotal    = (select ifnull(sum(clss.billfinal)         , 0) from clssettle   clss        where clss.grpno = gfnc.grpno and clss.managerdepositflg = 'n')                                      where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
-            case self::recalGrpfncClssaleslosstotalByPkForInside     : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clssaleslosstotal      = (select ifnull(sum(clss.billfinal)         , 0) from clssettle   clss        where clss.grpno = gfnc.grpno and clss.managerdepositflg = 'loss')                                   where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
-            case self::recalGrpfncClspurchasetotalByPkForInside      : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clspurchasetotal       = (select ifnull(sum(cls.clsbillpurchase)    , 0) from cls                     where cls.grpno  = gfnc.grpno and cls.grpfinancereflectflg = 'y')                                    where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
-            case self::recalGrpfncAlltotalByPkForInside              : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_alltotal               = grpfnc_sponsorshiptotal - grpfnc_purchasetotal - grpfnc_losstotal + grpfnc_clssalestotal - grpfnc_clssalesunpaidtotal - grpfnc_clssaleslosstotal - grpfnc_clspurchasetotal    where gfnc.grpno = '$GRPNO'"; $result = GGsql::exeQuery($query); break;
+            case self::recalGrpfncSponsorshiptotalByPkForInside      : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_sponsorshiptotal       = (select ifnull(sum(gfsp.sponcost)          , 0) from grpfnc_sponsorship gfsp where gfsp.grpno = gfnc.grpno and gfsp.spontype = 'money')                                           where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
+            case self::recalGrpfncPurchasetotalByPkForInside         : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_purchasetotal          = (select ifnull(sum(gfpc.purchasecost)      , 0) from grpfnc_purchase    gfpc where gfpc.grpno = gfnc.grpno)                                                                       where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
+            case self::recalGrpfncLosstotalByPkForInside             : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_losstotal              = (select ifnull(sum(gfls.losscost)          , 0) from grpfnc_loss        gfls where gfls.grpno = gfnc.grpno)                                                                       where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
+            case self::recalGrpfncClssalestotalByPkForInside         : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clssalestotal          = (select ifnull(sum(cls.clsbillsales)       , 0) from cls                     where cls.grpno  = gfnc.grpno and cls.grpfinancereflectflg = 'y')                                    where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
+            case self::recalGrpfncClssalesunpaidtotalByPkForInside   : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clssalesunpaidtotal    = (select ifnull(sum(clss.billfinal)         , 0) from clssettle   clss        where clss.grpno = gfnc.grpno and clss.managerdepositflg = 'n')                                      where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
+            case self::recalGrpfncClssaleslosstotalByPkForInside     : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clssaleslosstotal      = (select ifnull(sum(clss.billfinal)         , 0) from clssettle   clss        where clss.grpno = gfnc.grpno and clss.managerdepositflg = 'loss')                                   where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
+            case self::recalGrpfncClspurchasetotalByPkForInside      : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_clspurchasetotal       = (select ifnull(sum(cls.clsbillpurchase)    , 0) from cls                     where cls.grpno  = gfnc.grpno and cls.grpfinancereflectflg = 'y')                                    where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); $this->recalGrpfncAlltotalByPkForInside($GRPNO); break;
+            case self::recalGrpfncAlltotalByPkForInside              : $this->makeRecordsIfNotExistsByPkForInside($GRPNO); $query = "update grpfnca gfnc set modidt = now(), grpfnc_alltotal               = grpfnc_sponsorshiptotal - grpfnc_purchasetotal - grpfnc_losstotal + grpfnc_clssalestotal - grpfnc_clssalesunpaidtotal - grpfnc_clssaleslosstotal - grpfnc_clspurchasetotal    where gfnc.grpno = '$GRPNO'"; $rslt = GGsql::exeQuery($query); break;
             default:
             {
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $result;
+        return $rslt;
     }
 
 }

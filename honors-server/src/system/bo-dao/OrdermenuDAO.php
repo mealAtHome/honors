@@ -54,7 +54,7 @@ class OrdermenuDAO extends _CommonBO
                 userno  = '$userno' and
                 storeno = '$storeno'
         ";
-        $result = GGsql::exeQuery($query);
+        $rslt = GGsql::exeQuery($query);
 
         /* --------------- */
         /* copy record - cartmenuopt > ordermenuopt */
@@ -83,7 +83,7 @@ class OrdermenuDAO extends _CommonBO
                 userno  = '$userno' and
                 storeno = '$storeno'
         ";
-        $result = GGsql::exeQuery($query);
+        $rslt = GGsql::exeQuery($query);
 
         /* --------------- */
         /* copy record - cartmenuopt_detail > ordermenuopt_detail */
@@ -118,7 +118,7 @@ class OrdermenuDAO extends _CommonBO
                 userno  = '$userno' and
                 storeno = '$storeno'
         ";
-        $result = GGsql::exeQuery($query);
+        $rslt = GGsql::exeQuery($query);
 
         /* --------------- */
         /* copy record - cartmenu_recommend > ordermenu_recommend */
@@ -155,7 +155,7 @@ class OrdermenuDAO extends _CommonBO
                 userno  = '$userno' and
                 storeno = '$storeno'
         ";
-        $result = GGsql::exeQuery($query);
+        $rslt = GGsql::exeQuery($query);
 
         return true;
     }
