@@ -249,11 +249,9 @@ class GrpMemberBO extends _CommonBO
     {
         /* vars */
         $rslt = Common::getReturn();
-
-        /* get vars */
         extract($this->setBO());
-        extract($options);
         extract(self::getConsts());
+        extract($options);
 
         /* override option */
         if($option != "")

@@ -156,18 +156,15 @@ class SchedulebyweekBO extends _CommonBO
     const insertByPkForInside = "insertByPkForInside";
     protected function update($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
-        // extract(self::getConsts());
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* result */
-        $rslt = Common::getReturn();
 
         /* ==================== */
         /* process */

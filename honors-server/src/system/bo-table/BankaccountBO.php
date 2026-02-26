@@ -164,21 +164,15 @@ class BankaccountBO extends _CommonBO
     const deleteByPk = "deleteByPk";
     protected function update($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        $rslt = Common::getReturn();
         extract($this->setBO());
         extract(self::getConsts());
         extract($options);
 
-        /* bo */
-        $ggAuth = GGauth::getInstance();
-
         /* override option */
-        $OPTION = $option != "" ? $option : $OPTION;
-
-        /* result */
-        $baccno = "";
+        if($option != "")
+            $OPTION = $option;
 
         try
         {
@@ -260,6 +254,9 @@ class BankaccountBO extends _CommonBO
                             break;
                         }
                     }
+
+                    /* set return */
+                    $rslt[GGF::DATA] = $baccno;
                     break;
                 }
                 case self::deleteByPk:
@@ -301,7 +298,7 @@ class BankaccountBO extends _CommonBO
         {
             throw $e;
         }
-        return $baccno;
+        return $rslt;
     }
 
     public function getNewIndex($BACCTYPE, $EXECUTOR)

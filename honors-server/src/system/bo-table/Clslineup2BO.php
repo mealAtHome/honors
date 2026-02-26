@@ -225,49 +225,15 @@ class Clslineup2BO extends _CommonBO
     const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     protected function update($options, $option="")
     {
-        /* return */
-        $clsno = null;
-
-        /* get vars */
+        /* vars */
+        $rslt = Common::getReturn();
         extract($this->setBO());
-        extract(Clslineup2BO::getConsts());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* =============== */
-        /* auth */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::updateFromPage: { /* TODO : is manager of grp? */ break; }
-        }
-
-        /* =============== */
-        /* validation (common) */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::updateFromPage:
-            {
-                break;
-            }
-        }
-
-        /* =============== */
-        /* validation (key) */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::updateFromPage:
-            {
-                if(Common::isEmpty(trim($GRPNO))) { throw new GGexception(); }
-                if(Common::isEmpty(trim($CLSNO))) { throw new GGexception(); }
-                break;
-            }
-        }
 
         /* =============== */
         /* process */
@@ -286,6 +252,8 @@ class Clslineup2BO extends _CommonBO
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* is grp manager, no exception */
 
                 /* validation */
+                if(Common::isEmpty(trim($GRPNO))) { throw new GGexception(); }
+                if(Common::isEmpty(trim($CLSNO))) { throw new GGexception(); }
                 $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
 
                 /* get cls info */

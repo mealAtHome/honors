@@ -176,8 +176,10 @@ class ClssettlehistBO extends _CommonBO
     const copyFromClssettleForInside = "copyFromClssettleForInside";
     protected function update($options, $option="")
     {
-        /* get vars */
-        extract(ClssettlehistBO::getConsts());
+        /* vars */
+        $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
@@ -236,7 +238,7 @@ class ClssettlehistBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return true;
+        return $rslt;
     }
 
 } /* end class */

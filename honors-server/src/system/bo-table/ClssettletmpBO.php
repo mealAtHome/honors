@@ -200,7 +200,9 @@ class ClssettletmpBO extends _CommonBO
     const deleteByClsnoForInside = "deleteByClsnoForInside";
     protected function update($options, $option="")
     {
-        /* get vars */
+        /* vars */
+        $rslt = Common::getReturn();
+        extract($this->setBO());
         extract(self::getConsts());
         extract($options);
 
@@ -294,14 +296,7 @@ class ClssettletmpBO extends _CommonBO
                 GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* process */
-                $query =
-                "
-                    delete from
-                        clssettletmp
-                    where
-                        grpno = '$GRPNO' and
-                        clsno = '$CLSNO'
-                ";
+                $query = "delete from clssettletmp where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
                 break;
             }
@@ -310,6 +305,7 @@ class ClssettletmpBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
+        return $rslt;
     }
 
 } /* end class */

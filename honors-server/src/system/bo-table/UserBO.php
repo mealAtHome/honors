@@ -194,265 +194,255 @@ class UserBO extends _CommonBO
     const deleteRecordByPkForInside = "deleteRecordByPkForInside";
     protected function update($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        $rslt = Common::getReturn();
         extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
 
-        /* return */
-        $rslt = Common::getReturn();
-
-        try
+        /* ==================== */
+        /* process */
+        /* ==================== */
+        switch($OPTION)
         {
-            /* ==================== */
-            /* process */
-            /* ==================== */
-            switch($OPTION)
+            case self::insertForInside:
             {
-                case self::insertForInside:
+                /* make userno */
+                $userno = $idxBO->makeUserno();
+
+                /* ID : 영숫자만 사용가능 */
+                if(preg_match("/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]/", $ID) == false)
+                    throw new GGexception("아이디는 영숫자만 사용가능합니다.");
+
+                /* check id duplicated */
+                $userForId = $this->getUserById($ID);
+                if($userForId != null) { throw new GGexception("이미 사용된 아이디입니다."); } /* ID : 동일한 아이디 불가 */
+
+                /* check validation */
+                if(Common::isEmpty($ID)) { throw new GGexception("아이디를 입력해주세요."); } /* ID : 아이디 입력 필수 */
+                if(Common::isEmpty($PW)) { throw new GGexception("비밀번호를 입력해주세요."); } /* PW : 비밀번호 입력 필수 */
+                if(Common::isEmpty($NAME)) { throw new GGexception("이름을 입력해주세요."); } /* NAME : 닉네임 입력 필수 */
+
+                /* 비밀번호 해쉬화 */
+                $pwHash = password_hash($PW, PASSWORD_BCRYPT);
+
+                /* 전화번호 하이픈 여부 확인 */
+                if(strpos($PHONE, "-") === false)
                 {
-                    /* make userno */
-                    $userno = $idxBO->makeUserno();
-
-                    /* ID : 영숫자만 사용가능 */
-                    if(preg_match("/[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789]/", $ID) == false)
-                        throw new GGexception("아이디는 영숫자만 사용가능합니다.");
-
-                    /* check id duplicated */
-                    $userForId = $this->getUserById($ID);
-                    if($userForId != null) { throw new GGexception("이미 사용된 아이디입니다."); } /* ID : 동일한 아이디 불가 */
-
-                    /* check validation */
-                    if(Common::isEmpty($ID)) { throw new GGexception("아이디를 입력해주세요."); } /* ID : 아이디 입력 필수 */
-                    if(Common::isEmpty($PW)) { throw new GGexception("비밀번호를 입력해주세요."); } /* PW : 비밀번호 입력 필수 */
-                    if(Common::isEmpty($NAME)) { throw new GGexception("이름을 입력해주세요."); } /* NAME : 닉네임 입력 필수 */
-
-                    /* 비밀번호 해쉬화 */
-                    $pwHash = password_hash($PW, PASSWORD_BCRYPT);
-
-                    /* 전화번호 하이픈 여부 확인 */
-                    if(strpos($PHONE, "-") === false)
-                    {
-                        /* 01011111111 > 010-1111-1111 */
-                        $PHONE = preg_replace("/[^0-9]/", "", $PHONE);
-                        if(strlen($PHONE) == 11)
-                            $PHONE = substr($PHONE, 0, 3)."-".substr($PHONE, 3, 4)."-".substr($PHONE, 7);
-                        else if(strlen($PHONE) == 10)
-                            $PHONE = substr($PHONE, 0, 3)."-".substr($PHONE, 3, 3)."-".substr($PHONE, 6);
-                    }
-
-                    /* for int */
-                    $BIRTHYEAR = $BIRTHYEAR == "" ? "null" : $BIRTHYEAR;
-
-                    /* insert */
-                    $query =
-                    "
-                        insert into user
-                        (
-                              userno
-                            , id
-                            , pw
-                            , img
-                            , name
-                            , birthyear
-                            , phone
-                            , email
-                            , adrcvflg
-                            , hascarflg
-                            , address
-                            , adminflg
-                            , apikey
-                            , pushtoken
-                            , modidt
-                            , regidt
-                        )
-                        values
-                        (
-                              '$userno'
-                            , '$ID'
-                            , '$pwHash'
-                            ,  null
-                            , '$NAME'
-                            ,  $BIRTHYEAR
-                            , '$PHONE'
-                            , '$EMAIL'
-                            , '$ADRCVFLG'
-                            , '$HASCARFLG'
-                            , '$ADDRESS'
-                            , 'n'
-                            ,  null
-                            ,  null
-                            ,  now()
-                            ,  now()
-                        )
-                    ";
-                    $rslt = GGsql::exeQuery($query);
-
-                    /* set user img */
-                    GGnavi::getImageUtils();
-                    ImageUtils::setImgUser($userno);
-
-                    /* insert grp_member */
-                    $grpMemberBO->insertTempForInside($userno);
-
-                    /* generate API key */
-                    $rslt[GGF::ID] = $ID;
-                    $rslt[GGF::USERNO] = $userno;
-                    $rslt[GGF::APIKEY] = $this->generateApikey($userno);
-                    break;
+                    /* 01011111111 > 010-1111-1111 */
+                    $PHONE = preg_replace("/[^0-9]/", "", $PHONE);
+                    if(strlen($PHONE) == 11)
+                        $PHONE = substr($PHONE, 0, 3)."-".substr($PHONE, 3, 4)."-".substr($PHONE, 7);
+                    else if(strlen($PHONE) == 10)
+                        $PHONE = substr($PHONE, 0, 3)."-".substr($PHONE, 3, 3)."-".substr($PHONE, 6);
                 }
-                case self::insertTempForInside:
-                {
-                    $userno = $idxBO->makeUserno();
-                    $id = "temp-".$this->generateTempId();
-                    $pwHash = password_hash(Common::getRandomString(10), PASSWORD_BCRYPT);
 
-                    /* insert */
-                    $query =
-                    "
-                        insert into user
-                        (
-                              userno
-                            , usertype
-                            , id
-                            , pw
-                            , img
-                            , name
-                            , birthyear
-                            , phone
-                            , email
-                            , adrcvflg
-                            , hascarflg
-                            , address
-                            , adminflg
-                            , apikey
-                            , pushtoken
-                            , modidt
-                            , regidt
-                        )
-                        values
-                        (
-                              '$userno'
-                            , 'temp'
-                            , '$id'
-                            , '$pwHash'
-                            ,  null
-                            , '$NAME'
-                            ,  null
-                            , ''
-                            , ''
-                            , 'n'
-                            , 'n'
-                            , ''
-                            , 'n'
-                            ,  null
-                            ,  null
-                            ,  now()
-                            ,  now()
-                        )
-                    ";
-                    $rslt = GGsql::exeQuery($query);
+                /* for int */
+                $BIRTHYEAR = $BIRTHYEAR == "" ? "null" : $BIRTHYEAR;
 
-                    /* set user img */
-                    GGnavi::getImageUtils();
-                    ImageUtils::setImgUser($userno);
+                /* insert */
+                $query =
+                "
+                    insert into user
+                    (
+                            userno
+                        , id
+                        , pw
+                        , img
+                        , name
+                        , birthyear
+                        , phone
+                        , email
+                        , adrcvflg
+                        , hascarflg
+                        , address
+                        , adminflg
+                        , apikey
+                        , pushtoken
+                        , modidt
+                        , regidt
+                    )
+                    values
+                    (
+                            '$userno'
+                        , '$ID'
+                        , '$pwHash'
+                        ,  null
+                        , '$NAME'
+                        ,  $BIRTHYEAR
+                        , '$PHONE'
+                        , '$EMAIL'
+                        , '$ADRCVFLG'
+                        , '$HASCARFLG'
+                        , '$ADDRESS'
+                        , 'n'
+                        ,  null
+                        ,  null
+                        ,  now()
+                        ,  now()
+                    )
+                ";
+                $rslt = GGsql::exeQuery($query);
 
-                    /* generate API key */
-                    $rslt[GGF::ID] = $id;
-                    $rslt[GGF::USERNO] = $userno;
-                    break;
-                }
-                case self::updateBaccnoRefund:
-                {
-                    $query = "update user set baccno_refund = $BACCNO_REFUND where userno = '$EXECUTOR'";
-                    $rslt = GGsql::exeQuery($query);
-                    break;
-                }
-                case self::updateDeviceInfoByInside:
-                {
-                    /* update pushToken */
-                    if(Common::isEmpty($PUSHTOKEN) == false)
-                    {
-                        $query = "update user set pushtoken = '$PUSHTOKEN', modidt = now() where userno = '$USERNO'";
-                        $rslt = GGsql::exeQuery($query);
-                    }
+                /* set user img */
+                GGnavi::getImageUtils();
+                ImageUtils::setImgUser($userno);
 
-                    /* is pushToken null? */
-                    if(Common::isEmpty($PLATFORM) == false)
-                    {
-                        $query = "update user set platform = '$PLATFORM', modidt = now() where userno = '$USERNO'";
-                        $rslt = GGsql::exeQuery($query);
-                    }
-                    break;
-                }
-                case self::updatePhoneByUsernoForInside:
-                {
-                    $query = "update user set phone = '$PHONE', modidt = now() where userno = '$USERNO'";
-                    $rslt = GGsql::exeQuery($query);
-                    break;
-                }
-                case self::addPointForInside:
-                {
-                    $query =
-                    "
-                        update
-                            user
-                        set
-                              point = point + $POINT
-                            , modidt = now()
-                        where userno = '$USERNO'
-                    ";
-                    $rslt = GGsql::exeQuery($query);
-                    break;
-                }
-                case self::updateBaccnodefaultForInside:
-                {
-                    $query = "update user set baccnodefault = $BACCNODEFAULT where userno = '$USERNO'";
-                    $rslt = GGsql::exeQuery($query);
-                    break;
-                }
-                case self::deleteUserInfo:
-                {
-                    if($ID == "" || $PW == "")
-                        return $rslt;
+                /* insert grp_member */
+                $grpMemberBO->insertTempForInside($userno);
 
-                    /* 유저 조회 */
-                    $user = $this->getUserById($ID);
-
-                    /* 비밀번호 확인 */
-                    $pw = Common::getField($user, self::FIELD__PW);
-                    if(password_verify($PW, $pw) == false)
-                        return $rslt;
-
-                    /* 이미 신청했다면 */
-                    $deletedataRqstdt = Common::getField($user, self::FIELD__DELETEDATA_RQSTDT);
-                    if(Common::isEmpty($deletedataRqstdt) == false)
-                        return $rslt;
-
-                    $query = "update user set deletedata_rqstdt = now() where id = '$ID'";
-                    $rslt = GGsql::exeQuery($query);
-                    break;
-                }
-                case self::deleteRecordByPkForInside:
-                {
-                    $query = "delete from user where userno = '$USERNO'";
-                    GGsql::exeQuery($query);
-                    break;
-                }
-                default:
-                {
-                    throw new Exception("unknown option");
-                }
+                /* generate API key */
+                $rslt[GGF::ID] = $ID;
+                $rslt[GGF::USERNO] = $userno;
+                $rslt[GGF::APIKEY] = $this->generateApikey($userno);
+                break;
             }
-        }
-        catch(Error $e)
-        {
-            throw $e;
+            case self::insertTempForInside:
+            {
+                $userno = $idxBO->makeUserno();
+                $id = "temp-".$this->generateTempId();
+                $pwHash = password_hash(Common::getRandomString(10), PASSWORD_BCRYPT);
+
+                /* insert */
+                $query =
+                "
+                    insert into user
+                    (
+                            userno
+                        , usertype
+                        , id
+                        , pw
+                        , img
+                        , name
+                        , birthyear
+                        , phone
+                        , email
+                        , adrcvflg
+                        , hascarflg
+                        , address
+                        , adminflg
+                        , apikey
+                        , pushtoken
+                        , modidt
+                        , regidt
+                    )
+                    values
+                    (
+                            '$userno'
+                        , 'temp'
+                        , '$id'
+                        , '$pwHash'
+                        ,  null
+                        , '$NAME'
+                        ,  null
+                        , ''
+                        , ''
+                        , 'n'
+                        , 'n'
+                        , ''
+                        , 'n'
+                        ,  null
+                        ,  null
+                        ,  now()
+                        ,  now()
+                    )
+                ";
+                $rslt = GGsql::exeQuery($query);
+
+                /* set user img */
+                GGnavi::getImageUtils();
+                ImageUtils::setImgUser($userno);
+
+                /* generate API key */
+                $rslt[GGF::ID] = $id;
+                $rslt[GGF::USERNO] = $userno;
+                break;
+            }
+            case self::updateBaccnoRefund:
+            {
+                $query = "update user set baccno_refund = $BACCNO_REFUND where userno = '$EXECUTOR'";
+                $rslt = GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateDeviceInfoByInside:
+            {
+                /* update pushToken */
+                if(Common::isEmpty($PUSHTOKEN) == false)
+                {
+                    $query = "update user set pushtoken = '$PUSHTOKEN', modidt = now() where userno = '$USERNO'";
+                    $rslt = GGsql::exeQuery($query);
+                }
+
+                /* is pushToken null? */
+                if(Common::isEmpty($PLATFORM) == false)
+                {
+                    $query = "update user set platform = '$PLATFORM', modidt = now() where userno = '$USERNO'";
+                    $rslt = GGsql::exeQuery($query);
+                }
+                break;
+            }
+            case self::updatePhoneByUsernoForInside:
+            {
+                $query = "update user set phone = '$PHONE', modidt = now() where userno = '$USERNO'";
+                $rslt = GGsql::exeQuery($query);
+                break;
+            }
+            case self::addPointForInside:
+            {
+                $query =
+                "
+                    update
+                        user
+                    set
+                            point = point + $POINT
+                        , modidt = now()
+                    where userno = '$USERNO'
+                ";
+                $rslt = GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateBaccnodefaultForInside:
+            {
+                $query = "update user set baccnodefault = $BACCNODEFAULT where userno = '$USERNO'";
+                $rslt = GGsql::exeQuery($query);
+                break;
+            }
+            case self::deleteUserInfo:
+            {
+                if($ID == "" || $PW == "")
+                    return $rslt;
+
+                /* 유저 조회 */
+                $user = $this->getUserById($ID);
+
+                /* 비밀번호 확인 */
+                $pw = Common::getField($user, self::FIELD__PW);
+                if(password_verify($PW, $pw) == false)
+                    return $rslt;
+
+                /* 이미 신청했다면 */
+                $deletedataRqstdt = Common::getField($user, self::FIELD__DELETEDATA_RQSTDT);
+                if(Common::isEmpty($deletedataRqstdt) == false)
+                    return $rslt;
+
+                $query = "update user set deletedata_rqstdt = now() where id = '$ID'";
+                $rslt = GGsql::exeQuery($query);
+                break;
+            }
+            case self::deleteRecordByPkForInside:
+            {
+                $query = "delete from user where userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            default:
+            {
+                throw new Exception("unknown option");
+            }
         }
         return $rslt;
     }

@@ -149,24 +149,14 @@ class GrpMemberPointhistBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $pointhistno = null;
-
-        /* get vars */
+        $rslt = Common::getReturn();
         extract($this->setBO());
-        extract(GrpMemberPointhistBO::getConsts());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* =============== */
-        /* auth */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::insertForInside: { break; }
-        }
 
         /* =============== */
         /* process */
@@ -224,7 +214,7 @@ class GrpMemberPointhistBO extends _CommonBO
             }
             default: throw new GGexception("(server) no option defined");
         }
-        return $pointhistno;
+        return $rslt;
     }
 
     public function getNextPointhistno($GRPNO, $USERNO, $POINTHISTDT)

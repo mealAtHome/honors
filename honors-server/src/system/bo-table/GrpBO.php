@@ -160,14 +160,10 @@ class GrpBO extends _CommonBO
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
     protected function update($options, $option="")
     {
-        /* set BO */
-        extract($this->setBO());
-
         /* vars */
-        $ggAuth = GGauth::getInstance();
         $rslt = Common::getReturn();
-
-        /* get vars */
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

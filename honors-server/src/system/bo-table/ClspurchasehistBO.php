@@ -165,27 +165,15 @@ class ClspurchasehistBO extends _CommonBO
     const copyFromClspurchaseForInside = "copyFromClspurchaseForInside";
     protected function update($options, $option="")
     {
-        /* get vars */
-        extract(ClspurchasehistBO::getConsts());
+        /* vars */
+        $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* =============== */
-        /* auth validation */
-        /* =============== */
-        // switch($OPTION)
-        // {
-        //     case self::insertByArr:
-        //     {
-        //         /* is grpmanager? */
-        //         $ggAuth = GGauth::getInstance();
-        //         $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-        //         break;
-        //     }
-        // }
 
         /* =============== */
         /* process */
@@ -242,6 +230,7 @@ class ClspurchasehistBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
+        return $rslt;
     }
 
 } /* end class */

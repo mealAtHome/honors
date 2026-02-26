@@ -123,29 +123,13 @@ class ClzcancelBO extends _CommonBO
     {
         /* vars */
         $rslt = Common::getReturn();
-
-        /* get vars */
         extract($this->setBO());
-        extract(ClzcancelBO::getConsts());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* =============== */
-        /* validation (common) */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::insertForInside:
-            {
-                if(Common::isEmpty(trim($GRPNO))             ) { throw new GGexception("입력되지 않은 항목이 있습니다."); }
-                if(Common::isEmpty(trim($CLSNO))             ) { throw new GGexception("입력되지 않은 항목이 있습니다."); }
-                if(Common::isEmpty(trim($CLSCANCELREASON))   ) { throw new GGexception("입력되지 않은 항목이 있습니다. (취소사유)"); }
-                break;
-            }
-        }
 
         /* =============== */
         /* process */
@@ -154,6 +138,11 @@ class ClzcancelBO extends _CommonBO
         {
             case self::insertForInside:
             {
+                /* validation */
+                if(Common::isEmpty(trim($GRPNO))             ) { throw new GGexception("입력되지 않은 항목이 있습니다."); }
+                if(Common::isEmpty(trim($CLSNO))             ) { throw new GGexception("입력되지 않은 항목이 있습니다."); }
+                if(Common::isEmpty(trim($CLSCANCELREASON))   ) { throw new GGexception("입력되지 않은 항목이 있습니다. (취소사유)"); }
+
                 $query =
                 "
                     insert into clzcancel

@@ -244,8 +244,10 @@ class ClssettleBO extends _CommonBO
     const deleteByPkForInside = "deleteByPkForInside";
     protected function update($options, $option="")
     {
-        /* get vars */
-        extract(ClssettleBO::getConsts());
+        /* vars */
+        $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
@@ -482,6 +484,7 @@ class ClssettleBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
+        return $rslt;
     }
 
 } /* end class */

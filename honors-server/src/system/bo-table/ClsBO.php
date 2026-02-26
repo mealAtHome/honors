@@ -319,10 +319,8 @@ class ClsBO extends _CommonBO
     {
         /* vars */
         $rslt = Common::getReturn();
-
-        /* get vars */
         extract($this->setBO());
-        extract(ClsBO::getConsts());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

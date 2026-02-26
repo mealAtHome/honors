@@ -19,6 +19,11 @@ class CartDAO extends _CommonBO
         return $arr;
     }
 
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
     static public function getConsts()
     {
         $arr = array();

@@ -191,27 +191,15 @@ class ClspurchaseBO extends _CommonBO
     const deleteByClsnoForInside = "deleteByClsnoForInside";
     protected function update($options, $option="")
     {
-        /* get vars */
-        extract(ClspurchaseBO::getConsts());
+        /* vars */
+        $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* =============== */
-        /* auth validation */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::insertByArr:
-            {
-                /* is grpmanager? */
-                $ggAuth = GGauth::getInstance();
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-                break;
-            }
-        }
 
         /* =============== */
         /* process */
@@ -220,6 +208,9 @@ class ClspurchaseBO extends _CommonBO
         {
             case self::insertByArr:
             {
+                /* validation */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+
                 /* bo */
                 GGnavi::getClsBO();
                 GGnavi::getClspurchasehistBO();
@@ -339,6 +330,7 @@ class ClspurchaseBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
+        return $rslt;
     }
 
 } /* end class */

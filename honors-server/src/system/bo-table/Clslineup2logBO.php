@@ -150,47 +150,14 @@ class Clslineup2logBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $clsno = null;
-
-        /* get vars */
-        extract(Clslineup2logBO::getConsts());
+        $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
         if($option != "")
             $OPTION = $option;
-
-        /* =============== */
-        /* auth */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::updateFromPage: { /* TODO : is manager of grp? */ break; }
-        }
-
-        /* =============== */
-        /* validation (common) */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::updateFromPage:
-            {
-                break;
-            }
-        }
-
-        /* =============== */
-        /* validation (key) */
-        /* =============== */
-        switch($OPTION)
-        {
-            case self::updateFromPage:
-            {
-                if(Common::isEmpty(trim($GRPNO)) ) { throw new GGexception(); }
-                if(Common::isEmpty(trim($CLSNO))    ) { throw new GGexception(); }
-                break;
-            }
-        }
 
         /* =============== */
         /* process */
@@ -205,6 +172,11 @@ class Clslineup2logBO extends _CommonBO
             }
             case self::updateFromPage:
             {
+                /* validation */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR); /* is grp manager */
+                if(Common::isEmpty(trim($GRPNO))) { throw new GGexception(); }
+                if(Common::isEmpty(trim($CLSNO))) { throw new GGexception(); }
+
                 /* delete first */
                 $this->deleteByClsnoForInside($GRPNO, $CLSNO);
 
@@ -263,7 +235,7 @@ class Clslineup2logBO extends _CommonBO
                 throw new GGexception("(server) no option defined");
             }
         }
-        return $clsno;
+        return $rslt;
     }
 
 } /* end class */

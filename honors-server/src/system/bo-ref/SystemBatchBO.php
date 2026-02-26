@@ -193,6 +193,8 @@ class SystemBatchBO extends _CommonBO
     {
         /* vars */
         $rslt = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
