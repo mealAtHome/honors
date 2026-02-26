@@ -150,6 +150,9 @@ class GrpfncPurchaseBO extends _CommonBO
         {
             case self::insertFromPage:
             {
+                /* check auth */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
                 /* validation */
                 if(Common::isEmpty($GRPNO))        { throw new GGexception("시스템 오류입니다."); }
                 if(Common::isEmpty($PURCHASEITEM))     { throw new GGexception("구매품목이 공란입니다."); }

@@ -146,7 +146,6 @@ class GrpfncSponsorshipBO extends _CommonBO
     /* ========================= */
     const insertFromPage = "insertFromPage";
     const deleteByPk = "deleteByPk";
-    /* const updateBaccnodefaultForInside = "updateBaccnodefaultForInside"; */
     protected function update($options, $option="")
     {
         /* vars */
@@ -164,6 +163,9 @@ class GrpfncSponsorshipBO extends _CommonBO
         {
             case self::insertFromPage:
             {
+                /* check auth */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
                 /* validation */
                 if(Common::isEmpty($GRPNO))                                              { throw new GGexception("시스템 오류입니다."); }
                 if(Common::isEmpty($SPONSORTYPE))                                        { throw new GGexception("시스템 오류입니다."); }
