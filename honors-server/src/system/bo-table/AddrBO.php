@@ -11,6 +11,12 @@ class AddrBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
     /* fields */
@@ -40,12 +46,17 @@ class AddrBO extends _CommonBO
     const FIELD__ADDR_DETAIL     = "addr_detail";    /* (  ) char(100) */
 
     /* ========================= */
-    /* fields */
+    /* enum */
     /*
     */
     /* ========================= */
     const ADDRTYPE__BIZ = "biz";
-
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /*  */
@@ -157,127 +168,117 @@ class AddrBO extends _CommonBO
     const insertByInside = "insertByInside";
     protected function update($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        $result = Common::getReturn();
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
-        $addrno = null;
 
         /* override option */
         if($option != "")
             $OPTION = $option;
 
-        /* result */
-        $rslt = Common::getReturn();
-
-        try
+        /* ==================== */
+        /* process */
+        /* ==================== */
+        switch($OPTION)
         {
-            /* ==================== */
-            /* process */
-            /* ==================== */
-            switch($OPTION)
+            case self::insertByInside:
             {
-                case self::insertByInside:
-                {
-                    /* ----- */
-                    /* get BO */
-                    /* ----- */
-                    GGnavi::getGGcoordinate();
-                    GGnavi::getIdxBO();
-                    $ggCoordinate = GGcoordinate::getInstance();
-                    $idxBO = IdxBO::getInstance();
+                /* ----- */
+                /* get BO */
+                /* ----- */
+                GGnavi::getGGcoordinate();
+                GGnavi::getIdxBO();
+                $ggCoordinate = GGcoordinate::getInstance();
+                $idxBO = IdxBO::getInstance();
 
-                    /* ----- */
-                    /* validation */
-                    /* ----- */
+                /* ----- */
+                /* validation */
+                /* ----- */
 
-                    /* get coordinate */
-                    $coordinate = $ggCoordinate->getCoordinate(
-                        $ADDR_ADMCD,
-                        $ADDR_RNMGTSN,
-                        $ADDR_UDRTYN,
-                        $ADDR_BULDMNNM,
-                        $ADDR_BULDSLNO
-                    );
-                    $ADDR_GRS80Y = $coordinate['ADDR_GRS80Y'];
-                    $ADDR_GRS80X = $coordinate['ADDR_GRS80X'];
-                    $ADDR_LATIY  = $coordinate['ADDR_LATIY'];
-                    $ADDR_LONGX  = $coordinate['ADDR_LONGX'];
+                /* get coordinate */
+                $coordinate = $ggCoordinate->getCoordinate(
+                    $ADDR_ADMCD,
+                    $ADDR_RNMGTSN,
+                    $ADDR_UDRTYN,
+                    $ADDR_BULDMNNM,
+                    $ADDR_BULDSLNO
+                );
+                $ADDR_GRS80Y = $coordinate['ADDR_GRS80Y'];
+                $ADDR_GRS80X = $coordinate['ADDR_GRS80X'];
+                $ADDR_LATIY  = $coordinate['ADDR_LATIY'];
+                $ADDR_LONGX  = $coordinate['ADDR_LONGX'];
 
-                    /* 주소 유효확인 */
-                    GGvalid::isValidAddr($options);
+                /* 주소 유효확인 */
+                GGvalid::isValidAddr($options);
 
-                    /* 지역정보 */
-                    $ADDR_LATIYS = round($ADDR_LATIY, 2);
-                    $ADDR_LONGXS = round($ADDR_LONGX, 2);
+                /* 지역정보 */
+                $ADDR_LATIYS = round($ADDR_LATIY, 2);
+                $ADDR_LONGXS = round($ADDR_LONGX, 2);
 
-                    /* ----- */
-                    /* insert */
-                    /* ----- */
+                /* ----- */
+                /* insert */
+                /* ----- */
 
-                    /* make addrno */
-                    $addrno = $idxBO->makeAddrno();
-                    $query =
-                    "
-                        insert into addr
-                        (
-                              addrno
-                            , addrtype
-                            , addr_zipcode
-                            , addr_sido
-                            , addr_sigungu
-                            , addr_emd
-                            , addr_road
-                            , addr_jibun
-                            , addr_roadeng
-                            , addr_admcd
-                            , addr_rnmgtsn
-                            , addr_udrtyn
-                            , addr_buldmnnm
-                            , addr_buldslno
-                            , addr_grs80y
-                            , addr_grs80x
-                            , addr_latiy
-                            , addr_longx
-                            , addr_latiys
-                            , addr_longxs
-                            , addr_detail
-                        )
-                        values
-                        (
-                             '$addrno'
-                            ,'$ADDRTYPE'
-                            ,'$ADDR_ZIPCODE'
-                            ,'$ADDR_SIDO'
-                            ,'$ADDR_SIGUNGU'
-                            ,'$ADDR_EMD'
-                            ,'$ADDR_ROAD'
-                            ,'$ADDR_JIBUN'
-                            ,'$ADDR_ROADENG'
-                            ,'$ADDR_ADMCD'
-                            ,'$ADDR_RNMGTSN'
-                            ,'$ADDR_UDRTYN'
-                            , $ADDR_BULDMNNM
-                            , $ADDR_BULDSLNO
-                            , $ADDR_GRS80Y
-                            , $ADDR_GRS80X
-                            , $ADDR_LATIY
-                            , $ADDR_LONGX
-                            , $ADDR_LATIYS
-                            , $ADDR_LONGXS
-                            ,'$ADDR_DETAIL'
-                        )
-                    ";
-                    $result = GGsql::exeQuery($query);
-                    break;
-                }
-            } /* switch : 옵션별 처리 */
+                /* make addrno */
+                $addrno = $idxBO->makeAddrno();
+                $query =
+                "
+                    insert into addr
+                    (
+                            addrno
+                        , addrtype
+                        , addr_zipcode
+                        , addr_sido
+                        , addr_sigungu
+                        , addr_emd
+                        , addr_road
+                        , addr_jibun
+                        , addr_roadeng
+                        , addr_admcd
+                        , addr_rnmgtsn
+                        , addr_udrtyn
+                        , addr_buldmnnm
+                        , addr_buldslno
+                        , addr_grs80y
+                        , addr_grs80x
+                        , addr_latiy
+                        , addr_longx
+                        , addr_latiys
+                        , addr_longxs
+                        , addr_detail
+                    )
+                    values
+                    (
+                            '$addrno'
+                        ,'$ADDRTYPE'
+                        ,'$ADDR_ZIPCODE'
+                        ,'$ADDR_SIDO'
+                        ,'$ADDR_SIGUNGU'
+                        ,'$ADDR_EMD'
+                        ,'$ADDR_ROAD'
+                        ,'$ADDR_JIBUN'
+                        ,'$ADDR_ROADENG'
+                        ,'$ADDR_ADMCD'
+                        ,'$ADDR_RNMGTSN'
+                        ,'$ADDR_UDRTYN'
+                        , $ADDR_BULDMNNM
+                        , $ADDR_BULDSLNO
+                        , $ADDR_GRS80Y
+                        , $ADDR_GRS80X
+                        , $ADDR_LATIY
+                        , $ADDR_LONGX
+                        , $ADDR_LATIYS
+                        , $ADDR_LONGXS
+                        ,'$ADDR_DETAIL'
+                    )
+                ";
+                $result = GGsql::exeQuery($query);
+                break;
+            }
         }
-        catch(Error $e)
-        {
-            throw $e;
-        }
-        return $addrno;
+        return $result;
     }
 
 } /* end class */

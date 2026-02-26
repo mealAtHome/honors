@@ -13,14 +13,35 @@ class InformationSchemaPartitionsBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function setBO()
+    function setBO()
     {
-        // GGnavi::getReorderpctResultBO();
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
     }
 
+
+    /* ========================= */
+    /* fields */
+    /*
+    */
+    /* ========================= */
+
+
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
     const FIELD__TABLE_SCHEMA   = "table_schema";    /* varchar(64) */
     const FIELD__TABLE_NAME     = "table_name";      /* varchar(64) */
     const FIELD__PARTITION_NAME = "partition_name";  /* varchar(64) */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* 조회 */

@@ -28,7 +28,7 @@ class GrpMemberBO extends _CommonBO
     }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -77,6 +77,8 @@ class GrpMemberBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPkForInside = "selectByPkForInside";
     const selectByGrpnoForMng = "selectByGrpnoForMng";

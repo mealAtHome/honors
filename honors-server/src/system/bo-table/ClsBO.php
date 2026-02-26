@@ -33,7 +33,7 @@ class ClsBO extends _CommonBO
         return $arr;
     }
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -78,9 +78,6 @@ class ClsBO extends _CommonBO
     const CLSSETTLEFLG__YET         = "yet";                /* clssettleflg : 미정산 */
     const CLSSETTLEFLG__DONE        = "done";               /* clssettleflg : 정산완료 */
 
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
@@ -109,6 +106,8 @@ class ClsBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPkForInside = "selectByPkForInside";
     const selectByPkForAll = "selectByPkForAll";

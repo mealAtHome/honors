@@ -12,10 +12,15 @@ class ClzcancelBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function setBO() {}
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -29,23 +34,12 @@ class ClzcancelBO extends _CommonBO
     /*
     */
     /* ========================= */
-
-
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
-        // $arr['clstypeLineup1']                  = self::CLSTYPE__LINEUP1;       /* 일반참가 */
-        // $arr['clstypeLineup2']                  = self::CLSTYPE__LINEUP2;       /* 라인업1시합 */
-        // $arr['clstypeLineup4']                  = self::CLSTYPE__LINEUP4;       /* 라인업2시합 */
-        // $arr['clsstatusEdit']                   = self::CLSSTATUS__EDIT;        /* 일정상태 : 작성중 */
-        // $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
-        // $arr['clsstatusEnd']                 = self::CLSSTATUS__END;      /* 일정상태 : 일정완료 */
+        // $arr['key'] = "value";
         return $arr;
     }
-
 
     /* ========================= */
     /* select > sub > sub */
@@ -59,6 +53,8 @@ class ClzcancelBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPkForInside = "selectByPkForInside";
     protected function select($options, $option="")

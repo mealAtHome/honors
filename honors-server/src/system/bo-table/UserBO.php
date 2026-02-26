@@ -26,6 +26,8 @@ class UserBO extends _CommonBO
 
     /* ========================= */
     /* fields */
+    /*
+    */
     /* ========================= */
     const FIELD__USERNO               = "userno";             /* (pk) char(30) */
     const FIELD__USERTYPE             = "usertype";           /* (  ) enum('normal','temp') default 'normal' */
@@ -51,6 +53,18 @@ class UserBO extends _CommonBO
     const FIELD__REGIDT               = "regidt";             /* (  ) datetime */
 
     /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
+
+    /* ========================= */
     /* 유저의 모든 정보 습득 */
     /* ========================= */
     function getByPk     ($USERNO) { return                     GGsql::selectOne("select * from user where userno = '$USERNO'"); }
@@ -72,6 +86,8 @@ class UserBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectMe = "selectMe";
     const selectMeForLogin = "selectMeForLogin";

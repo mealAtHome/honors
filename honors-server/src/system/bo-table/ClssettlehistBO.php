@@ -13,9 +13,15 @@ class ClssettlehistBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -41,13 +47,9 @@ class ClssettlehistBO extends _CommonBO
     const HISTTYPE__DELETE                 = "delete";                     /* 이력유형 : 삭제 */
     const HISTTYPE__AFTER                  = "after";                      /* 이력유형 : 이후 */
 
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
-        // $arr['clsstatusEdit'] = self::CLSSTATUS__EDIT; /* 일정상태 : 작성중 */
         return $arr;
     }
 
@@ -58,6 +60,8 @@ class ClssettlehistBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPkForInside = "selectByPkForInside";
     const selectByClsno = "selectByClsno";

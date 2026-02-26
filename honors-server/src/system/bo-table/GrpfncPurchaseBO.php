@@ -13,7 +13,8 @@ class GrpfncPurchaseBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function setBO() {
+    function setBO()
+    {
         GGnavi::getGrpfncaBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
@@ -22,7 +23,7 @@ class GrpfncPurchaseBO extends _CommonBO
     }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -38,6 +39,12 @@ class GrpfncPurchaseBO extends _CommonBO
     /*
     */
     /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* select > sub > sub */
@@ -51,16 +58,16 @@ class GrpfncPurchaseBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByGrpnoPagenum = "selectByGrpnoPagenum";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        $result = Common::getReturn();
         extract($this->setBO());
-        extract(GrpMemberBO::getConsts());
         extract($options);
 
         /* override option */
@@ -128,12 +135,13 @@ class GrpfncPurchaseBO extends _CommonBO
     /* const updateBaccnodefaultForInside = "updateBaccnodefaultForInside"; */
     protected function update($options, $option="")
     {
-        /* set BO */
+        /* vars */
+        $result = Common::getReturn();
         extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
-        /* set var */
-        $result = Common::getReturn();
+        /* override option */
         if($option != "")
             $OPTION = $option;
 

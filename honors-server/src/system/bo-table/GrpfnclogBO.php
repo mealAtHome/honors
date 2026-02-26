@@ -12,9 +12,16 @@ class GrpfnclogBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
+
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -34,6 +41,12 @@ class GrpfnclogBO extends _CommonBO
     /*
     */
     /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* select > sub */
@@ -42,6 +55,8 @@ class GrpfnclogBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByPkForInside = "selectByPkForInside";
@@ -123,10 +138,9 @@ class GrpfnclogBO extends _CommonBO
     protected function update($options, $option="")
     {
         /* vars */
-        $ggAuth = GGauth::getInstance();
         $result = Common::getReturn();
-
-        /* get vars */
+        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

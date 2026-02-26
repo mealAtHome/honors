@@ -12,9 +12,15 @@ class SchedulebytimeBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -30,6 +36,18 @@ class SchedulebytimeBO extends _CommonBO
     const FIELD__REGDT              = "regdt";              /* (  ) datetime        / YES */
 
     /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
+
+    /* ========================= */
     /* select > sub > sub */
     /* ========================= */
     // public function getByPk($GRPNO, $CLSNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO)); }
@@ -41,6 +59,8 @@ class SchedulebytimeBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByYMW = "selectByYMW";
     protected function select($options, $option="")

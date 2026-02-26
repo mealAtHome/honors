@@ -12,9 +12,15 @@ class ClspurchaseBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -25,6 +31,18 @@ class ClspurchaseBO extends _CommonBO
     const FIELD__PRODUCTBILL                = "productbill";                /* (  ) int */
     const FIELD__PURCHASEMEMO               = "purchasememo";               /* (  ) varchar(100) */
     const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
+
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* validation */
@@ -77,6 +95,8 @@ class ClspurchaseBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPkForInside = "selectByPkForInside";
     const selectByClsno = "selectByClsno";

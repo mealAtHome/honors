@@ -15,6 +15,8 @@ class SystemCheckBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const checkDuplicateOfUserId = "checkDuplicateOfUserId";
     protected function check($options, $option="")

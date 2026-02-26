@@ -13,7 +13,8 @@ class GrpfncLossBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function setBO() {
+    function setBO()
+    {
         GGnavi::getGrpfncaBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
@@ -21,8 +22,9 @@ class GrpfncLossBO extends _CommonBO
         return $arr;
     }
 
+
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -38,6 +40,12 @@ class GrpfncLossBO extends _CommonBO
     /*
     */
     /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* select > sub > sub */
@@ -51,6 +59,8 @@ class GrpfncLossBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByPkForInside = "selectByPkForInside";
@@ -130,12 +140,13 @@ class GrpfncLossBO extends _CommonBO
     /* const updateBaccnodefaultForInside = "updateBaccnodefaultForInside"; */
     protected function update($options, $option="")
     {
-        /* set BO */
+        /* vars */
+        $result = Common::getReturn();
         extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
-        /* set var */
-        $result = Common::getReturn();
+        /* override option */
         if($option != "")
             $OPTION = $option;
 

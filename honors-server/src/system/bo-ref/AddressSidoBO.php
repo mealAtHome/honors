@@ -13,12 +13,33 @@ class AddressSidoBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
+
 
     /* ========================= */
     /* fields */
+    /*
+    */
     /* ========================= */
     const FIELD__SDIDX   = "sdidx";   /* (pk) int      */
     const FIELD__SDNAME  = "sdname";  /* (  ) char(30) */
+
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /*  */

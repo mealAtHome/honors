@@ -14,7 +14,18 @@ class UserAddrBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
+    /* ========================= */
+    /* fields */
+    /*
+    */
+    /* ========================= */
     const FIELD__USERNO               = "userno";
     const FIELD__ADDR_INDEX           = "addr_index";
     const FIELD__ADDR_NAME            = "addr_name";
@@ -39,6 +50,18 @@ class UserAddrBO extends _CommonBO
     const FIELD__AT_LASTORDERCOMPLETE = "at_lastordercomplete";
     const FIELD__CNT_ORDERCOMPLETE    = "cnt_ordercomplete";
     const FIELD__IS_DELETED           = "is_deleted";
+
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* 유저의 주변 반경 위/경도 쿼리문 반환 */

@@ -12,8 +12,15 @@ class Clslineup2logBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
+
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -35,9 +42,6 @@ class Clslineup2logBO extends _CommonBO
     // const CLSSTATUS__ING            = "ing";                /* 진행중 */
     // const CLSSTATUS__END         = "end";             /* 일정완료 */
 
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
@@ -58,6 +62,8 @@ class Clslineup2logBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByClsno = "selectByClsno";
     // const selectByPkForMng = "selectByPkForMng";

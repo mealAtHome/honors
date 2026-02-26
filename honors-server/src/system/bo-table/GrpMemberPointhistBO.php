@@ -13,16 +13,15 @@ class GrpMemberPointhistBO extends _CommonBO
         return self::$bo;
     }
     function setBO() {
-        $ggAuth = GGauth::getInstance();
-        $grpMemberBO = GrpMemberBO::getInstance();
+        GGnavi::getGrpMemberBO();
         $arr = array();
-        $arr['ggAuth'] = $ggAuth;
-        $arr['grpMemberBO'] = $grpMemberBO;
+        $arr['ggAuth'] = GGauth::getInstance();
+        $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         return $arr;
     }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -41,15 +40,9 @@ class GrpMemberPointhistBO extends _CommonBO
     /*
     */
     /* ========================= */
-    // const CLSSTATUS__EDIT = "edit"; /* 작성중 */
-
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
-        // $arr['clsstatusEdit'] = self::CLSSTATUS__EDIT; /* 일정상태 : 작성중 */
         return $arr;
     }
 
@@ -65,6 +58,8 @@ class GrpMemberPointhistBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     // const selectByClsno = "selectByClsno";
     const selectLast3mByUserno = "selectLast3mByUserno";

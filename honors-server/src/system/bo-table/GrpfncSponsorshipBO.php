@@ -13,7 +13,8 @@ class GrpfncSponsorshipBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    function setBO() {
+    function setBO()
+    {
         GGnavi::getGrpfncaBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
@@ -21,8 +22,9 @@ class GrpfncSponsorshipBO extends _CommonBO
         return $arr;
     }
 
+
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -44,6 +46,13 @@ class GrpfncSponsorshipBO extends _CommonBO
     const SPONTYPE__THING = "thing"; /* 단발형 */
     const SPONTYPE__MONEY = "money"; /* 금전형 */
 
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
+
     /* ========================= */
     /* select > sub > sub */
     /* ========================= */
@@ -56,6 +65,8 @@ class GrpfncSponsorshipBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByGrpnoPagenum = "selectByGrpnoPagenum";
@@ -65,7 +76,6 @@ class GrpfncSponsorshipBO extends _CommonBO
         /* init vars */
         /* --------------- */
         extract($this->setBO());
-        extract(GrpMemberBO::getConsts());
         extract($options);
 
         /* override option */
@@ -140,13 +150,15 @@ class GrpfncSponsorshipBO extends _CommonBO
     /* const updateBaccnodefaultForInside = "updateBaccnodefaultForInside"; */
     protected function update($options, $option="")
     {
-        /* set BO */
+        /* vars */
+        $result = Common::getReturn();
         extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
-        /* set var */
-        $result = Common::getReturn();
-        $OPTION = $option != "" ? $option : $OPTION;
+        /* override option */
+        if($option != "")
+            $OPTION = $option;
 
         /* process */
         switch($OPTION)

@@ -14,7 +14,6 @@ class BankaccountBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-
     public function setBO()
     {
         GGnavi::getUserBO();
@@ -45,10 +44,6 @@ class BankaccountBO extends _CommonBO
     /* ========================= */
     const BACCTYPE__USER            = "user";               /* 계좌타입 : 유저 */
     const BACCTYPE__GRP             = "grp";                /* 계좌타입 : 그룹 */
-
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();

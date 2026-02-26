@@ -12,9 +12,15 @@ class ClssettletmpBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -38,10 +44,6 @@ class ClssettletmpBO extends _CommonBO
     /*
     */
     /* ========================= */
-
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
@@ -63,6 +65,8 @@ class ClssettletmpBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByClsno = "selectByClsno";
     protected function select($options, $option="")

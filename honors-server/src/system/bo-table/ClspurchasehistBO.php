@@ -12,9 +12,15 @@ class ClspurchasehistBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -36,16 +42,6 @@ class ClspurchasehistBO extends _CommonBO
     const HISTTYPE__INSERT          = "insert";             /* 이력유형 : 등록 */
     const HISTTYPE__UPDATE          = "update";             /* 이력유형 : 수정 */
     const HISTTYPE__DELETE          = "delete";             /* 이력유형 : 삭제 */
-
-    /* ========================= */
-    /* validation */
-    /*
-    */
-    /* ========================= */
-
-    /* ========================= */
-    /* get consts */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
@@ -54,6 +50,13 @@ class ClspurchasehistBO extends _CommonBO
         $arr['histtypeDelete'] = self::HISTTYPE__DELETE;      /* 이력유형 : 삭제 */
         return $arr;
     }
+
+    /* ========================= */
+    /* validation */
+    /*
+    */
+    /* ========================= */
+
 
     /* ========================= */
     /* select > sub > sub */
@@ -67,6 +70,8 @@ class ClspurchasehistBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByClsno = "selectByClsno";
     protected function select($options, $option="")

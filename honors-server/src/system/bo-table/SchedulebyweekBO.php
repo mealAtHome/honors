@@ -12,9 +12,15 @@ class SchedulebyweekBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -27,6 +33,17 @@ class SchedulebyweekBO extends _CommonBO
     const FIELD__MODIDT             = "modidt";             /* (  ) datetime        / YES */
     const FIELD__REGDT              = "regdt";              /* (  ) datetime        / YES */
 
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* select */

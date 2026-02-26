@@ -14,7 +14,7 @@ class IdxBO extends _CommonBO
     }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -30,6 +30,13 @@ class IdxBO extends _CommonBO
     const ENTITY__USER = "user";
     const ENTITY__CLS  = "game";
     const ENTITY__PLOG = "payment_log";
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
+
 
     /* ========================= */
     /* update (sub > sub) */

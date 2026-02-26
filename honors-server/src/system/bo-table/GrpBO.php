@@ -16,11 +16,12 @@ class GrpBO extends _CommonBO
         GGnavi::getGrpMemberBO();
         $arr = array();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        $arr['ggAuth'] = GGauth::getInstance();
         return $arr;
     }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -37,6 +38,12 @@ class GrpBO extends _CommonBO
     /*
     */
     /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* select > sub > sub */
@@ -50,6 +57,8 @@ class GrpBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByPkForInside = "selectByPkForInside";

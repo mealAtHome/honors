@@ -13,9 +13,26 @@ class BankBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function setBO()
+    function setBO()
     {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
     }
+
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
+
+
 
     /* ========================= */
     /*  */

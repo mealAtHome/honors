@@ -13,10 +13,34 @@ class SystemBatchBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-
-    public function setBO()
+    function setBO()
     {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
     }
+
+
+    /* ========================= */
+    /* fields */
+    /*
+    */
+    /* ========================= */
+
+
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
+
+
 
     /* fields */
     const FIELD__BATCHNAME         = "batchname";         /* char(50) */

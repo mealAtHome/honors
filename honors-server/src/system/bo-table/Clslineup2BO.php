@@ -26,7 +26,7 @@ class Clslineup2BO extends _CommonBO
     }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -52,9 +52,6 @@ class Clslineup2BO extends _CommonBO
     // const CLSSTATUS__ING            = "ing";                /* 진행중 */
     // const CLSSTATUS__END         = "end";             /* 일정완료 */
 
-    /* ========================= */
-    /* select options */
-    /* ========================= */
     static public function getConsts()
     {
         $arr = array();
@@ -79,6 +76,8 @@ class Clslineup2BO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByClsno = "selectByClsno";
     const selectByClsnoForInside = "selectByClsnoForInside";

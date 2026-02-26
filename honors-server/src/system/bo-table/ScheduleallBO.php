@@ -12,9 +12,15 @@ class ScheduleallBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function setBO()
+    {
+        $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        return $arr;
+    }
 
     /* ========================= */
-    /* field */
+    /* fields */
     /*
     */
     /* ========================= */
@@ -23,6 +29,18 @@ class ScheduleallBO extends _CommonBO
     const FIELD__SCLWEEK            = "sclweek";            /* (pk) tinyint / NO */
     const FIELD__SCLSTARTDATE       = "sclstartdate";       /* (  ) date    / NO */
     const FIELD__SCLCLOSEDATE       = "sclclosedate";       /* (  ) date    / NO */
+
+    /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
 
     /* ========================= */
     /* select > sub > sub */
@@ -36,6 +54,8 @@ class ScheduleallBO extends _CommonBO
 
     /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByPkForInside = "selectByPkForInside";

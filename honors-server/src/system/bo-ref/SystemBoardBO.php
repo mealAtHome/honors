@@ -12,14 +12,17 @@ class SystemBoardBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
-    public function setBO()
+    function setBO()
     {
         $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
         return $arr;
     }
 
     /* ========================= */
-    /* field */
+    /* fields */
+    /*
+    */
     /* ========================= */
     const FIELD__SBINDEX   = "sbindex";    /* int                        / NO  / PRI / / auto_increment */
     const FIELD__SBLEVEL   = "sblevel";    /* enum('info','warn','err')  / YES /     / /                */
@@ -31,7 +34,21 @@ class SystemBoardBO extends _CommonBO
     const FIELD__REGIDT    = "regidt";     /* datetime                   / YES /     / /                */
 
     /* ========================= */
+    /* enum */
+    /*
+    */
+    /* ========================= */
+    static public function getConsts()
+    {
+        $arr = array();
+        // $arr['key'] = "value";
+        return $arr;
+    }
+
+    /* ========================= */
     /* select */
+    /*
+    */
     /* ========================= */
     const selectMain     = "selectMain";       /* 메인에 표시할 공지사항 */
     const selectOpenList = "selectOpenList";   /* 조회가능한 공지사항 전체 */
