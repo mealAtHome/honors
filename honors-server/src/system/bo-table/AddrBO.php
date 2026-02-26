@@ -13,7 +13,11 @@ class AddrBO extends _CommonBO
     }
     function setBO()
     {
+        GGnavi::getGGcoordinate();
+        GGnavi::getIdxBO();
         $arr = array();
+        $arr['ggCoordinate'] = GGcoordinate::getInstance();
+        $arr['idxBO'] = IdxBO::getInstance();
         $arr['ggAuth'] = GGauth::getInstance();
         return $arr;
     }
@@ -184,14 +188,6 @@ class AddrBO extends _CommonBO
         {
             case self::insertByInside:
             {
-                /* ----- */
-                /* get BO */
-                /* ----- */
-                GGnavi::getGGcoordinate();
-                GGnavi::getIdxBO();
-                $ggCoordinate = GGcoordinate::getInstance();
-                $idxBO = IdxBO::getInstance();
-
                 /* ----- */
                 /* validation */
                 /* ----- */

@@ -14,8 +14,18 @@ class ClssettleBO extends _CommonBO
     }
     function setBO()
     {
+        GGnavi::getClsBO();
+        GGnavi::getGrpMemberBO();
+        GGnavi::getGrpMemberPointhistBO();
+        GGnavi::getClssettlehistBO();
+        GGnavi::getClssettletmpBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
+        $arr['clsBO'] = ClsBO::getInstance();
+        $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        $arr['grpMemberPointhistBO'] = GrpMemberPointhistBO::getInstance();
+        $arr['clssettlehistBO'] = ClssettlehistBO::getInstance();
+        $arr['clssettletmpBO'] = ClssettletmpBO::getInstance();
         return $arr;
     }
 
@@ -138,7 +148,7 @@ class ClssettleBO extends _CommonBO
             case self::selectNotDepositedByGrpnoClsnoForMng:
             {
                 /* is grpmanager? */
-                GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
                 break;
             }
         }
@@ -259,18 +269,6 @@ class ClssettleBO extends _CommonBO
         {
             case self::upsertForInside:
             {
-                /* set bo */
-                GGnavi::getClsBO();
-                GGnavi::getGrpMemberBO();
-                GGnavi::getGrpMemberPointhistBO();
-                GGnavi::getClssettlehistBO();
-                GGnavi::getClssettletmpBO();
-                $clsBO = ClsBO::getInstance();
-                $grpMemberBO = GrpMemberBO::getInstance();
-                $grpMemberPointhistBO = GrpMemberPointhistBO::getInstance();
-                $clssettlehistBO = ClssettlehistBO::getInstance();
-                $clssettletmpBO = ClssettletmpBO::getInstance();
-
                 /* get cls info */
                 $clsInfo = $clsBO->getByPk($GRPNO, $CLSNO);
                 if($clsInfo == null)
@@ -447,7 +445,7 @@ class ClssettleBO extends _CommonBO
             case self::updateManagerdepositflgYesForMng:
             {
                 /* is manager? */
-                GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* update */
                 $query =

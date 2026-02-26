@@ -124,7 +124,7 @@ class ClssettletmpBO extends _CommonBO
             case self::selectByClsno:
             {
                 /* is grpmanager? */
-                GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
                 break;
             }
         }
@@ -217,7 +217,7 @@ class ClssettletmpBO extends _CommonBO
             {
                 /* TODO : is finance charge */
                 /* validation */
-                GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* delete before insert */
                 $this->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
@@ -291,7 +291,7 @@ class ClssettletmpBO extends _CommonBO
             {
                 /* TODO : is finance charge */
                 /* validation */
-                GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* process */
                 $query = "delete from clssettletmp where grpno = '$GRPNO' and clsno = '$CLSNO'";

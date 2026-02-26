@@ -21,15 +21,17 @@ class ClsBO extends _CommonBO
         GGnavi::getGrpMemberBO();
         GGnavi::getClssettleBO();
         GGnavi::getClzcancelBO();
+        GGnavi::getGrpfncaBO();
         $arr = array();
-        $arr['ggAuth']       = GGauth::getInstance();
-        $arr['idxBO']        = IdxBO::getInstance();
-        $arr['grpBO']        = GrpBO::getInstance();
+        $arr['ggAuth'] = GGauth::getInstance();
+        $arr['idxBO'] = IdxBO::getInstance();
+        $arr['grpBO'] = GrpBO::getInstance();
         $arr['clslineup2BO'] = Clslineup2BO::getInstance();
-        $arr['paymentABO']   = PaymentABO::getInstance();
-        $arr['grpMemberBO']  = GrpMemberBO::getInstance();
+        $arr['paymentABO'] = PaymentABO::getInstance();
+        $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['clssettleBO'] = ClssettleBO::getInstance();
-        $arr['clzcancelBO']  = ClzcancelBO::getInstance();
+        $arr['clzcancelBO'] = ClzcancelBO::getInstance();
+        $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         return $arr;
     }
     /* ========================= */
@@ -595,10 +597,6 @@ class ClsBO extends _CommonBO
             }
             case self::updateBillByPkForInside:
             {
-                /* bo */
-                GGnavi::getGrpfncaBO();
-                $grpfncaBO = GrpfncaBO::getInstance();
-
                 /* process */
                 $query =
                 "

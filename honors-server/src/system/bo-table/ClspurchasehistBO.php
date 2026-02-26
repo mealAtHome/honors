@@ -105,23 +105,6 @@ class ClspurchasehistBO extends _CommonBO
         ";
 
         /* --------------- */
-        /* validation */
-        /* --------------- */
-        // switch($OPTION)
-        // {
-        //     case self::selectNotDepositedByUsernoForMng:
-        //     case self::selectNotDepositedAllByGrpnoForMng:
-        //     case self::selectMemberdepositflgYesByGrpnoForMng:
-        //     case self::selectNotDepositedByGrpnoForMng:
-        //     {
-        //         /* is grpmanager? */
-        //         $ggAuth = GGauth::getInstance();
-        //         $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-        //         break;
-        //     }
-        // }
-
-        /* --------------- */
         /* from */
         /* --------------- */
         switch($OPTION)

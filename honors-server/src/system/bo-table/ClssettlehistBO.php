@@ -107,7 +107,7 @@ class ClssettlehistBO extends _CommonBO
         //     case self::selectByClsnoForMng:
         //     {
         //         /* is grpmanager? */
-        //         GGauth::getInstance()->isGrpmanager($GRPNO, $EXECUTOR, true);
+        //         $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
         //         break;
         //     }
         // }

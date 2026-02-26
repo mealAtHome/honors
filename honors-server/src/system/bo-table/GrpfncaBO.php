@@ -14,8 +14,10 @@ class GrpfncaBO extends _CommonBO
     }
     function setBO()
     {
+        GGnavi::getGrpfnclogBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
+        $arr['grpfnclogBO'] = GrpfnclogBO::getInstance();
         return $arr;
     }
 
@@ -169,10 +171,6 @@ class GrpfncaBO extends _CommonBO
             case self::recalByPk: { $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true); $this->recalByPkForInside($GRPNO); break; }
             case self::updateCapitaltotalByPk:
             {
-                /* BO */
-                GGnavi::getGrpfnclogBO();
-                $grpfnclogBO = GrpfnclogBO::getInstance();
-
                 /* check auth */
                 $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
 

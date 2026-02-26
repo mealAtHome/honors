@@ -14,8 +14,12 @@ class ClspurchaseBO extends _CommonBO
     }
     function setBO()
     {
+        GGnavi::getClsBO();
+        GGnavi::getClspurchasehistBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
+        $arr['clsBO'] = ClsBO::getInstance();
+        $arr['clspurchasehistBO'] = ClspurchasehistBO::getInstance();
         return $arr;
     }
 
@@ -129,23 +133,6 @@ class ClspurchaseBO extends _CommonBO
         ";
 
         /* --------------- */
-        /* validation */
-        /* --------------- */
-        // switch($OPTION)
-        // {
-        //     case self::selectNotDepositedByUsernoForMng:
-        //     case self::selectNotDepositedAllByGrpnoForMng:
-        //     case self::selectMemberdepositflgYesByGrpnoForMng:
-        //     case self::selectNotDepositedByGrpnoForMng:
-        //     {
-        //         /* is grpmanager? */
-        //         $ggAuth = GGauth::getInstance();
-        //         $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-        //         break;
-        //     }
-        // }
-
-        /* --------------- */
         /* from */
         /* --------------- */
         switch($OPTION)
@@ -208,12 +195,6 @@ class ClspurchaseBO extends _CommonBO
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-
-                /* bo */
-                GGnavi::getClsBO();
-                GGnavi::getClspurchasehistBO();
-                $clsBO = ClsBO::getInstance();
-                $clspurchasehistBO = ClspurchasehistBO::getInstance();
 
                 /* var */
                 $arr = json_decode($ARR, true);

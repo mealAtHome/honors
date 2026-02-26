@@ -181,10 +181,6 @@ class BankaccountBO extends _CommonBO
                 case self::insertForUser:
                 case self::insertForGrp:
                 {
-                    /* bo */
-                    $userBO = UserBO::getInstance();
-                    $grpBO = GrpBO::getInstance();
-
                     /* var by option */
                     $bacckey = "";
                     $bacctype = "";
@@ -258,10 +254,6 @@ class BankaccountBO extends _CommonBO
                 }
                 case self::deleteByPk:
                 {
-                    /* bo */
-                    $userBO = UserBO::getInstance();
-                    $grpBO = GrpBO::getInstance();
-
                     /* validation : is owner? */
                     $ggAuth->isBankaccountOwner($EXECUTOR, $BACCTYPE, $BACCKEY, $BACCNO, true);
 

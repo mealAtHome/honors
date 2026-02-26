@@ -14,8 +14,10 @@ class SchedulebyweekBO extends _CommonBO
     }
     function setBO()
     {
+        GGnavi::getScheduleallBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
+        $arr['scheduleallBO'] = ScheduleallBO::getInstance();
         return $arr;
     }
 
@@ -173,8 +175,7 @@ class SchedulebyweekBO extends _CommonBO
             case self::insertByPkForInside:
             {
                 /* check scheduleall */
-                GGnavi::getScheduleallBO();
-                $record = ScheduleallBO::getInstance()->getByPk($SCLYEAR, $SCLMONTH, $SCLWEEK);
+                $record = $scheduleallBO->getByPk($SCLYEAR, $SCLMONTH, $SCLWEEK);
                 if($record == null)
                     throw new GGexception("(server) scheduleall record not found");
 
