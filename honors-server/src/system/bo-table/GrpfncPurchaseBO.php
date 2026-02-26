@@ -66,8 +66,7 @@ class GrpfncPurchaseBO extends _CommonBO
     protected function select($options, $option="")
     {
         /* vars */
-        $rslt = Common::getReturn();
-        extract($this->setBO());
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

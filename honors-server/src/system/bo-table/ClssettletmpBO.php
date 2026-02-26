@@ -71,9 +71,7 @@ class ClssettletmpBO extends _CommonBO
     const selectByClsno = "selectByClsno";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
         extract(self::getConsts());
         extract($options);
 

@@ -68,9 +68,8 @@ class SchedulebyweekBO extends _CommonBO
     const selectByPkInsertIfNotExists = "selectByPkInsertIfNotExists";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

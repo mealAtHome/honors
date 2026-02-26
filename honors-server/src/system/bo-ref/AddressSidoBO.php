@@ -52,9 +52,8 @@ class AddressSidoBO extends _CommonBO
     const selectAll = "selectAll"; /* 조회 */
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

@@ -55,8 +55,8 @@ class SystemBoardBO extends _CommonBO
     const selectOpenByPk = "selectOpenByPk";   /* 인덱스로 선택 */
     protected function select($options, $option="")
     {
-        /* set */
-        extract($this->setBO());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

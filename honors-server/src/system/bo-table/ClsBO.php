@@ -128,11 +128,8 @@ class ClsBO extends _CommonBO
     const selectForMngrByClsstatusCancel    = "selectForMngrByClsstatusCancel";     /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract($this->setBO());
-        extract(ClsBO::getConsts());
+        /* vars */
+        extract(self::getConsts());
         extract(GrpMemberBO::getConsts());
         extract($options);
 

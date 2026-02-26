@@ -70,9 +70,8 @@ class AddrBO extends _CommonBO
     // const selectBankaccountByPk = "selectBankaccountByPk";
     protected function select($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

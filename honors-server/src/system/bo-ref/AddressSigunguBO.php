@@ -54,9 +54,8 @@ class AddressSigunguBO extends _CommonBO
     const selectBySdidx = "selectBySdidx"; /* 조회 */
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

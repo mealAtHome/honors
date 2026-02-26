@@ -65,9 +65,8 @@ class SchedulebytimeBO extends _CommonBO
     const selectByYMW = "selectByYMW";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

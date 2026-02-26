@@ -66,10 +66,8 @@ class GrpBO extends _CommonBO
     const selectActiveForUsr = "selectActiveForUsr";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract($this->setBO());
+        /* vars */
+        extract(self::getConsts());
         extract(GrpMemberBO::getConsts());
         extract($options);
 

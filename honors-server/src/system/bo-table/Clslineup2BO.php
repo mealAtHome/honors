@@ -86,11 +86,8 @@ class Clslineup2BO extends _CommonBO
     const selectByClsnoForSettleForMng = "selectByClsnoForSettleForMng"; /* 중요 : 일정정산용 */
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract($this->setBO());
-        extract(Clslineup2BO::getConsts());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

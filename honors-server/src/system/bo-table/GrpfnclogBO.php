@@ -63,9 +63,8 @@ class GrpfnclogBO extends _CommonBO
     const selectGrpfncCapitaltotalByGrpno = "selectGrpfncCapitaltotalByGrpno";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

@@ -62,9 +62,8 @@ class GrpfncaBO extends _CommonBO
     const selectByPkForInside = "selectByPkForInside";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

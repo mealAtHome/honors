@@ -75,10 +75,7 @@ class BankaccountBO extends _CommonBO
     const selectByBacckeyUsableForInside = "selectByBacckeyUsableForInside";
     protected function select($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
-        extract($this->setBO());
         extract(self::getConsts());
         extract($options);
 

@@ -69,10 +69,8 @@ class Clslineup2logBO extends _CommonBO
     // const selectByPkForMng = "selectByPkForMng";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract(Clslineup2logBO::getConsts());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

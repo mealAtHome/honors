@@ -98,13 +98,11 @@ class UserBO extends _CommonBO
     const selectCntById = "selectCntById"; /* ID */
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* get vars */
-        /* --------------- */
-        extract($this->setBO());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
-        /* overring option */
+        /* override option */
         if($option != "")
             $OPTION = $option;
 

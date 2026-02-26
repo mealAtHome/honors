@@ -67,10 +67,8 @@ class ClssettlehistBO extends _CommonBO
     const selectByClsno = "selectByClsno";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract(ClssettlehistBO::getConsts());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

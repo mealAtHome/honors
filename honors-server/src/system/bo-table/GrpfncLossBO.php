@@ -67,11 +67,8 @@ class GrpfncLossBO extends _CommonBO
     const selectByGrpnoPagenum = "selectByGrpnoPagenum";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        // extract(GrpMemberBO::getConsts());
-        extract($this->setBO());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

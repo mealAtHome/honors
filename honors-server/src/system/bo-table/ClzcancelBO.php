@@ -59,11 +59,8 @@ class ClzcancelBO extends _CommonBO
     const selectByPkForInside = "selectByPkForInside";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract($this->setBO());
-        extract(ClzcancelBO::getConsts());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

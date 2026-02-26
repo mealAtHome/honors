@@ -62,9 +62,8 @@ class ScheduleallBO extends _CommonBO
     const selectByPM3month = "selectByPM3month";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

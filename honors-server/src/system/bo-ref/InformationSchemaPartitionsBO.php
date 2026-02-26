@@ -60,9 +60,8 @@ class InformationSchemaPartitionsBO extends _CommonBO
     const selectByPartitionNameForInside  = "selectByPartitionNameForInside";
     protected function select($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

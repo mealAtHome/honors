@@ -80,10 +80,8 @@ class ClssettleBO extends _CommonBO
     const selectCmpByUsernoForUsr = "selectCmpByUsernoForUsr"; /* 유저메인 : 완료 */
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract(ClssettleBO::getConsts());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

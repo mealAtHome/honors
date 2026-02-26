@@ -65,11 +65,8 @@ class GrpMemberPointhistBO extends _CommonBO
     const selectLast3mByUserno = "selectLast3mByUserno";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract($this->setBO());
-        extract(GrpMemberPointhistBO::getConsts());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

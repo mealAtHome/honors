@@ -43,9 +43,8 @@ class BankBO extends _CommonBO
     const selectAll = "selectAll";
     protected function select($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

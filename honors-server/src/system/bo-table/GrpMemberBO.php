@@ -89,10 +89,8 @@ class GrpMemberBO extends _CommonBO
     const selectMeByGrpno = "selectMeByGrpno";
     protected function select($options, $option="")
     {
-        /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract($this->setBO());
+        /* vars */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */

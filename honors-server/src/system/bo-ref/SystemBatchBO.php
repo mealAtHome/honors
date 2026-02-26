@@ -86,9 +86,8 @@ class SystemBatchBO extends _CommonBO
     const selectByPkForInside = "selectByPkForInside";
     protected function select($options, $option="")
     {
-        /* -------------- */
         /* vars */
-        /* -------------- */
+        extract(self::getConsts());
         extract($options);
 
         /* override option */
