@@ -195,7 +195,7 @@ class ClspurchaseBO extends _CommonBO
             case self::insertByArr:
             {
                 /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
 
                 /* var */
                 $arr = json_decode($ARR, true);
