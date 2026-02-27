@@ -187,12 +187,12 @@
                     $(".CUTF-btn-tabTeam[val=b]").show();
 
                     /* ----- */
-                    /* get clslineup2 */
+                    /* get clslineupb */
                     /* ----- */
-                    let clslineup2s = Api.Clslineup2.selectByClsno(grpno, CUTF.Data.clsno);
-                    for(let i in clslineup2s.getModels())
+                    let clslineupbs = Api.Clslineupb.selectByClsno(grpno, CUTF.Data.clsno);
+                    for(let i in clslineupbs.getModels())
                     {
-                        let model = clslineup2s.getModels()[i];
+                        let model = clslineupbs.getModels()[i];
                         CUTF.Temp.teamname = model.getTeamname();
                         CUTF.addRow(model);
                     }
@@ -204,9 +204,9 @@
                     CUTF.Temp.teamname = "d"; CUTF.updateRowNum();
 
                     /* recovery db values */
-                    for(let i in clslineup2s.getModels())
+                    for(let i in clslineupbs.getModels())
                     {
-                        let model = clslineup2s.getModels()[i];
+                        let model = clslineupbs.getModels()[i];
 
                         /* set teamnick */
                         $(`.CUDE-input-teamnick[teamname=${model.getTeamname()}]`).val(model.getTeamnick());
@@ -237,10 +237,10 @@
                 }, ajaxDelayTime);
             },
 
-            addRow(mClslineup2=null)
+            addRow(mClslineupb=null)
             {
                 let isClsstatusIng = CUTF.isClsstatusIng();
-                let hasUser = mClslineup2 != null && Common.isEmpty(mClslineup2.getUserno()) == false;
+                let hasUser = mClslineupb != null && Common.isEmpty(mClslineupb.getUserno()) == false;
                 let html =
                 `
                     <tr class="CUTF-tr-lineup" orderno="" datatype="new">
@@ -449,7 +449,7 @@
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    let mApiResponse = Api.Clslineup2.updateFromPage(CUTF.Data.grpno, CUTF.Data.clsno, data, GGF.toast, GGF.toast);
+                    let mApiResponse = Api.Clslineupb.updateFromPage(CUTF.Data.grpno, CUTF.Data.clsno, data, GGF.toast, GGF.toast);
                     // if(mApiResponse.isSuccess())
 
                     Common.hideProgress();

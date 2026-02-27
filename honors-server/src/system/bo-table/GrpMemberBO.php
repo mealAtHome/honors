@@ -16,14 +16,14 @@ class GrpMemberBO extends _CommonBO
     {
         GGnavi::getUserBO();
         GGnavi::getGrpMemberPointhistBO();
-        GGnavi::getClslineup2BO();
+        GGnavi::getClslineupbBO();
         GGnavi::getClssettleBO();
         GGnavi::getGrpmPrivacyBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
         $arr['grpMemberPointhistBO'] = GrpMemberPointhistBO::getInstance();
-        $arr['clslineup2BO'] = Clslineup2BO::getInstance();
+        $arr['clslineupbBO'] = ClslineupbBO::getInstance();
         $arr['clssettleBO'] = ClssettleBO::getInstance();
         $arr['grpmPrivacyBO'] = GrpmPrivacyBO::getInstance();
         return $arr;
@@ -401,7 +401,7 @@ class GrpMemberBO extends _CommonBO
                 }
 
                 /* update && delete */
-                $clslineup2BO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $clslineupbBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
                 $clssettleBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
                 $grpMemberPointhistBO->deleteRecordByGrpnoUsernoForInside($GRPNO, $USERNO);
                 $this->deleteRecordByPkForInside($GRPNO, $USERNO);

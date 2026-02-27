@@ -1,4 +1,4 @@
-class MClslineup2
+class MClslineupb
 {
     constructor(dat)
     {
@@ -57,7 +57,7 @@ class MClslineup2
 
 }
 
-class MClslineup2s extends _MCommon
+class MClslineupbs extends _MCommon
 {
     constructor(ajax)
     {
@@ -65,7 +65,7 @@ class MClslineup2s extends _MCommon
         for(let i in this.data)
         {
             let dat  = this.data[i];
-            this.models.push(new MClslineup2(dat));
+            this.models.push(new MClslineupb(dat));
         }
     }
 

@@ -16,7 +16,7 @@ class ClsBO extends _CommonBO
     {
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
-        GGnavi::getClslineup2BO();
+        GGnavi::getClslineupbBO();
         GGnavi::getPaymentABO();
         GGnavi::getGrpMemberBO();
         GGnavi::getClssettleBO();
@@ -26,7 +26,7 @@ class ClsBO extends _CommonBO
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['idxBO'] = IdxBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
-        $arr['clslineup2BO'] = Clslineup2BO::getInstance();
+        $arr['clslineupbBO'] = ClslineupbBO::getInstance();
         $arr['paymentABO'] = PaymentABO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['clssettleBO'] = ClssettleBO::getInstance();
@@ -244,7 +244,7 @@ class ClsBO extends _CommonBO
                                     distinct c.clsno
                                 from
                                     cls c
-                                    join clslineup2 cl
+                                    join clslineupb cl
                                         on
                                             c.grpno = cl.grpno and
                                             c.clsno = cl.clsno
@@ -539,7 +539,7 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
 
                 /* copy lineup */
-                $clslineup2BO->copyFromClsnoForInside($GRPNO, $CLSNO, $clsno);
+                $clslineupbBO->copyFromClsnoForInside($GRPNO, $CLSNO, $clsno);
                 break;
             }
             case self::deleteByPkForMng:
@@ -552,7 +552,7 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
 
                 /* delete lineup */
-                $clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
+                $clslineupbBO->deleteByClsnoForInside($GRPNO, $CLSNO);
                 break;
             }
             case self::updatePurchaseidxMaxusedForInside:

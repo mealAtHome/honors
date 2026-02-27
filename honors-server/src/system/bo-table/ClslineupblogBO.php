@@ -1,6 +1,6 @@
 <?php
 
-class Clslineup2logBO extends _CommonBO
+class ClslineupblogBO extends _CommonBO
 {
     /* ----- */
     /* singleton */
@@ -109,7 +109,7 @@ class Clslineup2logBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByClsno : { $from = "(select * from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByClsno : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -165,7 +165,7 @@ class Clslineup2logBO extends _CommonBO
         {
             case self::deleteByClsnoForInside:
             {
-                $query = "delete from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO'";
+                $query = "delete from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
                 break;
             }
@@ -194,7 +194,7 @@ class Clslineup2logBO extends _CommonBO
                     /* update */
                     $query =
                     "
-                        insert into clslineup2
+                        insert into clslineupb
                         (
                               grpno
                             , clsno

@@ -5,9 +5,9 @@
         #CLSD-tbl-clssettle  { white-space: nowrap; }
 
         /* lineup2 */
-        .CLSD-tbl-clslineup2 { white-space: nowrap; }
-        .CLSD-tbl-clslineup2 > tbody > tr > td { text-align: center; }
-        .CLSD-tbl-clslineup2 > tbody > tr > td[col="etc"] { font-size:0.9em; text-align: left; white-space: normal;}
+        .CLSD-tbl-clslineupb { white-space: nowrap; }
+        .CLSD-tbl-clslineupb > tbody > tr > td { text-align: center; }
+        .CLSD-tbl-clslineupb > tbody > tr > td[col="etc"] { font-size:0.9em; text-align: left; white-space: normal;}
 
         /* lineup > common */
         .CLSD-input-username { width: 6em; vertical-align: middle; text-align: center;}
@@ -98,7 +98,7 @@
         <!-- 참가형식 : 라인업(1팀) -->
         <!-- --------------- -->
         <div class="CLSD-div-clssub" tab="lineup1" style="display:none;">
-            <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
+            <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
                 <thead>
                     <tr>
                         <th>타순</th>
@@ -126,7 +126,7 @@
             <div class="CLSD-div-tabTeam2" teamname="a" style="display:none;">
                 <p class="common-p-titlesub"><span class="CLSD-span-teamnick" teamname="a"></span></p>
                 <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
+                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
                         <thead>
                             <tr>
                                 <th>타순</th>
@@ -144,7 +144,7 @@
             <div class="CLSD-div-tabTeam2" teamname="b" style="display:none;">
                 <p class="common-p-titlesub"><span class="CLSD-span-teamnick" teamname="b"></span></p>
                 <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
+                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
                         <thead>
                             <tr>
                                 <th>타순</th>
@@ -175,7 +175,7 @@
             <div class="CLSD-div-tabTeam4" teamname="a" style="display:none;">
                 <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-teamnick" teamname="a"></span></p>
                 <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
+                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="a">
                         <thead>
                             <tr>
                                 <th>타순</th>
@@ -193,7 +193,7 @@
             <div class="CLSD-div-tabTeam4" teamname="b" style="display:none;">
                 <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-teamnick" teamname="b"></span></p>
                 <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
+                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="b">
                         <thead>
                             <tr>
                                 <th>타순</th>
@@ -211,7 +211,7 @@
             <div class="CLSD-div-tabTeam4" teamname="c" style="display:none;">
                 <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-teamnick" teamname="c"></span></p>
                 <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="c">
+                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="c">
                         <thead>
                             <tr>
                                 <th>타순</th>
@@ -229,7 +229,7 @@
             <div class="CLSD-div-tabTeam4" teamname="d" style="display:none;">
                 <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-teamnick" teamname="d"></span></p>
                 <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineup2 common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="d">
+                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" teamname="d">
                         <thead>
                             <tr>
                                 <th>타순</th>
@@ -313,7 +313,7 @@
 
                 /* init el */
                 $("#CLSD-div-tabmain").hide();
-                $(".CLSD-tbl-clslineup2 > tbody").empty();
+                $(".CLSD-tbl-clslineupb > tbody").empty();
                 $("#CLSD-btn-textSettle").hide();
                 $("#CLSD-btn-editSettle").hide();
                 $("#CLSD-btn-editPurchase").hide();
@@ -469,10 +469,10 @@
                         /* =============== */
                         /* 참가정보 : 라인업 표시 */
                         /* =============== */
-                        let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        $(".CLSD-span-teamnick[teamname=a]").text(mClslineup2s.getTeamnick("a"));
-                        $(".CLSD-span-teamnick[teamname=b]").text(mClslineup2s.getTeamnick("b"));
-                        let lineups = mClslineup2s.getModels();
+                        let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        $(".CLSD-span-teamnick[teamname=a]").text(mClslineupbs.getTeamnick("a"));
+                        $(".CLSD-span-teamnick[teamname=b]").text(mClslineupbs.getTeamnick("b"));
+                        let lineups = mClslineupbs.getModels();
                         for(let i in lineups)
                             CLSD.addRowForLineup2(lineups[i]);
                         CLSD.setEvent();
@@ -485,9 +485,9 @@
                 }, ajaxDelayTime);
             },
 
-            addRowForLineup2(mClslineup2)
+            addRowForLineup2(mClslineupb)
             {
-                let model = mClslineup2;
+                let model = mClslineupb;
 
                 /* ----- */
                 /* battingflg */
@@ -569,12 +569,12 @@
                         <td col="etc">${model.getEtc()}</td>
                     </tr>
                 `;
-                $(`.CLSD-tbl-clslineup2[teamname=${model.getTeamname()}] > tbody`).append(html);
+                $(`.CLSD-tbl-clslineupb[teamname=${model.getTeamname()}] > tbody`).append(html);
             },
 
             setEvent()
             {
-                /* 참가신청 : clslineup2 */
+                /* 참가신청 : clslineupb */
                 $(".CLSD-btn-applyForLineup2").off("click").on("click", function()
                 {
                     let grpno = $(this).attr("grpno");
@@ -597,7 +597,7 @@
                     Navigation.moveFrontDialog(Navigation.Page.F00Class001DetailApplyDialog, pageData);
                 });
 
-                /* 참가취소 : clslineup2 */
+                /* 참가취소 : clslineupb */
                 $(".CLSD-btn-cancelForLineup2").off("click").on("click", function()
                 {
                     let grpno = $(this).attr("grpno");
@@ -609,7 +609,7 @@
                         Common.showProgress();
                         setTimeout(function()
                         {
-                            let mApiResponse = Api.Clslineup2.updateApplyCancel(grpno, clsno, teamname, orderno, GGF.toast, GGF.toast);
+                            let mApiResponse = Api.Clslineupb.updateApplyCancel(grpno, clsno, teamname, orderno, GGF.toast, GGF.toast);
                             Navigation.executeShow();
                             Common.hideProgress();
                         }, ajaxDelayTime);
@@ -626,7 +626,7 @@
                     let orderno = $(this).attr("orderno");
                     let data =
                     {
-                        option : "F00-applyToClslineup2",
+                        option : "F00-applyToClslineupb",
                         grpno : grpno,
                         clsno : clsno,
                         teamname : teamname,

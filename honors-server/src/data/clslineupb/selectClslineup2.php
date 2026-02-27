@@ -4,10 +4,10 @@
     /* init */
     /* ============================ */
     include '../../env/env.php';
-    GGnavi::getClslineup2BO();
+    GGnavi::getClslineupbBO();
 
     /* vars */
-    $clslineup2BO = Clslineup2BO::getInstance();
+    $clslineupbBO = ClslineupbBO::getInstance();
     $rslt = array();
 
     /* ============================ */
@@ -15,7 +15,7 @@
     /* ============================ */
     try
     {
-        $rslt = $clslineup2BO->selectByOption($options);
+        $rslt = $clslineupbBO->selectByOption($options);
     }
     catch(GGexception $e)
     {

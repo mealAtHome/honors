@@ -1,6 +1,6 @@
 <?php
 
-class Clslineup2BO extends _CommonBO
+class ClslineupbBO extends _CommonBO
 {
     /* ----- */
     /* singleton */
@@ -48,16 +48,16 @@ class Clslineup2BO extends _CommonBO
     /*
     */
     /* ========================= */
-    // const CLSSTATUS__EDIT           = "edit";               /* 작성중 */
-    // const CLSSTATUS__ING            = "ing";                /* 진행중 */
-    // const CLSSTATUS__END         = "end";             /* 일정완료 */
+    // const CLSSTATUS__EDIT   = "edit";          /* 작성중 */
+    // const CLSSTATUS__ING    = "ing";           /* 진행중 */
+    // const CLSSTATUS__END    = "end";           /* 일정완료 */
 
     static public function getConsts()
     {
         $arr = array();
-        // $arr['clsstatusEdit']                   = self::CLSSTATUS__EDIT;        /* 일정상태 : 작성중 */
-        // $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
-        // $arr['clsstatusEnd']                 = self::CLSSTATUS__END;      /* 일정상태 : 일정완료 */
+        // $arr['clsstatusEdit']    = self::CLSSTATUS__EDIT;    /* 일정상태 : 작성중 */
+        // $arr['clsstatusIng']     = self::CLSSTATUS__ING;     /* 일정상태 : 진행중 */
+        // $arr['clsstatusEnd']     = self::CLSSTATUS__END;     /* 일정상태 : 일정완료 */
         return $arr;
     }
 
@@ -140,10 +140,10 @@ class Clslineup2BO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByClsno                        : { $from = "(select * from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectByClsnoForInside               : { $from = "(select * from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectByPkForInside                  : { $from = "(select * from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO' and teamname = '$TEAMNAME' and orderno = $ORDERNO) t"; break; }
-            case self::selectDuplicateApplyForInside        : { $from = "(select * from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
+            case self::selectByClsno                        : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByClsnoForInside               : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByPkForInside                  : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and teamname = '$TEAMNAME' and orderno = $ORDERNO) t"; break; }
+            case self::selectDuplicateApplyForInside        : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
             case self::selectByClsnoForSettleForMng :
             {
                 $select =
@@ -156,7 +156,7 @@ class Clslineup2BO extends _CommonBO
                     , sum(t.bill) as bill
                     , grpm.point as memberpoint
                 ";
-                $from = "(select * from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO' and (userno is not null and userno <> '')) t";
+                $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and (userno is not null and userno <> '')) t";
                 $groupby =
                 "
                     group by
@@ -240,7 +240,7 @@ class Clslineup2BO extends _CommonBO
         {
             case self::deleteByClsnoForInside:
             {
-                $query = "delete from clslineup2 where grpno = '$GRPNO' and clsno = '$CLSNO'";
+                $query = "delete from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
                 break;
             }
@@ -284,7 +284,7 @@ class Clslineup2BO extends _CommonBO
                         $query =
                         "
                             update
-                                clslineup2
+                                clslineupb
                             set
                                 bill = $BILL
                             where
@@ -300,7 +300,7 @@ class Clslineup2BO extends _CommonBO
                     /* update */
                     $query =
                     "
-                        insert into clslineup2
+                        insert into clslineupb
                         (
                               grpno
                             , clsno
@@ -348,8 +348,8 @@ class Clslineup2BO extends _CommonBO
                 }
 
                 /* 해당 포지션에 이미 다른 유저가 기입하였는지 확인 */
-                $clslineup2 = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO));
-                $userno = Common::getField($clslineup2, self::FIELD__USERNO);
+                $clslineupb = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO));
+                $userno = Common::getField($clslineupb, self::FIELD__USERNO);
                 if(Common::isNotEmpty($userno))
                     throw new GGexception("이미 신청된 일정입니다.");
 
@@ -361,7 +361,7 @@ class Clslineup2BO extends _CommonBO
                 $query =
                 "
                     update
-                        clslineup2
+                        clslineupb
                     set
                           userno = '$EXECUTOR'
                         , username = '$USERNAME'
@@ -388,8 +388,8 @@ class Clslineup2BO extends _CommonBO
                     $ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
 
                 /* 해당 포지션에 이미 다른 유저가 기입하였는지 확인 */
-                $clslineup2 = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO));
-                $userno = Common::getField($clslineup2, self::FIELD__USERNO);
+                $clslineupb = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO));
+                $userno = Common::getField($clslineupb, self::FIELD__USERNO);
                 if(Common::isNotEmpty($userno))
                     throw new GGexception("이미 신청된 일정입니다.");
 
@@ -400,7 +400,7 @@ class Clslineup2BO extends _CommonBO
                 $query =
                 "
                     update
-                        clslineup2
+                        clslineupb
                     set
                           userno = '$USERNO'
                         , username = '$USERNAME'
@@ -421,8 +421,8 @@ class Clslineup2BO extends _CommonBO
                 $ggAuth->isClsIng($GRPNO, $CLSNO);
 
                 /* check already canceled */
-                $clslineup2 = $this->getByPk($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO);
-                $userno = Common::getField($clslineup2, self::FIELD__USERNO);
+                $clslineupb = $this->getByPk($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO);
+                $userno = Common::getField($clslineupb, self::FIELD__USERNO);
                 if(Common::isEmpty($userno))
                     throw new GGexception("이미 취소되어 있습니다.");
 
@@ -431,15 +431,15 @@ class Clslineup2BO extends _CommonBO
                 if($isGrpmanager == false)
                 {
                     /* check userno */
-                    if(Common::getField($clslineup2, self::FIELD__USERNO) != $EXECUTOR)
+                    if(Common::getField($clslineupb, self::FIELD__USERNO) != $EXECUTOR)
                         throw new GGexception("본인이 신청한 일정만 취소할 수 있습니다.");
                 }
                 else
                 {
                     /* check userregdt passed 1 day */
-                    // if(Common::getField($clslineup2, self::FIELD__USERNO) != $EXECUTOR)
+                    // if(Common::getField($clslineupb, self::FIELD__USERNO) != $EXECUTOR)
                     // {
-                    //     $userregdt = Common::getField($clslineup2, self::FIELD__USERREGDT);
+                    //     $userregdt = Common::getField($clslineupb, self::FIELD__USERREGDT);
                     //     $userregdtObj = GGF::getDateFromString($userregdt);
                     //     $userregdtObj1DayAfter = GGdate::addTime($userregdtObj, "1 day");
                     //     $nowObj = GGdate::now();
@@ -457,7 +457,7 @@ class Clslineup2BO extends _CommonBO
                 $query =
                 "
                     update
-                        clslineup2
+                        clslineupb
                     set
                           userno = ''
                         , username = ''
@@ -475,7 +475,7 @@ class Clslineup2BO extends _CommonBO
             {
                 $query =
                 "
-                    insert into clslineup2
+                    insert into clslineupb
                     (
                           grpno
                         , clsno
@@ -502,7 +502,7 @@ class Clslineup2BO extends _CommonBO
                         ,  null
                         ,  bill
                     from
-                        clslineup2
+                        clslineupb
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO'
@@ -512,7 +512,7 @@ class Clslineup2BO extends _CommonBO
             }
             case self::updateUsernoToTargetForInside:
             {
-                $query = "update clslineup2 set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
+                $query = "update clslineupb set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
                 break;
             }

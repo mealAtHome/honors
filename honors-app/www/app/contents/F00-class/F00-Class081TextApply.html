@@ -1,8 +1,8 @@
 <ons-page id="CLDA">
 
     <style>
-        .CLDA-tbl-clslineup2 { white-space: nowrap; }
-        .CLDA-tbl-clslineup2 > tbody > tr > td { text-align: center; }
+        .CLDA-tbl-clslineupb { white-space: nowrap; }
+        .CLDA-tbl-clslineupb > tbody > tr > td { text-align: center; }
         .CLDA-input-username { width: 6em; vertical-align: middle;}
         #CLDA-tbl-clssettle  { white-space: nowrap; }
     </style>
@@ -68,8 +68,8 @@
 
 
                         /* 참가정보 */
-                        let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        let lineups = mClslineup2s.getModels();
+                        let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        let lineups = mClslineupbs.getModels();
                         let teamnick = "";
                         for(let i in lineups)
                         {

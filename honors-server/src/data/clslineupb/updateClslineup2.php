@@ -4,10 +4,10 @@
     /* init */
     /* ============================ */
     include '../../env/env.php';
-    GGnavi::getClslineup2BO();
+    GGnavi::getClslineupbBO();
 
     /* vars */
-    $clslineup2BO = Clslineup2BO::getInstance();
+    $clslineupbBO = ClslineupbBO::getInstance();
     $rslt = Common::getReturn();
 
     /* ============================ */
@@ -16,7 +16,7 @@
     GGsql::autoCommitFalse();
     try
     {
-        $clsno = $clslineup2BO->updateByOption($options);
+        $clsno = $clslineupbBO->updateByOption($options);
         $rslt[GGF::DATA] = $clsno;
     }
     catch(GGexception $e)

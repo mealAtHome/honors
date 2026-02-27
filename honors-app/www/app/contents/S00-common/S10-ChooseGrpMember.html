@@ -145,7 +145,7 @@
                         Navigation.moveBack();
                         break;
                     }
-                    case "F00-applyToClslineup2":
+                    case "F00-applyToClslineupb":
                     {
                         let etc = "관라자에 의한 대리접수";
                         process = function()
@@ -153,7 +153,7 @@
                             Common.showProgress();
                             setTimeout(function()
                             {
-                                let mApiResponse = Api.Clslineup2.updateApplyRegistStead(grpno, clsno, teamname, orderno, userno, etc, GGF.toast, GGF.toast);
+                                let mApiResponse = Api.Clslineupb.updateApplyRegistStead(grpno, clsno, teamname, orderno, userno, etc, GGF.toast, GGF.toast);
                                 if(mApiResponse.isSuccess())
                                     Navigation.moveBack();
 
@@ -188,8 +188,8 @@
                             bill        : mCls.getClsbillapplyprice(),
                             memberpoint : mUser.getPoint(),
                         }
-                        let mClslineup2 = new MClslineup2(dat);
-                        CUST.addRowForSettleByClslineup2(mClslineup2);
+                        let mClslineupb = new MClslineupb(dat);
+                        CUST.addRowForSettleByClslineupb(mClslineupb);
                         Navigation.moveBack();
 
                         /* event */

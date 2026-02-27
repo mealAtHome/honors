@@ -201,10 +201,10 @@
                     /* 임시저장데이터가 없으면, 라인업으로부터 작성 */
                     if(mClssettletmpModels.length == 0)
                     {
-                        let mClslineup2s = Api.Clslineup2.selectByClsnoForSettleForMng(grpno, clsno);
-                        let lineups = mClslineup2s.getModels();
+                        let mClslineupbs = Api.Clslineupb.selectByClsnoForSettleForMng(grpno, clsno);
+                        let lineups = mClslineupbs.getModels();
                         for(let i in lineups)
-                            CUST.addRowForSettleByClslineup2(lineups[i]);
+                            CUST.addRowForSettleByClslineupb(lineups[i]);
                     }
                 }
 
@@ -272,7 +272,7 @@
                 $(`#CUST-tbl-settle > tbody`).append(html);
             },
 
-            addRowForSettleByClslineup2(model)
+            addRowForSettleByClslineupb(model)
             {
                 let html =
                 `
