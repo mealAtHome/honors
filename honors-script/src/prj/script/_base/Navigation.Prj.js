@@ -62,6 +62,7 @@ Navigation.Page =
     A15UserMainManage : "UMMG",
     A81UserBankacctList : "UBKL",
     A82UserBankacctUpdate : "UBKU",
+    A1011ManagePhonePrivacy : "UMPP",
     B10ManagerChooseGrp : "MGCG",
     B11ManagerMainHome : "MMHM",
     B12ManagerMainClasses : "MMCL",
@@ -124,6 +125,7 @@ Navigation.getURL = function(str)
         case Navigation.Page.A15UserMainManage                             : url = "./app/contents/A00-user/A15-UserMainManage.html"; break;
         case Navigation.Page.A81UserBankacctList                           : url = "./app/contents/A00-user/A81-UserBankacctList.html"; break;
         case Navigation.Page.A82UserBankacctUpdate                         : url = "./app/contents/A00-user/A82-UserBankacctUpdate.html"; break;
+        case Navigation.Page.A1011ManagePhonePrivacy                       : url = "./app/contents/A10-userManage/A1011ManagePhonePrivacy.html"; break;
         case Navigation.Page.B10ManagerChooseGrp                           : url = "./app/contents/B00-manager/B10-ManagerChooseGrp.html"; break;
         case Navigation.Page.B11ManagerMainHome                            : url = "./app/contents/B00-manager/B11-ManagerMainHome.html"; break;
         case Navigation.Page.B12ManagerMainClasses                         : url = "./app/contents/B00-manager/B12-ManagerMainClasses.html"; break;
@@ -136,8 +138,8 @@ Navigation.getURL = function(str)
         case Navigation.Page.B81ManagerBankacctList                        : url = "./app/contents/B00-manager/B81-ManagerBankacctList.html"; break;
         case Navigation.Page.B82ManagerBankacctUpdate                      : url = "./app/contents/B00-manager/B82-ManagerBankacctUpdate.html"; break;
         case Navigation.Page.B1000GrpFinanceHome                           : url = "./app/contents/B10-grpfnc/B1000GrpFinanceHome.html"; break;
-        case Navigation.Page.B1010GrpFinanceCapitalList                   : url = "./app/contents/B10-grpfnc/B1010GrpFinanceCapitalList.html"; break;
-        case Navigation.Page.B1011GrpFinanceCapitalUpdate                 : url = "./app/contents/B10-grpfnc/B1011GrpFinanceCapitalUpdate.html"; break;
+        case Navigation.Page.B1010GrpFinanceCapitalList                    : url = "./app/contents/B10-grpfnc/B1010GrpFinanceCapitalList.html"; break;
+        case Navigation.Page.B1011GrpFinanceCapitalUpdate                  : url = "./app/contents/B10-grpfnc/B1011GrpFinanceCapitalUpdate.html"; break;
         case Navigation.Page.B1020GrpFinanceSponsorList                    : url = "./app/contents/B10-grpfnc/B1020GrpFinanceSponsorList.html"; break;
         case Navigation.Page.B1021GrpFinanceSponsorUpdate                  : url = "./app/contents/B10-grpfnc/B1021GrpFinanceSponsorUpdate.html"; break;
         case Navigation.Page.B1030GrpFinancePurchaseList                   : url = "./app/contents/B10-grpfnc/B1030GrpFinancePurchaseList.html"; break;
@@ -188,6 +190,7 @@ Navigation.getData = function(code)
         case Navigation.Page.A15UserMainManage                      : data = UMMG.Data; break;
         case Navigation.Page.A81UserBankacctList                    : data = UBKL.Data; break;
         case Navigation.Page.A82UserBankacctUpdate                  : data = UBKU.Data; break;
+        case Navigation.Page.A1011ManagePhonePrivacy                : data = UMPP.Data; break;
         case Navigation.Page.B10ManagerChooseGrp                    : data = MGCG.Data; break;
         case Navigation.Page.B11ManagerMainHome                     : data = MMHM.Data; break;
         case Navigation.Page.B12ManagerMainClasses                  : data = MMCL.Data; break;
@@ -279,6 +282,7 @@ Navigation.executeShow = function()
         case Navigation.Page.A15UserMainManage                        : UMMG.show(); break;
         case Navigation.Page.A81UserBankacctList                      : UBKL.show(); break;
         case Navigation.Page.A82UserBankacctUpdate                    : UBKU.show(); break;
+        case Navigation.Page.A1011ManagePhonePrivacy                  : UMPP.show(); break;
         case Navigation.Page.B10ManagerChooseGrp                      : MGCG.show(); break;
         case Navigation.Page.B11ManagerMainHome                       : MMHM.show(); break;
         case Navigation.Page.B12ManagerMainClasses                    : MMCL.show(); break;
@@ -354,6 +358,7 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.A15UserMainManage                        : UMMG.close(true); break;
         case Navigation.Page.A81UserBankacctList                      : UBKL.close(true); break;
         case Navigation.Page.A82UserBankacctUpdate                    : UBKU.close(true); break;
+        case Navigation.Page.A1011ManagePhonePrivacy                  : UMPP.close(true); break;
         case Navigation.Page.B10ManagerChooseGrp                      : MGCG.close(true); break;
         case Navigation.Page.B11ManagerMainHome                       : MMHM.close(true); break;
         case Navigation.Page.B12ManagerMainClasses                    : MMCL.close(true); break;

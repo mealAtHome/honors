@@ -87,6 +87,8 @@
     $options["POINT"]                                               = get("POINT");
     $options["POINTMEMO"]                                           = get("POINTMEMO");
     $options["POSITION"]                                            = get("POSITION");
+    $options["PRIV_PHONE_GRPM"]                                     = get("PRIV_PHONE_GRPM");
+    $options["PRIV_PHONE"]                                          = get("PRIV_PHONE");
     $options["PURCHASECOMMENT"]                                     = get("PURCHASECOMMENT");
     $options["PURCHASECOST"]                                        = get("PURCHASECOST");
     $options["PURCHASEIDX"]                                         = get("PURCHASEIDX");

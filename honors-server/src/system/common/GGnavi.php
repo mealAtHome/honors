@@ -21,14 +21,13 @@ class GGnavi
     static public function getAddrBO()                                              { require_once ROOT."/src/system/bo-table/AddrBO.php"; }
     static public function getBankaccountBO()                                       { require_once ROOT."/src/system/bo-table/BankaccountBO.php"; }
     static public function getClsBO()                                               { require_once ROOT."/src/system/bo-table/ClsBO.php"; }
-    static public function getClzcancelBO()                                         { require_once ROOT."/src/system/bo-table/ClzcancelBO.php"; }
     static public function getClslineup2BO()                                        { require_once ROOT."/src/system/bo-table/Clslineup2BO.php"; }
     static public function getClspurchaseBO()                                       { require_once ROOT."/src/system/bo-table/ClspurchaseBO.php"; }
     static public function getClspurchasehistBO()                                   { require_once ROOT."/src/system/bo-table/ClspurchasehistBO.php"; }
     static public function getClssettleBO()                                         { require_once ROOT."/src/system/bo-table/ClssettleBO.php"; }
     static public function getClssettlehistBO()                                     { require_once ROOT."/src/system/bo-table/ClssettlehistBO.php"; }
     static public function getClssettletmpBO()                                      { require_once ROOT."/src/system/bo-table/ClssettletmpBO.php"; }
-    static public function getIdxBO()                                               { require_once ROOT."/src/system/bo-table/_IdxBO.php"; }
+    static public function getClzcancelBO()                                         { require_once ROOT."/src/system/bo-table/ClzcancelBO.php"; }
     static public function getGrpBO()                                               { require_once ROOT."/src/system/bo-table/GrpBO.php"; }
     static public function getGrpfncaBO()                                           { require_once ROOT."/src/system/bo-table/GrpfncaBO.php"; }
     static public function getGrpfnclogBO()                                         { require_once ROOT."/src/system/bo-table/GrpfnclogBO.php"; }
@@ -37,12 +36,15 @@ class GGnavi
     static public function getGrpfncSponsorshipBO()                                 { require_once ROOT."/src/system/bo-table/GrpfncSponsorshipBO.php"; }
     static public function getGrpMemberBO()                                         { require_once ROOT."/src/system/bo-table/GrpMemberBO.php"; }
     static public function getGrpMemberPointhistBO()                                { require_once ROOT."/src/system/bo-table/GrpMemberPointhistBO.php"; }
+    static public function getGrpmPrivacyBO()                                       { require_once ROOT."/src/system/bo-table/GrpmPrivacyBO.php"; }
+    static public function getIdxBO()                                               { require_once ROOT."/src/system/bo-table/_IdxBO.php"; }
     static public function getScheduleallBO()                                       { require_once ROOT."/src/system/bo-table/ScheduleallBO.php"; }
-    static public function getSchedulebyweekBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebyweekBO.php"; }
     static public function getSchedulebytimeBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebytimeBO.php"; }
+    static public function getSchedulebyweekBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebyweekBO.php"; }
     static public function getUserAddrBO()                                          { require_once ROOT."/src/system/bo-table/UserAddrBO.php"; }
     static public function getUserBO()                                              { require_once ROOT."/src/system/bo-table/UserBO.php"; }
     static public function getUserEtcBO()                                           { require_once ROOT."/src/system/bo-table/UserEtcBO.php"; }
+    static public function getUserPrivacyBO()                                       { require_once ROOT."/src/system/bo-table/UserPrivacyBO.php"; }
     static public function getUserSearchoptBO()                                     { require_once ROOT."/src/system/bo-table/UserSearchoptBO.php"; }
     static public function getUserStoreloveBO()                                     { require_once ROOT."/src/system/bo-table/UserStoreloveBO.php"; }
 

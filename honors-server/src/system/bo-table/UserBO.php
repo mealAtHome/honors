@@ -14,13 +14,18 @@ class UserBO extends _CommonBO
     }
     public function setBO()
     {
+
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
         GGnavi::getGrpMemberBO();
+        GGnavi::getGrpmPrivacyBO();
+        GGnavi::getUserPrivacyBO();
         $arr = array();
         $arr['idxBO'] = IdxBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        $arr['grpmPrivacyBO'] = GrpmPrivacyBO::getInstance();
+        $arr['userPrivacyBO'] = UserPrivacyBO::getInstance();
         return $arr;
     }
 
@@ -128,6 +133,7 @@ class UserBO extends _CommonBO
             , t.baccnodefault
             , t.modidt
             , t.regidt
+            , up.priv_phone
         ";
 
         /* --------------- */
@@ -153,6 +159,9 @@ class UserBO extends _CommonBO
                 $select
             from
                 $from
+                left join user_privacy up
+                    on
+                        up.userno = t.userno
             order by
                 t.id asc
         ";
@@ -191,6 +200,7 @@ class UserBO extends _CommonBO
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
     const deleteUserInfo = "deleteUserInfo";
     const deleteRecordByPkForInside = "deleteRecordByPkForInside";
+    const updatePhonePrivacyByPk = "updatePhonePrivacyByPk"; /* EXECUTOR, PRIV_PHONE, PRIV_PHONE_GRPM */
     protected function update($options, $option="")
     {
         /* vars */
@@ -287,6 +297,9 @@ class UserBO extends _CommonBO
                 ";
                 $rslt = GGsql::exeQuery($query);
 
+                /* insert sub tables */
+                $userPrivacyBO->insertDefaultForInside($userno);
+
                 /* set user img */
                 GGnavi::getImageUtils();
                 ImageUtils::setImgUser($userno);
@@ -351,6 +364,9 @@ class UserBO extends _CommonBO
                     )
                 ";
                 $rslt = GGsql::exeQuery($query);
+
+                /* insert sub tables */
+                $userPrivacyBO->insertDefaultForInside($userno);
 
                 /* set user img */
                 GGnavi::getImageUtils();
@@ -436,6 +452,12 @@ class UserBO extends _CommonBO
             {
                 $query = "delete from user where userno = '$USERNO'";
                 GGsql::exeQuery($query);
+                break;
+            }
+            case self::updatePhonePrivacyByPk: /* EXECUTOR, PRIV_PHONE, PRIV_PHONE_GRPM */
+            {
+                $userPrivacyBO->upsertByPkForInside($EXECUTOR, $PRIV_PHONE);
+                $grpmPrivacyBO->upsertByGrpmArrForInside($EXECUTOR, $PRIV_PHONE_GRPM);
                 break;
             }
             default:

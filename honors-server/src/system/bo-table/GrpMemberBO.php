@@ -18,12 +18,14 @@ class GrpMemberBO extends _CommonBO
         GGnavi::getGrpMemberPointhistBO();
         GGnavi::getClslineup2BO();
         GGnavi::getClssettleBO();
+        GGnavi::getGrpmPrivacyBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
         $arr['grpMemberPointhistBO'] = GrpMemberPointhistBO::getInstance();
         $arr['clslineup2BO'] = Clslineup2BO::getInstance();
         $arr['clssettleBO'] = ClssettleBO::getInstance();
+        $arr['grpmPrivacyBO'] = GrpmPrivacyBO::getInstance();
         return $arr;
     }
 
@@ -85,8 +87,9 @@ class GrpMemberBO extends _CommonBO
     const selectByPkForMng = "selectByPkForMng";
     const selectByPkForAll = "selectByPkForAll";
     const selectByGrpnoForAll = "selectByGrpnoForAll";
-    const selectByKeywordForAll = "selectByKeywordForAll";
     const selectMeByGrpno = "selectMeByGrpno";
+    const selectByExecutorForAll = "selectByExecutorForAll";
+    const selectByKeywordForAll = "selectByKeywordForAll";
     protected function select($options, $option="")
     {
         /* vars */
@@ -98,76 +101,51 @@ class GrpMemberBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
+        /* set executor */
+        $EXECUTOR = isset($EXECUTOR) ? $EXECUTOR : "";
+
         /* --------------- */
         /* sql body */
         /* --------------- */
         $query  = "";
-        $select = "";
         $from   = "";
         $where  = "";
-
-        /* --------------- */
-        /* field by auth */
-        /* --------------- */
-        switch($OPTION)
-        {
-            /* for mng */
-            case self::selectByPkForInside:
-            case self::selectByGrpnoForMng:
-            case self::selectByPkForMng:
-            {
-                $select =
-                "
-                    t.grpno
-                    , t.userno
-                    , t.grpmtype
-                    , t.grpmposition
-                    , t.grpmfinauth
-                    , t.grpmstatus
-                    , t.point
-                    , t.deletedt
-                    , t.regidt
-                    , u.usertype
-                    , u.id
-                    , u.img
-                    , u.name
-                    , u.birthyear
-                    , u.phone
-                    , u.hascarflg
-                    , u.address
-                    , u.adminflg
-                    , grpmngu.id as grpmanagerid
-                ";
-                break;
-            }
-            /* for all */
-            default:
-            {
-                $select =
-                "
-                    t.grpno
-                    , t.userno
-                    , t.grpmtype
-                    , t.grpmposition
-                    , t.grpmfinauth
-                    , t.grpmstatus
-                    , null as point
-                    , t.deletedt
-                    , t.regidt
-                    , u.usertype
-                    , u.id
-                    , u.img
-                    , u.name
-                    , u.birthyear
-                    , u.phone
-                    , u.hascarflg
-                    , u.address
-                    , u.adminflg
-                    , grpmngu.id as grpmanagerid
-                ";
-                break;
-            }
-        }
+        $select =
+        "
+            null as head
+            , t.grpno
+            , t.userno
+            , t.grpmtype
+            , t.grpmposition
+            , t.grpmfinauth
+            , t.grpmstatus
+            , t.point
+            , t.deletedt
+            , t.regidt
+            , u.usertype
+            , u.id
+            , u.img
+            , u.name
+            , u.birthyear
+            ,
+            case
+                when grpmprv.priv_phone is null then
+                    case
+                        when userprv.priv_phone = 'all' then u.phone
+                        when userprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
+                        when userprv.priv_phone = 'mng' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone end
+                    end
+                when grpmprv.priv_phone = 'all' then u.phone
+                when grpmprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
+                when grpmprv.priv_phone = 'mng' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone end
+            end as phone
+            , u.hascarflg
+            , u.address
+            , u.adminflg
+            , grp.grpname
+            , grpmngu.id as grpmanagerid
+            , grpmprv.priv_phone
+        ";
 
         /* --------------- */
         /* auth */
@@ -183,17 +161,30 @@ class GrpMemberBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside        : { $from = "(select * from grp_member where grpno = '$GRPNO' and userno = '$USERNO') t"; break; }
-            case self::selectByGrpnoForMng        : { $from = "(select * from grp_member where grpno = '$GRPNO') t"; break; }
-            case self::selectByPkForMng           : { $from = "(select * from grp_member where grpno = '$GRPNO' and userno = '$USERNO') t"; break; }
-            case self::selectByPkForAll           : { $from = "(select * from grp_member where grpno = '$GRPNO' and userno = '$USERNO') t"; break; }
-            case self::selectByGrpnoForAll        : { $from = "(select * from grp_member where grpno = '$GRPNO') t"; break; }
-            case self::selectMeByGrpno            : { $from = "(select * from grp_member where grpno = '$GRPNO' and userno = '$EXECUTOR') t"; break; }
+            case self::selectByPkForInside        : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
+            case self::selectByGrpnoForMng        : { $from = "(select * from grp_member where grpno  = '$GRPNO') t"; break; }
+            case self::selectByPkForMng           : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
+            case self::selectByPkForAll           : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
+            case self::selectByGrpnoForAll        : { $from = "(select * from grp_member where grpno  = '$GRPNO') t"; break; }
+            case self::selectMeByGrpno            : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$EXECUTOR') t"; break; }
+            case self::selectByExecutorForAll     : { $from = "(select * from grp_member where userno = '$EXECUTOR') t"; break; }
             case self::selectByKeywordForAll:
             {
-                $from = "(select * from grp_member where grpno = '$GRPNO') t";
-                $where = "where u.name like '%$KEYWORD%'";
-                break;
+                $from =
+                "
+                    (
+                        select
+                            *
+                        from
+                            grp_member grpm
+                            left join user u
+                                on
+                                    grpm.userno = u.userno
+                        where
+                            grpm.grpno = '$GRPNO' and
+                            u.name like '%$KEYWORD%'
+                    ) t
+                "; break;
             }
             default:
                 throw new GGexception("(server) no option defined");
@@ -217,11 +208,28 @@ class GrpMemberBO extends _CommonBO
                 left join user grpmngu
                     on
                         grp.grpmanager = grpmngu.userno
+                left join grpm_privacy grpmprv
+                    on
+                        grpmprv.grpno = t.grpno and
+                        grpmprv.userno = t.userno
+                left join user_privacy userprv
+                    on
+                        userprv.userno = t.userno
+                left join grp_member execgrpm
+                    on
+                        execgrpm.grpno = t.grpno and
+                        execgrpm.userno = '$EXECUTOR'
             $where
             order by
                 u.name
         ";
         $rslt = GGsql::select($query, $from, $options);
+
+        /* masking */
+        foreach($rslt[GGF::DATA] as &$row)
+        {
+        }
+
         return $rslt;
     }
 
@@ -265,17 +273,7 @@ class GrpMemberBO extends _CommonBO
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* execute */
-                $query =
-                "
-                    update
-                        grp_member
-                    set
-                        grpmstatus = 'delete',
-                        deletedt = now()
-                    where
-                        grpno = '$GRPNO' and
-                        userno = '$USERNO'
-                ";
+                $query = "update grp_member set grpmstatus = 'delete', deletedt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
                 break;
             }
@@ -291,16 +289,7 @@ class GrpMemberBO extends _CommonBO
                     throw new GGexception("멤버 포인트는 마이너스가 될 수 없습니다.");
 
                 /* execute */
-                $query =
-                "
-                    update
-                        grp_member
-                    set
-                        point = point + $POINT
-                    where
-                        grpno = '$GRPNO' and
-                        userno = '$USERNO'
-                ";
+                $query = "update grp_member set point = point + $POINT where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
                 break;
             }
@@ -360,19 +349,7 @@ class GrpMemberBO extends _CommonBO
                     if(Common::isEmpty($GRPMFINAUTH)) { throw new GGexception("시스템 오류입니다."); }
 
                     /* execute */
-                    $query =
-                    "
-                        update
-                            grp_member
-                        set
-                            grpmtype = '$GRPMTYPE',
-                            grpmposition = '$GRPMPOSITION',
-                            grpmfinauth = '$GRPMFINAUTH',
-                            modidt = now()
-                        where
-                            grpno = '$GRPNO' and
-                            userno = '$USERNO'
-                    ";
+                    $query = "update grp_member set grpmtype = '$GRPMTYPE', grpmposition = '$GRPMPOSITION', grpmfinauth = '$GRPMFINAUTH', modidt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
                     GGsql::exeQuery($query);
                 }
                 break;
@@ -387,22 +364,11 @@ class GrpMemberBO extends _CommonBO
                 $userno = Common::getField($userInfo, GGF::USERNO);
 
                 /* insert grp_member */
-                $query =
-                "
-                    insert into grp_member
-                    (
-                          grpno
-                        , userno
-                        , regidt
-                    )
-                    values
-                    (
-                          '$GRPNO'
-                        , '$userno'
-                        ,  now()
-                    )
-                ";
+                $query = "insert into grp_member (grpno, userno, regidt) values ('$GRPNO', '$userno', now())";
                 GGsql::exeQuery($query);
+
+                /* insert sub tables */
+                $grpmPrivacyBO->insertDefaultForInside($GRPNO, $userno);
 
                 /* update point */
                 $point = intval($POINT);
@@ -440,6 +406,7 @@ class GrpMemberBO extends _CommonBO
                 $grpMemberPointhistBO->deleteRecordByGrpnoUsernoForInside($GRPNO, $USERNO);
                 $this->deleteRecordByPkForInside($GRPNO, $USERNO);
                 $userBO->deleteRecordByPkForInside($USERNO);
+                $grpmPrivacyBO->deleteByUsernoForInside($USERNO);
                 break;
             }
             case self::deleteRecordByPkForInside:

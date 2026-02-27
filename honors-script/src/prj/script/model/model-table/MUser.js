@@ -17,6 +17,7 @@ class MUser
         /* data */      this.adminflg       = GGC.Common.enum(dat.adminflg);
         /* data */      this.modidt         = GGC.Common.datetime(dat.modidt);
         /* data */      this.regidt         = GGC.Common.datetime(dat.regidt);
+        /* data */      this.priv_phone     = GGC.Common.enum(dat.priv_phone);
         /* custom */    this.hascarflgCvrt  = GGC.User.hascarflg(dat.hascarflg);
         /* custom */    this.img_           = GGC.User.img_(this.userno, this.img, false);
         /* custom */    this.usertypeCvrt   = GGC.User.usertypeCvrt(this.usertype);
@@ -41,6 +42,7 @@ class MUser
     getAdminflg() { return this.adminflg; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
+    getPrivPhone() { return this.priv_phone; }
 
     /* custom */
     getHascarflgCvrt() { return this.hascarflgCvrt; }

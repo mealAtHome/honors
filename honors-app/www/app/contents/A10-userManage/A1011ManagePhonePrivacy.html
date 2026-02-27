@@ -1,0 +1,175 @@
+<ons-page id="UMPP">
+
+    <ons-toolbar>
+        <ons-toolbar>
+            <div class="left"><gg-backbtn onclick="UMPP.close()"></gg-backbtn></div>
+            <div class="center">전화번호공개설정</div>
+        </ons-toolbar>
+    </ons-toolbar>
+
+    <!-- ======================== -->
+    <!-- main page -->
+    <!-- ======================== -->
+    <div class="common-div-cushion">
+
+        <div class="common-div-cushionUD">
+            <ul class="common-ul-announce">
+                <li>전화번호 공개 설정을 변경할 수 있습니다.</li>
+                <li>아래 모임별설정에서 특정 모임에 대한 공개 여부를 설정할 수 있습니다.</li>
+            </ul>
+        </div>
+
+        <div class="common-div-cushionUD">
+            <p class="common-p-title">전체설정</p>
+            <table id="UMPP-tbl-userPrivPhone" class="common-tbl-vertical common-tbl-type common-tag-fontsize09" tbl-type="rowborder">
+                <tbody>
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="all" tab="">전체공개</button></th><td>전체 사용자에게 공개됩니다.</td></tr>
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="grp" tab="">모임공개</button></th><td>가입한 모임 내 멤버에게만 공개됩니다.</td></tr>
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="mng" tab="">운영진공개</button></th><td>가입한 모임 내 운영진에게만 공개됩니다.</td></tr>
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="any" tab="">비공개</button></th><td>아무에게도 공개되지 않습니다.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <hr class="common-hr-full"/>
+
+        <style>
+            #UMPP-tbl-grpList > tbody > tr > td { white-space: nowrap; text-align: left; }
+        </style>
+        <div class="common-div-cushionUD">
+            <p class="common-p-title">모임별설정</p>
+            <div class="common-div-cushionUD">
+                <div class="common-div-scrollX">
+                    <table id="UMPP-tbl-grpList" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                        <thead>
+                            <tr>
+                                <th>모임명</th>
+                                <th>공개범위</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- footer -->
+        <!-- ======================== -->
+        <button id="UMPP-btn-save" class="common-btn-footer">저장하기</button>
+        <div class="common-div-cushionFooter"></div>
+
+    </div>
+
+    <script>
+
+        var UMPP =
+        {
+            code : "UMPP",
+            userImgUri: null,
+            Data: {},
+
+            show()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* get user info */
+                    let mUser = Api.User.selectMe().getModel();
+                    if(mUser == null)
+                    {
+                        UMPP.close(true);
+                        return;
+                    }
+                    $(`.UMPP-btn-userPrivPhone[val="${mUser.getPrivPhone()}"]`).attr("tab", "tab");
+
+                    /* get grp */
+                    let html = "";
+                    let mGrpMembers = Api.GrpMember.selectByExecutorForAll().getModels();
+                    for(let i in mGrpMembers)
+                    {
+                        let mGrpMember = mGrpMembers[i];
+                        html +=
+                        `
+                            <tr grpno="${mGrpMember.getGrpno()}">
+                                <td>${mGrpMember.getGrpname()}</td>
+                                <td>
+                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="not" tab="${mGrpMember.getPrivPhone() == "" ? "tab" : ""}">전체설정에 따름</button>
+                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="all" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.ALL ? "tab" : ""}">전체공개</button>
+                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="grp" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.GRP ? "tab" : ""}">모임공개</button>
+                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="mng" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.MNG ? "tab" : ""}">운영진공개</button>
+                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="any" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.ANY ? "tab" : ""}">비공개</button>
+                                </td>
+                            </tr>
+                        `;
+                    }
+                    $("#UMPP-tbl-grpList > tbody").html(html);
+
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+
+            },
+
+            close()
+            {
+                Navigation.moveBack();
+            },
+        };
+
+
+        $(document).ready(function()
+        {
+            /* =============================== */
+            /* events */
+            /* =============================== */
+
+            /* ---------------------- */
+            /* 저장하기 */
+            /* ---------------------- */
+            $("#UMPP-btn-save").click(function()
+            {
+                let privPhone = $('.UMPP-btn-userPrivPhone[tab="tab"]').attr("val");
+                let privPhoneGrpm = [];
+                $("#UMPP-tbl-grpList > tbody > tr").each(function()
+                {
+                    let grpno = $(this).attr("grpno");
+                    let val = $(this).find(`.UMPP-btn-privPhone[tab="tab"]`).attr("val");
+                    privPhoneGrpm.push({ GRPNO: grpno, PRIV_PHONE: val });
+                });
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        Api.User.updatePhonePrivacyByPk(privPhone, privPhoneGrpm, GGF.toast, GGF.toast);
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                UMPP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UMPP.close(true);
+            }
+
+            /* localizing */
+            /* $("#UMPP").i18n(); */
+
+        });
+
+    </script>
+</ons-page>

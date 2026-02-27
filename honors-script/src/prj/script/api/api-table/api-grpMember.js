@@ -8,6 +8,7 @@ Api.GrpMember =
     selectByPkForAll           (grpno, userno,  noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByPkForAll"           , GRPNO: grpno, USERNO: userno,  }, noticeOK, noticeFail).getModel(); },
     selectMeByGrpno            (grpno,          noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectMeByGrpno"            , GRPNO: grpno,                  }, noticeOK, noticeFail).getModel(); },
     selectByGrpnoForAll        (grpno,          noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByGrpnoForAll"        , GRPNO: grpno,                  }, noticeOK, noticeFail); },
+    selectByExecutorForAll     (                noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByExecutorForAll"     ,                                }, noticeOK, noticeFail); },
     selectByKeywordForAll      (grpno, keyword, noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByKeywordForAll"      , GRPNO: grpno, KEYWORD: keyword }, noticeOK, noticeFail); },
 
     /* ========================= */

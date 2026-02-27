@@ -10,7 +10,8 @@ Api.User =
     /* ========================= */
     /* update */
     /* ========================= */
-    updateBaccnoRefund(baccnoRefund, noticeOK, noticeFail) { return Api.User.update({"OPTION":"updateBaccnoRefund", "BACCNO_REFUND":baccnoRefund }, noticeOK, noticeFail); },
+    updateBaccnoRefund(baccnoRefund, noticeOK, noticeFail) { return Api.User.update({OPTION:"updateBaccnoRefund", BACCNO_REFUND:baccnoRefund }, noticeOK, noticeFail); },
+    updatePhonePrivacyByPk(privPhone, privPhoneGrpm, noticeOK, noticeFail) { return Api.User.update({OPTION:"updatePhonePrivacyByPk", PRIV_PHONE:privPhone, PRIV_PHONE_GRPM:privPhoneGrpm }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* 등록 */

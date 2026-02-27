@@ -11,7 +11,9 @@ class MGrpMember
         /* data */      this.point              = GGC.Common.int(dat.point);
         /* data */      this.deletedt           = GGC.Common.datetime(dat.deletedt);
         /* data */      this.regidt             = GGC.Common.datetime(dat.regidt);
+        /* data */      this.grpname            = GGC.Common.char(dat.grpname);
         /* data */      this.grpmanagerid       = GGC.Common.char(dat.grpmanagerid);
+        /* data */      this.priv_phone         = GGC.Common.enum(dat.priv_phone);
         /* custom */    this.mUser              = _MCommon.fromDat(dat, MUser);
         /* custom */    this.pointWon           = GGC.Common.priceWon(dat.point);
         /* custom */    this.grpmtypeCvrt       = GGC.GrpMember.grpmtypeCvrt(this.grpmtype);
@@ -30,7 +32,9 @@ class MGrpMember
     getDeletedt() { return this.deletedt; }
     getPoint() { return this.point; }
     getRegidt() { return this.regidt; }
+    getGrpname() { return this.grpname; }
     getGrpmanagerid() { return this.grpmanagerid; }
+    getPrivPhone() { return this.priv_phone; }
 
     /* custom */
     getMUser() { return this.mUser; }

@@ -93,8 +93,19 @@ GGF.GrpMember =
     {
         ACTIVE      : 'active',     /* GGF.GrpMember.Grpmstatus.ACTIVE */
         DELETE      : 'delete',     /* GGF.GrpMember.Grpmstatus.DELETE */
-    }
+    },
 };
+
+GGF.GrpmPrivacy =
+{
+    PrivPhone :
+    {
+        ALL : "all", /* GGF.GrpmPrivacy.PrivPhone.ALL : 전화번호 전체공개 */
+        GRP : "grp", /* GGF.GrpmPrivacy.PrivPhone.GRP : 전화번호 그룹공개 */
+        MNG : "mng", /* GGF.GrpmPrivacy.PrivPhone.MNG : 전화번호 관리자공개 */
+        ANY : "any", /* GGF.GrpmPrivacy.PrivPhone.ANY : 전화번호 비공개 */
+    },
+}
 
 GGF.GrpfncSponsorship =
 {
