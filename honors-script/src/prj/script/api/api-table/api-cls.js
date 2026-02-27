@@ -27,7 +27,6 @@ Api.Cls =
           option
         , grpno
         , clsno
-        , clstype
         , clstitle
         , clscontent
         , clsstartdt
@@ -49,7 +48,6 @@ Api.Cls =
             OPTION              : option,
             GRPNO               : grpno,
             CLSNO               : clsno,
-            CLSTYPE             : clstype,
             CLSTITLE            : clstitle,
             CLSCONTENT          : clscontent,
             CLSSTARTDT          : clsstartdt,

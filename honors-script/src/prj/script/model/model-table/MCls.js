@@ -5,7 +5,6 @@ class MCls
         /* data */      this.grpno                  = GGC.Common.char(dat.grpno);
         /* data */      this.clsno                  = GGC.Common.char(dat.clsno);
         /* data */      this.clsstatus              = GGC.Common.char(dat.clsstatus);
-        /* data */      this.clstype                = GGC.Common.char(dat.clstype);
         /* data */      this.clstitle               = GGC.Common.char(dat.clstitle);
         /* data */      this.clscontent             = GGC.Common.varchar(dat.clscontent);
         /* data */      this.clsstartdt             = GGC.Common.datetime(dat.clsstartdt);
@@ -40,7 +39,6 @@ class MCls
     /* data */      getGrpno() { return this.grpno; }
     /* data */      getClsno() { return this.clsno; }
     /* data */      getClsstatus() { return this.clsstatus; }
-    /* data */      getClstype() { return this.clstype; }
     /* data */      getClstitle() { return this.clstitle; }
     /* data */      getClscontent() { return this.clscontent; }
     /* data */      getClsstartdt() { return this.clsstartdt; }
@@ -71,7 +69,6 @@ class MCls
     /* ========================= */
     /* fields - additional */
     /* ========================= */
-    getClstypeCvrt()                { return GGC.Cls.clstypeCvrt(this.getClstype()); }
     getClsstatusCard()              { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
     getClsstatusFont()              { return GGC.Cls.clsstatusFont(this.getClsstatus()); }
     getClssettleflgCvrt()           { return GGC.Cls.clssettleflgCvrt(this.getClssettleflg()); }
@@ -114,7 +111,7 @@ class MCls
                 <div class="common-div-cushionUp">
                     <div class="common-tag-block">
                         <span class="common-tag-fontsize11 common-tag-strong">일정</span>
-                        <span class="common-tag-fontsize09">${model.getClstypeCvrt()}</span>
+                        <span class="common-tag-fontsize09"></span>
                     </div>
                     <span class="common-tag-block">${model.getClstitle()}</span>
                     <div class="common-div-cushionUD">

@@ -43,7 +43,6 @@ class ClsBO extends _CommonBO
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14)              / NO  */
     const FIELD__CLSSTATUS                  = "clsstatus";                  /* (  ) char(30)              / NO  */
     const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) enum('yet','done')    / YES */
-    const FIELD__CLSTYPE                    = "clstype";                    /* (  ) char(30)              / NO  */
     const FIELD__CLSTITLE                   = "clstitle";                   /* (  ) char(50)              / NO  */
     const FIELD__CLSCONTENT                 = "clscontent";                 /* (  ) varchar(255)          / YES  */
     const FIELD__CLSSTARTDT                 = "clsstartdt";                 /* (  ) datetime              / NO  */
@@ -70,9 +69,6 @@ class ClsBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const CLSTYPE__LINEUP1          = "lineup1";            /* clstype : 일반참가 */
-    const CLSTYPE__LINEUP2          = "lineup2";            /* clstype : 라인업1시합 */
-    const CLSTYPE__LINEUP4          = "lineup4";            /* clstype : 라인업2시합 */
     const CLSSTATUS__EDIT           = "edit";               /* clsstatus : 작성중 */
     const CLSSTATUS__ING            = "ing";                /* clsstatus : 진행중 */
     const CLSSTATUS__END            = "end";                /* clsstatus : 일정완료 */
@@ -83,9 +79,6 @@ class ClsBO extends _CommonBO
     static public function getConsts()
     {
         $arr = array();
-        $arr['clstypeLineup1']                  = self::CLSTYPE__LINEUP1;       /* 일반참가 */
-        $arr['clstypeLineup2']                  = self::CLSTYPE__LINEUP2;       /* 라인업1시합 */
-        $arr['clstypeLineup4']                  = self::CLSTYPE__LINEUP4;       /* 라인업2시합 */
         $arr['clsstatusEdit']                   = self::CLSSTATUS__EDIT;        /* 일정상태 : 작성중 */
         $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
         $arr['clsstatusEnd']                    = self::CLSSTATUS__END;         /* 일정상태 : 일정완료 */
@@ -152,7 +145,6 @@ class ClsBO extends _CommonBO
             , t.clsno
             , t.clsstatus
             , t.clssettleflg
-            , t.clstype
             , t.clstitle
             , t.clscontent
             , t.clsstartdt
@@ -335,7 +327,6 @@ class ClsBO extends _CommonBO
             case self::insert:
             case self::update:
             {
-                if(Common::isEmpty(trim($CLSTYPE))           ) { throw new GGexception("입력되지 않은 항목이 있습니다. (일정유형)"); }
                 if(Common::isEmpty(trim($CLSTITLE))          ) { throw new GGexception("입력되지 않은 항목이 있습니다. (일정제목)"); }
                 if(Common::isEmpty(trim($CLSCONTENT))        ) { throw new GGexception("입력되지 않은 항목이 있습니다. (일정상세)"); }
                 if(Common::isEmpty(trim($CLSSTARTDT))        ) { throw new GGexception("입력되지 않은 항목이 있습니다. (일정시작일시)"); }
@@ -373,7 +364,6 @@ class ClsBO extends _CommonBO
                           grpno
                         , clsno
                         , clsstatus
-                        , clstype
                         , clstitle
                         , clscontent
                         , clsstartdt
@@ -395,7 +385,6 @@ class ClsBO extends _CommonBO
                           '$GRPNO'
                         , '$clsno'
                         , '$clsstatusEdit'
-                        , '$CLSTYPE'
                         , '$CLSTITLE'
                         , '$CLSCONTENT'
                         , '$CLSSTARTDT'
@@ -423,11 +412,6 @@ class ClsBO extends _CommonBO
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
                 $ggAuth->throwIfClsCancel($GRPNO, $CLSNO);
 
-                /* clstype is changed? */
-                $clstypeOrigin = Common::getField($this->getByPk($GRPNO, $CLSNO), self::FIELD__CLSTYPE);
-                if($clstypeOrigin != $CLSTYPE)
-                    $clslineup2BO->deleteByClsnoForInside($GRPNO, $CLSNO);
-
                 /* update cls info */
                 $query   =
                 "
@@ -435,7 +419,6 @@ class ClsBO extends _CommonBO
                         cls
                     set
                           clsmodidt         =  now()
-                        , clstype           = '$CLSTYPE'
                         , clstitle          = '$CLSTITLE'
                         , clscontent        = '$CLSCONTENT'
                         , clsstartdt        = '$CLSSTARTDT'
@@ -510,7 +493,6 @@ class ClsBO extends _CommonBO
 
                 /* copy cls */
                 $cls = $this->getByPk($GRPNO, $CLSNO);
-                $clstype = Common::getField($cls, ClsBO::FIELD__CLSTYPE);
                 $clsno = $idxBO->makeClsno();
                 $query =
                 "
@@ -519,7 +501,6 @@ class ClsBO extends _CommonBO
                           grpno
                         , clsno
                         , clsstatus
-                        , clstype
                         , clstitle
                         , clscontent
                         , clsstartdt
@@ -537,7 +518,6 @@ class ClsBO extends _CommonBO
                           '$GRPNO'
                         , '$clsno'
                         , '$clsstatusEdit'
-                        ,  clstype
                         ,  clstitle
                         ,  clscontent
                         ,  clsstartdt

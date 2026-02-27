@@ -25,24 +25,6 @@
                 </div>
             </div>
 
-            <!-- 일정유형 -->
-            <div class="common-div-formField">
-                <span>일정유형</span>
-                <span>[필수] 아래 유형에서 선택해주세요.</span>
-                <style>
-                    #CUDE-tbl-clstype > tbody > tr > th { text-align:left; }
-                    #CUDE-tbl-clstype > tbody > tr > th > button { min-width:6.5em; }
-                    #CUDE-tbl-clstype > tbody > tr > td { font-size:0.9em; color:rgb(100, 100, 100); }
-                </style>
-                <table id="CUDE-tbl-clstype" class="common-tbl-vertical common-tag-fontsize09" tbl-type="rowborder">
-                    <tbody>
-                        <tr><th><button class="CUDE-btn-clstype commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clstype" val="lineup1" tab="tab" >라인업(1팀)</button></th><td>1개팀 라인업 기재</td></tr>
-                        <tr><th><button class="CUDE-btn-clstype commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clstype" val="lineup2" tab=""    >라인업(1시합)</button></th><td>1시합 양 팀 라인업 기재</td></tr>
-                        <tr><th><button class="CUDE-btn-clstype commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clstype" val="lineup4" tab=""    >라인업(2시합)</button></th><td>2시합 양 팀 라인업 기재</td></tr>
-                    </tbody>
-                </table>
-            </div>
-
             <!-- 일정명 -->
             <div class="common-div-formField">
                 <span>일정제목</span>
@@ -286,7 +268,6 @@
                 <div class="common-div-empty"></div>
                 <table class="common-tbl-vertical" tbl-type="rowborder">
                     <tbody>
-                        <tr><th>일정유형</th><td><div id="CUDE-div-summaryClstype"></div></td></tr>
                         <tr><th>일정제목</th><td><div id="CUDE-div-summaryClstitle"></div></td></tr>
                         <tr><th>참가비</th><td><div id="CUDE-div-summaryClsbillapply"></div></td></tr>
                         <tr><th>일정상세</th><td><div id="CUDE-div-summaryClscontent"></div></td></tr>
@@ -351,7 +332,6 @@
                         case "update":
                         {
                             let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
-                            $(`.CUDE-btn-clstype[val='${mCls.getClstype()}']`).click();
                             $("#CUDE-input-clstitle").val(mCls.getClstitle());
                             $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
                             $("#CUDE-input-clsground").val(mCls.getClsground());
@@ -368,18 +348,15 @@
                             /* ----- */
 
                             /* 생성 이후에는 편집불가 */
-                            $(`.CUDE-btn-clstype`).prop("disabled", true);
                             switch(mCls.getClsstatus())
                             {
                                 case GGF.Cls.Clsstatus.EDIT:
                                 {
-                                    $(`.CUDE-btn-clstype`).prop("disabled", false);
                                     break;
                                 }
                                 case GGF.Cls.Clsstatus.ING:
                                 case GGF.Cls.Clsstatus.END:
                                 {
-                                    $(`.CUDE-btn-clstype`).prop("disabled", true);
                                     $("#CUDE-input-clstitle").prop("disabled", true);
                                     $("#CUDE-input-clsbillapplyprice").prop("disabled", true);
                                     break;
@@ -462,13 +439,11 @@
                 {
                     case "CUDE-div-formIntro":
                     {
-                        let clstype = $(".CUDE-btn-clstype[tab=tab]").attr("val");
                         let clstitle = $("#CUDE-input-clstitle").val();
                         let clscontent = $("#CUDE-textarea-clscontent").val();
                         let clsbillapplyprice = $("#CUDE-input-clsbillapplyprice").val();
                         let clsbillapplyunit = $("#CUDE-input-clsbillapplyunit").val();
 
-                        if(Common.isEmpty(clstype))      { Common.toastError("일정유형을 선택해주세요."); return; }
                         if(Common.isEmpty(clstitle))     { Common.toastError("일정제목을 입력해주세요."); $("#CUDE-input-clstitle").focus(); return; }
                         if(Common.isEmpty(clscontent))   { Common.toastError("일정상세를 입력해주세요."); $("#CUDE-textarea-clscontent").focus(); return; }
                         if(Common.isEmpty(clsbillapplyprice)) { Common.toastError("참가비를 올바르게 입력해주세요."); $("#CUDE-input-clsbillapplyprice").focus(); return; }
@@ -525,7 +500,6 @@
                         if(Common.isEmpty(userno)) { Common.toastError("일정주관자를 선택해주세요."); return; }
 
                         /* 내용요약 */
-                        const clstype             = $(".CUDE-btn-clstype[tab=tab]").html();
                         const clstitle            = $("#CUDE-input-clstitle").val();
                         const clscontent          = $("#CUDE-textarea-clscontent").val();
                         const clsbillapplyprice   = $("#CUDE-span-clsbillapplypricePretty").html();
@@ -537,7 +511,6 @@
                         const clsapplyclosedt     = $("#CUDE-span-clsapplyclosedtPretty").html();
                         const clsusernoadm        = GGC.Common.char($("#CUDE-div-usernoadm").attr("name"));
                         const clsusernosub        = GGC.Common.char($("#CUDE-div-usernosub").attr("name"));
-                        $("#CUDE-div-summaryClstype").html(clstype);
                         $("#CUDE-div-summaryClstitle").html(clstitle);
                         $("#CUDE-div-summaryClscontent").html(clscontent);
                         $("#CUDE-div-summaryClsbillapply").html(clsbillapplyprice);
@@ -660,7 +633,6 @@
                         const option                = CUDE.Data.option;
                         const grpno                 = CUDE.Data.grpno;
                         const clsno                 = CUDE.Data.clsno;
-                        const clstype               = $(".CUDE-btn-clstype[tab=tab]").attr("val");
                         const clstitle              = $("#CUDE-input-clstitle").val();
                         const clscontent            = $("#CUDE-textarea-clscontent").val();
                         const clsstartdt            = GGdate.fromDivYearToMin("#CUDE-div-clsstartdt");
@@ -678,7 +650,6 @@
                             option
                             , grpno
                             , clsno
-                            , clstype
                             , clstitle
                             , clscontent
                             , clsstartdt
@@ -699,20 +670,13 @@
                             if(CUDE.Data.option == "insert")
                                 CUDE.Data.clsno = mApiResponse.getData();
 
-                            let pageCode = null;
-                            switch(clstype)
-                            {
-                                case GGF.Cls.Clstype.LINEUP1: pageCode = Navigation.Page.F10ClassUpdate010TypeLineup; break;
-                                case GGF.Cls.Clstype.LINEUP2: pageCode = Navigation.Page.F10ClassUpdate010TypeLineup; break;
-                                case GGF.Cls.Clstype.LINEUP4: pageCode = Navigation.Page.F10ClassUpdate010TypeLineup; break;
-                            }
                             switch(CUDE.Data.option)
                             {
                                 case "insert":
                                 {
                                     Common.toastSuccess("일정이 생성되었습니다.");
                                     Navigation.removeLastPageData(); /* 현재 페이지 제거 */
-                                    Navigation.moveFrontPage(pageCode, {option:option, grpno:grpno, clsno: CUDE.Data.clsno, });
+                                    Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate010TypeLineup, {option:option, grpno:grpno, clsno: CUDE.Data.clsno, });
                                     break;
                                 }
                                 case "update":

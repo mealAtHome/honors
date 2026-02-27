@@ -1,19 +1,5 @@
 GGC.Cls =
 {
-    /* ----- */
-    /* clstype */
-    /* ----- */
-    clstypeCvrt(val)
-    {
-        let rslt = "";
-        switch(val)
-        {
-            case GGF.Cls.Clstype.LINEUP1 : rslt = "라인업(1팀)"; break;
-            case GGF.Cls.Clstype.LINEUP2 : rslt = "라인업(1시합)"; break;
-            case GGF.Cls.Clstype.LINEUP4 : rslt = "라인업(2시합)"; break;
-        }
-        return rslt;
-    },
 
     /* ----- */
     /* clsstatus */
@@ -73,7 +59,6 @@ GGC.Cls =
 
 
     /* ----- */
-    /* clstype */
     /* ----- */
     getGrpfinancereflectflgCvrt(val)
     {

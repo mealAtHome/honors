@@ -23,12 +23,6 @@ GGF.Bankaccount =
 
 GGF.Cls =
 {
-    Clstype :
-    {
-        LINEUP1         : "lineup1",            /* GGF.Cls.Clstype.LINEUP1 : 라인업(1팀) */
-        LINEUP2         : "lineup2",            /* GGF.Cls.Clstype.LINEUP2 : 라인업(1시합) */
-        LINEUP4         : "lineup4",            /* GGF.Cls.Clstype.LINEUP4 : 라인업(2시합) */
-    },
     Clsstatus :
     {
         EDIT            : "edit",               /* GGF.Cls.Clsstatus.EDIT : 작성중 */

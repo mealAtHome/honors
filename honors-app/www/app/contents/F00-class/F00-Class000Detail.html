@@ -301,7 +301,6 @@
             */
             /* ========================= */
             Data : {},
-            clstype : null,
             isManager : false,
 
             show()
@@ -379,17 +378,6 @@
 
                         /* is manager and end */
                         let isManagerAndEnd = (CLSD.isManager && mCls.isEnd());
-
-                        /* clstype */
-                        $(`.CLSD-div-clssub[tab=${mCls.getClstype()}]`).show();
-                        $(`.CLSD-div-clssub[tab!=${mCls.getClstype()}]`).hide();
-
-                        /* team tab */
-                        switch(mCls.getClstype())
-                        {
-                            case GGF.Cls.Clstype.LINEUP2: { $(`.CLSD-btn-tabTeam2[val=${CLSD.Data.teamname}]`).click(); break; }
-                            case GGF.Cls.Clstype.LINEUP4: { $(`.CLSD-btn-tabTeam4[val=${CLSD.Data.teamname}]`).click(); break; }
-                        }
 
                         /* cancel reason */
                         if(mCls.isCancel())
@@ -479,42 +467,14 @@
                         }
 
                         /* =============== */
-                        /* 참가정보 : clstype에 따라 다르게 대응 */
+                        /* 참가정보 : 라인업 표시 */
                         /* =============== */
-                        CLSD.clstype = mCls.getClstype();
-                        switch(CLSD.clstype)
-                        {
-                            case GGF.Cls.Clstype.LINEUP1:
-                            {
-                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                                let lineups = mClslineup2s.getModels();
-                                for(let i in lineups)
-                                    CLSD.addRowForLineup2(lineups[i]);
-                                break;
-                            }
-                            case GGF.Cls.Clstype.LINEUP2:
-                            {
-                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                                $(".CLSD-span-teamnick[teamname=a]").text(mClslineup2s.getTeamnick("a"));
-                                $(".CLSD-span-teamnick[teamname=b]").text(mClslineup2s.getTeamnick("b"));
-                                let lineups = mClslineup2s.getModels();
-                                for(let i in lineups)
-                                    CLSD.addRowForLineup2(lineups[i]);
-                                break;
-                            }
-                            case GGF.Cls.Clstype.LINEUP4:
-                            {
-                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                                $(".CLSD-span-teamnick[teamname=a]").text(mClslineup2s.getTeamnick("a"));
-                                $(".CLSD-span-teamnick[teamname=b]").text(mClslineup2s.getTeamnick("b"));
-                                $(".CLSD-span-teamnick[teamname=c]").text(mClslineup2s.getTeamnick("c"));
-                                $(".CLSD-span-teamnick[teamname=d]").text(mClslineup2s.getTeamnick("d"));
-                                let lineups = mClslineup2s.getModels();
-                                for(let i in lineups)
-                                    CLSD.addRowForLineup2(lineups[i]);
-                                break;
-                            }
-                        }
+                        let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        $(".CLSD-span-teamnick[teamname=a]").text(mClslineup2s.getTeamnick("a"));
+                        $(".CLSD-span-teamnick[teamname=b]").text(mClslineup2s.getTeamnick("b"));
+                        let lineups = mClslineup2s.getModels();
+                        for(let i in lineups)
+                            CLSD.addRowForLineup2(lineups[i]);
                         CLSD.setEvent();
                     }
                     catch(e)
@@ -660,29 +620,20 @@
                 /* 대리접수 */
                 $(".CLSD-btn-applyStead").off("click").on("click", function()
                 {
-                    switch(CLSD.clstype)
+                    let grpno = $(this).attr("grpno");
+                    let clsno = $(this).attr("clsno");
+                    let teamname = $(this).attr("teamname");
+                    let orderno = $(this).attr("orderno");
+                    let data =
                     {
-                        case GGF.Cls.Clstype.LINEUP1:
-                        case GGF.Cls.Clstype.LINEUP2:
-                        case GGF.Cls.Clstype.LINEUP4:
-                        {
-                            let grpno = $(this).attr("grpno");
-                            let clsno = $(this).attr("clsno");
-                            let teamname = $(this).attr("teamname");
-                            let orderno = $(this).attr("orderno");
-                            let data =
-                            {
-                                option : "F00-applyToClslineup2",
-                                grpno : grpno,
-                                clsno : clsno,
-                                teamname : teamname,
-                                orderno : orderno,
-                                regmember : GGF.Y,
-                            }
-                            Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
-                            break;
-                        }
+                        option : "F00-applyToClslineup2",
+                        grpno : grpno,
+                        clsno : clsno,
+                        teamname : teamname,
+                        orderno : orderno,
+                        regmember : GGF.Y,
                     }
+                    Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
                 });
             },
 

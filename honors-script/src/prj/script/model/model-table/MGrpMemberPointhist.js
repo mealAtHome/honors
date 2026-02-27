@@ -47,7 +47,6 @@ class MGrpMemberPointhist
     /* ========================= */
     /* fields - additional */
     /* ========================= */
-    // getClstypeCvrt()   { return GGC.Cls.clstypeCvrt(this.getClstype()); }
     // getClsstatusCard() { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
 
 }

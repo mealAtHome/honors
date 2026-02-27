@@ -67,43 +67,33 @@
                         html += `\n장소 : ${mCls.getClsground()} (${mCls.getClsgroundaddr()})`;
 
 
-                        /* 참가정보 : clstype에 따라 다르게 대응 */
-                        let clstype = mCls.getClstype();
-                        switch(clstype)
+                        /* 참가정보 */
+                        let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        let lineups = mClslineup2s.getModels();
+                        let teamnick = "";
+                        for(let i in lineups)
                         {
-                            case GGF.Cls.Clstype.LINEUP1:
-                            case GGF.Cls.Clstype.LINEUP2:
-                            case GGF.Cls.Clstype.LINEUP4:
+                            let model = lineups[i];
+
+                            /* team */
+                            if(teamnick != model.getTeamnick())
                             {
-                                let mClslineup2s = Api.Clslineup2.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                                let lineups = mClslineup2s.getModels();
-                                let teamnick = "";
-                                for(let i in lineups)
-                                {
-                                    let model = lineups[i];
-
-                                    /* team */
-                                    if(teamnick != model.getTeamnick())
-                                    {
-                                        html += `\n\n■ ${model.getTeamnick()}`;
-                                        teamnick = model.getTeamnick();
-                                    }
-
-                                    /* orderno */
-                                    let orderno = model.getOrderno();
-                                    if(model.isBattingflgY() == false)
-                                        orderno = "0";
-
-                                    /* username */
-                                    let username = `${model.getUsername()}`;
-                                    if(model.getUsername() != model.getApplyername())
-                                        username = `${model.getUsername()} (${model.getApplyername()})`;
-
-                                    /* add row */
-                                    html += `\n${orderno}. ${model.getPosition()} - ${username}`;
-                                }
-                                break;
+                                html += `\n\n■ ${model.getTeamnick()}`;
+                                teamnick = model.getTeamnick();
                             }
+
+                            /* orderno */
+                            let orderno = model.getOrderno();
+                            if(model.isBattingflgY() == false)
+                                orderno = "0";
+
+                            /* username */
+                            let username = `${model.getUsername()}`;
+                            if(model.getUsername() != model.getApplyername())
+                                username = `${model.getUsername()} (${model.getApplyername()})`;
+
+                            /* add row */
+                            html += `\n${orderno}. ${model.getPosition()} - ${username}`;
                         }
                         $("#CLDA-pre-summary").html(html);
                     }

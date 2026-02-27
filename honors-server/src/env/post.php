@@ -47,7 +47,6 @@
     $options["CLSSTARTDT"]                                          = get("CLSSTARTDT");
     $options["CLSSTATUS"]                                           = get("CLSSTATUS");
     $options["CLSTITLE"]                                            = get("CLSTITLE");
-    $options["CLSTYPE"]                                             = get("CLSTYPE");
     $options["CLSUSERNOADM"]                                        = get("CLSUSERNOADM");
     $options["CLSUSERNOSUB"]                                        = get("CLSUSERNOSUB");
     $options["COMMENT"]                                             = get("COMMENT"); /* abstract */

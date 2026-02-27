@@ -6,7 +6,7 @@
     <ons-toolbar>
         <ons-toolbar>
             <div class="left"><gg-backbtn onclick="CUTF.close(true);"></gg-backbtn></div>
-            <div class="center"><span style="vertical-align:middle;">참가설정 - </span><span id="CUTF-span-clstypeForTitle"></span></div>
+            <div class="center"><span style="vertical-align:middle;">참가설정</div>
         </ons-toolbar>
     </ons-toolbar>
 
@@ -181,36 +181,10 @@
                     let isClsstatusWait = CUTF.isClsstatusWait();
 
                     /* set title */
-                    $("#CUTF-span-clstypeForTitle").text(mCls.getClstypeCvrt());
-                    switch(mCls.getClstype())
-                    {
-                        case GGF.Cls.Clstype.LINEUP1:
-                        {
-                            $(".CUTF-span-teamnameSub[teamname=a]").text("라인업");
-                            $(".CUTF-btn-tabTeam[val=a]").show();
-                            break;
-                        }
-                        case GGF.Cls.Clstype.LINEUP2:
-                        {
-                            $(".CUTF-span-teamnameSub[teamname=a]").text("팀A");
-                            $(".CUTF-span-teamnameSub[teamname=b]").text("팀B");
-                            $(".CUTF-btn-tabTeam[val=a]").show();
-                            $(".CUTF-btn-tabTeam[val=b]").show();
-                            break;
-                        }
-                        case GGF.Cls.Clstype.LINEUP4:
-                        {
-                            $(".CUTF-span-teamnameSub[teamname=a]").text("시합1 - 팀A");
-                            $(".CUTF-span-teamnameSub[teamname=b]").text("시합1 - 팀B");
-                            $(".CUTF-span-teamnameSub[teamname=c]").text("시합2 - 팀C");
-                            $(".CUTF-span-teamnameSub[teamname=d]").text("시합2 - 팀D");
-                            $(".CUTF-btn-tabTeam[val=a]").show();
-                            $(".CUTF-btn-tabTeam[val=b]").show();
-                            $(".CUTF-btn-tabTeam[val=c]").show();
-                            $(".CUTF-btn-tabTeam[val=d]").show();
-                            break;
-                        }
-                    }
+                    $(".CUTF-span-teamnameSub[teamname=a]").text("팀A");
+                    $(".CUTF-span-teamnameSub[teamname=b]").text("팀B");
+                    $(".CUTF-btn-tabTeam[val=a]").show();
+                    $(".CUTF-btn-tabTeam[val=b]").show();
 
                     /* ----- */
                     /* get clslineup2 */
