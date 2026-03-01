@@ -15,21 +15,13 @@
     <!-- ======================== -->
     <div class="common-div-cushion">
         <div class="common-tag-fontsize09">
-            <button id="CUTF-btn-save"    class="common-btn-outline">💿저장</button>
-            <button id="CUTF-btn-rowAdd"  class="common-btn-outline">➕행추가</button>
-            <button id="CUTF-btn-rowAuto" class="common-btn-outline">🤖자동라인업</button>
-        </div>
-        <hr class="common-hr-paddingUD"/>
-        <div class="common-tag-fontsize09">
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀A --><span class="CUTF-span-lineupidxSub" lineupidx="a"></span><!-- 1시합 --></button>
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀B --><span class="CUTF-span-lineupidxSub" lineupidx="b"></span><!-- 1시합 --></button>
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="c" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀C --><span class="CUTF-span-lineupidxSub" lineupidx="c"></span><!-- 2시합 --></button>
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="d" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀D --><span class="CUTF-span-lineupidxSub" lineupidx="d"></span><!-- 2시합 --></button>
+            <button id="CUTF-btn-save"       class="common-btn-outline">💿저장</button>
+            <button id="CUTF-btn-lineupAdd"  class="common-btn-outline">➕라인업추가</button>
         </div>
         <hr class="common-hr-paddingUD"/>
         <style>
             .CUTF-input-common      { font-size: 1em; }
-            .CUDE-input-lineupname    { width: 10em; }
+            .CUTF-input-lineupname  { width: 10em; }
             .CUTF-input-position    { width: 5em; }
             .CUTF-input-user        { width: 5em; }
             .CUTF-input-bill        { width: 5em; }
@@ -42,97 +34,9 @@
             .CUTF-tbl-lineup > tbody > tr > td[col="delt"] { width: 10%; }
         </style>
 
-        <div class="CUTF-div-tabTeam" lineupidx="a" style="display:none;">
-            <p class="common-p-title">
-                <!-- 팀A --><span class="CUTF-span-lineupidxSub" lineupidx="a"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="a" value="A">
-            </p>
-            <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="a" tbl-type="rowborder">
-                    <thead>
-                        <tr>
-                            <th>타순</th>
-                            <th>타격여부</th>
-                            <th>포지션</th>
-                            <th>참가자</th>
-                            <th>참가비</th>
-                            <th>삭제</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 동적으로 행이 추가됩니다 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="CUTF-div-tabTeam" lineupidx="b" style="display:none;">
-            <p class="common-p-title">
-                <!-- 팀B --><span class="CUTF-span-lineupidxSub" lineupidx="b"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="b" value="B">
-            </p>
-            <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="b" tbl-type="rowborder">
-                    <thead>
-                        <tr>
-                            <th>타순</th>
-                            <th>타격여부</th>
-                            <th>포지션</th>
-                            <th>참가자</th>
-                            <th>참가비</th>
-                            <th>삭제</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 동적으로 행이 추가됩니다 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="CUTF-div-tabTeam" lineupidx="c" style="display:none;">
-            <p class="common-p-title">
-                <!-- 팀C --><span class="CUTF-span-lineupidxSub" lineupidx="c"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="c" value="C">
-            </p>
-            <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="c" tbl-type="rowborder">
-                    <thead>
-                        <tr>
-                            <th>타순</th>
-                            <th>타격여부</th>
-                            <th>포지션</th>
-                            <th>참가자</th>
-                            <th>참가비</th>
-                            <th>삭제</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 동적으로 행이 추가됩니다 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="CUTF-div-tabTeam" lineupidx="d" style="display:none;">
-            <p class="common-p-title">
-                <!-- 팀D --><span class="CUTF-span-lineupidxSub" lineupidx="d"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="d" value="D">
-            </p>
-            <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="d" tbl-type="rowborder">
-                    <thead>
-                        <tr>
-                            <th>타순</th>
-                            <th>타격여부</th>
-                            <th>포지션</th>
-                            <th>참가자</th>
-                            <th>참가비</th>
-                            <th>삭제</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 동적으로 행이 추가됩니다 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <div id="CUTF-div-tabBtns" class="common-tag-fontsize09"></div>
+        <hr class="common-hr-paddingUD"/>
+        <div id="CUTF-div-tabContents"></div>
     </div>
 
 
@@ -144,12 +48,13 @@
             Data: {},
             Temp :
             {
-                lineupidx : "a",
+                lineupidx : 0,
+                nextLineupidx : 1,
             },
             El :
             {
-                getTbl (lineupidx="") { return `.CUTF-tbl-lineup[lineupidx=${lineupidx == "" ? CUTF.Temp.lineupidx : lineupidx}]`; },
-                getTr  (lineupidx="") { return `.CUTF-tbl-lineup[lineupidx=${lineupidx == "" ? CUTF.Temp.lineupidx : lineupidx}] > tbody > tr`; },
+                getTbl (lineupidx="") { return `.CUTF-tbl-lineup[lineupidx="${lineupidx == "" ? CUTF.Temp.lineupidx : lineupidx}"]`; },
+                getTr  (lineupidx="") { return `.CUTF-tbl-lineup[lineupidx="${lineupidx == "" ? CUTF.Temp.lineupidx : lineupidx}"] > tbody > tr`; },
             },
             isClsstatusWait () { return CUTF.Data.clsstatus == GGF.Cls.Clsstatus.WAIT; },
             isClsstatusIng  () { return CUTF.Data.clsstatus == GGF.Cls.Clsstatus.ING; },
@@ -169,6 +74,11 @@
                     let clsno = CUTF.Data.clsno;
                     let grpno = CUTF.Data.grpno;
 
+                    /* reset dynamic containers */
+                    $("#CUTF-div-tabBtns").empty();
+                    $("#CUTF-div-tabContents").empty();
+                    CUTF.Temp.nextLineupidx = 1;
+
                     /* ----- */
                     /* get cls */
                     /* ----- */
@@ -176,43 +86,60 @@
                     CUTF.Data.clsstatus = mCls.getClsstatus();
                     CUTF.Data.clsbillapplyprice = mCls.getClsbillapplyprice();
 
-                    /* show / hide */
-                    let isClsstatusIng = CUTF.isClsstatusIng();
-                    let isClsstatusWait = CUTF.isClsstatusWait();
+                    /* ----- */
+                    /* get clslineupa and build tabs */
+                    /* ----- */
+                    let mClslineupaList = Api.Clslineupa.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                    let mClslineupaModels = mClslineupaList.getModels();
 
-                    /* set title */
-                    $(".CUTF-span-lineupidxSub[lineupidx=a]").text("팀A");
-                    $(".CUTF-span-lineupidxSub[lineupidx=b]").text("팀B");
-                    $(".CUTF-btn-tabTeam[val=a]").show();
-                    $(".CUTF-btn-tabTeam[val=b]").show();
+                    if(mClslineupaModels.length == 0)
+                    {
+                        /* no lineups yet: add one default lineup */
+                        CUTF.addLineup(CUTF.Temp.nextLineupidx++, "팀A");
+                    }
+                    else
+                    {
+                        for(let i in mClslineupaModels)
+                        {
+                            let model = mClslineupaModels[i];
+                            CUTF.addLineup(model.getLineupidx(), model.getLineupname());
+                            if(model.getLineupidx() >= CUTF.Temp.nextLineupidx)
+                                CUTF.Temp.nextLineupidx = model.getLineupidx() + 1;
+                        }
+                    }
 
                     /* ----- */
                     /* get clslineupb */
                     /* ----- */
                     let clslineupbs = Api.Clslineupb.selectByClsno(grpno, CUTF.Data.clsno);
-                    for(let i in clslineupbs.getModels())
+                    let isClsstatusIng = CUTF.isClsstatusIng();
+
+                    let clslineupbModels = clslineupbs.getModels();
+                    for(let i in clslineupbModels)
                     {
-                        let model = clslineupbs.getModels()[i];
+                        let model = clslineupbModels[i];
                         CUTF.Temp.lineupidx = model.getLineupidx();
                         CUTF.addRow(model);
                     }
 
-                    /* recovery default values */
-                    CUTF.Temp.lineupidx = "a"; CUTF.updateRowNum();
-                    CUTF.Temp.lineupidx = "b"; CUTF.updateRowNum();
-                    CUTF.Temp.lineupidx = "c"; CUTF.updateRowNum();
-                    CUTF.Temp.lineupidx = "d"; CUTF.updateRowNum();
+                    /* recovery row numbers for each lineup */
+                    $(".CUTF-div-tabTeam").each(function()
+                    {
+                        let li = $(this).attr("lineupidx");
+                        CUTF.Temp.lineupidx = parseInt(li);
+                        CUTF.updateRowNum();
+                    });
 
                     /* recovery db values */
-                    for(let i in clslineupbs.getModels())
+                    for(let i in clslineupbModels)
                     {
-                        let model = clslineupbs.getModels()[i];
+                        let model = clslineupbModels[i];
 
                         /* set lineupname */
-                        $(`.CUDE-input-lineupname[lineupidx=${model.getLineupidx()}]`).val(model.getLineupname());
+                        $(`.CUTF-input-lineupname[lineupidx="${model.getLineupidx()}"]`).val(model.getLineupname());
 
                         /* set rows */
-                        let tr = $(`.CUTF-tbl-lineup[lineupidx=${model.getLineupidx()}] > tbody > tr[orderno="${model.getOrderno()}"]`);
+                        let tr = $(`.CUTF-tbl-lineup[lineupidx="${model.getLineupidx()}"] > tbody > tr[orderno="${model.getOrderno()}"]`);
                         tr.find(`.CUTF-select-orderno`).val(model.getOrderno());
                         tr.find(`.CUTF-input-battingflg`).prop("checked", model.isBattingflgY());
                         tr.find(`.CUTF-input-position`).val(model.getPosition());
@@ -230,27 +157,139 @@
                         }
                     }
 
-                    /* recovery */
-                    $(".CUTF-btn-tabTeam[val=a]").click();
+                    /* click first tab */
+                    $("#CUTF-div-tabBtns").find(".CUTF-btn-tabTeam").first().click();
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
             },
 
+            addLineup(lineupidx, lineupname)
+            {
+                /* tab button */
+                let btnHtml =
+                `
+                    <button
+                        class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio"
+                        radio_name="CUTF-btn-tabTeam"
+                        val="${lineupidx}"
+                        style="padding-left:0.8em; padding-right:0.8em;"
+                        lineupidx="${lineupidx}"
+                    >
+                        ${lineupname == "" ? lineupidx : lineupname}
+                    </button>`;
+                $("#CUTF-div-tabBtns").append(btnHtml);
+
+                /* tab content */
+                let contentHtml =
+                `
+                    <div class="CUTF-div-tabTeam" lineupidx="${lineupidx}" style="display:none;">
+                        <p class="common-p-title">
+                            <input type="text" class="CUTF-input-lineupname CUTF-input-common common-input-text common-tag-fontsize09" lineupidx="${lineupidx}" value="${lineupname}">
+                        </p>
+                        <div class="common-div-cushionUD">
+                            <button class="common-btn-outline CUTF-btn-rowAdd">➕행추가</button>
+                            <button class="common-btn-outline CUTF-btn-rowAuto">🤖자동라인업</button>
+                        </div>
+
+                        <div class="common-div-scrollX">
+                            <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="${lineupidx}" tbl-type="rowborder">
+                                <thead>
+                                    <tr>
+                                        <th>삭제</th>
+                                        <th>타순</th>
+                                        <th>타격여부</th>
+                                        <th>포지션</th>
+                                        <th>참가자</th>
+                                        <th>참가비</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 동적으로 행이 추가됩니다 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                $("#CUTF-div-tabContents").append(contentHtml);
+
+                /* 라인업 버튼 */
+                $(`.CUTF-btn-tabTeam`).off("click").on("click", function()
+                {
+                    let lineupidx = $(this).attr('val');
+                    $(".CUTF-div-tabTeam").hide();
+                    $(`.CUTF-div-tabTeam[lineupidx="${lineupidx}"]`).show();
+                    CUTF.Temp.lineupidx = parseInt(lineupidx);
+                });
+
+                /* 라인업 이름을 수정하면, 버튼이름에 반영 */
+                $(`.CUTF-input-lineupname`).off("input").on("input", function()
+                {
+                    let val = $(this).val();
+                    let lineupidx = $(this).attr('lineupidx');
+                    $(`.CUTF-btn-tabTeam[val="${lineupidx}"]`).text(val);
+                });
+
+                /* 행 추가 */
+                $(".CUTF-btn-rowAdd").off("click").on("click", function()
+                {
+                    if($(CUTF.El.getTr()).length >= 30)
+                    {
+                        Common.showAlert("최대 30명의 참가자를 등록할 수 있습니다.");
+                        return;
+                    }
+                    CUTF.addRow(null);
+                    CUTF.updateRowNum();
+                });
+
+                /* 자동 라인업 */
+                $(".CUTF-btn-rowAuto").off("click").on("click", function()
+                {
+                    /* add row */
+                    if($(CUTF.El.getTr()).length == 0)
+                    {
+                        for(let i = 1; i <= 11; i++)
+                            CUTF.addRow(null);
+                        CUTF.updateRowNum();
+                    }
+
+                    /* auto tr */
+                    $(CUTF.El.getTr()).each(function()
+                    {
+                        let ordernoEl     = $(this).find('.CUTF-select-orderno');
+                        let battingflgEl  = $(this).find('.CUTF-input-battingflg');
+                        let positionEl    = $(this).find('.CUTF-input-position');
+                        switch(ordernoEl.val())
+                        {
+                            case "1": positionEl.val("C");   battingflgEl.prop("checked", true); break;
+                            case "2": positionEl.val("DH");  battingflgEl.prop("checked", true); break;
+                            case "3": positionEl.val("RF");  battingflgEl.prop("checked", true); break;
+                            case "4": positionEl.val("CF");  battingflgEl.prop("checked", true); break;
+                            case "5": positionEl.val("LF");  battingflgEl.prop("checked", true); break;
+                            case "6": positionEl.val("1B");  battingflgEl.prop("checked", true); break;
+                            case "7": positionEl.val("2B");  battingflgEl.prop("checked", true); break;
+                            case "8": positionEl.val("3B");  battingflgEl.prop("checked", true); break;
+                            case "9": positionEl.val("SS");  battingflgEl.prop("checked", true); break;
+                            case "10": positionEl.val("SP"); battingflgEl.prop("checked", false); break;
+                            case "11": positionEl.val("RP"); battingflgEl.prop("checked", false); break;
+                        }
+                    });
+                });
+            },
+
             addRow(mClslineupb=null)
             {
                 let isClsstatusIng = CUTF.isClsstatusIng();
-                let hasUser = mClslineupb != null && Common.isEmpty(mClslineupb.getUserno()) == false;
                 let html =
                 `
                     <tr class="CUTF-tr-lineup" orderno="" datatype="new">
+                        <td col="delt"><button class="common-btn-outline CUTF-btn-delete" btn-type="cancel" orderno="">삭제</button></td>
                         ${isClsstatusIng == false ? `<td col="numb"><select class="common-select-outline CUTF-select-orderno" orderno=""></select></td>` : ""}
-                        ${isClsstatusIng == true ? `<td col="numb"><span class="CUTF-span-orderno"></span></td>` : ""}
+                        ${isClsstatusIng == true  ? `<td col="numb"><span class="CUTF-span-orderno"></span></td>` : ""}
                         <td col="batf"><label class="common-label-switch"><input type="checkbox" class="CUTF-input-battingflg" checked                                  orderno=""/><span></span></label></td>
                         <td col="pstn"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-position"   value=""                                 orderno=""/></td>
                         <td col="user"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-user"       value=""                                 orderno="" disabled/></td>
                         <td col="bill"><input type="number"  class="common-input-text CUTF-input-common CUTF-input-bill"       value="${CUTF.Data.clsbillapplyprice}"   orderno=""/></td>
-                        <td col="delt"><button class="common-btn-outline CUTF-btn-delete" btn-type="cancel" orderno="">삭제</button></td>
                     </tr>
                 `;
                 $(`${CUTF.El.getTbl()} > tbody`).append(html);
@@ -263,12 +302,12 @@
                 $(CUTF.El.getTr()).each(function(orderno0)
                 {
                     let orderno         = orderno0 + 1;
+                    let deleteEl        = $(this).find('.CUTF-btn-delete');
                     let ordernoEl       = $(this).find('.CUTF-select-orderno');
                     let battingflgEl    = $(this).find('.CUTF-input-battingflg');
                     let positionEl      = $(this).find('.CUTF-input-position');
                     let userEl          = $(this).find('.CUTF-input-user');
                     let billEl          = $(this).find('.CUTF-input-bill');
-                    let deleteEl        = $(this).find('.CUTF-btn-delete');
 
                     /* if clsstatus is ING, ordernoEl is "CUTF-span-orderno" */
                     if(isClsstatusIng)
@@ -285,12 +324,12 @@
 
                     /* set orderno */
                     $(this).attr("orderno", orderno);
+                    deleteEl.attr("orderno", orderno);
                     ordernoEl.attr("orderno", orderno);
                     battingflgEl.attr("orderno", orderno);
                     positionEl.attr("orderno", orderno);
                     userEl.attr("orderno", orderno);
                     billEl.attr("orderno", orderno);
-                    deleteEl.attr("orderno", orderno);
                 });
                 CUTF.setEvent();
             },
@@ -339,58 +378,10 @@
             /* events */
             /* =============================== */
 
-            $(".CUTF-btn-tabTeam").click(function()
+            $("#CUTF-btn-lineupAdd").click(function()
             {
-                let lineupidx = $(this).attr('val');
-                $(".CUTF-div-tabTeam").hide();
-                $(`.CUTF-div-tabTeam[lineupidx="${lineupidx}"]`).show();
-
-                /* exchange lineupidx */
-                CUTF.Temp.lineupidx = lineupidx;
-            });
-
-            $("#CUTF-btn-rowAdd").click(function()
-            {
-                if($(CUTF.El.getTr()).length >= 30)
-                {
-                    Common.showAlert("최대 30명의 참가자를 등록할 수 있습니다.");
-                    return;
-                }
-                CUTF.addRow(null);
-                CUTF.updateRowNum();
-            });
-
-            $("#CUTF-btn-rowAuto").click(function()
-            {
-                /* add row */
-                if($(CUTF.El.getTr()).length == 0)
-                {
-                    for(let i = 1; i <= 11; i++)
-                        CUTF.addRow(null);
-                    CUTF.updateRowNum();
-                }
-
-                /* auto tr */
-                $(CUTF.El.getTr()).each(function()
-                {
-                    let ordernoEl     = $(this).find('.CUTF-select-orderno');
-                    let battingflgEl  = $(this).find('.CUTF-input-battingflg');
-                    let positionEl    = $(this).find('.CUTF-input-position');
-                    switch(ordernoEl.val())
-                    {
-                        case "1": positionEl.val("C");   battingflgEl.prop("checked", true); break;
-                        case "2": positionEl.val("DH");  battingflgEl.prop("checked", true); break;
-                        case "3": positionEl.val("RF");  battingflgEl.prop("checked", true); break;
-                        case "4": positionEl.val("CF");  battingflgEl.prop("checked", true); break;
-                        case "5": positionEl.val("LF");  battingflgEl.prop("checked", true); break;
-                        case "6": positionEl.val("1B");  battingflgEl.prop("checked", true); break;
-                        case "7": positionEl.val("2B");  battingflgEl.prop("checked", true); break;
-                        case "8": positionEl.val("3B");  battingflgEl.prop("checked", true); break;
-                        case "9": positionEl.val("SS");  battingflgEl.prop("checked", true); break;
-                        case "10": positionEl.val("SP"); battingflgEl.prop("checked", false); break;
-                        case "11": positionEl.val("RP"); battingflgEl.prop("checked", false); break;
-                    }
-                });
+                CUTF.addLineup(CUTF.Temp.nextLineupidx++, "");
+                $("#CUTF-div-tabBtns").find(".CUTF-btn-tabTeam").last().click();
             });
 
             /* ---------------------- */
@@ -398,17 +389,21 @@
             /* ---------------------- */
             $("#CUTF-btn-save").click(function()
             {
-                /* validation */
-                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=a]`).val())) { Common.toastError("팀 A의 팀명을 입력해주세요."); return; }
-                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=b]`).val())) { Common.toastError("팀 B의 팀명을 입력해주세요."); return; }
-                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=c]`).val())) { Common.toastError("팀 C의 팀명을 입력해주세요."); return; }
-                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=d]`).val())) { Common.toastError("팀 D의 팀명을 입력해주세요."); return; }
+                /* validation: each lineup must have a name */
+                let validationOK = true;
+                $(".CUTF-div-tabTeam").each(function()
+                {
+                    let li = $(this).attr("lineupidx");
+                    let name = $(`.CUTF-input-lineupname[lineupidx="${li}"]`).val();
+                    if(Common.isEmpty(name)) { Common.toastError("라인업 이름을 입력해주세요."); validationOK = false; return false; }
+                });
+                if(!validationOK) return;
 
                 let data = [];
                 $(".CUTF-tbl-lineup").each(function()
                 {
-                    let lineupidx = $(this).attr('lineupidx');
-                    let lineupname = $(`.CUDE-input-lineupname[lineupidx=${lineupidx}]`).val();
+                    let lineupidx = parseInt($(this).attr('lineupidx'));
+                    let lineupname = $(`.CUTF-input-lineupname[lineupidx="${lineupidx}"]`).val();
                     $(this).find("tbody").find("tr").each(function()
                     {
                         let datatype        = $(this).attr("datatype");
@@ -427,8 +422,8 @@
                         data.push
                         ({
                             DATATYPE    : datatype,
-                            LINEUPIDX    : lineupidx,
-                            LINEUPNAME    : lineupname,
+                            LINEUPIDX   : lineupidx,
+                            LINEUPNAME  : lineupname,
                             ORDERNO     : orderno,
                             BATTINGFLG  : battingflgEl.is(':checked') ? "y" : "n",
                             POSITION    : positionEl.val(),

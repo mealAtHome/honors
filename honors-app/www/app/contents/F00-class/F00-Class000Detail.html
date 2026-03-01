@@ -94,156 +94,11 @@
     <div class="common-div-cushion CLSD-div-tabmain" tabval="clslineup">
         <p class="common-p-title">참가현황</p>
 
-        <!-- --------------- -->
-        <!-- 참가형식 : 라인업(1팀) -->
-        <!-- --------------- -->
-        <div class="CLSD-div-clssub" tab="lineup1" style="display:none;">
-            <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="a">
-                <thead>
-                    <tr>
-                        <th>타순</th>
-                        <th>포지션</th>
-                        <th>참가자</th>
-                        <th>접수자</th>
-                        <th>참가비고</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- --------------- -->
-        <!-- 참가형식 : 라인업(1시합) -->
-        <!-- --------------- -->
-        <div class="CLSD-div-clssub" tab="lineup2" style="display:none;">
-            <div class="common-tag-fontsize09">
-                <button class="CLSD-btn-tabTeam2 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam2" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀A</button>
-                <button class="CLSD-btn-tabTeam2 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam2" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em;">팀B</button>
-            </div>
+        <!-- 동적 라인업 컨테이너 -->
+        <div id="CLSD-div-clslineup">
+            <div id="CLSD-div-lineupTabBtns" class="common-tag-fontsize09" style="display:none;"></div>
             <hr class="common-hr-paddingUD"/>
-
-            <div class="CLSD-div-tabTeam2" lineupidx="a" style="display:none;">
-                <p class="common-p-titlesub"><span class="CLSD-span-lineupname" lineupidx="a"></span></p>
-                <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="a">
-                        <thead>
-                            <tr>
-                                <th>타순</th>
-                                <th>포지션</th>
-                                <th>참가자</th>
-                                <th>접수자</th>
-                                <th>참가비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="CLSD-div-tabTeam2" lineupidx="b" style="display:none;">
-                <p class="common-p-titlesub"><span class="CLSD-span-lineupname" lineupidx="b"></span></p>
-                <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="b">
-                        <thead>
-                            <tr>
-                                <th>타순</th>
-                                <th>포지션</th>
-                                <th>참가자</th>
-                                <th>접수자</th>
-                                <th>참가비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- --------------- -->
-        <!-- 참가형식 : 라인업(2시합) -->
-        <!-- --------------- -->
-        <div class="CLSD-div-clssub" tab="lineup4" style="display:none;">
-            <div class="common-tag-fontsize09">
-                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="a" tab="">시합1 - 팀A</button>
-                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="b" tab="">시합1 - 팀B</button>
-                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="c" tab="">시합2 - 팀C</button>
-                <button class="CLSD-btn-tabTeam4 commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-tabTeam4" val="d" tab="">시합2 - 팀D</button>
-            </div>
-            <hr class="common-hr-paddingUD"/>
-            <div class="CLSD-div-tabTeam4" lineupidx="a" style="display:none;">
-                <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-lineupname" lineupidx="a"></span></p>
-                <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="a">
-                        <thead>
-                            <tr>
-                                <th>타순</th>
-                                <th>포지션</th>
-                                <th>참가자</th>
-                                <th>접수자</th>
-                                <th>참가비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="CLSD-div-tabTeam4" lineupidx="b" style="display:none;">
-                <p class="common-p-titlesub"><span>1시합 - </span><span class="CLSD-span-lineupname" lineupidx="b"></span></p>
-                <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="b">
-                        <thead>
-                            <tr>
-                                <th>타순</th>
-                                <th>포지션</th>
-                                <th>참가자</th>
-                                <th>접수자</th>
-                                <th>참가비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="CLSD-div-tabTeam4" lineupidx="c" style="display:none;">
-                <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-lineupname" lineupidx="c"></span></p>
-                <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="c">
-                        <thead>
-                            <tr>
-                                <th>타순</th>
-                                <th>포지션</th>
-                                <th>참가자</th>
-                                <th>접수자</th>
-                                <th>참가비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="CLSD-div-tabTeam4" lineupidx="d" style="display:none;">
-                <p class="common-p-titlesub"><span>2시합 - </span><span class="CLSD-span-lineupname" lineupidx="d"></span></p>
-                <div class="common-div-scrollX">
-                    <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="d">
-                        <thead>
-                            <tr>
-                                <th>타순</th>
-                                <th>포지션</th>
-                                <th>참가자</th>
-                                <th>접수자</th>
-                                <th>참가비고</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div id="CLSD-div-lineupContents"></div>
         </div>
     </div>
 
@@ -308,12 +163,13 @@
                 /* validation param */
                 if(CLSD.Data.clsno      == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
                 if(CLSD.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
-                if(CLSD.Data.lineupidx   == undefined) { CLSD.Data.lineupidx = "a"; }
+                if(CLSD.Data.lineupidx   == undefined) { CLSD.Data.lineupidx = 1; }
                 if(CLSD.Data.tabmain    == undefined) { CLSD.Data.tabmain  = "clslineup"; }
 
                 /* init el */
                 $("#CLSD-div-tabmain").hide();
-                $(".CLSD-tbl-clslineupb > tbody").empty();
+                $("#CLSD-div-lineupTabBtns").empty().hide();
+                $("#CLSD-div-lineupContents").empty();
                 $("#CLSD-btn-textSettle").hide();
                 $("#CLSD-btn-editSettle").hide();
                 $("#CLSD-btn-editPurchase").hide();
@@ -324,23 +180,6 @@
 
                 /* recover tab */
                 $(`.CLSD-td-tabmain[tabval=${CLSD.Data.tabmain}]`).click();
-
-                // <button id="CLSD-btn-textSettle" class="common-btn-outline" style="display:none;">정산요약</button>
-                // <button id="CLSD-btn-editSettle" class="common-btn-outline" style="display:none;">정산목록</button>
-                // <tr id="CLSD-tr-clsbill" style="display:none;">
-                // <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
-                // <div id="CLSD-div-tabmain" class="common-div-cushion" style="display:none;">
-                // <div class="CLSD-div-clssub" tab="lineup1" style="display:none;">
-                // <div class="CLSD-div-clssub" tab="lineup2" style="display:none;">
-                // <div class="CLSD-div-tabTeam" lineupidx="a" style="display:none;">
-                // <div class="CLSD-div-tabTeam" lineupidx="b" style="display:none;">
-                // <div class="CLSD-div-clssub" tab="lineup4" style="display:none;">
-                // <div class="CLSD-div-tabTeam" lineupidx="a" style="display:none;">
-                // <div class="CLSD-div-tabTeam" lineupidx="b" style="display:none;">
-                // <div class="CLSD-div-tabTeam" lineupidx="c" style="display:none;">
-                // <div class="CLSD-div-tabTeam" lineupidx="d" style="display:none;">
-                // <div id="CLSD-div-clssettleTop" class="common-div-cushion CLSD-div-tabmain" tabval="clssettle" style="display:none;">
-                // <div id="CLSD-div-clspurchase" class="common-div-cushion CLSD-div-tabmain" tabval="clspurchase" style="display:none;">
 
                 /* init */
                 Common.showProgress();
@@ -469,12 +308,29 @@
                         /* =============== */
                         /* 참가정보 : 라인업 표시 */
                         /* =============== */
+                        let mClslineupaList = Api.Clslineupa.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        let lineupass = mClslineupaList.getModels();
+
+                        /* 1개 초과 시 탭 표시 */
+                        if(lineupass.length > 1)
+                            $("#CLSD-div-lineupTabBtns").show();
+
+                        /* 각 라인업별 섹션 생성 */
+                        for(let i in lineupass)
+                        {
+                            let lp = lineupass[i];
+                            CLSD.addLineupSection(lp.getLineupidx(), lp.getLineupname(), lineupass.length);
+                        }
+
+                        /* clslineupb 행 채우기 */
                         let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        $(".CLSD-span-lineupname[lineupidx=a]").text(mClslineupbs.getLineupname("a"));
-                        $(".CLSD-span-lineupname[lineupidx=b]").text(mClslineupbs.getLineupname("b"));
                         let lineups = mClslineupbs.getModels();
                         for(let i in lineups)
                             CLSD.addRowForLineup2(lineups[i]);
+
+                        /* 첫 탭 활성화 */
+                        $("#CLSD-div-lineupTabBtns").find(".CLSD-btn-lineupTab").first().click();
+
                         CLSD.setEvent();
                     }
                     catch(e)
@@ -483,6 +339,51 @@
                     }
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            },
+
+            addLineupSection(lineupidx, lineupname, totalCount)
+            {
+                /* 탭 버튼 (2개 이상일 때만) */
+                if(totalCount > 1)
+                {
+                    let btnHtml =
+                    `
+                        <button class="CLSD-btn-lineupTab commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-lineupTab" val="${lineupidx}" style="padding-left:0.8em; padding-right:0.8em;">${lineupname}</button>
+                    `;
+                    $("#CLSD-div-lineupTabBtns").append(btnHtml);
+
+                    let $btn = $("#CLSD-div-lineupTabBtns").find(`.CLSD-btn-lineupTab[val="${lineupidx}"]`);
+                    $btn.off("click").on("click", function()
+                    {
+                        let li = $(this).attr("val");
+                        $(".CLSD-div-tabTeam").hide();
+                        $(`.CLSD-div-tabTeam[lineupidx="${li}"]`).show();
+                    });
+                }
+
+                /* 섹션 컨테이너 */
+                let sectionHtml =
+                `
+                    <div class="CLSD-div-tabTeam" lineupidx="${lineupidx}" style="${totalCount > 1 ? "display:none;" : ""}">
+                        ${lineupname != "" ? `<p class="common-p-titlesub">${lineupname}</p>` : ""}
+                        <div class="common-div-scrollX">
+                            <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="${lineupidx}">
+                                <thead>
+                                    <tr>
+                                        <th>타순</th>
+                                        <th>포지션</th>
+                                        <th>참가자</th>
+                                        <th>접수자</th>
+                                        <th>참가비고</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                $("#CLSD-div-lineupContents").append(sectionHtml);
             },
 
             addRowForLineup2(mClslineupb)
@@ -569,7 +470,7 @@
                         <td col="etc">${model.getEtc()}</td>
                     </tr>
                 `;
-                $(`.CLSD-tbl-clslineupb[lineupidx=${model.getLineupidx()}] > tbody`).append(html);
+                $(`.CLSD-tbl-clslineupb[lineupidx="${model.getLineupidx()}"] > tbody`).append(html);
             },
 
             setEvent()
@@ -662,14 +563,6 @@
             $("#CLSD-btn-editSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate020Settle,   {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
             $("#CLSD-btn-editPurchase") .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate021Purchase, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
 
-            /* 팀 선택 */
-            $(".CLSD-btn-tabTeam").click(function()
-            {
-                let lineupidx = $(this).attr('val');
-                $(".CLSD-div-tabTeam").hide();
-                $(`.CLSD-div-tabTeam[lineupidx="${lineupidx}"]`).show();
-            });
-
             /* 탭 선택 */
             $(".CLSD-td-tabmain").click(function()
             {
@@ -677,11 +570,6 @@
                 $(".CLSD-div-tabmain").hide();
                 $(`.CLSD-div-tabmain[tabval="${tabval}"]`).show();
             });
-
-            /* =============== */
-            /* 저장 */
-            /* =============== */
-
 
             /* ========================= */
             /* page process */

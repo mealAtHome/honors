@@ -17,11 +17,13 @@ class ClslineupbBO extends _CommonBO
         GGnavi::getUserBO();
         GGnavi::getPaymentABO();
         GGnavi::getClsBO();
+        GGnavi::getClslineupaBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
         $arr['paymentABO'] = PaymentABO::getInstance();
         $arr['clsBO'] = ClsBO::getInstance();
+        $arr['clslineupaBO'] = ClslineupaBO::getInstance();
         return $arr;
     }
 
@@ -270,6 +272,22 @@ class ClslineupbBO extends _CommonBO
 
                 /* insert */
                 $arr = json_decode($ARR, true);
+
+                /* if clsstatus is edit, re-set clslineupa */
+                if($clsstatus == ClsBO::CLSSTATUS__EDIT)
+                {
+                    $clslineupaBO->deleteByClsnoForInside($GRPNO, $CLSNO);
+                    $seenLineupidx = [];
+                    foreach($arr as $dat)
+                    {
+                        $li = $dat['LINEUPIDX'];
+                        if(!in_array($li, $seenLineupidx))
+                        {
+                            $clslineupaBO->insertOneForInside($GRPNO, $CLSNO, $li, $dat['LINEUPNAME']);
+                            $seenLineupidx[] = $li;
+                        }
+                    }
+                }
                 foreach($arr as $dat)
                 {
                     $DATATYPE    = $dat['DATATYPE'];

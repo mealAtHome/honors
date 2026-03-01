@@ -21,6 +21,7 @@ class GGnavi
     static public function getAddrBO()                                              { require_once ROOT."/src/system/bo-table/AddrBO.php"; }
     static public function getBankaccountBO()                                       { require_once ROOT."/src/system/bo-table/BankaccountBO.php"; }
     static public function getClsBO()                                               { require_once ROOT."/src/system/bo-table/ClsBO.php"; }
+    static public function getClslineupaBO()                                        { require_once ROOT."/src/system/bo-table/ClslineupaBO.php"; }
     static public function getClslineupbBO()                                        { require_once ROOT."/src/system/bo-table/ClslineupbBO.php"; }
     static public function getClspurchaseBO()                                       { require_once ROOT."/src/system/bo-table/ClspurchaseBO.php"; }
     static public function getClspurchasehistBO()                                   { require_once ROOT."/src/system/bo-table/ClspurchasehistBO.php"; }
