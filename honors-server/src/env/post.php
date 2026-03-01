@@ -112,8 +112,8 @@
     $options["SPONUSERNAME"]                                        = get("SPONUSERNAME");
     $options["SPONUSERNO"]                                          = get("SPONUSERNO");
     $options["TARGET"]                                              = get("TARGET"); /* abstract */
-    $options["TEAMNAME"]                                            = get("TEAMNAME");
-    $options["TEAMNICK"]                                            = get("TEAMNICK");
+    $options["LINEUPIDX"]                                           = get("LINEUPIDX");
+    $options["LINEUPNAME"]                                          = get("LINEUPNAME");
     $options["TOKEN"]                                               = get("TOKEN");
     $options["USABLE"]                                              = get("USABLE");
     $options["USERNAME"]                                            = get("USERNAME");

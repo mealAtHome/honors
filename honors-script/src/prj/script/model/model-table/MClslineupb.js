@@ -4,8 +4,8 @@ class MClslineupb
     {
         /* data */      this.grpno              = GGC.Common.char(dat.grpno);
         /* data */      this.clsno              = GGC.Common.char(dat.clsno);
-        /* data */      this.teamname           = GGC.Common.char(dat.teamname);
-        /* data */      this.teamnick           = GGC.Common.char(dat.teamnick);
+        /* data */      this.lineupidx           = GGC.Common.char(dat.lineupidx);
+        /* data */      this.lineupname           = GGC.Common.char(dat.lineupname);
         /* data */      this.orderno            = GGC.Common.int(dat.orderno);
         /* data */      this.battingflg         = GGC.Common.enum(dat.battingflg);
         /* data */      this.position           = GGC.Common.char(dat.position);
@@ -19,7 +19,7 @@ class MClslineupb
         /* data */      this.memberpoint        = GGC.Common.int(dat.memberpoint);
         /* data */      this.applyername        = GGC.Common.char(dat.applyername);
         /* custom */    this.memberpointwon     = GGC.Common.priceWon(this.memberpoint);
-        /* custom */    this.pk                 = `grpno="${this.grpno}" clsno="${this.clsno}" teamname="${this.teamname}" orderno="${this.orderno}"`;
+        /* custom */    this.pk                 = `grpno="${this.grpno}" clsno="${this.clsno}" lineupidx="${this.lineupidx}" orderno="${this.orderno}"`;
     }
 
     /* ========================= */
@@ -27,8 +27,8 @@ class MClslineupb
     /* ========================= */
     /* data */      getGrpno() { return this.grpno; }
     /* data */      getClsno() { return this.clsno; }
-    /* data */      getTeamname() { return this.teamname; }
-    /* data */      getTeamnick() { return this.teamnick; }
+    /* data */      getLineupidx() { return this.lineupidx; }
+    /* data */      getLineupname() { return this.lineupname; }
     /* data */      getOrderno() { return this.orderno; }
     /* data */      getBattingflg() { return this.battingflg; }
     /* data */      getPosition() { return this.position; }
@@ -69,19 +69,19 @@ class MClslineupbs extends _MCommon
         }
     }
 
-    getTeamnick(teamname="a")
+    getLineupname(lineupidx="a")
     {
-        let teamnick = "";
+        let lineupname = "";
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            if(model.getTeamname() == teamname)
+            if(model.getLineupidx() == lineupidx)
             {
-                teamnick = model.getTeamnick();
+                lineupname = model.getLineupname();
                 break;
             }
         }
-        return teamnick;
+        return lineupname;
     }
 
 }

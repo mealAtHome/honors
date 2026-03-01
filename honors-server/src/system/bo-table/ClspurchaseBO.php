@@ -70,24 +70,6 @@ class ClspurchaseBO extends _CommonBO
     }
 
     /* ========================= */
-    /* enum */
-    /*
-    */
-    /* ========================= */
-
-    /* ========================= */
-    /* get consts */
-    /* ========================= */
-    static public function getConsts()
-    {
-        $arr = array();
-        // $arr['clsstatusEdit']                   = self::CLSSTATUS__EDIT;        /* 일정상태 : 작성중 */
-        // $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
-        // $arr['clsstatusEnd']                 = self::CLSSTATUS__END;      /* 일정상태 : 일정완료 */
-        return $arr;
-    }
-
-    /* ========================= */
     /* select > sub > sub */
     /* ========================= */
     // public function selectB($GRPNO, $PURCHASECLSNO, $USERNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $PURCHASECLSNO, $USERNO)); }

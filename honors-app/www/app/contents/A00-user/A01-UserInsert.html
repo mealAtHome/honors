@@ -135,7 +135,7 @@
             <div class="common-div-formField">
                 <span>활동중인 팀</span>
                 <span>(필수)</span>
-                <input id="UINT-input-teamname" class="common-input-field" placeholder="활동중인 팀 이름">
+                <input id="UINT-input-lineupidx" class="common-input-field" placeholder="활동중인 팀 이름">
             </div>
 
             <!-- 다음으로 -->
@@ -268,8 +268,8 @@
                     let adrcvflg    = "n"; /* $(".UINT-radio-adrcvflg:checked").val(); */
                     let hascar      = $(".UINT-radio-hascarflg:checked").val();
                     let address     = $("#UINT-input-address").val();
-                    let teamname    = $("#UINT-input-teamname").val();
-                    let rslt = Api.User.insert(id, pw, name, birthYear, phone, email, adrcvflg, hascar, address, teamname, GGF.toast, GGF.alert);
+                    let lineupidx    = $("#UINT-input-lineupidx").val();
+                    let rslt = Api.User.insert(id, pw, name, birthYear, phone, email, adrcvflg, hascar, address, lineupidx, GGF.toast, GGF.alert);
                     if(rslt == false) {
                         Common.hideProgress();
                         return;

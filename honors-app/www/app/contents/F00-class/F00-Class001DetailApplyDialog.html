@@ -96,9 +96,9 @@
             {
                 if(Common.isEmpty(CLSA.Data.grpno))    { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
                 if(Common.isEmpty(CLSA.Data.clsno))    { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
-                if(Common.isEmpty(CLSA.Data.teamname)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.lineupidx)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
                 if(Common.isEmpty(CLSA.Data.orderno))  { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
-                if(Common.isEmpty(CLSA.Data.teamnick)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
+                if(Common.isEmpty(CLSA.Data.lineupname)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
                 if(Common.isEmpty(CLSA.Data.position)) { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
                 if(Common.isEmpty(CLSA.Data.bill))     { Common.toast("잘못된 접근입니다."); CLSA.close(true); return; }
                 if(Common.isEmpty(CLSA.Data.tab))      { CLSA.Data.tab = "apply"; }
@@ -108,7 +108,7 @@
                 $(`.CLSA-btn-tab[val=${CLSA.Data.tab}]`).click();
 
                 /* 지원 포지션 */
-                $(".CLSA-span-choosedPosition").text(`${CLSA.Data.teamnick}, ${CLSA.Data.position}, ${CLSA.Data.orderno}`);
+                $(".CLSA-span-choosedPosition").text(`${CLSA.Data.lineupname}, ${CLSA.Data.position}, ${CLSA.Data.orderno}`);
             },
 
             /* ========================= */
@@ -191,7 +191,7 @@
             {
                 let grpno = CLSA.Data.grpno;
                 let clsno = CLSA.Data.clsno;
-                let teamname = CLSA.Data.teamname;
+                let lineupidx = CLSA.Data.lineupidx;
                 let orderno = CLSA.Data.orderno;
                 let username = $("#CLSA-input-username").val().trim();
                 let etc = $("#CLSA-textarea-etc").val().trim();
@@ -200,7 +200,7 @@
                     Common.showProgress();
                     setTimeout(function()
                     {
-                        let mApiResponse = Api.Clslineupb.updateApplyRegist(grpno, clsno, teamname, orderno, username, etc, GGF.toast, GGF.toast);
+                        let mApiResponse = Api.Clslineupb.updateApplyRegist(grpno, clsno, lineupidx, orderno, username, etc, GGF.toast, GGF.toast);
                         if(mApiResponse.isSuccess())
                         {
                             Common.hideProgress();

@@ -70,16 +70,16 @@
                         /* 참가정보 */
                         let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
                         let lineups = mClslineupbs.getModels();
-                        let teamnick = "";
+                        let lineupname = "";
                         for(let i in lineups)
                         {
                             let model = lineups[i];
 
                             /* team */
-                            if(teamnick != model.getTeamnick())
+                            if(lineupname != model.getLineupname())
                             {
-                                html += `\n\n■ ${model.getTeamnick()}`;
-                                teamnick = model.getTeamnick();
+                                html += `\n\n■ ${model.getLineupname()}`;
+                                lineupname = model.getLineupname();
                             }
 
                             /* orderno */

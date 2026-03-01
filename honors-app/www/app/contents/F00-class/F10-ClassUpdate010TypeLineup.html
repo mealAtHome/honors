@@ -21,15 +21,15 @@
         </div>
         <hr class="common-hr-paddingUD"/>
         <div class="common-tag-fontsize09">
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀A --><span class="CUTF-span-teamnameSub" teamname="a"></span><!-- 1시합 --></button>
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀B --><span class="CUTF-span-teamnameSub" teamname="b"></span><!-- 1시합 --></button>
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="c" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀C --><span class="CUTF-span-teamnameSub" teamname="c"></span><!-- 2시합 --></button>
-            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="d" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀D --><span class="CUTF-span-teamnameSub" teamname="d"></span><!-- 2시합 --></button>
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="a" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀A --><span class="CUTF-span-lineupidxSub" lineupidx="a"></span><!-- 1시합 --></button>
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="b" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀B --><span class="CUTF-span-lineupidxSub" lineupidx="b"></span><!-- 1시합 --></button>
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="c" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀C --><span class="CUTF-span-lineupidxSub" lineupidx="c"></span><!-- 2시합 --></button>
+            <button class="CUTF-btn-tabTeam commonEvent-btn-radio common-btn-radio" radio_name="CUTF-btn-tabTeam" val="d" tab="" style="padding-left:0.8em; padding-right:0.8em; display:none;"><!-- 팀D --><span class="CUTF-span-lineupidxSub" lineupidx="d"></span><!-- 2시합 --></button>
         </div>
         <hr class="common-hr-paddingUD"/>
         <style>
             .CUTF-input-common      { font-size: 1em; }
-            .CUDE-input-teamnick    { width: 10em; }
+            .CUDE-input-lineupname    { width: 10em; }
             .CUTF-input-position    { width: 5em; }
             .CUTF-input-user        { width: 5em; }
             .CUTF-input-bill        { width: 5em; }
@@ -42,12 +42,12 @@
             .CUTF-tbl-lineup > tbody > tr > td[col="delt"] { width: 10%; }
         </style>
 
-        <div class="CUTF-div-tabTeam" teamname="a" style="display:none;">
+        <div class="CUTF-div-tabTeam" lineupidx="a" style="display:none;">
             <p class="common-p-title">
-                <!-- 팀A --><span class="CUTF-span-teamnameSub" teamname="a"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="a" value="A">
+                <!-- 팀A --><span class="CUTF-span-lineupidxSub" lineupidx="a"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="a" value="A">
             </p>
             <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="a" tbl-type="rowborder">
+                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="a" tbl-type="rowborder">
                     <thead>
                         <tr>
                             <th>타순</th>
@@ -65,12 +65,12 @@
             </div>
         </div>
 
-        <div class="CUTF-div-tabTeam" teamname="b" style="display:none;">
+        <div class="CUTF-div-tabTeam" lineupidx="b" style="display:none;">
             <p class="common-p-title">
-                <!-- 팀B --><span class="CUTF-span-teamnameSub" teamname="b"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="b" value="B">
+                <!-- 팀B --><span class="CUTF-span-lineupidxSub" lineupidx="b"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="b" value="B">
             </p>
             <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="b" tbl-type="rowborder">
+                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="b" tbl-type="rowborder">
                     <thead>
                         <tr>
                             <th>타순</th>
@@ -88,12 +88,12 @@
             </div>
         </div>
 
-        <div class="CUTF-div-tabTeam" teamname="c" style="display:none;">
+        <div class="CUTF-div-tabTeam" lineupidx="c" style="display:none;">
             <p class="common-p-title">
-                <!-- 팀C --><span class="CUTF-span-teamnameSub" teamname="c"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="c" value="C">
+                <!-- 팀C --><span class="CUTF-span-lineupidxSub" lineupidx="c"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="c" value="C">
             </p>
             <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="c" tbl-type="rowborder">
+                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="c" tbl-type="rowborder">
                     <thead>
                         <tr>
                             <th>타순</th>
@@ -111,12 +111,12 @@
             </div>
         </div>
 
-        <div class="CUTF-div-tabTeam" teamname="d" style="display:none;">
+        <div class="CUTF-div-tabTeam" lineupidx="d" style="display:none;">
             <p class="common-p-title">
-                <!-- 팀D --><span class="CUTF-span-teamnameSub" teamname="d"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-teamnick common-input-text common-tag-fontsize09" teamname="d" value="D">
+                <!-- 팀D --><span class="CUTF-span-lineupidxSub" lineupidx="d"></span> :&nbsp;&nbsp;<input type="text" class="CUDE-input-lineupname common-input-text common-tag-fontsize09" lineupidx="d" value="D">
             </p>
             <div class="common-div-scrollX">
-                <table class="common-tbl-normal CUTF-tbl-lineup" teamname="d" tbl-type="rowborder">
+                <table class="common-tbl-normal CUTF-tbl-lineup" lineupidx="d" tbl-type="rowborder">
                     <thead>
                         <tr>
                             <th>타순</th>
@@ -144,12 +144,12 @@
             Data: {},
             Temp :
             {
-                teamname : "a",
+                lineupidx : "a",
             },
             El :
             {
-                getTbl (teamname="") { return `.CUTF-tbl-lineup[teamname=${teamname == "" ? CUTF.Temp.teamname : teamname}]`; },
-                getTr  (teamname="") { return `.CUTF-tbl-lineup[teamname=${teamname == "" ? CUTF.Temp.teamname : teamname}] > tbody > tr`; },
+                getTbl (lineupidx="") { return `.CUTF-tbl-lineup[lineupidx=${lineupidx == "" ? CUTF.Temp.lineupidx : lineupidx}]`; },
+                getTr  (lineupidx="") { return `.CUTF-tbl-lineup[lineupidx=${lineupidx == "" ? CUTF.Temp.lineupidx : lineupidx}] > tbody > tr`; },
             },
             isClsstatusWait () { return CUTF.Data.clsstatus == GGF.Cls.Clsstatus.WAIT; },
             isClsstatusIng  () { return CUTF.Data.clsstatus == GGF.Cls.Clsstatus.ING; },
@@ -181,8 +181,8 @@
                     let isClsstatusWait = CUTF.isClsstatusWait();
 
                     /* set title */
-                    $(".CUTF-span-teamnameSub[teamname=a]").text("팀A");
-                    $(".CUTF-span-teamnameSub[teamname=b]").text("팀B");
+                    $(".CUTF-span-lineupidxSub[lineupidx=a]").text("팀A");
+                    $(".CUTF-span-lineupidxSub[lineupidx=b]").text("팀B");
                     $(".CUTF-btn-tabTeam[val=a]").show();
                     $(".CUTF-btn-tabTeam[val=b]").show();
 
@@ -193,26 +193,26 @@
                     for(let i in clslineupbs.getModels())
                     {
                         let model = clslineupbs.getModels()[i];
-                        CUTF.Temp.teamname = model.getTeamname();
+                        CUTF.Temp.lineupidx = model.getLineupidx();
                         CUTF.addRow(model);
                     }
 
                     /* recovery default values */
-                    CUTF.Temp.teamname = "a"; CUTF.updateRowNum();
-                    CUTF.Temp.teamname = "b"; CUTF.updateRowNum();
-                    CUTF.Temp.teamname = "c"; CUTF.updateRowNum();
-                    CUTF.Temp.teamname = "d"; CUTF.updateRowNum();
+                    CUTF.Temp.lineupidx = "a"; CUTF.updateRowNum();
+                    CUTF.Temp.lineupidx = "b"; CUTF.updateRowNum();
+                    CUTF.Temp.lineupidx = "c"; CUTF.updateRowNum();
+                    CUTF.Temp.lineupidx = "d"; CUTF.updateRowNum();
 
                     /* recovery db values */
                     for(let i in clslineupbs.getModels())
                     {
                         let model = clslineupbs.getModels()[i];
 
-                        /* set teamnick */
-                        $(`.CUDE-input-teamnick[teamname=${model.getTeamname()}]`).val(model.getTeamnick());
+                        /* set lineupname */
+                        $(`.CUDE-input-lineupname[lineupidx=${model.getLineupidx()}]`).val(model.getLineupname());
 
                         /* set rows */
-                        let tr = $(`.CUTF-tbl-lineup[teamname=${model.getTeamname()}] > tbody > tr[orderno="${model.getOrderno()}"]`);
+                        let tr = $(`.CUTF-tbl-lineup[lineupidx=${model.getLineupidx()}] > tbody > tr[orderno="${model.getOrderno()}"]`);
                         tr.find(`.CUTF-select-orderno`).val(model.getOrderno());
                         tr.find(`.CUTF-input-battingflg`).prop("checked", model.isBattingflgY());
                         tr.find(`.CUTF-input-position`).val(model.getPosition());
@@ -341,12 +341,12 @@
 
             $(".CUTF-btn-tabTeam").click(function()
             {
-                let teamname = $(this).attr('val');
+                let lineupidx = $(this).attr('val');
                 $(".CUTF-div-tabTeam").hide();
-                $(`.CUTF-div-tabTeam[teamname="${teamname}"]`).show();
+                $(`.CUTF-div-tabTeam[lineupidx="${lineupidx}"]`).show();
 
-                /* exchange teamname */
-                CUTF.Temp.teamname = teamname;
+                /* exchange lineupidx */
+                CUTF.Temp.lineupidx = lineupidx;
             });
 
             $("#CUTF-btn-rowAdd").click(function()
@@ -399,16 +399,16 @@
             $("#CUTF-btn-save").click(function()
             {
                 /* validation */
-                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=a]`).val())) { Common.toastError("팀 A의 팀명을 입력해주세요."); return; }
-                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=b]`).val())) { Common.toastError("팀 B의 팀명을 입력해주세요."); return; }
-                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=c]`).val())) { Common.toastError("팀 C의 팀명을 입력해주세요."); return; }
-                if(Common.isEmpty($(`.CUDE-input-teamnick[teamname=d]`).val())) { Common.toastError("팀 D의 팀명을 입력해주세요."); return; }
+                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=a]`).val())) { Common.toastError("팀 A의 팀명을 입력해주세요."); return; }
+                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=b]`).val())) { Common.toastError("팀 B의 팀명을 입력해주세요."); return; }
+                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=c]`).val())) { Common.toastError("팀 C의 팀명을 입력해주세요."); return; }
+                if(Common.isEmpty($(`.CUDE-input-lineupname[lineupidx=d]`).val())) { Common.toastError("팀 D의 팀명을 입력해주세요."); return; }
 
                 let data = [];
                 $(".CUTF-tbl-lineup").each(function()
                 {
-                    let teamname = $(this).attr('teamname');
-                    let teamnick = $(`.CUDE-input-teamnick[teamname=${teamname}]`).val();
+                    let lineupidx = $(this).attr('lineupidx');
+                    let lineupname = $(`.CUDE-input-lineupname[lineupidx=${lineupidx}]`).val();
                     $(this).find("tbody").find("tr").each(function()
                     {
                         let datatype        = $(this).attr("datatype");
@@ -427,8 +427,8 @@
                         data.push
                         ({
                             DATATYPE    : datatype,
-                            TEAMNAME    : teamname,
-                            TEAMNICK    : teamnick,
+                            LINEUPIDX    : lineupidx,
+                            LINEUPNAME    : lineupname,
                             ORDERNO     : orderno,
                             BATTINGFLG  : battingflgEl.is(':checked') ? "y" : "n",
                             POSITION    : positionEl.val(),

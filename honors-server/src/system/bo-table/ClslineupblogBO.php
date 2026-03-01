@@ -26,7 +26,7 @@ class ClslineupblogBO extends _CommonBO
     /* ========================= */
     const FIELD__GRPNO              = "grpno";              /* (pk) char(30) */
     const FIELD__CLSNO              = "clsno";              /* (pk) char(14) */
-    const FIELD__TEAMNAME           = "teamname";           /* (pk) char(10) */
+    const FIELD__LINEUPIDX           = "lineupidx";           /* (pk) char(10) */
     const FIELD__ORDERNO            = "orderno";            /* (pk) int */
     const FIELD__LOGNO              = "logno";              /* (pk) int */
     const FIELD__LOGTYPE            = "logtype";            /* (  ) enum('insert','delete') */
@@ -88,7 +88,7 @@ class ClslineupblogBO extends _CommonBO
         "
               t.grpno
             , t.clsno
-            , t.teamname
+            , t.lineupidx
             , t.orderno
             , t.logno
             , t.logtype
@@ -128,7 +128,7 @@ class ClslineupblogBO extends _CommonBO
             order by
                   t.grpno
                 , t.clsno
-                , t.teamname
+                , t.lineupidx
                 , t.orderno
                 , t.logno
         ";
@@ -183,7 +183,7 @@ class ClslineupblogBO extends _CommonBO
                 $arr = json_decode($ARR, true);
                 foreach($arr as $dat)
                 {
-                    $TEAMNAME   = $dat['TEAMNAME'];
+                    $LINEUPIDX   = $dat['LINEUPIDX'];
                     $ORDERNO    = $dat['ORDERNO'];
                     $BATTINGFLG = $dat['BATTINGFLG'];
                     $POSITION   = $dat['POSITION'];
@@ -198,7 +198,7 @@ class ClslineupblogBO extends _CommonBO
                         (
                               grpno
                             , clsno
-                            , teamname
+                            , lineupidx
                             , orderno
                             , battingflg
                             , position
@@ -210,7 +210,7 @@ class ClslineupblogBO extends _CommonBO
                         (
                               '$GRPNO'
                             , '$CLSNO'
-                            , '$TEAMNAME'
+                            , $LINEUPIDX
                             ,  $ORDERNO
                             , '$BATTINGFLG'
                             , '$POSITION'

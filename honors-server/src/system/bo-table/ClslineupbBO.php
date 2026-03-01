@@ -32,8 +32,7 @@ class ClslineupbBO extends _CommonBO
     /* ========================= */
     const FIELD__GRPNO              = "grpno";              /* (pk) char(30)        */
     const FIELD__CLSNO              = "clsno";              /* (pk) char(14)        */
-    const FIELD__TEAMNAME           = "teamname";           /* (pk) char(10)        */
-    const FIELD__TEAMNICK           = "teamnick";           /* (  ) char(20)        */
+    const FIELD__LINEUPIDX          = "lineupidx";          /* (pk) char(10)        */
     const FIELD__ORDERNO            = "orderno";            /* (pk) int             */
     const FIELD__BATTINGFLG         = "battingflg";         /* (  ) enum('n', 'y')  */
     const FIELD__POSITION           = "position";           /* (  ) char(10)        */
@@ -65,13 +64,13 @@ class ClslineupbBO extends _CommonBO
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    public function getByPk($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO)); }
+    public function getByPk($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO) { return Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO)); }
 
     /* ========================= */
     /* select > sub */
     /* ========================= */
     public function selectByClsnoForInside              ($GRPNO, $CLSNO)                        { return $this->select(get_defined_vars(), __FUNCTION__); }
-    public function selectByPkForInside                 ($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO)   { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside                 ($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO)   { return $this->select(get_defined_vars(), __FUNCTION__); }
     public function selectDuplicateApplyForInside       ($GRPNO, $CLSNO, $USERNO)               { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
@@ -105,8 +104,7 @@ class ClslineupbBO extends _CommonBO
         "
               t.grpno
             , t.clsno
-            , t.teamname
-            , t.teamnick
+            , t.lineupidx
             , t.orderno
             , t.battingflg
             , t.position
@@ -115,6 +113,7 @@ class ClslineupbBO extends _CommonBO
             , t.bill
             , t.etc
             , t.userregdt
+            , clslua.lineupname
             , cls.clsstatus
             , u.name as applyername
         ";
@@ -123,7 +122,7 @@ class ClslineupbBO extends _CommonBO
         "
               t.grpno
             , t.clsno
-            , t.teamname
+            , t.lineupidx
             , t.orderno
         ";
 
@@ -142,7 +141,7 @@ class ClslineupbBO extends _CommonBO
         {
             case self::selectByClsno                        : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             case self::selectByClsnoForInside               : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectByPkForInside                  : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and teamname = '$TEAMNAME' and orderno = $ORDERNO) t"; break; }
+            case self::selectByPkForInside                  : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and lineupidx = $LINEUPIDX and orderno = $ORDERNO) t"; break; }
             case self::selectDuplicateApplyForInside        : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
             case self::selectByClsnoForSettleForMng :
             {
@@ -195,6 +194,11 @@ class ClslineupbBO extends _CommonBO
                     on
                         grpm.grpno = t.grpno and
                         grpm.userno = t.userno
+                left join clslineupa clslua
+                    on
+                        clslua.grpno = t.grpno and
+                        clslua.clsno = t.clsno and
+                        clslua.lineupidx = t.lineupidx
             $groupby
             order by
                 $orderby
@@ -268,15 +272,15 @@ class ClslineupbBO extends _CommonBO
                 $arr = json_decode($ARR, true);
                 foreach($arr as $dat)
                 {
-                    $DATATYPE   = $dat['DATATYPE'];
-                    $TEAMNAME   = $dat['TEAMNAME'];
-                    $TEAMNICK   = $dat['TEAMNICK'];
-                    $ORDERNO    = $dat['ORDERNO'];
-                    $BATTINGFLG = $dat['BATTINGFLG'];
-                    $POSITION   = $dat['POSITION'];
-                    $USERNO     = isset($dat['USERNO'])   ? $dat['USERNO'] : null;
-                    $USERNAME   = isset($dat['USERNAME']) ? $dat['USERNAME'] : null;
-                    $BILL       = $dat['BILL'];
+                    $DATATYPE    = $dat['DATATYPE'];
+                    $LINEUPIDX   = $dat['LINEUPIDX'];
+                    $LINEUPNAME  = $dat['LINEUPNAME'];
+                    $ORDERNO     = $dat['ORDERNO'];
+                    $BATTINGFLG  = $dat['BATTINGFLG'];
+                    $POSITION    = $dat['POSITION'];
+                    $USERNO      = isset($dat['USERNO'])   ? $dat['USERNO'] : null;
+                    $USERNAME    = isset($dat['USERNAME']) ? $dat['USERNAME'] : null;
+                    $BILL        = $dat['BILL'];
 
                     /* if datatype old, update bill only */
                     if($DATATYPE == "old")
@@ -290,7 +294,7 @@ class ClslineupbBO extends _CommonBO
                             where
                                 grpno = '$GRPNO' and
                                 clsno = '$CLSNO' and
-                                teamname = '$TEAMNAME' and
+                                lineupidx = $LINEUPIDX and
                                 orderno = $ORDERNO
                         ";
                         GGsql::exeQuery($query);
@@ -304,8 +308,7 @@ class ClslineupbBO extends _CommonBO
                         (
                               grpno
                             , clsno
-                            , teamname
-                            , teamnick
+                            , lineupidx
                             , orderno
                             , battingflg
                             , position
@@ -317,8 +320,7 @@ class ClslineupbBO extends _CommonBO
                         (
                               '$GRPNO'
                             , '$CLSNO'
-                            , '$TEAMNAME'
-                            , '$TEAMNICK'
+                            , $LINEUPIDX
                             ,  $ORDERNO
                             , '$BATTINGFLG'
                             , '$POSITION'
@@ -348,7 +350,7 @@ class ClslineupbBO extends _CommonBO
                 }
 
                 /* 해당 포지션에 이미 다른 유저가 기입하였는지 확인 */
-                $clslineupb = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO));
+                $clslineupb = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO));
                 $userno = Common::getField($clslineupb, self::FIELD__USERNO);
                 if(Common::isNotEmpty($userno))
                     throw new GGexception("이미 신청된 일정입니다.");
@@ -370,7 +372,7 @@ class ClslineupbBO extends _CommonBO
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
-                        teamname = '$TEAMNAME' and
+                        lineupidx = $LINEUPIDX and
                         orderno = $ORDERNO
                 ";
                 GGsql::exeQuery($query);
@@ -388,7 +390,7 @@ class ClslineupbBO extends _CommonBO
                     $ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
 
                 /* 해당 포지션에 이미 다른 유저가 기입하였는지 확인 */
-                $clslineupb = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO));
+                $clslineupb = Common::getDataOne($this->selectByPkForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO));
                 $userno = Common::getField($clslineupb, self::FIELD__USERNO);
                 if(Common::isNotEmpty($userno))
                     throw new GGexception("이미 신청된 일정입니다.");
@@ -409,7 +411,7 @@ class ClslineupbBO extends _CommonBO
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
-                        teamname = '$TEAMNAME' and
+                        lineupidx = $LINEUPIDX and
                         orderno = $ORDERNO
                 ";
                 GGsql::exeQuery($query);
@@ -421,7 +423,7 @@ class ClslineupbBO extends _CommonBO
                 $ggAuth->isClsIng($GRPNO, $CLSNO);
 
                 /* check already canceled */
-                $clslineupb = $this->getByPk($GRPNO, $CLSNO, $TEAMNAME, $ORDERNO);
+                $clslineupb = $this->getByPk($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO);
                 $userno = Common::getField($clslineupb, self::FIELD__USERNO);
                 if(Common::isEmpty($userno))
                     throw new GGexception("이미 취소되어 있습니다.");
@@ -465,7 +467,7 @@ class ClslineupbBO extends _CommonBO
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
-                        teamname = '$TEAMNAME' and
+                        lineupidx = $LINEUPIDX and
                         orderno = $ORDERNO
                 ";
                 GGsql::exeQuery($query);
@@ -479,8 +481,7 @@ class ClslineupbBO extends _CommonBO
                     (
                           grpno
                         , clsno
-                        , teamname
-                        , teamnick
+                        , lineupidx
                         , orderno
                         , battingflg
                         , position
@@ -492,8 +493,7 @@ class ClslineupbBO extends _CommonBO
                     select
                            grpno
                         , '$CLSNONEW'
-                        ,  teamname
-                        ,  teamnick
+                        ,  lineupidx
                         ,  orderno
                         ,  battingflg
                         ,  position

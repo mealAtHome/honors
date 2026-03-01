@@ -16,7 +16,7 @@ Api.User =
     /* ========================= */
     /* 등록 */
     /* ========================= */
-    insert(id, pw, name, birthYear, phone, email, adrcvflg, hascarflg, address, teamname, noticeOK, noticeFail)
+    insert(id, pw, name, birthYear, phone, email, adrcvflg, hascarflg, address, lineupidx, noticeOK, noticeFail)
     {
         let ajaxData =
         {
@@ -29,7 +29,7 @@ Api.User =
             ADRCVFLG    : adrcvflg,
             HASCARFLG   : hascarflg,
             ADDRESS     : address,
-            TEAMNAME    : teamname,
+            LINEUPIDX    : lineupidx,
         };
         let ajax = Api.execute(ajaxData, "Api.User.insert", noticeOK, noticeFail);
         if(GGvalid.Api.isSucceed(ajax))

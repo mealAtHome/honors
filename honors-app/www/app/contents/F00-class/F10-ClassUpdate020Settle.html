@@ -496,13 +496,13 @@
                 /* 다이얼로그 */
                 let grpno = CUST.Data.grpno;
                 let clsno = CUST.Data.clsno;
-                let teamname = "for-settle";
+                let lineupidx = "for-settle";
                 let data =
                 {
                     option : "F10ClassUpdate020Settle-addSettleUser",
                     grpno : grpno,
                     clsno : clsno,
-                    teamname : teamname,
+                    lineupidx : lineupidx,
                     regmember : GGF.Y,
                 }
                 Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
