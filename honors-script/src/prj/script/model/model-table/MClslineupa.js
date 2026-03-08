@@ -17,7 +17,7 @@ class MClslineupa
     /* data */  getLineupname() { return this.lineupname; }
 }
 
-class MClslineupaList extends _MCommon
+class MClslineupas extends _MCommon
 {
     constructor(ajax)
     {

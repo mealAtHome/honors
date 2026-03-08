@@ -11,7 +11,7 @@ Api.Clslineupa =
     select(ajaxData, noticeOK, noticeFail)
     {
         let ajax = Api.execute(ajaxData, "Api.Clslineupa.select", noticeOK, noticeFail);
-        let rslt = new MClslineupaList(ajax);
+        let rslt = new MClslineupas(ajax);
         return rslt;
     },
     update(ajaxData={}, noticeOK=GGF.TOAST, noticeFail=GGF.TOAST)

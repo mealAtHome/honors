@@ -11,3 +11,12 @@
 .page__background { background-color: #f8f9fa; }
 
 input { line-height: 1.5; }
+
+.right
+{
+    display: flex;
+    align-items: center;
+    font-size:inherit;
+    padding-right: 0.4em;
+}
+

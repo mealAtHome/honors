@@ -308,8 +308,8 @@
                         /* =============== */
                         /* 참가정보 : 라인업 표시 */
                         /* =============== */
-                        let mClslineupaList = Api.Clslineupa.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        let lineupass = mClslineupaList.getModels();
+                        let mClslineupas = Api.Clslineupa.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        let lineupass = mClslineupas.getModels();
 
                         /* 1개 초과 시 탭 표시 */
                         if(lineupass.length > 1)
@@ -365,7 +365,7 @@
                 let sectionHtml =
                 `
                     <div class="CLSD-div-tabTeam" lineupidx="${lineupidx}" style="${totalCount > 1 ? "display:none;" : ""}">
-                        ${lineupname != "" ? `<p class="common-p-titlesub">${lineupname}</p>` : ""}
+                        ${lineupname != "" ? `<p class="common-p-title">${lineupname}</p>` : ""}
                         <div class="common-div-scrollX">
                             <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="${lineupidx}">
                                 <thead>

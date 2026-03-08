@@ -89,6 +89,8 @@ class MCls
     /* ========================= */
     isEnd() { return this.getClsstatus() === GGF.Cls.Clsstatus.END; }
     isCancel() { return this.getClsstatus() === GGF.Cls.Clsstatus.CANCEL; }
+    isClsstatusWait () { return this.getClsstatus() === GGF.Cls.Clsstatus.WAIT; }
+    isClsstatusIng  () { return this.getClsstatus() === GGF.Cls.Clsstatus.ING; }
 
     /* ========================= */
     /* make with buttons */
