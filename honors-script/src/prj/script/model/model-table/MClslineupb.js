@@ -4,8 +4,8 @@ class MClslineupb
     {
         /* data */      this.grpno              = GGC.Common.char(dat.grpno);
         /* data */      this.clsno              = GGC.Common.char(dat.clsno);
-        /* data */      this.lineupidx           = GGC.Common.char(dat.lineupidx);
-        /* data */      this.lineupname           = GGC.Common.char(dat.lineupname);
+        /* data */      this.lineupidx          = GGC.Common.char(dat.lineupidx);
+        /* data */      this.lineupname         = GGC.Common.char(dat.lineupname);
         /* data */      this.orderno            = GGC.Common.int(dat.orderno);
         /* data */      this.battingflg         = GGC.Common.enum(dat.battingflg);
         /* data */      this.position           = GGC.Common.char(dat.position);
@@ -67,21 +67,6 @@ class MClslineupbs extends _MCommon
             let dat  = this.data[i];
             this.models.push(new MClslineupb(dat));
         }
-    }
-
-    getLineupname(lineupidx="a")
-    {
-        let lineupname = "";
-        for(let i in this.getModels())
-        {
-            let model = this.getModels()[i];
-            if(model.getLineupidx() == lineupidx)
-            {
-                lineupname = model.getLineupname();
-                break;
-            }
-        }
-        return lineupname;
     }
 
 }

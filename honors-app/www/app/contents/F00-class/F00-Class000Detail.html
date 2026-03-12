@@ -309,24 +309,24 @@
                         /* 참가정보 : 라인업 표시 */
                         /* =============== */
                         let mClslineupas = Api.Clslineupa.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        let lineupass = mClslineupas.getModels();
+                        let mClslineupaModels = mClslineupas.getModels();
 
                         /* 1개 초과 시 탭 표시 */
-                        if(lineupass.length > 1)
+                        if(mClslineupaModels.length > 1)
                             $("#CLSD-div-lineupTabBtns").show();
 
                         /* 각 라인업별 섹션 생성 */
-                        for(let i in lineupass)
+                        for(let i in mClslineupaModels)
                         {
-                            let lp = lineupass[i];
-                            CLSD.addLineupSection(lp.getLineupidx(), lp.getLineupname(), lineupass.length);
+                            let lp = mClslineupaModels[i];
+                            CLSD.addLineupSection(lp.getLineupidx(), lp.getLineupname(), mClslineupaModels.length);
                         }
 
                         /* clslineupb 행 채우기 */
                         let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        let lineups = mClslineupbs.getModels();
-                        for(let i in lineups)
-                            CLSD.addRowForLineup2(lineups[i]);
+                        let mClslineupbModels = mClslineupbs.getModels();
+                        for(let i in mClslineupbModels)
+                            CLSD.addRowForLineup2(mClslineupbModels[i]);
 
                         /* 첫 탭 활성화 */
                         $("#CLSD-div-lineupTabBtns").find(".CLSD-btn-lineupTab").first().click();

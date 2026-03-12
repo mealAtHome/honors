@@ -38,7 +38,8 @@
 
         <div id="CUTF-div-lineupFix" class="common-tag-fontsize09">
             <button id="CUTF-btn-save" class="common-btn-outline">💿저장</button>
-            <button id="CUTF-btn-lineupAdd" class="common-btn-outline">➕라인업추가</button>
+            <button id="CUTF-btn-lineupAdd" class="common-btn-outline">➕추가</button>
+            <button id="CUTF-btn-lineupImport" class="common-btn-outline">⬇️가져오기</button>
         </div>
         <div id="CUTF-div-lineupBtn" class="common-tag-fontsize09"></div>
 
@@ -116,6 +117,20 @@
                         let model = CUTF.Temp.mClslineupbModels[i];
                         CUTF.Temp.lineupidx = model.getLineupidx();
                         CUTF.addRow(model);
+                    }
+
+                    /* recovery row numbers for each lineup */
+                    $(".CUTF-div-tabTeam").each(function()
+                    {
+                        let lineupidx = $(this).attr("lineupidx");
+                        CUTF.Temp.lineupidx = parseInt(lineupidx);
+                        CUTF.updateRowNum();
+                    });
+
+                    /* recovery db values */
+                    for(let i in CUTF.Temp.mClslineupbModels)
+                    {
+                        let model = CUTF.Temp.mClslineupbModels[i];
 
                         /* set lineupname */
                         $(`.CUTF-input-lineupname[lineupidx="${model.getLineupidx()}"]`).val(model.getLineupname());
@@ -138,14 +153,6 @@
                             tr.find(`.CUTF-btn-delete`).prop("disabled", true);
                         }
                     }
-
-                    /* recovery row numbers for each lineup */
-                    $(".CUTF-div-tabTeam").each(function()
-                    {
-                        let lineupidx = $(this).attr("lineupidx");
-                        CUTF.Temp.lineupidx = parseInt(lineupidx);
-                        CUTF.updateRowNum();
-                    });
 
                     /* click first tab */
                     $("#CUTF-div-lineupBtn").find(".CUTF-btn-tabTeam").first().click();
@@ -180,7 +187,7 @@
                         <div class="common-div-cushionUD common-tag-fontsize09">
                             <button class="common-btn-outline CUTF-btn-deleteLineup" btn-type="delete" lineupidx="${lineupidx}">🗑️삭제</button>
                             <button class="common-btn-outline CUTF-btn-rowAdd">➕행추가</button>
-                            <button class="common-btn-outline CUTF-btn-rowAuto">🤖자동</button>
+                            <button class="common-btn-outline CUTF-btn-importLineup" class="common-btn-outline">⬇️가져오기</button>
                         </div>
 
                         <div class="common-div-scrollX">
@@ -188,7 +195,7 @@
                                 <thead>
                                     <tr>
                                         <th>삭제</th>
-                                        <th>타순</th>
+                                        <th>번호</th>
                                         <th>타격여부</th>
                                         <th>포지션</th>
                                         <th>참가자</th>
@@ -209,7 +216,7 @@
                 {
                     let lineupidx = parseInt($(this).attr("lineupidx"));
                     $(".CUTF-div-tabTeam").hide();
-                    $(`.CUTF-dv-tabTeam[lineupidx="${lineupidx}"]`).show();
+                    $(`.CUTF-div-tabTeam[lineupidx="${lineupidx}"]`).show();
                     CUTF.Temp.lineupidx = lineupidx;
                 });
 
@@ -253,43 +260,6 @@
                     CUTF.updateRowNum();
                 });
 
-                /* 자동 라인업 */
-                $(".CUTF-btn-rowAuto").off("click").on("click", function()
-                {
-                    /* check lineup */
-                    if($(CUTF.El.getTr()).length >= 1)
-                    {
-                        Common.toast("자동으로 라인업을 생성하려면, 테이블에 등록된 행이 없어야 합니다.");
-                        return;
-                    }
-
-                    /* add row */
-                    for(let i = 1; i <= 11; i++)
-                        CUTF.addRow(null);
-                    CUTF.updateRowNum();
-
-                    /* auto tr */
-                    $(CUTF.El.getTr()).each(function()
-                    {
-                        let orderno       = $(this).attr("orderno");
-                        let battingflgEl  = $(this).find('.CUTF-input-battingflg');
-                        let positionEl    = $(this).find('.CUTF-input-position');
-                        switch(orderno)
-                        {
-                            case "1"  : positionEl.val("C");    battingflgEl.prop("checked", true);   break;
-                            case "2"  : positionEl.val("DH");   battingflgEl.prop("checked", true);   break;
-                            case "3"  : positionEl.val("RF");   battingflgEl.prop("checked", true);   break;
-                            case "4"  : positionEl.val("CF");   battingflgEl.prop("checked", true);   break;
-                            case "5"  : positionEl.val("LF");   battingflgEl.prop("checked", true);   break;
-                            case "6"  : positionEl.val("1B");   battingflgEl.prop("checked", true);   break;
-                            case "7"  : positionEl.val("2B");   battingflgEl.prop("checked", true);   break;
-                            case "8"  : positionEl.val("3B");   battingflgEl.prop("checked", true);   break;
-                            case "9"  : positionEl.val("SS");   battingflgEl.prop("checked", true);   break;
-                            case "10" : positionEl.val("SP");   battingflgEl.prop("checked", false);  break;
-                            case "11" : positionEl.val("RP");   battingflgEl.prop("checked", false);  break;
-                        }
-                    });
-                });
             },
 
             addRow(mClslineupb=null)
