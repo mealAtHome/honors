@@ -75,6 +75,7 @@
     font-size: 1em;
     padding: 1em 2em;
 }
+.common-div-formChild > .common-div-formField:nth-child(1) { margin-top: 1em; }
 
 /* 폼 내 */
 .common-div-formTitle

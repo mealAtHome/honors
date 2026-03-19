@@ -165,14 +165,14 @@ class MClss extends _MCommon
                     case GGF.Cls.Clsstatus.EDIT:
                     {
                         btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate000Default}" hyperlink-viewmode="page" option="update" ${model.getPk()}>일정수정</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010TypeLineup}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010LineupUpdate}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
                         btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-editToIng" ${model.getPk()}>일정공개</button>`;
                         btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-deleteCls" btn-type="delete" ${model.getPk()}>일정삭제</button>`;
                         break;
                     }
                     case GGF.Cls.Clsstatus.ING:
                     {
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010TypeLineup}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010LineupUpdate}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
                         btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-ingToEnd" ${model.getPk()}>일정종료</button>`;
                         btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate030Cancel}" hyperlink-viewmode="page" btn-type="cancel" ${model.getPk()}>일정취소</button>`;
                         break;

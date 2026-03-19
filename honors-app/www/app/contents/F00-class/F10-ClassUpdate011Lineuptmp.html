@@ -1,0 +1,347 @@
+<ons-page id="CULT">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="CULT-toolbar">
+        <div class="left"><gg-backbtn onclick="CULT.close(true);"></gg-backbtn></div>
+        <div class="center"><span>라인업템플릿</span></div>
+    </ons-toolbar>
+
+    <!-- --------------- -->
+    <!-- 선택 탭 -->
+    <!-- --------------- -->
+    <div class="common-div-cushion">
+        <table class="CULT-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="CULT-td-maintab" maintab="save" tab="">저장</td>
+                    <td class="CULT-td-maintab" maintab="tmp"  tab="">템플릿</td>
+                    <td class="CULT-td-maintab" maintab="cls"  tab="">최근일정</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- --------------- -->
+    <!-- 템플릿 저장 -->
+    <!-- --------------- -->
+    <div class="CULT-div-maintab common-div-formChild" style="display:none;" maintab="save">
+
+        <!-- 템플릿 이름 -->
+        <div class="common-div-formField">
+            <span>*템플릿 이름</span>
+            <span>템플릿 이름을 설정해주세요.</span>
+            <input id="GFSU-input-sponusername" type="text" class="common-input-field" placeholder="템플릿 이름"/>
+        </div>
+
+        <!-- 라인업 html -->
+        <style>
+            .CULT-tbl-lineup > tbody > tr > td { text-align: center; }
+        </style>
+        <div class="common-div-formField">
+            <span>*라인업 확인</span>
+            <span>저장하려고 하는 라인업이 다르다면 수정 후, 다시 이 창을 열어주세요.</span>
+            <div id="CULT-div-lineupBtn" class="common-tag-fontsize09"></div>
+            <hr class="common-hr-paddingUD"/>
+            <div id="CULT-div-lineupDetails"></div>
+        </div>
+
+        <!-- 저장 버튼 -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="CULT-btn-save" class="common-btn-inline">저장</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 템플릿에서 가져오기 -->
+    <!-- --------------- -->
+    <div class="CULT-div-maintab common-div-cushion" style="display:none;" maintab="tmp">
+        <div id="CULT-div-searchResultTmp" class="common-div-scrollX"></div>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 최근 일정에서 가져오기 -->
+    <!-- --------------- -->
+    <div class="CULT-div-maintab common-div-cushion" style="display:none;" maintab="cls">
+        <div id="CULT-div-searchResultCls" class="common-div-scrollX"></div>
+    </div>
+
+    <script>
+        var CULT =
+        {
+            code : "CULT",
+            Data: {},
+            Temp :
+            {
+                lineupidx : 0,
+            },
+            El :
+            {
+                getTbl (lineupidx="") { return `.CULT-tbl-lineup[lineupidx="${lineupidx == "" ? CULT.Temp.lineupidx : lineupidx}"]`; },
+                getTr  (lineupidx="") { return `.CULT-tbl-lineup[lineupidx="${lineupidx == "" ? CULT.Temp.lineupidx : lineupidx}"] > tbody > tr`; },
+            },
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                // if(CULT.Data.option     == undefined) { Common.toast("잘못된 접근입니다."); CULT.close(); return; }
+                if(CULT.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CULT.close(); return; }
+                if(CULT.Data.tab        == undefined) { CULT.Data.tab = "save"; }
+                if(CULT.Data.pagenumtmp == undefined) { CULT.Data.pagenumtmp = 1; }
+                if(CULT.Data.pagenumcls == undefined) { CULT.Data.pagenumcls = 1; }
+                if(CULT.Data.lineupidx  == undefined) { CULT.Data.lineupidx = null; }
+
+                /* init */
+                $(`.CULT-td-maintab[maintab='${CULT.Data.tab}']`).click();
+            },
+
+            initByTab()
+            {
+                let option      = CULT.Data.option;
+                let grpno       = CULT.Data.grpno;
+                let tab         = CULT.Data.tab;
+                let pagenumtmp  = CULT.Data.pagenumtmp;
+                let pagenumcls  = CULT.Data.pagenumcls;
+                let lineupidx   = CULT.Data.lineupidx;
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mClss = null;
+                    switch(tab)
+                    {
+                        case "save":
+                        {
+                            /* ----- */
+                            /* restore lineup */
+                            /* ----- */
+                            let data = CUTF.getLineupData();
+                            let lineuparr = [];
+                            for(let i in data)
+                            {
+                                let dat = data[i];
+                                let dup = false;
+
+                                /* filter */
+                                if(lineupidx != null && dat.LINEUPIDX != lineupidx)
+                                    continue;
+
+                                /* check duplicate */
+                                for(let j in lineuparr)
+                                {
+                                    let linedat = lineuparr[j];
+                                    if(linedat.LINEUPIDX == dat.LINEUPIDX)
+                                        dup = true;
+                                }
+
+                                /* if not dup, make lineup */
+                                if(!dup)
+                                {
+                                    lineuparr.push({LINEUPIDX: dat.LINEUPIDX, LINEUPNAME: dat.LINEUPNAME});
+                                    CULT.addLineup(dat.LINEUPIDX, dat.LINEUPNAME);
+                                }
+
+                                /* add row to lineup */
+                                CULT.addRow(data[i]);
+                            }
+
+                            /* click first tab */
+                            $("#CULT-div-lineupBtn").find(".CULT-btn-tabTeam").first().click();
+                            break;
+                        }
+                        // case "cls"  : mClss = Api.Cls.selectByGrpnoForAll(CULT.Data.grpno); break;
+                        // case "tmp"  : mClss = Api.Cls.selectFor1YearByGrpnoForAll(); break;
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            addLineup(lineupidx, lineupname)
+            {
+                /* tab button */
+                let btnHtml =
+                `
+                    <button
+                        class="CULT-btn-tabTeam commonEvent-btn-radio common-btn-radio"
+                        radio_name="CULT-btn-tabTeam"
+                        style="padding-left:0.8em; padding-right:0.8em;"
+                        lineupidx="${lineupidx}"
+                    >
+                        ${lineupname == "" ? lineupidx : lineupname}
+                    </button>`;
+                $("#CULT-div-lineupBtn").append(btnHtml);
+
+                /* tab content */
+                let contentHtml =
+                `
+                    <div class="CULT-div-tabTeam" lineupidx="${lineupidx}" style="display:none;">
+                        <p class="common-p-title">
+                            <span>팀 명 : ${lineupname}</span>
+                        </p>
+                        <div class="common-div-scrollX">
+                            <table class="common-tbl-normal CULT-tbl-lineup" lineupidx="${lineupidx}" tbl-type="rowborder">
+                                <thead>
+                                    <tr>
+                                        <th>번호</th>
+                                        <th>타격여부</th>
+                                        <th>포지션</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 동적으로 행이 추가됩니다 -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+                $("#CULT-div-lineupDetails").append(contentHtml);
+
+                /* 라인업 버튼 */
+                $(`.CULT-btn-tabTeam`).off("click").on("click", function()
+                {
+                    let lineupidx = parseInt($(this).attr("lineupidx"));
+                    $(".CULT-div-tabTeam").hide();
+                    $(`.CULT-div-tabTeam[lineupidx="${lineupidx}"]`).show();
+                    CULT.Temp.lineupidx = lineupidx;
+                });
+            },
+
+            addRow(dat)
+            {
+                let html =
+                `
+                    <tr class="CULT-tr-lineup" orderno="" datatype="new">
+                        <td col="numb">${dat.ORDERNO}</td>
+                        <td col="batf">${dat.BATTINGFLG == GGF.Y ? "타격" : "-"}</td>
+                        <td col="pstn">${dat.POSITION}</td>
+                    </tr>
+                `;
+                $(`${CULT.El.getTbl(dat.LINEUPIDX)} > tbody`).append(html);
+            },
+
+            // eventAfterSearch()
+            // {
+            //     /* pagenation */
+            //     $("#CULT-div-searchResult .common-btn-pagenationBtn").off("click").on("click", function()
+            //     {
+            //         let toPage = $(this).attr("to_page");
+            //         CULT.Data.pagenum = parseInt(toPage);
+            //         CULT.search();
+            //     });
+
+            //     /* 선택 */
+            //     $("#CULT-div-searchResult .MClss-make-btn-choose").off("click").on("click", function()
+            //     {
+            //         let option = CULT.Data.option;
+            //         let grpno = CULT.Data.grpno;
+            //         let clsno  = $(this).attr("clsno");
+
+            //         switch(option)
+            //         {
+            //             case "chooseFromF10":
+            //             {
+            //                 Common.showProgress();
+            //                 setTimeout(function()
+            //                 {
+            //                     let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
+            //                     if(mCls == null)
+            //                     {
+            //                         Common.toastError("일정을 불러오지 못했습니다.");
+            //                         Common.hideProgress();
+            //                         return;
+            //                     }
+
+            //                     /* to F10ClassUpdate000Default */
+            //                     $("#CUDE-input-clstitle").val(mCls.getClstitle());
+            //                     $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
+            //                     $("#CUDE-input-clsground").val(mCls.getClsground());
+            //                     $("#CUDE-input-clsgroundaddr").val(mCls.getClsgroundaddr());
+            //                     $("#CUDE-input-clsbillapplyprice").val(mCls.getClsbillapplyprice());
+            //                     $("#CUDE-input-clsbillapplyunit").val(mCls.getClsbillapplyunit());
+            //                     GGdate.toDivYearToMin("#CUDE-div-clsstartdt", new Date(mCls.getClsstartdt()));
+            //                     GGdate.toDivYearToMin("#CUDE-div-clsclosedt", new Date(mCls.getClsclosedt()));
+            //                     GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", new Date(mCls.getClsapplystartdt()));
+            //                     GGdate.toDivYearToMin("#CUDE-div-clsapplyclosedt", new Date(mCls.getClsapplyclosedt()));
+            //                     CUDE.keyup();
+
+            //                     /* close CULT */
+            //                     CULT.close(true);
+
+            //                     Common.hideProgress();
+            //                 }, ajaxDelayTime);
+            //                 break;
+            //             }
+            //             default:
+            //             {
+            //                 Common.toastError("잘못된 접근입니다.");
+            //                 CULT.close(true);
+            //                 break;
+            //             }
+            //         }
+
+            //     });
+            // },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* tab */
+            $(".CULT-td-maintab").click(function()
+            {
+                let tabChoosed = $(this).attr("maintab");
+                CULT.Data.tab = tabChoosed;
+
+                $(".CULT-div-maintab").hide();
+                $(`.CULT-div-maintab[maintab='${tabChoosed}']`).show();
+
+                /* init */
+                CULT.initByTab();
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CULT.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CULT.close(true);
+            }
+        });
+
+    </script>
+
+
+</ons-page>

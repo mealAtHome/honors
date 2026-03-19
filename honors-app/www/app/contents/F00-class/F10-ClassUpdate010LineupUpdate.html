@@ -39,10 +39,9 @@
         <div id="CUTF-div-lineupFix" class="common-tag-fontsize09">
             <button id="CUTF-btn-save" class="common-btn-outline">💿저장</button>
             <button id="CUTF-btn-lineupAdd" class="common-btn-outline">➕추가</button>
-            <button id="CUTF-btn-lineupImport" class="common-btn-outline">⬇️가져오기</button>
+            <button id="CUTF-btn-lineuptmp" class="common-btn-outline">🗃️템플릿</button>
         </div>
         <div id="CUTF-div-lineupBtn" class="common-tag-fontsize09"></div>
-
         <hr class="common-hr-paddingUD"/>
         <div id="CUTF-div-lineupDetails"></div>
     </div>
@@ -187,7 +186,7 @@
                         <div class="common-div-cushionUD common-tag-fontsize09">
                             <button class="common-btn-outline CUTF-btn-deleteLineup" btn-type="delete" lineupidx="${lineupidx}">🗑️삭제</button>
                             <button class="common-btn-outline CUTF-btn-rowAdd">➕행추가</button>
-                            <button class="common-btn-outline CUTF-btn-importLineup" class="common-btn-outline">⬇️가져오기</button>
+                            <button class="common-btn-outline CUTF-btn-lineuptmp" class="common-btn-outline" lineupidx="${lineupidx}">🗃️템플릿</button>
                         </div>
 
                         <div class="common-div-scrollX">
@@ -260,6 +259,12 @@
                     CUTF.updateRowNum();
                 });
 
+                /* 템플릿 */
+                $(".CUTF-btn-lineuptmp").off("click").on("click", function()
+                {
+                    let lineupidx = parseInt($(this).attr("lineupidx"));
+                    Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate011Lineuptmp, {grpno:CUTF.Data.grpno, lineupidx:lineupidx, });
+                });
             },
 
             addRow(mClslineupb=null)
@@ -314,10 +319,10 @@
                     userEl.attr("orderno", orderno);
                     billEl.attr("orderno", orderno);
                 });
-                CUTF.setEvent();
+                CUTF.setRowEvent();
             },
 
-            setEvent()
+            setRowEvent()
             {
                 $(".CUTF-btn-delete").off("click").on("click", function()
                 {
@@ -340,48 +345,8 @@
                 });
             },
 
-            /* ========================= */
-            /* close */
-            /* ========================= */
-            close(force=false)
+            getLineupData()
             {
-                if(force == true)
-                {
-                    Navigation.moveBack();
-                    return;
-                }
-                Common.confirmClose();
-            },
-        };
-
-
-        $(document).ready(function()
-        {
-            /* =============================== */
-            /* events */
-            /* =============================== */
-
-            $("#CUTF-btn-lineupAdd").click(function()
-            {
-                CUTF.addLineup(CUTF.Temp.nextLineupidx++, "");
-                $("#CUTF-div-lineupBtn").find(".CUTF-btn-tabTeam").last().click();
-            });
-
-            /* ---------------------- */
-            /* 등록 */
-            /* ---------------------- */
-            $("#CUTF-btn-save").click(function()
-            {
-                /* validation: each lineup must have a name */
-                let validationOK = true;
-                $(".CUTF-div-tabTeam").each(function()
-                {
-                    let li = $(this).attr("lineupidx");
-                    let name = $(`.CUTF-input-lineupname[lineupidx="${li}"]`).val();
-                    if(Common.isEmpty(name)) { Common.toastError("라인업 이름을 입력해주세요."); validationOK = false; return false; }
-                });
-                if(!validationOK) return;
-
                 let data = [];
                 $(".CUTF-tbl-lineup").each(function()
                 {
@@ -415,6 +380,57 @@
                         });
                     });
                 });
+                return data;
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        };
+
+
+        $(document).ready(function()
+        {
+            /* =============================== */
+            /* events */
+            /* =============================== */
+            $("#CUTF-btn-lineuptmp").click(function()
+            {
+                CUTF.Data.executeShowWhenClose = false;
+                Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate011Lineuptmp, {grpno:CUTF.Data.grpno, });
+            });
+            $("#CUTF-btn-lineupAdd").click(function()
+            {
+                CUTF.addLineup(CUTF.Temp.nextLineupidx++, "");
+                $("#CUTF-div-lineupBtn").find(".CUTF-btn-tabTeam").last().click();
+            });
+
+            /* ---------------------- */
+            /* 등록 */
+            /* ---------------------- */
+            $("#CUTF-btn-save").click(function()
+            {
+                /* validation: each lineup must have a name */
+                let validationOK = true;
+                $(".CUTF-div-tabTeam").each(function()
+                {
+                    let li = $(this).attr("lineupidx");
+                    let name = $(`.CUTF-input-lineupname[lineupidx="${li}"]`).val();
+                    if(Common.isEmpty(name)) { Common.toastError("라인업 이름을 입력해주세요."); validationOK = false; return false; }
+                });
+                if(!validationOK) return;
+
+                /* get data */
+                let data = CUTF.getLineupData();
 
                 /* save */
                 Common.showProgress();

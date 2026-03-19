@@ -95,7 +95,8 @@ Navigation.Page =
     F00Class081TextApply : "CLDA",
     F00Class082TextSettle : "CLDS",
     F10ClassUpdate000Default : "CUDE",
-    F10ClassUpdate010TypeLineup : "CUTF",
+    F10ClassUpdate010LineupUpdate : "CUTF",
+    F10ClassUpdate011Lineuptmp : "CULT",
     F10ClassUpdate020Settle : "CUST",
     F10ClassUpdate021Purchase : "CUPU",
     F10ClassUpdate030Cancel : "CUCC",
@@ -158,7 +159,8 @@ Navigation.getURL = function(str)
         case Navigation.Page.F00Class081TextApply                          : url = "./app/contents/F00-class/F00-Class081TextApply.html"; break;
         case Navigation.Page.F00Class082TextSettle                         : url = "./app/contents/F00-class/F00-Class082TextSettle.html"; break;
         case Navigation.Page.F10ClassUpdate000Default                      : url = "./app/contents/F00-class/F10-ClassUpdate000Default.html"; break;
-        case Navigation.Page.F10ClassUpdate010TypeLineup                   : url = "./app/contents/F00-class/F10-ClassUpdate010TypeLineup.html"; break;
+        case Navigation.Page.F10ClassUpdate010LineupUpdate                 : url = "./app/contents/F00-class/F10-ClassUpdate010LineupUpdate.html"; break;
+        case Navigation.Page.F10ClassUpdate011Lineuptmp                    : url = "./app/contents/F00-class/F10-ClassUpdate011Lineuptmp.html"; break;
         case Navigation.Page.F10ClassUpdate020Settle                       : url = "./app/contents/F00-class/F10-ClassUpdate020Settle.html"; break;
         case Navigation.Page.F10ClassUpdate021Purchase                     : url = "./app/contents/F00-class/F10-ClassUpdate021Purchase.html"; break;
         case Navigation.Page.F10ClassUpdate030Cancel                       : url = "./app/contents/F00-class/F10-ClassUpdate030Cancel.html"; break;
@@ -223,7 +225,8 @@ Navigation.getData = function(code)
         case Navigation.Page.F00Class081TextApply                   : data = CLDA.Data; break;
         case Navigation.Page.F00Class082TextSettle                  : data = CLDS.Data; break;
         case Navigation.Page.F10ClassUpdate000Default               : data = CUDE.Data; break;
-        case Navigation.Page.F10ClassUpdate010TypeLineup            : data = CUTF.Data; break;
+        case Navigation.Page.F10ClassUpdate010LineupUpdate          : data = CUTF.Data; break;
+        case Navigation.Page.F10ClassUpdate011Lineuptmp             : data = CULT.Data; break;
         case Navigation.Page.F10ClassUpdate020Settle                : data = CUST.Data; break;
         case Navigation.Page.F10ClassUpdate021Purchase              : data = CUPU.Data; break;
         case Navigation.Page.F10ClassUpdate030Cancel                : data = CUCC.Data; break;
@@ -265,6 +268,7 @@ Navigation.executeShow = function()
     {
         if(lastPage.data.executeShowWhenClose == false)
         {
+            console.log("executeShowWhenClose가 false로 설정되어 있습니다.");
             pageStack[pageStack.length-1].data.executeShowWhenClose = true;
             GGstorage.setPageStack(pageStack);
             return;
@@ -297,8 +301,8 @@ Navigation.executeShow = function()
         case Navigation.Page.B81ManagerBankacctList                   : MBKL.show(); break;
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.show(); break;
         case Navigation.Page.B1000GrpFinanceHome                      : GFHM.show(); break;
-        case Navigation.Page.B1010GrpFinanceCapitalList              : GFCL.show(); break;
-        case Navigation.Page.B1011GrpFinanceCapitalUpdate            : GFCU.show(); break;
+        case Navigation.Page.B1010GrpFinanceCapitalList               : GFCL.show(); break;
+        case Navigation.Page.B1011GrpFinanceCapitalUpdate             : GFCU.show(); break;
         case Navigation.Page.B1020GrpFinanceSponsorList               : GFSL.show(); break;
         case Navigation.Page.B1021GrpFinanceSponsorUpdate             : GFSU.show(); break;
         case Navigation.Page.B1030GrpFinancePurchaseList              : GFPL.show(); break;
@@ -315,7 +319,8 @@ Navigation.executeShow = function()
         case Navigation.Page.F00Class081TextApply                     : CLDA.show(); break;
         case Navigation.Page.F00Class082TextSettle                    : CLDS.show(); break;
         case Navigation.Page.F10ClassUpdate000Default                 : CUDE.show(); break;
-        case Navigation.Page.F10ClassUpdate010TypeLineup              : CUTF.show(); break;
+        case Navigation.Page.F10ClassUpdate010LineupUpdate            : CUTF.show(); break;
+        case Navigation.Page.F10ClassUpdate011Lineuptmp               : CULT.show(); break;
         case Navigation.Page.F10ClassUpdate020Settle                  : CUST.show(); break;
         case Navigation.Page.F10ClassUpdate021Purchase                : CUPU.show(); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.show(); break;
@@ -391,7 +396,8 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.F00Class081TextApply                     : CLDA.close(true); break;
         case Navigation.Page.F00Class082TextSettle                    : CLDS.close(true); break;
         case Navigation.Page.F10ClassUpdate000Default                 : CUDE.close(true); break;
-        case Navigation.Page.F10ClassUpdate010TypeLineup              : CUTF.close(true); break;
+        case Navigation.Page.F10ClassUpdate010LineupUpdate            : CUTF.close(true); break;
+        case Navigation.Page.F10ClassUpdate011Lineuptmp               : CULT.close(true); break;
         case Navigation.Page.F10ClassUpdate020Settle                  : CUST.close(true); break;
         case Navigation.Page.F10ClassUpdate021Purchase                : CUPU.close(true); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.close(true); break;

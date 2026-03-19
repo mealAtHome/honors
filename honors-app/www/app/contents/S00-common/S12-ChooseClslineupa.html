@@ -1,0 +1,211 @@
+<ons-page id="CHLA">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <ons-toolbar id="CHLA-toolbar">
+        <div class="left"><gg-backbtn onclick="CHLA.close(true);"></gg-backbtn></div>
+        <div class="center"><span>라인업 가져오기 (전체)</span></div>
+    </ons-toolbar>
+
+    <!-- --------------- -->
+    <!-- 선택 탭 -->
+    <!-- --------------- -->
+    <div class="common-div-cushion">
+        <table class="CHLA-tbl-common common-tbl-tab commonEvent-tbl-tab">
+            <tbody>
+                <tr>
+                    <td class="CHLA-td-searchtype" searchtype="auto"   tab="">자동</td>
+                    <td class="CHLA-td-searchtype" searchtype="cls"    tab="">최근일정</td>
+                    <td class="CHLA-td-searchtype" searchtype="tmp"    tab="">템플릿</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- --------------- -->
+    <!-- 목록 -->
+    <!-- --------------- -->
+    <div class="common-div-cushion">
+        <div id="CHLA-div-searchResult" class="common-div-scrollX"></div>
+    </div>
+
+    <script>
+        var CHLA =
+        {
+            code : "CHLA",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(CHLA.Data.option     == undefined) { Common.toast("잘못된 접근입니다."); CHLA.close(); return; }
+                if(CHLA.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CHLA.close(); return; }
+                if(CHLA.Data.tab        == undefined) { CHLA.Data.tab = "auto"; }
+                if(CHLA.Data.pagenum    == undefined) { CHLA.Data.pagenum = 1; }
+
+                /* init */
+                CHLA.search();
+            },
+
+            eventAfterSearch()
+            {
+                /* pagenation */
+                $("#CHLA-div-searchResult .common-btn-pagenationBtn").off("click").on("click", function()
+                {
+                    let toPage = $(this).attr("to_page");
+                    CHLA.Data.pagenum = parseInt(toPage);
+                    CHLA.search();
+                });
+
+                /* 선택 */
+                $("#CHLA-div-searchResult .MClss-make-btn-choose").off("click").on("click", function()
+                {
+                    let option = CHLA.Data.option;
+                    let grpno = CHLA.Data.grpno;
+                    let clsno  = $(this).attr("clsno");
+
+                    switch(option)
+                    {
+                        case "chooseFromF10":
+                        {
+                            Common.showProgress();
+                            setTimeout(function()
+                            {
+                                let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
+                                if(mCls == null)
+                                {
+                                    Common.toastError("일정을 불러오지 못했습니다.");
+                                    Common.hideProgress();
+                                    return;
+                                }
+
+                                /* to F10ClassUpdate000Default */
+                                $("#CUDE-input-clstitle").val(mCls.getClstitle());
+                                $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
+                                $("#CUDE-input-clsground").val(mCls.getClsground());
+                                $("#CUDE-input-clsgroundaddr").val(mCls.getClsgroundaddr());
+                                $("#CUDE-input-clsbillapplyprice").val(mCls.getClsbillapplyprice());
+                                $("#CUDE-input-clsbillapplyunit").val(mCls.getClsbillapplyunit());
+                                GGdate.toDivYearToMin("#CUDE-div-clsstartdt", new Date(mCls.getClsstartdt()));
+                                GGdate.toDivYearToMin("#CUDE-div-clsclosedt", new Date(mCls.getClsclosedt()));
+                                GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", new Date(mCls.getClsapplystartdt()));
+                                GGdate.toDivYearToMin("#CUDE-div-clsapplyclosedt", new Date(mCls.getClsapplyclosedt()));
+                                CUDE.keyup();
+
+                                /* close CHLA */
+                                CHLA.close(true);
+
+                                Common.hideProgress();
+                            }, ajaxDelayTime);
+                            break;
+                        }
+                        default:
+                        {
+                            Common.toastError("잘못된 접근입니다.");
+                            CHLA.close(true);
+                            break;
+                        }
+                    }
+
+                });
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* tab */
+            $(".CHLA-td-searchtype").click(function()
+            {
+                let tabChoosed = $(this).attr("searchtype");
+                let tab = CHLA.Data.tab;
+                let grpno = CHLA.Data.grpno;
+                let pageno = CHLA.Data.pagenum;
+
+                /* 탭이 다르면 페이지번호 초기화 */
+                if(tab != tabChoosed)
+                    pageno = 1;
+
+                /* 탭에 따른 조회 */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mClss = null;
+                    switch(CHLA.Data.tab)
+                    {
+                        case "auto" : mClss = Api.Cls.selectFor1YearByGrpnoForAll(); break;
+                        case "cls"  : mClss = Api.Cls.selectByGrpnoForAll(grpno); break;
+                        case "tmp"  : mClss = Api.Cls.selectFor1YearByGrpnoForAll(); break;
+                    }
+
+                    // let grpno = CHLA.Data.grpno;
+                    // let pagenum  = CHLA.Data.pagenum;
+                    // let mClss = Api.Cls.selectByGrpnoForMng(grpno, pagenum, GGF.none, GGF.toast);
+                    // mClss.makeForChoose("#CHLA-div-searchResult");
+                    // CHLA.eventAfterSearch();
+
+                    // save selected
+                    CHLA.Data.tab = tabChoosed;
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+             /* ========================= */
+             /* page process */
+             /* ========================= */
+
+             /* get data from Config */
+             try
+             {
+                 CHLA.Data = Navigation.getPageParam();
+                 Navigation.executeShow();
+             }
+             catch(e)
+             {
+                 console.error(e);
+                 CHLA.close(true);
+             }
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CHLA.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CHLA.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>
