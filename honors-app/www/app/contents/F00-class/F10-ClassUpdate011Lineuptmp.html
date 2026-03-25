@@ -4,48 +4,64 @@
     <!-- 페이지용 타이틀 -->
     <!-- --------------- -->
     <ons-toolbar id="CULT-toolbar">
-        <div class="left"><gg-backbtn onclick="CULT.close(true);"></gg-backbtn></div>
+        <div class="left"><gg-backbtn class="CULT-btn-back"></gg-backbtn></div>
         <div class="center"><span>라인업템플릿</span></div>
     </ons-toolbar>
 
     <!-- --------------- -->
-    <!-- 선택 탭 -->
+    <!-- 화면 진입 시 -->
     <!-- --------------- -->
-    <div class="common-div-cushion">
-        <table class="CULT-tbl-common common-tbl-tab commonEvent-tbl-tab">
-            <tbody>
-                <tr>
-                    <td class="CULT-td-maintab" maintab="save" tab="">저장</td>
-                    <td class="CULT-td-maintab" maintab="tmp"  tab="">템플릿</td>
-                    <td class="CULT-td-maintab" maintab="cls"  tab="">최근일정</td>
-                </tr>
-            </tbody>
-        </table>
+    <div id="CULT-div-menuTop" class="common-div-cushion">
+        <ul class="common-ul-announce">
+            <li>라인업 템플릿을 저장하고 불러올 수 있는 페이지입니다.</li>
+        </ul>
+        <style>
+            #CULT-tbl-menuTop > tbody > tr > td { text-align: center; word-break: keep-all; }
+            .CULT-btn-menu
+            {
+                min-width: 6.5em;
+                height: 2.4em;
+                margin: 0.4em 0.4em;
+            }
+        </style>
+        <div class="common-div-cushionUD">
+            <table id="CULT-tbl-menuTop" class="common-tbl-normal" tbl-type="colborder">
+                <tbody>
+                    <tr>
+                        <td><button class="common-btn-outline CULT-btn-menu" id="CULT-btn-toSaveTab">저장하기</button></td>
+                        <td><button class="common-btn-outline CULT-btn-menu" id="CULT-btn-toLoadTab">불러오기</button></td>
+                    </tr>
+                    <tr>
+                        <td style="line-height:1.6em;">현재 라인업을 템플릿으로 저장</td>
+                        <td style="line-height:1.6em;">템플릿 혹은 최근일정에서 라인업 가져오기</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <hr class="common-hr-paddingLR"/>
 
-    <!-- --------------- -->
-    <!-- 템플릿 저장 -->
-    <!-- --------------- -->
-    <div class="CULT-div-maintab common-div-formChild" style="display:none;" maintab="save">
+    <!-- ======================== -->
+    <!-- 저장 탭 -->
+    <!-- ======================== -->
+    <div id="CULT-div-savetop" class="common-div-formChild" style="display:none;">
 
         <!-- 템플릿 이름 -->
         <div class="common-div-formField">
             <span>*템플릿 이름</span>
-            <span>템플릿 이름을 설정해주세요.</span>
-            <input id="GFSU-input-sponusername" type="text" class="common-input-field" placeholder="템플릿 이름"/>
+            <span>저장할 템플릿의 이름을 설정해주세요.</span>
+            <input id="CULT-input-lineuptitle" type="text" class="common-input-field" placeholder="템플릿 이름"/>
         </div>
 
         <!-- 라인업 html -->
         <style>
-            .CULT-tbl-lineup > tbody > tr > td { text-align: center; }
+            .CULT-tbl-lineupTeam > tbody > tr > td { text-align: center; }
         </style>
         <div class="common-div-formField">
             <span>*라인업 확인</span>
             <span>저장하려고 하는 라인업이 다르다면 수정 후, 다시 이 창을 열어주세요.</span>
-            <div id="CULT-div-lineupBtn" class="common-tag-fontsize09"></div>
+            <div class="CULT-div-lineupBtn common-tag-fontsize09" div-type="save"></div>
             <hr class="common-hr-paddingUD"/>
-            <div id="CULT-div-lineupDetails"></div>
+            <div class="CULT-div-lineupDetails" div-type="save"></div>
         </div>
 
         <!-- 저장 버튼 -->
@@ -58,33 +74,58 @@
         </table>
     </div>
 
-    <!-- --------------- -->
-    <!-- 템플릿에서 가져오기 -->
-    <!-- --------------- -->
-    <div class="CULT-div-maintab common-div-cushion" style="display:none;" maintab="tmp">
-        <div id="CULT-div-searchResultTmp" class="common-div-scrollX"></div>
+    <!-- ======================== -->
+    <!-- 불러오기 탭 -->
+    <!-- ======================== -->
+    <div id="CULT-div-loadtop" style="display:none;">
+        <div class="common-div-cushion">
+            <table class="CULT-tbl-common common-tbl-tab commonEvent-tbl-tab">
+                <tbody>
+                    <tr>
+                        <td class="CULT-td-loadtab" loadtab="def"  tab="">기본</td>
+                        <td class="CULT-td-loadtab" loadtab="tmp"  tab="">템플릿</td>
+                        <td class="CULT-td-loadtab" loadtab="cls"  tab="">최근일정</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr class="common-hr-paddingLR"/>
     </div>
 
-    <!-- --------------- -->
-    <!-- 최근 일정에서 가져오기 -->
-    <!-- --------------- -->
-    <div class="CULT-div-maintab common-div-cushion" style="display:none;" maintab="cls">
-        <div id="CULT-div-searchResultCls" class="common-div-scrollX"></div>
+    <!-- 라인업 상세 (hidden) -->
+    <div id="CULT-div-tmpDetail" style="display:none;">
+        <div class="CULT-div-detailHeader"></div>
+        <div class="CULT-div-lineupBtn common-tag-fontsize09" div-type="tmp"></div>
+        <hr class="common-hr-paddingUD"/>
+        <div class="CULT-div-lineupDetails" div-type="tmp"></div>
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="CULT-btn-tmpApply" class="common-btn-inline">참가설정에 적용</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+    <!-- 리스트 탭 -->
+    <div id="CULT-div-defList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="def"></div> <!-- 템플릿 탭 -->
+    <div id="CULT-div-tmpList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="tmp"></div> <!-- 템플릿 탭 -->
+    <div id="CULT-div-clsList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="cls"></div> <!-- 최근일정 탭 -->
 
     <script>
         var CULT =
         {
             code : "CULT",
             Data: {},
-            Temp :
+            Temp:
             {
-                lineupidx : 0,
+                lineupidx: null,
             },
-            El :
+            Const:
             {
-                getTbl (lineupidx="") { return `.CULT-tbl-lineup[lineupidx="${lineupidx == "" ? CULT.Temp.lineupidx : lineupidx}"]`; },
-                getTr  (lineupidx="") { return `.CULT-tbl-lineup[lineupidx="${lineupidx == "" ? CULT.Temp.lineupidx : lineupidx}"] > tbody > tr`; },
+                PAGE_MENU:"menu",
+                PAGE_SAVE:"save",
+                PAGE_LOAD:"load",
             },
 
             /* ===================== */
@@ -92,103 +133,65 @@
             /* ===================== */
             show()
             {
-                // if(CULT.Data.option     == undefined) { Common.toast("잘못된 접근입니다."); CULT.close(); return; }
-                if(CULT.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CULT.close(); return; }
-                if(CULT.Data.tab        == undefined) { CULT.Data.tab = "save"; }
-                if(CULT.Data.pagenumtmp == undefined) { CULT.Data.pagenumtmp = 1; }
+                if(CULT.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CULT.close(true); return; }
+                if(CULT.Data.tab        == undefined) { CULT.Data.tab = ""; }
                 if(CULT.Data.pagenumcls == undefined) { CULT.Data.pagenumcls = 1; }
-                if(CULT.Data.lineupidx  == undefined) { CULT.Data.lineupidx = null; }
+                if(CULT.Data.clsno      == undefined) { CULT.Data.clsno = ""; }
+                if(CULT.Data.page       == undefined) { CULT.Data.page = CULT.Const.PAGE_MENU; }
 
-                /* init */
-                $(`.CULT-td-maintab[maintab='${CULT.Data.tab}']`).click();
+
             },
 
-            initByTab()
+            /* ========================= */
+            /* 저장 탭 */
+            /* ========================= */
+            addLineupBox(divType, lineupidx, lineupname)
             {
-                let option      = CULT.Data.option;
-                let grpno       = CULT.Data.grpno;
-                let tab         = CULT.Data.tab;
-                let pagenumtmp  = CULT.Data.pagenumtmp;
-                let pagenumcls  = CULT.Data.pagenumcls;
-                let lineupidx   = CULT.Data.lineupidx;
-
-                Common.showProgress();
-                setTimeout(function()
+                /* check duplicated */
+                let dup = false;
+                $(`.CULT-div-lineupTab[div-type='${divType}']`).each(function()
                 {
-                    let mClss = null;
-                    switch(tab)
-                    {
-                        case "save":
-                        {
-                            /* ----- */
-                            /* restore lineup */
-                            /* ----- */
-                            let data = CUTF.getLineupData();
-                            let lineuparr = [];
-                            for(let i in data)
-                            {
-                                let dat = data[i];
-                                let dup = false;
+                    if(parseInt($(this).attr("lineupidx")) == lineupidx)
+                        dup = true;
+                });
+                if(dup)
+                    return;
 
-                                /* filter */
-                                if(lineupidx != null && dat.LINEUPIDX != lineupidx)
-                                    continue;
-
-                                /* check duplicate */
-                                for(let j in lineuparr)
-                                {
-                                    let linedat = lineuparr[j];
-                                    if(linedat.LINEUPIDX == dat.LINEUPIDX)
-                                        dup = true;
-                                }
-
-                                /* if not dup, make lineup */
-                                if(!dup)
-                                {
-                                    lineuparr.push({LINEUPIDX: dat.LINEUPIDX, LINEUPNAME: dat.LINEUPNAME});
-                                    CULT.addLineup(dat.LINEUPIDX, dat.LINEUPNAME);
-                                }
-
-                                /* add row to lineup */
-                                CULT.addRow(data[i]);
-                            }
-
-                            /* click first tab */
-                            $("#CULT-div-lineupBtn").find(".CULT-btn-tabTeam").first().click();
-                            break;
-                        }
-                        // case "cls"  : mClss = Api.Cls.selectByGrpnoForAll(CULT.Data.grpno); break;
-                        // case "tmp"  : mClss = Api.Cls.selectFor1YearByGrpnoForAll(); break;
-                    }
-
-                    Common.hideProgress();
-                }, ajaxDelayTime);
-            },
-
-            addLineup(lineupidx, lineupname)
-            {
+                /* ----- */
                 /* tab button */
-                let btnHtml =
+                /* ----- */
+                let btnForLineupTab =
                 `
                     <button
-                        class="CULT-btn-tabTeam commonEvent-btn-radio common-btn-radio"
-                        radio_name="CULT-btn-tabTeam"
+                        class="CULT-btn-lineupTab commonEvent-btn-radio common-btn-radio"
+                        radio_name="CULT-btn-lineupTab"
                         style="padding-left:0.8em; padding-right:0.8em;"
                         lineupidx="${lineupidx}"
+                        div-type="${divType}"
                     >
                         ${lineupname == "" ? lineupidx : lineupname}
                     </button>`;
-                $("#CULT-div-lineupBtn").append(btnHtml);
+                $(`.CULT-div-lineupBtn[div-type='${divType}']`).append(btnForLineupTab);
 
+                /* ----- */
                 /* tab content */
+                /* ----- */
+                let btnHtml = "";
+                switch(divType)
+                {
+                    case "save" : { btnHtml = `<button class="CULT-btn-deleteLineup common-btn-outline common-tag-fontsize09" btn-type="delete" div-type="${divType}" lineupidx="${lineupidx}" style="margin-left:1em;">삭제</button>`; break; }
+                    case "tmp"  : { btnHtml = ``; break; }
+                }
+
                 let contentHtml =
                 `
-                    <div class="CULT-div-tabTeam" lineupidx="${lineupidx}" style="display:none;">
-                        <p class="common-p-title">
-                            <span>팀 명 : ${lineupname}</span>
-                        </p>
+                    <div class="CULT-div-lineupTab" div-type="${divType}" lineupidx="${lineupidx}" style="display:none;">
+                        <div class="common-div-cushionUD">
+                            <div style="display:inline-block;"><span>팀 명 : </span><span class="CULT-span-lineupname">${lineupname}</span></div>
+                            ${btnHtml}
+                        </div>
                         <div class="common-div-scrollX">
-                            <table class="common-tbl-normal CULT-tbl-lineup" lineupidx="${lineupidx}" tbl-type="rowborder">
+                            <table class="common-tbl-normal CULT-tbl-lineupTeam" div-type="${divType}" lineupidx="${lineupidx}" tbl-type="rowborder">
                                 <thead>
                                     <tr>
                                         <th>번호</th>
@@ -203,93 +206,133 @@
                         </div>
                     </div>
                 `;
-                $("#CULT-div-lineupDetails").append(contentHtml);
-
-                /* 라인업 버튼 */
-                $(`.CULT-btn-tabTeam`).off("click").on("click", function()
-                {
-                    let lineupidx = parseInt($(this).attr("lineupidx"));
-                    $(".CULT-div-tabTeam").hide();
-                    $(`.CULT-div-tabTeam[lineupidx="${lineupidx}"]`).show();
-                    CULT.Temp.lineupidx = lineupidx;
-                });
+                $(`.CULT-div-lineupDetails[div-type='${divType}']`).append(contentHtml);
             },
-
-            addRow(dat)
+            addLineupRow(divType, dat)
             {
                 let html =
                 `
-                    <tr class="CULT-tr-lineup" orderno="" datatype="new">
-                        <td col="numb">${dat.ORDERNO}</td>
-                        <td col="batf">${dat.BATTINGFLG == GGF.Y ? "타격" : "-"}</td>
-                        <td col="pstn">${dat.POSITION}</td>
+                    <tr class="CULT-tr-lineup" div-type="${divType}" lineupidx="${dat.LINEUPIDX}">
+                        <td col="numb" orderno="${dat.ORDERNO}"       >${dat.ORDERNO}</td>
+                        <td col="batf" battingflg="${dat.BATTINGFLG}" >${dat.BATTINGFLG == GGF.Y ? "타격" : "-"}</td>
+                        <td col="pstn" position="${dat.POSITION}"     >${dat.POSITION}</td>
                     </tr>
                 `;
-                $(`${CULT.El.getTbl(dat.LINEUPIDX)} > tbody`).append(html);
+                $(`.CULT-tbl-lineupTeam[div-type='${divType}'][lineupidx="${dat.LINEUPIDX}"] > tbody`).append(html);
+            },
+            addLineupEvent()
+            {
+                /* 라인업 버튼 */
+                $(`.CULT-btn-lineupTab`).off("click").on("click", function()
+                {
+                    let lineupidx = parseInt($(this).attr("lineupidx"));
+                    let divType = $(this).attr("div-type");
+                    $(`.CULT-div-lineupTab[div-type='${divType}']`).hide();
+                    $(`.CULT-div-lineupTab[div-type='${divType}'][lineupidx="${lineupidx}"]`).show();
+                    CULT.Temp.lineupidx = lineupidx;
+                });
+
+                /* 삭제버튼 */
+                $(`.CULT-btn-deleteLineup`).off("click").on("click", function()
+                {
+                    let lineupidx = parseInt($(this).attr("lineupidx"));
+                    let divType = $(this).attr("div-type");
+                    let process = function()
+                    {
+                        $(`.CULT-div-lineupTab[div-type='${divType}'][lineupidx="${lineupidx}"]`).remove();
+                        $(`.CULT-btn-lineupTab[div-type='${divType}'][lineupidx="${lineupidx}"]`).remove();
+                        $(`.CULT-div-lineupBtn[div-type='${divType}']`).find(".CULT-btn-lineupTab").first().click();
+                    }
+                    Common.confirm2("이 라인업을 삭제하시겠습니까?", process);
+                });
+
+                /* 적용버튼 */
+
             },
 
-            // eventAfterSearch()
-            // {
-            //     /* pagenation */
-            //     $("#CULT-div-searchResult .common-btn-pagenationBtn").off("click").on("click", function()
-            //     {
-            //         let toPage = $(this).attr("to_page");
-            //         CULT.Data.pagenum = parseInt(toPage);
-            //         CULT.search();
-            //     });
+            /* ========================= */
+            /* 템플릿 탭 */
+            /* ========================= */
+            setEventForTmpTab()
+            {
+                /* 상세보기 버튼 */
+                $(".CULT-btn-clslineuptmpaDetail").off("click").on("click", function()
+                {
+                    let lineupgroup = $(this).attr("lineupgroup");
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mClslineuptmpas = Api.Clslineuptmpa.selectByPk(CULT.Data.grpno, lineupgroup);
+                        let mClslineuptmpbs = Api.Clslineuptmpb.selectByLineupgroup(CULT.Data.grpno, lineupgroup);
+                        let mClslineuptmpcs = Api.Clslineuptmpc.selectByLineupgroup(CULT.Data.grpno, lineupgroup);
+                        let mClslineuptmpaModel  = mClslineuptmpas.getModel();
+                        let mClslineuptmpbModels = mClslineuptmpbs.getModels();
+                        let mClslineuptmpcModels = mClslineuptmpcs.getModels();
 
-            //     /* 선택 */
-            //     $("#CULT-div-searchResult .MClss-make-btn-choose").off("click").on("click", function()
-            //     {
-            //         let option = CULT.Data.option;
-            //         let grpno = CULT.Data.grpno;
-            //         let clsno  = $(this).attr("clsno");
+                        /* clear html */
+                        $(".CULT-div-lineupBtn[div-type=tmp]").empty();
+                        $(".CULT-div-lineupDetails[div-type=tmp]").empty();
 
-            //         switch(option)
-            //         {
-            //             case "chooseFromF10":
-            //             {
-            //                 Common.showProgress();
-            //                 setTimeout(function()
-            //                 {
-            //                     let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
-            //                     if(mCls == null)
-            //                     {
-            //                         Common.toastError("일정을 불러오지 못했습니다.");
-            //                         Common.hideProgress();
-            //                         return;
-            //                     }
+                        /* set title */
+                        $("#CULT-span-tmpLineuptitle").text(mClslineuptmpaModel.getLineuptitle());
 
-            //                     /* to F10ClassUpdate000Default */
-            //                     $("#CUDE-input-clstitle").val(mCls.getClstitle());
-            //                     $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
-            //                     $("#CUDE-input-clsground").val(mCls.getClsground());
-            //                     $("#CUDE-input-clsgroundaddr").val(mCls.getClsgroundaddr());
-            //                     $("#CUDE-input-clsbillapplyprice").val(mCls.getClsbillapplyprice());
-            //                     $("#CUDE-input-clsbillapplyunit").val(mCls.getClsbillapplyunit());
-            //                     GGdate.toDivYearToMin("#CUDE-div-clsstartdt", new Date(mCls.getClsstartdt()));
-            //                     GGdate.toDivYearToMin("#CUDE-div-clsclosedt", new Date(mCls.getClsclosedt()));
-            //                     GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", new Date(mCls.getClsapplystartdt()));
-            //                     GGdate.toDivYearToMin("#CUDE-div-clsapplyclosedt", new Date(mCls.getClsapplyclosedt()));
-            //                     CUDE.keyup();
+                        /* set lineup */
+                        for(let i in mClslineuptmpbModels)
+                        {
+                            let bModel = mClslineuptmpbModels[i];
+                            let lineupidx = bModel.getLineupidx();
+                            let lineupname = bModel.getLineupname();
+                            CULT.addLineupBox("tmp", lineupidx, lineupname);
+                        }
+                        for(let i in mClslineuptmpcModels)
+                        {
+                            let cModel = mClslineuptmpcModels[i];
+                            let dat =
+                            {
+                                LINEUPIDX  : cModel.getLineupidx(),
+                                ORDERNO    : cModel.getOrderno(),
+                                BATTINGFLG : cModel.getBattingflg(),
+                                POSITION   : cModel.getPosition(),
+                            };
+                            CULT.addLineupRow("tmp", dat);
+                        }
+                        CULT.addLineupEvent();
 
-            //                     /* close CULT */
-            //                     CULT.close(true);
+                        /* 화면 표시 */
+                        $("#CULT-div-tmpList").hide();
+                        $("#CULT-div-tmpDetail").show();
 
-            //                     Common.hideProgress();
-            //                 }, ajaxDelayTime);
-            //                 break;
-            //             }
-            //             default:
-            //             {
-            //                 Common.toastError("잘못된 접근입니다.");
-            //                 CULT.close(true);
-            //                 break;
-            //             }
-            //         }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                });
 
-            //     });
-            // },
+                /* 전체적용 버튼 */
+                $(".CULT-btn-clslineuptmpaRender").off("click").on("click", function()
+                {
+                    let lineupgroup = $(this).attr("lineupgroup");
+                    let mClslineuptmpa = Api.Clslineuptmpa.selectByGrpnoLineupgroup(CULT.Data.grpno, lineupgroup);
+                    if(mClslineuptmpa.getModels().length == 0) { Common.toast("데이터를 불러오는데 실패했습니다."); return; }
+                    let model = mClslineuptmpa.getModels()[0];
+                    let dataForB = model.getDataForB();
+                    let dataForC = model.getDataForC();
+
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        CUTF.applyLineupData(dataForB, dataForC);
+                        Common.hideProgress();
+                        Common.toast("라인업에 적용되었습니다.");
+                    }, ajaxDelayTime);
+                });
+            },
+
+            /* ========================= */
+            /* 최근일정 탭 */
+            /* ========================= */
+
+            /* ========================= */
+            /* 참가설정에 적용 */
+            /* ========================= */
 
             /* ========================= */
             /* close */
@@ -308,27 +351,182 @@
         $(document).ready(function()
         {
             /* ======================== */
-            /* event */
+            /* 이벤트 */
             /* ======================== */
 
-            /* tab */
-            $(".CULT-td-maintab").click(function()
+            /* =============== */
+            /* 뒤로가기 */
+            /* =============== */
+            $(".CULT-btn-back").click(function()
             {
-                let tabChoosed = $(this).attr("maintab");
-                CULT.Data.tab = tabChoosed;
+                switch(CULT.Data.page)
+                {
+                    case CULT.Const.PAGE_MENU: { CULT.close(); break; }
+                    case CULT.Const.PAGE_SAVE: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-savetop").hide(); $("#CULT-div-menuTop").show(); break; }
+                    case CULT.Const.PAGE_LOAD: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-loadtop").hide(); $("#CULT-div-menuTop").show(); break; }
+                }
+            });
 
-                $(".CULT-div-maintab").hide();
-                $(`.CULT-div-maintab[maintab='${tabChoosed}']`).show();
+            /* =============== */
+            /* 저장하기 */
+            /* =============== */
+            $("#CULT-btn-toSaveTab").click(function()
+            {
+                CULT.Data.page = CULT.Const.PAGE_SAVE;
+                $("#CULT-div-menuTop").hide(); $("#CULT-div-savetop").show();
 
-                /* init */
-                CULT.initByTab();
+
+                /* 라인업 데이터 가져오기 */
+                let data = CUTF.getLineupData();
+                let lineuparr = [];
+                for(let i in data)
+                {
+                    let dat = data[i];
+                    CULT.addLineupBox("save", dat.LINEUPIDX, dat.LINEUPNAME);
+                    CULT.addLineupRow("save", dat);
+                }
+                CULT.addLineupEvent();
+
+                /* 첫번째 라인업 선택 */
+                $(".CULT-div-lineupBtn[div-type='save']").find(".CULT-btn-lineupTab").first().click();
+            });
+            $("#CULT-btn-toLoadTab").click(function()
+            { CULT.Data.page = CULT.Const.PAGE_LOAD; $("#CULT-div-menuTop").hide(); $("#CULT-div-loadtop").show(); $(`.CULT-td-loadtab:nth-child(1)`).click(); });
+
+            /* =============== */
+            /* 저장하기 > 저장 */
+            /* =============== */
+            $("#CULT-btn-save").click(function()
+            {
+                let process = function()
+                {
+                    /* get input */
+                    let lineuptitle = $("#CULT-input-lineuptitle").val().trim();
+
+                    /* get data */
+                    let dataForB = [];
+                    let dataForC = [];
+                    $(".CULT-div-lineupDetails[div-type='save'] > .CULT-div-lineupTab").each(function()
+                    {
+                        let lineupidx = $(this).attr("lineupidx");
+                        let lineupname = $(this).find(".CULT-span-lineupname").text();
+                        dataForB.push(
+                        {
+                            LINEUPIDX  : lineupidx,
+                            LINEUPNAME : lineupname,
+                        });
+
+                        $(`.CULT-tbl-lineupTeam[div-type='save'][lineupidx="${lineupidx}"] > tbody > tr`).each(function()
+                        {
+                            let orderno = $(this).find("td[col='numb']").attr("orderno");
+                            let battingflg = $(this).find("td[col='batf']").attr("battingflg");
+                            let position = $(this).find("td[col='pstn']").attr("position");
+                            dataForC.push(
+                            {
+                                LINEUPIDX  : lineupidx,
+                                ORDERNO    : orderno,
+                                BATTINGFLG : battingflg,
+                                POSITION   : position,
+                            });
+                        });
+                    });
+
+                    /* save */
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        /* save process */
+                        let saveProcess = function()
+                        {
+                            Api.Clslineuptmpa.insertFromPage(CULT.Data.grpno, lineuptitle, dataForB, dataForC, GGF.toast, GGF.toast);
+                            Common.hideProgress();
+                        }
+
+                        /* check duplicate */
+                        let mClslineuptmpas = Api.Clslineuptmpa.selectByGrpnoLineuptitle(CULT.Data.grpno, lineuptitle, GGF.none, GGF.toast);
+                        if(mClslineuptmpas.getModels().length > 0)
+                            Common.confirm2("같은 이름의 템플릿이 이미 존재합니다. 덮어쓰시겠습니까?", saveProcess, function() { Common.hideProgress(); });
+                        else
+                            saveProcess();
+
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("현재 라인업을 템플릿으로 저장하시겠습니까?", process);
+            });
+
+            /* =============== */
+            /* 불러오기 */
+            /* =============== */
+            $(".CULT-td-loadtab").click(function()
+            {
+                let tab = $(this).attr("loadtab");
+                CULT.Data.tab = tab;
+                $(".CULT-div-loadtab").hide();
+                $(`.CULT-div-loadtab[loadtab='${tab}']`).show();
+
+                /* process by tab */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    switch(tab)
+                    {
+                        case "def":
+                        {
+
+                            break;
+                        }
+                        case "tmp":
+                        {
+                            /* set models */
+                            let mClslineuptmpas = Api.Clslineuptmpa.selectByGrpno(CULT.Data.grpno);
+                            let mClslineuptmpasModels = mClslineuptmpas.getModels();
+                            let html = "";
+                            for(let i in mClslineuptmpasModels)
+                            {
+                                let model = mClslineuptmpasModels[i];
+                                let lineupgroup = model.getLineupgroup();
+                                let btnHtml =
+                                `
+                                    <button class="CULT-btn-clslineuptmpaDetail common-btn-outline" lineupgroup="${lineupgroup}">상세보기</button>
+                                    <button class="CULT-btn-clslineuptmpaRender common-btn-outline" lineupgroup="${lineupgroup}">전체적용</button>
+                                `;
+                                html += model.make(btnHtml);
+                            }
+                            $("#CULT-div-tmpList").html(html);
+
+                            /* set event */
+                            CULT.setEventForTmpTab();
+                            break;
+                        }
+                        case "cls":
+                        {
+                            /* CULT.Data.pagenumcls; */
+
+                            // $("#CULT-div-clsList").show();
+                            // $("#CULT-div-clsDetail").hide();
+
+                            // let rslt = Api.Clslineupa.selectByGrpnoExcludeClsno(CULT.Data.grpno, CULT.Data.clsno, GGF.none, GGF.toast);
+                            // CULT.Temp.clsModels = rslt.getModels();
+                            // CULT.renderClsList(CULT.Temp.clsPagenum);
+                            break;
+                        }
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* =============== */
+            /* 불러오기 > 돌아가기 */
+            /* =============== */
+            $("#CULT-btn-tmpDetailBack").click(function()
+            {
+                $("#CULT-div-tmpDetail").hide();
+                $("#CULT-div-tmpList").show();
             });
 
             /* ========================= */
             /* page process */
             /* ========================= */
-
-            /* get data from Config */
             try
             {
                 CULT.Data = Navigation.getPageParam();
@@ -342,6 +540,5 @@
         });
 
     </script>
-
 
 </ons-page>

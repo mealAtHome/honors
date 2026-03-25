@@ -122,6 +122,10 @@
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
     $options["WEEK"]                                                = get("WEEK"); /* abstract */
     $options["YEAR"]                                                = get("YEAR"); /* abstract */
+    $options["CLSLINEUPTMPB_ARR"]                                   = get("CLSLINEUPTMPB_ARR"); /* abstract */
+    $options["CLSLINEUPTMPC_ARR"]                                   = get("CLSLINEUPTMPC_ARR"); /* abstract */
+    $options["LINEUPTITLE"]                                         = get("LINEUPTITLE");
+    $options["LINEUPGROUP"]                                         = get("LINEUPGROUP");
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))

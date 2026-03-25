@@ -102,7 +102,7 @@ class MCls
         html +=
         `
             <div class="MClss-make-div-modelTop common-div-card">
-                <table class="common-tbl-label" label-size="3rd">
+                <table class="common-tbl-imglabel" label-size="3rd">
                     <tbody>
                         <tr>
                             <td><div class="common-img-label" style="background-image:url('${model.getGrpimgPath()}')"></div></td>

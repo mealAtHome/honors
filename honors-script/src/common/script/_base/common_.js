@@ -64,13 +64,14 @@ var Common =
             null
     */
     /* ================ */
-    confirm2(msg, okCallback)
+    confirm2(msg, okCallback, ngCallback)
     {
         Common.confirm
         ({
             title      : "알림",
             msg        : msg,
             okCallback : okCallback,
+            noCallback : ngCallback,
         });
     },
     confirmClose(msg="입력사항이 저장되지 않습니다. 그래도 닫으시겠습니까?")

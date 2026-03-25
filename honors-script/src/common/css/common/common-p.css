@@ -15,7 +15,7 @@
     display: block;
     margin: 0.4em 0em; /* top bottom */
     color:rgb(2,6,84);
-    font-weight: 900;
+    font-weight: bold;
     line-height:1.4em;
     font-size:1.1em;
 }
@@ -23,6 +23,20 @@
 .common-div-cushion    > .common-p-title { margin-top:0em; }
 .common-div-cushionLRD > .common-p-title { margin-top:0em; }
 .common-div-cushionTop > .common-p-title { margin-top:0em; }
+
+.common-p-entityTitle
+{
+    display: block;
+    margin: 0.4em 0em; /* top bottom */
+    color:gray;
+    font-weight: bold;
+    line-height:1.4em;
+    font-size:1em;
+}
+.common-div-card       > .common-p-entityTitle { margin-top:0em; }
+.common-div-cushion    > .common-p-entityTitle { margin-top:0em; }
+.common-div-cushionLRD > .common-p-entityTitle { margin-top:0em; }
+.common-div-cushionTop > .common-p-entityTitle { margin-top:0em; }
 
 /* ------------------------------ */
 /* insert 페이지의 타이틀 */

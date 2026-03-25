@@ -23,6 +23,9 @@ class GGnavi
     static public function getClsBO()                                               { require_once ROOT."/src/system/bo-table/ClsBO.php"; }
     static public function getClslineupaBO()                                        { require_once ROOT."/src/system/bo-table/ClslineupaBO.php"; }
     static public function getClslineupbBO()                                        { require_once ROOT."/src/system/bo-table/ClslineupbBO.php"; }
+    static public function getClslineuptmpaBO()                                     { require_once ROOT."/src/system/bo-table/ClslineuptmpaBO.php"; }
+    static public function getClslineuptmpbBO()                                     { require_once ROOT."/src/system/bo-table/ClslineuptmpbBO.php"; }
+    static public function getClslineuptmpcBO()                                     { require_once ROOT."/src/system/bo-table/ClslineuptmpcBO.php"; }
     static public function getClspurchaseBO()                                       { require_once ROOT."/src/system/bo-table/ClspurchaseBO.php"; }
     static public function getClspurchasehistBO()                                   { require_once ROOT."/src/system/bo-table/ClspurchasehistBO.php"; }
     static public function getClssettleBO()                                         { require_once ROOT."/src/system/bo-table/ClssettleBO.php"; }

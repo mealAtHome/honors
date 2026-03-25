@@ -45,8 +45,9 @@ class ClslineupaBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const selectByClsno           = "selectByClsno";
-    const selectByClsnoForInside  = "selectByClsnoForInside";
+    const selectByClsno                = "selectByClsno";
+    const selectByClsnoForInside       = "selectByClsnoForInside";
+    const selectByGrpnoExcludeClsno    = "selectByGrpnoExcludeClsno";
     protected function select($options, $option="")
     {
         /* vars */
@@ -82,6 +83,52 @@ class ClslineupaBO extends _CommonBO
         {
             case self::selectByClsno         : { $from = "(select * from clslineupa where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             case self::selectByClsnoForInside: { $from = "(select * from clslineupa where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByGrpnoExcludeClsno:
+            {
+                $excludeCond = Common::isEmpty($CLSNO) ? "" : "and t.clsno != '$CLSNO'";
+                $select =
+                "
+                      t.grpno
+                    , t.clsno
+                    , t.lineupidx
+                    , t.lineupname
+                    , cls.clstitle
+                    , cls.clsstartdt
+                ";
+                $orderby =
+                "
+                      cls.clsstartdt desc
+                    , t.clsno desc
+                    , t.lineupidx
+                ";
+                $from =
+                "
+                    (
+                        select
+                              lua.grpno
+                            , lua.clsno
+                            , lua.lineupidx
+                            , lua.lineupname
+                            , cls.clstitle
+                            , cls.clsstartdt
+                        from
+                            clslineupa lua
+                            left join cls
+                                on cls.grpno = lua.grpno and cls.clsno = lua.clsno
+                        where
+                            lua.grpno = '$GRPNO'
+                            $excludeCond
+                    ) t
+                ";
+                $query =
+                "
+                    select $select
+                    from $from
+                    order by $orderby
+                ";
+                $rslt = GGsql::select($query, $from, $options);
+                return $rslt;
+            }
             default:
             {
                 throw new GGexception("(server) no option defined");

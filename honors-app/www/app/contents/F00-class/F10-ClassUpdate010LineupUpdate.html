@@ -263,7 +263,8 @@
                 $(".CUTF-btn-lineuptmp").off("click").on("click", function()
                 {
                     let lineupidx = parseInt($(this).attr("lineupidx"));
-                    Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate011Lineuptmp, {grpno:CUTF.Data.grpno, lineupidx:lineupidx, });
+                    CUTF.Data.executeShowWhenClose = false;
+                    Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate011Lineuptmp, {grpno:CUTF.Data.grpno, clsno:CUTF.Data.clsno, lineupidx:lineupidx, });
                 });
             },
 
@@ -406,7 +407,7 @@
             $("#CUTF-btn-lineuptmp").click(function()
             {
                 CUTF.Data.executeShowWhenClose = false;
-                Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate011Lineuptmp, {grpno:CUTF.Data.grpno, });
+                Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate011Lineuptmp, {grpno:CUTF.Data.grpno, clsno:CUTF.Data.clsno, });
             });
             $("#CUTF-btn-lineupAdd").click(function()
             {

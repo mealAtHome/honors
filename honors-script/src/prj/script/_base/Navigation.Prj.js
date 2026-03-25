@@ -29,6 +29,11 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* clslineupa */                case "Api.Clslineupa.update"                                : url = serverHost + "/src/data/clslineupa/updateClslineupa.php"; break;
         /* clslineupb */                case "Api.Clslineupb.select"                                : url = serverHost + "/src/data/clslineupb/selectClslineupb.php"; break;
         /* clslineupb */                case "Api.Clslineupb.update"                                : url = serverHost + "/src/data/clslineupb/updateClslineupb.php"; break;
+        /* clslineuptmpa */             case "Api.Clslineuptmpa.select"                             : url = serverHost + "/src/data/clslineuptmpa/selectClslineuptmpa.php"; break;
+        /* clslineuptmpa */             case "Api.Clslineuptmpa.update"                             : url = serverHost + "/src/data/clslineuptmpa/updateClslineuptmpa.php"; break;
+        /* clslineuptmpb */             case "Api.Clslineuptmpb.select"                             : url = serverHost + "/src/data/clslineuptmpb/selectClslineuptmpb.php"; break;
+        /* clslineuptmpb */             case "Api.Clslineuptmpb.update"                             : url = serverHost + "/src/data/clslineuptmpb/updateClslineuptmpb.php"; break;
+        /* clslineuptmpc */             case "Api.Clslineuptmpc.select"                             : url = serverHost + "/src/data/clslineuptmpc/selectClslineuptmpc.php"; break;
         /* clspurchase */               case "Api.Clspurchase.select"                               : url = serverHost + "/src/data/clspurchase/selectClspurchase.php"; break;
         /* clspurchase */               case "Api.Clspurchase.update"                               : url = serverHost + "/src/data/clspurchase/updateClspurchase.php"; break;
         /* clspurchasehist */           case "Api.Clspurchasehist.select"                           : url = serverHost + "/src/data/clspurchasehist/selectClspurchasehist.php"; break;

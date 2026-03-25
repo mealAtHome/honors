@@ -372,6 +372,15 @@
 .common-tbl-normal[tbl-type="rowborder"] > tbody > tr > td  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
 .common-tbl-normal[tbl-type="rowborder"] > tfoot > tr > td  { border-top:1px solid #dee2e6; border-bottom:1px solid #dee2e6; }
 
+.common-tbl-normal[tbl-type="colborder"] > thead > tr > th                      { border-left:1px solid #dee2e6; border-right:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="colborder"] > thead > tr > th:nth-child(1)         { border-left:none;                border-right:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="colborder"] > thead > tr > th:nth-last-child(1)    { border-left:1px solid #dee2e6; border-right:none; }
+.common-tbl-normal[tbl-type="colborder"] > tbody > tr > th                      { border-left:1px solid #dee2e6; border-right:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="colborder"] > tbody > tr > td                      { border-left:1px solid #dee2e6; border-right:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="colborder"] > tbody > tr > td:nth-child(1)         { border-left:none;                border-right:1px solid #dee2e6; }
+.common-tbl-normal[tbl-type="colborder"] > tbody > tr > td:nth-last-child(1)    { border-left:1px solid #dee2e6; border-right:none; }
+.common-tbl-normal[tbl-type="colborder"] > tfoot > tr > td                      { border-left:1px solid #dee2e6; border-right:1px solid #dee2e6; }
+
 /* ============================== */
 /* 슬라이드 입력폼용 테이블 */
 /* ============================== */

@@ -3,8 +3,9 @@ Api.Clslineupb =
     /* ========================= */
     /* select */
     /* ========================= */
-    selectByClsno                   (grpno, clsno, noticeOK, noticeFail) { return Api.Clslineupb.select({OPTION:"selectByClsno"                 , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
-    selectByClsnoForSettleForMng    (grpno, clsno, noticeOK, noticeFail) { return Api.Clslineupb.select({OPTION:"selectByClsnoForSettleForMng"  , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    selectByClsno                   (grpno, clsno,              noticeOK, noticeFail) { return Api.Clslineupb.select({OPTION:"selectByClsno"                 , GRPNO:grpno, CLSNO:clsno,                         }, noticeOK, noticeFail); },
+    selectByClsnoForSettleForMng    (grpno, clsno,              noticeOK, noticeFail) { return Api.Clslineupb.select({OPTION:"selectByClsnoForSettleForMng"  , GRPNO:grpno, CLSNO:clsno,                         }, noticeOK, noticeFail); },
+    selectByClsnoAndLineupidx       (grpno, clsno, lineupidx,  noticeOK, noticeFail) { return Api.Clslineupb.select({OPTION:"selectByClsnoAndLineupidx"      , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx,   }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* update */

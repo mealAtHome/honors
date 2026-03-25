@@ -6,6 +6,8 @@ class MClslineupa
         /* data */      this.clsno      = GGC.Common.char(dat.clsno);
         /* data */      this.lineupidx  = GGC.Common.int(dat.lineupidx);
         /* data */      this.lineupname = GGC.Common.varchar(dat.lineupname);
+        /* optional */  this.clstitle   = GGC.Common.varchar(dat.clstitle);
+        /* optional */  this.clsstartdt = GGC.Common.varchar(dat.clsstartdt);
     }
 
     /* ========================= */
@@ -14,7 +16,9 @@ class MClslineupa
     /* data */  getGrpno()      { return this.grpno; }
     /* data */  getClsno()      { return this.clsno; }
     /* data */  getLineupidx()  { return this.lineupidx; }
-    /* data */  getLineupname() { return this.lineupname; }
+    /* data */  getLineupname()  { return this.lineupname; }
+    /* data */  getClstitle()   { return this.clstitle; }
+    /* data */  getClsstartdt() { return this.clsstartdt; }
 }
 
 class MClslineupas extends _MCommon
