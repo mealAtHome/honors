@@ -410,12 +410,16 @@
 .common-tbl-slideformFooterBtn  > tbody > tr > th  { border:none; }
 .common-tbl-slideformFooterBtn  > tbody > tr > td  { border:none; }
 
-.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td          { width:100%; }
-.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td > button { width:100%; padding:0.6em; }
+.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td              { width:100%; }
+.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td > button     { width:100%; padding:0.6em; }
 
 .common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td:nth-child(1) { width:20%;  padding-right : 0.3em; }
 .common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td:nth-child(2) { width:100%; padding-left  : 0.3em; }
 .common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td > button     { width:100%; padding:0.6em; }
+
+.common-tbl-slideformFooterBtn[tbl-type="liner2"] > tbody > tr > td:nth-child(1) { width:50%; padding-right : 0.3em; }
+.common-tbl-slideformFooterBtn[tbl-type="liner2"] > tbody > tr > td:nth-child(2) { width:50%; padding-left  : 0.3em; }
+.common-tbl-slideformFooterBtn[tbl-type="liner2"] > tbody > tr > td > button     { width:100%; padding:0.6em; }
 
 
 /* ============================== */

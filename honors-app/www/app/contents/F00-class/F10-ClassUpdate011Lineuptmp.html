@@ -93,15 +93,22 @@
     </div>
 
     <!-- 라인업 상세 (hidden) -->
-    <div id="CULT-div-tmpDetail" style="display:none;">
+    <div id="CULT-div-tmpDetail" class="common-div-cushion" style="display:none;">
+
+        <!-- header -->
         <div class="CULT-div-detailHeader"></div>
-        <div class="CULT-div-lineupBtn common-tag-fontsize09" div-type="tmp"></div>
         <hr class="common-hr-paddingUD"/>
+
+        <!-- lineup details -->
+        <div class="CULT-div-lineupBtn common-tag-fontsize09" div-type="tmp"></div>
         <div class="CULT-div-lineupDetails" div-type="tmp"></div>
-        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+
+        <!-- footer buttons -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="liner2">
             <tbody>
                 <tr>
-                    <td><button id="CULT-btn-tmpApply" class="common-btn-inline">참가설정에 적용</button></td>
+                    <td><button id="CULT-btn-tmpApply" class="common-btn-inline">현재라인업 적용</button></td>
+                    <td><button id="CULT-btn-tmpApply" class="common-btn-inline">전체라인업 적용</button></td>
                 </tr>
             </tbody>
         </table>
@@ -126,6 +133,7 @@
                 PAGE_MENU:"menu",
                 PAGE_SAVE:"save",
                 PAGE_LOAD:"load",
+                PAGE_LDTL:"ldtl", /* lineup detail */
             },
 
             /* ===================== */
@@ -134,13 +142,51 @@
             show()
             {
                 if(CULT.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CULT.close(true); return; }
-                if(CULT.Data.tab        == undefined) { CULT.Data.tab = ""; }
+                if(CULT.Data.tab        == undefined) { CULT.Data.tab = "def"; }
                 if(CULT.Data.pagenumcls == undefined) { CULT.Data.pagenumcls = 1; }
                 if(CULT.Data.clsno      == undefined) { CULT.Data.clsno = ""; }
                 if(CULT.Data.page       == undefined) { CULT.Data.page = CULT.Const.PAGE_MENU; }
-
-
             },
+
+            /* ========================= */
+            /* div 이동 */
+            /* ========================= */
+            movePage(from, to)
+            {
+                switch(from)
+                {
+                    case CULT.Const.PAGE_MENU: { $("#CULT-div-menuTop").hide(); break; }
+                    case CULT.Const.PAGE_SAVE: { $("#CULT-div-savetop").hide(); break; }
+                    case CULT.Const.PAGE_LOAD: { $("#CULT-div-loadtop").hide(); break; }
+                    case CULT.Const.PAGE_LDTL: { $("#CULT-div-tmpDetail").hide(); break; }
+                }
+                switch(to)
+                {
+                    case CULT.Const.PAGE_MENU: { $("#CULT-div-menuTop").show(); break; }
+                    case CULT.Const.PAGE_SAVE: { $("#CULT-div-savetop").show(); break; }
+                    case CULT.Const.PAGE_LOAD: { $("#CULT-div-loadtop").show(); $(`.CULT-td-loadtab[loadtab=${CULT.Data.tab}]`).click(); break; }
+                    case CULT.Const.PAGE_LDTL: { $("#CULT-div-tmpDetail").show(); break; }
+                }
+                CULT.Data.page = to;
+            },
+            movePageToLineupDetail()
+            {
+                $("#CULT-div-tmpList").hide();
+                $("#CULT-div-loadtop").hide();
+                $("#CULT-div-tmpDetail").show();
+                CULT.Data.page = CULT.Const.PAGE_LDTL;
+            },
+            moveBack()
+            {
+                switch(CULT.Data.page)
+                {
+                    case CULT.Const.PAGE_MENU: { CULT.close(); break; }
+                    case CULT.Const.PAGE_SAVE: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-savetop").hide();   $("#CULT-div-menuTop").show(); break; }
+                    case CULT.Const.PAGE_LOAD: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-loadtop").hide();   $("#CULT-div-menuTop").show(); $(`.CULT-div-loadtab`).hide(); break; }
+                    case CULT.Const.PAGE_LDTL: { CULT.Data.page = CULT.Const.PAGE_LOAD; $("#CULT-div-tmpDetail").hide(); $("#CULT-div-loadtop").show(); $(`.CULT-div-loadtab[loadtab="${CULT.Data.tab}"]`).show(); break; }
+                }
+            },
+
 
             /* ========================= */
             /* 저장 탭 */
@@ -274,7 +320,8 @@
                         $(".CULT-div-lineupDetails[div-type=tmp]").empty();
 
                         /* set title */
-                        $("#CULT-span-tmpLineuptitle").text(mClslineuptmpaModel.getLineuptitle());
+                        $(".CULT-div-detailHeader").html(mClslineuptmpaModel.make());
+                        /* $("#CULT-span-tmpLineuptitle").text(mClslineuptmpaModel.getLineuptitle()); */
 
                         /* set lineup */
                         for(let i in mClslineuptmpbModels)
@@ -298,9 +345,11 @@
                         }
                         CULT.addLineupEvent();
 
+                        /* 첫번째 라인업 선택 */
+                        $(".CULT-div-lineupBtn[div-type='tmp']").find(".CULT-btn-lineupTab").first().click();
+
                         /* 화면 표시 */
-                        $("#CULT-div-tmpList").hide();
-                        $("#CULT-div-tmpDetail").show();
+                        CULT.movePageToLineupDetail();
 
                         Common.hideProgress();
                     }, ajaxDelayTime);
@@ -357,24 +406,15 @@
             /* =============== */
             /* 뒤로가기 */
             /* =============== */
-            $(".CULT-btn-back").click(function()
-            {
-                switch(CULT.Data.page)
-                {
-                    case CULT.Const.PAGE_MENU: { CULT.close(); break; }
-                    case CULT.Const.PAGE_SAVE: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-savetop").hide(); $("#CULT-div-menuTop").show(); break; }
-                    case CULT.Const.PAGE_LOAD: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-loadtop").hide(); $("#CULT-div-menuTop").show(); break; }
-                }
-            });
+            $(".CULT-btn-back").click(function() { CULT.moveBack(); });
 
             /* =============== */
             /* 저장하기 */
             /* =============== */
             $("#CULT-btn-toSaveTab").click(function()
             {
-                CULT.Data.page = CULT.Const.PAGE_SAVE;
-                $("#CULT-div-menuTop").hide(); $("#CULT-div-savetop").show();
-
+                /* 페이지 이동 */
+                CULT.movePage(CULT.Const.PAGE_MENU, CULT.Const.PAGE_SAVE);
 
                 /* 라인업 데이터 가져오기 */
                 let data = CUTF.getLineupData();
@@ -390,8 +430,6 @@
                 /* 첫번째 라인업 선택 */
                 $(".CULT-div-lineupBtn[div-type='save']").find(".CULT-btn-lineupTab").first().click();
             });
-            $("#CULT-btn-toLoadTab").click(function()
-            { CULT.Data.page = CULT.Const.PAGE_LOAD; $("#CULT-div-menuTop").hide(); $("#CULT-div-loadtop").show(); $(`.CULT-td-loadtab:nth-child(1)`).click(); });
 
             /* =============== */
             /* 저장하기 > 저장 */
@@ -457,6 +495,14 @@
             /* =============== */
             /* 불러오기 */
             /* =============== */
+            $("#CULT-btn-toLoadTab").click(function()
+            {
+                CULT.movePage(CULT.Const.PAGE_MENU, CULT.Const.PAGE_LOAD);
+            });
+
+            /* =============== */
+            /* 불러오기 > 탭 선택 */
+            /* =============== */
             $(".CULT-td-loadtab").click(function()
             {
                 let tab = $(this).attr("loadtab");
@@ -500,28 +546,11 @@
                         }
                         case "cls":
                         {
-                            /* CULT.Data.pagenumcls; */
-
-                            // $("#CULT-div-clsList").show();
-                            // $("#CULT-div-clsDetail").hide();
-
-                            // let rslt = Api.Clslineupa.selectByGrpnoExcludeClsno(CULT.Data.grpno, CULT.Data.clsno, GGF.none, GGF.toast);
-                            // CULT.Temp.clsModels = rslt.getModels();
-                            // CULT.renderClsList(CULT.Temp.clsPagenum);
                             break;
                         }
                     }
                     Common.hideProgress();
                 }, ajaxDelayTime);
-            });
-
-            /* =============== */
-            /* 불러오기 > 돌아가기 */
-            /* =============== */
-            $("#CULT-btn-tmpDetailBack").click(function()
-            {
-                $("#CULT-div-tmpDetail").hide();
-                $("#CULT-div-tmpList").show();
             });
 
             /* ========================= */
