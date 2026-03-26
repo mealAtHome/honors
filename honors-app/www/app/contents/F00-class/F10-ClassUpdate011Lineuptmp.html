@@ -16,7 +16,7 @@
             <li>라인업 템플릿을 저장하고 불러올 수 있는 페이지입니다.</li>
         </ul>
         <style>
-            #CULT-tbl-menuTop > tbody > tr > td { text-align: center; word-break: keep-all; }
+            #CULT-tbl-menuTop > tbody > tr > td { width:50%; text-align: center; word-break: keep-all; }
             .CULT-btn-menu
             {
                 min-width: 6.5em;
@@ -32,8 +32,8 @@
                         <td><button class="common-btn-outline CULT-btn-menu" id="CULT-btn-toLoadTab">불러오기</button></td>
                     </tr>
                     <tr>
-                        <td style="line-height:1.6em;">현재 라인업을 템플릿으로 저장</td>
-                        <td style="line-height:1.6em;">템플릿 혹은 최근일정에서 라인업 가져오기</td>
+                        <td style="vertical-align:top; line-height:1.6em;">현재 라인업을<br> 템플릿으로 저장</td>
+                        <td style="vertical-align:top; line-height:1.6em;">저장한 템플릿 혹은<br> 최근일정에서 라인업 가져오기</td>
                     </tr>
                 </tbody>
             </table>
@@ -114,8 +114,8 @@
         <table class="common-tbl-slideformFooterBtn" tbl-type="liner2">
             <tbody>
                 <tr>
-                    <td><button id="CULT-btn-tmpApply" class="common-btn-inline">현재라인업 적용</button></td>
-                    <td><button id="CULT-btn-tmpApply" class="common-btn-inline">전체라인업 적용</button></td>
+                    <td><button id="CULT-btn-tmpApplyNow" class="common-btn-inline">현재라인업 적용</button></td>
+                    <td><button id="CULT-btn-tmpApplyAll" class="common-btn-inline">전체라인업 적용</button></td>
                 </tr>
             </tbody>
         </table>
@@ -500,6 +500,59 @@
             /* ========================= */
             /* 참가설정에 적용 */
             /* ========================= */
+            applyLineupToCUTF(lineupidx)
+            {
+                let lineupidxBefore = CUTF.Temp.lineupidx;
+                try
+                {
+                    /* make data for CUTF */
+                    let arr = [];
+                    let teamname = $(`.CULT-div-lineupTab[lineupidx=${lineupidx}] .CULT-span-lineupname`).text();
+
+                    /* make new lineup in CUTF */
+                    let lineupidxNew = CUTF.Temp.nextLineupidx;
+                    if(CUTF.addLineup(lineupidxNew, teamname) == false)
+                        return false;
+
+                    CUTF.Temp.lineupidx = lineupidxNew; /* focus on lineup */
+
+                    /* get data from CULT & make row in CUTF */
+                    $(`.CULT-div-lineupTab[lineupidx=${lineupidx}] .CULT-tbl-lineupTeam > tbody > tr`).each(function()
+                    {
+                        let orderno = $(this).find("td[col='numb']").attr("orderno");
+                        let battingflg = $(this).find("td[col='batf']").attr("battingflg");
+                        let position = $(this).find("td[col='pstn']").attr("position");
+                        let dat =
+                        {
+                            lineupidx  : lineupidxNew,
+                            orderno    : orderno,
+                            battingflg : battingflg,
+                            position   : position,
+                        }
+                        arr.push(dat);
+                        CUTF.addRow(null);
+                    });
+                    CUTF.updateRowNum();
+
+                    /* set data in CUTF */
+                    for(let i in arr)
+                    {
+                        let model = arr[i];
+                        let tr = $(`.CUTF-tbl-lineup[lineupidx="${model.lineupidx}"] > tbody > tr[orderno="${model.orderno}"]`);
+                        tr.find(`.CUTF-select-orderno`).val(model.orderno);
+                        tr.find(`.CUTF-input-battingflg`).prop("checked", model.battingflg === GGF.Y);
+                        tr.find(`.CUTF-input-position`).val(model.position);
+                    }
+                    CUTF.Temp.nextLineupidx++;
+                }
+                catch(e)
+                {
+                    console.error(e);
+                    Common.toast("라인업 적용 중 오류가 발생했습니다.");
+                    CUTF.Temp.lineupidx = lineupidxBefore;
+                }
+                return true;
+            },
 
             /* ========================= */
             /* close */
@@ -669,6 +722,36 @@
                         break;
                     }
                 }
+            });
+
+            /* =============== */
+            /* 불러오기 > 탭 선택 > 상세보기 > 현재 라인업을 적용 */
+            /* =============== */
+            $("#CULT-btn-tmpApplyNow").click(function()
+            {
+                /* get choosed */
+                let choosedLineup = $(".CULT-div-lineupBtn[div-type='tmp'] > .CULT-btn-lineupTab[tab=tab]");
+                let lineupidx = choosedLineup.attr("lineupidx");
+                if(choosedLineup.length == 0)
+                {
+                    Common.toast("적용할 라인업을 선택해주세요.");
+                    return;
+                }
+
+                /* apply lineup to CUTF */
+                if(CULT.applyLineupToCUTF(lineupidx))
+                    Common.toast("현재 라인업에 적용되었습니다.");
+
+            });
+            $("#CULT-btn-tmpApplyAll").click(function()
+            {
+                /* get choosed */
+                $(".CULT-div-lineupBtn[div-type='tmp'] > .CULT-btn-lineupTab").each(function()
+                {
+                    let lineupidx = $(this).attr("lineupidx");
+                    if(CULT.applyLineupToCUTF(lineupidx))
+                        Common.toast("현재 라인업에 적용되었습니다.");
+                });
             });
 
             /* ========================= */

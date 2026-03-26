@@ -162,6 +162,13 @@
 
             addLineup(lineupidx, lineupname)
             {
+                /* validation : 라인업은 최대 10개까지 지정가능 */
+                if($("#CUTF-div-lineupBtn").find(".CUTF-btn-tabTeam").length >= 10)
+                {
+                    Common.toast("라인업은 최대 10개까지 지정할 수 있습니다.");
+                    return false;
+                }
+
                 /* tab button */
                 let btnHtml =
                 `
@@ -235,8 +242,7 @@
                     {
                         $(`.CUTF-btn-tabTeam[lineupidx="${lineupidx}"]`).remove();
                         $(`.CUTF-div-tabTeam[lineupidx="${lineupidx}"]`).remove();
-                        if($(`.CUTF-btn-tabTeam[lineupidx="${lineupidx+1}"]`).length > 0) { $(`.CUTF-btn-tabTeam[lineupidx="${lineupidx+1}"]`).click(); return; }
-                        if($(`.CUTF-btn-tabTeam[lineupidx="${lineupidx-1}"]`).length > 0) { $(`.CUTF-btn-tabTeam[lineupidx="${lineupidx-1}"]`).click(); return; }
+                        $("#CUTF-div-lineupBtn").find(".CUTF-btn-tabTeam").last().click();
                     };
 
                     if($(CUTF.El.getTr()).length == 0)
@@ -266,6 +272,8 @@
                     CUTF.Data.executeShowWhenClose = false;
                     Navigation.moveFrontDialog(Navigation.Page.F10ClassUpdate011Lineuptmp, {grpno:CUTF.Data.grpno, clsno:CUTF.Data.clsno, lineupidx:lineupidx, });
                 });
+
+                return true;
             },
 
             addRow(mClslineupb=null)
@@ -329,7 +337,6 @@
                 {
                     let orderno = $(this).attr('orderno');
                     $(`${CUTF.El.getTr()}[orderno="${orderno}"]`).remove();
-                    console.log(CUTF.El.getTr(), orderno);
                     CUTF.updateRowNum();
                 });
 
