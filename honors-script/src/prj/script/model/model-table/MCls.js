@@ -95,7 +95,7 @@ class MCls
     /* ========================= */
     /* make with buttons */
     /* ========================= */
-    makeWithBtnHtml(btnHtml="")
+    make(btnHtml="")
     {
         let html = "";
         let model = this;
@@ -187,7 +187,7 @@ class MClss extends _MCommon
             }
 
             /* make html */
-            html += model.makeWithBtnHtml(btnHtml);
+            html += model.make(btnHtml);
         }
         $(el).html(html);
 
@@ -272,7 +272,7 @@ class MClss extends _MCommon
         {
             let model = this.getModels()[i];
             let btnHtml = `<button class="common-btn-inline MClss-make-btn-choose" ${model.getPk()}>선택하기</button>`;
-            html += model.makeWithBtnHtml(btnHtml);
+            html += model.make(btnHtml);
         }
 
         /* pagenation */

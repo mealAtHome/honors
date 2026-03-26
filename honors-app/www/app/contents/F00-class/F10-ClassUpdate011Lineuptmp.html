@@ -92,7 +92,14 @@
         <hr class="common-hr-paddingLR"/>
     </div>
 
+    <!-- 리스트 탭 -->
+    <div id="CULT-div-defList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="def"></div> <!-- 템플릿 탭 -->
+    <div id="CULT-div-tmpList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="tmp"></div> <!-- 템플릿 탭 -->
+    <div id="CULT-div-clsList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="cls"></div> <!-- 최근일정 탭 -->
+
+    <!-- ======================== -->
     <!-- 라인업 상세 (hidden) -->
+    <!-- ======================== -->
     <div id="CULT-div-tmpDetail" class="common-div-cushion" style="display:none;">
 
         <!-- header -->
@@ -113,11 +120,6 @@
             </tbody>
         </table>
     </div>
-
-    <!-- 리스트 탭 -->
-    <div id="CULT-div-defList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="def"></div> <!-- 템플릿 탭 -->
-    <div id="CULT-div-tmpList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="tmp"></div> <!-- 템플릿 탭 -->
-    <div id="CULT-div-clsList" class="CULT-div-loadtab common-div-cushion" style="display:none;" loadtab="cls"></div> <!-- 최근일정 탭 -->
 
     <script>
         var CULT =
@@ -171,7 +173,9 @@
             },
             movePageToLineupDetail()
             {
+                $("#CULT-div-defList").hide();
                 $("#CULT-div-tmpList").hide();
+                $("#CULT-div-clsList").hide();
                 $("#CULT-div-loadtop").hide();
                 $("#CULT-div-tmpDetail").show();
                 CULT.Data.page = CULT.Const.PAGE_LDTL;
@@ -326,20 +330,20 @@
                         /* set lineup */
                         for(let i in mClslineuptmpbModels)
                         {
-                            let bModel = mClslineuptmpbModels[i];
-                            let lineupidx = bModel.getLineupidx();
-                            let lineupname = bModel.getLineupname();
+                            let model = mClslineuptmpbModels[i];
+                            let lineupidx = model.getLineupidx();
+                            let lineupname = model.getLineupname();
                             CULT.addLineupBox("tmp", lineupidx, lineupname);
                         }
                         for(let i in mClslineuptmpcModels)
                         {
-                            let cModel = mClslineuptmpcModels[i];
+                            let model = mClslineuptmpcModels[i];
                             let dat =
                             {
-                                LINEUPIDX  : cModel.getLineupidx(),
-                                ORDERNO    : cModel.getOrderno(),
-                                BATTINGFLG : cModel.getBattingflg(),
-                                POSITION   : cModel.getPosition(),
+                                LINEUPIDX  : model.getLineupidx(),
+                                ORDERNO    : model.getOrderno(),
+                                BATTINGFLG : model.getBattingflg(),
+                                POSITION   : model.getPosition(),
                             };
                             CULT.addLineupRow("tmp", dat);
                         }
@@ -358,26 +362,140 @@
                 /* 전체적용 버튼 */
                 $(".CULT-btn-clslineuptmpaRender").off("click").on("click", function()
                 {
-                    let lineupgroup = $(this).attr("lineupgroup");
-                    let mClslineuptmpa = Api.Clslineuptmpa.selectByGrpnoLineupgroup(CULT.Data.grpno, lineupgroup);
-                    if(mClslineuptmpa.getModels().length == 0) { Common.toast("데이터를 불러오는데 실패했습니다."); return; }
-                    let model = mClslineuptmpa.getModels()[0];
-                    let dataForB = model.getDataForB();
-                    let dataForC = model.getDataForC();
+                    // let lineupgroup = $(this).attr("lineupgroup");
+                    // let mClslineuptmpa = Api.Clslineuptmpa.selectByGrpnoLineupgroup(CULT.Data.grpno, lineupgroup);
+                    // if(mClslineuptmpa.getModels().length == 0) { Common.toast("데이터를 불러오는데 실패했습니다."); return; }
+                    // let model = mClslineuptmpa.getModels()[0];
+                    // let dataForB = model.getDataForB();
+                    // let dataForC = model.getDataForC();
 
-                    Common.showProgress();
-                    setTimeout(function()
-                    {
-                        CUTF.applyLineupData(dataForB, dataForC);
-                        Common.hideProgress();
-                        Common.toast("라인업에 적용되었습니다.");
-                    }, ajaxDelayTime);
+                    // Common.showProgress();
+                    // setTimeout(function()
+                    // {
+                    //     CUTF.applyLineupData(dataForB, dataForC);
+                    //     Common.hideProgress();
+                    //     Common.toast("라인업에 적용되었습니다.");
+                    // }, ajaxDelayTime);
                 });
             },
 
             /* ========================= */
             /* 최근일정 탭 */
             /* ========================= */
+            searchForClsTab()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let grpno = CULT.Data.grpno;
+                    let pagenum  = CULT.Data.pagenumcls;
+                    let mClss = Api.Cls.selectByGrpnoForMng(grpno, pagenum);
+                    let mClsModels = mClss.getModels();
+                    let html = "";
+                    for(let i in mClsModels)
+                    {
+                        let model = mClsModels[i];
+                        let btnHtml =
+                        `
+                            <button class="CULT-btn-clslineuptmpaDetail common-btn-outline" clsno="${model.getClsno()}">상세보기</button>
+                            <button class="CULT-btn-clslineuptmpaRender common-btn-outline" clsno="${model.getClsno()}">전체적용</button>
+                        `;
+                        html += model.make(btnHtml);
+                    }
+                    if(mClss.getPagecnt() > 1)
+                    {
+                        let pagenation = mClss.getPagenation();
+                        html = pagenation + html + pagenation;
+                    }
+                    $("#CULT-div-clsList").html(html);
+                    CULT.setEventForClsTab(); /* set event */
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            setEventForClsTab()
+            {
+                /* 페이지네이션 */
+                $("#CULT-div-clsList .common-btn-pagenationBtn").off("click").on("click", function()
+                {
+                    let toPage = $(this).attr("to_page");
+                    CULT.Data.pagenumcls = parseInt(toPage);
+                    CULT.searchForClsTab();
+                });
+
+                /* 상세보기 버튼 */
+                $(".CULT-btn-clslineuptmpaDetail").off("click").on("click", function()
+                {
+                    let grpno = CULT.Data.grpno;
+                    let clsno = $(this).attr("clsno");
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mCls = Api.Cls.selectByPkForMng(grpno, clsno);
+                        let mClslineupas = Api.Clslineupa.selectByClsno(grpno, clsno);
+                        let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno);
+                        let mClslineupaModels = mClslineupas.getModels();
+                        let mClslineupbModels = mClslineupbs.getModels();
+
+                        /* clear html */
+                        $(".CULT-div-lineupBtn[div-type=tmp]").empty();
+                        $(".CULT-div-lineupDetails[div-type=tmp]").empty();
+
+                        /* set title */
+                        $(".CULT-div-detailHeader").html(mCls.make());
+
+                        /* set lineup */
+                        for(let i in mClslineupaModels)
+                        {
+                            let model = mClslineupaModels[i];
+                            let lineupidx = model.getLineupidx();
+                            let lineupname = model.getLineupname();
+                            CULT.addLineupBox("tmp", lineupidx, lineupname);
+                        }
+                        for(let i in mClslineupbModels)
+                        {
+                            let model = mClslineupbModels[i];
+                            let dat =
+                            {
+                                LINEUPIDX  : model.getLineupidx(),
+                                ORDERNO    : model.getOrderno(),
+                                BATTINGFLG : model.getBattingflg(),
+                                POSITION   : model.getPosition(),
+                            };
+                            CULT.addLineupRow("tmp", dat);
+                        }
+                        CULT.addLineupEvent();
+
+                        /* 첫번째 라인업 선택 */
+                        $(".CULT-div-lineupBtn[div-type='tmp']").find(".CULT-btn-lineupTab").first().click();
+
+                        /* 화면 표시 */
+                        CULT.movePageToLineupDetail();
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                });
+
+                /* 전체적용 버튼 */
+                $(".CULT-btn-clslineuptmpaRender").off("click").on("click", function()
+                {
+                    // let clsno = $(this).attr("clsno");
+                    // let mClslineuptmpa = Api.Clslineuptmpa.selectByGrpnoLineupgroup(CULT.Data.grpno, clsno);
+                    // if(mClslineuptmpa.getModels().length == 0) { Common.toast("데이터를 불러오는데 실패했습니다."); return; }
+                    // let model = mClslineuptmpa.getModels()[0];
+                    // let dataForB = model.getDataForB();
+                    // let dataForC = model.getDataForC();
+
+                    // Common.showProgress();
+                    // setTimeout(function()
+                    // {
+                    //     CUTF.applyLineupData(dataForB, dataForC);
+                    //     Common.hideProgress();
+                    //     Common.toast("라인업에 적용되었습니다.");
+                    // }, ajaxDelayTime);
+                });
+            },
 
             /* ========================= */
             /* 참가설정에 적용 */
@@ -511,17 +629,17 @@
                 $(`.CULT-div-loadtab[loadtab='${tab}']`).show();
 
                 /* process by tab */
-                Common.showProgress();
-                setTimeout(function()
+                switch(tab)
                 {
-                    switch(tab)
+                    case "def":
                     {
-                        case "def":
-                        {
 
-                            break;
-                        }
-                        case "tmp":
+                        break;
+                    }
+                    case "tmp":
+                    {
+                        Common.showProgress();
+                        setTimeout(function()
                         {
                             /* set models */
                             let mClslineuptmpas = Api.Clslineuptmpa.selectByGrpno(CULT.Data.grpno);
@@ -539,18 +657,18 @@
                                 html += model.make(btnHtml);
                             }
                             $("#CULT-div-tmpList").html(html);
+                            CULT.setEventForTmpTab(); /* set event */
 
-                            /* set event */
-                            CULT.setEventForTmpTab();
-                            break;
-                        }
-                        case "cls":
-                        {
-                            break;
-                        }
+                            Common.hideProgress();
+                        }, ajaxDelayTime);
+                        break;
                     }
-                    Common.hideProgress();
-                }, ajaxDelayTime);
+                    case "cls":
+                    {
+                        CULT.searchForClsTab();
+                        break;
+                    }
+                }
             });
 
             /* ========================= */

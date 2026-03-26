@@ -85,7 +85,6 @@ class ClslineupbBO extends _CommonBO
     const selectByPkForInside = "selectByPkForInside";
     const selectDuplicateApplyForInside = "selectDuplicateApplyForInside";
     const selectByClsnoForSettleForMng = "selectByClsnoForSettleForMng"; /* 중요 : 일정정산용 */
-    const selectByClsnoAndLineupidx = "selectByClsnoAndLineupidx";
     protected function select($options, $option="")
     {
         /* vars */
@@ -145,7 +144,6 @@ class ClslineupbBO extends _CommonBO
             case self::selectByClsnoForInside               : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             case self::selectByPkForInside                  : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and lineupidx = $LINEUPIDX and orderno = $ORDERNO) t"; break; }
             case self::selectDuplicateApplyForInside        : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
-            case self::selectByClsnoAndLineupidx            : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and lineupidx = '$LINEUPIDX') t"; break; }
             case self::selectByClsnoForSettleForMng :
             {
                 $select =

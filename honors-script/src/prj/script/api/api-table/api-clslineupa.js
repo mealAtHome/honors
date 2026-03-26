@@ -3,8 +3,7 @@ Api.Clslineupa =
     /* ========================= */
     /* select */
     /* ========================= */
-    selectByClsno                (grpno, clsno,        noticeOK, noticeFail) { return Api.Clslineupa.select({OPTION:"selectByClsno",              GRPNO:grpno, CLSNO:clsno,        }, noticeOK, noticeFail); },
-    selectByGrpnoExcludeClsno   (grpno, clsno,        noticeOK, noticeFail) { return Api.Clslineupa.select({OPTION:"selectByGrpnoExcludeClsno",  GRPNO:grpno, CLSNO:clsno,        }, noticeOK, noticeFail); },
+    selectByClsno (grpno, clsno, noticeOK, noticeFail) { return Api.Clslineupa.select({OPTION:"selectByClsno", GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main */
