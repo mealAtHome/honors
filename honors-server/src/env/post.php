@@ -20,6 +20,8 @@
     $options["ADRCVFLG"]                                            = get("ADRCVFLG");
     $options["APIKEY"]                                              = get("APIKEY");
     $options["ARR"]                                                 = get("ARR"); /* abstract */
+    $options["ARR1"]                                                = get("ARR1"); /* abstract */
+    $options["ARR2"]                                                = get("ARR2"); /* abstract */
     $options["AUTOLOGIN"]                                           = get("AUTOLOGIN");
     $options["BACCACCT"]                                            = get("BACCACCT");
     $options["BACCCODE"]                                            = get("BACCCODE");

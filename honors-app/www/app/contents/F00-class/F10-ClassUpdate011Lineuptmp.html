@@ -295,88 +295,6 @@
                     }
                     Common.confirm2("이 라인업을 삭제하시겠습니까?", process);
                 });
-
-                /* 적용버튼 */
-
-            },
-
-            /* ========================= */
-            /* 템플릿 탭 */
-            /* ========================= */
-            setEventForTmpTab()
-            {
-                /* 상세보기 버튼 */
-                $(".CULT-btn-clslineuptmpaDetail").off("click").on("click", function()
-                {
-                    let lineupgroup = $(this).attr("lineupgroup");
-                    Common.showProgress();
-                    setTimeout(function()
-                    {
-                        let mClslineuptmpas = Api.Clslineuptmpa.selectByPk(CULT.Data.grpno, lineupgroup);
-                        let mClslineuptmpbs = Api.Clslineuptmpb.selectByLineupgroup(CULT.Data.grpno, lineupgroup);
-                        let mClslineuptmpcs = Api.Clslineuptmpc.selectByLineupgroup(CULT.Data.grpno, lineupgroup);
-                        let mClslineuptmpaModel  = mClslineuptmpas.getModel();
-                        let mClslineuptmpbModels = mClslineuptmpbs.getModels();
-                        let mClslineuptmpcModels = mClslineuptmpcs.getModels();
-
-                        /* clear html */
-                        $(".CULT-div-lineupBtn[div-type=tmp]").empty();
-                        $(".CULT-div-lineupDetails[div-type=tmp]").empty();
-
-                        /* set title */
-                        $(".CULT-div-detailHeader").html(mClslineuptmpaModel.make());
-                        /* $("#CULT-span-tmpLineuptitle").text(mClslineuptmpaModel.getLineuptitle()); */
-
-                        /* set lineup */
-                        for(let i in mClslineuptmpbModels)
-                        {
-                            let model = mClslineuptmpbModels[i];
-                            let lineupidx = model.getLineupidx();
-                            let lineupname = model.getLineupname();
-                            CULT.addLineupBox("tmp", lineupidx, lineupname);
-                        }
-                        for(let i in mClslineuptmpcModels)
-                        {
-                            let model = mClslineuptmpcModels[i];
-                            let dat =
-                            {
-                                LINEUPIDX  : model.getLineupidx(),
-                                ORDERNO    : model.getOrderno(),
-                                BATTINGFLG : model.getBattingflg(),
-                                POSITION   : model.getPosition(),
-                            };
-                            CULT.addLineupRow("tmp", dat);
-                        }
-                        CULT.addLineupEvent();
-
-                        /* 첫번째 라인업 선택 */
-                        $(".CULT-div-lineupBtn[div-type='tmp']").find(".CULT-btn-lineupTab").first().click();
-
-                        /* 화면 표시 */
-                        CULT.movePageToLineupDetail();
-
-                        Common.hideProgress();
-                    }, ajaxDelayTime);
-                });
-
-                /* 전체적용 버튼 */
-                $(".CULT-btn-clslineuptmpaRender").off("click").on("click", function()
-                {
-                    // let lineupgroup = $(this).attr("lineupgroup");
-                    // let mClslineuptmpa = Api.Clslineuptmpa.selectByGrpnoLineupgroup(CULT.Data.grpno, lineupgroup);
-                    // if(mClslineuptmpa.getModels().length == 0) { Common.toast("데이터를 불러오는데 실패했습니다."); return; }
-                    // let model = mClslineuptmpa.getModels()[0];
-                    // let dataForB = model.getDataForB();
-                    // let dataForC = model.getDataForC();
-
-                    // Common.showProgress();
-                    // setTimeout(function()
-                    // {
-                    //     CUTF.applyLineupData(dataForB, dataForC);
-                    //     Common.hideProgress();
-                    //     Common.toast("라인업에 적용되었습니다.");
-                    // }, ajaxDelayTime);
-                });
             },
 
             /* ========================= */
@@ -395,11 +313,7 @@
                     for(let i in mClsModels)
                     {
                         let model = mClsModels[i];
-                        let btnHtml =
-                        `
-                            <button class="CULT-btn-clslineuptmpaDetail common-btn-outline" clsno="${model.getClsno()}">상세보기</button>
-                            <button class="CULT-btn-clslineuptmpaRender common-btn-outline" clsno="${model.getClsno()}">전체적용</button>
-                        `;
+                        let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outline" grpno="${grpno}" clsno="${model.getClsno()}">상세보기</button>`;
                         html += model.make(btnHtml);
                     }
                     if(mClss.getPagecnt() > 1)
@@ -476,24 +390,66 @@
                         Common.hideProgress();
                     }, ajaxDelayTime);
                 });
+            },
 
-                /* 전체적용 버튼 */
-                $(".CULT-btn-clslineuptmpaRender").off("click").on("click", function()
+            /* ========================= */
+            /* 상세보기 버튼 이벤트 설정 */
+            /* ========================= */
+            setEventForDetailBtn()
+            {
+                /* 상세보기 버튼 */
+                $(".CULT-btn-clslineuptmpaDetail").off("click").on("click", function()
                 {
-                    // let clsno = $(this).attr("clsno");
-                    // let mClslineuptmpa = Api.Clslineuptmpa.selectByGrpnoLineupgroup(CULT.Data.grpno, clsno);
-                    // if(mClslineuptmpa.getModels().length == 0) { Common.toast("데이터를 불러오는데 실패했습니다."); return; }
-                    // let model = mClslineuptmpa.getModels()[0];
-                    // let dataForB = model.getDataForB();
-                    // let dataForC = model.getDataForC();
+                    let grpno = $(this).attr("grpno");
+                    let lineupgroup = $(this).attr("lineupgroup");
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mClslineuptmpas = Api.Clslineuptmpa.selectByPk(grpno, lineupgroup);
+                        let mClslineuptmpbs = Api.Clslineuptmpb.selectByLineupgroup(grpno, lineupgroup);
+                        let mClslineuptmpcs = Api.Clslineuptmpc.selectByLineupgroup(grpno, lineupgroup);
+                        let mClslineuptmpaModel  = mClslineuptmpas.getModel();
+                        let mClslineuptmpbModels = mClslineuptmpbs.getModels();
+                        let mClslineuptmpcModels = mClslineuptmpcs.getModels();
 
-                    // Common.showProgress();
-                    // setTimeout(function()
-                    // {
-                    //     CUTF.applyLineupData(dataForB, dataForC);
-                    //     Common.hideProgress();
-                    //     Common.toast("라인업에 적용되었습니다.");
-                    // }, ajaxDelayTime);
+                        /* clear html */
+                        $(".CULT-div-lineupBtn[div-type=tmp]").empty();
+                        $(".CULT-div-lineupDetails[div-type=tmp]").empty();
+
+                        /* set title */
+                        $(".CULT-div-detailHeader").html(mClslineuptmpaModel.make());
+                        /* $("#CULT-span-tmpLineuptitle").text(mClslineuptmpaModel.getLineuptitle()); */
+
+                        /* set lineup */
+                        for(let i in mClslineuptmpbModels)
+                        {
+                            let model = mClslineuptmpbModels[i];
+                            let lineupidx = model.getLineupidx();
+                            let lineupname = model.getLineupname();
+                            CULT.addLineupBox("tmp", lineupidx, lineupname);
+                        }
+                        for(let i in mClslineuptmpcModels)
+                        {
+                            let model = mClslineuptmpcModels[i];
+                            let dat =
+                            {
+                                LINEUPIDX  : model.getLineupidx(),
+                                ORDERNO    : model.getOrderno(),
+                                BATTINGFLG : model.getBattingflg(),
+                                POSITION   : model.getPosition(),
+                            };
+                            CULT.addLineupRow("tmp", dat);
+                        }
+                        CULT.addLineupEvent();
+
+                        /* 첫번째 라인업 선택 */
+                        $(".CULT-div-lineupBtn[div-type='tmp']").find(".CULT-btn-lineupTab").first().click();
+
+                        /* 화면 표시 */
+                        CULT.movePageToLineupDetail();
+
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
                 });
             },
 
@@ -510,7 +466,7 @@
                     let teamname = $(`.CULT-div-lineupTab[lineupidx=${lineupidx}] .CULT-span-lineupname`).text();
 
                     /* make new lineup in CUTF */
-                    let lineupidxNew = CUTF.Temp.nextLineupidx;
+                    let lineupidxNew = CUTF.Temp.lineupidxNext;
                     if(CUTF.addLineup(lineupidxNew, teamname) == false)
                         return false;
 
@@ -543,7 +499,7 @@
                         tr.find(`.CUTF-input-battingflg`).prop("checked", model.battingflg === GGF.Y);
                         tr.find(`.CUTF-input-position`).val(model.position);
                     }
-                    CUTF.Temp.nextLineupidx++;
+                    CUTF.Temp.lineupidxNext++;
                 }
                 catch(e)
                 {
@@ -686,7 +642,25 @@
                 {
                     case "def":
                     {
+                        Common.showProgress();
+                        setTimeout(function()
+                        {
+                            /* set models */
+                            let mClslineuptmpas = Api.Clslineuptmpa.selectByGrpno(GGF.SYSTEM);
+                            let mClslineuptmpasModels = mClslineuptmpas.getModels();
+                            let html = "";
+                            for(let i in mClslineuptmpasModels)
+                            {
+                                let model = mClslineuptmpasModels[i];
+                                let lineupgroup = model.getLineupgroup();
+                                let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outline" grpno="${model.getGrpno()}" lineupgroup="${lineupgroup}">상세보기</button>`;
+                                html += model.make(btnHtml);
+                            }
+                            $("#CULT-div-defList").html(html);
+                            CULT.setEventForDetailBtn(); /* set event */
 
+                            Common.hideProgress();
+                        }, ajaxDelayTime);
                         break;
                     }
                     case "tmp":
@@ -702,15 +676,11 @@
                             {
                                 let model = mClslineuptmpasModels[i];
                                 let lineupgroup = model.getLineupgroup();
-                                let btnHtml =
-                                `
-                                    <button class="CULT-btn-clslineuptmpaDetail common-btn-outline" lineupgroup="${lineupgroup}">상세보기</button>
-                                    <button class="CULT-btn-clslineuptmpaRender common-btn-outline" lineupgroup="${lineupgroup}">전체적용</button>
-                                `;
+                                let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outline" grpno="${model.getGrpno()}" lineupgroup="${lineupgroup}">상세보기</button>`;
                                 html += model.make(btnHtml);
                             }
                             $("#CULT-div-tmpList").html(html);
-                            CULT.setEventForTmpTab(); /* set event */
+                            CULT.setEventForDetailBtn(); /* set event */
 
                             Common.hideProgress();
                         }, ajaxDelayTime);

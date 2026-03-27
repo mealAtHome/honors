@@ -6,6 +6,11 @@ Api.Clslineupa =
     selectByClsno (grpno, clsno, noticeOK, noticeFail) { return Api.Clslineupa.select({OPTION:"selectByClsno", GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
 
     /* ========================= */
+    /* update */
+    /* ========================= */
+    updateFromPage(grpno, clsno, arr, noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateFromPage", GRPNO:grpno, CLSNO:clsno, ARR:JSON.stringify(arr), noticeOK, noticeFail); },
+
+    /* ========================= */
     /* main */
     /* ========================= */
     select(ajaxData, noticeOK, noticeFail)

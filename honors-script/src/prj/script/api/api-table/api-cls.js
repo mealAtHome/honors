@@ -69,7 +69,7 @@ Api.Cls =
     updateClsstatusIngToEnd       (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusIngToEnd"   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
     updateClssettleflgDone        (grpno, clsno, arr             , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClssettleflgDone"    , GRPNO:grpno, CLSNO:clsno, ARR:arr }, noticeOK, noticeFail); },
     updateClsstatusToCancel       (grpno, clsno, clscancelreason , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusToCancel"   , GRPNO:grpno, CLSNO:clsno, CLSCANCELREASON:clscancelreason }, noticeOK, noticeFail); },
-    deleteByPkForMng              (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "deleteByPkForMng"          , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    deleteByPkWithSubForMng       (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "deleteByPkWithSubForMng"   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
 
 
     /*
@@ -88,7 +88,7 @@ Api.Cls =
             Common.confirm2(`일정을 복사하시겠습니까?`, process);
         });
      */
-    copyClsForMng                 (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "copyClsForMng"                   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    copyClsForMng(grpno, clsno, noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "copyClsForMng", GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main */

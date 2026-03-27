@@ -2,6 +2,7 @@ var GGF =
 {
     Y : 'y',
     N : 'n',
+    SYSTEM: "system",
 
     none  : "none",
     toast : "toast",

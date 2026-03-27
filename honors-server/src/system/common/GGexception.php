@@ -17,7 +17,16 @@ class GGexceptionAuth extends GGexception
         $message = "(system) auth failed";
         parent::__construct($message, $code, $previous);
     }
+}
 
+/* 유저에게 밝힐 수 없는 예외 */
+class GGexceptionRule extends Exception
+{
+    public function __construct($message="", $code = 0, Throwable $previous = null)
+    {
+        $message = "(system) rule failed";
+        parent::__construct($message, $code, $previous);
+    }
 }
 
 ?>

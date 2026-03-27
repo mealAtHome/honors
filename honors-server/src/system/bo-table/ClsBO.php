@@ -16,7 +16,7 @@ class ClsBO extends _CommonBO
     {
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
-        GGnavi::getClslineupbBO();
+        GGnavi::getClslineupaBO();
         GGnavi::getPaymentABO();
         GGnavi::getGrpMemberBO();
         GGnavi::getClssettleBO();
@@ -26,7 +26,7 @@ class ClsBO extends _CommonBO
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['idxBO'] = IdxBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
-        $arr['clslineupbBO'] = ClslineupbBO::getInstance();
+        $arr['clslineupaBO'] = ClslineupaBO::getInstance();
         $arr['paymentABO'] = PaymentABO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['clssettleBO'] = ClssettleBO::getInstance();
@@ -300,16 +300,16 @@ class ClsBO extends _CommonBO
     /* ========================= */
     /* update */
     /* ========================= */
-    const insert                                = "insert";                                 /* [mngr]  */
-    const update                                = "update";                                 /* [mngr]  */
-    const updateClsstatusEditToIng              = "updateClsstatusEditToIng";               /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 진행중으로 변경 */
-    const updateClsstatusIngToEnd               = "updateClsstatusIngToEnd";                /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 종료로 변경 */
-    const updateClssettleflgDone                = "updateClssettleflgDone";                 /* [mngr] [EXECUTOR, GRPNO, CLSNO, ARR]  : 일정정산정보 등록 */
-    const updateClsstatusToCancel               = "updateClsstatusToCancel";                /* [mngr] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
-    const copyClsForMng                         = "copyClsForMng";                          /* [mngr]  */
-    const deleteByPkForMng                      = "deleteByPkForMng";                       /* [mngr]  */
-    const updatePurchaseidxMaxusedForInside     = "updatePurchaseidxMaxusedForInside";      /* [null] [GRPNO, CLSNO, PURCHASEIDX_MAXUSED] */
-    const updateBillByPkForInside               = "updateBillByPkForInside";                /* [null] [GRPNO, CLSNO] */
+    const insert                                = "insert";                                 /* [mng]  */
+    const update                                = "update";                                 /* [mng]  */
+    const updateClsstatusEditToIng              = "updateClsstatusEditToIng";               /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 진행중으로 변경 */
+    const updateClsstatusIngToEnd               = "updateClsstatusIngToEnd";                /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 종료로 변경 */
+    const updateClssettleflgDone                = "updateClssettleflgDone";                 /* [mng] [EXECUTOR, GRPNO, CLSNO, ARR]  : 일정정산정보 등록 */
+    const updateClsstatusToCancel               = "updateClsstatusToCancel";                /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
+    const copyClsForMng                         = "copyClsForMng";                          /* [mng]  */
+    const deleteByPkWithSubForMng               = "deleteByPkWithSubForMng";                /* [mng]  */
+    const updatePurchaseidxMaxusedForInside     = "updatePurchaseidxMaxusedForInside";      /* [all] [GRPNO, CLSNO, PURCHASEIDX_MAXUSED] */
+    const updateBillByPkForInside               = "updateBillByPkForInside";                /* [all] [GRPNO, CLSNO] */
     protected function update($options, $option="")
     {
         /* vars */
@@ -542,10 +542,10 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
 
                 /* copy lineup */
-                $clslineupbBO->copyFromClsnoForInside($GRPNO, $CLSNO, $clsno);
+                $clslineupaBO->copyFromClsnoWithSubForInside($GRPNO, $CLSNO, $clsno);
                 break;
             }
-            case self::deleteByPkForMng:
+            case self::deleteByPkWithSubForMng:
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
@@ -555,7 +555,7 @@ class ClsBO extends _CommonBO
                 GGsql::exeQuery($query);
 
                 /* delete lineup */
-                $clslineupbBO->deleteByClsnoForInside($GRPNO, $CLSNO);
+                $clslineupaBO->deleteByClsnoWithSubForInside($GRPNO, $CLSNO);
                 break;
             }
             case self::updatePurchaseidxMaxusedForInside:

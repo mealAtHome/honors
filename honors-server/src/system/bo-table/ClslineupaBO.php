@@ -15,6 +15,9 @@ class ClslineupaBO extends _CommonBO
     function setBO()
     {
         $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
+        $arr['clsBO'] = ClsBO::getInstance();
+        $arr['clslineupbBO'] = ClslineupbBO::getInstance();
         return $arr;
     }
 
@@ -107,16 +110,20 @@ class ClslineupaBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function deleteByClsnoForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function insertOneForInside($GRPNO, $CLSNO, $LINEUPIDX, $LINEUPNAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function copyFromClsnoForInside($GRPNO, $CLSNO, $CLSNONEW) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updateFromPage($GRPNO, $CLSNO, $ARR, $ARR2, $ORDERNO) { throw new GGexceptionRule(); }
+    public function insertOneForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO, $BATTINGFLG, $POSITION, $USERNO, $USERNAME, $BILL) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function copyFromClsnoWithSubForInside($GRPNO, $CLSNO, $CLSNONEW) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function deleteByClsnoWithSubForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function deleteByPkForInside($GRPNO, $CLSNO, $LINEUPIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
     /* ========================= */
-    const deleteByClsnoForInside  = "deleteByClsnoForInside";
-    const insertOneForInside      = "insertOneForInside";
-    const copyFromClsnoForInside  = "copyFromClsnoForInside";
+    const updateFromPage = "updateFromPage";
+    const insertOneForInside = "insertOneForInside";
+    const copyFromClsnoWithSubForInside = "copyFromClsnoWithSubForInside";
+    const deleteByClsnoWithSubForInside = "deleteByClsnoWithSubForInside";
+    const deleteByPkForInside = "deleteByPkForInside";
     protected function update($options, $option="")
     {
         /* vars */
@@ -134,36 +141,92 @@ class ClslineupaBO extends _CommonBO
         /* =============== */
         switch($OPTION)
         {
-            case self::deleteByClsnoForInside:
+            case self::updateFromPage:
             {
-                $query = "delete from clslineupa where grpno = '$GRPNO' and clsno = '$CLSNO'";
-                GGsql::exeQuery($query);
+                /* check is manager */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* is grp manager, no exception */
+
+                /* validation */
+                if(Common::isEmpty(trim($GRPNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($CLSNO))) { throw new Exception(); }
+                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+
+                /* get cls info */
+                $cls = $clsBO->getByPk($GRPNO, $CLSNO);
+                if($cls == null)
+                    throw new Exception();
+
+                /* delete lineupa by clsno */
+                $this->deleteByClsnoWithSubForInside($GRPNO, $CLSNO);
+
+                /* insert */
+                $arr = json_decode($ARR, true);
+                foreach($arr as $dat)
+                {
+                    $LINEUPIDX   = Common::getField($dat, 'LINEUPIDX');
+                    $LINEUPNAME  = Common::getField($dat, 'LINEUPNAME');
+                    $ORDERNO     = Common::getField($dat, 'ORDERNO');
+                    $BATTINGFLG  = Common::getField($dat, 'BATTINGFLG');
+                    $POSITION    = Common::getField($dat, 'POSITION');
+                    $USERNO      = Common::getField($dat, 'USERNO');
+                    $USERNAME    = Common::getField($dat, 'USERNAME');
+                    $BILL        = Common::getField($dat, 'BILL');
+                    $this->insertOneForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO, $BATTINGFLG, $POSITION, $USERNO, $USERNAME, $BILL);
+                }
                 break;
             }
             case self::insertOneForInside:
             {
+                /* validation */
+                if(Common::isEmpty(trim($GRPNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($CLSNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($LINEUPIDX))) { throw new Exception(); }
+                if(Common::isEmpty(trim($ORDERNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($BATTINGFLG))) { throw new Exception(); }
+                if(Common::isEmpty(trim($POSITION))) { throw new Exception(); }
+                if(Common::isEmpty(trim($BILL))) { throw new Exception(); }
+
+                /* set value before insert */
+                $USERNO   = Common::isEmpty($USERNO)   ? "null" : "'$USERNO'";
+                $USERNAME = Common::isEmpty($USERNAME) ? "null" : "'$USERNAME'";
+
+                /* process */
                 $query =
                 "
-                    insert into clslineupa
+                    insert into clslineupb
                     (
                           grpno
                         , clsno
                         , lineupidx
-                        , lineupname
+                        , orderno
+                        , battingflg
+                        , position
+                        , userno
+                        , username
+                        , bill
                     )
                     values
                     (
                           '$GRPNO'
                         , '$CLSNO'
                         ,  $LINEUPIDX
-                        , '$LINEUPNAME'
+                        ,  $ORDERNO
+                        , '$BATTINGFLG'
+                        , '$POSITION'
+                        ,  $USERNO
+                        ,  $USERNAME
+                        ,  $BILL
                     )
                 ";
                 GGsql::exeQuery($query);
                 break;
             }
-            case self::copyFromClsnoForInside:
+            case self::copyFromClsnoWithSubForInside:
             {
+                /* copy sub (clslineupb) */
+                $clslineupbBO->copyFromClsnoWithSubForInside($GRPNO, $CLSNO, $CLSNONEW);
+
+                /* copy main (clslineupa) */
                 $query =
                 "
                     insert into clslineupa
@@ -184,6 +247,34 @@ class ClslineupaBO extends _CommonBO
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO'
                 ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::deleteByClsnoWithSubForInside:
+            {
+                /* validation */
+                if(Common::isEmpty(trim($GRPNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($CLSNO))) { throw new Exception(); }
+
+                /* select && delete */
+                $clslineupas = Common::getData($this->selectByClsnoForInside($GRPNO, $CLSNO));
+                foreach($clslineupas as $clslineupa)
+                {
+                    $LINEUPIDX = Common::getField($clslineupa, self::FIELD__LINEUPIDX);
+                    $clslineupbBO->deleteByLineupidxWithSubForInside($GRPNO, $CLSNO, $LINEUPIDX); /* delete sub table */
+                    $this->deleteByPkForInside($GRPNO, $CLSNO, $LINEUPIDX);
+                }
+                break;
+            }
+            case self::deleteByPkForInside:
+            {
+                /* validation */
+                if(Common::isEmpty(trim($GRPNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($CLSNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($LINEUPIDX))) { throw new Exception(); }
+
+                /* process */
+                $query = "delete from clslineupa where grpno = '$GRPNO' and clsno = '$CLSNO' and lineupidx = $LINEUPIDX";
                 GGsql::exeQuery($query);
                 break;
             }

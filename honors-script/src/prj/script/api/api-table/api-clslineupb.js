@@ -9,7 +9,6 @@ Api.Clslineupb =
     /* ========================= */
     /* update */
     /* ========================= */
-    updateFromPage          (grpno, clsno, arr,                              noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateFromPage"           , GRPNO:grpno, CLSNO:clsno, ARR:JSON.stringify(arr),                                           }, noticeOK, noticeFail); },
     updateApplyRegist       (grpno, clsno, lineupidx, orderno, username, etc, noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateApplyRegist"        , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno, USERNAME:username , ETC:etc,   }, noticeOK, noticeFail); },
     updateApplyRegistStead  (grpno, clsno, lineupidx, orderno, userno  , etc, noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateApplyRegistStead"   , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno, USERNO:userno     , ETC:etc,   }, noticeOK, noticeFail); },
     updateApplyCancel       (grpno, clsno, lineupidx, orderno,                noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateApplyCancel"        , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno,                                }, noticeOK, noticeFail); },

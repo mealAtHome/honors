@@ -224,7 +224,7 @@ class MClss extends _MCommon
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    let mApiResponse = Api.Cls.deleteByPkForMng(grpno, clsno);
+                    let mApiResponse = Api.Cls.deleteByPkWithSubForMng(grpno, clsno);
                     if(mApiResponse.isSuccess())
                     {
                         Common.hideProgress();
