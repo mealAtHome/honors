@@ -98,7 +98,7 @@ class AddressSidoBO extends _CommonBO
             order by
                 t.sdidx asc
         ";
-        return GGsql::select($query, $from, $options);
+        return GGsql::select($query, $from, $options, $OPTION);
     }
 
 } /* end class */

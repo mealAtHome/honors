@@ -90,7 +90,7 @@
 
 /* button size */
 .common-btn-outline[btn-size="large"]  { display:block;        margin:1em auto; padding:0.8em;       width:12em; max-width:90%; }
-.common-btn-outline[btn-size="search"] { display:inline-block;                  padding:0.3em 0.5em; }
+.common-btn-outline[btn-size="search"] { display:inline-block;                  padding:0.3em 0.4em; }
 
 /* inline */
 .common-btn-inline                           { border:1px solid rgba(2, 6, 84, 1.0);     ; background-color: rgba(2, 6, 84, 1.0);     color: white; }

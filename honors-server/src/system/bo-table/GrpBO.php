@@ -147,7 +147,7 @@ class GrpBO extends _CommonBO
             order by
                 t.grpname asc
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

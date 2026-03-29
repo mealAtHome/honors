@@ -105,7 +105,7 @@ class ClslineupaBO extends _CommonBO
             order by
                 $orderby
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

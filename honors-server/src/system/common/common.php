@@ -197,6 +197,12 @@ class Common
             return true;
         return false;
     }
+    static function ifEmpty($str, $ifnull="")
+    {
+        if(self::isEmpty($str))
+            return $ifnull;
+        return $str;
+    }
 
     /* ===================== */
     /* select 결과만 리턴 */

@@ -181,7 +181,7 @@ class ClssettletmpBO extends _CommonBO
                 , t.clsno
                 , u.name
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

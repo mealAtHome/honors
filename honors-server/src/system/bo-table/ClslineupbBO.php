@@ -204,7 +204,7 @@ class ClslineupbBO extends _CommonBO
                 $orderby
 
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

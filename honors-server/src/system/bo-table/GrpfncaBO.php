@@ -120,7 +120,7 @@ class GrpfncaBO extends _CommonBO
             order by
                 t.grpno asc
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

@@ -104,7 +104,7 @@ class ClzcancelBO extends _CommonBO
             from
                 $from
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

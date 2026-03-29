@@ -287,7 +287,7 @@ class ClsBO extends _CommonBO
             order by
                 t.clsstartdt desc
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

@@ -337,16 +337,16 @@
     padding-bottom:0.3em;
 }
 
-.common-div-cushion     { display: block; margin: 0.6em;                   padding: 0.0em;                   overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionULR  { display: block; margin: 0.3em 0.3em 0.0em 0.3em; padding: 0.3em 0.3em 0.0em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionTLR  { display: block; margin: 0.3em 0.3em 0.0em 0.3em; padding: 0.3em 0.3em 0.0em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionTop  { display: block; margin: 0.0em 0.3em 0.3em 0.3em; padding: 0.0em 0.3em 0.3em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionUp   { display: block; margin: 0.3em 0.0em 0.0em 0.0em; padding: 0.3em 0.0em 0.0em 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionUD   { display: block; margin: 0.3em 0.0em;             padding: 0.3em 0.0em;             overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionD    { display: block; margin: 0.0em 0.0em 0.3em 0.0em; padding: 0.0em 0.0em 0.3em 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionLeft { display: block; margin: 0.0em 0.0em 0.0em 0.3em; padding: 0.0em 0.0em 0.0em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionUL   { display: block; margin: 0.3em 0.0em 0.0em 0.3em; padding: 0.3em 0.0em 0.0em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionLRD  { display: block; margin: 0.0em 0.3em 0.3em 0.3em; padding: 0.0em 0.3em 0.3em 0.3em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushion     { display: block; margin: 0.6em;                   padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
+.common-div-cushionULR  { display: block; margin: 0.6em 0.6em 0.0em 0.6em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
+.common-div-cushionTLR  { display: block; margin: 0.6em 0.6em 0.0em 0.6em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
+.common-div-cushionTop  { display: block; margin: 0.0em 0.6em 0.6em 0.6em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
+.common-div-cushionUp   { display: block; margin: 0.6em 0.0em 0.0em 0.0em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionUD   { display: block; margin: 0.6em 0.0em;             padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionD    { display: block; margin: 0.0em 0.0em 0.6em 0.0em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionLeft { display: block; margin: 0.0em 0.0em 0.0em 0.6em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionUL   { display: block; margin: 0.6em 0.0em 0.0em 0.6em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionLRD  { display: block; margin: 0.0em 0.6em 0.6em 0.6em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
 .common-div-cushion > .common-div-cushionUD:nth-child(1) { margin : 0em 0.0em 0.3em 0.0em; padding : 0.0em 0.0em 0.3em 0.0em; }

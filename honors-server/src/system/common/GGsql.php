@@ -46,25 +46,31 @@ class GGsql
     /* ===================== */
     /* exeQuery + writelog + returnSelect */
     /* ===================== */
-    public static function select($query, $from="", $options=[])
+    public static function select($query, $from="", $options=[], $OPTION)
     {
         /* set result */
         $rslt = Common::getReturn();
 
         /* get pagenation */
-        $PAGEFLG =        Common::get($options, "PAGEFLG", "n");
-        $PAGENUM = intval(Common::get($options, "PAGENUM", 1));
-        $PERPAGE = intval(Common::get($options, "PERPAGE", 50));
-        $limit   = "";
-        $cnt     = 0;
-        if(isset($PAGEFLG) && Common::isPagenation($PAGEFLG) && $from != "")
+        /* 주어진 옵션과 오버라이딩된 옵션이 일치하고 있으면서, PAGEFLG가 정의되면 페이지네이션 가능 */
+        $PAGEFLG =        Common::ifEmpty(Common::get($options, "PAGEFLG"), "n");
+        $PAGENUM = intval(Common::ifEmpty(Common::get($options, "PAGENUM"), 1));
+        $PERPAGE = intval(Common::ifEmpty(Common::get($options, "PERPAGE"), 50));
+        $limit = "";
+        $allcnt = 0;
+        $pagecnt = 1;
+        if(Common::get($options, "OPTION") == $OPTION)
         {
-            /* set limit point */
-            $startPoint = ($PAGENUM-1) * $PERPAGE;
-            $limit = "limit $startPoint, $PERPAGE";
+            if(Common::isPagenation($PAGEFLG) && $from != "")
+            {
+                /* set limit point */
+                $startPoint = ($PAGENUM-1) * $PERPAGE;
+                $limit = "limit $startPoint, $PERPAGE";
 
-            $queryForCount =  "select count(*) cnt from $from";
-            $cnt = GGsql::selectCnt($queryForCount);
+                $queryForCount =  "select count(*) cnt from $from";
+                $allcnt = GGsql::selectCnt($queryForCount);
+                $pagecnt = ceil($allcnt / $PERPAGE);
+            }
         }
 
         /* make final query */
@@ -78,12 +84,19 @@ class GGsql
             $cnt++;
         }
 
+        /* allcnt override if not pagenation */
+        if(Common::isPagenation($PAGEFLG) == false)
+        {
+            $allcnt = $cnt;
+            $pagecnt = ceil($allcnt / $PERPAGE);
+        }
+
         /* add result */
         $rslt['PAGEFLG'] = $PAGEFLG;
         $rslt['PAGENUM'] = $PAGENUM; /* 현재 페이지 번호 */
-        $rslt['PERPAGE'] = intval($PERPAGE); /* 페이지 당 컨텐츠 수 */
-        $rslt['ALLCNT']  = intval($cnt); /* 총 컨텐츠 수 */
-        $rslt['PAGECNT'] = intval(ceil($rslt['ALLCNT'] / $PERPAGE)); /* 총 페이지 수 */
+        $rslt['PERPAGE'] = $PERPAGE; /* 페이지 당 컨텐츠 수 */
+        $rslt['ALLCNT']  = $allcnt; /* 총 컨텐츠 수 */
+        $rslt['PAGECNT'] = $pagecnt; /* 총 페이지 수 */
         $rslt['CNT']     = $cnt; /* 조회된 레코드 수 */
 
         /* return result */

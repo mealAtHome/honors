@@ -140,7 +140,7 @@ class AddrBO extends _CommonBO
         /* --------------- */
         /* execute query */
         /* --------------- */
-        return GGsql::select($query, $from, $options);
+        return GGsql::select($query, $from, $options, $OPTION);
     }
 
     /* ==================== */

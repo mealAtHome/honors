@@ -128,6 +128,9 @@
     $options["CLSLINEUPTMPC_ARR"]                                   = get("CLSLINEUPTMPC_ARR"); /* abstract */
     $options["LINEUPTITLE"]                                         = get("LINEUPTITLE");
     $options["LINEUPGROUP"]                                         = get("LINEUPGROUP");
+    $options["PAGENUM"]                                             = get("PAGENUM"); /* abstract */
+    $options["PERPAGE"]                                             = get("PERPAGE"); /* abstract */
+    $options["PAGEFLG"]                                             = get("PAGEFLG"); /* abstract */
 
     /* if has pagenum, add pageflg */
     if(isset($_POST["PAGENUM"]))

@@ -3,13 +3,14 @@ Api.GrpMember =
     /* ========================= */
     /* select */
     /* ========================= */
-    selectByGrpnoForMng        (grpno,          noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByGrpnoForMng"        , GRPNO: grpno,                  }, noticeOK, noticeFail); },
-    selectByPkForMng           (grpno, userno,  noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByPkForMng"           , GRPNO: grpno, USERNO: userno,  }, noticeOK, noticeFail).getModel(); },
-    selectByPkForAll           (grpno, userno,  noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByPkForAll"           , GRPNO: grpno, USERNO: userno,  }, noticeOK, noticeFail).getModel(); },
-    selectMeByGrpno            (grpno,          noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectMeByGrpno"            , GRPNO: grpno,                  }, noticeOK, noticeFail).getModel(); },
-    selectByGrpnoForAll        (grpno,          noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByGrpnoForAll"        , GRPNO: grpno,                  }, noticeOK, noticeFail); },
-    selectByExecutorForAll     (                noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByExecutorForAll"     ,                                }, noticeOK, noticeFail); },
-    selectByKeywordForAll      (grpno, keyword, noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByKeywordForAll"      , GRPNO: grpno, KEYWORD: keyword }, noticeOK, noticeFail); },
+    selectByGrpnoForMng                 (grpno,                     noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByGrpnoForMng"           , GRPNO: grpno,                                     }, noticeOK, noticeFail); },
+    selectByPkForMng                    (grpno, userno,             noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByPkForMng"              , GRPNO: grpno, USERNO: userno,                     }, noticeOK, noticeFail).getModel(); },
+    selectByPkForAll                    (grpno, userno,             noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByPkForAll"              , GRPNO: grpno, USERNO: userno,                     }, noticeOK, noticeFail).getModel(); },
+    selectMeByGrpno                     (grpno,                     noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectMeByGrpno"               , GRPNO: grpno,                                     }, noticeOK, noticeFail).getModel(); },
+    selectByGrpnoForAll                 (grpno,                     noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByGrpnoForAll"           , GRPNO: grpno,                                     }, noticeOK, noticeFail); },
+    selectByExecutorForAll              (                           noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByExecutorForAll"        ,                                                   }, noticeOK, noticeFail); },
+    selectByKeywordForAll               (grpno, keyword,            noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByKeywordForAll"         , GRPNO: grpno, KEYWORD: keyword                    }, noticeOK, noticeFail); },
+    selectByKeywordWithPageForAll       (grpno, keyword, pagenum,   noticeOK, noticeFail) { return Api.GrpMember.select({OPTION:"selectByKeywordWithPageForAll" , GRPNO: grpno, KEYWORD: keyword, PAGENUM: pagenum, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* update */

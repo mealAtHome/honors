@@ -26,6 +26,8 @@ class _MCommon
     getAllcnt() { return this.allcnt; }
     getCnt() { return this.cnt; }
 
+    isPagenation() { return this.getPageflg() === GGF.Y; }
+
     /* 변환 함수 */
     static getAjaxSucceed(arr=[])
     {

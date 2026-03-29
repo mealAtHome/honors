@@ -97,7 +97,7 @@ class BankBO extends _CommonBO
             order by
                 t.bankcode
         ";
-        return GGsql::select($query, $from, $options);
+        return GGsql::select($query, $from, $options, $OPTION);
     }
 
 } /* end class */

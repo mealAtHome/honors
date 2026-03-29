@@ -106,7 +106,7 @@ class InformationSchemaPartitionsBO extends _CommonBO
 
         /* set db_name before sql */
         GGsql::setConnectionAsInformationSchema();
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         GGsql::setConnectionAsNormal();
         return $rslt;
     }

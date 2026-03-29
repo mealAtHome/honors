@@ -111,7 +111,7 @@ class GrpmPrivacyBO extends _CommonBO
                   t.grpno asc
                 , t.userno desc
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

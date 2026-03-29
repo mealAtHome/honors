@@ -117,7 +117,7 @@ class GrpfncPurchaseBO extends _CommonBO
                   t.grpno asc
                 , t.purchaseidx desc
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

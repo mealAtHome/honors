@@ -169,7 +169,7 @@ class UserBO extends _CommonBO
         /* --------------- */
         /* execute query */
         /* --------------- */
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         switch($OPTION)
         {
             case UserBO::selectCntById: { $rslt[GGF::DATA] = []; break; }

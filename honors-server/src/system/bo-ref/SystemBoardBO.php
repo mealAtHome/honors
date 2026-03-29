@@ -105,7 +105,7 @@ class SystemBoardBO extends _CommonBO
             order by
                 t.regidt desc
         ";
-        return GGsql::select($query, $from, $options);
+        return GGsql::select($query, $from, $options, $OPTION);
     }
 
 }

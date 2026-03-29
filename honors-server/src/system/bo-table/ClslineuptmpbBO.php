@@ -97,7 +97,7 @@ class ClslineuptmpbBO extends _CommonBO
                 , t.lineupgroup
                 , t.lineupidx
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

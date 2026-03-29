@@ -132,7 +132,7 @@ class ClslineupblogBO extends _CommonBO
                 , t.orderno
                 , t.logno
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 

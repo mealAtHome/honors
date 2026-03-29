@@ -178,7 +178,6 @@ class MGrpMembers extends _MCommon
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            let mUser = model.getMUser();
             let isManager = GGstorage.Prj.isManagerOfGrp(model.getGrpno());
 
             /* --------------- */
@@ -212,6 +211,12 @@ class MGrpMembers extends _MCommon
             /* --------------- */
             html += model.make(buttonHtml);
         }
+
+        /* pagination */
+        if(this.isPagenation())
+            html = this.getPagenation() + html + this.getPagenation();
+
+        /* append html */
         $(el).html(html);
     }
 

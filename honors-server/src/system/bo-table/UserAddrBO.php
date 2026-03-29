@@ -172,7 +172,7 @@ class UserAddrBO extends _CommonBO
                 au.userno,
                 au.addr_index
         ";
-        return GGsql::select($query, $from, $options);
+        return GGsql::select($query, $from, $options, $OPTION);
     }
 
     /* ========================= */

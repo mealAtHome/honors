@@ -122,7 +122,7 @@ class GrpfnclogBO extends _CommonBO
                 , t.gfmlkeyno
                 , t.gfmlhistno
         ";
-        $rslt = GGsql::select($query, $from, $options);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
     }
 
