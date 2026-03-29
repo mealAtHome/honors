@@ -211,6 +211,7 @@ class ClslineupbBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
+    public function insertOneForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO, $BATTINGFLG, $POSITION, $USERNO, $USERNAME, $BILL) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteByPkForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteByClsnoForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteByLineupidxWithSubForInside($GRPNO, $CLSNO, $LINEUPIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
@@ -220,6 +221,7 @@ class ClslineupbBO extends _CommonBO
     /* ========================= */
     /* update */
     /* ========================= */
+    const insertOneForInside = "insertOneForInside";
     const deleteByPkForInside = "deleteByPkForInside";
     const deleteByClsnoForInside = "deleteByClsnoForInside";
     const deleteByLineupidxWithSubForInside = "deleteByLineupidxWithSubForInside";
@@ -245,6 +247,52 @@ class ClslineupbBO extends _CommonBO
         /* =============== */
         switch($OPTION)
         {
+            case self::insertOneForInside:
+            {
+                /* validation */
+                if(Common::isEmpty(trim($GRPNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($CLSNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($LINEUPIDX))) { throw new Exception(); }
+                if(Common::isEmpty(trim($ORDERNO))) { throw new Exception(); }
+                if(Common::isEmpty(trim($BATTINGFLG))) { throw new Exception(); }
+                if(Common::isEmpty(trim($POSITION))) { throw new Exception(); }
+                if(Common::isEmpty(trim($BILL))) { throw new Exception(); }
+
+                /* set value before insert */
+                $USERNO   = Common::isEmpty($USERNO)   ? "null" : "'$USERNO'";
+                $USERNAME = Common::isEmpty($USERNAME) ? "null" : "'$USERNAME'";
+
+                /* process */
+                $query =
+                "
+                    insert into clslineupb
+                    (
+                          grpno
+                        , clsno
+                        , lineupidx
+                        , orderno
+                        , battingflg
+                        , position
+                        , userno
+                        , username
+                        , bill
+                    )
+                    values
+                    (
+                          '$GRPNO'
+                        , '$CLSNO'
+                        ,  $LINEUPIDX
+                        ,  $ORDERNO
+                        , '$BATTINGFLG'
+                        , '$POSITION'
+                        ,  $USERNO
+                        ,  $USERNAME
+                        ,  $BILL
+                    )
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
             case self::deleteByPkForInside:
             {
                 /* validation */

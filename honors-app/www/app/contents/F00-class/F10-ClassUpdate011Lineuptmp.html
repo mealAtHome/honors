@@ -147,7 +147,7 @@
                 if(CULT.Data.tab        == undefined) { CULT.Data.tab = "def"; }
                 if(CULT.Data.pagenumcls == undefined) { CULT.Data.pagenumcls = 1; }
                 if(CULT.Data.clsno      == undefined) { CULT.Data.clsno = ""; }
-                if(CULT.Data.page       == undefined) { CULT.Data.page = CULT.Const.PAGE_MENU; }
+                if(CULT.Data.pagetype   == undefined) { CULT.Data.pagetype = CULT.Const.PAGE_MENU; }
             },
 
             /* ========================= */
@@ -169,7 +169,7 @@
                     case CULT.Const.PAGE_LOAD: { $("#CULT-div-loadtop").show(); $(`.CULT-td-loadtab[loadtab=${CULT.Data.tab}]`).click(); break; }
                     case CULT.Const.PAGE_LDTL: { $("#CULT-div-tmpDetail").show(); break; }
                 }
-                CULT.Data.page = to;
+                CULT.Data.pagetype = to;
             },
             movePageToLineupDetail()
             {
@@ -178,22 +178,22 @@
                 $("#CULT-div-clsList").hide();
                 $("#CULT-div-loadtop").hide();
                 $("#CULT-div-tmpDetail").show();
-                CULT.Data.page = CULT.Const.PAGE_LDTL;
+                CULT.Data.pagetype = CULT.Const.PAGE_LDTL;
             },
             moveBack()
             {
-                switch(CULT.Data.page)
+                switch(CULT.Data.pagetype)
                 {
                     case CULT.Const.PAGE_MENU: { CULT.close(); break; }
-                    case CULT.Const.PAGE_SAVE: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-savetop").hide();   $("#CULT-div-menuTop").show(); break; }
-                    case CULT.Const.PAGE_LOAD: { CULT.Data.page = CULT.Const.PAGE_MENU; $("#CULT-div-loadtop").hide();   $("#CULT-div-menuTop").show(); $(`.CULT-div-loadtab`).hide(); break; }
-                    case CULT.Const.PAGE_LDTL: { CULT.Data.page = CULT.Const.PAGE_LOAD; $("#CULT-div-tmpDetail").hide(); $("#CULT-div-loadtop").show(); $(`.CULT-div-loadtab[loadtab="${CULT.Data.tab}"]`).show(); break; }
+                    case CULT.Const.PAGE_SAVE: { CULT.Data.pagetype = CULT.Const.PAGE_MENU; $("#CULT-div-savetop").hide();   $("#CULT-div-menuTop").show(); break; }
+                    case CULT.Const.PAGE_LOAD: { CULT.Data.pagetype = CULT.Const.PAGE_MENU; $("#CULT-div-loadtop").hide();   $("#CULT-div-menuTop").show(); $(`.CULT-div-loadtab`).hide(); break; }
+                    case CULT.Const.PAGE_LDTL: { CULT.Data.pagetype = CULT.Const.PAGE_LOAD; $("#CULT-div-tmpDetail").hide(); $("#CULT-div-loadtop").show(); $(`.CULT-div-loadtab[loadtab="${CULT.Data.tab}"]`).show(); break; }
                 }
             },
 
 
             /* ========================= */
-            /* 저장 탭 */
+            /* 라인업 표현 */
             /* ========================= */
             addLineupBox(divType, lineupidx, lineupname)
             {
@@ -542,6 +542,10 @@
             {
                 /* 페이지 이동 */
                 CULT.movePage(CULT.Const.PAGE_MENU, CULT.Const.PAGE_SAVE);
+
+                /* clear html */
+                $(".CULT-div-lineupBtn[div-type='save']").empty();
+                $(".CULT-div-lineupDetails[div-type='save']").empty();
 
                 /* 라인업 데이터 가져오기 */
                 let data = CUTF.getLineupData();

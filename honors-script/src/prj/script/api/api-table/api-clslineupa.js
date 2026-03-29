@@ -8,7 +8,7 @@ Api.Clslineupa =
     /* ========================= */
     /* update */
     /* ========================= */
-    updateFromPage(grpno, clsno, arr, noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateFromPage", GRPNO:grpno, CLSNO:clsno, ARR:JSON.stringify(arr), noticeOK, noticeFail); },
+    updateFromPage(grpno, clsno, arr, noticeOK, noticeFail) { return Api.Clslineupa.update({OPTION:"updateFromPage", GRPNO:grpno, CLSNO:clsno, ARR:JSON.stringify(arr), }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main */

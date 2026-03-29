@@ -14,6 +14,8 @@ class ClslineupaBO extends _CommonBO
     }
     function setBO()
     {
+        GGnavi::getClsBO();
+        GGnavi::getClslineupbBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['clsBO'] = ClsBO::getInstance();
@@ -111,7 +113,6 @@ class ClslineupaBO extends _CommonBO
     /* update (sub) */
     /* ========================= */
     public function updateFromPage($GRPNO, $CLSNO, $ARR, $ARR2, $ORDERNO) { throw new GGexceptionRule(); }
-    public function insertOneForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO, $BATTINGFLG, $POSITION, $USERNO, $USERNAME, $BILL) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function copyFromClsnoWithSubForInside($GRPNO, $CLSNO, $CLSNONEW) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteByClsnoWithSubForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteByPkForInside($GRPNO, $CLSNO, $LINEUPIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
@@ -120,7 +121,6 @@ class ClslineupaBO extends _CommonBO
     /* update */
     /* ========================= */
     const updateFromPage = "updateFromPage";
-    const insertOneForInside = "insertOneForInside";
     const copyFromClsnoWithSubForInside = "copyFromClsnoWithSubForInside";
     const deleteByClsnoWithSubForInside = "deleteByClsnoWithSubForInside";
     const deleteByPkForInside = "deleteByPkForInside";
@@ -159,7 +159,8 @@ class ClslineupaBO extends _CommonBO
                 /* delete lineupa by clsno */
                 $this->deleteByClsnoWithSubForInside($GRPNO, $CLSNO);
 
-                /* insert */
+                /* insert into clslineupa */
+                /* insert into clslineupb */
                 $arr = json_decode($ARR, true);
                 foreach($arr as $dat)
                 {
@@ -171,54 +172,32 @@ class ClslineupaBO extends _CommonBO
                     $USERNO      = Common::getField($dat, 'USERNO');
                     $USERNAME    = Common::getField($dat, 'USERNAME');
                     $BILL        = Common::getField($dat, 'BILL');
-                    $this->insertOneForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO, $BATTINGFLG, $POSITION, $USERNO, $USERNAME, $BILL);
+
+                    /* clslineupa */
+                    $query =
+                    "
+                        insert into clslineupa
+                        (
+                              grpno
+                            , clsno
+                            , lineupidx
+                            , lineupname
+                        )
+                        values
+                        (
+                              '$GRPNO'
+                            , '$CLSNO'
+                            ,  $LINEUPIDX
+                            , '$LINEUPNAME'
+                        )
+                        on duplicate key update
+                            lineupname = '$LINEUPNAME'
+                    ";
+                    GGsql::exeQuery($query);
+
+                    /* clslineupb */
+                    $clslineupbBO->insertOneForInside($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO, $BATTINGFLG, $POSITION, $USERNO, $USERNAME, $BILL);
                 }
-                break;
-            }
-            case self::insertOneForInside:
-            {
-                /* validation */
-                if(Common::isEmpty(trim($GRPNO))) { throw new Exception(); }
-                if(Common::isEmpty(trim($CLSNO))) { throw new Exception(); }
-                if(Common::isEmpty(trim($LINEUPIDX))) { throw new Exception(); }
-                if(Common::isEmpty(trim($ORDERNO))) { throw new Exception(); }
-                if(Common::isEmpty(trim($BATTINGFLG))) { throw new Exception(); }
-                if(Common::isEmpty(trim($POSITION))) { throw new Exception(); }
-                if(Common::isEmpty(trim($BILL))) { throw new Exception(); }
-
-                /* set value before insert */
-                $USERNO   = Common::isEmpty($USERNO)   ? "null" : "'$USERNO'";
-                $USERNAME = Common::isEmpty($USERNAME) ? "null" : "'$USERNAME'";
-
-                /* process */
-                $query =
-                "
-                    insert into clslineupb
-                    (
-                          grpno
-                        , clsno
-                        , lineupidx
-                        , orderno
-                        , battingflg
-                        , position
-                        , userno
-                        , username
-                        , bill
-                    )
-                    values
-                    (
-                          '$GRPNO'
-                        , '$CLSNO'
-                        ,  $LINEUPIDX
-                        ,  $ORDERNO
-                        , '$BATTINGFLG'
-                        , '$POSITION'
-                        ,  $USERNO
-                        ,  $USERNAME
-                        ,  $BILL
-                    )
-                ";
-                GGsql::exeQuery($query);
                 break;
             }
             case self::copyFromClsnoWithSubForInside:
@@ -263,6 +242,15 @@ class ClslineupaBO extends _CommonBO
                     $LINEUPIDX = Common::getField($clslineupa, self::FIELD__LINEUPIDX);
                     $clslineupbBO->deleteByLineupidxWithSubForInside($GRPNO, $CLSNO, $LINEUPIDX); /* delete sub table */
                     $this->deleteByPkForInside($GRPNO, $CLSNO, $LINEUPIDX);
+                }
+
+                /* check sub */
+                $clslineupbs = Common::getData($clslineupbBO->selectByClsnoForInside($GRPNO, $CLSNO));
+                foreach($clslineupbs as $clslineupb)
+                {
+                    $lineupidx = Common::getField($clslineupb, ClslineupbBO::FIELD__LINEUPIDX);
+                    $orderno = Common::getField($clslineupb, ClslineupbBO::FIELD__ORDERNO);
+                    $clslineupbBO->deleteByPkForInside($GRPNO, $CLSNO, $lineupidx, $orderno); /* delete main table */
                 }
                 break;
             }
