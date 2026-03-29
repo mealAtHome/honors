@@ -36,6 +36,7 @@ Api.User =
         {
             GGstorage.saveLoginInfoToFile(ajax.apikey, ajax.id, function(rslt) { /* console.log("write to file : ", rslt); */ });
             GGstorage.setUserid(ajax.id);
+            GGstorage.setUsername(ajax.username);
             GGstorage.setApikey(ajax.apikey);
         }
         else

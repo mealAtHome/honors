@@ -15,6 +15,7 @@ class GGF
     /* 공통 필드명 */
     const ID = "id";
     const USERNO = "userno";
+    const USERNAME = "username";
     const APIKEY = "apikey";
     const GRPNO = "grpno"; /* 그룹번호 */
     const STORENO = "storeno";

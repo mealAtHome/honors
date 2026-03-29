@@ -131,3 +131,6 @@
 
 
 .common-tag-positionAbsUR { position:absolute; top:0.5em; right:0.5em; }
+
+.common-tag-me[me="y"]  { background-color: rgba(2, 6, 84, 0.1); }
+.common-span-me[me="y"] { font-weight: bold; color: rgba(2, 6, 84, 1.0); }

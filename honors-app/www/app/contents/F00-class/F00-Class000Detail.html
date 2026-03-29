@@ -75,7 +75,7 @@
     <!-- 메인 탭 -->
     <!-- ========================= -->
     <div id="CLSD-div-tabmain" class="common-div-cushion" style="display:none;">
-        <hr class="common-hr-marginSUDw"/>
+        <hr class="common-hr-full"/>
         <table class="common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
@@ -85,7 +85,7 @@
                 </tr>
             </tbody>
         </table>
-        <hr class="common-hr-marginSUDw"/>
+        <hr class="common-hr-full"/>
     </div>
 
     <!-- ========================= -->
@@ -93,11 +93,8 @@
     <!-- ========================= -->
     <div class="common-div-cushion CLSD-div-tabmain" tabval="clslineup">
         <p class="common-p-title">참가현황</p>
-
-        <!-- 동적 라인업 컨테이너 -->
         <div id="CLSD-div-clslineup">
             <div id="CLSD-div-lineupTabBtns" class="common-tag-fontsize09" style="display:none;"></div>
-            <hr class="common-hr-paddingUD"/>
             <div id="CLSD-div-lineupContents"></div>
         </div>
     </div>
@@ -155,6 +152,11 @@
                 페이지 데이터
             */
             /* ========================= */
+            Storage :
+            {
+                myUserno   : null,
+                myUsername : null,
+            },
             Data : {},
             isManager : false,
 
@@ -163,7 +165,7 @@
                 /* validation param */
                 if(CLSD.Data.clsno      == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
                 if(CLSD.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); CLSD.close(); return; }
-                if(CLSD.Data.lineupidx   == undefined) { CLSD.Data.lineupidx = 1; }
+                if(CLSD.Data.lineupidx  == undefined) { CLSD.Data.lineupidx = 1; }
                 if(CLSD.Data.tabmain    == undefined) { CLSD.Data.tabmain  = "clslineup"; }
 
                 /* init el */
@@ -190,6 +192,16 @@
                         /* get var */
                         let clsno = CLSD.Data.clsno;
                         let grpno = CLSD.Data.grpno;
+
+                        /* set storage */
+                        /* select me */
+                        let mUsers = Api.User.selectMe();
+                        if(mUsers.getModel() != null)
+                        {
+                            let mUser = mUsers.getModel();
+                            CLSD.Storage.myUserno   = mUser.getUserno();
+                            CLSD.Storage.myUsername = mUser.getName();
+                        }
 
                         /* 기본정보 */
                         let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
@@ -348,7 +360,14 @@
                 {
                     let btnHtml =
                     `
-                        <button class="CLSD-btn-lineupTab commonEvent-btn-radio common-btn-radio" radio_name="CLSD-btn-lineupTab" val="${lineupidx}" style="padding-left:0.8em; padding-right:0.8em;">${lineupname}</button>
+                        <button
+                            class="CLSD-btn-lineupTab commonEvent-btn-radio common-btn-radio"
+                            radio_name="CLSD-btn-lineupTab"
+                            val="${lineupidx}"
+                            style="padding-left:0.8em; padding-right:0.8em;"
+                        >
+                            ${lineupname}
+                        </button>
                     `;
                     $("#CLSD-div-lineupTabBtns").append(btnHtml);
 
@@ -365,7 +384,7 @@
                 let sectionHtml =
                 `
                     <div class="CLSD-div-tabTeam" lineupidx="${lineupidx}" style="${totalCount > 1 ? "display:none;" : ""}">
-                        ${lineupname != "" ? `<p class="common-p-title">${lineupname}</p>` : ""}
+                        <p class="common-p-title">팀 : ${lineupname}</p>
                         <div class="common-div-scrollX">
                             <table class="CLSD-tbl-clslineupb common-tbl-normal common-tag-fontsize09" tbl-type="rowborder" lineupidx="${lineupidx}">
                                 <thead>
@@ -460,13 +479,15 @@
                 /* ----- */
                 /* make TR */
                 /* ----- */
+                let isMyUserno = model.getUserno()   == CLSD.Storage.myUserno   ? "y" : "n";
+                let isMyName   = model.getUsername() == CLSD.Storage.myUsername ? "y" : "n";
                 let html =
                 `
-                    <tr>
+                    <tr class="common-tag-me" me="${isMyUserno}">
                         <td>${orderno}</td>
                         <td>${position}</td>
-                        <td>${apply}</td>
-                        <td>${applyer}</td>
+                        <td><span class="common-span-me" me="${isMyName}">${apply}</span></td>
+                        <td><span class="common-span-me" me="${isMyName}">${applyer}</span></td>
                         <td col="etc">${model.getEtc()}</td>
                     </tr>
                 `;

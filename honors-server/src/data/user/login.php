@@ -36,6 +36,7 @@
         /* get field */
         $pw     = Common::getField($user, UserBO::FIELD__PW);
         $userno = Common::getField($user, UserBO::FIELD__USERNO);
+        $name   = Common::getField($user, UserBO::FIELD__NAME);
 
         /* check pw */
         if(password_verify($PW, $pw) == false)
@@ -66,9 +67,10 @@
     }
 
     /* return result */
-    $rslt[GGF::ID]     = $ID;
-    $rslt[GGF::USERNO] = $userno;
-    $rslt[GGF::APIKEY] = $apikey;
+    $rslt[GGF::ID]          = $ID;
+    $rslt[GGF::USERNO]      = $userno;
+    $rslt[GGF::USERNAME]    = $name;
+    $rslt[GGF::APIKEY]      = $apikey;
     Common::returnRslt($rslt);
 
 ?>
