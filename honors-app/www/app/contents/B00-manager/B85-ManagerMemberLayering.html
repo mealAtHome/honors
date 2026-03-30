@@ -73,13 +73,14 @@
 
             show()
             {
-                if(Common.isEmpty(MMLY.Data.grpno)) { Common.toast("잘못된 접근입니다."); MMLY.close(); return; }
+                if(Common.isEmpty(MMLY.Data.grpno))   { Common.toast("잘못된 접근입니다."); MMLY.close(); return; }
+                if(Common.isEmpty(MMLY.Data.pagenum)) { Common.toast("잘못된 접근입니다."); MMLY.close(); return; }
 
                 Common.showProgress();
                 setTimeout(function()
                 {
                     /* var */
-                    let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(MMLY.Data.grpno);
+                    let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(0, MMLY.Data.grpno);
                     let mGrpMemberModels = mGrpMembers.getModels();
                     let $tbody = $("#MMLY-tbl-memberList > tbody");
 

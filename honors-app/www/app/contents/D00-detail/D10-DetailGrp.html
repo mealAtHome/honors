@@ -27,24 +27,7 @@
     <!-- ========================= -->
     <!-- 검색 -->
     <!-- ========================= -->
-    <style>
-        #DGRP-input-searchkey
-        {
-            width:13em;
-            font-size:1em;
-            line-height:1.5;
-            vertical-align: middle;
-        }
-        #DGRP-btn-search
-        {
-            padding-left: 1em;
-            padding-right: 1em;
-            font-size: 1em;
-            line-height: 1.5;
-            vertical-align: middle;
-        }
-    </style>
-    <div id="DGRP-div-search" class="common-div-cushion" style="display:none;">
+    <div id="DGRP-div-search" class="common-div-cushion common-search-div-top" style="display:none;">
         <input type="text" id="DGRP-input-searchkey" class="common-input-text"/>
         <button id="DGRP-btn-search" class="common-btn-outline" btn-size="search">🔍 검색</button>
         <div class="common-tag-block common-tag-fontsize09">
@@ -152,7 +135,8 @@
                                 DGRP.Data.searchkey = searchkey;
 
                                 /* 멤버검색 */
-                                let mGrpMembers = Api.GrpMember.selectByKeywordWithPageForAll(grpno, searchkey, DGRP.Data.pagenoGrpm);
+                                let pagenum = DGRP.Data.pagenoGrpm;
+                                let mGrpMembers = Api.GrpMember.selectByKeywordWithPageForAll(pagenum, grpno, searchkey);
                                 mGrpMembers.make("#DGRP-div-memberList");
 
                                 /* 검색건수 표시 */

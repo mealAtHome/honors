@@ -82,15 +82,16 @@ class GrpMemberBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const selectByPkForInside = "selectByPkForInside";
-    const selectByGrpnoForMng = "selectByGrpnoForMng";
-    const selectByPkForMng = "selectByPkForMng";
     const selectByPkForAll = "selectByPkForAll";
-    const selectByGrpnoForAll = "selectByGrpnoForAll";
     const selectMeByGrpno = "selectMeByGrpno";
     const selectByExecutorForAll = "selectByExecutorForAll";
+    const selectByPkForMng = "selectByPkForMng";
+    const selectByPkForInside = "selectByPkForInside";
+    const selectByGrpnoForAll = "selectByGrpnoForAll";
+    const selectByGrpnoForMng = "selectByGrpnoForMng";
     const selectByKeywordForAll = "selectByKeywordForAll";
     const selectByKeywordWithPageForAll = "selectByKeywordWithPageForAll";
+    const selectByGrpnoUsernameSearchtypeForAll = "selectByGrpnoUsernameSearchtypeForAll"; /* [PAGENUM, GRPNO, USENAME, SEARCHTYPE] */
     protected function select($options, $option="")
     {
         /* vars */
@@ -162,15 +163,27 @@ class GrpMemberBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside              : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
-            case self::selectByGrpnoForMng              : { $from = "(select * from grp_member where grpno  = '$GRPNO') t"; break; }
-            case self::selectByPkForMng                 : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
-            case self::selectByPkForAll                 : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
-            case self::selectByGrpnoForAll              : { $from = "(select * from grp_member where grpno  = '$GRPNO') t"; break; }
-            case self::selectMeByGrpno                  : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$EXECUTOR') t"; break; }
-            case self::selectByExecutorForAll           : { $from = "(select * from grp_member where userno = '$EXECUTOR') t"; break; }
-            case self::selectByKeywordForAll            : { $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$KEYWORD%') t"; break; }
-            case self::selectByKeywordWithPageForAll    : { $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$KEYWORD%') t"; break; }
+            case self::selectByPkForAll                         : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
+            case self::selectMeByGrpno                          : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$EXECUTOR') t"; break; }
+            case self::selectByExecutorForAll                   : { $from = "(select * from grp_member where userno = '$EXECUTOR') t"; break; }
+            case self::selectByPkForInside                      : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
+            case self::selectByGrpnoForAll                      : { $from = "(select * from grp_member where grpno  = '$GRPNO') t"; break; }
+            case self::selectByGrpnoForMng                      : { $from = "(select * from grp_member where grpno  = '$GRPNO') t"; break; }
+            case self::selectByPkForMng                         : { $from = "(select * from grp_member where grpno  = '$GRPNO' and userno = '$USERNO') t"; break; }
+            case self::selectByKeywordForAll                    : { $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$KEYWORD%') t"; break; }
+            case self::selectByKeywordWithPageForAll            : { $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$KEYWORD%') t"; break; }
+            case self::selectByGrpnoUsernameSearchtypeForAll:
+            {
+                switch($SEARCHTYPE)
+                {
+                    case "all"      : $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$USERNAME%') t"; break;
+                    case "manager"  : $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$USERNAME%' and grpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub')) t"; break;
+                    case "normem"   : $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$USERNAME%' and grpm.grpmtype in ('$grpmtypeMember') and u.usertype = 'normal') t"; break;
+                    case "tmpmem"   : $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$USERNAME%' and grpm.grpmtype in ('$grpmtypeMember') and u.usertype = 'temp') t"; break;
+                    default: { throw new Exception("(server) selectByGrpnoUsernameSearchtypeForAll searchtype not defined"); }
+                }
+                break;
+            }
             default:
                 throw new GGexception("(server) no option defined");
         }

@@ -17,13 +17,24 @@
                 <tr>
                     <td class="MMMB-td-searchtype" searchtype="all"       tab="tab" >전체</td>
                     <td class="MMMB-td-searchtype" searchtype="manager"   tab=""    >관리자</td>
-                    <td class="MMMB-td-searchtype" searchtype="member"    tab=""    >멤버</td>
-                    <td class="MMMB-td-searchtype" searchtype="temp"      tab=""    >임시</td>
+                    <td class="MMMB-td-searchtype" searchtype="normem"    tab=""    >멤버</td>
+                    <td class="MMMB-td-searchtype" searchtype="tmpmem"    tab=""    >임시</td>
                 </tr>
             </tbody>
         </table>
     </div>
     <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- 검색 -->
+    <!-- ========================= -->
+    <div id="MMMB-div-search" class="common-div-cushion common-search-div-top">
+        <input type="text" id="MMMB-input-searchkey" class="common-input-text"/>
+        <button id="MMMB-btn-search" class="common-btn-outline" btn-size="search">🔍 검색</button>
+        <div class="common-tag-block common-tag-fontsize09">
+            <span id="MMMB-span-searchedCnt"></span>건 검색되었습니다.
+        </div>
+    </div>
 
     <!-- ========================= -->
     <!-- list -->
@@ -40,78 +51,49 @@
             {
                 if(MMMB.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); MMMB.close(); return; }
                 if(MMMB.Data.searchtype == undefined) { MMMB.Data.searchtype = "all"; }
+                if(MMMB.Data.searchkey  == undefined) { MMMB.Data.searchkey = ""; }
+                if(MMMB.Data.pagenum    == undefined) { MMMB.Data.pagenum = 1; }
+
+                /* set searchkey */
+                $("#MMMB-input-searchkey").val(MMMB.Data.searchkey);
 
                 /* 멤버 리스트 조회 */
                 $(`.MMMB-td-searchtype[searchtype='${MMMB.Data.searchtype}']`).click();
             },
 
-            search()
+            search(searchtype)
             {
                 Common.showProgress();
                 setTimeout(function()
                 {
                     let grpno = MMMB.Data.grpno;
-                    let searchtype = MMMB.Data.searchtype;
-                    let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(MMMB.Data.grpno, GGF.none, GGF.toast);
-                    let models = mGrpMembers.getModels();
+                    let pagenum = MMMB.Data.pagenum;
+                    let searchkey = $("#MMMB-input-searchkey").val();
+                    if(MMMB.Data.searchtype != searchtype)
+                        pagenum = 1;
 
-                    let filteredModels = [];
+                    let mGrpMembers = null;
                     switch(searchtype)
                     {
-                        case "all":
-                        {
-                            filteredModels = models;
-                            break;
-                        }
-                        case "manager":
-                        {
-                            for(let i in models)
-                            {
-                                let model = models[i];
-                                let cut = true;
-                                if(model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNG) cut = false;
-                                if(model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNGSUB) cut = false;
-
-                                /* splice */
-                                if(cut == false)
-                                    filteredModels.push(model);
-                            }
-                            break;
-                        }
-                        case "member":
-                        {
-                            for(let i in models)
-                            {
-                                let model = models[i];
-                                let mUser = model.getMUser();
-                                let cut = false;
-                                if(model.getGrpmtype() != GGF.GrpMember.Grpmtype.MEMBER) cut = true;
-                                if(mUser.isUsertypeTemp()) cut = true;
-
-                                /* splice */
-                                if(cut == false)
-                                    filteredModels.push(model);
-                            }
-                            break;
-                        }
-                        case "temp":
-                        {
-                            for(let i in models)
-                            {
-                                let model = models[i];
-                                let mUser = model.getMUser();
-                                let cut = true;
-                                if(mUser.isUsertypeTemp()) cut = false;
-
-                                /* splice */
-                                if(cut == false)
-                                    filteredModels.push(model);
-                            }
-                            break;
-                        }
+                        case "all"      : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "all"); break; }
+                        case "manager"  : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "manager"); break; }
+                        case "normem"   : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "normem"); break; }
+                        case "tmpmem"   : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "tmpmem"); break; }
                     }
-                    mGrpMembers.models = filteredModels;
                     mGrpMembers.make("#MMMB-div-list");
+                    $("#MMMB-span-searchedCnt").text(mGrpMembers.getAllcnt());
+
+                    /* set event */
+                    $("#MMMB-div-list .common-btn-pagenationBtn").click(function()
+                    {
+                        let toPage = $(this).attr("to_page");
+                        MMMB.Data.pagenum = toPage;
+                        MMMB.search(MMMB.Data.searchtype);
+                    });
+
+                    /* save selected */
+                    MMMB.Data.searchkey = searchkey;
+                    MMMB.Data.searchtype = searchtype;
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
@@ -134,16 +116,16 @@
             /* ========================= */
             $(".MMMB-td-searchtype").click(function()
             {
-                /* 선택된 탭 표시 */
                 let searchtype = $(this).attr("searchtype");
-
-                /* save selected */
-                MMMB.Data.searchtype = searchtype;
-
-                /* process */
-                MMMB.search();
+                $("#MMMB-input-searchkey").val("");
+                MMMB.search(searchtype);
             });
 
+            $("#MMMB-btn-search").click(function()
+            {
+                MMMB.Data.pagenum = 1;
+                MMMB.search(MMMB.Data.searchtype);
+            });
 
             /* ========================= */
             /* page process */

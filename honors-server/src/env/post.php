@@ -118,7 +118,7 @@
     $options["LINEUPNAME"]                                          = get("LINEUPNAME");
     $options["TOKEN"]                                               = get("TOKEN");
     $options["USABLE"]                                              = get("USABLE");
-    $options["USERNAME"]                                            = get("USERNAME");
+    $options["USERNAME"]                                            = get("USERNAME"); /* abstract */
     $options["USERNO"]                                              = get("USERNO");
     $options["USERREGDT"]                                           = get("USERREGDT");
     $options["VALUE"]                                               = get("VALUE"); /* abstract */
@@ -131,9 +131,10 @@
     $options["PAGENUM"]                                             = get("PAGENUM"); /* abstract */
     $options["PERPAGE"]                                             = get("PERPAGE"); /* abstract */
     $options["PAGEFLG"]                                             = get("PAGEFLG"); /* abstract */
+    $options["SEARCHTYPE"]                                          = get("SEARCHTYPE"); /* abstract */
 
     /* if has pagenum, add pageflg */
-    if(isset($_POST["PAGENUM"]))
+    if(isset($_POST["PAGENUM"]) && intval($_POST["PAGENUM"]) > 0)
         $options["PAGEFLG"] = GGF::Y;
 
     extract($options);

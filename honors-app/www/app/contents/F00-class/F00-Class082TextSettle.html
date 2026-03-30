@@ -111,7 +111,7 @@
 
                         /* 잔여금내역 */
                         html += `\n\n■ 잔여금내역`;
-                        let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                        let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(0, grpno);
                         let members = mGrpMembers.getModels();
                         let membersCnt = 0;
                         for(let i in members)

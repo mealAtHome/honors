@@ -277,7 +277,7 @@ class UserBO extends _CommonBO
                     )
                     values
                     (
-                            '$userno'
+                          '$userno'
                         , '$ID'
                         , '$pwHash'
                         ,  null

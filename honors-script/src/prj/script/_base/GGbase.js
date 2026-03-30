@@ -125,6 +125,7 @@ var GGbase =
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-label-checkbox.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-p.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-radio.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-search.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-select.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-span.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-switch.css?v=${scriptVersion}`);
