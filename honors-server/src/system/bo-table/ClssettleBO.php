@@ -320,22 +320,16 @@ class ClssettleBO extends _CommonBO
                             /* 포인트 사용 */
                             $pointUsed = $existingBillPointed - $BILLPOINTED;
                             if($pointUsed != 0)
-                            {
-                                $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$pointUsed));
-                                $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$pointUsed), "일정정산으로 인한 변동", $CLSNO);
-                            }
+                                $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$pointUsed), "일정정산으로 인한 변동", $CLSNO);
                         }
 
-                        /* 레코드가 존재했었다면, 반복할 필요 없음 */
+                        /* 레코드가 존재했었다면, 아래 로직이 실행되어서는 안됨. */
                         continue;
                     }
 
                     /* is pointed? */
                     if($BILLPOINTED > 0)
-                    {
-                        $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$BILLPOINTED));
-                        $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $CLSNO);
-                    }
+                        $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $CLSNO);
 
                     /* if billfinal == 0 ?, deposit complete */
                     $memberdepositflg     = ($BILLFINAL == 0) ? "'y'"   : "'n'";

@@ -11,6 +11,7 @@ class MGrpfnca
         /* data */      this.grpfnc_clssalesunpaidtotal         = -1 * GGC.Common.bigint(dat.grpfnc_clssalesunpaidtotal);
         /* data */      this.grpfnc_clssaleslosstotal           = -1 * GGC.Common.bigint(dat.grpfnc_clssaleslosstotal);
         /* data */      this.grpfnc_clspurchasetotal            = -1 * GGC.Common.bigint(dat.grpfnc_clspurchasetotal);
+        /* data */      this.grpfnc_memberpointtotal            =      GGC.Common.bigint(dat.grpfnc_memberpointtotal);
         /* data */      this.grpfnc_alltotal                    =      GGC.Common.bigint(dat.grpfnc_alltotal);
         /* data */      this.modidt                             =      GGC.Common.datetime(dat.modidt);
         /* custom */    this.pk = `grpno="${this.grpno}"`;
@@ -28,6 +29,7 @@ class MGrpfnca
     /* data */  getGrpfncClssalesunpaidtotal() { return this.grpfnc_clssalesunpaidtotal; }
     /* data */  getGrpfncClssaleslosstotal() { return this.grpfnc_clssaleslosstotal; }
     /* data */  getGrpfncClspurchasetotal() { return this.grpfnc_clspurchasetotal; }
+    /* data */  getGrpfncMemberpointtotal() { return this.grpfnc_memberpointtotal; }
     /* data */  getGrpfncAlltotal() { return this.grpfnc_alltotal; }
     /* data */  getModidt() { return this.modidt; }
 
@@ -44,6 +46,7 @@ class MGrpfnca
     /* wonColor */ getGrpfncClssalesunpaidtotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClssalesunpaidtotal()); }
     /* wonColor */ getGrpfncClssaleslosstotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClssaleslosstotal()); }
     /* wonColor */ getGrpfncClspurchasetotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClspurchasetotal()); }
+    /* wonColor */ getGrpfncMemberpointtotalWonColor() { return GGC.Common.wonColor(this.getGrpfncMemberpointtotal()); }
     /* wonColor */ getGrpfncAlltotalWonColor() { return GGC.Common.wonColor(this.getGrpfncAlltotal()); }
     getModidtDiff() { return GGC.Common.dateDiff(this.getModidt()); }
 

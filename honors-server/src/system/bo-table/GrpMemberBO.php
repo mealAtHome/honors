@@ -19,6 +19,7 @@ class GrpMemberBO extends _CommonBO
         GGnavi::getClslineupbBO();
         GGnavi::getClssettleBO();
         GGnavi::getGrpmPrivacyBO();
+        GGnavi::getGrpfncaBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
@@ -26,6 +27,7 @@ class GrpMemberBO extends _CommonBO
         $arr['clslineupbBO'] = ClslineupbBO::getInstance();
         $arr['clssettleBO'] = ClssettleBO::getInstance();
         $arr['grpmPrivacyBO'] = GrpmPrivacyBO::getInstance();
+        $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         return $arr;
     }
 
@@ -228,7 +230,7 @@ class GrpMemberBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    public function updatePointForInside($GRPNO, $USERNO, $POINT) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updatePointForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, $RELCLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertTempForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteRecordByPkForInside($GRPNO, $USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
@@ -283,6 +285,12 @@ class GrpMemberBO extends _CommonBO
                 /* execute */
                 $query = "update grp_member set point = point + $POINT where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
+
+                /* insert to history */
+                $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, $RELCLSNO);
+
+                /* update grpfnca */
+                $grpfncaBO->recalGrpfncMemberpointtotalByPkForInside($GRPNO);
                 break;
             }
             case self::updateInjectPointForMng:
@@ -291,10 +299,7 @@ class GrpMemberBO extends _CommonBO
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
                 /* update point */
-                $this->updatePointForInside($GRPNO, $USERNO, $POINT);
-
-                /* insert to history */
-                $grpMemberPointhistBO->insertForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, null);
+                $this->updatePointForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, null);
                 break;
             }
             case self::insertTempForInside:
