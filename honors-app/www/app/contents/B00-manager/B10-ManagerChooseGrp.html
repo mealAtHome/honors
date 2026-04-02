@@ -34,11 +34,11 @@
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    /* 그룹리스트 조회 */
+                    /* 모임리스트 조회 */
                     let mGrps = Api.Grp.selectManaging();
                     mGrps.makeForChooseGrp("#MGCG-div-list");
 
-                    /* 그룹이 하나밖에 존재하지 않으면 첫번째 엘리먼트 자동선택 */
+                    /* 모임이 하나밖에 존재하지 않으면 첫번째 엘리먼트 자동선택 */
                     if(mGrps.getModels().length == 1)
                     {
                         Navigation.loginIntoGrp(mGrps.getModel().getGrpno());

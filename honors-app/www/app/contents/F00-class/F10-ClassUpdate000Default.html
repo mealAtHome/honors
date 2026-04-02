@@ -543,7 +543,7 @@
                 let grpno = CUDE.Data.grpno;
                 let mGrpMember = Api.GrpMember.selectMeByGrpno(grpno, GGF.none, GGF.toast);
                 if(mGrpMember == null)
-                    return Common.toast("해당 그룹의 멤버가 아닙니다.");
+                    return Common.toast("해당 모임의 멤버가 아닙니다.");
 
                 let mUser = mGrpMember.getMUser();
                 $("#CUDE-div-usernoadm").html(mGrpMember.make());
@@ -560,7 +560,7 @@
                 let grpno = CUDE.Data.grpno;
                 let mGrpMember = Api.GrpMember.selectMeByGrpno(grpno, GGF.none, GGF.toast);
                 if(mGrpMember == null)
-                    return Common.toast("해당 그룹의 멤버가 아닙니다.");
+                    return Common.toast("해당 모임의 멤버가 아닙니다.");
 
                 let mUser = mGrpMember.getMUser();
                 $("#CUDE-div-usernosub").html(mGrpMember.make());

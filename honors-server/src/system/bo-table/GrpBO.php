@@ -67,7 +67,7 @@ class GrpBO extends _CommonBO
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByPkForInside = "selectByPkForInside";
-    const selectManaging = "selectManaging"; /* 그룹 : 내 그룹리스트를 가져옴 */
+    const selectManaging = "selectManaging"; /* 모임 : 내 모임리스트를 가져옴 */
     const selectActiveForUsr = "selectActiveForUsr";
     protected function select($options, $option="")
     {

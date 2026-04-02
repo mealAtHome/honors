@@ -251,7 +251,7 @@
     border-collapse: collapse;
     white-space: normal;
 }
-/* nowrap은 첫 번째 버튼 그룹에만 해당함 */
+/* nowrap은 첫 번째 버튼에만 해당함 */
 .common-tbl-btnGroup > tbody > tr:nth-child(1) > td { white-space: nowrap; }
 .common-tbl-btnGroup > tbody > tr > td
 {

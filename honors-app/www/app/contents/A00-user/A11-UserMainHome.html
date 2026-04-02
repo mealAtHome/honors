@@ -64,7 +64,7 @@
                     let mSystemBoards = Api.SystemBoard.selectMain();
                     mSystemBoards.makeMainBanners("#UMHM-div-systemBoard");
 
-                    /* 그룹매니저 여부 조회 */
+                    /* 모임매니저 여부 조회 */
                     let mGrps = Api.Grp.selectManaging();
                     if(mGrps.getModels().length > 0)
                         $("#UMHM-btn-toManager").show();

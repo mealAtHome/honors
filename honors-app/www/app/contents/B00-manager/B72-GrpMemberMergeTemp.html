@@ -64,7 +64,7 @@
                 if(GMMT.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); GMMT.close(true); return; }
                 if(GMMT.Data.userno     == undefined) { Common.toast("잘못된 접근입니다."); GMMT.close(true); return; }
 
-                /* 선택한 그룹멤버 표시 */
+                /* 선택한 모임멤버 표시 */
                 let mGrpMember = Api.GrpMember.selectByPkForMng(GMMT.Data.grpno, GMMT.Data.userno, GGF.none, GGF.toast);
                 if(mGrpMember == null)
                 {

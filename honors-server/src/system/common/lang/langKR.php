@@ -52,7 +52,7 @@ class LangKR
         'bTeam-rgb_pants_stripe'                            => '',
         'bTeam-rgb_cap'                                     => 'ffffff',
         'bTeam-rgb_shoes'                                   => 'ffffff',
-        'not_allow_delete_league_attendance'                => '리그 시합 그룹에 참가 중인 경우, 해당 리그에서 참가팀을 삭제할 수 없습니다.',
+        'not_allow_delete_league_attendance'                => '리그 시합 모임에 참가 중인 경우, 해당 리그에서 참가팀을 삭제할 수 없습니다.',
         'model_batchRecordSummary-waitingBatchIsExsists'    => '통산집계계산 처리가 이미 처리예정에 있으므로, 중복으로 등록하실 수 없습니다.',
         'data/game/insert_practice_game-gameAlreadyExists'  => '이미 시합이 존재합니다. 기존의 시합을 삭제하고, 다시 시도해주세요.',
         'lockerroom-cannotVoteToMyBoard'                    => '내 글에 추천/비추천을 할 수 없습니다..',

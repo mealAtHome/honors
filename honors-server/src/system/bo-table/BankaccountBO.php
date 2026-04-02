@@ -43,12 +43,12 @@ class BankaccountBO extends _CommonBO
     */
     /* ========================= */
     const BACCTYPE__USER            = "user";               /* 계좌타입 : 유저 */
-    const BACCTYPE__GRP             = "grp";                /* 계좌타입 : 그룹 */
+    const BACCTYPE__GRP             = "grp";                /* 계좌타입 : 모임 */
     static public function getConsts()
     {
         $arr = array();
         $arr['bacctypeUser']        = self::BACCTYPE__USER;         /* 계좌타입 : 유저 */
-        $arr['bacctypeGrp']         = self::BACCTYPE__GRP;          /* 계좌타입 : 그룹 */
+        $arr['bacctypeGrp']         = self::BACCTYPE__GRP;          /* 계좌타입 : 모임 */
         return $arr;
     }
 

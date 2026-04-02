@@ -5,7 +5,7 @@
     <!-- ======================== -->
     <ons-toolbar>
         <div class="left"><gg-backbtn onclick="DGRP.close(true);"></gg-backbtn></div>
-        <div class="center">그룹상세</div>
+        <div class="center">모임상세</div>
     </ons-toolbar>
 
     <!-- ========================= -->
@@ -112,7 +112,7 @@
                                 /* 검색 탭 숨김 */
                                 $("#DGRP-div-search").hide();
 
-                                /* 그룹정보 */
+                                /* 모임정보 */
                                 let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
                                 $("#DGRP-div-info").html(mGrp.make());
                                 break;

@@ -17,7 +17,7 @@ class GGF
     const USERNO = "userno";
     const USERNAME = "username";
     const APIKEY = "apikey";
-    const GRPNO = "grpno"; /* 그룹번호 */
+    const GRPNO = "grpno"; /* 모임번호 */
     const STORENO = "storeno";
     const RIDERNO = "riderno";
     const ORDERNO = "orderno";

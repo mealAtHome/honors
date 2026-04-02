@@ -22,7 +22,7 @@ var CommonEvent =
         $('body').on('click',  '.commonEvent-div-pagenationBtn',               $.proxy(CommonEvent.tapPagenationBtn, this));       /* 페이지네이션 div */
         $('body').on('click',  '.commonEvent-tbl-multitab > tbody > tr > td',  $.proxy(CommonEvent.multitab, this));               /* 멀티 탭 */
         $('body').on('click',  '.commonEvent-tbl-tab > tbody > tr > td',       $.proxy(CommonEvent.tab, this));                    /* 탭 */
-        $('body').on('click',  '.commonEvent-tbl-btnGroup > tbody > tr > td',  $.proxy(CommonEvent.tab, this));                    /* 버튼그룹 */
+        $('body').on('click',  '.commonEvent-tbl-btnGroup > tbody > tr > td',  $.proxy(CommonEvent.tab, this));                    /* 버튼 */
         $('body').on('click',  '.commonEvent-tbl-sort > thead > tr > th',      $.proxy(CommonEvent.sort, this));                   /* 테이블 정렬 */
         $('body').on('click',  '.commonEvent-btn-round',                       $.proxy(CommonEvent.roundBtn, this));               /* 유저의 탭으로 plus/minus 처리를 해줌. */
         $('body').on('click',  '.commonEvent-btn-plusMinus',                   $.proxy(CommonEvent.btnPlusMinus, this));           /* 유저의 탭으로 plus/minus 처리를 해줌. */
@@ -564,7 +564,7 @@ var CommonEvent =
     /* commonEvent-btn-radio 라는 클래스를 가진 엘리먼트에 라디오 효과를 부여함 */
     /*
         attributes
-          [*] radio_name    : 그룹을 묶어줄 수 있는 키
+          [*] radio_name    : 키
           [*] tab           : ["tab", ""]
           [*] linked_div    : 링크된 div만 표시하고, tab div는 가린다.
     */
@@ -609,7 +609,7 @@ var CommonEvent =
           [*] checkbox_mode    : ["single", "multi"]
             - single : 한 개만 선택할 수 있음 (라디오효과)
             - multi  : 여러개를 한 번에 선택할 수 있음 (체크박스효과)
-          [*] checkbox_name    : 그룹을 묶어줄 수 있는 키
+          [*] checkbox_name    : 키
           [*] checkbox_checked : ["y", "n"]
           [*] code             : 페이지코드
     */
@@ -648,7 +648,7 @@ var CommonEvent =
           [*] checkbox_mode    : ["single", "multi"]
             - single : 한 개만 선택할 수 있음 (라디오효과)
             - multi  : 여러개를 한 번에 선택할 수 있음 (체크박스효과)
-          [*] checkbox_name    : 그룹을 묶어줄 수 있는 키
+          [*] checkbox_name    : 키
           [*] checkbox_checked : ["y", "n"]
     */
     /* ========================== */

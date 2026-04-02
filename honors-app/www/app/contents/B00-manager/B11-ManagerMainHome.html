@@ -15,7 +15,7 @@
     </div>
 
     <!-- ========================= -->
-    <!-- 그룹 -->
+    <!-- 모임 -->
     <!-- ========================= -->
     <hr class="common-hr-padding"/>
     <div class="common-div-cushion">
@@ -67,16 +67,16 @@
                     /* let mSystemBoards = Api.SystemBoard.selectMain(); */
                     /* mSystemBoards.makeMainBanners("#MMHM-div-systemBoard"); */
 
-                    /* 그룹정보조회 */
+                    /* 모임정보조회 */
                     let mGrp = Api.Grp.selectByPk(MMHM.Data.grpno);
                     if(mGrp == null)
                     {
-                        Common.error("그룹정보가 없습니다.");
+                        Common.error("모임정보가 없습니다.");
                         return;
                     }
                     $("#MMHM-div-grp").html(mGrp.make());
 
-                    /* 이 그룹의 매니저인지 여부를 확인 */
+                    /* 이 모임의 매니저인지 여부를 확인 */
                     if(GGstorage.Prj.isManagerOfGrp(MMHM.Data.grpno) == false)
                     {
                         Common.toast("매니저 권한이 없습니다.");

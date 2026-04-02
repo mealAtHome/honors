@@ -58,7 +58,7 @@ else
 /* requries */
 /* ===================== */
 
-/* 공통함수 모임 */
+/* 공통함수 */
 require_once ROOT.'/src/system/common/common.php';
 require_once ROOT.'/src/system/common/GGrslt.php';
 require_once ROOT.'/src/system/common/GGauth.php';
