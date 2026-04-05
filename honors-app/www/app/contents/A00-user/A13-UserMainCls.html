@@ -44,26 +44,14 @@
                 setTimeout(function()
                 {
                     let mClss = Api.Cls.selectClsstatusEditInImMng();
-                    if(mClss.getModels().length > 0)
-                    {
-                        $(".UMCL-td-searchtype[searchtype='edit']").show();
-                        if(Common.isEmpty(UMCL.Data.searchtype))
-                        {
-                            UMCL.Data.searchtype = "edit";
-                            $(`.UMCL-td-searchtype[searchtype='edit']`).click();
-                        }
-                    }
-                    else
-                    {
-                        $(".UMCL-td-searchtype[searchtype='edit']").hide();
-                        $(`.UMCL-td-searchtype[searchtype='${UMCL.Data.searchtype}']`).click();
-                    }
+                    if(mClss.getModels().length >= 1) { $(".UMCL-td-searchtype[searchtype='edit']").show(); if(UMCL.Data.searchtype == "") UMCL.Data.searchtype = "edit"; }
+                    if(mClss.getModels().length == 0) { $(".UMCL-td-searchtype[searchtype='edit']").hide(); if(UMCL.Data.searchtype == "") UMCL.Data.searchtype = "ing";  }
+
+                    /* click last selected tab */
+                    $(`.UMCL-td-searchtype[searchtype='${UMCL.Data.searchtype}']`).click();
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
-
-                /* 선택사항 복구 */
-
             },
 
             close()

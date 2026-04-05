@@ -2,7 +2,7 @@ class MSystemBoard
 {
     constructor(dat)
     {
-        /* dat */     this.sb_index       = GGC.Common.int(dat.sb_index);
+        /* dat */     this.sbindex       = GGC.Common.int(dat.sbindex);
         /* dat */     this.sb_level       = GGC.Common.enum(dat.sb_level);
         /* dat */     this.sb_title       = GGC.Common.char(dat.sb_title);
         /* dat */     this.is_open        = GGC.Common.enum(dat.is_open);
@@ -14,10 +14,10 @@ class MSystemBoard
         /* dat */     this.regidt         = GGC.Common.datetime(dat.regidt);
         /* custom */  this.fullUrl        = `${ServerInfo.getServerHost()}/src/z-res/_system_board/${this.getUrl()}`;
         /* custom */  this.regidtPretty   = GGdate.toYMDDHI(new Date(this.getRegidt()));
-        /* pk */      this.pk             = `sb_index="${this.sb_index}"`;
+        /* pk */      this.pk             = `sbindex="${this.sbindex}"`;
     }
 
-    /* dat */     getSbIndex()          { return this.sb_index; }
+    /* dat */     getSbIndex()          { return this.sbindex; }
     /* dat */     getSbLevel()          { return this.sb_level; }
     /* dat */     getSbTitle()          { return this.sb_title; }
     /* dat */     getIsOpen()           { return this.is_open; }

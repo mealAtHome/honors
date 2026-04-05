@@ -103,7 +103,7 @@
                                 pointHtml = ` (잔금:${model.getBillpointedWon()})`;
 
                             /* is deposited */
-                            let isDeposited = model.isManagerdepositflgYes() ? " [입금완료]" : "";
+                            let isDeposited = model.isManagerdepositflgYes() ? " [입금확인]" : "";
 
                             /* add row */
                             html += `\n${model.getUsername()} : ${model.getBillfinalWon()}${discountHtml}${pointHtml}${isDeposited}`;

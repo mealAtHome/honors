@@ -123,8 +123,8 @@ GGC.Clssettle =
     {
         let status = "";
         let rslt = "";
-        if      (managerdepositflg == GGF.Y)                              { status = "succeed"; rslt = "입금완료"; }
-        else if (managerdepositflg == GGF.N && memberdepositflg == GGF.Y) { status = "warning"; rslt = "입금완료(임시)"; }
+        if      (managerdepositflg == GGF.Y)                              { status = "succeed"; rslt = "입금확인"; }
+        else if (managerdepositflg == GGF.N && memberdepositflg == GGF.Y) { status = "warning"; rslt = "입금완료"; }
         else
         {
             status = "failed";

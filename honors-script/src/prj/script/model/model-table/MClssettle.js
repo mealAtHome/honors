@@ -123,11 +123,11 @@ class MClssettles extends _MCommon
 
             /* 나의 미입금이면서, 미입금상태라면, 완료된 상태가 아니라면 */
             if(isMe && model.getMemberdepositflg() != GGF.Y && model.getManagerdepositflg() != GGF.Y)
-                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-memberdepositflgYes" ${model.getPk()}>입금완료(임시)</button> `;
+                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-memberdepositflgYes" ${model.getPk()}>입금완료</button> `;
 
             /* 관리자면서, 미임금상태라면 */
             if(isManager && model.getManagerdepositflg() != GGF.Y)
-                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-managerdepositflgYes" ${model.getPk()}>입금완료</button> `;
+                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-managerdepositflgYes" ${model.getPk()}>입금확인완료</button> `;
 
             /* 미입금상태라면, 입금계좌표시 */
             if(model.getManagerdepositflg() != GGF.Y)
@@ -170,7 +170,7 @@ class MClssettles extends _MCommon
         }
         $(el).html(html);
 
-        /* 입금완료(임시) */
+        /* 입금완료 */
         $(`${el} .MClssettle-make-btn-memberdepositflgYes`).off("click").on("click", function()
         {
             let grpno = $(this).attr("grpno");
@@ -187,10 +187,10 @@ class MClssettles extends _MCommon
                     Common.hideProgress();
                 }, ajaxDelayTime);
             }
-            Common.confirm2("입금완료(임시) 처리는 유저 본인이 입금한 후에 임시로 완료처리하는 것으로, 완전히 완료된 것은 아닙니다. 계속하시겠습니까?", process);
+            Common.confirm2("입금을 완료하셨습니까?", process);
         });
 
-        /* 입금완료 */
+        /* 입금확인완료 */
         $(`${el} .MClssettle-make-btn-managerdepositflgYes`).off("click").on("click", function()
         {
             let grpno = $(this).attr("grpno");

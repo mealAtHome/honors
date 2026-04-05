@@ -237,7 +237,7 @@ class MClss extends _MCommon
             Common.confirm2("일정이 삭제됩니다. 계속하시겠습니까?", process);
         });
 
-        /* 정산중 */
+        /* 일정종료 */
         $(`${el} .MClss-make-btn-ingToEnd`).off("click").on("click", function()
         {
             let grpno = $(this).attr("grpno");
@@ -257,7 +257,7 @@ class MClss extends _MCommon
                     Common.hideProgress();
                 }, ajaxDelayTime);
             }
-            Common.confirm2("정산상태로 변경합니다. 계속하시겠습니까?", process);
+            Common.confirm2("일정이 종료됩니다. 이후 정산을 꼭 진행하시기 바랍니다. 계속하시겠습니까?", process);
         });
     }
 

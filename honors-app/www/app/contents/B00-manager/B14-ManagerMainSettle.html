@@ -15,8 +15,8 @@
         <table class="MMST-tbl-common common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="MMST-td-searchtype" val="nodepositall"   tab="tab" >전체</td> <!-- 미입금 + 임시완료 -->
-                    <td class="MMST-td-searchtype" val="memberdeposit"  tab=""    >임시완료</td>
+                    <td class="MMST-td-searchtype" val="nodepositall"   tab="tab" >전체</td> <!-- 미입금 + 입금완료 -->
+                    <td class="MMST-td-searchtype" val="memberdeposit"  tab=""    >입금완료</td>
                     <td class="MMST-td-searchtype" val="nodeposit"      tab=""    >미입금</td>
                 </tr>
             </tbody>
@@ -38,14 +38,14 @@
     </div>
 
     <!-- ========================= -->
-    <!-- 임시완료 -->
+    <!-- 입금완료 -->
     <!-- ========================= -->
     <div class="MMST-div-tab" tab="memberdeposit" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">임시완료</p>
+            <p class="common-p-title">입금완료</p>
             <ul class="common-ul-announce">
-                <li>멤버 본인이 입금완료했다고 표시한 리스트를 표시합니다.</li>
-                <li>실제로 완료되었는지 확인 후, 입금완료로 처리하면 됩니다.</li>
+                <li>멤버 본인이 입금했다고 표시한 리스트를 표시합니다.</li>
+                <li>실제로 완료되었는지 확인 후, 확인완료로 처리하면 됩니다.</li>
             </ul>
         </div>
         <div id="MMST-div-memberdepositList"></div>
@@ -58,7 +58,7 @@
         <div class="common-div-cushion">
             <p class="common-p-title">미입금</p>
             <ul class="common-ul-announce">
-                <li>멤버 본인이 입금완료했다고 표시하지 않았고, 입금완료처리도 진행되지 않은 건을 조회힙니다.</li>
+                <li>멤버 본인이 입금했다고 표시하지 않았고, 확인완료도 진행되지 않은 건을 조회힙니다.</li>
             </ul>
         </div>
         <div id="MMST-div-nodepositList"></div>

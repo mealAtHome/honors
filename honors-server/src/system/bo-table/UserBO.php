@@ -258,7 +258,7 @@ class UserBO extends _CommonBO
                 "
                     insert into user
                     (
-                            userno
+                          userno
                         , id
                         , pw
                         , img
@@ -295,7 +295,7 @@ class UserBO extends _CommonBO
                         ,  now()
                     )
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* insert sub tables */
                 $userPrivacyBO->insertDefaultForInside($userno);
@@ -324,7 +324,7 @@ class UserBO extends _CommonBO
                 "
                     insert into user
                     (
-                            userno
+                          userno
                         , usertype
                         , id
                         , pw
@@ -344,7 +344,7 @@ class UserBO extends _CommonBO
                     )
                     values
                     (
-                            '$userno'
+                          '$userno'
                         , 'temp'
                         , '$id'
                         , '$pwHash'
@@ -363,7 +363,7 @@ class UserBO extends _CommonBO
                         ,  now()
                     )
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* insert sub tables */
                 $userPrivacyBO->insertDefaultForInside($userno);

@@ -19,7 +19,8 @@
     /* process */
     /* ========================= */
     $userno  = "";
-    $apikey = "";
+    $name    = "";
+    $apikey  = "";
     $storeno = "";
     $riderno = "";
 
