@@ -7,6 +7,7 @@
         <table class="UMCL-tbl-common common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
+                    <td class="UMCL-td-searchtype" searchtype="edit"      tab=""    style="display:none;">작성중</td>
                     <td class="UMCL-td-searchtype" searchtype="ing"       tab="tab" >진행중</td>
                     <td class="UMCL-td-searchtype" searchtype="settle"    tab=""    >정산중</td>
                     <td class="UMCL-td-searchtype" searchtype="end"       tab=""    >완료</td>
@@ -36,10 +37,33 @@
 
             show()
             {
-                if(Common.isEmpty(UMCL.Data.searchtype)) { UMCL.Data.searchtype = "ing"; }
+                if(Common.isEmpty(UMCL.Data.searchtype)) { UMCL.Data.searchtype = ""; }
+
+                /* 작성중 조회 */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mClss = Api.Cls.selectClsstatusEditInImMng();
+                    if(mClss.getModels().length > 0)
+                    {
+                        $(".UMCL-td-searchtype[searchtype='edit']").show();
+                        if(Common.isEmpty(UMCL.Data.searchtype))
+                        {
+                            UMCL.Data.searchtype = "edit";
+                            $(`.UMCL-td-searchtype[searchtype='edit']`).click();
+                        }
+                    }
+                    else
+                    {
+                        $(".UMCL-td-searchtype[searchtype='edit']").hide();
+                        $(`.UMCL-td-searchtype[searchtype='${UMCL.Data.searchtype}']`).click();
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
 
                 /* 선택사항 복구 */
-                $(`.UMCL-td-searchtype[searchtype='${UMCL.Data.searchtype}']`).click();
+
             },
 
             close()
@@ -74,10 +98,11 @@
                     let mClss = null;
                     switch(searchtype)
                     {
-                        case "ing"      : mClss = Api.Cls.selectForUserByClsstatusIng    (); break;
-                        case "settle"   : mClss = Api.Cls.selectForUserByClssettleflgN   (); break;
-                        case "end"      : mClss = Api.Cls.selectForUserByClsstatusEnd    (); break;
-                        case "cancel"   : mClss = Api.Cls.selectForUserByClsstatusCancel (); break;
+                        case "edit"     : mClss = Api.Cls.selectClsstatusEditInImMng(); break;
+                        case "ing"      : mClss = Api.Cls.selectForUserByClsstatusIng(); break;
+                        case "settle"   : mClss = Api.Cls.selectForUserByClssettleflgN(); break;
+                        case "end"      : mClss = Api.Cls.selectForUserByClsstatusEnd(); break;
+                        case "cancel"   : mClss = Api.Cls.selectForUserByClsstatusCancel(); break;
                     }
                     mClss.make("#UMCL-div-list");
 

@@ -179,6 +179,8 @@
                 $("#CLSD-tr-clscancelreason").hide();
                 $("#CLSD-div-clssettleTop").hide();
                 $("#CLSD-div-clspurchase").hide();
+                $("#CLSD-tbl-clssettle > tbody").empty();
+                $("#CLSD-tbl-clspurchase > tbody").empty();
 
                 /* recover tab */
                 $(`.CLSD-td-tabmain[tabval=${CLSD.Data.tabmain}]`).click();

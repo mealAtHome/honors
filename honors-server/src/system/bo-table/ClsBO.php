@@ -112,6 +112,7 @@ class ClsBO extends _CommonBO
     const selectAppliedFor1YearByUserno = "selectAppliedFor1YearByUserno";
     const selectFor1YearByGrpnoForAll = "selectFor1YearByGrpnoForAll";
 
+    const selectClsstatusEditInImMng        = "selectClsstatusEditInImMng";         /* [mngr] [EXECUTOR]        : 일정상태가 작성중인 일정 검색 */
     const selectForUserByClsstatusIng       = "selectForUserByClsstatusIng";        /* [user] [EXECUTOR]        : 탭검색 */
     const selectForUserByClssettleflgN      = "selectForUserByClssettleflgN";       /* [user] [EXECUTOR]        : 탭검색 */
     const selectForUserByClsstatusEnd       = "selectForUserByClsstatusEnd";        /* [user] [EXECUTOR]        : 탭검색 */
@@ -221,6 +222,7 @@ class ClsBO extends _CommonBO
             case self::selectByGrpnoForMng              : { $from = "(select * from cls where grpno = '$GRPNO') t"; break; }
             case self::selectByClsstatusForMng          : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$CLSSTATUS') t"; break; }
             case self::selectFor1YearByGrpnoForAll      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstartdt >= date_sub(now(), interval 1 year)) t"; break; }
+            case self::selectClsstatusEditInImMng       : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype in ('mng', 'mngsub')) and clsstatus = '$clsstatusEdit') t"; break; }
             case self::selectForUserByClsstatusIng      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusIng') t"; break; }
             case self::selectForUserByClssettleflgN     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgYet') t"; break; }
             case self::selectForUserByClsstatusEnd      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
