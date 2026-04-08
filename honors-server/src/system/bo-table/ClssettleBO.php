@@ -18,14 +18,12 @@ class ClssettleBO extends _CommonBO
         GGnavi::getGrpMemberBO();
         GGnavi::getGrpMemberPointhistBO();
         GGnavi::getClssettlehistBO();
-        GGnavi::getClssettletmpBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['clsBO'] = ClsBO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['grpMemberPointhistBO'] = GrpMemberPointhistBO::getInstance();
         $arr['clssettlehistBO'] = ClssettlehistBO::getInstance();
-        $arr['clssettletmpBO'] = ClssettletmpBO::getInstance();
         return $arr;
     }
 
@@ -380,9 +378,6 @@ class ClssettleBO extends _CommonBO
                         $clssettlehistBO->copyFromClssettleForInside($GRPNO, $CLSNO, $USERNO, ClssettlehistBO::HISTTYPE__AFTER, $BILLFINAL);
 
                 } /* loop ARR */
-
-                /* delete tmp */
-                $clssettletmpBO->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
 
                 /* update clsbillsales */
                 $clsBO->updateBillByPkForInside($GRPNO, $CLSNO);

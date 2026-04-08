@@ -51,7 +51,7 @@
             <tbody>
                 <tr>
                     <td class="CUST-td-maintab" tab-val="input"   tab="tab" >정산입력</td>
-                    <td class="CUST-td-maintab" tab-val="history"  tab=""    >정산이력</td>
+                    <td class="CUST-td-maintab" tab-val="history"  tab=""   >정산 후 변경이력</td>
                 </tr>
             </tbody>
         </table>
@@ -69,8 +69,6 @@
             <div class="common-div-cushionUD">
                 <div class="common-tag-fontsize09">
                     <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
-                    <button id="CUST-btn-saveSettle"    class="common-btn-outline">💿임시저장</button>
-                    <button id="CUST-btn-resetSettle"   class="common-btn-outline">🔃임시저장취소</button>
                 </div>
             </div>
             <div class="common-div-scrollX">
@@ -110,7 +108,7 @@
     <!-- --------------- -->
     <div class="CUST-div-maintab" tab="history" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">정산이력</p>
+            <p class="common-p-title">정산 후 변경이력</p>
             <span class="common-tag-block common-tag-fontsize09">※첫 정산완료 시, 이력은 저장하지 않고, 이후 변경 시에만 저장합니다.</span>
             <span class="common-tag-block common-tag-fontsize09">※표시되는 데이터는 변경직전의 데이터입니다.</span>
             <div class="common-div-scrollX">
@@ -188,24 +186,14 @@
                 $("#CUST-tbl-settle > tbody").empty();
 
                 /* ----- */
-                /* cls : 미정산 */
+                /* cls : 미정산, clslineupb 로부터 조회 */
                 /* ----- */
                 if(clssettleflg == GGF.Cls.Clssettleflg.YET)
                 {
-                    /* 임시저장데이터 */
-                    let mClssettletmps = Api.Clssettletmp.selectByClsno(grpno, clsno);
-                    let mClssettletmpModels = mClssettletmps.getModels();
-                    for(let i in mClssettletmpModels)
-                        CUST.addRowForSettleByClssettletmp(mClssettletmpModels[i]);
-
-                    /* 임시저장데이터가 없으면, 라인업으로부터 작성 */
-                    if(mClssettletmpModels.length == 0)
-                    {
-                        let mClslineupbs = Api.Clslineupb.selectByClsnoForSettleForMng(grpno, clsno);
-                        let lineups = mClslineupbs.getModels();
-                        for(let i in lineups)
-                            CUST.addRowForSettleByClslineupb(lineups[i]);
-                    }
+                    let mClslineupbs = Api.Clslineupb.selectByClsnoForSettleForMng(grpno, clsno);
+                    let lineups = mClslineupbs.getModels();
+                    for(let i in lineups)
+                        CUST.addRowForSettleByClslineupb(lineups[i]);
                 }
 
                 /* ----- */
@@ -222,30 +210,6 @@
                 /* event */
                 CUST.setEventForSettle();
                 CUST.calSummarySettle();
-            },
-
-            addRowForSettleByClssettletmp(model)
-            {
-                /* 행이 이미 삭제되었는지 */
-                let isDeleted = model.getSettledeleteflg() == GGF.Y;
-                let rowStatus = isDeleted ? "deleted" : "active";
-                let display = isDeleted ? "display:none;" : "";
-
-                let html =
-                `
-                    <tr userno="${model.getUserno()}" settle-status="temp" row-status="${rowStatus}" style="${display}">
-                        <td col="status"                                                 >임시</td>
-                        <td col="btn"                                                    ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
-                        <td col="username"         userno="${model.getUserno()}"         >${model.getUsername()}</td>
-                        <td col="billstand"        subval="${model.getBillstandard()}"   >${model.getBillstandardWon()}</td>
-                        <td col="billfinal"                                              ><input type="text"   class="common-input-text CUST-input-billfinal"        userno="${model.getUserno()}" value="${model.getBillstandardWon()}" billstandard="${model.getBillstandard()}" subval="${model.getBillstandard()}" disabled></td>
-                        <td col="billadjustment"                                         ><input type="number" class="common-input-text CUST-input-billadjustment"   userno="${model.getUserno()}" value="0"></td>
-                        <td col="memberpoint"                                            ><input type="text"   class="common-input-text CUST-input-memberpoint"      userno="${model.getUserno()}" value="${model.getGrpmPointWon()}" subval="${model.getGrpmPoint()}" disabled></td>
-                        <td col="billpointed"                                            ><input type="number" class="common-input-text CUST-input-billpointed"      userno="${model.getUserno()}" value="0"></td>
-                        <td col="billmemo"                                               ><input type="text"   class="common-input-text CUST-input-billmemo"         userno="${model.getUserno()}" value=""></td>
-                    </tr>
-                `;
-                $(`#CUST-tbl-settle > tbody`).append(html);
             },
 
             addRowForSettleByClssettle(model)
@@ -506,59 +470,6 @@
                     regmember : GGF.Y,
                 }
                 Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
-            });
-
-            /* =============== */
-            /* settle : 임시저장 */
-            /* =============== */
-            $("#CUST-btn-saveSettle").click(function()
-            {
-                Common.showProgress();
-                setTimeout(function()
-                {
-                    try
-                    {
-                        let clsno = CUST.Data.clsno;
-                        let grpno = CUST.Data.grpno;
-                        let arr = CUST.getArrForSettle();
-                        let mApiResponse = Api.Clssettletmp.insertByArr(grpno, clsno, JSON.stringify(arr), GGF.toast, GGF.toast);
-                    }
-                    catch(e)
-                    {
-                        Common.catchProc(e);
-                    }
-                    Common.hideProgress();
-                }, ajaxDelayTime);
-            });
-
-            /* =============== */
-            /* settle : 임시저장삭제 */
-            /* =============== */
-            $("#CUST-btn-resetSettle").click(function()
-            {
-                let process = function()
-                {
-                    Common.showProgress();
-                    setTimeout(function()
-                    {
-                        try
-                        {
-                            let clsno = CUST.Data.clsno;
-                            let grpno = CUST.Data.grpno;
-
-                            /* 삭제 */
-                            let mApiResponse = Api.Clssettletmp.deleteByClsno(grpno, clsno, GGF.toast, GGF.toast);
-                            if(mApiResponse.isSuccess())
-                                CUST.resetSettle();
-                        }
-                        catch(e)
-                        {
-                            Common.catchProc(e);
-                        }
-                        Common.hideProgress();
-                    }, ajaxDelayTime);
-                }
-                Common.confirm2("임시로 저장한 데이터가 삭제되며, 기존 데이터에는 영향이 없습니다. 진행하시겠습니까?", process);
             });
 
             /* =============== */

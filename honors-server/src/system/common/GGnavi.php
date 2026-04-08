@@ -30,7 +30,6 @@ class GGnavi
     static public function getClspurchasehistBO()                                   { require_once ROOT."/src/system/bo-table/ClspurchasehistBO.php"; }
     static public function getClssettleBO()                                         { require_once ROOT."/src/system/bo-table/ClssettleBO.php"; }
     static public function getClssettlehistBO()                                     { require_once ROOT."/src/system/bo-table/ClssettlehistBO.php"; }
-    static public function getClssettletmpBO()                                      { require_once ROOT."/src/system/bo-table/ClssettletmpBO.php"; }
     static public function getClzcancelBO()                                         { require_once ROOT."/src/system/bo-table/ClzcancelBO.php"; }
     static public function getGrpBO()                                               { require_once ROOT."/src/system/bo-table/GrpBO.php"; }
     static public function getGrpfncaBO()                                           { require_once ROOT."/src/system/bo-table/GrpfncaBO.php"; }
