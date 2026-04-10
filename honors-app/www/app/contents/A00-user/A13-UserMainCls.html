@@ -4,7 +4,7 @@
     <!-- 선택 탭 -->
     <!-- ----- -->
     <div class="common-div-cushion">
-        <table class="UMCL-tbl-common common-tbl-tab commonEvent-tbl-tab">
+        <table class="UMCL-tbl-common common-tbl-tab commonEvent-tbl-tab" style="display:inline-block;">
             <tbody>
                 <tr>
                     <td class="UMCL-td-searchtype" searchtype="edit"      tab=""    style="display:none;">작성중</td>
@@ -15,6 +15,7 @@
                 </tr>
             </tbody>
         </table>
+        <button id="UMCL-btn-addCls" class="common-btn-outline common-tag-fontsize09" style="display:none; float:right;">+일정등록</button>
     </div>
     <hr class="common-hr-paddingLR"/>
 
@@ -47,6 +48,11 @@
                     if(mClss.getModels().length >= 1) { $(".UMCL-td-searchtype[searchtype='edit']").show(); if(UMCL.Data.searchtype == "") UMCL.Data.searchtype = "edit"; }
                     if(mClss.getModels().length == 0) { $(".UMCL-td-searchtype[searchtype='edit']").hide(); if(UMCL.Data.searchtype == "") UMCL.Data.searchtype = "ing";  }
 
+                    /* 모임매니저 여부 조회 */
+                    let mGrps = Api.Grp.selectManaging();
+                    if(mGrps.getModels().length > 0)
+                        $("#UMCL-btn-addCls").show();
+
                     /* click last selected tab */
                     $(`.UMCL-td-searchtype[searchtype='${UMCL.Data.searchtype}']`).click();
 
@@ -65,6 +71,11 @@
             /* ========================= */
             /* events */
             /* ========================= */
+            $("#UMCL-btn-addCls").click(function() { Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate000Default, { }); });
+
+            /* =============== */
+            /* tab click event */
+            /* =============== */
             $(".UMCL-td-searchtype").click(function()
             {
                 /* 선택된 탭 표시 */

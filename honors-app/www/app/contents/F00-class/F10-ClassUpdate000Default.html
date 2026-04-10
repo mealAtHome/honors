@@ -12,9 +12,39 @@
         </div>
 
         <!-- ======================== -->
+        <!-- 모임선택 -->
+        <!-- ======================== -->
+        <style>
+            #CUDE-div-formChooseGrp
+            {
+                width: calc(100% - 1.2em);
+                padding-left: 0.6em;
+                padding-right: 0.6em;
+            }
+        </style>
+        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formChooseGrp" slideform-next="#CUDE-div-formIntro" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
+            <div class="common-div-headerPadding"></div>
+
+            <!-- 모임선택 -->
+            <div class="common-div-formTitle">
+                <span>모임 선택</span>
+                <div id="CUDE-div-chooseGrp" class="common-div-cushionUD"></div>
+            </div>
+
+            <!-- 다음으로 -->
+            <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+                <tbody>
+                    <tr>
+                        <td><button class="CUDE-btn-formNext common-btn-inline">다음으로</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ======================== -->
         <!-- 일정소개 -->
         <!-- ======================== -->
-        <div class="common-div-slideformChild" slideform-status="open" id="CUDE-div-formIntro" slideform-next="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
+        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formIntro" slideform-next="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -303,15 +333,36 @@
                 /* validation */
                 if(CUDE.Data.option == undefined) CUDE.Data.option   = "insert";
                 if(CUDE.Data.clsno  == undefined) CUDE.Data.clsno    = "";
-                if(CUDE.Data.grpno  == undefined) { Common.toast("잘못된 접근입니다."); CUDE.close(true); return; }
+                if(CUDE.Data.grpno  == undefined) CUDE.Data.grpno    = "";
 
                 /* recovery */
                 Common.showProgress();
                 setTimeout(function()
                 {
+                    let open = false;
                     let option = CUDE.Data.option;
                     let clsno = CUDE.Data.clsno;
                     let grpno = CUDE.Data.grpno;
+
+                    /* =============== */
+                    /* 그룹 선택 */
+                    /* =============== */
+                    if(grpno == "")
+                    {
+                        // CUDE-div-chooseGrp
+                        let firstBtn = true;
+                        let mGrps = Api.Grp.selectManaging();
+                        let mGrpModels = mGrps.getModels();
+                        if      (mGrpModels.length == 0) { Common.toast("관리중인 모임이 없습니다. 먼저 모임을 생성해주세요."); Navigation.moveBack(); return; }
+                        else if (mGrpModels.length == 1) { CUDE.Data.grpno = mGrpModels[0].getGrpno(); grpno = CUDE.Data.grpno; }
+                        else if (mGrpModels.length > 1)
+                        {
+                            open = true;
+                            $("#CUDE-div-formChooseGrp").attr("slideform-status", "open");
+                            $("#CUDE-div-formIntro").attr("slideform-status", "wait");
+                            mGrps.makeForChooseGrp2("#CUDE-div-chooseGrp");
+                        }
+                    }
 
                     switch(option)
                     {
@@ -365,6 +416,11 @@
                             break;
                         }
                     }
+
+                    /* open */
+                    if(open == false)
+                        $("#CUDE-div-formIntro").attr("slideform-status", "open");
+
                     Common.hideProgress();
                 }, ajaxDelayTime);
             },
@@ -437,6 +493,12 @@
                 /* validation by id */
                 switch(id)
                 {
+                    case "CUDE-div-formChooseGrp":
+                    {
+                        let grpno = $(`.CUDE-btn-chooseGrp[tab="tab"]`).attr("grpno");
+                        if(Common.isEmpty(grpno)) { Common.toastError("모임을 선택해주세요."); return; }
+                        break;
+                    }
                     case "CUDE-div-formIntro":
                     {
                         let clstitle = $("#CUDE-input-clstitle").val();

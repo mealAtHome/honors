@@ -54,8 +54,20 @@ class MGrp
     /* make */
     /* ========================= */
 
-    make()
+    make(btnHtml="")
     {
+        if(btnHtml != "")
+        {
+            btnHtml =
+            `
+                <tr>
+                    <td colspan="2">
+                        ${btnHtml}
+                    </td>
+                </tr>
+            `;
+        }
+
         let html = "";
         html +=
         `
@@ -72,6 +84,7 @@ class MGrp
                                 </span>
                             </td>
                         </tr>
+                        ${btnHtml}
                     </tbody>
                 </table>
             </div>
@@ -99,10 +112,12 @@ class MGrps extends _MCommon
     /* ========================= */
     /* make */
     /* ========================= */
-    makeForView(el)      { this.make("makeForView", el); }
-    makeForChooseGrp(el) { this.make("makeForChooseGrp", el); }
+    makeForView(el)       { this.make("makeForView", el); }
+    makeForChooseGrp(el)  { this.make("makeForChooseGrp", el); }
+    makeForChooseGrp2(el) { this.make("makeForChooseGrp2", el); }
     make(option, el)
     {
+        let firstBtn = true;
         let html = "";
         for(let i in this.models)
         {
@@ -110,16 +125,9 @@ class MGrps extends _MCommon
             let buttonHtml = "";
             switch(option)
             {
-                case "makeForChooseGrp":
-                {
-                    buttonHtml = `<button class="common-btn-inline Mgrp-make-btn-login" grpno="${model.getGrpno()}">선택하기</button>`;
-                    break;
-                }
-                case "makeForView":
-                {
-                    buttonHtml = `<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`;
-                    break;
-                }
+                case "makeForView"        : { buttonHtml = `<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`; break; }
+                case "makeForChooseGrp"   : { buttonHtml = `<button class="common-btn-inline Mgrp-make-btn-login" grpno="${model.getGrpno()}">선택하기</button>`; break; }
+                case "makeForChooseGrp2"  : { buttonHtml = `<button class="CUDE-btn-chooseGrp commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-chooseGrp" tab="" grpno="${model.getGrpno()}">선택</button>`; break; }
             }
             html +=
             `
@@ -145,6 +153,7 @@ class MGrps extends _MCommon
                     </table>
                 </div>
             `;
+            firstBtn = false;
         }
         $(el).html(html);
 
