@@ -43,21 +43,6 @@
         </div>
     </div>
 
-    <!-- ----- -->
-    <!-- 선택 탭 -->
-    <!-- ----- -->
-    <div class="common-div-cushion">
-        <table class="common-tbl-tab commonEvent-tbl-tab">
-            <tbody>
-                <tr>
-                    <td class="CUST-td-maintab" tab-val="input"   tab="tab" >정산입력</td>
-                    <td class="CUST-td-maintab" tab-val="history"  tab=""    >정산이력</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <hr class="common-hr-paddingLR"/>
-
     <!-- --------------- -->
     <!-- 정산입력 -->
     <!-- --------------- -->
@@ -68,9 +53,10 @@
             <span class="common-tag-block common-tag-fontsize09">※좌우로 스크롤을 움직여 정산정보를 입력할 수 있습니다.</span>
             <div class="common-div-cushionUD">
                 <div class="common-tag-fontsize09">
-                    <button id="CUST-btn-addSettleItem" class="common-btn-outline">＋참가자추가</button>
-                    <button id="CUST-btn-saveSettle"    class="common-btn-outline">💿임시저장</button>
-                    <button id="CUST-btn-resetSettle"   class="common-btn-outline">🔃임시저장취소</button>
+                    <button id="CUST-btn-saveSettle"     class="common-btn-outline">💿저장</button>
+                    <button id="CUST-btn-settleComplete" class="common-btn-outline">✅확정</button>
+                    <button id="CUST-btn-resetSettle"    class="common-btn-outline">🔃초기화</button>
+                    <button id="CUST-btn-applyPoint"     class="common-btn-outline">💰잔여금적용</button>
                 </div>
             </div>
             <div class="common-div-scrollX">
@@ -91,7 +77,9 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="3">합계</td>
+                            <td colspan="3" style="text-align:left;">
+                                <button id="CUST-btn-addSettleItem"  class="common-btn-outline">＋참가자추가</button>
+                            </td>
                             <td><span id="CUST-span-billstandSummary"></span></td>
                             <td><span id="CUST-span-billfinalSummary"></span></td>
                             <td><span id="CUST-span-billadjustmentSummary"></span></td>
@@ -118,13 +106,6 @@
             </div>
         </div>
     </div>
-
-
-    <!-- ======================== -->
-    <!-- footer -->
-    <!-- ======================== -->
-    <button id="CUST-btn-settleComplete" class="common-btn-footer">정산완료</button>
-    <div class="common-div-cushionFooter"></div>
 
     <script>
         var CUST =
@@ -159,9 +140,6 @@
                         let grpno = CUST.Data.grpno;
                         let mClssettlehists = Api.Clssettlehist.selectByClsno(grpno, clsno);
                         mClssettlehists.makeTable("#CUST-div-settlehist");
-
-                        /* 탭 표시 */
-                        $(`.CUST-td-maintab[tab-val=${CUST.Data.maintab}]`).click();
                     }
                     catch(e)
                     {
@@ -184,8 +162,9 @@
                 let clssettleflg = mCls.getClssettleflg();
                 $("#CUST-span-clstitle").text(mCls.getClstitle());
 
-                /* clear */
+                /* init el */
                 $("#CUST-tbl-settle > tbody").empty();
+                $("#CUST-btn-resetSettle").show();
 
                 /* ----- */
                 /* cls : 미정산 */
@@ -213,10 +192,14 @@
                 /* ----- */
                 if(clssettleflg == GGF.Cls.Clssettleflg.DONE)
                 {
+                    /* hide for edit */
+                    $("#CUST-btn-resetSettle").hide();
+
+                    /* clssettle 조회 */
                     let mClssettles = Api.Clssettle.selectByClsnoForMng(grpno, clsno);
                     let mClssettleModels = mClssettles.getModels();
                     for(let i in mClssettleModels)
-                        CUST.addRowForSettleByClssettle(mClssettleModels[i]);
+                        CUST.addRowForSettleByClssettleOrigin(mClssettleModels[i]);
                 }
 
                 /* event */
@@ -226,15 +209,10 @@
 
             addRowForSettleByClssettletmp(model)
             {
-                /* 행이 이미 삭제되었는지 */
-                let isDeleted = model.getSettledeleteflg() == GGF.Y;
-                let rowStatus = isDeleted ? "deleted" : "active";
-                let display = isDeleted ? "display:none;" : "";
-
                 let html =
                 `
-                    <tr userno="${model.getUserno()}" settle-status="temp" row-status="${rowStatus}" style="${display}">
-                        <td col="status"                                                 >임시</td>
+                    <tr userno="${model.getUserno()}" settle-status="temp">
+                        <td col="status"                                                 >-</td>
                         <td col="btn"                                                    ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"         >${model.getUsername()}</td>
                         <td col="billstand"        subval="${model.getBillstandard()}"   >${model.getBillstandardWon()}</td>
@@ -248,7 +226,7 @@
                 $(`#CUST-tbl-settle > tbody`).append(html);
             },
 
-            addRowForSettleByClssettle(model)
+            addRowForSettleByClssettleOrigin(model)
             {
                 /* 납부확정일 시, 더 이상 청구금액 변경 불가 */
                 let disabled = (model.isMemberdepositflgYes() || model.isManagerdepositflgYes()) ? "disabled" : "";
@@ -257,7 +235,7 @@
                 /* 행 생산 */
                 let html =
                 `
-                    <tr userno="${model.getUserno()}" settle-status="settled" row-status="active">
+                    <tr userno="${model.getUserno()}" settle-status="settled">
                         <td col="status"                                                >${statusText}</td>
                         <td col="btn"                                                   ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}" ${disabled}>삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"        >${model.getUsername()}</td>
@@ -276,8 +254,8 @@
             {
                 let html =
                 `
-                    <tr userno="${model.getUserno()}" settle-status="temp" row-status="active">
-                        <td col="status"                                            >등록</td>
+                    <tr userno="${model.getUserno()}" settle-status="temp">
+                        <td col="status"                                            >-</td>
                         <td col="btn"                                               ><button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button></td>
                         <td col="username"         userno="${model.getUserno()}"    >${model.getUsername()}</td>
                         <td col="billstand"        subval="${model.getBill()}"      >${model.getBillWon()}</td>
@@ -315,20 +293,18 @@
                 $("#CUST-tbl-settle > tbody > tr").each(function()
                 {
                     let settleStatus    = $(this).attr("settle-status");
-                    let rowStatus       = $(this).attr("row-status");
                     let billstand       = parseInt($(this).find("td[col=billstand]").attr("subval"));
                     let billfinal       = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
                     let billadjustment  = parseInt($(this).find("td[col=billadjustment] > input").val());
                     let billpointed     = parseInt($(this).find("td[col=billpointed] > input").val());
 
-                    if(rowStatus == "deleted")
-                        return;
+                    /* validation */
+                    if(isNaN(billstand)) billstand = 0;
+                    if(isNaN(billfinal)) billfinal = 0;
+                    if(isNaN(billadjustment)) billadjustment = 0;
+                    if(isNaN(billpointed)) billpointed = 0;
 
-                    if(isNaN(billstand)) return;
-                    if(isNaN(billfinal)) return;
-                    if(isNaN(billadjustment)) return;
-                    if(isNaN(billpointed)) return;
-
+                    /* summary */
                     billstandSummary += billstand;
                     billfinalSummary += billfinal;
                     billadjustmentSummary += billadjustment;
@@ -351,17 +327,7 @@
                     let userno = $(this).attr("userno");
                     let process = function()
                     {
-                        /* get settleStatus */
-                        let settleStatus = $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).attr("settle-status");
-                        if(settleStatus == "temp")
-                        {
-                            $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).remove();
-                        }
-                        else
-                        {
-                            $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).attr("row-status", "deleted");
-                            $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).hide();
-                        }
+                        $(`#CUST-tbl-settle > tbody > tr[userno=${userno}]`).remove();
                         CUST.calSummarySettle();
                     }
                     Common.confirm2("삭제하시겠습니까?", process);
@@ -429,7 +395,6 @@
                 $("#CUST-tbl-settle > tbody > tr").each(function()
                 {
                     let userno              = $(this).attr("userno");
-                    let rowStatus           = $(this).attr("row-status");
                     let billstand           = parseInt($(this).find("td[col=billstand]").attr("subval"));
                     let billfinal           = parseInt($(this).find("td[col=billfinal] > input").attr("subval"));
                     let billadjustment      = parseInt($(this).find("td[col=billadjustment] > input").val());
@@ -438,7 +403,6 @@
                     let dat =
                     {
                         USERNO          : userno,
-                        ROW_STATUS      : rowStatus,
                         BILLSTANDARD    : billstand,
                         BILLADJUSTMENT  : billadjustment,
                         BILLPOINTED     : billpointed,
@@ -470,21 +434,6 @@
             /* event */
             /* ========================= */
 
-
-            /* =============== */
-            /* 탭 */
-            /* =============== */
-            $(".CUST-td-maintab").click(function()
-            {
-                /* 선택된 탭 표시 */
-                let val = $(this).attr("tab-val");
-                CUST.Data.maintab = val;
-
-                /* 탭별 표시 */
-                $(".CUST-div-maintab").hide();
-                $(`.CUST-div-maintab[tab=${val}]`).show();
-            });
-
             /* =============== */
             /* settle : 참가자추가 */
             /* =============== */
@@ -509,30 +458,7 @@
             });
 
             /* =============== */
-            /* settle : 임시저장 */
-            /* =============== */
-            $("#CUST-btn-saveSettle").click(function()
-            {
-                Common.showProgress();
-                setTimeout(function()
-                {
-                    try
-                    {
-                        let clsno = CUST.Data.clsno;
-                        let grpno = CUST.Data.grpno;
-                        let arr = CUST.getArrForSettle();
-                        let mApiResponse = Api.Clssettletmp.insertByArr(grpno, clsno, JSON.stringify(arr), GGF.toast, GGF.toast);
-                    }
-                    catch(e)
-                    {
-                        Common.catchProc(e);
-                    }
-                    Common.hideProgress();
-                }, ajaxDelayTime);
-            });
-
-            /* =============== */
-            /* settle : 임시저장삭제 */
+            /* settle : 초기화 */
             /* =============== */
             $("#CUST-btn-resetSettle").click(function()
             {
@@ -558,11 +484,34 @@
                         Common.hideProgress();
                     }, ajaxDelayTime);
                 }
-                Common.confirm2("임시로 저장한 데이터가 삭제되며, 기존 데이터에는 영향이 없습니다. 진행하시겠습니까?", process);
+                Common.confirm2("참가자 명단으로부터 정산을 다시 작성합니다. 초기화하시겠습니까?", process);
             });
 
             /* =============== */
-            /* 저장 */
+            /* settle : 저장 */
+            /* =============== */
+            $("#CUST-btn-saveSettle").click(function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        let clsno = CUST.Data.clsno;
+                        let grpno = CUST.Data.grpno;
+                        let arr = CUST.getArrForSettle();
+                        let mApiResponse = Api.Clssettletmp.insertByArr(grpno, clsno, JSON.stringify(arr), GGF.toast, GGF.toast);
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* =============== */
+            /* settle : 확정 */
             /* =============== */
             $("#CUST-btn-settleComplete").click(function()
             {
@@ -603,9 +552,53 @@
                         Common.hideProgress();
                     }, ajaxDelayTime);
                 }
-                Common.confirm2("정산을 완료하시겠습니까? 추후에 수정가능합니다.", process);
+                Common.confirm2("정산 내용이 각 멤버들에게 표시됩니다. 정산을 확정하시겠습니까?", process);
             });
 
+            /* =============== */
+            /* 잔여금적용 : 표시된 잔여금을 정산에 적용 */
+            /* =============== */
+            $("#CUST-btn-applyPoint").click(function()
+            {
+                /* tr 루프를 통해, 최종금액에 반영가능한 포인트를 billpointed에 반영 */
+                $("#CUST-tbl-settle > tbody > tr").each(function()
+                {
+                    let settleStatus  = $(this).attr("settle-status");
+                    let billfinalEl   = $(this).find(".CUST-input-billfinal");
+                    let memberpointEl = $(this).find(".CUST-input-memberpoint");
+                    let billpointedEl = $(this).find(".CUST-input-billpointed");
+
+                    /* validation : length */
+                    if(settleStatus != "temp") return;
+                    if(billfinalEl.length   == 0) return;
+                    if(memberpointEl.length == 0) return;
+                    if(billpointedEl.length == 0) return;
+
+                    /* values */
+                    let billfinal   = parseInt(billfinalEl.attr("subval"));
+                    let memberpoint = parseInt(memberpointEl.attr("subval"));
+                    let billpointed = parseInt(billpointedEl.val());
+                    if(isNaN(billfinal)) billfinal = 0;
+                    if(isNaN(memberpoint)) memberpoint = 0;
+                    if(isNaN(billpointed)) billpointed = 0;
+
+                    /* ----- */
+                    /* calc */
+                    /* ----- */
+                    /* 반영가능한 포인트가 없는 경우, 패스 */
+                    let availablePoint = memberpoint - billpointed;
+                    if(availablePoint <= 0)
+                        return;
+
+                    if(availablePoint >= billfinal) billpointedEl.val(billpointed + (availablePoint - billfinal)); /* 반영가능한 포인트가 최종청구금액보다 많거나 같은 경우 */
+                    if(availablePoint <  billfinal) billpointedEl.val(billpointed + availablePoint);               /* 반영가능한 포인트가 최종청구금액보다 작은 경우 */
+
+                    /* trigger keyup event to update UI */
+                    billpointedEl.keyup();
+                });
+
+                Common.toast("잔여금이 청구금액에 적용되었습니다.");
+            });
 
             /* ========================= */
             /* page process */
