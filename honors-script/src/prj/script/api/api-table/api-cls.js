@@ -68,7 +68,7 @@ Api.Cls =
 
     updateClsstatusEditToIng      (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusEditToIng"  , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
     updateClsstatusIngToEnd       (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusIngToEnd"   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
-    updateClssettleflgDone        (grpno, clsno, arr             , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClssettleflgDone"    , GRPNO:grpno, CLSNO:clsno, ARR:arr }, noticeOK, noticeFail); },
+    updateClssettleflgDone        (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClssettleflgDone"    , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
     updateClsstatusToCancel       (grpno, clsno, clscancelreason , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusToCancel"   , GRPNO:grpno, CLSNO:clsno, CLSCANCELREASON:clscancelreason }, noticeOK, noticeFail); },
     deleteByPkWithSubForMng       (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "deleteByPkWithSubForMng"   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
 

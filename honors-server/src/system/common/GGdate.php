@@ -127,7 +127,11 @@ class GGdate
         return true;
     }
 
-    public static function diffHour($start=null, $close=null)
+    public static function isInSecondsFromNow($dateStr, $seconds) { return self::diffSeconds($dateStr) <= $seconds; }
+
+
+    public static function diffHour($start=null, $close=null) { return self::diffSeconds($start, $close) / 3600; }
+    public static function diffSeconds($start=null, $close=null)
     {
         /* validation */
         $start = $start == null ? date('Y-m-d H:i:s') : $start;
@@ -140,8 +144,7 @@ class GGdate
 
         /* cal */
         $seconds = $dt2->getTimestamp() - $dt1->getTimestamp();
-        $diff = round($seconds / 3600, 2);
-        return $diff;
+        return $seconds;
     }
 
 } /* end class */

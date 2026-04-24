@@ -29,6 +29,7 @@ class ClssettletmpBO extends _CommonBO
     const FIELD__USERNO                     = "userno";                     /* (PK) char(30) */
     const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
     const FIELD__BILLADJUSTMENT             = "billadjustment";             /* (  ) int */
+    const FIELD__BILLDISCOUNT               = "billdiscount";               /* (  ) int */
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
     const FIELD__BILLFINAL                  = "billfinal";                  /* (  ) int */
     const FIELD__BILLMEMO                   = "billmemo";                   /* (  ) varchar(100) */
@@ -61,6 +62,7 @@ class ClssettletmpBO extends _CommonBO
     /* select > sub */
     /* ========================= */
     // public function selectByPkForInside($GRPNO, $CLSNO, $USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByClsnoForInside($GRPNO, $CLSNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
@@ -68,6 +70,7 @@ class ClssettletmpBO extends _CommonBO
     */
     /* ========================= */
     const selectByClsno = "selectByClsno";
+    const selectByClsnoForInside = "selectByClsnoForInside";
     protected function select($options, $option="")
     {
         /* vars */
@@ -93,6 +96,7 @@ class ClssettletmpBO extends _CommonBO
             , t.userno
             , t.billstandard
             , t.billadjustment
+            , t.billdiscount
             , t.billpointed
             , t.billfinal
             , t.billmemo
@@ -133,7 +137,8 @@ class ClssettletmpBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByClsno : { $from = "(select * from clssettletmp where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByClsno            : { $from = "(select * from clssettletmp where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByClsnoForInside   : { $from = "(select * from clssettletmp where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -187,7 +192,7 @@ class ClssettletmpBO extends _CommonBO
     /* update (sub) */
     /* ========================= */
     // public function insertByArr($GRPNO, $CLSNO, $EXECUTOR, $ARR) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function deleteByClsnoForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
@@ -214,12 +219,11 @@ class ClssettletmpBO extends _CommonBO
         {
             case self::insertByArr:
             {
-                /* TODO : is finance charge */
-                /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                /* auth */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
 
                 /* delete before insert */
-                $this->deleteByClsnoForInside($GRPNO, $CLSNO, $EXECUTOR);
+                $this->deleteByClsnoForInside($GRPNO, $CLSNO);
 
                 /* process */
                 $arr = json_decode($ARR, true);
@@ -229,6 +233,7 @@ class ClssettletmpBO extends _CommonBO
                     $USERNO         = $dat['USERNO'];
                     $BILLSTANDARD   = intval($dat['BILLSTANDARD']);
                     $BILLADJUSTMENT = intval($dat['BILLADJUSTMENT']);
+                    $BILLDISCOUNT   = intval($dat['BILLDISCOUNT']);
                     $BILLPOINTED    = intval($dat['BILLPOINTED']);
                     $BILLFINAL      = intval($dat['BILLFINAL']);
                     $BILLMEMO       = $dat['BILLMEMO'];
@@ -249,6 +254,7 @@ class ClssettletmpBO extends _CommonBO
                             , userno
                             , billstandard
                             , billadjustment
+                            , billdiscount
                             , billpointed
                             , billfinal
                             , billmemo
@@ -265,6 +271,7 @@ class ClssettletmpBO extends _CommonBO
                             , '$USERNO'
                             ,  $BILLSTANDARD
                             ,  $BILLADJUSTMENT
+                            ,  $BILLDISCOUNT
                             ,  $BILLPOINTED
                             ,  $BILLFINAL
                             , '$BILLMEMO'
@@ -282,9 +289,9 @@ class ClssettletmpBO extends _CommonBO
             case self::deleteByClsnoForInside:
             case self::deleteByClsno:
             {
-                /* TODO : is finance charge */
-                /* validation */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                /* auth */
+                if($OPTION == self::deleteByClsno)
+                    $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
 
                 /* process */
                 $query = "delete from clssettletmp where grpno = '$GRPNO' and clsno = '$CLSNO'";

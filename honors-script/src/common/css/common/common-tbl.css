@@ -1,4 +1,10 @@
 /*=================================*/
+/* table auto width */
+/*=================================*/
+.common-tbl-autowidth { width: auto; }
+.common-tbl-autowidth > tbody, thead > tr > th, td { width: auto; }
+
+/*=================================*/
 /* table to footer */
 /*=================================*/
 .common-tbl-footer
@@ -499,6 +505,10 @@
 {
     border-top:none;
 }
+.common-tbl-vertical[tbl-width="auto"] > thead > tr > td { width:auto; }
+.common-tbl-vertical[tbl-width="auto"] > thead > tr > th { width:auto; }
+.common-tbl-vertical[tbl-width="auto"] > tbody > tr > td { width:auto; }
+.common-tbl-vertical[tbl-width="auto"] > tbody > tr > th { width:auto; }
 
 /* ============================== */
 /* TABLE : 테이블 안에 테이블을 활용할 시 */

@@ -9,6 +9,7 @@ class MClssettlehist
         /* data */      this.histtype = GGC.Common.enum(dat.histtype);
         /* data */      this.billstandard = GGC.Common.int(dat.billstandard);
         /* data */      this.billadjustment = GGC.Common.int(dat.billadjustment);
+        /* data */      this.billdiscount = GGC.Common.int(dat.billdiscount);
         /* data */      this.billpointed = GGC.Common.int(dat.billpointed);
         /* data */      this.billfinal = GGC.Common.int(dat.billfinal);
         /* data */      this.billmemo = GGC.Common.varchar(dat.billmemo);
@@ -29,6 +30,7 @@ class MClssettlehist
     getHisttype() { return this.histtype; }
     getBillstandard() { return this.billstandard; }
     getBilladjustment() { return this.billadjustment; }
+    getBilldiscount() { return this.billdiscount; }
     getBillpointed() { return this.billpointed; }
     getBillfinal() { return this.billfinal; }
     getBillmemo() { return this.billmemo; }
@@ -43,6 +45,7 @@ class MClssettlehist
     getHisttypeFont() { return GGC.Clssettlehist.histtypeFont(this.getHisttype()); }
     getBillstandardWon() { return GGC.Common.priceWon(this.billstandard); }
     getBilladjustmentWon() { return GGC.Common.priceWon(this.billadjustment); }
+    getBilldiscountWon() { return GGC.Common.priceWon(this.billdiscount); }
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }
     getBillfinalWon() { return GGC.Common.priceWon(this.billfinal); }
     getBillfinalafterWon() { return GGC.Common.priceWon(this.billfinalafter); }
@@ -85,6 +88,7 @@ class MClssettlehists extends _MCommon
                     <td col="billfinal"          >${model.getBillfinalWon()}</td>
                     <td col="billfinalafter"     >${model.getBillfinalafterWon()}</td>
                     <td col="billadjustment"     >${model.getBilladjustmentWon()}</td>
+                    <td col="billdiscount"       >${model.getBilldiscountWon()}</td>
                     <td col="billpointed"        >${model.getBillpointedWon()}</td>
                     <td col="billmemo"           >${Common.ifempty(model.getBillmemo(), "-")}</td>
                     <td col="regdt"              >${model.getRegdt()}</td>
@@ -101,7 +105,8 @@ class MClssettlehists extends _MCommon
                         <th>이력타입</th>
                         <th>변경전</th>
                         <th>변경후</th>
-                        <th>청구보정</th>
+                        <th>청구추가</th>
+                        <th>청구차감</th>
                         <th>잔여금사용</th>
                         <th>비고</th>
                         <th>등록일</th>

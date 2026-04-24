@@ -1,0 +1,94 @@
+<ons-page id="DCLS">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="DCLS.close(true);"></gg-backbtn></div>
+        <div class="center">정산상세</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 정산상세 -->
+    <!-- ========================= -->
+    <div id="DCLS-div-detail"></div>
+
+    <script>
+        var DCLS =
+        {
+            code : "DCLS",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(DCLS.Data.grpno  == undefined) { Common.toast("잘못된 접근입니다."); DCLS.close(); return; }
+                if(DCLS.Data.clsno  == undefined) { Common.toast("잘못된 접근입니다."); DCLS.close(); return; }
+                if(DCLS.Data.userno == undefined) { Common.toast("잘못된 접근입니다."); DCLS.close(); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* get var */
+                    let grpno = DCLS.Data.grpno;
+                    let clsno = DCLS.Data.clsno;
+                    let userno = DCLS.Data.userno;
+
+                    /* get data */
+                    let mClssettles = Api.Clssettle.selectByPkForMng(grpno, clsno, userno);
+                    mClssettles.make("#DCLS-div-detail");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                DCLS.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                DCLS.close(true);
+            }
+
+            /* localizing */
+            /* $("#DCLS").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

@@ -179,8 +179,18 @@ class MClss extends _MCommon
                     }
                     case GGF.Cls.Clsstatus.END:
                     {
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020Settle}"   hyperlink-viewmode="page" ${model.getPk()}>정산</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate021Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매</button>`;
+                        switch(model.getClssettleflg())
+                        {
+                            case GGF.Cls.Clssettleflg.EDIT:
+                                btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020SettleEdit}"   hyperlink-viewmode="page" ${model.getPk()}>정산입력</button>`;
+                                btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate026Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매입력</button>`;
+                                break;
+                            case GGF.Cls.Clssettleflg.PROC:
+                                btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate026Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매입력</button>`;
+                                break;
+                            case GGF.Cls.Clssettleflg.DONE:
+                                break;
+                        }
                         break;
                     }
                 }

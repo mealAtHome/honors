@@ -73,8 +73,9 @@ class ClsBO extends _CommonBO
     const CLSSTATUS__ING            = "ing";                /* clsstatus : 진행중 */
     const CLSSTATUS__END            = "end";                /* clsstatus : 일정완료 */
     const CLSSTATUS__CANCEL         = "cancel";             /* clsstatus : 취소 */
-    const CLSSETTLEFLG__YET         = "yet";                /* clssettleflg : 미정산 */
-    const CLSSETTLEFLG__DONE        = "done";               /* clssettleflg : 정산완료 */
+    const CLSSETTLEFLG__EDIT        = "edit";               /* clssettleflg : 정산입력중 */
+    const CLSSETTLEFLG__PROC        = "proc";               /* clssettleflg : 정산확인중 */
+    const CLSSETTLEFLG__DONE        = "done";               /* clssettleflg : 정산완료됨 */
 
     static public function getConsts()
     {
@@ -83,8 +84,9 @@ class ClsBO extends _CommonBO
         $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
         $arr['clsstatusEnd']                    = self::CLSSTATUS__END;         /* 일정상태 : 일정완료 */
         $arr['clsstatusCancel']                 = self::CLSSTATUS__CANCEL;      /* 일정상태 : 취소 */
-        $arr['clssettleflgYet']                 = self::CLSSETTLEFLG__YET;      /* 정산여부 : 미정산 */
-        $arr['clssettleflgDone']                = self::CLSSETTLEFLG__DONE;     /* 정산여부 : 정산완료 */
+        $arr['clssettleflgEdit']                = self::CLSSETTLEFLG__EDIT;     /* 정산여부 : 정산입력중 */
+        $arr['clssettleflgProc']                = self::CLSSETTLEFLG__PROC;     /* 정산여부 : 정산확인중 */
+        $arr['clssettleflgDone']                = self::CLSSETTLEFLG__DONE;     /* 정산여부 : 정산완료됨 */
         return $arr;
     }
 
@@ -224,12 +226,12 @@ class ClsBO extends _CommonBO
             case self::selectFor1YearByGrpnoForAll      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstartdt >= date_sub(now(), interval 1 year)) t"; break; }
             case self::selectClsstatusEditInImMng       : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype in ('mng', 'mngsub')) and clsstatus = '$clsstatusEdit') t"; break; }
             case self::selectForUserByClsstatusIng      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusIng') t"; break; }
-            case self::selectForUserByClssettleflgN     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgYet') t"; break; }
+            case self::selectForUserByClssettleflgN     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
             case self::selectForUserByClsstatusEnd      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
             case self::selectForUserByClsstatusCancel   : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusCancel') t"; break; }
             case self::selectForMngrByClsstatusEdit     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEdit') t"; break; }
             case self::selectForMngrByClsstatusIng      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
-            case self::selectForMngrByClssettleflgN     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgYet') t"; break; }
+            case self::selectForMngrByClssettleflgN     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
             case self::selectForMngrByClsstatusEnd      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
             case self::selectForMngrByClsstatusCancel   : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
             case self::selectAppliedFor1YearByUserno    :
@@ -306,7 +308,7 @@ class ClsBO extends _CommonBO
     const update                                = "update";                                 /* [mng]  */
     const updateClsstatusEditToIng              = "updateClsstatusEditToIng";               /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 진행중으로 변경 */
     const updateClsstatusIngToEnd               = "updateClsstatusIngToEnd";                /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 종료로 변경 */
-    const updateClssettleflgDone                = "updateClssettleflgDone";                 /* [mng] [EXECUTOR, GRPNO, CLSNO, ARR]  : 일정정산정보 등록 */
+    const updateClssettleflgDone                = "updateClssettleflgDone";                 /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 정산완료 */
     const updateClsstatusToCancel               = "updateClsstatusToCancel";                /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
     const copyClsForMng                         = "copyClsForMng";                          /* [mng]  */
     const deleteByPkWithSubForMng               = "deleteByPkWithSubForMng";                /* [mng]  */
@@ -468,9 +470,10 @@ class ClsBO extends _CommonBO
                 /* validation */
                 $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
                 $ggAuth->isClsEnd($GRPNO, $CLSNO, true);
+                $ggAuth->isClssetleflgEdit($GRPNO, $CLSNO, true);
 
                 /* regist settle */
-                $clssettleBO->upsertForInside($GRPNO, $CLSNO, $EXECUTOR, $ARR);
+                $clssettleBO->completeSettlementFromTmp($GRPNO, $CLSNO);
 
                 /* update clsstatus */
                 $query = "update cls set clssettleflg = '$clssettleflgDone', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";

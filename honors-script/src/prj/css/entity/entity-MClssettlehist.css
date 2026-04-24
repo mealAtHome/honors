@@ -10,6 +10,7 @@
 .MClssettlehist-makeTable-mainTable > tbody > tr > td[col="billfinal"]       { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: bold; }
 .MClssettlehist-makeTable-mainTable > tbody > tr > td[col="billstandard"]    { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
 .MClssettlehist-makeTable-mainTable > tbody > tr > td[col="billadjustment"]  { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
+.MClssettlehist-makeTable-mainTable > tbody > tr > td[col="billdiscount"]    { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
 .MClssettlehist-makeTable-mainTable > tbody > tr > td[col="billpointed"]     { white-space:nowrap; word-break: keep-all; text-align: right;  font-weight: normal; }
 .MClssettlehist-makeTable-mainTable > tbody > tr > td[col="billmemo"]        { white-space:normal; word-break: keep-all; text-align: left;   font-weight: normal; }
 .MClssettlehist-makeTable-mainTable > tbody > tr > td[col="regdt"]           { white-space:nowrap; word-break: keep-all; text-align: center; font-weight: normal; }

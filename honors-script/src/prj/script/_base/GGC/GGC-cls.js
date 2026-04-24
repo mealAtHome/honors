@@ -9,10 +9,10 @@ GGC.Cls =
         let rslt = "";
         switch(val)
         {
-            case GGF.Cls.Clsstatus.EDIT   : rslt = "작성중"; break;
-            case GGF.Cls.Clsstatus.ING    : rslt = "진행중"; break;
-            case GGF.Cls.Clsstatus.END    : rslt = "완료"; break;
-            case GGF.Cls.Clsstatus.CANCEL : rslt = "취소"; break;
+            case GGF.Cls.Clsstatus.EDIT   : rslt = "일정작성중"; break;
+            case GGF.Cls.Clsstatus.ING    : rslt = "일정진행중"; break;
+            case GGF.Cls.Clsstatus.END    : rslt = "일정종료"; break;
+            case GGF.Cls.Clsstatus.CANCEL : rslt = "일정취소"; break;
         }
         return rslt;
     },
@@ -39,8 +39,9 @@ GGC.Cls =
         let rslt = "";
         switch(val)
         {
-            case GGF.Cls.Clssettleflg.YET     : rslt = "미정산"; break;
-            case GGF.Cls.Clssettleflg.DONE    : rslt = "정산완료"; break;
+            case GGF.Cls.Clssettleflg.EDIT    : rslt = "정산입력중"; break;
+            case GGF.Cls.Clssettleflg.PROC    : rslt = "정산확인중"; break;
+            case GGF.Cls.Clssettleflg.DONE    : rslt = "정산확정됨"; break;
         }
         return rslt;
     },
@@ -49,7 +50,8 @@ GGC.Cls =
         let rslt = "";
         switch(val)
         {
-            case GGF.Cls.Clssettleflg.YET     : rslt = "hold"; break;
+            case GGF.Cls.Clssettleflg.EDIT    : rslt = "hold"; break;
+            case GGF.Cls.Clssettleflg.PROC    : rslt = "prog"; break;
             case GGF.Cls.Clssettleflg.DONE    : rslt = "pstv"; break;
         }
         return rslt;

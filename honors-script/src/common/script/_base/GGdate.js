@@ -216,20 +216,20 @@ var GGdate =
         return Math.round( (x1 - x0) / msPerDay );
     },
 
+    /* ========================= */
     /* e.g. getSecondsBetweenDates( 22-Jul-2011, 29-jul-2011) => 7. */
+    /* ========================= */
+    isIn5MinFromNow(dateStr) { return GGdate.getSecondsBetweenDates(GGdate.fromStr(dateStr), new Date()) <= 5 * 60; },
     getSecondsBetweenDates(d0, d1)
     {
         let msPerSecond = 1e3;
 
         // Copy dates so don't mess them up
-        if(d0 == null) d0 = new Date();
-        if(d1 == null) d1 = new Date();
-
-        let x0 = new Date(d0);
-        let x1 = new Date(d1);
+        d0 = d0 == null ? new Date() : new Date(d0);
+        d1 = d1 == null ? new Date() : new Date(d1);
 
         // Round to remove daylight saving errors
-        return Math.round( (x1 - x0) / msPerSecond );
+        return Math.round( (d1 - d0) / msPerSecond );
     },
 
     /* param : div id to "YYYY-MM-DD HH:II" str */

@@ -32,8 +32,9 @@ GGF.Cls =
     },
     Clssettleflg :
     {
-        YET             : "yet",                /* GGF.Cls.Clssettleflg.YET : 미정산 */
-        DONE            : "done",               /* GGF.Cls.Clssettleflg.DONE : 정산완료 */
+        EDIT            : "edit",               /* GGF.Cls.Clssettleflg.EDIT : 정산입력중 */
+        PROC            : "proc",               /* GGF.Cls.Clssettleflg.PROC : 정산확인중 */
+        DONE            : "done",               /* GGF.Cls.Clssettleflg.DONE : 정산확정됨 */
     },
     Grpfinancereflectflg :
     {

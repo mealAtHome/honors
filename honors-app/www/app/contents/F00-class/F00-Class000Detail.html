@@ -107,9 +107,10 @@
         <table id="CLSD-tbl-clssettle" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
             <thead>
                 <tr>
+                    <th>상세</th>
                     <th>입금여부</th>
                     <th>접수자</th>
-                    <th>최종금액</th>
+                    <th>청구금액</th>
                     <th>비고</th>
                 </tr>
             </thead>
@@ -263,6 +264,7 @@
                                 let html =
                                 `
                                     <tr>
+                                        <td class="common-tag-alignC"><button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D21DetailClssettle}" hyperlink-viewmode="dialog" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">상세</button></td>
                                         <td class="common-tag-alignC">${managerDepositflgHtml}</td>
                                         <td class="common-tag-alignC">${model.getUsername()}</td>
                                         <td class="common-tag-alignR">${model.getBillfinalWon()}</td>
@@ -343,7 +345,11 @@
                             CLSD.addRowForLineup2(mClslineupbModels[i]);
 
                         /* 첫 탭 활성화 */
-                        $("#CLSD-div-lineupTabBtns").find(".CLSD-btn-lineupTab").first().click();
+                        /* 선택된 라인업이 있는지, 존재하는지 확인 후, 이동 */
+                        if($(`.CLSD-btn-lineupTab[val="${CLSD.Data.lineupidx}"]`).length > 0)
+                            $(`.CLSD-btn-lineupTab[val="${CLSD.Data.lineupidx}"]`).click();
+                        else
+                            $("#CLSD-div-lineupTabBtns").find(".CLSD-btn-lineupTab").first().click();
 
                         CLSD.setEvent();
                     }
@@ -373,12 +379,12 @@
                     `;
                     $("#CLSD-div-lineupTabBtns").append(btnHtml);
 
-                    let $btn = $("#CLSD-div-lineupTabBtns").find(`.CLSD-btn-lineupTab[val="${lineupidx}"]`);
-                    $btn.off("click").on("click", function()
+                    $(`.CLSD-btn-lineupTab[val="${lineupidx}"]`).off("click").on("click", function()
                     {
                         let li = $(this).attr("val");
                         $(".CLSD-div-tabTeam").hide();
                         $(`.CLSD-div-tabTeam[lineupidx="${li}"]`).show();
+                        CLSD.Data.lineupidx = li;
                     });
                 }
 
@@ -583,8 +589,8 @@
             $("#CLSD-btn-textCls")      .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class080TextCls,        {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
             $("#CLSD-btn-textApply")    .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class081TextApply,      {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
             $("#CLSD-btn-textSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F00Class082TextSettle,     {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
-            $("#CLSD-btn-editSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate020Settle,   {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
-            $("#CLSD-btn-editPurchase") .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate021Purchase, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-editSettle")   .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate020SettleEdit,   {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
+            $("#CLSD-btn-editPurchase") .click(function(){ Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate026Purchase, {grpno:CLSD.Data.grpno, clsno:CLSD.Data.clsno, }) });
 
             /* 탭 선택 */
             $(".CLSD-td-tabmain").click(function()
@@ -592,6 +598,7 @@
                 let tabval = $(this).attr('tabval');
                 $(".CLSD-div-tabmain").hide();
                 $(`.CLSD-div-tabmain[tabval="${tabval}"]`).show();
+                CLSD.Data.tabmain = tabval;
             });
 
             /* ========================= */

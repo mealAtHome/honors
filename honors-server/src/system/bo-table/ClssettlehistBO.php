@@ -32,6 +32,7 @@ class ClssettlehistBO extends _CommonBO
     const FIELD__HISTTYPE                   = "histtype";                   /* (  ) enum('update','delete') */
     const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
     const FIELD__BILLADJUSTMENT             = "billadjustment";             /* (  ) int */
+    const FIELD__BILLDISCOUNT               = "billdiscount";               /* (  ) int */
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
     const FIELD__BILLFINAL                  = "billfinal";                  /* (  ) int */
     const FIELD__BILLMEMO                   = "billmemo";                   /* (  ) varchar(100) */
@@ -92,6 +93,7 @@ class ClssettlehistBO extends _CommonBO
             , t.userno
             , t.billstandard
             , t.billadjustment
+            , t.billdiscount
             , t.billpointed
             , t.billfinal
             , t.billmemo
@@ -203,6 +205,7 @@ class ClssettlehistBO extends _CommonBO
                         , histtype
                         , billstandard
                         , billadjustment
+                        , billdiscount
                         , billpointed
                         , billfinal
                         , billmemo
@@ -217,6 +220,7 @@ class ClssettlehistBO extends _CommonBO
                         , '$HISTTYPE' as histtype
                         ,  billstandard
                         ,  billadjustment
+                        ,  billdiscount
                         ,  billpointed
                         ,  billfinal
                         ,  billmemo

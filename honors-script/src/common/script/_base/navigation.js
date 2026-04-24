@@ -119,6 +119,9 @@ var Navigation =
     {
         let pageStack = GGstorage.getPageStack();
         let viewMode = "";
+        if(pageStack == null || pageStack.length == 0)
+            return viewMode;
+
         if(pageStack[pageStack.length-1] != undefined)
             viewMode = pageStack[pageStack.length-1].data.viewMode;
         return viewMode;
@@ -138,8 +141,9 @@ var Navigation =
     moveFront(viewMode=null, movePage, nextPageParam={}, url=false)
     {
         /* viewMode 가 null 이면 가장 마지막 데이터에서 viewMode를 불러옴 */
+        let lastViewMode = Navigation.getLastViewMode();
         if(viewMode == null)
-            viewMode = Navigation.getLastViewMode();
+            viewMode = lastViewMode;
 
         /* (모바일 전용) 혹시 러닝중이면 1초뒤에 다시 실시 */
         if($("#index-dom").attr("_is-running") == "true")
@@ -208,7 +212,7 @@ var Navigation =
             case "page":
             {
                 /* 다음 이동해야할 페이지의 viewMode이 "page"라면, 다이어로그는 숨긴다. */
-                if(Navigation.getLastViewMode() == "dialog")
+                if(lastViewMode == "dialog")
                     GGdialog.hide();
 
                 $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
@@ -228,15 +232,25 @@ var Navigation =
 
     /* ================== */
     /* 뒤로가기 : pageStack에서 현재 페이지의 배열을 삭제하고, 바로 이전 배열의 페이지로 이동한다. */
-    /*
-        {
-            executeShowWhenClose : true/false
-                > 뒤로가기한 페이지를 새로고침 할 것인지?
-            moveBackTimes : int
-                > 몇 개 페이지를 뒤로가기 할 것인지?
-        }
-    */
     /* ================== */
+
+    /* 여러 단계 뒤로가기 : pageStack에서 현재 페이지의 배열을 삭제하고, 지정한 단계만큼 이전 배열의 페이지로 이동한다. */
+    moveBackTwice() { Navigation.moveBackMultiple(2); },
+    moveBackMultiple(count=1)
+    {
+        /* 2개 이하면 의미 없음 */
+        if(count < 2)
+            return Navigation.moveBack();
+
+        /* 현재 배열만 남기고, 지정한 단계만큼 배열을 삭제 후, 뒤로가기 */
+        /* 자연스럽게 현재 배열은 moveBack으로 인하여 삭제됨 */
+        let pageStack = GGstorage.getPageStack();
+        pageStack.splice(pageStack.length - count, count - 1);
+        GGstorage.setPageStack(pageStack);
+        Navigation.moveBack();
+    },
+
+    /* 뒤로가기 : pageStack에서 현재 페이지의 배열을 삭제하고, 바로 이전 배열의 페이지로 이동한다. */
     moveBack(param={})
     {
         /* (모바일 전용) 혹시 러닝중이면 1초뒤에 다시 실시 */

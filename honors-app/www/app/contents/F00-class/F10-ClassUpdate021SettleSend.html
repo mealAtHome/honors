@@ -1,0 +1,283 @@
+<ons-page id="CUSS">
+
+    <style>
+        #CUSS-tbl-settle
+        {
+            white-space: nowrap;
+        }
+        #CUSS-tbl-settle > tbody > tr > td[col="username"]          { text-align:left; }
+        #CUSS-tbl-settle > tbody > tr > td[col="billstand"]         { text-align:right;  padding-left: 0.8em; }
+        #CUSS-tbl-settle > tbody > tr > td[col="billfinal"]         { text-align:right;  padding-left: 0.8em; }
+        #CUSS-tbl-settle > tbody > tr > td[col="billadjustment"]    { text-align:right;  padding-left: 0.8em; }
+        #CUSS-tbl-settle > tbody > tr > td[col="billdiscount"]      { text-align:right;  padding-left: 0.8em; }
+        #CUSS-tbl-settle > tbody > tr > td[col="memberpoint"]       { text-align:right;  padding-left: 0.8em; }
+        #CUSS-tbl-settle > tbody > tr > td[col="billpointed"]       { text-align:right;  padding-left: 0.8em; }
+        #CUSS-tbl-settle > tbody > tr > td[col="billmemo"]          { text-align:center; }
+        #CUSS-tbl-settle > tfoot > tr > td { text-align: right; }
+
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <ons-toolbar>
+        <div class="left"><gg-backbtn onclick="CUSS.close(true);"></gg-backbtn></div>
+        <div class="center">정산통지</div>
+    </ons-toolbar>
+
+    <!-- ========================= -->
+    <!-- 일정상세 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion">
+        <div class="common-tag-fontsize11" style="font-weight:bold;">
+            <span class="common-tag-fontsize10">일정 : </span>
+            <span class="common-tag-fontsize10" id="CUSS-span-clstitle"></span>
+        </div>
+    </div>
+
+    <!-- --------------- -->
+    <!-- 정산입력 -->
+    <!-- --------------- -->
+    <div class="CUSS-div-maintab" tab="input">
+        <div class="common-div-cushion">
+            <span class="common-tag-block common-tag-fontsize09">※정산내용이 각 멤버들에게 통지됩니다.</span>
+            <span class="common-tag-block common-tag-fontsize09">※내용을 확인하고 발신버튼을 눌러주세요.</span>
+            <div class="common-div-cushionUD">
+                <table class="common-tbl-vertical common-tag-fontsize09" tbl-type="normal" tbl-width="auto">
+                    <tr>
+                        <th style="text-align:left;">최종청구합계<br>(청구금액+잔여금사용)</th>
+                        <td style="text-align:right;">
+                            <span id="CUSS-span-summaryTotal"></span><br>
+                            (<span id="CUSS-span-summaryFinal"></span>+<span id="CUSS-span-summaryPointed"></span>)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="common-div-scrollX">
+                <table id="CUSS-tbl-settle" class="common-tbl-normal common-tag-fontsize09" tbl-type="normal">
+                    <thead>
+                        <tr>
+                            <th>청구대상</th>
+                            <th>참가비</th>
+                            <th>청구최종</th>
+                            <th>(+)추가</th>
+                            <th>(-)차감</th>
+                            <th>잔여금</th>
+                            <th>잔여금사용</th>
+                            <th>메모</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td style="text-align:left;">합계</td>
+                            <td><span id="CUSS-span-billstandSummary"></span></td>
+                            <td><span id="CUSS-span-billfinalSummary"></span></td>
+                            <td><span id="CUSS-span-billadjustmentSummary"></span></td>
+                            <td><span id="CUSS-span-billdiscountSummary"></span></td>
+                            <td>-</span></td>
+                            <td><span id="CUSS-span-billpointedSummary"></span></td>
+                            <td>-</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- footer -->
+    <!-- ======================== -->
+    <button id="CUSS-btn-sendSettle" class="common-btn-footer">정산내용 발신</button>
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+        var CUSS =
+        {
+            code : "CUSS",
+
+            /* ========================= */
+            /*
+                페이지 데이터
+            */
+            /* ========================= */
+            Data : {},
+
+            show()
+            {
+                /* validation param */
+                if(CUSS.Data.clsno == undefined)   { Common.toast("잘못된 접근입니다."); CUSS.close(); return; }
+                if(CUSS.Data.grpno == undefined)   { Common.toast("잘못된 접근입니다."); CUSS.close(); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        /* get var */
+                        let clsno = CUSS.Data.clsno;
+                        let grpno = CUSS.Data.grpno;
+
+                        /* ----- */
+                        /* init */
+                        /* ----- */
+                        let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
+                        let clssettleflg = mCls.getClssettleflg();
+                        $("#CUSS-span-clstitle").text(mCls.getClstitle());
+
+                        /* init el */
+                        $("#CUSS-tbl-settle > tbody").empty();
+
+                        /* 임시저장데이터 */
+                        let mClssettletmps = Api.Clssettletmp.selectByClsno(grpno, clsno);
+                        let mClssettletmpModels = mClssettletmps.getModels();
+                        for(let i in mClssettletmpModels)
+                            CUSS.addRowForSettleByClssettletmp(mClssettletmpModels[i]);
+
+                        /* event */
+                        CUSS.calSummarySettle();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            addRowForSettleByClssettletmp(model)
+            {
+                let html =
+                `
+                    <tr userno="${model.getUserno()}">
+                        <td col="username"                                                  >${model.getUsername()}</td>
+                        <td col="billstand"        subval="${model.getBillstandard()}"      >${model.getBillstandardWon()}</td>
+                        <td col="billfinal"        subval="${model.getBillfinal()}"         >${model.getBillfinalWon()}</td>
+                        <td col="billadjustment"   subval="${model.getBilladjustment()}"    >${model.getBilladjustmentWon()}</td>
+                        <td col="billdiscount"     subval="${model.getBilldiscount()}"      >${model.getBilldiscountWon()}</td>
+                        <td col="memberpoint"      subval="${model.getGrpmPoint()}"         >${model.getGrpmPointWon()}</td>
+                        <td col="billpointed"      subval="${model.getBillpointed()}"       >${model.getBillpointedWon()}</td>
+                        <td col="billmemo"                                                  >${model.getBillmemo()}</td>
+                    </tr>
+                `;
+                $(`#CUSS-tbl-settle > tbody`).append(html);
+            },
+
+            calSummarySettle()
+            {
+                let billstandSummary = 0;
+                let billfinalSummary = 0;
+                let billadjustmentSummary = 0;
+                let billdiscountSummary = 0;
+                let billpointedSummary = 0;
+
+                /* 합계 */
+                $("#CUSS-tbl-settle > tbody > tr").each(function()
+                {
+                    let billstand       = parseInt($(this).find("td[col=billstand]").attr("subval"));
+                    let billfinal       = parseInt($(this).find("td[col=billfinal]").attr("subval"));
+                    let billadjustment  = parseInt($(this).find("td[col=billadjustment]").attr("subval"));
+                    let billdiscount    = parseInt($(this).find("td[col=billdiscount]").attr("subval"));
+                    let billpointed     = parseInt($(this).find("td[col=billpointed]").attr("subval"));
+
+                    /* validation */
+                    if(isNaN(billstand)) billstand = 0;
+                    if(isNaN(billfinal)) billfinal = 0;
+                    if(isNaN(billadjustment)) billadjustment = 0;
+                    if(isNaN(billdiscount)) billdiscount = 0;
+                    if(isNaN(billpointed)) billpointed = 0;
+
+                    /* summary */
+                    billstandSummary += billstand;
+                    billfinalSummary += billfinal;
+                    billadjustmentSummary += billadjustment;
+                    billdiscountSummary += billdiscount;
+                    billpointedSummary += billpointed;
+                });
+
+                $("#CUSS-span-billstandSummary").text(GGC.Common.priceWon(billstandSummary));
+                $("#CUSS-span-billfinalSummary").text(GGC.Common.priceWon(billfinalSummary));
+                $("#CUSS-span-billadjustmentSummary").text(GGC.Common.priceWon(billadjustmentSummary));
+                $("#CUSS-span-billdiscountSummary").text(GGC.Common.priceWon(billdiscountSummary));
+                $("#CUSS-span-billpointedSummary").text(GGC.Common.priceWon(billpointedSummary));
+                $("#CUSS-span-summaryFinal").text(GGC.Common.priceWon(billfinalSummary));
+                $("#CUSS-span-summaryPointed").text(GGC.Common.priceWon(billpointedSummary));
+                $("#CUSS-span-summaryTotal").text(GGC.Common.priceWon(billfinalSummary + billpointedSummary));
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Common.confirmClose();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* =============== */
+            /* settle : 확정 */
+            /* =============== */
+            $("#CUSS-btn-sendSettle").click(function()
+            {
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        try
+                        {
+                            /* vars */
+                            let clsno = CUSS.Data.clsno;
+                            let grpno = CUSS.Data.grpno;
+
+                            /* api */
+                            let mApiResponse = Api.Cls.updateClssettleflgDone(grpno, clsno, GGF.toast, GGF.toast);
+                            if(mApiResponse.isSuccess())
+                                Navigation.moveBackTwice();
+                        }
+                        catch(e)
+                        {
+                            Common.catchProc(e);
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }
+                Common.confirm2("정산 내용이 각 멤버들에게 표시됩니다. 정산을 확정하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CUSS.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CUSS.close(true);
+            }
+
+            /* localizing */
+            /* $("#CUSS").i18n(); */
+
+        }); /* end function */
+
+    </script>
+</ons-page>

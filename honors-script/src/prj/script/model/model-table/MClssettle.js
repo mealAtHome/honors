@@ -7,6 +7,7 @@ class MClssettle
         /* data */      this.userno                 = GGC.Common.char(dat.userno);
         /* data */      this.billstandard           = GGC.Common.int(dat.billstandard);
         /* data */      this.billadjustment         = GGC.Common.int(dat.billadjustment);
+        /* data */      this.billdiscount           = GGC.Common.int(dat.billdiscount);
         /* data */      this.billpointed            = GGC.Common.int(dat.billpointed);
         /* data */      this.billfinal              = GGC.Common.int(dat.billfinal);
         /* data */      this.billmemo               = GGC.Common.varchar(dat.billmemo);
@@ -41,6 +42,7 @@ class MClssettle
     getUserno() { return this.userno; }
     getBillstandard() { return this.billstandard; }
     getBilladjustment() { return this.billadjustment; }
+    getBilldiscount() { return this.billdiscount; }
     getBillpointed() { return this.billpointed; }
     getBillfinal() { return this.billfinal; }
     getBillmemo() { return this.billmemo; }
@@ -70,6 +72,7 @@ class MClssettle
     /* custom > custom */
     getBillstandardWon() { return GGC.Common.priceWon(this.billstandard); }
     getBilladjustmentWon() { return GGC.Common.priceWon(this.billadjustment); }
+    getBilldiscountWon() { return GGC.Common.priceWon(this.billdiscount); }
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }
     getBillfinalWon() { return GGC.Common.priceWon(this.billfinal); }
     getGrpmPointWon() { return GGC.Common.priceWon(this.grpm_point); }
@@ -83,6 +86,7 @@ class MClssettle
     /* ========================= */
     isMemberdepositflgYes() { return this.getMemberdepositflg() === GGF.Y; }
     isManagerdepositflgYes() { return this.getManagerdepositflg() === GGF.Y; }
+    isIn5MinWhenManagerdepositflgdt() { return Common.isEmpty(this.getManagerdepositflgdt()) ? false : GGdate.isIn5MinFromNow(this.getManagerdepositflgdt()); }
 
     /* ========================= */
     /* fields - additional */
@@ -121,26 +125,30 @@ class MClssettles extends _MCommon
             let btnHtml   = "";
             let baccHtml  = "";
 
-            /* 나의 미입금이면서, 미입금상태라면, 완료된 상태가 아니라면 */
+            /* 입금완료 : 나의 미입금이면서, 미입금상태라면, 완료된 상태가 아니라면 */
             if(isMe && model.getMemberdepositflg() != GGF.Y && model.getManagerdepositflg() != GGF.Y)
-                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-memberdepositflgYes" ${model.getPk()}>입금완료</button> `;
+                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-memberdepositflgYes" ${model.getPk()} btn-type="normal">입금완료</button> `;
 
-            /* 관리자면서, 미임금상태라면 */
+            /* 입금확인완료 : 관리자면서, 미임금상태라면 */
             if(isManager && model.getManagerdepositflg() != GGF.Y)
-                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-managerdepositflgYes" ${model.getPk()}>입금확인완료</button> `;
+                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-managerdepositflgYes" ${model.getPk()} btn-type="normal">입금확인완료</button> `;
+
+            /* 입금확인취소 : 관리자면서, 입금완료상태인데, 입금완료한지 5분 이내라면 */
+            if(isManager && model.getManagerdepositflg() === GGF.Y && model.isIn5MinWhenManagerdepositflgdt())
+                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-managerdepositflgNo" ${model.getPk()} btn-type="delete">입금확인취소</button> `;
 
             /* 미입금상태라면, 입금계좌표시 */
             if(model.getManagerdepositflg() != GGF.Y)
             {
                 baccHtml +=
                 `
-                    <span class="common-tag-block common-tag-marginUp06 common-tag-alignL common-tag-fontsize09">
-                        입금계좌<br>
+                    <div class="common-tag-marginUp08 common-tag-alignL common-tag-fontsize09">
+                        <span class="common-tag-block">입금계좌</span>
                         <span class="common-tag-block">
                             <span style="vertical-align:middle">${model.getBankname()} ${model.getBaccacct()} ${model.getBaccname()}</span>
                             <button class="common-btn-outline MClssettle-make-btn-copyBacc" copytext="${model.getBankname()} ${model.getBaccacct()}" style="margin-left:0.2em;">복사</button>
                         </span>
-                    </span>
+                    </div>
                 `;
             }
 
@@ -156,7 +164,8 @@ class MClssettles extends _MCommon
                     <span class="common-tag-block common-tag-colorGrey common-tag-fontsize08">${model.getClsPeriod()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-bold">${model.getBillfinalWon()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">기준금액:${model.getBillstandardWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구보정:${model.getBilladjustmentWon()}</span>
+                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구추가:${model.getBilladjustmentWon()}</span>
+                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구차감:${model.getBilldiscountWon()}</span>
                     ${model.getBillpointed() >= 1  ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">사전정산:${model.getBillpointedWon()}</span>` : ""}
                     ${model.getBillmemo()    != "" ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">보정사유:${model.getBillmemo()}</span>` : ""}
                     <span class="common-tag-block common-tag-marginUp common-tag-fontsize09">
@@ -208,6 +217,26 @@ class MClssettles extends _MCommon
                 }, ajaxDelayTime);
             }
             Common.confirm2("입금이 확인되셨습니까?", process);
+        });
+
+        /* 입금확인취소 */
+        $(`${el} .MClssettle-make-btn-managerdepositflgNo`).off("click").on("click", function()
+        {
+            let grpno = $(this).attr("grpno");
+            let clsno = $(this).attr("clsno");
+            let userno = $(this).attr("userno");
+            let process = function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    Api.Clssettle.updateManagerdepositflgNoForMng(grpno, clsno, userno, GGF.TOAST, GGF.TOAST);
+                    Navigation.executeShow();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            }
+            Common.confirm2("입금확인을 취소하시겠습니까?", process);
         });
 
         /* 입금계좌 복사 */

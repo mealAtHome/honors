@@ -102,8 +102,9 @@ Navigation.Page =
     F10ClassUpdate000Default : "CUDE",
     F10ClassUpdate010LineupUpdate : "CUTF",
     F10ClassUpdate011Lineuptmp : "CULT",
-    F10ClassUpdate020Settle : "CUST",
-    F10ClassUpdate021Purchase : "CUPU",
+    F10ClassUpdate020SettleEdit : "CUST",
+    F10ClassUpdate021SettleSend : "CUSS",
+    F10ClassUpdate026Purchase : "CUPU",
     F10ClassUpdate030Cancel : "CUCC",
     G10ScheduleByYear : "GSCY",
     G20ScheduleByWeek : "GSCW",
@@ -156,7 +157,7 @@ Navigation.getURL = function(str)
         case Navigation.Page.B1041GrpFinanceLossUpdate                     : url = "./app/contents/B10-grpfnc/B1041GrpFinanceLossUpdate.html"; break;
         case Navigation.Page.C00AdminChooseUser                            : url = "./app/contents/C00-admin/C00-AdminChooseUser.html"; break;
         case Navigation.Page.D10DetailGrp                                  : url = "./app/contents/D00-detail/D10-DetailGrp.html"; break;
-        case Navigation.Page.D21DetailClssettle                            : url = "./app/contents/D00-detail/D21-DetailClssettle.html"; break;
+        case Navigation.Page.D21DetailClssettle                            : url = "./app/contents/D00-detail/D21DetailClssettle.html"; break;
         case Navigation.Page.D22DetailClssettleByClsno                     : url = "./app/contents/D00-detail/D22-DetailClssettleByClsno.html"; break;
         case Navigation.Page.F00Class000Detail                             : url = "./app/contents/F00-class/F00-Class000Detail.html"; break;
         case Navigation.Page.F00Class001DetailApplyDialog                  : url = "./app/contents/F00-class/F00-Class001DetailApplyDialog.html"; break;
@@ -166,8 +167,9 @@ Navigation.getURL = function(str)
         case Navigation.Page.F10ClassUpdate000Default                      : url = "./app/contents/F00-class/F10-ClassUpdate000Default.html"; break;
         case Navigation.Page.F10ClassUpdate010LineupUpdate                 : url = "./app/contents/F00-class/F10-ClassUpdate010LineupUpdate.html"; break;
         case Navigation.Page.F10ClassUpdate011Lineuptmp                    : url = "./app/contents/F00-class/F10-ClassUpdate011Lineuptmp.html"; break;
-        case Navigation.Page.F10ClassUpdate020Settle                       : url = "./app/contents/F00-class/F10-ClassUpdate020Settle.html"; break;
-        case Navigation.Page.F10ClassUpdate021Purchase                     : url = "./app/contents/F00-class/F10-ClassUpdate021Purchase.html"; break;
+        case Navigation.Page.F10ClassUpdate020SettleEdit                   : url = "./app/contents/F00-class/F10-ClassUpdate020SettleEdit.html"; break;
+        case Navigation.Page.F10ClassUpdate021SettleSend                   : url = "./app/contents/F00-class/F10-ClassUpdate021SettleSend.html"; break;
+        case Navigation.Page.F10ClassUpdate026Purchase                     : url = "./app/contents/F00-class/F10-ClassUpdate026Purchase.html"; break;
         case Navigation.Page.F10ClassUpdate030Cancel                       : url = "./app/contents/F00-class/F10-ClassUpdate030Cancel.html"; break;
         case Navigation.Page.G10ScheduleByYear                             : url = "./app/contents/G00-schedule/G10ScheduleByYear.html"; break;
         case Navigation.Page.G20ScheduleByWeek                             : url = "./app/contents/G00-schedule/G20ScheduleByWeek.html"; break;
@@ -185,66 +187,68 @@ Navigation.getURL = function(str)
 /* ================================== */
 Navigation.getData = function(code)
 {
-    let rslt = null;
-    let data = {};
     switch(code)
     {
-        case Navigation.Page.A00UserLogin                           : data = ULGN.Data; break;
-        case Navigation.Page.A01UserInsert                          : data = UINT.Data; break;
-        case Navigation.Page.A02UserPrivacyDelete                   : data = UPRD.Data; break;
-        case Navigation.Page.A11UserMainHome                        : data = UMHM.Data; break;
-        case Navigation.Page.A12UserMainGrp                         : data = UMGP.Data; break;
-        case Navigation.Page.A13UserMainCls                         : data = UMCL.Data; break;
-        case Navigation.Page.A14UserMainSettle                      : data = UMST.Data; break;
-        case Navigation.Page.A15UserMainManage                      : data = UMMG.Data; break;
-        case Navigation.Page.A81UserBankacctList                    : data = UBKL.Data; break;
-        case Navigation.Page.A82UserBankacctUpdate                  : data = UBKU.Data; break;
-        case Navigation.Page.A1011ManagePhonePrivacy                : data = UMPP.Data; break;
-        case Navigation.Page.B10ManagerChooseGrp                    : data = MGCG.Data; break;
-        case Navigation.Page.B11ManagerMainHome                     : data = MMHM.Data; break;
-        case Navigation.Page.B12ManagerMainClasses                  : data = MMCL.Data; break;
-        case Navigation.Page.B13ManagerMainMembers                  : data = MMMB.Data; break;
-        case Navigation.Page.B14ManagerMainSettle                   : data = MMST.Data; break;
-        case Navigation.Page.B80GrpManageHome                       : data = MMMG.Data; break;
-        case Navigation.Page.B85ManagerMemberLayering               : data = MMLY.Data; break;
-        case Navigation.Page.B71GrpMemberDetail                     : data = GMDT.Data; break;
-        case Navigation.Page.B72GrpMemberMergeTemp                  : data = GMMT.Data; break;
-        case Navigation.Page.B81ManagerBankacctList                 : data = MBKL.Data; break;
-        case Navigation.Page.B82ManagerBankacctUpdate               : data = MBKU.Data; break;
-        case Navigation.Page.B1000GrpFinanceHome                    : data = GFHM.Data; break;
-        case Navigation.Page.B1010GrpFinanceCapitalList             : data = GFCL.Data; break;
-        case Navigation.Page.B1011GrpFinanceCapitalUpdate           : data = GFCU.Data; break;
-        case Navigation.Page.B1020GrpFinanceSponsorList             : data = GFSL.Data; break;
-        case Navigation.Page.B1021GrpFinanceSponsorUpdate           : data = GFSU.Data; break;
-        case Navigation.Page.B1030GrpFinancePurchaseList            : data = GFPL.Data; break;
-        case Navigation.Page.B1031GrpFinancePurchaseUpdate          : data = GFPU.Data; break;
-        case Navigation.Page.B1040GrpFinanceLossList                : data = GFLL.Data; break;
-        case Navigation.Page.B1041GrpFinanceLossUpdate              : data = GFLU.Data; break;
-        case Navigation.Page.C00AdminChooseUser                     : data = AACU.Data; break;
-        case Navigation.Page.D10DetailGrp                           : data = DGRP.Data; break;
-        case Navigation.Page.D21DetailClssettle                     : data = DCLS.Data; break;
-        case Navigation.Page.D22DetailClssettleByClsno              : data = DCSC.Data; break;
-        case Navigation.Page.F00Class000Detail                      : data = CLSD.Data; break;
-        case Navigation.Page.F00Class001DetailApplyDialog           : data = CLSA.Data; break;
-        case Navigation.Page.F00Class080TextCls                     : data = CLDC.Data; break;
-        case Navigation.Page.F00Class081TextApply                   : data = CLDA.Data; break;
-        case Navigation.Page.F00Class082TextSettle                  : data = CLDS.Data; break;
-        case Navigation.Page.F10ClassUpdate000Default               : data = CUDE.Data; break;
-        case Navigation.Page.F10ClassUpdate010LineupUpdate          : data = CUTF.Data; break;
-        case Navigation.Page.F10ClassUpdate011Lineuptmp             : data = CULT.Data; break;
-        case Navigation.Page.F10ClassUpdate020Settle                : data = CUST.Data; break;
-        case Navigation.Page.F10ClassUpdate021Purchase              : data = CUPU.Data; break;
-        case Navigation.Page.F10ClassUpdate030Cancel                : data = CUCC.Data; break;
-        case Navigation.Page.G10ScheduleByYear                      : data = GSCY.Data; break;
-        case Navigation.Page.G20ScheduleByWeek                      : data = GSCW.Data; break;
-        case Navigation.Page.S10ChooseGrpMember                     : data = CHGM.Data; break;
-        case Navigation.Page.S11ChooseCls                           : data = CHCL.Data; break;
-        case Navigation.Page.Z00AppUpdateUrl                        : data = SAPP.Data; break;
-        case Navigation.Page.Z21SystemBoardList                     : data = SBLI.Data; break;
-        case Navigation.Page.Z22SystemBoardDetail                   : data = SBDL.Data; break;
+        case Navigation.Page.A00UserLogin                           : return data = ULGN.Data;
+        case Navigation.Page.A01UserInsert                          : return data = UINT.Data;
+        case Navigation.Page.A02UserPrivacyDelete                   : return data = UPRD.Data;
+        case Navigation.Page.A11UserMainHome                        : return data = UMHM.Data;
+        case Navigation.Page.A12UserMainGrp                         : return data = UMGP.Data;
+        case Navigation.Page.A13UserMainCls                         : return data = UMCL.Data;
+        case Navigation.Page.A14UserMainSettle                      : return data = UMST.Data;
+        case Navigation.Page.A15UserMainManage                      : return data = UMMG.Data;
+        case Navigation.Page.A81UserBankacctList                    : return data = UBKL.Data;
+        case Navigation.Page.A82UserBankacctUpdate                  : return data = UBKU.Data;
+        case Navigation.Page.A1011ManagePhonePrivacy                : return data = UMPP.Data;
+        case Navigation.Page.B10ManagerChooseGrp                    : return data = MGCG.Data;
+        case Navigation.Page.B11ManagerMainHome                     : return data = MMHM.Data;
+        case Navigation.Page.B12ManagerMainClasses                  : return data = MMCL.Data;
+        case Navigation.Page.B13ManagerMainMembers                  : return data = MMMB.Data;
+        case Navigation.Page.B14ManagerMainSettle                   : return data = MMST.Data;
+        case Navigation.Page.B80GrpManageHome                       : return data = MMMG.Data;
+        case Navigation.Page.B85ManagerMemberLayering               : return data = MMLY.Data;
+        case Navigation.Page.B71GrpMemberDetail                     : return data = GMDT.Data;
+        case Navigation.Page.B72GrpMemberMergeTemp                  : return data = GMMT.Data;
+        case Navigation.Page.B81ManagerBankacctList                 : return data = MBKL.Data;
+        case Navigation.Page.B82ManagerBankacctUpdate               : return data = MBKU.Data;
+        case Navigation.Page.B1000GrpFinanceHome                    : return data = GFHM.Data;
+        case Navigation.Page.B1010GrpFinanceCapitalList             : return data = GFCL.Data;
+        case Navigation.Page.B1011GrpFinanceCapitalUpdate           : return data = GFCU.Data;
+        case Navigation.Page.B1020GrpFinanceSponsorList             : return data = GFSL.Data;
+        case Navigation.Page.B1021GrpFinanceSponsorUpdate           : return data = GFSU.Data;
+        case Navigation.Page.B1030GrpFinancePurchaseList            : return data = GFPL.Data;
+        case Navigation.Page.B1031GrpFinancePurchaseUpdate          : return data = GFPU.Data;
+        case Navigation.Page.B1040GrpFinanceLossList                : return data = GFLL.Data;
+        case Navigation.Page.B1041GrpFinanceLossUpdate              : return data = GFLU.Data;
+        case Navigation.Page.C00AdminChooseUser                     : return data = AACU.Data;
+        case Navigation.Page.D10DetailGrp                           : return data = DGRP.Data;
+        case Navigation.Page.D21DetailClssettle                     : return data = DCLS.Data;
+        case Navigation.Page.D22DetailClssettleByClsno              : return data = DCSC.Data;
+        case Navigation.Page.F00Class000Detail                      : return data = CLSD.Data;
+        case Navigation.Page.F00Class001DetailApplyDialog           : return data = CLSA.Data;
+        case Navigation.Page.F00Class080TextCls                     : return data = CLDC.Data;
+        case Navigation.Page.F00Class081TextApply                   : return data = CLDA.Data;
+        case Navigation.Page.F00Class082TextSettle                  : return data = CLDS.Data;
+        case Navigation.Page.F10ClassUpdate000Default               : return data = CUDE.Data;
+        case Navigation.Page.F10ClassUpdate010LineupUpdate          : return data = CUTF.Data;
+        case Navigation.Page.F10ClassUpdate011Lineuptmp             : return data = CULT.Data;
+        case Navigation.Page.F10ClassUpdate020SettleEdit            : return data = CUST.Data;
+        case Navigation.Page.F10ClassUpdate021SettleSend            : return data = CUSS.Data;
+        case Navigation.Page.F10ClassUpdate026Purchase              : return data = CUPU.Data;
+        case Navigation.Page.F10ClassUpdate030Cancel                : return data = CUCC.Data;
+        case Navigation.Page.G10ScheduleByYear                      : return data = GSCY.Data;
+        case Navigation.Page.G20ScheduleByWeek                      : return data = GSCW.Data;
+        case Navigation.Page.S10ChooseGrpMember                     : return data = CHGM.Data;
+        case Navigation.Page.S11ChooseCls                           : return data = CHCL.Data;
+        case Navigation.Page.Z00AppUpdateUrl                        : return data = SAPP.Data;
+        case Navigation.Page.Z21SystemBoardList                     : return data = SBLI.Data;
+        case Navigation.Page.Z22SystemBoardDetail                   : return data = SBDL.Data;
+        default:
+        {
+            console.log("Navigation.getData : 해당 페이지 코드에 대한 데이터를 찾을 수 없습니다. code = " + code);
+            return null;
+        }
     }
-    rslt = data;
-    return rslt;
 };
 
 /* ======================= */
@@ -266,21 +270,21 @@ Navigation.executeShow = function()
     {
         lastPage = pageStack[pageStack.length-1];
     }
-    let lastPageCode = lastPage['page'];
 
     /* 파라미터 추가설정 > 뒤로가기를 한 후, 초기화를 실행할 것인지? */
-    if(lastPage.data.executeShowWhenClose != undefined)
+    let data = Navigation.getData(lastPage.page);
+    if(data.executeShowWhenClose != undefined)
     {
-        if(lastPage.data.executeShowWhenClose == false)
+        if(data.executeShowWhenClose == false)
         {
             console.log("executeShowWhenClose가 false로 설정되어 있습니다.");
-            pageStack[pageStack.length-1].data.executeShowWhenClose = true;
-            GGstorage.setPageStack(pageStack);
+            data.executeShowWhenClose = true;
             return;
         }
     }
 
     /* 페이지에 대한 show 실행 */
+    let lastPageCode = lastPage['page'];
     switch(lastPageCode)
     {
         case Navigation.Page.A00UserLogin                             : ULGN.show(); break;
@@ -326,8 +330,9 @@ Navigation.executeShow = function()
         case Navigation.Page.F10ClassUpdate000Default                 : CUDE.show(); break;
         case Navigation.Page.F10ClassUpdate010LineupUpdate            : CUTF.show(); break;
         case Navigation.Page.F10ClassUpdate011Lineuptmp               : CULT.show(); break;
-        case Navigation.Page.F10ClassUpdate020Settle                  : CUST.show(); break;
-        case Navigation.Page.F10ClassUpdate021Purchase                : CUPU.show(); break;
+        case Navigation.Page.F10ClassUpdate020SettleEdit              : CUST.show(); break;
+        case Navigation.Page.F10ClassUpdate021SettleSend              : CUSS.show(); break;
+        case Navigation.Page.F10ClassUpdate026Purchase                : CUPU.show(); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.show(); break;
         case Navigation.Page.G10ScheduleByYear                        : GSCY.show(); break;
         case Navigation.Page.G20ScheduleByWeek                        : GSCW.show(); break;
@@ -403,8 +408,9 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.F10ClassUpdate000Default                 : CUDE.close(true); break;
         case Navigation.Page.F10ClassUpdate010LineupUpdate            : CUTF.close(true); break;
         case Navigation.Page.F10ClassUpdate011Lineuptmp               : CULT.close(true); break;
-        case Navigation.Page.F10ClassUpdate020Settle                  : CUST.close(true); break;
-        case Navigation.Page.F10ClassUpdate021Purchase                : CUPU.close(true); break;
+        case Navigation.Page.F10ClassUpdate020SettleEdit              : CUST.close(true); break;
+        case Navigation.Page.F10ClassUpdate021SettleSend              : CUSS.close(true); break;
+        case Navigation.Page.F10ClassUpdate026Purchase                : CUPU.close(true); break;
         case Navigation.Page.F10ClassUpdate030Cancel                  : CUCC.close(true); break;
         case Navigation.Page.G10ScheduleByYear                        : GSCY.close(true); break;
         case Navigation.Page.G20ScheduleByWeek                        : GSCW.close(true); break;

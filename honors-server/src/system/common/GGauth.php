@@ -105,6 +105,7 @@ class GGauth
     public function isClsIng                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__ING     , ($errorflg == false ? null : "일정이 진행중일 때만 가능합니다.")); }
     public function isClsEnd                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__END     , ($errorflg == false ? null : "일정종료 상태에서만 가능합니다.")); }
     public function isClsCancel                 ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__CANCEL  , ($errorflg == false ? null : "일정취소 상태에서만 가능합니다.")); }
+    public function isClssetleflgEdit           ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSETTLEFLG           , ClsBO::CLSSETTLEFLG__EDIT , ($errorflg == false ? null : "정산 대기 상태에서만 가능합니다.")); }
     public function isGrpfinancereflectflgY     ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__GRPFINANCEREFLECTFLG   , GGF::Y                    , ($errorflg == false ? null : "모임 재정 반영이 설정되어 있지 않습니다.")); }
 
     public function isClsInApplyDt($GRPNO, $CLSNO)
@@ -150,6 +151,17 @@ class GGauth
             return false;
         }
         return true;
+    }
+
+    public function checkExist($record, $errormsg=null)
+    {
+        if($record == null)
+        {
+            if($errormsg != null)
+                throw new GGexception($errormsg);
+            return false;
+        }
+        return $record;
     }
 
 }

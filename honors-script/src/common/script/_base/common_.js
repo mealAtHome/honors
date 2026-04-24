@@ -32,8 +32,8 @@ var Common =
     /* ================ */
     catchProc(e)
     {
-        Common.hideProgress();
         console.error(e);
+        Common.hideProgress();
         Common.toast("예기치 못한 에러가 발생하였습니다. 잠시 후 다시 시도해주세요.");
         Navigation.moveBack();
     },
