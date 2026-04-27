@@ -59,10 +59,20 @@
                 <tr id="CLSD-tr-clsbill" style="display:none;">
                     <th>정산결과</th>
                     <td>
-                        <div class="common-tag-block"><span>합계 : </span><span id="CLSD-span-clsbillsales"></span></div>
-                        <div class="common-tag-block"><span>구매 : </span><span id="CLSD-span-clsbillpurchase"></span></div>
-                        <div class="common-tag-block"><span>최종 : </span><span id="CLSD-span-clsbillfinal"></span></div>
-                        <div class="common-tag-block"><span>재무반영여부 : </span><span id="CLSD-div-grpfinancereflectflg"></span></div>
+                        <table class="common-tbl-vertical" tbl-type="minimal">
+                            <tbody>
+                                <tr><th>청구합계</th><td><span id="CLSD-span-clsbillsales"></span></td></tr>
+                                <tr><th>구매합계</th><td><span id="CLSD-span-clsbillpurchase"></span></td></tr>
+                                <tr><th>집계결과</th><td><span id="CLSD-span-clsbillfinal"></span></td></tr>
+                                <tr><th>재무반영여부</th><td><span id="CLSD-div-grpfinancereflectflg"></span></td></tr><!--
+                                <tr>
+                                    <td colspan="2" style="text-align:left;">
+                                        <button id="CLSD-btn-grpfinancereflectflgToY" class="common-btn-outline" btn-type="normal">반영</button>
+                                        <button id="CLSD-btn-grpfinancereflectflgToN" class="common-btn-outline" btn-type="cancel">해제</button>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
                 <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
@@ -599,6 +609,32 @@
                 $(".CLSD-div-tabmain").hide();
                 $(`.CLSD-div-tabmain[tabval="${tabval}"]`).show();
                 CLSD.Data.tabmain = tabval;
+            });
+
+            /* 재무반영여부 */
+            $("#CLSD-btn-grpfinancereflectflgToY").click(function()
+            {
+                let grpno = CLSD.Data.grpno;
+                let clsno = CLSD.Data.clsno;
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    Api.Cls.updateGrpfinancereflectflgToYForMng(grpno, clsno, GGF.toast, GGF.toast);
+                    Common.hideProgress();
+                    Navigation.executeShow();
+                }, ajaxDelayTime);
+            });
+            $("#CLSD-btn-grpfinancereflectflgToN").click(function()
+            {
+                let grpno = CLSD.Data.grpno;
+                let clsno = CLSD.Data.clsno;
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    Api.Cls.updateGrpfinancereflectflgToNForMng(grpno, clsno, GGF.toast, GGF.toast);
+                    Common.hideProgress();
+                    Navigation.executeShow();
+                }, ajaxDelayTime);
             });
 
             /* ========================= */

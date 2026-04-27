@@ -37,6 +37,8 @@ class ClssettletmpBO extends _CommonBO
     const FIELD__MEMBERDEPOSITFLGDT         = "memberdepositflgdt";         /* (  ) datetime */
     const FIELD__MANAGERDEPOSITFLG          = "managerdepositflg";          /* (  ) enum('y','n') */
     const FIELD__MANAGERDEPOSITFLGDT        = "managerdepositflgdt";        /* (  ) datetime */
+    const FIELD__LOSSFLG                    = "lossflg";                    /* (  ) enum('y','n') */
+    const FIELD__LOSSFLGDT                  = "lossflgdt";                  /* (  ) datetime */
     const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
@@ -104,6 +106,8 @@ class ClssettletmpBO extends _CommonBO
             , t.memberdepositflgdt
             , t.managerdepositflg
             , t.managerdepositflgdt
+            , t.lossflg
+            , t.lossflgdt
             , t.regdt
             , u.name as username
             , u.id as userid

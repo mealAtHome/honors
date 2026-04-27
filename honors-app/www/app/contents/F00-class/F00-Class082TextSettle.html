@@ -94,19 +94,19 @@
 
                             /* discount */
                             let discountHtml = "";
-                            if(model.getBilladjustment() >= 1)
-                                discountHtml = ` (할인:${model.getBilladjustmentWon()}${model.getBillmemo() != "" ? " - " + model.getBillmemo() : ""})`;
+                            if(model.getBilladjustment() >= 1 || model.getBilldiscount() >= 1)
+                                discountHtml = ` (보정:${GGC.Common.priceWon(model.getBilladjustment() - model.getBilldiscount())}${model.getBillmemo() != "" ? " - " + model.getBillmemo() : ""})`;
 
                             /* point */
                             let pointHtml = "";
                             if(model.getBillpointed() >= 1)
-                                pointHtml = ` (잔금:${model.getBillpointedWon()})`;
+                                pointHtml = ` (사전정산금사용:${model.getBillpointedWon()})`;
 
                             /* is deposited */
-                            let isDeposited = model.isManagerdepositflgYes() ? " [입금확인]" : "";
+                            let isDeposited = model.isManagerdepositflgYes() ? "[입금완료] " : "";
 
                             /* add row */
-                            html += `\n${model.getUsername()} : ${model.getBillfinalWon()}${discountHtml}${pointHtml}${isDeposited}`;
+                            html += `\n${isDeposited}${model.getUsername()} : ${model.getBillfinalWon()}${discountHtml}${pointHtml}`;
                         }
 
                         /* 잔여금내역 */

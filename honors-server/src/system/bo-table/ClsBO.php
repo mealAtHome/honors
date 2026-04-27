@@ -312,6 +312,8 @@ class ClsBO extends _CommonBO
     const updateClsstatusToCancel               = "updateClsstatusToCancel";                /* [mng] [EXECUTOR, GRPNO, CLSNO]       : 일정상태를 취소로 변경 */
     const copyClsForMng                         = "copyClsForMng";                          /* [mng]  */
     const deleteByPkWithSubForMng               = "deleteByPkWithSubForMng";                /* [mng]  */
+    const updateGrpfinancereflectflgToYForMng   = "updateGrpfinancereflectflgToYForMng";    /* [mng] [GRPNO, CLSNO] */
+    const updateGrpfinancereflectflgToNForMng   = "updateGrpfinancereflectflgToNForMng";    /* [mng] [GRPNO, CLSNO] */
     const updatePurchaseidxMaxusedForInside     = "updatePurchaseidxMaxusedForInside";      /* [all] [GRPNO, CLSNO, PURCHASEIDX_MAXUSED] */
     const updateBillByPkForInside               = "updateBillByPkForInside";                /* [all] [GRPNO, CLSNO] */
     protected function update($options, $option="")
@@ -563,6 +565,26 @@ class ClsBO extends _CommonBO
                 $clslineupaBO->deleteByClsnoWithSubForInside($GRPNO, $CLSNO);
                 break;
             }
+            case self::updateGrpfinancereflectflgToYForMng:
+            {
+                /* validation */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
+                /* update grpfinancereflectflg */
+                $query = "update cls set grpfinancereflectflg = 'y' where grpno = '$GRPNO' and clsno = '$CLSNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateGrpfinancereflectflgToNForMng:
+            {
+                /* validation */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
+                /* update grpfinancereflectflg */
+                $query = "update cls set grpfinancereflectflg = 'n' where grpno = '$GRPNO' and clsno = '$CLSNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
             case self::updatePurchaseidxMaxusedForInside:
             {
                 $query = "update cls set purchaseidx_maxused =  $PURCHASEIDX_MAXUSED, clsmodidt =  now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -577,8 +599,8 @@ class ClsBO extends _CommonBO
                     update
                         cls
                     set
-                          clsbillsales    =  (select ifnull(sum(clss.billfinal),0)   from clssettle   clss where clss.grpno = cls.grpno and clss.clsno = cls.clsno)
-                        , clsbillpurchase =  (select ifnull(sum(clsp.productbill),0) from clspurchase clsp where clsp.grpno = cls.grpno and clsp.clsno = cls.clsno)
+                          clsbillsales    =  (select ifnull(sum(clss.billfinal + clss.billpointed) ,0) from clssettle   clss where clss.grpno = cls.grpno and clss.clsno = cls.clsno)
+                        , clsbillpurchase =  (select ifnull(sum(clsp.productbill)                  ,0) from clspurchase clsp where clsp.grpno = cls.grpno and clsp.clsno = cls.clsno)
                         , clsbillfinal    =  (clsbillsales - clsbillpurchase)
                         , clsmodidt       =  now()
                     where

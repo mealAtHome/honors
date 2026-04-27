@@ -15,6 +15,8 @@ class MClssettle
         /* data */      this.memberdepositflgdt     = GGC.Common.datetime(dat.memberdepositflgdt);
         /* data */      this.managerdepositflg      = GGC.Common.enum(dat.managerdepositflg);
         /* data */      this.managerdepositflgdt    = GGC.Common.datetime(dat.managerdepositflgdt);
+        /* data */      this.lossflg                = GGC.Common.enum(dat.lossflg);
+        /* data */      this.lossflgdt              = GGC.Common.datetime(dat.lossflgdt);
         /* data */      this.regdt                  = GGC.Common.datetime(dat.regdt);
         /* data */      this.username               = GGC.Common.char(dat.username);
         /* data */      this.userid                 = GGC.Common.char(dat.userid);
@@ -50,6 +52,8 @@ class MClssettle
     getMemberdepositflgdt() { return this.memberdepositflgdt; }
     getManagerdepositflg() { return this.managerdepositflg; }
     getManagerdepositflgdt() { return this.managerdepositflgdt; }
+    getLossflg() { return this.lossflg; }
+    getLossflgdt() { return this.lossflgdt; }
     getRegdt() { return this.regdt; }
     getUsername() { return this.username; }
     getUserid() { return this.userid; }
@@ -77,7 +81,7 @@ class MClssettle
     getBillfinalWon() { return GGC.Common.priceWon(this.billfinal); }
     getGrpmPointWon() { return GGC.Common.priceWon(this.grpm_point); }
     getClsPeriod() { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
-    getClssettleStatusPretty() { return GGC.Clssettle.clssettleStatusPretty(this.getMemberdepositflg(), this.getManagerdepositflg()); }
+    getClssettleStatusPretty() { return GGC.Clssettle.clssettleStatusPretty(this.getMemberdepositflg(), this.getManagerdepositflg(), this.getLossflg()); }
     getGrpmPointAfterSettle() { return this.getGrpmPoint() + this.getBillpointed();}
     getGrpmPointAfterSettleWon() { return GGC.Common.priceWon(this.getGrpmPointAfterSettle()); }
 
@@ -135,7 +139,11 @@ class MClssettles extends _MCommon
 
             /* 입금확인취소 : 관리자면서, 입금완료상태인데, 입금완료한지 5분 이내라면 */
             if(isManager && model.getManagerdepositflg() === GGF.Y && model.isIn5MinWhenManagerdepositflgdt())
-                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-managerdepositflgNo" ${model.getPk()} btn-type="delete">입금확인취소</button> `;
+                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-managerdepositflgNo" ${model.getPk()} btn-type="cancel">입금확인취소</button> `;
+
+            /* 손실처리 : 관리자면서, 입금완료 상태가 아니며, 손실처리상태가 아니라면 */
+            if(isManager && model.getManagerdepositflg() != GGF.Y && model.getLossflg() != GGF.Y)
+                btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-lossflgYes" ${model.getPk()} btn-type="delete">손실처리</button> `;
 
             /* 미입금상태라면, 입금계좌표시 */
             if(model.getManagerdepositflg() != GGF.Y)
@@ -237,6 +245,26 @@ class MClssettles extends _MCommon
                 }, ajaxDelayTime);
             }
             Common.confirm2("입금확인을 취소하시겠습니까?", process);
+        });
+
+        /* 손실처리 */
+        $(`${el} .MClssettle-make-btn-lossflgYes`).off("click").on("click", function()
+        {
+            let grpno = $(this).attr("grpno");
+            let clsno = $(this).attr("clsno");
+            let userno = $(this).attr("userno");
+            let process = function()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    Api.Clssettle.updateLossflgYesForMng(grpno, clsno, userno, GGF.TOAST, GGF.TOAST);
+                    Navigation.executeShow();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            }
+            Common.confirm2("손실처리를 진행하시겠습니까?", process);
         });
 
         /* 입금계좌 복사 */

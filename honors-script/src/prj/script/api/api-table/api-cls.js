@@ -66,12 +66,13 @@ Api.Cls =
         return Api.Cls.update(ajax, noticeOK, noticeFail);
     },
 
-    updateClsstatusEditToIng      (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusEditToIng"  , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
-    updateClsstatusIngToEnd       (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusIngToEnd"   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
-    updateClssettleflgDone        (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClssettleflgDone"    , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
-    updateClsstatusToCancel       (grpno, clsno, clscancelreason , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusToCancel"   , GRPNO:grpno, CLSNO:clsno, CLSCANCELREASON:clscancelreason }, noticeOK, noticeFail); },
-    deleteByPkWithSubForMng       (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "deleteByPkWithSubForMng"   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
-
+    updateClsstatusEditToIng            (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusEditToIng"                 , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    updateClsstatusIngToEnd             (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusIngToEnd"                  , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    updateClssettleflgDone              (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClssettleflgDone"                   , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    updateClsstatusToCancel             (grpno, clsno, clscancelreason , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateClsstatusToCancel"                  , GRPNO:grpno, CLSNO:clsno, CLSCANCELREASON:clscancelreason }, noticeOK, noticeFail); },
+    deleteByPkWithSubForMng             (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "deleteByPkWithSubForMng"                  , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    updateGrpfinancereflectflgToYForMng (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateGrpfinancereflectflgToYForMng"      , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
+    updateGrpfinancereflectflgToNForMng (grpno, clsno                  , noticeOK, noticeFail) { return Api.Cls.update({ OPTION: "updateGrpfinancereflectflgToNForMng"      , GRPNO:grpno, CLSNO:clsno, }, noticeOK, noticeFail); },
 
     /*
         $("#CLSD-btn-copyCls").click(function()

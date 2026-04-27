@@ -346,6 +346,44 @@ class MClss extends _MCommon
             html = pagenation + html + pagenation;
         }
         $(el).html(html);
+
+        /* event */
+        $(`${el} .MClss-makeTableForFinanceReflect-btn-toY`).off("click").on("click", function()
+        {
+            let grpno = $(this).attr("grpno");
+            let clsno = $(this).attr("clsno");
+            Common.showProgress();
+            setTimeout(function()
+            {
+                let mApiResponse = Api.Cls.updateGrpfinancereflectflgToYForMng(grpno, clsno);
+                if(mApiResponse.isSuccess())
+                {
+                    Common.hideProgress();
+                    Navigation.executeShow();
+                    return;
+                }
+                Common.hideProgress();
+            }, ajaxDelayTime);
+        });
+
+        $(`${el} .MClss-makeTableForFinanceReflect-btn-toN`).off("click").on("click", function()
+        {
+            let grpno = $(this).attr("grpno");
+            let clsno = $(this).attr("clsno");
+            Common.showProgress();
+            setTimeout(function()
+            {
+                let mApiResponse = Api.Cls.updateGrpfinancereflectflgToNForMng(grpno, clsno);
+                if(mApiResponse.isSuccess())
+                {
+                    Common.hideProgress();
+                    Navigation.executeShow();
+                    return;
+                }
+                Common.hideProgress();
+            }, ajaxDelayTime);
+        });
+
     }
 
 }

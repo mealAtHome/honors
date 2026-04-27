@@ -485,6 +485,11 @@
 .common-tbl-vertical[tbl-type="normal"]   > tbody > tr > th { width: 5%;  text-align:right; font-weight:bold; }
 .common-tbl-vertical[tbl-type="normal"]   > tbody > tr > td { width: 95%; text-align:left;  border:1px solid #dee2e6; white-space:normal;}
 
+.common-tbl-vertical[tbl-type="minimal"]   { border:1px solid #dee2e6; }
+.common-tbl-vertical[tbl-type="minimal"]   > tbody > tr > th { background-color:#e9ecef; border:1px solid #dee2e6; }
+.common-tbl-vertical[tbl-type="minimal"]   > tbody > tr > th { width: 5%;  text-align:right; font-weight:normal; }
+.common-tbl-vertical[tbl-type="minimal"]   > tbody > tr > td { width: 95%; text-align:left;  border:1px solid #dee2e6; white-space:normal;}
+
 .common-tbl-vertical[tbl-type="noborder"] { border:none; }
 .common-tbl-vertical[tbl-type="noborder"] > thead > tr > th { background-color: rgba(0,0,0,0); }
 .common-tbl-vertical[tbl-type="noborder"] > tbody > tr > th { width: 5%;  text-align:right; border:none; font-weight:bold; }

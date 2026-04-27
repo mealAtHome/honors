@@ -23,6 +23,7 @@ Api.Clssettle =
     updateMemberdepositflgYesForUsr     (grpno, clsno, userno, noticeOK, noticeFail) { return Api.Clssettle.update({OPTION:"updateMemberdepositflgYesForUsr"  , GRPNO:grpno, CLSNO:clsno, USERNO:userno}, noticeOK, noticeFail); },
     updateManagerdepositflgYesForMng    (grpno, clsno, userno, noticeOK, noticeFail) { return Api.Clssettle.update({OPTION:"updateManagerdepositflgYesForMng" , GRPNO:grpno, CLSNO:clsno, USERNO:userno}, noticeOK, noticeFail); },
     updateManagerdepositflgNoForMng     (grpno, clsno, userno, noticeOK, noticeFail) { return Api.Clssettle.update({OPTION:"updateManagerdepositflgNoForMng"  , GRPNO:grpno, CLSNO:clsno, USERNO:userno}, noticeOK, noticeFail); },
+    updateLossflgYesForMng              (grpno, clsno, userno, noticeOK, noticeFail) { return Api.Clssettle.update({OPTION:"updateLossflgYesForMng"           , GRPNO:grpno, CLSNO:clsno, USERNO:userno}, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main */

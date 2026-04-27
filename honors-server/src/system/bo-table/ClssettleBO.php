@@ -47,6 +47,8 @@ class ClssettleBO extends _CommonBO
     const FIELD__MEMBERDEPOSITFLGDT         = "memberdepositflgdt";         /* (  ) datetime */
     const FIELD__MANAGERDEPOSITFLG          = "managerdepositflg";          /* (  ) enum('y','n') */
     const FIELD__MANAGERDEPOSITFLGDT        = "managerdepositflgdt";        /* (  ) datetime */
+    const FIELD__LOSSFLG                    = "lossflg";                    /* (  ) enum('y','n') */
+    const FIELD__LOSSFLGDT                  = "lossflgdt";                  /* (  ) datetime */
     const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
@@ -123,6 +125,8 @@ class ClssettleBO extends _CommonBO
             , t.memberdepositflgdt
             , t.managerdepositflg
             , t.managerdepositflgdt
+            , t.lossflg
+            , t.lossflgdt
             , t.regdt
             , u.name as username
             , u.id as userid
@@ -227,6 +231,7 @@ class ClssettleBO extends _CommonBO
     const updateMemberdepositflgYesForUsr = "updateMemberdepositflgYesForUsr";
     const updateManagerdepositflgYesForMng = "updateManagerdepositflgYesForMng";
     const updateManagerdepositflgNoForMng = "updateManagerdepositflgNoForMng";
+    const updateLossflgYesForMng = "updateLossflgYesForMng";
     const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     const deleteByPkForInside = "deleteByPkForInside";
     protected function update($options, $option="")
@@ -357,7 +362,9 @@ class ClssettleBO extends _CommonBO
                         clssettle
                     set
                         managerdepositflg = 'y',
-                        managerdepositflgdt = now()
+                        managerdepositflgdt = now(),
+                        lossflg = 'n',
+                        lossflgdt = null
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
@@ -368,7 +375,7 @@ class ClssettleBO extends _CommonBO
             }
             case self::updateManagerdepositflgNoForMng:
             {
-                /* is manager? */
+                /* has finauth of grp? */
                 $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
 
                 /* validation : in 5 minutes from now */
@@ -389,6 +396,27 @@ class ClssettleBO extends _CommonBO
                     set
                         managerdepositflg = 'n',
                         managerdepositflgdt = null
+                    where
+                        grpno = '$GRPNO' and
+                        clsno = '$CLSNO' and
+                        userno = '$USERNO'
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateLossflgYesForMng:
+            {
+                /* has finauth of grp? */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
+                /* update */
+                $query =
+                "
+                    update
+                        clssettle
+                    set
+                        lossflg = 'y',
+                        lossflgdt = now()
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
