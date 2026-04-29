@@ -8,6 +8,7 @@ class MClssettlehist
         /* data */      this.userno = GGC.Common.char(dat.userno);
         /* data */      this.histtype = GGC.Common.enum(dat.histtype);
         /* data */      this.billstandard = GGC.Common.int(dat.billstandard);
+        /* data */      this.billprepaid = GGC.Common.int(dat.billprepaid);
         /* data */      this.billadjustment = GGC.Common.int(dat.billadjustment);
         /* data */      this.billdiscount = GGC.Common.int(dat.billdiscount);
         /* data */      this.billpointed = GGC.Common.int(dat.billpointed);
@@ -29,6 +30,7 @@ class MClssettlehist
     getUserno() { return this.userno; }
     getHisttype() { return this.histtype; }
     getBillstandard() { return this.billstandard; }
+    getBillprepaid() { return this.billprepaid; }
     getBilladjustment() { return this.billadjustment; }
     getBilldiscount() { return this.billdiscount; }
     getBillpointed() { return this.billpointed; }
@@ -44,6 +46,7 @@ class MClssettlehist
     /* custom > custom */
     getHisttypeFont() { return GGC.Clssettlehist.histtypeFont(this.getHisttype()); }
     getBillstandardWon() { return GGC.Common.priceWon(this.billstandard); }
+    getBillprepaidWon() { return GGC.Common.priceWon(this.billprepaid); }
     getBilladjustmentWon() { return GGC.Common.priceWon(this.billadjustment); }
     getBilldiscountWon() { return GGC.Common.priceWon(this.billdiscount); }
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }

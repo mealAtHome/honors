@@ -64,13 +64,15 @@
                                 <tr><th>청구합계</th><td><span id="CLSD-span-clsbillsales"></span></td></tr>
                                 <tr><th>구매합계</th><td><span id="CLSD-span-clsbillpurchase"></span></td></tr>
                                 <tr><th>집계결과</th><td><span id="CLSD-span-clsbillfinal"></span></td></tr>
-                                <tr><th>재무반영여부</th><td><span id="CLSD-div-grpfinancereflectflg"></span></td></tr><!--
-                                <tr>
-                                    <td colspan="2" style="text-align:left;">
-                                        <button id="CLSD-btn-grpfinancereflectflgToY" class="common-btn-outline" btn-type="normal">반영</button>
-                                        <button id="CLSD-btn-grpfinancereflectflgToN" class="common-btn-outline" btn-type="cancel">해제</button>
-                                    </td>
-                                </tr> -->
+                                <tr><th>재무반영여부</th><td><span id="CLSD-div-grpfinancereflectflg"></span></td></tr>
+                                <!--
+                                    <tr>
+                                        <td colspan="2" style="text-align:left;">
+                                            <button id="CLSD-btn-grpfinancereflectflgToY" class="common-btn-outline" btn-type="normal">반영</button>
+                                            <button id="CLSD-btn-grpfinancereflectflgToN" class="common-btn-outline" btn-type="cancel">해제</button>
+                                        </td>
+                                    </tr>
+                                -->
                             </tbody>
                         </table>
                     </td>
@@ -170,6 +172,7 @@
             },
             Data : {},
             isManager : false,
+            mCls : null,
 
             show()
             {
@@ -239,6 +242,7 @@
                         /* ----- */
                         /* is manager */
                         CLSD.isManager = GGstorage.Prj.isManagerOfGrp(grpno);
+                        CLSD.mCls = mCls;
 
                         /* is manager and end */
                         let isManagerAndEnd = (CLSD.isManager && mCls.isEnd());
@@ -411,6 +415,7 @@
                                         <th>포지션</th>
                                         <th>참가자</th>
                                         <th>접수자</th>
+                                        <th>사전정산</th>
                                         <th>참가비고</th>
                                     </tr>
                                 </thead>
@@ -495,6 +500,17 @@
                 }
 
                 /* ----- */
+                /* prepaidflg */
+                /* ----- */
+                let prepaidflgHtml = model.getPrepaidflgCvrt();
+                let prepaidflg = model.getPrepaidflg();
+                if(CLSD.isManager && model.hasApplyer() && CLSD.mCls.isClsstatusEnd() == false)
+                {
+                    if(prepaidflg == GGF.Y) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToN" ${model.getPk()}>취소</button>`;
+                    if(prepaidflg == GGF.N) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToY" ${model.getPk()}>완료</button>`;
+                }
+
+                /* ----- */
                 /* make TR */
                 /* ----- */
                 let isMyUserno = model.getUserno()   == CLSD.Storage.myUserno   ? "y" : "n";
@@ -506,6 +522,7 @@
                         <td>${position}</td>
                         <td><span class="common-span-me" me="${isMyName}">${apply}</span></td>
                         <td><span class="common-span-me" me="${isMyName}">${applyer}</span></td>
+                        <td><span class="common-span-me" me="${isMyName}">${prepaidflgHtml}</span></td>
                         <td col="etc">${model.getEtc()}</td>
                     </tr>
                 `;
@@ -574,6 +591,44 @@
                         regmember : GGF.Y,
                     }
                     Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
+                });
+
+                /* 사전정산여부 */
+                $(".CLSD-btn-prepaidflgToY").off("click").on("click", function()
+                {
+                    let grpno = $(this).attr("grpno");
+                    let clsno = $(this).attr("clsno");
+                    let lineupidx = $(this).attr("lineupidx");
+                    let orderno = $(this).attr("orderno");
+                    let process = function()
+                    {
+                        Common.showProgress();
+                        setTimeout(function()
+                        {
+                            Api.Clslineupb.updatePrepaidflgToYForFin(grpno, clsno, lineupidx, orderno, GGF.toast, GGF.toast);
+                            Common.hideProgress();
+                            Navigation.executeShow();
+                        }, ajaxDelayTime);
+                    }
+                    Common.confirm2(`사전정산이 완료되었습니까?`, process);
+                });
+                $(".CLSD-btn-prepaidflgToN").off("click").on("click", function()
+                {
+                    let grpno = $(this).attr("grpno");
+                    let clsno = $(this).attr("clsno");
+                    let lineupidx = $(this).attr("lineupidx");
+                    let orderno = $(this).attr("orderno");
+                    let process = function()
+                    {
+                        Common.showProgress();
+                        setTimeout(function()
+                        {
+                            Api.Clslineupb.updatePrepaidflgToNForFin(grpno, clsno, lineupidx, orderno, GGF.toast, GGF.toast);
+                            Common.hideProgress();
+                            Navigation.executeShow();
+                        }, ajaxDelayTime);
+                    }
+                    Common.confirm2(`사전정산을 취소하시겠습니까?`, process);
                 });
             },
 

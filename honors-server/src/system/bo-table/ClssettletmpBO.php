@@ -28,6 +28,7 @@ class ClssettletmpBO extends _CommonBO
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14) */
     const FIELD__USERNO                     = "userno";                     /* (PK) char(30) */
     const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
+    const FIELD__BILLPREPAID                = "billprepaid";                /* (  ) int */
     const FIELD__BILLADJUSTMENT             = "billadjustment";             /* (  ) int */
     const FIELD__BILLDISCOUNT               = "billdiscount";               /* (  ) int */
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
@@ -97,6 +98,7 @@ class ClssettletmpBO extends _CommonBO
             , t.clsno
             , t.userno
             , t.billstandard
+            , t.billprepaid
             , t.billadjustment
             , t.billdiscount
             , t.billpointed
@@ -236,6 +238,7 @@ class ClssettletmpBO extends _CommonBO
                     /* vars */
                     $USERNO         = $dat['USERNO'];
                     $BILLSTANDARD   = intval($dat['BILLSTANDARD']);
+                    $BILLPREPAID    = intval($dat['BILLPREPAID']);
                     $BILLADJUSTMENT = intval($dat['BILLADJUSTMENT']);
                     $BILLDISCOUNT   = intval($dat['BILLDISCOUNT']);
                     $BILLPOINTED    = intval($dat['BILLPOINTED']);
@@ -257,6 +260,7 @@ class ClssettletmpBO extends _CommonBO
                             , clsno
                             , userno
                             , billstandard
+                            , billprepaid
                             , billadjustment
                             , billdiscount
                             , billpointed
@@ -274,6 +278,7 @@ class ClssettletmpBO extends _CommonBO
                             , '$CLSNO'
                             , '$USERNO'
                             ,  $BILLSTANDARD
+                            ,  $BILLPREPAID
                             ,  $BILLADJUSTMENT
                             ,  $BILLDISCOUNT
                             ,  $BILLPOINTED

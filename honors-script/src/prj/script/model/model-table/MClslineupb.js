@@ -13,6 +13,7 @@ class MClslineupb
         /* data */      this.username           = GGC.Common.char(dat.username);
         /* data */      this.userregdt          = GGC.Common.datetime(dat.userregdt);
         /* data */      this.bill               = GGC.Common.int(dat.bill);
+        /* data */      this.prepaidflg         = GGC.Common.enum(dat.prepaidflg);
         /* data */      this.etc                = GGC.Common.varchar(dat.etc);
         /* data */      this.clsstatus          = GGC.Common.char(dat.clsstatus);
         /* data */      this.cnt                = GGC.Common.int(dat.cnt);
@@ -35,6 +36,7 @@ class MClslineupb
     /* data */      getUserno() { return this.userno; }
     /* data */      getUsername() { return this.username; }
     /* data */      getBill() { return this.bill; }
+    /* data */      getPrepaidflg() { return this.prepaidflg; }
     /* data */      getEtc() { return this.etc; }
     /* data */      getClsstatus() { return this.clsstatus; }
     /* data */      getUserregdt() { return this.userregdt; }
@@ -48,6 +50,9 @@ class MClslineupb
     /* fields - additional */
     /* ========================= */
     /* data */ getBillWon() { return GGC.Common.priceWon(this.bill); }
+    /* data */ getPrepaidflgCvrt() { return GGC.Clslineupb.prepaidflgCvrt(this.prepaidflg); }
+    /* data */ getPrepaidflgCard() { return GGC.Clslineupb.prepaidflgCard(this.prepaidflg); }
+    /* data */ getPrepaidflgFont() { return GGC.Clslineupb.prepaidflgFont(this.prepaidflg); }
 
     /* ========================= */
     /* fields - flg */
@@ -67,6 +72,62 @@ class MClslineupbs extends _MCommon
             let dat  = this.data[i];
             this.models.push(new MClslineupb(dat));
         }
+    }
+
+    groupByForSettle()
+    {
+        let arr = [];
+        for(let i in this.models)
+        {
+            let model = this.models[i];
+            let grpno = model.getGrpno();
+            let clsno = model.getClsno();
+            let userno = model.getUserno();
+            let username = model.getUsername();
+            let bill = model.getBill();
+            let memberpoint = model.getMemberpoint();
+            let prepaidflg = model.getPrepaidflg();
+
+            // let dat =
+            // {
+            //     grpno        : grpno,
+            //     clsno        : clsno,
+            //     userno       : userno,
+            //     username     : username,
+            //     bill         : bill,
+            //     memberpoint  : memberpoint,
+            // };
+
+            let isExist = false;
+            for(let j in arr)
+            {
+                let dat = arr[j];
+                if(dat.getGrpno() === grpno && dat.getClsno() === clsno && dat.getUserno() === userno)
+                {
+                    dat.bill += bill;
+                    dat.billprepaid += prepaidflg === GGF.Y ? bill : 0;
+                    isExist = true;
+                    break;
+                }
+            }
+
+            if(!isExist)
+            {
+                let tmp =
+                {
+                    grpno        : grpno,
+                    clsno        : clsno,
+                    userno       : userno,
+                    username     : username,
+                    bill         : bill,
+                    billprepaid  : prepaidflg === GGF.Y ? bill : 0,
+                    memberpoint  : memberpoint,
+                };
+                let dat = new MClslineupb(tmp);
+                arr.push(dat);
+            }
+        }
+        return arr;
     }
 
 }

@@ -17,6 +17,7 @@ class ClsBO extends _CommonBO
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
         GGnavi::getClslineupaBO();
+        GGnavi::getClslineupbBO();
         GGnavi::getPaymentABO();
         GGnavi::getGrpMemberBO();
         GGnavi::getClssettleBO();
@@ -27,6 +28,7 @@ class ClsBO extends _CommonBO
         $arr['idxBO'] = IdxBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
         $arr['clslineupaBO'] = ClslineupaBO::getInstance();
+        $arr['clslineupbBO'] = ClslineupbBO::getInstance();
         $arr['paymentABO'] = PaymentABO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['clssettleBO'] = ClssettleBO::getInstance();
@@ -419,7 +421,7 @@ class ClsBO extends _CommonBO
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO);
+                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
 
                 /* update cls info */
                 $query   =
@@ -486,7 +488,7 @@ class ClsBO extends _CommonBO
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO);
+                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusCancel', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
@@ -494,6 +496,19 @@ class ClsBO extends _CommonBO
 
                 /* insert clzcancel */
                 $clzcancelBO->insertForInside($GRPNO, $CLSNO, $CLSCANCELREASON);
+
+                /* 선결제가 완료된 경우, 잔여금으로 넣어준다 */
+                $clslineupbList = Common::getData($clslineupbBO->selectByClsnoForInside($GRPNO, $CLSNO));
+                foreach($clslineupbList as $clslineupb)
+                {
+                    $prepaidflg = Common::get($clslineupb, ClslineupbBO::FIELD__PREPAIDFLG, "");
+                    if($prepaidflg == GGF::Y)
+                    {
+                        $targetUserno = Common::getField($clslineupb, ClslineupbBO::FIELD__USERNO);
+                        $bill = Common::getField($clslineupb, ClslineupbBO::FIELD__BILL);
+                        $grpMemberBO->updatePointForInside($GRPNO, $targetUserno, $bill, "일정취소로 인한 지급", $CLSNO);
+                    }
+                }
                 break;
             }
             case self::copyClsForMng:

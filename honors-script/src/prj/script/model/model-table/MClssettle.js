@@ -6,6 +6,7 @@ class MClssettle
         /* data */      this.clsno                  = GGC.Common.char(dat.clsno);
         /* data */      this.userno                 = GGC.Common.char(dat.userno);
         /* data */      this.billstandard           = GGC.Common.int(dat.billstandard);
+        /* data */      this.billprepaid            = GGC.Common.int(dat.billprepaid);
         /* data */      this.billadjustment         = GGC.Common.int(dat.billadjustment);
         /* data */      this.billdiscount           = GGC.Common.int(dat.billdiscount);
         /* data */      this.billpointed            = GGC.Common.int(dat.billpointed);
@@ -43,6 +44,7 @@ class MClssettle
     getClsno() { return this.clsno; }
     getUserno() { return this.userno; }
     getBillstandard() { return this.billstandard; }
+    getBillprepaid() { return this.billprepaid; }
     getBilladjustment() { return this.billadjustment; }
     getBilldiscount() { return this.billdiscount; }
     getBillpointed() { return this.billpointed; }
@@ -75,6 +77,7 @@ class MClssettle
 
     /* custom > custom */
     getBillstandardWon() { return GGC.Common.priceWon(this.billstandard); }
+    getBillprepaidWon() { return GGC.Common.priceWon(this.billprepaid); }
     getBilladjustmentWon() { return GGC.Common.priceWon(this.billadjustment); }
     getBilldiscountWon() { return GGC.Common.priceWon(this.billdiscount); }
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }
@@ -172,6 +175,7 @@ class MClssettles extends _MCommon
                     <span class="common-tag-block common-tag-colorGrey common-tag-fontsize08">${model.getClsPeriod()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-bold">${model.getBillfinalWon()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">기준금액:${model.getBillstandardWon()}</span>
+                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">사전정산:${model.getBillprepaidWon()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구추가:${model.getBilladjustmentWon()}</span>
                     <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구차감:${model.getBilldiscountWon()}</span>
                     ${model.getBillpointed() >= 1  ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">사전정산:${model.getBillpointedWon()}</span>` : ""}

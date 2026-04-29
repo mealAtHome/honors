@@ -16,9 +16,11 @@ class ClslineupbBO extends _CommonBO
     {
         GGnavi::getUserBO();
         GGnavi::getClslineupaBO();
+        GGnavi::getGrpMemberBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
+        $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         return $arr;
     }
 
@@ -37,6 +39,7 @@ class ClslineupbBO extends _CommonBO
     const FIELD__USERNAME           = "username";           /* (  ) char(30)        */
     const FIELD__USERREGDT          = "userregdt";          /* (  ) datetime        */
     const FIELD__BILL               = "bill";               /* (  ) int             */
+    const FIELD__PREPAIDFLG         = "prepaidflg";         /* (  ) enum('n', 'y')  */
     const FIELD__ETC                = "etc";                /* (  ) varchar(100)    */
 
     /* ========================= */
@@ -111,11 +114,13 @@ class ClslineupbBO extends _CommonBO
             , t.userno
             , t.username
             , t.bill
+            , t.prepaidflg
             , t.etc
             , t.userregdt
             , clslua.lineupname
             , cls.clsstatus
             , u.name as applyername
+            , grpm.point as memberpoint
         ";
         $groupby = "";
         $orderby =
@@ -144,30 +149,7 @@ class ClslineupbBO extends _CommonBO
             case self::selectByLineupidxForInside           : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and lineupidx = $LINEUPIDX) t"; break; }
             case self::selectByPkForInside                  : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and lineupidx = $LINEUPIDX and orderno = $ORDERNO) t"; break; }
             case self::selectDuplicateApplyForInside        : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO') t"; break; }
-            case self::selectByClsnoForSettleForMng :
-            {
-                $select =
-                "
-                      t.grpno
-                    , t.clsno
-                    , t.userno
-                    , u.name username
-                    , count(*) as cnt
-                    , sum(t.bill) as bill
-                    , grpm.point as memberpoint
-                ";
-                $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and (userno is not null and userno <> '')) t";
-                $groupby =
-                "
-                    group by
-                          t.grpno
-                        , t.clsno
-                        , t.userno
-                        , u.name
-                ";
-                $orderby = "u.name";
-                break;
-            }
+            case self::selectByClsnoForSettleForMng         : { $from = "(select * from clslineupb where grpno = '$GRPNO' and clsno = '$CLSNO' and (userno is not null and userno <> '')) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -228,6 +210,8 @@ class ClslineupbBO extends _CommonBO
     const updateApplyRegist = "updateApplyRegist";
     const updateApplyRegistStead = "updateApplyRegistStead";
     const updateApplyCancel = "updateApplyCancel";
+    const updatePrepaidflgToYForFin = "updatePrepaidflgToYForFin";                      /* [fin]  */
+    const updatePrepaidflgToNForFin = "updatePrepaidflgToNForFin";                      /* [fin]  */
     const copyFromClsnoWithSubForInside = "copyFromClsnoWithSubForInside";
     const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     protected function update($options, $option="")
@@ -333,7 +317,7 @@ class ClslineupbBO extends _CommonBO
             case self::updateApplyRegist:
             {
                 /* validation */
-                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
 
                 /* check cls info */
                 /* is cls ing */
@@ -433,18 +417,13 @@ class ClslineupbBO extends _CommonBO
                     if(Common::getField($clslineupb, self::FIELD__USERNO) != $EXECUTOR)
                         throw new GGexception("본인이 신청한 일정만 취소할 수 있습니다.");
                 }
-                else
+
+                /* 이미 선결제가 완료되었다면, 해당 멤버에게 사전정산금 지급 */
+                if(Common::getField($clslineupb, self::FIELD__PREPAIDFLG) == GGF::Y)
                 {
-                    /* check userregdt passed 1 day */
-                    // if(Common::getField($clslineupb, self::FIELD__USERNO) != $EXECUTOR)
-                    // {
-                    //     $userregdt = Common::getField($clslineupb, self::FIELD__USERREGDT);
-                    //     $userregdtObj = GGF::getDateFromString($userregdt);
-                    //     $userregdtObj1DayAfter = GGdate::addTime($userregdtObj, "1 day");
-                    //     $nowObj = GGdate::now();
-                    //     if($nowObj < $userregdtObj1DayAfter)
-                    //         throw new GGexception("멤버의 취소는, 일정기명 후 24시간이 지나야 취소할 수 있습니다.");
-                    // }
+                    $targetUserno = Common::getField($clslineupb, self::FIELD__USERNO);
+                    $bill = Common::getField($clslineupb, self::FIELD__BILL);
+                    $grpMemberBO->updatePointForInside($GRPNO, $targetUserno, $bill, "참가취소로 인한 지급", $CLSNO);
                 }
 
                 /* is in cls apply period */
@@ -461,11 +440,59 @@ class ClslineupbBO extends _CommonBO
                           userno = null
                         , username = null
                         , userregdt = null
+                        , etc = null
+                        , prepaidflg = 'n'
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
                         lineupidx = $LINEUPIDX and
                         orderno = $ORDERNO
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updatePrepaidflgToYForFin:
+            {
+                /* validation : has finauth */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
+                /* validation : check settle is edit */
+                $ggAuth->isClssetleflgEdit($GRPNO, $CLSNO, true);
+
+                /* process */
+                $query =
+                "
+                    update
+                        clslineupb
+                    set
+                        prepaidflg = 'y'
+                    where
+                        grpno = '$GRPNO' and
+                        clsno = '$CLSNO' and
+                        userno = '$USERNO'
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updatePrepaidflgToNForFin:
+            {
+                /* validation : has finauth */
+                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
+
+                /* validation : check settle is edit */
+                $ggAuth->isClssetleflgEdit($GRPNO, $CLSNO, true);
+
+                /* process */
+                $query =
+                "
+                    update
+                        clslineupb
+                    set
+                        prepaidflg = 'n'
+                    where
+                        grpno = '$GRPNO' and
+                        clsno = '$CLSNO' and
+                        userno = '$USERNO'
                 ";
                 GGsql::exeQuery($query);
                 break;

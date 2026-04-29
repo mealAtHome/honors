@@ -143,13 +143,13 @@ class ClslineupaBO extends _CommonBO
         {
             case self::updateFromPage:
             {
-                /* check is manager */
-                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); /* is grp manager, no exception */
-
                 /* validation */
                 if(Common::isEmpty(trim($GRPNO))) { throw new Exception(); }
                 if(Common::isEmpty(trim($CLSNO))) { throw new Exception(); }
-                $ggAuth->throwIfClsCancel($GRPNO, $CLSNO); /* is cancel status? */
+
+                /* validation : auth */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
 
                 /* get cls info */
                 $cls = $clsBO->getByPk($GRPNO, $CLSNO);

@@ -38,6 +38,7 @@ class ClssettleBO extends _CommonBO
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14) */
     const FIELD__USERNO                     = "userno";                     /* (PK) char(30) */
     const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
+    const FIELD__BILLPREPAID                = "billprepaid";                /* (  ) int */
     const FIELD__BILLADJUSTMENT             = "billadjustment";             /* (  ) int */
     const FIELD__BILLDISCOUNT               = "billdiscount";               /* (  ) int */
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
@@ -116,6 +117,7 @@ class ClssettleBO extends _CommonBO
             , t.clsno
             , t.userno
             , t.billstandard
+            , t.billprepaid
             , t.billadjustment
             , t.billdiscount
             , t.billpointed
@@ -264,6 +266,7 @@ class ClssettleBO extends _CommonBO
                     $CLSNO                =        Common::getField($record, ClssettletmpBO::FIELD__CLSNO);
                     $USERNO               =        Common::getField($record, ClssettletmpBO::FIELD__USERNO);
                     $BILLSTANDARD         = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLSTANDARD));
+                    $BILLPREPAID          = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLPREPAID));
                     $BILLADJUSTMENT       = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLADJUSTMENT));
                     $BILLDISCOUNT         = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLDISCOUNT));
                     $BILLPOINTED          = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLPOINTED));
@@ -289,6 +292,7 @@ class ClssettleBO extends _CommonBO
                             , clsno
                             , userno
                             , billstandard
+                            , billprepaid
                             , billadjustment
                             , billdiscount
                             , billpointed
@@ -306,6 +310,7 @@ class ClssettleBO extends _CommonBO
                             , '$CLSNO'
                             , '$USERNO'
                             ,  $BILLSTANDARD
+                            ,  $BILLPREPAID
                             ,  $BILLADJUSTMENT
                             ,  $BILLDISCOUNT
                             ,  $BILLPOINTED

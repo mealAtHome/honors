@@ -31,6 +31,7 @@ class ClssettlehistBO extends _CommonBO
     const FIELD__HISTNO                     = "histno";                     /* (PK) int */
     const FIELD__HISTTYPE                   = "histtype";                   /* (  ) enum('update','delete') */
     const FIELD__BILLSTANDARD               = "billstandard";               /* (  ) int */
+    const FIELD__BILLPREPAID                = "billprepaid";                /* (  ) int */
     const FIELD__BILLADJUSTMENT             = "billadjustment";             /* (  ) int */
     const FIELD__BILLDISCOUNT               = "billdiscount";               /* (  ) int */
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
@@ -92,6 +93,7 @@ class ClssettlehistBO extends _CommonBO
             , t.histtype
             , t.userno
             , t.billstandard
+            , t.billprepaid
             , t.billadjustment
             , t.billdiscount
             , t.billpointed
@@ -204,6 +206,7 @@ class ClssettlehistBO extends _CommonBO
                         , histno
                         , histtype
                         , billstandard
+                        , billprepaid
                         , billadjustment
                         , billdiscount
                         , billpointed
@@ -219,6 +222,7 @@ class ClssettlehistBO extends _CommonBO
                         ,  (select ifnull(max(clsh.histno), 0) + 1 from clssettlehist clsh where clsh.grpno = clss.grpno and clsh.clsno = clss.clsno and clsh.userno = clss.userno) as histno
                         , '$HISTTYPE' as histtype
                         ,  billstandard
+                        ,  billprepaid
                         ,  billadjustment
                         ,  billdiscount
                         ,  billpointed
