@@ -421,7 +421,7 @@ class ClsBO extends _CommonBO
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
+                $ggAuth->checkClsNotCanceled($GRPNO, $CLSNO, true);
 
                 /* update cls info */
                 $query   =
@@ -488,7 +488,7 @@ class ClsBO extends _CommonBO
             {
                 /* validation */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
+                $ggAuth->checkClsNotCanceled($GRPNO, $CLSNO, true);
 
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusCancel', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";

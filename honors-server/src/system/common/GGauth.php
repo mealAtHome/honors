@@ -101,13 +101,13 @@ class GGauth
         return true;
     }
 
-    public function isClsEdit                   ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__EDIT    , ($errorflg == false ? null : "일정 수정중일 때만 가능합니다.")); }
-    public function isClsIng                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__ING     , ($errorflg == false ? null : "일정이 진행중일 때만 가능합니다.")); }
-    public function isClsEnd                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__END     , ($errorflg == false ? null : "일정종료 상태에서만 가능합니다.")); }
-    public function isClsCancel                 ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__CANCEL  , ($errorflg == false ? null : "이미 취소된 일정입니다.")); }
-    public function isClsNotCancel              ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__CANCEL  , ($errorflg == false ? null : "일정이 취소된 상태에서만 가능합니다.")); }
-    public function isClssetleflgEdit           ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSETTLEFLG           , ClsBO::CLSSETTLEFLG__EDIT , ($errorflg == false ? null : "정산 대기 상태에서만 가능합니다.")); }
-    public function isGrpfinancereflectflgY     ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__GRPFINANCEREFLECTFLG   , GGF::Y                    , ($errorflg == false ? null : "모임 재정 반영이 설정되어 있지 않습니다.")); }
+    public function isClsEdit                   ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__EDIT    , ($errorflg == false ? null : "일정 수정중일 때만 가능합니다.")); }
+    public function isClsIng                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__ING     , ($errorflg == false ? null : "일정이 진행중일 때만 가능합니다.")); }
+    public function isClsEnd                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__END     , ($errorflg == false ? null : "일정종료 상태에서만 가능합니다.")); }
+    public function isClsCancel                 ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__CANCEL  , ($errorflg == false ? null : "아직 취소되지 않은 일정입니다.")); }
+    public function checkClsNotCanceled         ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkNotIqual ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__CANCEL  , ($errorflg == false ? null : "이미 취소된 일정입니다.")); }
+    public function isClssetleflgEdit           ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSETTLEFLG           , ClsBO::CLSSETTLEFLG__EDIT , ($errorflg == false ? null : "정산 대기 상태에서만 가능합니다.")); }
+    public function isGrpfinancereflectflgY     ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__GRPFINANCEREFLECTFLG   , GGF::Y                    , ($errorflg == false ? null : "모임 재정 반영이 설정되어 있지 않습니다.")); }
 
     public function isClsInApplyDt($GRPNO, $CLSNO)
     {
@@ -143,6 +143,16 @@ class GGauth
     /* ========================= */
     /* common */
     /* ========================= */
+    public function checkNotIqual($record, $field, $value, $errormsg=null)
+    {
+        if(Common::getField($record, $field) == $value)
+        {
+            if($errormsg != null)
+                throw new GGexception($errormsg);
+            return false;
+        }
+        return true;
+    }
     public function checkIqual($record, $field, $value, $errormsg=null)
     {
         if(Common::getField($record, $field) != $value)

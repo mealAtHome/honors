@@ -316,9 +316,6 @@ class ClslineupbBO extends _CommonBO
             }
             case self::updateApplyRegist:
             {
-                /* validation */
-                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
-
                 /* check cls info */
                 /* is cls ing */
                 $ggAuth->isClsIng($GRPNO, $CLSNO);
@@ -469,7 +466,8 @@ class ClslineupbBO extends _CommonBO
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
-                        userno = '$USERNO'
+                        lineupidx = $LINEUPIDX and
+                        orderno = $ORDERNO
                 ";
                 GGsql::exeQuery($query);
                 break;
@@ -492,7 +490,8 @@ class ClslineupbBO extends _CommonBO
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and
-                        userno = '$USERNO'
+                        lineupidx = $LINEUPIDX and
+                        orderno = $ORDERNO
                 ";
                 GGsql::exeQuery($query);
                 break;

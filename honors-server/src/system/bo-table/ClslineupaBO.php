@@ -149,7 +149,7 @@ class ClslineupaBO extends _CommonBO
 
                 /* validation : auth */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
-                $ggAuth->isClsCancel($GRPNO, $CLSNO, true);
+                $ggAuth->checkClsNotCanceled($GRPNO, $CLSNO, true);
 
                 /* get cls info */
                 $cls = $clsBO->getByPk($GRPNO, $CLSNO);

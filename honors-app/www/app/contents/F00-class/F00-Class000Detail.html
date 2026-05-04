@@ -492,7 +492,7 @@
                 /* ----- */
                 /* applyer */
                 /* ----- */
-                let applyer = model.getApplyername();
+                let applyer = `<span class="commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" grpno="${model.getGrpno()}" userno="${model.getUserno()}">${model.getApplyername()}</span>`;
                 if(applyer == "")
                 {
                     if(CLSD.isManager)
@@ -506,8 +506,8 @@
                 let prepaidflg = model.getPrepaidflg();
                 if(CLSD.isManager && model.hasApplyer() && CLSD.mCls.isClsstatusEnd() == false)
                 {
-                    if(prepaidflg == GGF.Y) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToN" ${model.getPk()}>취소</button>`;
-                    if(prepaidflg == GGF.N) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToY" ${model.getPk()}>완료</button>`;
+                    if(prepaidflg == GGF.Y) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToN" btn-type="cancel" ${model.getPk()}>취소</button>`;
+                    if(prepaidflg == GGF.N) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToY" btn-type="normal" ${model.getPk()}>완료</button>`;
                 }
 
                 /* ----- */

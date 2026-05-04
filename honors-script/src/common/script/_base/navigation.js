@@ -140,12 +140,12 @@ var Navigation =
     moveFrontDialog (movePage, nextPageParam, url=false) { Navigation.moveFront("dialog" , movePage, nextPageParam, url); },
     moveFront(viewMode=null, movePage, nextPageParam={}, url=false)
     {
-        /* viewMode 가 null 이면 가장 마지막 데이터에서 viewMode를 불러옴 */
-        let lastViewMode = Navigation.getLastViewMode();
-        if(viewMode == null)
-            viewMode = lastViewMode;
+        /* vars */
+        let pageStack = GGstorage.getPageStack();
 
+        /* --------------- */
         /* (모바일 전용) 혹시 러닝중이면 1초뒤에 다시 실시 */
+        /* --------------- */
         if($("#index-dom").attr("_is-running") == "true")
         {
             setTimeout(function()
@@ -155,10 +155,40 @@ var Navigation =
             return;
         }
 
-        /* ---------- */
+        /* --------------- */
+        /* viewMode */
+        /* --------------- */
+        /* viewMode 가 null 이면 가장 마지막 데이터에서 viewMode를 불러옴 */
+        let lastViewMode = Navigation.getLastViewMode();
+        if(viewMode == null)
+            viewMode = lastViewMode;
+
+        /* 마지막 페이지가 dialog 라면 다음 이동도 dialog로 처리한다. */
+        if(lastViewMode == "dialog")
+            viewMode = "dialog";
+
+        /*
+            다음 페이지로 이동하려는 viewMode 가 dialog 면서,
+            하이퍼링크로 인해서 띄워져 있는 페이지를 다시 부르게 될 것이라면,
+            페이지로 이동한다.
+        */
+        if(viewMode == "dialog")
+        {
+            /* pageStack 에서 마지막으로 viewMode 가 page 인 배열을 찾는다 */
+            let lastPageCode = null;
+            for(let i in pageStack)
+            {
+                let dat = pageStack[i];
+                if(dat.data.viewMode == "page")
+                    lastPageCode = dat.page;
+            }
+            if(lastPageCode == movePage)
+                viewMode = "page";
+        }
+
+        /* --------------- */
         /* 현재 페이지의 선택사항을 저장 */
-        /* ---------- */
-        let pageStack = GGstorage.getPageStack();
+        /* --------------- */
         if(pageStack != null && pageStack.length > 0)
         {
             let lastestStack     = pageStack[pageStack.length - 1];
@@ -175,9 +205,9 @@ var Navigation =
             pageStack = new Array();
         }
 
-        /* ---------- */
+        /* --------------- */
         /* 다음 페이지와 이전 페이지가 동일하다면, 리프레쉬 후 종료 */
-        /* ---------- */
+        /* --------------- */
         if(pageStack.length > 0 && pageStack[pageStack.length-1].page == movePage)
         {
             /* 현재 페이지의 선택사항을 저장 */
@@ -190,9 +220,9 @@ var Navigation =
             return;
         }
 
-        /* ---------- */
+        /* --------------- */
         /* 다음페이지에 전달할 파라미터를 저장 */
-        /* ---------- */
+        /* --------------- */
         nextPageParam.viewMode = viewMode;
         nextPageParam.page     = movePage;
         let stack =
@@ -203,10 +233,10 @@ var Navigation =
         pageStack.push(stack);
         GGstorage.setPageStack(pageStack);
 
-        /* ---------- */
+        /* --------------- */
         /* 실제적인 페이지 이동 */
         /* 페이지 이동에 대한 도큐먼트 : https://docs.google.com/spreadsheets/d/1aWIXsFjJcQ5Jqz1M6YfEBXO1itWStmLfkLnK6FO0IYg/edit#gid=2037633440 */
-        /* ---------- */
+        /* --------------- */
         switch(viewMode)
         {
             case "page":
@@ -217,7 +247,8 @@ var Navigation =
 
                 $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
                 {
-                    $("#index-dom > ons-page[id!="+movePage+"]").remove();
+                    $("#index-dom > ons-page[load=y]").remove();
+                    $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
                 });
                 break;
             }
