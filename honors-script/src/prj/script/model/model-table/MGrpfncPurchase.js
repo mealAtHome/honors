@@ -82,11 +82,7 @@ class MGrpfncPurchases extends _MCommon
                 </table>
             </div>
         `;
-
-        /* pagenation */
-        let pagenation = this.getPagenation();
-        html = pagenation + html + pagenation;
-        $(el).html(html);
+        $(el).html(this.mergePagenation(html));
 
         /* event */
         $(`${el} .MGrpfncPurchase-makeTable-btn-delete`).off("click").on("click", function()

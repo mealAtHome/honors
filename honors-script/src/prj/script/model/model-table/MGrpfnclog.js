@@ -87,14 +87,7 @@ class MGrpfnclogs extends _MCommon
                 </table>
             </div>
         `;
-
-        /* pagenation */
-        if(this.getPagecnt() > 1)
-        {
-            let pagenation = this.getPagenation();
-            html = pagenation + html + pagenation;
-        }
-        $(el).html(html);
+        $(el).html(this.mergePagenation(html));
     }
 
 }

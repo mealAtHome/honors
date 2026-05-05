@@ -92,15 +92,6 @@ class GGauth
     /* ========================= */
     /* cls */
     /* ========================= */
-    public function throwIfClsCancel($GRPNO, $CLSNO)
-    {
-        $cls = $this->getCls($GRPNO, $CLSNO);
-        $clsstatus = Common::getField($cls, ClsBO::FIELD__CLSSTATUS);
-        if($clsstatus == ClsBO::CLSSTATUS__CANCEL)
-            throw new GGexception("이미 취소된 일정입니다.");
-        return true;
-    }
-
     public function isClsEdit                   ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__EDIT    , ($errorflg == false ? null : "일정 수정중일 때만 가능합니다.")); }
     public function isClsIng                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__ING     , ($errorflg == false ? null : "일정이 진행중일 때만 가능합니다.")); }
     public function isClsEnd                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__END     , ($errorflg == false ? null : "일정종료 상태에서만 가능합니다.")); }
@@ -138,8 +129,6 @@ class GGauth
 
     public function isAdmin($EXECUTOR, $errorflg=false) { if(Common::getField($this->getUser($EXECUTOR), UserBO::FIELD__ADMINFLG) != GGF::Y) { if($errorflg) throw new GGexception("관리자만 접근가능합니다."); return false; } return true; }
 
-
-
     /* ========================= */
     /* common */
     /* ========================= */
@@ -173,6 +162,17 @@ class GGauth
             return false;
         }
         return $record;
+    }
+
+    public function checkMe($EXECUTOR, $USERNO, $errorflg=false)
+    {
+        if($EXECUTOR != $USERNO)
+        {
+            if($errorflg)
+                throw new GGexception("본인만 접근가능합니다.");
+            return false;
+        }
+        return true;
     }
 
 }

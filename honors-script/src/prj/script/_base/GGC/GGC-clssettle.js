@@ -1,44 +1,24 @@
 GGC.Clssettle =
 {
-    memberdepositflg(val)
+    /* ----- */
+    /* settlestatus */
+    /* ----- */
+    settlestatusCvrt(val)
     {
-        let rslt = "";
-        switch(val)
-        {
-            case GGF.Y : rslt = "완료"; break;
-            case GGF.N : rslt = "미입금"; break;
-        }
-        return rslt;
+        if(val == GGF.Clssettle.Settlestatus.WAIT) return "입금대기";
+        if(val == GGF.Clssettle.Settlestatus.MEMB) return "입금완료";
+        if(val == GGF.Clssettle.Settlestatus.DONE) return "확인완료";
+        if(val == GGF.Clssettle.Settlestatus.LOSS) return "손실";
+        return "";
     },
-    memberdepositflgdt(val)
+    settlestatusFeel(val)
     {
-
+        if(val == GGF.Clssettle.Settlestatus.WAIT) return "hold";
+        if(val == GGF.Clssettle.Settlestatus.MEMB) return "prog";
+        if(val == GGF.Clssettle.Settlestatus.DONE) return "pstv";
+        if(val == GGF.Clssettle.Settlestatus.LOSS) return "ngtv";
+        return "";
     },
-    managerdepositflg(val)
-    {
-        let rslt = "";
-        switch(val)
-        {
-            case GGF.Y : rslt = "완료"; break;
-            case GGF.N : rslt = "미입금"; break;
-        }
-        return rslt;
-    },
-    managerdepositflgdt(val)
-    {
-
-    },
-
-    clssettleStatusPretty(memberdepositflg, managerdepositflg, lossflg)
-    {
-        let status = "";
-        let rslt = "";
-        if(managerdepositflg == GGF.Y)                              { status = "succeed"; rslt = "입금확인"; }
-        if(managerdepositflg == GGF.N && memberdepositflg == GGF.Y) { status = "warning"; rslt = "입금완료"; }
-        if(managerdepositflg == GGF.N && memberdepositflg == GGF.N) { status = "warning"; rslt = "미입금"; }
-        if(managerdepositflg == GGF.N && lossflg          == GGF.Y) { status = "failed";  rslt = "손실"; }
-
-        let html = `<span class="common-span-card" span-type="${status}">${rslt}</span>`;
-        return html;
-    },
+    settlestatusCard(val) { return `<span class="common-tag-card" card-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
+    settlestatusFont(val) { return `<span class="common-tag-font" font-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
 }

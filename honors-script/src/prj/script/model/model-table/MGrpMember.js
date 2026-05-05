@@ -205,19 +205,9 @@ class MGrpMembers extends _MCommon
                     break;
                 }
             }
-
-            /* --------------- */
-            /* html */
-            /* --------------- */
             html += model.make(buttonHtml);
         }
-
-        /* pagination */
-        if(this.isPagenation())
-            html = this.getPagenation() + html + this.getPagenation();
-
-        /* append html */
-        $(el).html(html);
+        $(el).html(this.mergePagenation(html));
     }
 
 

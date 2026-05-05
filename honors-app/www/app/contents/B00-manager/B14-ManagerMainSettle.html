@@ -15,9 +15,9 @@
         <table class="MMST-tbl-common common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="MMST-td-searchtype" val="nodepositall"   tab="tab" >전체</td> <!-- 미입금 + 입금완료 -->
-                    <td class="MMST-td-searchtype" val="memberdeposit"  tab=""    >입금완료</td>
-                    <td class="MMST-td-searchtype" val="nodeposit"      tab=""    >미입금</td>
+                    <td class="MMST-td-searchtype" val="open" tab="tab" >처리중</td> <!-- 미입금 + 입금완료 -->
+                    <td class="MMST-td-searchtype" val="loss" tab=""    >손실</td>
+                    <td class="MMST-td-searchtype" val="done" tab=""    >완료</td>
                 </tr>
             </tbody>
         </table>
@@ -25,43 +25,39 @@
     <hr class="common-hr-paddingLR"/>
 
     <!-- ========================= -->
-    <!-- 전체 -->
+    <!-- 처리중 -->
     <!-- ========================= -->
-    <div class="MMST-div-tab" tab="nodepositall" style="display:none;">
+    <div class="MMST-div-tab" tab="open" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">전체</p>
             <ul class="common-ul-announce">
-                <li>입금처리가 완료되지 않은 전체건을 조회합니다.</li>
+                <li>입금처리가 완료되지 않은 건을 조회합니다.</li>
             </ul>
         </div>
-        <div id="MMST-div-nodepositallList"></div>
+        <div id="MMST-div-openList"></div>
     </div>
 
     <!-- ========================= -->
-    <!-- 입금완료 -->
+    <!-- 손실 -->
     <!-- ========================= -->
-    <div class="MMST-div-tab" tab="memberdeposit" style="display:none;">
+    <div class="MMST-div-tab" tab="loss" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">입금완료</p>
             <ul class="common-ul-announce">
-                <li>멤버 본인이 입금했다고 표시한 리스트를 표시합니다.</li>
-                <li>실제로 완료되었는지 확인 후, 확인완료로 처리하면 됩니다.</li>
+                <li>특정 사유로 손실처리된 건을 조회합니다.</li>
             </ul>
         </div>
-        <div id="MMST-div-memberdepositList"></div>
+        <div id="MMST-div-lossList"></div>
     </div>
 
     <!-- ========================= -->
-    <!-- 미입금 -->
+    <!-- 완료 -->
     <!-- ========================= -->
-    <div class="MMST-div-tab" tab="nodeposit" style="display:none;">
+    <div class="MMST-div-tab" tab="done" style="display:none;">
         <div class="common-div-cushion">
-            <p class="common-p-title">미입금</p>
             <ul class="common-ul-announce">
-                <li>멤버 본인이 입금했다고 표시하지 않았고, 확인완료도 진행되지 않은 건을 조회힙니다.</li>
+                <li>입금처리가 완료된 건을 조회합니다.</li>
             </ul>
         </div>
-        <div id="MMST-div-nodepositList"></div>
+        <div id="MMST-div-doneList"></div>
     </div>
 
     <script>
@@ -74,7 +70,8 @@
             {
                 /* validation param */
                 if(MMST.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); MMST.close(); return; }
-                if(MMST.Data.searchtype == undefined) { MMST.Data.searchtype = "nodepositall"; } /* 기본값 */
+                if(MMST.Data.searchtype == undefined) { MMST.Data.searchtype = "open"; }
+                if(MMST.Data.pagenoDone == undefined) { MMST.Data.pagenoDone = 1; }
 
                 /* set tab */
                 $(`.MMST-td-searchtype[val='${MMST.Data.searchtype}']`).click();
@@ -90,6 +87,50 @@
                 Common.showProgress();
                 setTimeout(function()
                 {
+                    try
+                    {
+                        /* get var */
+                        let grpno = MMST.Data.grpno;
+                        let searchtype = MMST.Data.searchtype;
+
+                        /* 탭별표시 */
+                        switch(searchtype)
+                        {
+                            case "open":
+                            {
+                                let mClssettles = Api.Clssettle.selectSettlestatusOpenByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                                mClssettles.make("#MMST-div-openList");
+                                break;
+                            }
+                            case "done":
+                            {
+                                let mClssettles = Api.Clssettle.selectSettlestatusDoneByGrpnoWithPageForMng(grpno, MMST.Data.pagenoDone, GGF.none, GGF.toast);
+                                mClssettles.make("#MMST-div-doneList");
+
+                                /* set event */
+                                $("#MMST-div-doneList .common-btn-pagenationBtn").click(function()
+                                {
+                                    let toPage = $(this).attr("to_page");
+                                    MMST.Data.pagenoDone = toPage;
+                                    MMST.search(MMST.Data.searchtype);
+                                });
+                                break;
+                            }
+                            case "loss":
+                            {
+                                let mClssettles = Api.Clssettle.selectSettlestatusLossByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                                mClssettles.make("#MMST-div-lossList");
+                                break;
+                            }
+                        }
+                        /* show / hide */
+                        $(".MMST-div-tab").hide();
+                        $(`.MMST-div-tab[tab='${searchtype}']`).show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                    }
                     Common.hideProgress();
                 }, ajaxDelayTime);
             },
@@ -120,47 +161,8 @@
                 /* save selected */
                 MMST.Data.searchtype = searchtype;
 
-                /* process */
-                Common.showProgress();
-                setTimeout(function()
-                {
-                    try
-                    {
-                        /* get var */
-                        let grpno = MMST.Data.grpno;
-
-                        /* 탭별표시 */
-                        switch(searchtype)
-                        {
-                            case "nodepositall":
-                            {
-                                let mClssettles = Api.Clssettle.selectNotDepositedAllByGrpnoForMng(grpno, GGF.none, GGF.toast);
-                                mClssettles.make("#MMST-div-nodepositallList");
-                                break;
-                            }
-                            case "memberdeposit":
-                            {
-                                let mClssettles = Api.Clssettle.selectMemberdepositflgYesByGrpnoForMng(grpno, GGF.none, GGF.toast);
-                                mClssettles.make("#MMST-div-memberdepositList");
-                                break;
-                            }
-                            case "nodeposit":
-                            {
-                                let mClssettles = Api.Clssettle.selectNotDepositedByGrpnoForMng(grpno, GGF.none, GGF.toast);
-                                mClssettles.make("#MMST-div-nodepositList");
-                                break;
-                            }
-                        }
-                        /* show / hide */
-                        $(".MMST-div-tab").hide();
-                        $(`.MMST-div-tab[tab='${searchtype}']`).show();
-                    }
-                    catch(e)
-                    {
-                        Common.catchProc(e);
-                    }
-                    Common.hideProgress();
-                }, ajaxDelayTime);
+                /* search */
+                MMST.search(searchtype);
             });
 
 

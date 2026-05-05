@@ -34,12 +34,10 @@ class ClssettletmpBO extends _CommonBO
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
     const FIELD__BILLFINAL                  = "billfinal";                  /* (  ) int */
     const FIELD__BILLMEMO                   = "billmemo";                   /* (  ) varchar(100) */
-    const FIELD__MEMBERDEPOSITFLG           = "memberdepositflg";           /* (  ) enum('y','n') */
-    const FIELD__MEMBERDEPOSITFLGDT         = "memberdepositflgdt";         /* (  ) datetime */
-    const FIELD__MANAGERDEPOSITFLG          = "managerdepositflg";          /* (  ) enum('y','n') */
-    const FIELD__MANAGERDEPOSITFLGDT        = "managerdepositflgdt";        /* (  ) datetime */
-    const FIELD__LOSSFLG                    = "lossflg";                    /* (  ) enum('y','n') */
-    const FIELD__LOSSFLGDT                  = "lossflgdt";                  /* (  ) datetime */
+    const FIELD__SETTLESTATUS               = "settlestatus";               /* (  ) char(4) */
+    const FIELD__SETTLEMEMBDT               = "settlemembdt";               /* (  ) datetime */
+    const FIELD__SETTLEDONEDT               = "settledonedt";               /* (  ) datetime */
+    const FIELD__SETTLELOSSDT               = "settlelossdt";               /* (  ) datetime */
     const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
@@ -47,12 +45,17 @@ class ClssettletmpBO extends _CommonBO
     /*
     */
     /* ========================= */
+    const SETTLESTATUS__WAIT = "wait"; /* 정산상태 : 입금대기 */
+    const SETTLESTATUS__MEMB = "memb"; /* 정산상태 : 입금완료 */
+    const SETTLESTATUS__DONE = "done"; /* 정산상태 : 확인완료 */
+    const SETTLESTATUS__LOSS = "loss"; /* 정산상태 : 손실 */
     static public function getConsts()
     {
         $arr = array();
-        // $arr['clsstatusEdit']                   = self::CLSSTATUS__EDIT;        /* 일정상태 : 작성중 */
-        // $arr['clsstatusIng']                    = self::CLSSTATUS__ING;         /* 일정상태 : 진행중 */
-        // $arr['clsstatusEnd']                 = self::CLSSTATUS__END;      /* 일정상태 : 일정완료 */
+        $arr['settlestatusWait'] = self::SETTLESTATUS__WAIT; /* 정산상태 : 입금대기 */
+        $arr['settlestatusMemb'] = self::SETTLESTATUS__MEMB; /* 정산상태 : 입금완료 */
+        $arr['settlestatusDone'] = self::SETTLESTATUS__DONE; /* 정산상태 : 확인완료 */
+        $arr['settlestatusLoss'] = self::SETTLESTATUS__LOSS; /* 정산상태 : 손실 */
         return $arr;
     }
 
@@ -104,12 +107,10 @@ class ClssettletmpBO extends _CommonBO
             , t.billpointed
             , t.billfinal
             , t.billmemo
-            , t.memberdepositflg
-            , t.memberdepositflgdt
-            , t.managerdepositflg
-            , t.managerdepositflgdt
-            , t.lossflg
-            , t.lossflgdt
+            , t.settlestatus
+            , t.settlemembdt
+            , t.settledonedt
+            , t.settlelossdt
             , t.regdt
             , u.name as username
             , u.id as userid
@@ -245,12 +246,6 @@ class ClssettletmpBO extends _CommonBO
                     $BILLFINAL      = intval($dat['BILLFINAL']);
                     $BILLMEMO       = $dat['BILLMEMO'];
 
-                    /* if billfinal == 0 ?, deposit complete */
-                    $memberdepositflg     = ($BILLFINAL == 0) ? "'y'"   : "'n'";
-                    $memberdepositflgdt   = ($BILLFINAL == 0) ? "now()" : "null";
-                    $managerdepositflg    = ($BILLFINAL == 0) ? "'y'"   : "'n'";
-                    $managerdepositflgdt  = ($BILLFINAL == 0) ? "now()" : "null";
-
                     /* insert */
                     $query =
                     "
@@ -266,10 +261,6 @@ class ClssettletmpBO extends _CommonBO
                             , billpointed
                             , billfinal
                             , billmemo
-                            , memberdepositflg
-                            , memberdepositflgdt
-                            , managerdepositflg
-                            , managerdepositflgdt
                             , regdt
                         )
                         values
@@ -284,10 +275,6 @@ class ClssettletmpBO extends _CommonBO
                             ,  $BILLPOINTED
                             ,  $BILLFINAL
                             , '$BILLMEMO'
-                            ,  $memberdepositflg
-                            ,  $memberdepositflgdt
-                            ,  $managerdepositflg
-                            ,  $managerdepositflgdt
                             ,  now()
                         )
                     ";

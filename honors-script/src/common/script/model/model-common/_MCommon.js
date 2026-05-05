@@ -73,13 +73,24 @@ class _MCommon
     /* ================================ */
     /* 페이지네이션 html을 반환한다 */
     /* ================================ */
+    mergePagenation(html)
+    {
+        /* pagenation */
+        if(this.getPagecnt() > 1)
+        {
+            let pagenation = this.getPagenation();
+            html = pagenation + html + pagenation;
+        }
+        return html;
+    }
     getPagenation()
     {
+        let btncnt = 5; /* btn per page */
         let pagenum = this.pagenum;
         let pagecnt = this.pagecnt;
         let allcnt = this.allcnt;
 
-        let startPage = pagenum - (pagenum % 5) + 1;
+        let startPage = pagenum - ((pagenum - 1) % btncnt);
 
         if(allcnt <= 1)
             return "";
@@ -90,7 +101,7 @@ class _MCommon
                 ${startPage > 1 ? `<div class="common-btn-pagenationBtn common-tap" to_page="${(startPage-1) < 1 ? 1 : (startPage-1)}">&lt;</div>` : ""}
                 <div class="common-div-pagenationBtnTop">
         `;
-        for(let i = startPage; i <= pagecnt && i < startPage+5; i++)
+        for(let i = startPage; i <= pagecnt && i < startPage+btncnt; i++)
         {
             let isTab = i == pagenum ? `tab="tab"` : "";
             pagenationHtml += `<div class="common-btn-pagenationBtn commonEvent-div-pagenationBtn common-tap" to_page="${i}" ${isTab}>${i}</div>`;
@@ -98,7 +109,7 @@ class _MCommon
         pagenationHtml +=
         `
                 </div>
-                ${startPage + 5 <= pagecnt ? `<div class="common-btn-pagenationBtn common-tap" to_page="${(startPage+5) > pagecnt ? pagecnt : (startPage+5)}">&gt;</div>` : ""}
+                ${startPage + btncnt <= pagecnt ? `<div class="common-btn-pagenationBtn common-tap" to_page="${(startPage+btncnt) > pagecnt ? pagecnt : (startPage+btncnt)}">&gt;</div>` : ""}
             </div>
         `;
         return pagenationHtml;

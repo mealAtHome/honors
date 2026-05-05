@@ -188,7 +188,7 @@
                             }
                             case "settle":
                             {
-                                let mClssettles = Api.Clssettle.selectNotDepositedByUsernoForMng(grpno, userno, GGF.none, GGF.toast);
+                                let mClssettles = Api.Clssettle.selectSettlestatusOpenByUsernoForMng(grpno, userno, GGF.none, GGF.toast);
                                 mClssettles.make("#GMDT-div-clssettleList");
                                 break;
                             }

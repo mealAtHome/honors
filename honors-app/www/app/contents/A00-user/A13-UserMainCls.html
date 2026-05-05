@@ -15,14 +15,15 @@
                 </tr>
             </tbody>
         </table>
-        <button id="UMCL-btn-addCls" class="common-btn-outline common-tag-fontsize09" style="display:none; float:right;">+일정등록</button>
     </div>
     <hr class="common-hr-paddingLR"/>
 
     <!-- ----- -->
     <!-- list -->
     <!-- ----- -->
+    <button id="UMCL-btn-addCls" class="common-btn-outline" btn-size="large" style="display:none; margin-top:1em;">+일정등록</button>
     <div id="UMCL-div-list" class="common-div-cushionUD"></div>
+
 
     <!-- =============== -->
     <!-- cushion for tab -->
@@ -97,11 +98,11 @@
                     let mClss = null;
                     switch(searchtype)
                     {
-                        case "edit"     : mClss = Api.Cls.selectClsstatusEditInImMng(); break;
-                        case "ing"      : mClss = Api.Cls.selectForUserByClsstatusIng(); break;
-                        case "settle"   : mClss = Api.Cls.selectForUserByClssettleflgN(); break;
-                        case "end"      : mClss = Api.Cls.selectForUserByClsstatusEnd(); break;
-                        case "cancel"   : mClss = Api.Cls.selectForUserByClsstatusCancel(); break;
+                        case "edit"     : mClss = Api.Cls.selectClsstatusEditInImMng();     $("#UMCL-btn-addCls").show(); break;
+                        case "ing"      : mClss = Api.Cls.selectForUserByClsstatusIng();    $("#UMCL-btn-addCls").show(); break;
+                        case "settle"   : mClss = Api.Cls.selectForUserByClssettleflgN();   $("#UMCL-btn-addCls").hide(); break;
+                        case "end"      : mClss = Api.Cls.selectForUserByClsstatusEnd();    $("#UMCL-btn-addCls").hide(); break;
+                        case "cancel"   : mClss = Api.Cls.selectForUserByClsstatusCancel(); $("#UMCL-btn-addCls").hide(); break;
                     }
                     mClss.make("#UMCL-div-list");
 

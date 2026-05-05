@@ -267,14 +267,14 @@
                         /* =============== */
                         if(isManagerAndEnd)
                         {
-                            let mClssettles = Api.Clssettle.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                            let mClssettles = Api.Clssettle.selectByClsno(grpno, clsno);
                             let models = mClssettles.getModels();
                             for(let i in models)
                             {
                                 let model = models[i];
-                                let managerDepositflgHtml = model.getManagerdepositflgCvrt();
-                                if(model.isManagerdepositflgYes() == false)
-                                    managerDepositflgHtml = `<button class="common-btn-outline CLSD-btn-managerdepositflgToY" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">입금확정</button>`;
+                                let settlestatusHtml = model.getSettlestatusFont();
+                                if(model.isSettlestatusDone() == false)
+                                    settlestatusHtml = `<button class="common-btn-outline CLSD-btn-settlestatusToDone" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">입금확정</button>`;
 
                                 /* 청구금액 (billfinal + billprepaid + billpointed) */
                                 let billrequired = model.getBillfinal() + model.getBillprepaid() + model.getBillpointed();
@@ -284,7 +284,7 @@
                                 `
                                     <tr>
                                         <td class="common-tag-alignC"><button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D21DetailClssettle}" hyperlink-viewmode="dialog" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">상세</button></td>
-                                        <td class="common-tag-alignC">${managerDepositflgHtml}</td>
+                                        <td class="common-tag-alignC">${settlestatusHtml}</td>
                                         <td class="common-tag-alignC">${model.getUsername()}</td>
                                         <td class="common-tag-alignR">${billrequiredWon}</td>
                                         <td class="common-tag-alignR">${model.getBillfinalWon()}</td>
@@ -295,7 +295,7 @@
                             }
 
                             /* 정산상세 버튼 이벤트 */
-                            $(".CLSD-btn-managerdepositflgToY").off("click").on("click", function()
+                            $(".CLSD-btn-settlestatusToDone").off("click").on("click", function()
                             {
                                 let grpno = $(this).attr("grpno");
                                 let clsno = $(this).attr("clsno");
@@ -305,7 +305,7 @@
                                     Common.showProgress();
                                     setTimeout(function()
                                     {
-                                        Api.Clssettle.updateManagerdepositflgYesForMng(grpno, clsno, userno, GGF.TOAST, GGF.TOAST);
+                                        Api.Clssettle.updateSettlestatusToDoneForFnc(grpno, clsno, userno);
                                         Navigation.executeShow();
 
                                         Common.hideProgress();
@@ -318,7 +318,7 @@
                         /* =============== */
                         /* 구매목록 */
                         /* =============== */
-                        let mClspurchases = Api.Clspurchase.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        let mClspurchases = Api.Clspurchase.selectByClsno(grpno, clsno);
                         if(isManagerAndEnd)
                         {
                             let models = mClspurchases.getModels();

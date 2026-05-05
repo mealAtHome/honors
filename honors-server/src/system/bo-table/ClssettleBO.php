@@ -44,12 +44,10 @@ class ClssettleBO extends _CommonBO
     const FIELD__BILLPOINTED                = "billpointed";                /* (  ) int */
     const FIELD__BILLFINAL                  = "billfinal";                  /* (  ) int */
     const FIELD__BILLMEMO                   = "billmemo";                   /* (  ) varchar(100) */
-    const FIELD__MEMBERDEPOSITFLG           = "memberdepositflg";           /* (  ) enum('y','n') */
-    const FIELD__MEMBERDEPOSITFLGDT         = "memberdepositflgdt";         /* (  ) datetime */
-    const FIELD__MANAGERDEPOSITFLG          = "managerdepositflg";          /* (  ) enum('y','n') */
-    const FIELD__MANAGERDEPOSITFLGDT        = "managerdepositflgdt";        /* (  ) datetime */
-    const FIELD__LOSSFLG                    = "lossflg";                    /* (  ) enum('y','n') */
-    const FIELD__LOSSFLGDT                  = "lossflgdt";                  /* (  ) datetime */
+    const FIELD__SETTLESTATUS               = "settlestatus";               /* (  ) enum('wait','loss','done') */
+    const FIELD__SETTLEMEMBDT               = "settlemembdt";               /* (  ) datetime */
+    const FIELD__SETTLEDONEDT               = "settledonedt";               /* (  ) datetime */
+    const FIELD__SETTLELOSSDT               = "settlelossdt";               /* (  ) datetime */
     const FIELD__REGDT                      = "regdt";                      /* (  ) datetime */
 
     /* ========================= */
@@ -57,9 +55,17 @@ class ClssettleBO extends _CommonBO
     /*
     */
     /* ========================= */
+    const SETTLESTATUS__WAIT = "wait"; /* 정산상태 : 입금대기 */
+    const SETTLESTATUS__MEMB = "memb"; /* 정산상태 : 입금완료 */
+    const SETTLESTATUS__DONE = "done"; /* 정산상태 : 확인완료 */
+    const SETTLESTATUS__LOSS = "loss"; /* 정산상태 : 손실 */
     static public function getConsts()
     {
         $arr = array();
+        $arr['settlestatusWait'] = self::SETTLESTATUS__WAIT; /* 정산상태 : 입금대기 */
+        $arr['settlestatusMemb'] = self::SETTLESTATUS__MEMB; /* 정산상태 : 입금완료 */
+        $arr['settlestatusDone'] = self::SETTLESTATUS__DONE; /* 정산상태 : 확인완료 */
+        $arr['settlestatusLoss'] = self::SETTLESTATUS__LOSS; /* 정산상태 : 손실 */
         return $arr;
     }
 
@@ -82,14 +88,11 @@ class ClssettleBO extends _CommonBO
     const selectByPkForMng = "selectByPkForMng";
     const selectByClsno = "selectByClsno";
     const selectByClsnoForMng = "selectByClsnoForMng";
-    const selectNotDepositedByUsernoForMng = "selectNotDepositedByUsernoForMng";
-    const selectNotDepositedAllByGrpnoForMng = "selectNotDepositedAllByGrpnoForMng";
-    const selectMemberdepositflgYesByGrpnoForMng = "selectMemberdepositflgYesByGrpnoForMng";
-    const selectNotDepositedByGrpnoForMng = "selectNotDepositedByGrpnoForMng";
-    const selectNotDepositedAllByGrpnoClsnoForMng = "selectNotDepositedAllByGrpnoClsnoForMng"; /* [GRPNO, CLSNO] */
-    const selectMemberdepositflgYesByGrpnoClsnoForMng = "selectMemberdepositflgYesByGrpnoClsnoForMng"; /* [GRPNO, CLSNO] */
-    const selectNotDepositedByGrpnoClsnoForMng = "selectNotDepositedByGrpnoClsnoForMng"; /* [GRPNO, CLSNO] */
-
+    const selectSettlestatusOpenByUsernoForMng = "selectSettlestatusOpenByUsernoForMng";
+    const selectSettlestatusOpenByGrpnoForMng = "selectSettlestatusOpenByGrpnoForMng";
+    const selectSettlestatusDoneByGrpnoForMng = "selectSettlestatusDoneByGrpnoForMng";
+    const selectSettlestatusDoneByGrpnoWithPageForMng = "selectSettlestatusDoneByGrpnoWithPageForMng";
+    const selectSettlestatusLossByGrpnoForMng = "selectSettlestatusLossByGrpnoForMng";
     const selectYetByUsernoForUsr = "selectYetByUsernoForUsr"; /* 유저메인 : 미입금전체 */
     const selectTmpByUsernoForUsr = "selectTmpByUsernoForUsr"; /* 유저메인 : 임시완료만 */
     const selectCmpByUsernoForUsr = "selectCmpByUsernoForUsr"; /* 유저메인 : 완료 */
@@ -123,12 +126,10 @@ class ClssettleBO extends _CommonBO
             , t.billpointed
             , t.billfinal
             , t.billmemo
-            , t.memberdepositflg
-            , t.memberdepositflgdt
-            , t.managerdepositflg
-            , t.managerdepositflgdt
-            , t.lossflg
-            , t.lossflgdt
+            , t.settlestatus
+            , t.settlemembdt
+            , t.settledonedt
+            , t.settlelossdt
             , t.regdt
             , u.name as username
             , u.id as userid
@@ -160,16 +161,14 @@ class ClssettleBO extends _CommonBO
             case self::selectByPkForMng                             : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and userno = '$USERNO') t"; break; }
             case self::selectByClsno                                : {                                                 $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
             case self::selectByClsnoForMng                          : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO') t"; break; }
-            case self::selectNotDepositedByUsernoForMng             : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO'   and managerdepositflg = 'n') t"; break; }
-            case self::selectNotDepositedAllByGrpnoForMng           : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n') t"; break; }
-            case self::selectMemberdepositflgYesByGrpnoForMng       : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectNotDepositedByGrpnoForMng              : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectNotDepositedAllByGrpnoClsnoForMng      : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n') t"; break; }
-            case self::selectMemberdepositflgYesByGrpnoClsnoForMng  : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectNotDepositedByGrpnoClsnoForMng         : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and clsno  = '$CLSNO'    and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectYetByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'n') t"; break; }
-            case self::selectTmpByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'n' and memberdepositflg = 'y') t"; break; }
-            case self::selectCmpByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and managerdepositflg = 'y' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
+            case self::selectSettlestatusOpenByUsernoForMng         : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO' and userno = '$USERNO'   and settlestatus in ('$settlestatusWait', '$settlestatusMemb') ) t"; break; }
+            case self::selectSettlestatusOpenByGrpnoForMng          : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and settlestatus in ('$settlestatusWait', '$settlestatusMemb') ) t"; break; }
+            case self::selectSettlestatusDoneByGrpnoForMng          : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and settlestatus = '$settlestatusDone') t"; break; }
+            case self::selectSettlestatusDoneByGrpnoWithPageForMng  : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and settlestatus = '$settlestatusDone') t"; break; }
+            case self::selectSettlestatusLossByGrpnoForMng          : { $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true); $from = "(select * from clssettle where grpno = '$GRPNO'                          and settlestatus = '$settlestatusLoss') t"; break; }
+            case self::selectYetByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and settlestatus = '$settlestatusWait') t"; break; }
+            case self::selectTmpByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and settlestatus = '$settlestatusMemb') t"; break; }
+            case self::selectCmpByUsernoForUsr                      : {                                                 $from = "(select * from clssettle where                      userno = '$EXECUTOR' and settlestatus = '$settlestatusDone' and regdt >= date_sub(now(), interval 1 year)) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -230,10 +229,10 @@ class ClssettleBO extends _CommonBO
     /* update */
     /* ========================= */
     const completeSettlementFromTmp = "completeSettlementFromTmp";
-    const updateMemberdepositflgYesForUsr = "updateMemberdepositflgYesForUsr";
-    const updateManagerdepositflgYesForMng = "updateManagerdepositflgYesForMng";
-    const updateManagerdepositflgNoForMng = "updateManagerdepositflgNoForMng";
-    const updateLossflgYesForMng = "updateLossflgYesForMng";
+    const updateSettlestatusToMembForUsr = "updateSettlestatusToMembForUsr";
+    const updateSettlestatusToDoneForFnc = "updateSettlestatusToDoneForFnc";
+    const updateSettlestatusToLossForFnc = "updateSettlestatusToLossForFnc";
+    const updateSettlestatusToWaitForFnc = "updateSettlestatusToWaitForFnc";
     const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     const deleteByPkForInside = "deleteByPkForInside";
     protected function update($options, $option="")
@@ -247,6 +246,21 @@ class ClssettleBO extends _CommonBO
         /* override option */
         if($option != "")
             $OPTION = $option;
+
+        /* =============== */
+        /* validation */
+        /* =============== */
+        switch($OPTION)
+        {
+            case self::completeSettlementFromTmp: break;
+            case self::updateSettlestatusToMembForUsr: $ggAuth->checkMe($EXECUTOR, $USERNO, true); break;
+            case self::updateSettlestatusToDoneForFnc: $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true); break;
+            case self::updateSettlestatusToLossForFnc: $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true); break;
+            case self::updateSettlestatusToWaitForFnc: $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true); break;
+            case self::updateUsernoToTargetForInside: break;
+            case self::deleteByPkForInside: break;
+        }
+
 
         /* =============== */
         /* process */
@@ -278,10 +292,8 @@ class ClssettleBO extends _CommonBO
                         $grpMemberBO->updatePointForInside($GRPNO, $USERNO, (-$BILLPOINTED), "일정정산으로 인한 차감", $CLSNO);
 
                     /* if billfinal == 0 ?, deposit complete */
-                    $memberdepositflg     = ($BILLFINAL == 0) ? "'y'"   : "'n'";
-                    $memberdepositflgdt   = ($BILLFINAL == 0) ? "now()" : "null";
-                    $managerdepositflg    = ($BILLFINAL == 0) ? "'y'"   : "'n'";
-                    $managerdepositflgdt  = ($BILLFINAL == 0) ? "now()" : "null";
+                    $settlestatus        = ($BILLFINAL == 0) ? self::SETTLESTATUS__DONE : self::SETTLESTATUS__WAIT;
+                    $settledonedt = ($BILLFINAL == 0) ? "now()" : "null";
 
                     /* insert */
                     $query =
@@ -298,10 +310,8 @@ class ClssettleBO extends _CommonBO
                             , billpointed
                             , billfinal
                             , billmemo
-                            , memberdepositflg
-                            , memberdepositflgdt
-                            , managerdepositflg
-                            , managerdepositflgdt
+                            , settlestatus
+                            , settledonedt
                             , regdt
                         )
                         values
@@ -316,10 +326,8 @@ class ClssettleBO extends _CommonBO
                             ,  $BILLPOINTED
                             ,  $BILLFINAL
                             , '$BILLMEMO'
-                            ,  $memberdepositflg
-                            ,  $memberdepositflgdt
-                            ,  $managerdepositflg
-                            ,  $managerdepositflgdt
+                            , '$settlestatus'
+                            ,  $settledonedt
                             ,  now()
                         )
                     ";
@@ -333,100 +341,23 @@ class ClssettleBO extends _CommonBO
                 $clsBO->updateBillByPkForInside($GRPNO, $CLSNO);
                 break;
             }
-            case self::updateMemberdepositflgYesForUsr:
+            case self::updateSettlestatusToMembForUsr: { $query = "update clssettle set settlestatus = '$settlestatusMemb', settlemembdt = now() where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO'"; GGsql::exeQuery($query); break; }
+            case self::updateSettlestatusToDoneForFnc: { $query = "update clssettle set settlestatus = '$settlestatusDone', settledonedt = now() where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO'"; GGsql::exeQuery($query); break; }
+            case self::updateSettlestatusToLossForFnc: { $query = "update clssettle set settlestatus = '$settlestatusLoss', settlelossdt = now() where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO'"; GGsql::exeQuery($query); break; }
+            case self::updateSettlestatusToWaitForFnc:
             {
-                /* is user and executor is same? */
-                if($EXECUTOR != $USERNO)
-                    throw new GGexception("예기치 못한 에러가 발생하였습니다.");
-
-                /* update */
-                $query =
-                "
-                    update
-                        clssettle
-                    set
-                        memberdepositflg = 'y',
-                        memberdepositflgdt = now()
-                    where
-                        grpno = '$GRPNO' and
-                        clsno = '$CLSNO' and
-                        userno = '$USERNO'
-                ";
-                GGsql::exeQuery($query);
-                break;
-            }
-            case self::updateManagerdepositflgYesForMng:
-            {
-                /* is manager? */
-                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
-
-                /* update */
-                $query =
-                "
-                    update
-                        clssettle
-                    set
-                        managerdepositflg = 'y',
-                        managerdepositflgdt = now(),
-                        lossflg = 'n',
-                        lossflgdt = null
-                    where
-                        grpno = '$GRPNO' and
-                        clsno = '$CLSNO' and
-                        userno = '$USERNO'
-                ";
-                GGsql::exeQuery($query);
-                break;
-            }
-            case self::updateManagerdepositflgNoForMng:
-            {
-                /* has finauth of grp? */
-                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
-
                 /* validation : in 5 minutes from now */
                 $clssettle = $this->getByPk($GRPNO, $CLSNO, $USERNO);
-                $managerdepositflgdt = Common::getField($clssettle, self::FIELD__MANAGERDEPOSITFLGDT);
-                if($managerdepositflgdt == null)
+                $settledonedt = Common::getField($clssettle, self::FIELD__SETTLEDONEDT);
+                if($settledonedt == null)
                     throw new GGexception("예기치 못한 에러가 발생하였습니다.");
 
-                $isValidTime = GGdate::isInSecondsFromNow($managerdepositflgdt, 310);
+                $isValidTime = GGdate::isInSecondsFromNow($settledonedt, 310);
                 if(!$isValidTime)
                     throw new GGexception("5분이 지나면 취소할 수 없습니다.");
 
                 /* update */
-                $query =
-                "
-                    update
-                        clssettle
-                    set
-                        managerdepositflg = 'n',
-                        managerdepositflgdt = null
-                    where
-                        grpno = '$GRPNO' and
-                        clsno = '$CLSNO' and
-                        userno = '$USERNO'
-                ";
-                GGsql::exeQuery($query);
-                break;
-            }
-            case self::updateLossflgYesForMng:
-            {
-                /* has finauth of grp? */
-                $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
-
-                /* update */
-                $query =
-                "
-                    update
-                        clssettle
-                    set
-                        lossflg = 'y',
-                        lossflgdt = now()
-                    where
-                        grpno = '$GRPNO' and
-                        clsno = '$CLSNO' and
-                        userno = '$USERNO'
-                ";
+                $query = "update clssettle set settlestatus = '$settlestatusWait', settledonedt = null where grpno = '$GRPNO' and clsno = '$CLSNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
                 break;
             }

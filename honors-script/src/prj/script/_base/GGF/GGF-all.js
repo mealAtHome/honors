@@ -42,6 +42,16 @@ GGF.Cls =
         UNABLE          : "unable",             /* GGF.Cls.Grpfinancereflectflg.UNABLE : 반영불가 */
     },
 };
+GGF.Clssettle =
+{
+    Settlestatus :
+    {
+        WAIT           : "wait",               /* GGF.Clssettle.Settlestatus.WAIT : 입금대기 */
+        MEMB           : "memb",               /* GGF.Clssettle.Settlestatus.MEMB : 입금완료 */
+        DONE           : "done",               /* GGF.Clssettle.Settlestatus.DONE : 확인완료 */
+        LOSS           : "loss",               /* GGF.Clssettle.Settlestatus.LOSS : 손실 */
+    }
+}
 GGF.Clssettlehist =
 {
     Histtype :

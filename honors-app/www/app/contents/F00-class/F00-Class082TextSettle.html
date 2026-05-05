@@ -67,7 +67,7 @@
 
                         /* 미입금 */
                         html += `\n\n■ 미입금`;
-                        let mClssettleNotDeposited = Api.Clssettle.selectNotDepositedAllByGrpnoForMng(grpno, GGF.none, GGF.toast);
+                        let mClssettleNotDeposited = Api.Clssettle.selectSettlestatusOpenByGrpnoForMng(grpno, GGF.none, GGF.toast);
                         let notDeposited = mClssettleNotDeposited.getModels();
                         let notDepositedCnt = 0;
                         for(let i in notDeposited)
@@ -103,7 +103,7 @@
                                 pointHtml = ` (사전정산금사용:${model.getBillpointedWon()})`;
 
                             /* is deposited */
-                            let isDeposited = model.isManagerdepositflgYes() ? "[입금완료] " : "";
+                            let isDeposited = model.isSettlestatusDone() ? "[입금완료] " : "";
 
                             /* add row */
                             html += `\n${isDeposited}${model.getUsername()} : ${model.getBillfinalWon()}${discountHtml}${pointHtml}`;

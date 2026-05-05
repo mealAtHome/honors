@@ -283,14 +283,7 @@ class MClss extends _MCommon
             let btnHtml = `<button class="common-btn-inline MClss-make-btn-choose" ${model.getPk()}>선택하기</button>`;
             html += model.make(btnHtml);
         }
-
-        /* pagenation */
-        if(this.getPagecnt() > 1)
-        {
-            let pagenation = this.getPagenation();
-            html = pagenation + html + pagenation;
-        }
-        $(el).html(html);
+        $(el).html(this.mergePagenation(html));
     }
 
     /* ========================= */
@@ -337,14 +330,7 @@ class MClss extends _MCommon
                 </table>
             </div>
         `;
-
-        /* pagenation */
-        if(this.getPagecnt() > 1)
-        {
-            let pagenation = this.getPagenation();
-            html = pagenation + html + pagenation;
-        }
-        $(el).html(html);
+        $(el).html(this.mergePagenation(html));
 
         /* event */
         $(`${el} .MClss-makeTableForFinanceReflect-btn-toY`).off("click").on("click", function()
