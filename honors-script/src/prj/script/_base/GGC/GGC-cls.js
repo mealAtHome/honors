@@ -40,7 +40,6 @@ GGC.Cls =
         switch(val)
         {
             case GGF.Cls.Clssettleflg.EDIT    : rslt = "정산입력중"; break;
-            case GGF.Cls.Clssettleflg.PROC    : rslt = "정산확인중"; break;
             case GGF.Cls.Clssettleflg.DONE    : rslt = "정산확정됨"; break;
         }
         return rslt;
@@ -51,7 +50,6 @@ GGC.Cls =
         switch(val)
         {
             case GGF.Cls.Clssettleflg.EDIT    : rslt = "hold"; break;
-            case GGF.Cls.Clssettleflg.PROC    : rslt = "prog"; break;
             case GGF.Cls.Clssettleflg.DONE    : rslt = "pstv"; break;
         }
         return rslt;

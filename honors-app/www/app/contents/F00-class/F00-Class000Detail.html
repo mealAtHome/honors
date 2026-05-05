@@ -123,6 +123,7 @@
                     <th>입금여부</th>
                     <th>접수자</th>
                     <th>청구금액</th>
+                    <th>최종청구</th>
                     <th>비고</th>
                 </tr>
             </thead>
@@ -275,12 +276,17 @@
                                 if(model.isManagerdepositflgYes() == false)
                                     managerDepositflgHtml = `<button class="common-btn-outline CLSD-btn-managerdepositflgToY" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">입금확정</button>`;
 
+                                /* 청구금액 (billfinal + billprepaid + billpointed) */
+                                let billrequired = model.getBillfinal() + model.getBillprepaid() + model.getBillpointed();
+                                let billrequiredWon = GGC.Common.priceWon(billrequired);
+
                                 let html =
                                 `
                                     <tr>
                                         <td class="common-tag-alignC"><button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D21DetailClssettle}" hyperlink-viewmode="dialog" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">상세</button></td>
                                         <td class="common-tag-alignC">${managerDepositflgHtml}</td>
                                         <td class="common-tag-alignC">${model.getUsername()}</td>
+                                        <td class="common-tag-alignR">${billrequiredWon}</td>
                                         <td class="common-tag-alignR">${model.getBillfinalWon()}</td>
                                         <td class="common-tag-alignL">${model.getBillmemo()}</td>
                                     </tr>
@@ -431,72 +437,66 @@
             addRowForLineup2(mClslineupb)
             {
                 let model = mClslineupb;
+                const pk = model.getPk();
+                const orderno = model.getOrderno();
+                const userno = model.getUserno();
+                const position = model.getPosition();
+                const username = model.getUsername();
+                const clsstatus = model.getClsstatus();
+                const clssettleflg = model.getClssettleflg();
 
                 /* ----- */
                 /* battingflg */
                 /* ----- */
-                let orderno = model.getOrderno();
+                let ordernoHtml = orderno;
                 if(model.isBattingflgY() == false)
-                    orderno = "-";
+                    ordernoHtml = "-";
 
                 /* ----- */
                 /* position */
                 /* ----- */
-                let position = model.getPosition();
-                if(position == "")
-                    position = "-";
+                let positionHtml = position;
+                if(positionHtml == "")
+                    positionHtml = "-";
 
                 /* ----- */
                 /* apply */
                 /* ----- */
-                let apply = "";
+                let applyHtml = "";
                 if(model.hasApplyer())
                 {
-                    switch(model.getClsstatus())
+                    applyHtml = `${username}`
+                    if(clssettleflg == GGF.Cls.Clssettleflg.EDIT)
                     {
-                        case GGF.Cls.Clsstatus.EDIT:
-                        case GGF.Cls.Clsstatus.END:
-                        {
-                            apply = `${model.getUsername()}`;
-                            break;
-                        }
-                        case GGF.Cls.Clsstatus.ING:
-                        {
-                            apply =
-                            `
-                                <input type="text" class="common-input-text CLSD-input-username" value="${model.getUsername()}" disabled/>
-                                <button class="common-btn-outline CLSD-btn-cancelForLineup2" btn-type="cancel" ${model.getPk()}>취소</button>
-                            `;
-                            break;
-                        }
+                        applyHtml =
+                        `
+                            <input type="text" class="common-input-text CLSD-input-username" value="${username}" disabled/>
+                            <button class="common-btn-outline CLSD-btn-cancelForLineup2" btn-type="cancel" ${pk}>취소</button>
+                        `;
                     }
                 }
                 else
                 {
-                    switch(model.getClsstatus())
+                    applyHtml = "-";
+                    if(clssettleflg == GGF.Cls.Clssettleflg.EDIT)
                     {
-                        case GGF.Cls.Clsstatus.EDIT : apply = "-"; break;
-                        case GGF.Cls.Clsstatus.END  : apply = "-"; break;
-                        case GGF.Cls.Clsstatus.ING  :
-                        {
-                            apply =
-                            `
-                                <input type="text" class="common-input-text CLSD-input-username" value="${model.getUsername()}" ${model.getPk()} disabled/>
-                                <button class="common-btn-outline CLSD-btn-applyForLineup2" ${model.getPk()} lineupname="${model.getLineupname()}" position="${model.getPosition()}" bill="${model.getBillWon()}">참가</button>
-                            `;
-                            break;
-                        }
+                        applyHtml =
+                        `
+                            <input type="text" class="common-input-text CLSD-input-username" value="${username}" ${pk} disabled/>
+                            <button class="common-btn-outline CLSD-btn-applyForLineup2" ${pk} lineupname="${model.getLineupname()}" position="${position}" bill="${model.getBillWon()}">참가</button>
+                        `;
                     }
                 }
 
                 /* ----- */
                 /* applyer */
                 /* ----- */
-                let applyer = `<span class="commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" grpno="${model.getGrpno()}" userno="${model.getUserno()}">${model.getApplyername()}</span>`;
-                if(applyer == "")
+                let applyerHtml = `<span class="commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" grpno="${model.getGrpno()}" userno="${userno}">${model.getApplyername()}</span>`;
+                if(model.hasApplyer() == false)
                 {
+                    applyerHtml = "-";
                     if(CLSD.isManager)
-                        applyer = `<button class="common-btn-outline CLSD-btn-applyStead" ${model.getPk()}>대리접수</button>`;
+                        applyerHtml = `<button class="common-btn-outline CLSD-btn-applyStead" ${pk}>대리접수</button>`;
                 }
 
                 /* ----- */
@@ -504,24 +504,24 @@
                 /* ----- */
                 let prepaidflgHtml = model.getPrepaidflgCvrt();
                 let prepaidflg = model.getPrepaidflg();
-                if(CLSD.isManager && model.hasApplyer() && CLSD.mCls.isClsstatusEnd() == false)
+                if(CLSD.isManager && model.hasApplyer() && CLSD.mCls.isClssettleflgEdit())
                 {
-                    if(prepaidflg == GGF.Y) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToN" btn-type="cancel" ${model.getPk()}>취소</button>`;
-                    if(prepaidflg == GGF.N) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToY" btn-type="normal" ${model.getPk()}>완료</button>`;
+                    if(prepaidflg == GGF.Y) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToN" btn-type="cancel" ${pk}>취소</button>`;
+                    if(prepaidflg == GGF.N) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToY" btn-type="normal" ${pk}>완료</button>`;
                 }
 
                 /* ----- */
                 /* make TR */
                 /* ----- */
-                let isMyUserno = model.getUserno()   == CLSD.Storage.myUserno   ? "y" : "n";
-                let isMyName   = model.getUsername() == CLSD.Storage.myUsername ? "y" : "n";
+                let isMyUserno = userno   == CLSD.Storage.myUserno   ? "y" : "n";
+                let isMyName   = username == CLSD.Storage.myUsername ? "y" : "n";
                 let html =
                 `
                     <tr class="common-tag-me" me="${isMyUserno}">
-                        <td>${orderno}</td>
-                        <td>${position}</td>
-                        <td><span class="common-span-me" me="${isMyName}">${apply}</span></td>
-                        <td><span class="common-span-me" me="${isMyName}">${applyer}</span></td>
+                        <td>${ordernoHtml}</td>
+                        <td>${positionHtml}</td>
+                        <td><span class="common-span-me" me="${isMyName}">${applyHtml}</span></td>
+                        <td><span class="common-span-me" me="${isMyName}">${applyerHtml}</span></td>
                         <td><span class="common-span-me" me="${isMyName}">${prepaidflgHtml}</span></td>
                         <td col="etc">${model.getEtc()}</td>
                     </tr>

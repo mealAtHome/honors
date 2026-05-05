@@ -119,6 +119,7 @@ class ClslineupbBO extends _CommonBO
             , t.userregdt
             , clslua.lineupname
             , cls.clsstatus
+            , cls.clssettleflg
             , u.name as applyername
             , grpm.point as memberpoint
         ";

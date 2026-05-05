@@ -44,7 +44,7 @@ class ClsBO extends _CommonBO
     const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30)              / NO  */
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14)              / NO  */
     const FIELD__CLSSTATUS                  = "clsstatus";                  /* (  ) char(30)              / NO  */
-    const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) enum('yet','done')    / YES */
+    const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) char(4)               / YES */
     const FIELD__CLSTITLE                   = "clstitle";                   /* (  ) char(50)              / NO  */
     const FIELD__CLSCONTENT                 = "clscontent";                 /* (  ) varchar(255)          / YES  */
     const FIELD__CLSSTARTDT                 = "clsstartdt";                 /* (  ) datetime              / NO  */
@@ -76,7 +76,6 @@ class ClsBO extends _CommonBO
     const CLSSTATUS__END            = "end";                /* clsstatus : 일정완료 */
     const CLSSTATUS__CANCEL         = "cancel";             /* clsstatus : 취소 */
     const CLSSETTLEFLG__EDIT        = "edit";               /* clssettleflg : 정산입력중 */
-    const CLSSETTLEFLG__PROC        = "proc";               /* clssettleflg : 정산확인중 */
     const CLSSETTLEFLG__DONE        = "done";               /* clssettleflg : 정산완료됨 */
 
     static public function getConsts()
@@ -87,7 +86,6 @@ class ClsBO extends _CommonBO
         $arr['clsstatusEnd']                    = self::CLSSTATUS__END;         /* 일정상태 : 일정완료 */
         $arr['clsstatusCancel']                 = self::CLSSTATUS__CANCEL;      /* 일정상태 : 취소 */
         $arr['clssettleflgEdit']                = self::CLSSETTLEFLG__EDIT;     /* 정산여부 : 정산입력중 */
-        $arr['clssettleflgProc']                = self::CLSSETTLEFLG__PROC;     /* 정산여부 : 정산확인중 */
         $arr['clssettleflgDone']                = self::CLSSETTLEFLG__DONE;     /* 정산여부 : 정산완료됨 */
         return $arr;
     }
@@ -614,8 +612,8 @@ class ClsBO extends _CommonBO
                     update
                         cls
                     set
-                          clsbillsales    =  (select ifnull(sum(clss.billfinal + clss.billpointed) ,0) from clssettle   clss where clss.grpno = cls.grpno and clss.clsno = cls.clsno)
-                        , clsbillpurchase =  (select ifnull(sum(clsp.productbill)                  ,0) from clspurchase clsp where clsp.grpno = cls.grpno and clsp.clsno = cls.clsno)
+                          clsbillsales    =  (select ifnull(sum(clss.billfinal + clss.billpointed + clss.billprepaid) ,0) from clssettle   clss where clss.grpno = cls.grpno and clss.clsno = cls.clsno)
+                        , clsbillpurchase =  (select ifnull(sum(clsp.productbill)                                     ,0) from clspurchase clsp where clsp.grpno = cls.grpno and clsp.clsno = cls.clsno)
                         , clsbillfinal    =  (clsbillsales - clsbillpurchase)
                         , clsmodidt       =  now()
                     where

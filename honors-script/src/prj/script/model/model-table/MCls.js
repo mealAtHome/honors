@@ -87,11 +87,12 @@ class MCls
     /* ========================= */
     /* is */
     /* ========================= */
-    isEnd() { return this.getClsstatus() === GGF.Cls.Clsstatus.END; }
-    isCancel() { return this.getClsstatus() === GGF.Cls.Clsstatus.CANCEL; }
-    isClsstatusWait () { return this.getClsstatus() === GGF.Cls.Clsstatus.WAIT; }
-    isClsstatusIng  () { return this.getClsstatus() === GGF.Cls.Clsstatus.ING; }
-    isClsstatusEnd  () { return this.getClsstatus() === GGF.Cls.Clsstatus.END; }
+    isEnd()                     { return this.getClsstatus()    === GGF.Cls.Clsstatus.END; }
+    isCancel()                  { return this.getClsstatus()    === GGF.Cls.Clsstatus.CANCEL; }
+    isClsstatusEdit()           { return this.getClsstatus()    === GGF.Cls.Clsstatus.EDIT; }
+    isClsstatusIng()            { return this.getClsstatus()    === GGF.Cls.Clsstatus.ING; }
+    isClsstatusEnd()            { return this.getClsstatus()    === GGF.Cls.Clsstatus.END; }
+    isClssettleflgEdit()        { return this.getClssettleflg() === GGF.Cls.Clssettleflg.EDIT; }
 
     /* ========================= */
     /* make with buttons */
@@ -184,9 +185,6 @@ class MClss extends _MCommon
                         {
                             case GGF.Cls.Clssettleflg.EDIT:
                                 btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020SettleEdit}"   hyperlink-viewmode="page" ${model.getPk()}>정산입력</button>`;
-                                btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate026Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매입력</button>`;
-                                break;
-                            case GGF.Cls.Clssettleflg.PROC:
                                 btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate026Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매입력</button>`;
                                 break;
                             case GGF.Cls.Clssettleflg.DONE:

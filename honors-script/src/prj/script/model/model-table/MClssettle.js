@@ -94,6 +94,7 @@ class MClssettle
     isMemberdepositflgYes() { return this.getMemberdepositflg() === GGF.Y; }
     isManagerdepositflgYes() { return this.getManagerdepositflg() === GGF.Y; }
     isIn5MinWhenManagerdepositflgdt() { return Common.isEmpty(this.getManagerdepositflgdt()) ? false : GGdate.isIn5MinFromNow(this.getManagerdepositflgdt()); }
+    hasBillprepaid() { return this.getBillprepaid() >= 1; }
 
     /* ========================= */
     /* fields - additional */

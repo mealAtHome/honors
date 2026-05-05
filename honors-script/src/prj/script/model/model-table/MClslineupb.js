@@ -16,11 +16,13 @@ class MClslineupb
         /* data */      this.prepaidflg         = GGC.Common.enum(dat.prepaidflg);
         /* data */      this.etc                = GGC.Common.varchar(dat.etc);
         /* data */      this.clsstatus          = GGC.Common.char(dat.clsstatus);
+        /* data */      this.clssettleflg       = GGC.Common.char(dat.clssettleflg);
         /* data */      this.cnt                = GGC.Common.int(dat.cnt);
         /* data */      this.memberpoint        = GGC.Common.int(dat.memberpoint);
         /* data */      this.applyername        = GGC.Common.char(dat.applyername);
         /* custom */    this.memberpointwon     = GGC.Common.priceWon(this.memberpoint);
         /* custom */    this.pk                 = `grpno="${this.grpno}" clsno="${this.clsno}" lineupidx="${this.lineupidx}" orderno="${this.orderno}"`;
+        /* other */     this.billprepaid        = dat.billprepaid == undefined ? 0 : GGC.Common.int(dat.billprepaid);
     }
 
     /* ========================= */
@@ -39,12 +41,14 @@ class MClslineupb
     /* data */      getPrepaidflg() { return this.prepaidflg; }
     /* data */      getEtc() { return this.etc; }
     /* data */      getClsstatus() { return this.clsstatus; }
+    /* data */      getClssettleflg() { return this.clssettleflg; }
     /* data */      getUserregdt() { return this.userregdt; }
     /* data */      getCnt() { return this.cnt; }
     /* data */      getMemberpoint() { return this.memberpoint; }
     /* data */      getApplyername() { return this.applyername; }
     /* custom */    getMemberpointWon() { return this.memberpointwon; }
     /* custom */    getPk() { return this.pk; }
+    /* other */     getBillprepaid() { return this.billprepaid; }
 
     /* ========================= */
     /* fields - additional */
@@ -58,6 +62,7 @@ class MClslineupb
     /* fields - flg */
     /* ========================= */
     isBattingflgY() { return this.getBattingflg() === GGF.Y; }
+    isPrepaid()     { return this.getPrepaidflg() === GGF.Y; }
     hasApplyer()    { return !Common.isEmpty(this.getUsername()); }
 
 }
@@ -106,6 +111,7 @@ class MClslineupbs extends _MCommon
                 {
                     dat.bill += bill;
                     dat.billprepaid += prepaidflg === GGF.Y ? bill : 0;
+                    dat.prepaidflg = dat.prepaidflg === GGF.Y ? GGF.Y : prepaidflg; // 선불 여부는 하나라도 Y면 Y
                     isExist = true;
                     break;
                 }
@@ -121,6 +127,7 @@ class MClslineupbs extends _MCommon
                     username     : username,
                     bill         : bill,
                     billprepaid  : prepaidflg === GGF.Y ? bill : 0,
+                    prepaidflg   : prepaidflg,
                     memberpoint  : memberpoint,
                 };
                 let dat = new MClslineupb(tmp);

@@ -33,7 +33,6 @@ GGF.Cls =
     Clssettleflg :
     {
         EDIT            : "edit",               /* GGF.Cls.Clssettleflg.EDIT : 정산입력중 */
-        PROC            : "proc",               /* GGF.Cls.Clssettleflg.PROC : 정산확인중 */
         DONE            : "done",               /* GGF.Cls.Clssettleflg.DONE : 정산확정됨 */
     },
     Grpfinancereflectflg :
