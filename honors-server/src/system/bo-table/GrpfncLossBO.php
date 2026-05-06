@@ -189,7 +189,7 @@ class GrpfncLossBO extends _CommonBO
                 $rslt = GGsql::exeQuery($query);
 
                 /* recal */
-                $grpfncBO->recalGrpfncLosstotalByPkForInside($GRPNO);
+                $grpfncaBO->recalGrpfncLosstotalByPkForInside($GRPNO);
                 break;
             }
             case self::deleteByPk:
@@ -213,7 +213,7 @@ class GrpfncLossBO extends _CommonBO
                 $rslt = GGsql::exeQuery($query);
 
                 /* recal */
-                $grpfncBO->recalGrpfncLosstotalByPkForInside($GRPNO);
+                $grpfncaBO->recalGrpfncLosstotalByPkForInside($GRPNO);
                 break;
             }
             default:

@@ -183,7 +183,7 @@ class GrpfncPurchaseBO extends _CommonBO
                 $rslt = GGsql::exeQuery($query);
 
                 /* recal */
-                $grpfncBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);
+                $grpfncaBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);
                 break;
             }
             case self::deleteByPk:
@@ -207,7 +207,7 @@ class GrpfncPurchaseBO extends _CommonBO
                 $rslt = GGsql::exeQuery($query);
 
                 /* recal */
-                $grpfncBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);
+                $grpfncaBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);
                 break;
             }
             default:

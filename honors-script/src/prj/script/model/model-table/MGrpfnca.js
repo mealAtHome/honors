@@ -3,6 +3,9 @@ class MGrpfnca
     constructor(dat)
     {
         /* data */      this.grpno                              =      GGC.Common.char(dat.grpno);
+        /* data */      this.grpfnc_totalall                    =      GGC.Common.bigint(dat.grpfnc_totalall);
+        /* data */      this.grpfnc_totalnormal                 =      GGC.Common.bigint(dat.grpfnc_totalnormal);
+        /* data */      this.grpfnc_totalcls                    =      GGC.Common.bigint(dat.grpfnc_totalcls);
         /* data */      this.grpfnc_capitaltotal                =      GGC.Common.bigint(dat.grpfnc_capitaltotal);
         /* data */      this.grpfnc_sponsorshiptotal            =      GGC.Common.bigint(dat.grpfnc_sponsorshiptotal);
         /* data */      this.grpfnc_purchasetotal               = -1 * GGC.Common.bigint(dat.grpfnc_purchasetotal);
@@ -12,7 +15,6 @@ class MGrpfnca
         /* data */      this.grpfnc_clssaleslosstotal           = -1 * GGC.Common.bigint(dat.grpfnc_clssaleslosstotal);
         /* data */      this.grpfnc_clspurchasetotal            = -1 * GGC.Common.bigint(dat.grpfnc_clspurchasetotal);
         /* data */      this.grpfnc_memberpointtotal            =      GGC.Common.bigint(dat.grpfnc_memberpointtotal);
-        /* data */      this.grpfnc_alltotal                    =      GGC.Common.bigint(dat.grpfnc_alltotal);
         /* data */      this.modidt                             =      GGC.Common.datetime(dat.modidt);
         /* custom */    this.pk = `grpno="${this.grpno}"`;
     }
@@ -21,6 +23,9 @@ class MGrpfnca
     /* getter */
     /* ========================= */
     /* data */  getGrpno() { return this.grpno; }
+    /* data */  getGrpfncTotalall() { return this.grpfnc_totalall; }
+    /* data */  getGrpfncTotalnormal() { return this.grpfnc_totalnormal; }
+    /* data */  getGrpfncTotalcls() { return this.grpfnc_totalcls; }
     /* data */  getGrpfncCapitaltotal() { return this.grpfnc_capitaltotal; }
     /* data */  getGrpfncSponsorshiptotal() { return this.grpfnc_sponsorshiptotal; }
     /* data */  getGrpfncPurchasetotal() { return this.grpfnc_purchasetotal; }
@@ -30,7 +35,6 @@ class MGrpfnca
     /* data */  getGrpfncClssaleslosstotal() { return this.grpfnc_clssaleslosstotal; }
     /* data */  getGrpfncClspurchasetotal() { return this.grpfnc_clspurchasetotal; }
     /* data */  getGrpfncMemberpointtotal() { return this.grpfnc_memberpointtotal; }
-    /* data */  getGrpfncAlltotal() { return this.grpfnc_alltotal; }
     /* data */  getModidt() { return this.modidt; }
 
 
@@ -38,6 +42,9 @@ class MGrpfnca
     /* make */
     /* ========================= */
     /* Won */      getGrpfncCapitaltotalWon() { return GGC.Common.priceWon(this.getGrpfncCapitaltotal()); }
+    /* wonColor */ getGrpfncTotalallWonColor() { return GGC.Common.wonColor(this.getGrpfncTotalall()); }
+    /* wonColor */ getGrpfncTotalnormalWonColor() { return GGC.Common.wonColor(this.getGrpfncTotalnormal()); }
+    /* wonColor */ getGrpfncTotalclsWonColor() { return GGC.Common.wonColor(this.getGrpfncTotalcls()); }
     /* wonColor */ getGrpfncCapitaltotalWonColor() { return GGC.Common.wonColor(this.getGrpfncCapitaltotal()); }
     /* wonColor */ getGrpfncSponsorshiptotalWonColor() { return GGC.Common.wonColor(this.getGrpfncSponsorshiptotal()); }
     /* wonColor */ getGrpfncPurchasetotalWonColor() { return GGC.Common.wonColor(this.getGrpfncPurchasetotal()); }
@@ -47,7 +54,6 @@ class MGrpfnca
     /* wonColor */ getGrpfncClssaleslosstotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClssaleslosstotal()); }
     /* wonColor */ getGrpfncClspurchasetotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClspurchasetotal()); }
     /* wonColor */ getGrpfncMemberpointtotalWonColor() { return GGC.Common.wonColor(this.getGrpfncMemberpointtotal()); }
-    /* wonColor */ getGrpfncAlltotalWonColor() { return GGC.Common.wonColor(this.getGrpfncAlltotal()); }
     getModidtDiff() { return GGC.Common.dateDiff(this.getModidt()); }
 
 }

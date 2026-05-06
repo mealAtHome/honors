@@ -1,5 +1,6 @@
 .common-tag-indent04 { padding-left: 0.4em; }
 .common-tag-indent08 { padding-left: 0.8em; }
+.common-tag-indent12 { padding-left: 1.2em; }
 
 .common-tag-marginTop10 { margin-top: 1.0em; }
 
@@ -35,7 +36,8 @@
 /* ============================== */
 /* 색칠 */
 /* ============================== */
-.common-tag-bgcolorGray { background-color: rgba(2, 6, 84, 0.2); }
+.common-tag-bgcolorGray    { background-color: rgba(2, 6, 84, 0.2); }
+.common-tag-bgcolorSign04  { background-color: rgba(2, 6, 84, 0.4); }
 
 /* ============================== */
 /* 아래 보더라인 */

@@ -48,7 +48,9 @@ class GrpfncSponsorshipBO extends _CommonBO
 
     static public function getConsts()
     {
+        GGnavi::getGrpfncaBO();
         $arr = array();
+        $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         // $arr['key'] = "value";
         return $arr;
     }
@@ -206,7 +208,7 @@ class GrpfncSponsorshipBO extends _CommonBO
                 $rslt = GGsql::exeQuery($query);
 
                 /* recal */
-                $grpfncBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
+                $grpfncaBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
                 break;
             }
             case self::deleteByPk:
@@ -230,7 +232,7 @@ class GrpfncSponsorshipBO extends _CommonBO
                 $rslt = GGsql::exeQuery($query);
 
                 /* recal */
-                $grpfncBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
+                $grpfncaBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
                 break;
             }
             default:

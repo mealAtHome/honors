@@ -56,7 +56,6 @@
     $options["DELETED"]                                             = get("DELETED");
     $options["EMAIL"]                                               = get("EMAIL");
     $options["ETC"]                                                 = get("ETC");
-    $options["GRPFNC_ALLTOTAL"]                                     = get("GRPFNC_ALLTOTAL");
     $options["GRPFNC_CAPITALTOTAL"]                                 = get("GRPFNC_CAPITALTOTAL");
     $options["GRPFNC_CLSPURCHASETOTAL"]                             = get("GRPFNC_CLSPURCHASETOTAL");
     $options["GRPFNC_CLSSALESLOSSTOTAL"]                            = get("GRPFNC_CLSSALESLOSSTOTAL");

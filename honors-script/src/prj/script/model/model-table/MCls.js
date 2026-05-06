@@ -315,7 +315,7 @@ class MClss extends _MCommon
         html =
         `
             <div class="common-div-scrollX">
-                <table class="common-tbl-normal" tbl-type="rowborder">
+                <table class="common-tbl-normal" tbl-type="rowborder" style="white-space:nowrap;">
                     <thead>
                         <tr>
                             <th>정산반영</th>

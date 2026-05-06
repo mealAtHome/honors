@@ -63,8 +63,8 @@ class MGrpfnclogs extends _MCommon
             `
                 <tr>
                     <td style="text-align:center; white-space:nowrap;                        ">${model.getRegdt()}</td>
-                    <td style="text-align:center; white-space:normal; word-break:break-word; ">${model.getGfmlsummaryrealWon()}</td>
-                    <td style="text-align:center; white-space:nowrap;                        ">${model.getGfmlcomment()}</td>
+                    <td style="text-align:center; white-space:normal;                        ">${model.getGfmlsummaryrealWon()}</td>
+                    <td style="text-align:left;   white-space:nowrap; word-break:break-word; ">${model.getGfmlcomment()}</td>
                 </tr>
             `;
         }
