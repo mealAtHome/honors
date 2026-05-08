@@ -128,6 +128,8 @@ class GGdate
     }
 
     public static function isInSecondsFromNow($dateStr, $seconds) { return self::diffSeconds($dateStr) <= $seconds; }
+    public static function isIn5MinFromNow($dateStr) { return self::isInSecondsFromNow($dateStr, 5 * 60); }
+    public static function isIn1DayFromNow($dateStr) { return self::isInSecondsFromNow($dateStr, 24 * 60 * 60); }
 
 
     public static function diffHour($start=null, $close=null) { return self::diffSeconds($start, $close) / 3600; }

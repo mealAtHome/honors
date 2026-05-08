@@ -21,12 +21,17 @@ class MGrpfncPurchase
     /* data */      getPurchasecomment() { return this.purchasecomment; }
     /* data */      getRegdt() { return this.regdt; }
     /* data */      getUsername() { return this.username; }
+    /* custom */    getPk() { return `grpno="${this.getGrpno()}" purchaseidx="${this.getPurchaseidx()}"`; }
 
     /* ========================= */
-    /* make */
+    /* convert */
     /* ========================= */
-    /* custom */    getPurchasecostWonColor() { return GGC.Common.wonColor(this.getPurchasecost()); }
-    /* custom */    getPk() { return `grpno="${this.getGrpno()}" purchaseidx="${this.getPurchaseidx()}"`; }
+    getPurchasecostWonColor() { return GGC.Common.wonColor(this.getPurchasecost()); }
+
+    /* ========================= */
+    /* fields - flg */
+    /* ========================= */
+    isIn1DayWhenRegdt() { return Common.isEmpty(this.getRegdt()) ? false : GGdate.isIn1DayFromNow(this.getRegdt()); }
 
 }
 
@@ -49,10 +54,12 @@ class MGrpfncPurchases extends _MCommon
         for(let i in this.models)
         {
             let model = this.models[i];
+            let disable = model.isIn1DayWhenRegdt() ? "" : "disabled";
+
             html +=
             `
                 <tr>
-                    <td col="delete"                ><button class="MGrpfncPurchase-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()}>삭제</td>
+                    <td col="delete"                ><button class="MGrpfncPurchase-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()} ${disable}>삭제</td>
                     <td col="purchaseidx"           >${model.getPurchaseidx()}</td>
                     <td col="regdt"                 >${model.getRegdt()}</td>
                     <td col="purchaseitem"          >${model.getPurchaseitem()}</td>

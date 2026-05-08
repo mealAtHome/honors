@@ -172,10 +172,10 @@ class GrpfncSponsorshipBO extends _CommonBO
                 if(Common::isEmpty($GRPNO))                                              { throw new GGexception("시스템 오류입니다."); }
                 if(Common::isEmpty($SPONSORTYPE))                                        { throw new GGexception("시스템 오류입니다."); }
                 if(Common::isEmpty($SPONTYPE))                                           { throw new GGexception("시스템 오류입니다."); }
+                if(Common::isEmpty($SPONCOST))                                           { throw new GGexception("찬조금액이 공란입니다."); }
                 if($SPONSORTYPE == "user" && Common::isEmpty($SPONUSERNO))               { throw new GGexception("찬조자가 선택되지 않았습니다."); }
                 if($SPONSORTYPE == "name" && Common::isEmpty($SPONUSERNAME))             { throw new GGexception("찬조자 이름이 입력되지 않았습니다."); }
                 if($SPONTYPE == self::SPONTYPE__THING && Common::isEmpty($SPONITEM))     { throw new GGexception("찬조품목이 공란입니다."); }
-                if($SPONTYPE == self::SPONTYPE__MONEY && Common::isEmpty($SPONCOST))     { throw new GGexception("찬조금액이 공란입니다."); }
 
                 /* process */
                 $query =
@@ -218,14 +218,11 @@ class GrpfncSponsorshipBO extends _CommonBO
                 if(Common::isEmpty($SPONIDX))  { throw new GGexception("시스템 오류입니다."); }
 
                 /* validation logic */
-                $isAdmin = $ggAuth->isAdmin($EXECUTOR, false);
+                /* validation logic */
                 $hasAuth = $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
-                if(!$isAdmin)
-                {
-                    $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $SPONIDX), self::FIELD__REGDT);
-                    if(GGdate::diffHour($regdt) > 72)
-                        throw new GGexception("찬조내역은 등록 후 72시간까지만 삭제할 수 있습니다.");
-                }
+                $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $SPONIDX), self::FIELD__REGDT);
+                if(GGdate::isIn1DayFromNow($regdt) == false)
+                    throw new GGexception("등록 후 하루이내에만 삭제 가능합니다.");
 
                 /* process */
                 $query = "delete from grpfnc_sponsorship where grpno = '$GRPNO' and sponidx = $SPONIDX";

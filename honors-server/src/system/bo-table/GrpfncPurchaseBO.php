@@ -54,7 +54,7 @@ class GrpfncPurchaseBO extends _CommonBO
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    // public function selectByPkForInside ($GRPNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside ($GRPNO, $PURCHASEIDX) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
@@ -63,6 +63,7 @@ class GrpfncPurchaseBO extends _CommonBO
     /* ========================= */
     const selectByPk = "selectByPk";
     const selectByGrpnoPagenum = "selectByGrpnoPagenum";
+    const selectByPkForInside = "selectByPkForInside";
     protected function select($options, $option="")
     {
         /* vars */
@@ -98,6 +99,7 @@ class GrpfncPurchaseBO extends _CommonBO
         {
             case self::selectByPk            : { $from = "(select * from grpfnc_purchase where grpno = '$GRPNO' and purchaseidx = $PURCHASEIDX) t"; break; }
             case self::selectByGrpnoPagenum  : { $from = "(select * from grpfnc_purchase where grpno = '$GRPNO') t"; break; }
+            case self::selectByPkForInside   : { $from = "(select * from grpfnc_purchase where grpno = '$GRPNO' and purchaseidx = $PURCHASEIDX) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -193,14 +195,10 @@ class GrpfncPurchaseBO extends _CommonBO
                 if(Common::isEmpty($PURCHASEIDX))  { throw new GGexception("시스템 오류입니다."); }
 
                 /* validation logic */
-                $isAdmin = $ggAuth->isAdmin($EXECUTOR, false);
                 $hasAuth = $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
-                if(!$isAdmin)
-                {
-                    $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $PURCHASEIDX), self::FIELD__REGDT);
-                    if(GGdate::diffHour($regdt) > 72)
-                        throw new GGexception("구매내역은 등록 후 72시간까지만 삭제할 수 있습니다.");
-                }
+                $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $PURCHASEIDX), self::FIELD__REGDT);
+                if(GGdate::isIn1DayFromNow($regdt) == false)
+                    throw new GGexception("등록 후 하루이내에만 삭제 가능합니다.");
 
                 /* process */
                 $query = "delete from grpfnc_purchase where grpno = '$GRPNO' and purchaseidx = $PURCHASEIDX";

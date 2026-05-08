@@ -5,7 +5,7 @@ class MGrpfncLoss
         /* data */      this.grpno = GGC.Common.char(dat.grpno);
         /* data */      this.lossidx = GGC.Common.int(dat.lossidx);
         /* data */      this.lossitem = GGC.Common.varchar(dat.lossitem);
-        /* data */      this.losscost = GGC.Common.int(dat.losscost);
+        /* data */      this.losscost = -1 * GGC.Common.int(dat.losscost);
         /* data */      this.losscomment = GGC.Common.varchar(dat.losscomment);
         /* data */      this.regdt = GGC.Common.datetime(dat.regdt);
         /* data */      this.username = GGC.Common.varchar(dat.username);
@@ -21,13 +21,17 @@ class MGrpfncLoss
     /* data */      getLosscomment() { return this.losscomment; }
     /* data */      getRegdt() { return this.regdt; }
     /* data */      getUsername() { return this.username; }
-
-    /* ========================= */
-    /* make */
-    /* ========================= */
-    /* custom */    getLosscostWonColor() { return GGC.Common.wonColor(this.getLosscost()); }
     /* custom */    getPk() { return `grpno="${this.getGrpno()}" lossidx="${this.getLossidx()}"`; }
 
+    /* ========================= */
+    /* convert */
+    /* ========================= */
+    getLosscostWonColor() { return GGC.Common.wonColor(this.getLosscost()); }
+
+    /* ========================= */
+    /* fields - flg */
+    /* ========================= */
+    isIn1DayWhenRegdt() { return Common.isEmpty(this.getRegdt()) ? false : GGdate.isIn1DayFromNow(this.getRegdt()); }
 }
 
 
@@ -49,10 +53,11 @@ class MGrpfncLosses extends _MCommon
         for(let i in this.models)
         {
             let model = this.models[i];
+            let disable = model.isIn1DayWhenRegdt() ? "" : "disabled";
             html +=
             `
                 <tr>
-                    <td col="delete"            ><button class="MGrpfncLoss-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()}>삭제</td>
+                    <td col="delete"            ><button class="MGrpfncLoss-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()} ${disable}>삭제</td>
                     <td col="lossidx"           >${model.getLossidx()}</td>
                     <td col="regdt"             >${model.getRegdt()}</td>
                     <td col="lossitem"          >${model.getLossitem()}</td>

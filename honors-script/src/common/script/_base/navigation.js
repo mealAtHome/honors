@@ -331,6 +331,7 @@ var Navigation =
                         $('#index-dom')[0].bringPageTop(Navigation.getURL(movePage), {"animation": "lift"}).then(function()
                         {
                             $("#index-dom > ons-page[id!="+movePage+"]").remove();
+                            Navigation.executeShow();
                         });
                     }
                     else

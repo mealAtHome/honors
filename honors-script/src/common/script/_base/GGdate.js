@@ -219,7 +219,9 @@ var GGdate =
     /* ========================= */
     /* e.g. getSecondsBetweenDates( 22-Jul-2011, 29-jul-2011) => 7. */
     /* ========================= */
-    isIn5MinFromNow(dateStr) { return GGdate.getSecondsBetweenDates(GGdate.fromStr(dateStr), new Date()) <= 5 * 60; },
+    isInSecondsFromNow(dateStr, seconds) { return GGdate.getSecondsBetweenDates(GGdate.fromStr(dateStr), new Date()) <= seconds; },
+    isIn5MinFromNow(dateStr) { return GGdate.isInSecondsFromNow(dateStr, 5 * 60); },
+    isIn1DayFromNow(dateStr) { return GGdate.isInSecondsFromNow(dateStr, 24 * 60 * 60); },
     getSecondsBetweenDates(d0, d1)
     {
         let msPerSecond = 1e3;

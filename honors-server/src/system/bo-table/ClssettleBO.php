@@ -352,8 +352,7 @@ class ClssettleBO extends _CommonBO
                 if($settledonedt == null)
                     throw new GGexception("예기치 못한 에러가 발생하였습니다.");
 
-                $isValidTime = GGdate::isInSecondsFromNow($settledonedt, 310);
-                if(!$isValidTime)
+                if(GGdate::isIn5MinFromNow($settledonedt) == false)
                     throw new GGexception("5분이 지나면 취소할 수 없습니다.");
 
                 /* update */

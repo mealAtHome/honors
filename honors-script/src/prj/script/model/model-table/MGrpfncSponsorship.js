@@ -27,14 +27,19 @@ class MGrpfncSponsorship
     /* data */      getSponcomment() { return this.sponcomment; }
     /* data */      getRegdt() { return this.regdt; }
     /* data */      getUsername() { return this.username; }
+    /* custom */    getPk() { return `grpno="${this.getGrpno()}" sponidx="${this.getSponidx()}"`; }
 
     /* ========================= */
-    /* make */
+    /* convert */
     /* ========================= */
-    /* custom */    getSponcostWonColor() { return GGC.Common.wonColor(this.getSponcost()); }
-    /* custom */    getSpontypeFont() { return GGC.GrpfncSponsorship.spontypeFont(this.getSpontype()); }
-    /* custom */    getUsernameForDp() { return Common.isEmpty(this.getSponuserno()) ? this.getSponusername() : this.getUsername(); }
-    /* custom */    getPk() { return `grpno="${this.getGrpno()}" sponidx="${this.getSponidx()}"`; }
+    getSponcostWonColor() { return GGC.Common.wonColor(this.getSponcost()); }
+    getSpontypeFont() { return GGC.GrpfncSponsorship.spontypeFont(this.getSpontype()); }
+    getUsernameForDp() { return Common.isEmpty(this.getSponuserno()) ? this.getSponusername() : this.getUsername(); }
+
+    /* ========================= */
+    /* fields - flg */
+    /* ========================= */
+    isIn1DayWhenRegdt() { return Common.isEmpty(this.getRegdt()) ? false : GGdate.isIn1DayFromNow(this.getRegdt()); }
 
     getSponitemFinal()
     {
@@ -66,10 +71,12 @@ class MGrpfncSponsorships extends _MCommon
         for(let i in this.models)
         {
             let model = this.models[i];
+            let disable = model.isIn1DayWhenRegdt() ? "" : "disabled";
+
             html +=
             `
                 <tr>
-                    <td col="delete"            ><button class="MGrpfncSponsorship-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()}>삭제</td>
+                    <td col="delete"            ><button class="MGrpfncSponsorship-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()} ${disable}>삭제</td>
                     <td col="sponidx"           >${model.getSponidx()}</td>
                     <td col="regdt"             >${model.getRegdt()}</td>
                     <td col="username"          >${model.getUsernameForDp()}</td>

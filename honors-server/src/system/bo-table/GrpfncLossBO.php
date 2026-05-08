@@ -161,8 +161,7 @@ class GrpfncLossBO extends _CommonBO
                 if(Common::isEmpty($LOSSITEM))     { throw new GGexception("손실품목이 공란입니다."); }
                 if(Common::isEmpty($LOSSCOST))     { throw new GGexception("손실금액이 공란입니다."); }
 
-                $LOSSCOST = intval($LOSSCOST) * -1; /* 시스템에서 자동으로 음수처리 */
-                if($LOSSCOST > 0) { throw new GGexception("손실금액은 0 이하이어야 합니다. 시스템에서 자동으로 음수처리합니다."); }
+                if($LOSSCOST < 0) { throw new GGexception("손실금액은 0 이상이어야 합니다. 시스템에서 자동으로 음수처리합니다."); }
 
                 /* process */
                 $query =
@@ -199,14 +198,10 @@ class GrpfncLossBO extends _CommonBO
                 if(Common::isEmpty($LOSSIDX))  { throw new GGexception("시스템 오류입니다."); }
 
                 /* validation logic */
-                $isAdmin = $ggAuth->isAdmin($EXECUTOR, false);
                 $hasAuth = $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
-                if(!$isAdmin)
-                {
-                    $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $LOSSIDX), self::FIELD__REGDT);
-                    if(GGdate::diffHour($regdt) > 72)
-                        throw new GGexception("손실내역은 등록 후 72시간까지만 삭제할 수 있습니다.");
-                }
+                $regdt = Common::getDataOneField($this->selectByPkForInside($GRPNO, $LOSSIDX), self::FIELD__REGDT);
+                if(GGdate::isIn1DayFromNow($regdt) == false)
+                    throw new GGexception("손실내역은 등록 후 하루이내에만 삭제 가능합니다.");
 
                 /* process */
                 $query = "delete from grpfnc_loss where grpno = '$GRPNO' and lossidx = $LOSSIDX";
