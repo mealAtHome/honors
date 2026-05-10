@@ -1,0 +1,139 @@
+#!/bin/bash
+mkdir -p ../../app
+
+appPath="../../app/app.js"
+touch $appPath
+echo "" > $appPath
+
+cssPath="../../app/app.css"
+touch $cssPath
+echo "" > $cssPath
+
+echo -e "\n" >> $appPath; cat ../common/script/_base/api.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/api-pr.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/choseong.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/common_.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/commonEvent.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGC.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGdate.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGdialog.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGhtml.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGpage.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGslideform.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGtoast.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGutils.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/navigation.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGvalid/GGvalid.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGvalid/GGvalid-api.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/_base/GGvalid/GGvalid-common.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/api/api-ref/api-govAddr.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/api/api-ref/api-systemBoard.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/model/model-common/_MCommon.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/model/model-common/MApiResponse.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/model/model-ref/MAddressSido.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/model/model-ref/MAddressSigungu.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/model/model-ref/MBank.js >> $appPath
+echo -e "\n" >> $appPath; cat ../common/script/model/model-ref/MGovAddr.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/Navigation.Prj.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/CommonEvent.Prj.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-all.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-cls.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-clslineupb.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-clssettle.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-clssettlehist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-clspurchasehist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-grp.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-GrpfncSponsorship.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGC/GGC-user.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/_base/GGvalid/GGvalid-user.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-addressSido.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-addressSigungu.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-bank.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-bankaccount.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-cls.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clslineupa.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clslineupb.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clslineuptmpa.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clslineuptmpb.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clslineuptmpc.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clspurchase.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clspurchasehist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clssettle.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clssettlehist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-clssettletmp.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-grp.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/Api.GrpfncLoss.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-GrpfncPurchase.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-GrpfncSponsorship.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-Grpfnca.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-Grpfnclog.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-grpMember.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-grpMemberPointhist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-systemBoard.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/api-user.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/Api.Scheduleall.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/api/api-table/Api.Schedulebyweek.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MBankaccount.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MCls.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClslineupa.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClslineupb.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClslineuptmpa.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClslineuptmpb.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClslineuptmpc.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClspurchase.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClspurchasehist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClssettle.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClssettlehist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MClssettletmp.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrp.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrpfncLoss.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrpfncPurchase.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrpfncSponsorship.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrpfnca.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrpfnclog.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrpMember.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MGrpMemberPointhist.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MSystemBoard.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MUser.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MScheduleall.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MSchedulebyweek.js >> $appPath
+echo -e "\n" >> $appPath; cat ../prj/script/model/model-table/MSchedulebytime.js >> $appPath
+
+
+echo -e "\n" >> $cssPath; cat ../common/css/common/common.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-btn.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-div.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-div-backBtn.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-div-checkbox.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-div-dialog.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-hr.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-img.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-input.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-label-checkbox.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-p.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-radio.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-search.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-select.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-span.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-switch.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-tag.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-tbl.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-textarea.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-ul.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-user.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/entity/entity.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/entity/entity-common.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/entity/entity-MBank.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/entity/entity-MGovAddr.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/entity/entity-MSystemBoard.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/page/page.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MBankaccount.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MCls.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MClssettlehist.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MClspurchasehist.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MGrp.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MGrpfncLoss.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MGrpfncPurchase.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MGrpfncSponsorship.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/entity/entity-MSchedulebyweek.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../prj/css/page/index.css >> $cssPath

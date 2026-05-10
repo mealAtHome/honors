@@ -142,7 +142,6 @@ var GGbase =
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MGovAddr.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MSystemBoard.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/page/page.css?v=${scriptVersion}`);
-        // /* project */ cssArr.push(`${scriptHost}/src/prj/css/prj/prj-span.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MBankaccount.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MCls.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MClssettlehist.css?v=${scriptVersion}`);
@@ -153,6 +152,12 @@ var GGbase =
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MGrpfncSponsorship.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MSchedulebyweek.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/page/index.css?v=${scriptVersion}`);
+
+        if(SCRIPT_MERGE)
+        {
+            scriptArr = [`${scriptHost}/app/app.js?v=${scriptVersion}`];
+            cssArr = [`${scriptHost}/app/app.css?v=${scriptVersion}`];
+        }
 
         /* ==================== */
         /* add css / script */
