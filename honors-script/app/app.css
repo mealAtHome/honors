@@ -2770,6 +2770,18 @@ textarea
 }
 
 
+.commonEvent-tag-phoneCall::before {
+    color: transparent;
+    text-shadow: 0 0 0 gray;
+    content: "📞";
+    margin-right: 2px;
+}
+.commonEvent-tag-phoneCall {
+    /* color: var(--color-blue); */
+    cursor: pointer;
+    /* text-decoration: underline; */
+}
+
 /* ========================= */
 /* MPaymentQueue */
 /* ========================= */
