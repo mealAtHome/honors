@@ -151,7 +151,7 @@ var Api =
         /* -------- */
         /* 필수 파라메터 추가 */
         /* -------- */
-        ajaxData.MODE           = localmode;
+        ajaxData.MODE           = LOCALMODE;
         ajaxData.VERSION        = versionSv;
         ajaxData.LANG           = GGstorage.getLang();
         ajaxData.APIKEY         = GGstorage.getApikey();
@@ -194,7 +194,7 @@ var Api =
     ajaxWithMenuPic(imgUri="", params={}, noticeOK="none", noticeFail="toast")
     {
         /* add params */
-        params.MODE        = localmode;
+        params.MODE        = LOCALMODE;
         params.APIKEY      = GGstorage.getApikey();
         params.LANG        = GGstorage.getLang();
 
@@ -245,7 +245,7 @@ var Api =
         /* add params */
         let params =
         {
-            MODE        : localmode,
+            MODE        : LOCALMODE,
             APIKEY      : GGstorage.getApikey(),
             LANG        : GGstorage.getLang(),
             ENTITY      : entity,
