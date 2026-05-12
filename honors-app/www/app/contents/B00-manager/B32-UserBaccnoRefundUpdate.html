@@ -115,9 +115,8 @@
                     Common.showProgress();
                     setTimeout(function()
                     {
-                        let rslt = Api.User.updateBaccnoRefund(bankaccount, "toast", "toast");
-                        if(rslt)
-                            Navigation.showLastPage();
+                        Api.User.updateBaccnoRefund(bankaccount, "toast", "toast");
+                        Navigation.executeShow();
 
                         Common.hideProgress();
                     }, ajaxDelayTime);

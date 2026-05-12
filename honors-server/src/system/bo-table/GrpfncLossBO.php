@@ -185,7 +185,7 @@ class GrpfncLossBO extends _CommonBO
                     from
                         dual
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncaBO->recalGrpfncLosstotalByPkForInside($GRPNO);
@@ -205,7 +205,7 @@ class GrpfncLossBO extends _CommonBO
 
                 /* process */
                 $query = "delete from grpfnc_loss where grpno = '$GRPNO' and lossidx = $LOSSIDX";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncaBO->recalGrpfncLosstotalByPkForInside($GRPNO);

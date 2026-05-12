@@ -380,7 +380,7 @@ class UserBO extends _CommonBO
             case self::updateBaccnoRefund:
             {
                 $query = "update user set baccno_refund = $BACCNO_REFUND where userno = '$EXECUTOR'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::updateDeviceInfoByInside:
@@ -389,21 +389,21 @@ class UserBO extends _CommonBO
                 if(Common::isEmpty($PUSHTOKEN) == false)
                 {
                     $query = "update user set pushtoken = '$PUSHTOKEN', modidt = now() where userno = '$USERNO'";
-                    $rslt = GGsql::exeQuery($query);
+                    GGsql::exeQuery($query);
                 }
 
                 /* is pushToken null? */
                 if(Common::isEmpty($PLATFORM) == false)
                 {
                     $query = "update user set platform = '$PLATFORM', modidt = now() where userno = '$USERNO'";
-                    $rslt = GGsql::exeQuery($query);
+                    GGsql::exeQuery($query);
                 }
                 break;
             }
             case self::updatePhoneByUsernoForInside:
             {
                 $query = "update user set phone = '$PHONE', modidt = now() where userno = '$USERNO'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::addPointForInside:
@@ -417,13 +417,13 @@ class UserBO extends _CommonBO
                         , modidt = now()
                     where userno = '$USERNO'
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::updateBaccnodefaultForInside:
             {
                 $query = "update user set baccnodefault = $BACCNODEFAULT where userno = '$USERNO'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::deleteUserInfo:
@@ -445,7 +445,7 @@ class UserBO extends _CommonBO
                     return $rslt;
 
                 $query = "update user set deletedata_rqstdt = now() where id = '$ID'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::deleteRecordByPkForInside:
@@ -486,12 +486,11 @@ class UserBO extends _CommonBO
         do
         {
             $randomString = Common::getRandomString(50);
-            $query = "select coalesce(count(*),0) cnt from user where autologin = '{$randomString}'";
+            $query = "select coalesce(count(*),0) cnt from user where autologin = '$randomString'";
             $cnt   = intval(GGsql::selectCnt($query));
             if($cnt == 0)
             {
-                $query = "update user set autologin = '{$randomString}' where userno = {$userno}";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery("update user set autologin = '$randomString' where userno = '$userno'");
                 $key = $randomString;
                 break;
             }
@@ -520,12 +519,11 @@ class UserBO extends _CommonBO
         {
             $randomString = Common::getRandomString(50);
             $query = "select count(*) cnt from user where apikey = '$randomString'";
-            $rslt = GGsql::exeQuery($query);
-            $row = $rslt->fetch_assoc();
+            $queryRslt = GGsql::exeQuery($query);
+            $row = $queryRslt->fetch_assoc();
             if(intval($row['cnt']) == 0)
             {
-                $query = "update user set apikey = '$randomString' where userno = '$userno'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery("update user set apikey = '$randomString' where userno = '$userno'");
                 $key = $randomString;
                 break;
             }
@@ -546,8 +544,8 @@ class UserBO extends _CommonBO
         {
             $randomString = Common::getRandomString(30);
             $query = "select count(*) cnt from user where id = '$randomString'";
-            $rslt = GGsql::exeQuery($query);
-            $row = $rslt->fetch_assoc();
+            $queryRslt = GGsql::exeQuery($query);
+            $row = $queryRslt->fetch_assoc();
             if(intval($row['cnt']) == 0)
             {
                 $key = $randomString;

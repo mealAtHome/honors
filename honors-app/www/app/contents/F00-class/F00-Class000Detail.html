@@ -495,7 +495,7 @@
                 if(model.hasApplyer() == false)
                 {
                     applyerHtml = "-";
-                    if(CLSD.isManager)
+                    if(CLSD.isManager && CLSD.mCls.isClssettleflgEdit())
                         applyerHtml = `<button class="common-btn-outline CLSD-btn-applyStead" ${pk}>대리접수</button>`;
                 }
 

@@ -202,7 +202,7 @@ class SchedulebyweekBO extends _CommonBO
                         ,  now()
                     )
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             default:

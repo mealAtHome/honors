@@ -151,7 +151,7 @@ class GrpmPrivacyBO extends _CommonBO
 
                 /* insert */
                 $query = "insert ignore into grpm_privacy (grpno, userno, priv_phone, modidt) values ('$GRPNO', '$USERNO', null, now())";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::upsertByGrpmArrForInside:
@@ -188,11 +188,16 @@ class GrpmPrivacyBO extends _CommonBO
                               priv_phone = $PRIV_PHONE
                             , modidt = now()
                     ";
-                    $rslt = GGsql::exeQuery($query);
+                    GGsql::exeQuery($query);
                 }
                 break;
             }
-            case self::deleteByUsernoForInside: { $query = "delete from grpm_privacy where userno = '$USERNO'"; $rslt = GGsql::exeQuery($query); break; }
+            case self::deleteByUsernoForInside:
+            {
+                $query = "delete from grpm_privacy where userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
             default:
             {
                 throw new GGexception("(server) no option defined");

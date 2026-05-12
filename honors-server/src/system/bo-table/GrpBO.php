@@ -180,7 +180,7 @@ class GrpBO extends _CommonBO
             case self::updateBaccnodefaultForInside:
             {
                 $query = "update grp set baccnodefault = $BACCNODEFAULT where grpno = '$GRPNO'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             default:

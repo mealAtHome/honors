@@ -86,7 +86,7 @@ class MGrpMember
                     ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
                 <span class="common-tag-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
                 <span class="common-tag-block common-tag-fontsize09">
-                    ${mUser.getPhone()         != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getPhone()}</span>` : ""}
+                    ${mUser.getPhone()         != "" ? `<span class="common-tag-block common-tag-colorGrey commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
                     ${mUser.getAddress()       != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getAddress()}</span>` : ""}
                     ${mUser.getHascarflgCvrt() != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getHascarflgCvrt()}</span>` : ""}
                 </span>
@@ -136,7 +136,7 @@ class MGrpMember
                     ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
                 <span class="common-tag-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
                 <span class="common-tag-block common-tag-fontsize09">
-                    ${mUser.getPhone()         != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getPhone()}</span>` : ""}
+                    ${mUser.getPhone()         != "" ? `<span class="common-tag-block common-tag-colorGrey commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
                     ${mUser.getAddress()       != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getAddress()}</span>` : ""}
                     ${mUser.getHascarflgCvrt() != "" ? `<span class="common-tag-block common-tag-colorGrey">${mUser.getHascarflgCvrt()}</span>` : ""}
                 </span>

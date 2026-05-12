@@ -44,7 +44,7 @@ class MBankaccount
     make(mode="")
     {
         let btnHtml = ``;
-        if(this.getDefaultflg() == GGF.Bankaccount.Defaultflg.Y)
+        if(this.getDefaultflg() == GGF.Y)
             btnHtml += `<span class="common-tag-inlineBlock">${this.getDefaultflgCard()}</span>`;
         switch(mode)
         {
@@ -55,7 +55,7 @@ class MBankaccount
             }
             default:
             {
-                if(this.getDefaultflg() == GGF.Bankaccount.Defaultflg.N || this.getDefaultflg() == "")
+                if(this.getDefaultflg() == GGF.N || this.getDefaultflg() == "")
                     btnHtml += `<button class="common-btn-outline MBankaccount-make-btn-delete" btn-type="cancel" ${this.getPk()}>삭제</button>`;
                 break;
             }
@@ -189,7 +189,7 @@ class MBankaccounts extends _MCommon
                 {
                     let mApiResponse =Api.Bankaccount.deleteByPk(bacctype, bacckey, baccno, "toast", "toast");
                     if(mApiResponse.isSuccess())
-                        Navigation.showLastPage();
+                        Navigation.executeShow();
 
                     Common.hideProgress();
                 }, ajaxDelayTime);

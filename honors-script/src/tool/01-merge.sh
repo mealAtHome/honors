@@ -121,6 +121,7 @@ echo -e "\n" >> $cssPath; cat ../common/css/common/common-tbl.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-textarea.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-ul.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-user.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common-event/common-event.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/entity/entity.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/entity/entity-common.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/entity/entity-MBank.css >> $cssPath

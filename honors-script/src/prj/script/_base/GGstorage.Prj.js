@@ -76,4 +76,18 @@ GGstorage.Prj =
             return false;
         return true;
     },
+    isMngOfAnyGrp()
+    {
+        let obj = GGstorage.getVal("grpmtype");
+        if(obj == undefined || obj == null)
+            return false;
+
+        let arr = [];
+        for(let i in obj)
+        {
+            if(obj[i].GRPMTYPE == GGF.GrpMember.Grpmtype.MNG || obj[i].GRPMTYPE == GGF.GrpMember.Grpmtype.MNGSUB)
+                return true;
+        }
+        return false;
+    },
 }

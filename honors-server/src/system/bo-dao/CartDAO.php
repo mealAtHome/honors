@@ -83,19 +83,19 @@ class CartDAO extends _CommonBO
                     on duplicate key update
                         at_update = now()
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::updateCartSummaryForInside:
             {
                 $query = "update cart set cart_summary = $CART_SUMMARY, at_update = now() where userno = '$USERNO' and storeno = '$STORENO'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::deleteByPkForInside:
             {
                 $query = "delete from cart where userno = '$USERNO' and storeno = '$STORENO'";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
         }

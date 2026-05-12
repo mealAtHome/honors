@@ -19,6 +19,7 @@ class BankaccountBO extends _CommonBO
         GGnavi::getUserBO();
         GGnavi::getGrpBO();
         $arr = array();
+        $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
         return $arr;
@@ -172,121 +173,115 @@ class BankaccountBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
-        try
+        /* ==================== */
+        /* process */
+        /* ==================== */
+        switch($OPTION)
         {
-            /* ==================== */
-            /* process */
-            /* ==================== */
-            switch($OPTION)
+            case self::insertForUser:
+            case self::insertForGrp:
             {
-                case self::insertForUser:
-                case self::insertForGrp:
+                /* var by option */
+                $bacckey = "";
+                $bacctype = "";
+                if      ($OPTION == self::insertForUser) { $bacckey = $EXECUTOR; $bacctype = $bacctypeUser; }
+                else if ($OPTION == self::insertForGrp)  { $bacckey = $BACCKEY;  $bacctype = $bacctypeGrp; }
+
+                /* is default */
+                $defaultflg = "";
+                if(count(Common::getData($this->selectByBacckeyUsableForInside($bacctype, $bacckey))) == 0)
+                    $defaultflg = "y";
+                else
+                    $defaultflg = "n";
+
+                /* get baccno */
+                $baccno = $this->getNewIndex($bacctype, $bacckey);
+
+                /* sql */
+                $query =
+                "
+                    insert into bankaccount
+                    (
+                          bacctype
+                        , bacckey
+                        , baccno
+                        , baccnickname
+                        , bacccode
+                        , baccacct
+                        , baccname
+                        , defaultflg
+                        , modidt
+                        , regidt
+                    )
+                    values
+                    (
+                          '$bacctype'
+                        , '$bacckey'
+                        ,  $baccno
+                        , '$BACCNICKNAME'
+                        , '$BACCCODE'
+                        , '$BACCACCT'
+                        , '$BACCNAME'
+                        , '$defaultflg'
+                        ,  now()
+                        ,  now()
+                    )
+                ";
+                GGsql::exeQuery($query);
+
+                /* after process */
+                switch($OPTION)
                 {
-                    /* var by option */
-                    $bacckey = "";
-                    $bacctype = "";
-                    if      ($OPTION == self::insertForUser) { $bacckey = $EXECUTOR; $bacctype = $bacctypeUser; }
-                    else if ($OPTION == self::insertForGrp)  { $bacckey = $BACCKEY;  $bacctype = $bacctypeGrp; }
-
-                    /* is default */
-                    $defaultflg = "";
-                    if(count(Common::getData($this->selectByBacckeyUsableForInside($bacctype, $bacckey))) == 0)
-                        $defaultflg = "y";
-                    else
-                        $defaultflg = "n";
-
-                    /* get baccno */
-                    $baccno = $this->getNewIndex($bacctype, $bacckey);
-
-                    /* sql */
-                    $query =
-                    "
-                        insert into bankaccount
-                        (
-                              bacctype
-                            , bacckey
-                            , baccno
-                            , baccnickname
-                            , bacccode
-                            , baccacct
-                            , baccname
-                            , defaultflg
-                            , modidt
-                            , regidt
-                        )
-                        values
-                        (
-                              '$bacctype'
-                            , '$bacckey'
-                            ,  $baccno
-                            , '$BACCNICKNAME'
-                            , '$BACCCODE'
-                            , '$BACCACCT'
-                            , '$BACCNAME'
-                            , '$defaultflg'
-                            ,  now()
-                            ,  now()
-                        )
-                    ";
-                    $rslt = GGsql::exeQuery($query);
-
-                    /* after process */
-                    switch($OPTION)
+                    case self::insertForUser:
                     {
-                        case self::insertForUser:
-                        {
-                            $userBaccnodefault = Common::getField($userBO->getByPk($bacckey), UserBO::FIELD__BACCNODEFAULT);
-                            if($userBaccnodefault == "")
-                                $userBO->updateBaccnodefaultForInside($bacckey, $baccno);
-                            break;
-                        }
-                        case self::insertForGrp:
-                        {
-                            $grpBaccnodefault = Common::getField($grpBO->getByPk($bacckey), GrpBO::FIELD__BACCNODEFAULT);
-                            if($grpBaccnodefault == "")
-                                $grpBO->updateBaccnodefaultForInside($bacckey, $baccno);
-                            break;
-                        }
+                        $userBaccnodefault = Common::getField($userBO->getByPk($bacckey), UserBO::FIELD__BACCNODEFAULT);
+                        if($userBaccnodefault == "")
+                            $userBO->updateBaccnodefaultForInside($bacckey, $baccno);
+                        break;
                     }
-
-                    /* set return */
-                    $rslt[GGF::DATA] = $baccno;
-                    break;
+                    case self::insertForGrp:
+                    {
+                        $grpBaccnodefault = Common::getField($grpBO->getByPk($bacckey), GrpBO::FIELD__BACCNODEFAULT);
+                        if($grpBaccnodefault == "")
+                            $grpBO->updateBaccnodefaultForInside($bacckey, $baccno);
+                        break;
+                    }
                 }
-                case self::deleteByPk:
-                {
-                    /* validation : is owner? */
-                    $ggAuth->isBankaccountOwner($EXECUTOR, $BACCTYPE, $BACCKEY, $BACCNO, true);
-
-                    /* if it default, cannot delete */
-                    $defaultflg = Common::getField($this->getByPk($BACCTYPE, $BACCKEY, $BACCNO), self::FIELD__DEFAULTFLG);
-                    if($defaultflg == "y")
-                        throw new GGexception("기본 계좌는 삭제할 수 없습니다.");
-
-                    /* sql */
-                    $query =
-                    "
-                        update
-                            bankaccount
-                        set
-                            usable = 'n'
-                        where
-                            bacctype = '$BACCTYPE' and
-                            bacckey  = '$BACCKEY' and
-                            baccno   =  $BACCNO
-                    ";
-                    $rslt = GGsql::exeQuery($query);
-                    break;
-                }
-                default:
-                {
-                    throw new GGexception("(server) no option defined");
-                }
+                break;
             }
-        }
-        catch(Error $e)
-        {
-            throw $e;
+            case self::deleteByPk:
+            {
+                /* validation : is owner? */
+                switch($BACCTYPE)
+                {
+                    case self::BACCTYPE__USER: $ggAuth->isBankaccountOwner($EXECUTOR, $BACCTYPE, $BACCKEY, $BACCNO, true); break;
+                    case self::BACCTYPE__GRP:  $ggAuth->hasGrpmfinauth($BACCKEY, $EXECUTOR, true); break;
+                }
+
+                /* if it default, cannot delete */
+                $defaultflg = Common::getField($this->getByPk($BACCTYPE, $BACCKEY, $BACCNO), self::FIELD__DEFAULTFLG);
+                if($defaultflg == "y")
+                    throw new GGexception("기본 계좌는 삭제할 수 없습니다.");
+
+                /* sql */
+                $query =
+                "
+                    update
+                        bankaccount
+                    set
+                        usable = 'n'
+                    where
+                        bacctype = '$BACCTYPE' and
+                        bacckey  = '$BACCKEY' and
+                        baccno   =  $BACCNO
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            default:
+            {
+                throw new GGexception("(server) no option defined");
+            }
         }
         return $rslt;
     }

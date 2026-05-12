@@ -16,8 +16,7 @@
     GGsql::autoCommitFalse();
     try
     {
-        $data = $grpfncLossBO->updateByOption($options);
-        $rslt[GGF::DATA] = $data;
+        $rslt = $grpfncLossBO->updateByOption($options);
     }
     catch(GGexception $e)
     {

@@ -33,4 +33,6 @@ CommonEvent.Prj =
         if(validation)
             Navigation.moveFront(viewMode, pageCode, pageData);
     },
+
+
 }

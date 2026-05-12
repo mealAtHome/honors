@@ -26,7 +26,8 @@ var CommonEvent =
         $('body').on('click',  '.commonEvent-tbl-sort > thead > tr > th',      $.proxy(CommonEvent.sort, this));                   /* 테이블 정렬 */
         $('body').on('click',  '.commonEvent-btn-round',                       $.proxy(CommonEvent.roundBtn, this));               /* 유저의 탭으로 plus/minus 처리를 해줌. */
         $('body').on('click',  '.commonEvent-btn-plusMinus',                   $.proxy(CommonEvent.btnPlusMinus, this));           /* 유저의 탭으로 plus/minus 처리를 해줌. */
-        $('body').on('click',  '.commonEvent-tag-userStorelove',               $.proxy(CommonEvent.userStorelove, this));           /* 유저의 탭으로 plus/minus 처리를 해줌. */
+        $('body').on('click',  '.commonEvent-tag-userStorelove',               $.proxy(CommonEvent.userStorelove, this));          /* 유저의 탭으로 plus/minus 처리를 해줌. */
+        $('body').on('click',  '.commonEvent-tag-phoneCall',                   $.proxy(CommonEvent.phoneCall, this));              /* 전화 걸기 */
 
         /* viberator, sound */
         // $('body').on('click', 'button', $.proxy(touch.btn, this));
@@ -976,4 +977,33 @@ var CommonEvent =
             Common.toastInfo(errMsg);
         }
     },
+
+    phoneCall(e)
+    {
+        /* class name */
+        let className = "commonEvent-tag-phoneCall";
+
+        /* 클래스 선택 */
+        let target = $(e.target);
+        if(!target.hasClass(className))
+            target = target.parents("."+className);
+
+        /* check device */
+        if(!GGstorage.isMobile())
+        {
+            Common.toastInfo("전화연결은 모바일에서만 사용할 수 있습니다.");
+            return;
+        }
+
+        /*  */
+        let phoneNum = target.attr("phone-call").replace(/[^0-9+]/g, '');
+        if(phoneNum != undefined)
+        {
+            let telUrl = "tel:"+phoneNum;
+            Common.confirm2("전화로 연결하시겠습니까?", function()
+            {
+                window.open(telUrl, '_system');
+            });
+        }
+    }
 }

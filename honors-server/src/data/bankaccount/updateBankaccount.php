@@ -18,8 +18,7 @@
     GGsql::autoCommitFalse();
     try
     {
-        $baccno = $bankaccountBO->updateByOption($options);
-        $rslt[GGF::DATA] = $baccno;
+        $rslt = $bankaccountBO->updateByOption($options);
     }
     catch(GGexception $e)
     {

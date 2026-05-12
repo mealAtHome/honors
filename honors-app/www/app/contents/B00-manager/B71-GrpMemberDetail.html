@@ -36,7 +36,7 @@
                 <tr><th>직위</th><td><span id="GMDT-span-position"></span></td></tr>
                 <tr><th>이름</th><td><span id="GMDT-span-name"></span></td></tr>
                 <tr><th>출생년도</th><td><span id="GMDT-span-birthyear"></span></td></tr>
-                <tr><th>전화번호</th><td><span id="GMDT-span-phone"></span></td></tr>
+                <tr><th>전화번호</th><td><span id="GMDT-span-phone" class="commonEvent-tag-phoneCall" phone-call=""></span></td></tr>
                 <tr><th>자차여부</th><td><span id="GMDT-span-hascarflg"></span></td></tr>
                 <tr><th>잔여금</th><td><span id="GMDT-span-point"></span></td></tr>
             </tbody>
@@ -170,8 +170,10 @@
                                 $("#GMDT-span-name").text(mGrpMemberUser.getName());
                                 $("#GMDT-span-birthyear").text(mGrpMemberUser.getBirthyear());
                                 $("#GMDT-span-phone").text(mGrpMemberUser.getPhone());
+                                $("#GMDT-span-phone").attr("phone-call", mGrpMemberUser.getPhone());
                                 $("#GMDT-span-hascarflg").text(mGrpMemberUser.getHascarflgCvrt());
                                 $("#GMDT-span-point").text(mGrpMember.getPointWon());
+
                                 break;
                             }
                             case "point":

@@ -132,17 +132,19 @@ class GrpMemberBO extends _CommonBO
             , u.name
             , u.birthyear
             ,
-            case
-                when grpmprv.priv_phone is null then
-                    case
-                        when userprv.priv_phone = 'all' then u.phone
-                        when userprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
-                        when userprv.priv_phone = 'mng' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone end
-                    end
-                when grpmprv.priv_phone = 'all' then u.phone
-                when grpmprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
-                when grpmprv.priv_phone = 'mng' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone end
-            end as phone
+            ifnull(
+                case
+                    when grpmprv.priv_phone is null then
+                        case
+                            when userprv.priv_phone = 'all' then u.phone
+                            when userprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
+                            when userprv.priv_phone = 'mng' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone end
+                        end
+                    when grpmprv.priv_phone = 'all' then u.phone
+                    when grpmprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
+                    when grpmprv.priv_phone = 'mng' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone end
+                end
+            , '비공개') as phone
             , u.hascarflg
             , u.address
             , u.adminflg

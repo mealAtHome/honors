@@ -231,6 +231,11 @@ var GGstorage =
     removeDeviceKindSmall()     { return GGstorage.removeItem("deviceKindSmall"); },
 
     /* ========================= */
+    /* is */
+    /* ========================= */
+    isMobile() { return GGstorage.getDeviceKind() === GGF.System.DeviceKind.MOBILE; },
+
+    /* ========================= */
     /* 휴일 리스트 */
     /* ========================= */
     setHolidayUpdated(val=null) { return GGstorage.setVal("holidayUpdated", val); },

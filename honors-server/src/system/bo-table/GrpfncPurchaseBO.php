@@ -182,7 +182,7 @@ class GrpfncPurchaseBO extends _CommonBO
                     from
                         dual
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncaBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);
@@ -202,7 +202,7 @@ class GrpfncPurchaseBO extends _CommonBO
 
                 /* process */
                 $query = "delete from grpfnc_purchase where grpno = '$GRPNO' and purchaseidx = $PURCHASEIDX";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncaBO->recalGrpfncPurchasetotalByPkForInside($GRPNO);

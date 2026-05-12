@@ -16,8 +16,7 @@
     GGsql::autoCommitFalse();
     try
     {
-        $clsno = $clspurchaseBO->updateByOption($options);
-        $rslt[GGF::DATA] = $clsno;
+        $rslt = $clspurchaseBO->updateByOption($options);
     }
     catch(GGexception $e)
     {

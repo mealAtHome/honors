@@ -151,7 +151,7 @@ class UserPrivacyBO extends _CommonBO
 
                 /* process */
                 $query = "insert into user_privacy (userno, modidt) values ('$USERNO', now())";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             case self::upsertByPkForInside:
@@ -179,7 +179,7 @@ class UserPrivacyBO extends _CommonBO
                           priv_phone = '$PRIV_PHONE'
                         , modidt = now()
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
             default:

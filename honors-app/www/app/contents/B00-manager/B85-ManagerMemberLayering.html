@@ -73,8 +73,7 @@
 
             show()
             {
-                if(Common.isEmpty(MMLY.Data.grpno))   { Common.toast("잘못된 접근입니다."); MMLY.close(); return; }
-                if(Common.isEmpty(MMLY.Data.pagenum)) { Common.toast("잘못된 접근입니다."); MMLY.close(); return; }
+                if(Common.isEmpty(MMLY.Data.grpno)) { Common.toast("잘못된 접근입니다."); MMLY.close(); return; }
 
                 Common.showProgress();
                 setTimeout(function()
@@ -114,8 +113,8 @@
                                 </td>
                                 <td col=""><input type="text" class="common-input-text MMLY-input-grpmposition" value="${model.getGrpmposition()}" ${model.getPk()} ${disabled}/></td>
                                 <td>
-                                    <label class="common-label-switch MMLY-input-grpmfinauth" ${model.getPk()} ${disabled}>
-                                        <input type="checkbox">
+                                    <label class="common-label-switch MMLY-input-grpmfinauth" ${model.getPk()}>
+                                        <input type="checkbox" ${model.getGrpmfinauth() == GGF.Y ? "checked" : ""} ${disabled}>
                                         <span></span>
                                     </label>
                                 </td>
@@ -150,8 +149,25 @@
                     let grpno = $(this).attr("grpno");
                     let userno = $(this).attr("userno");
                     let grpmtype = $(this).find("select.MMLY-select-grpmtype").val();
-                    let grpmposition = $(this).find("input.MMLY-input-grpmposition").val();
-                    let grpmfinauth = $(this).find("input.MMLY-input-grpmfinauth > input").is(":checked") == true ? "y" : "n";
+                    let grpmposition = $(this).find(".MMLY-input-grpmposition").val();
+                    let grpmfinauth = $(this).find(".MMLY-input-grpmfinauth > input").is(":checked") == true ? "y" : "n";
+
+                    for(let i in MMLY.originArr)
+                    {
+                        let originDat = MMLY.originArr[i];
+                        if(originDat.USERNO == userno)
+                        {
+                            if(
+                                originDat.GRPMTYPE == grpmtype &&
+                                originDat.GRPMPOSITION == grpmposition &&
+                                originDat.GRPMFINAUTH == grpmfinauth
+                            )
+                            {
+                                return;
+                            }
+                        }
+                    }
+
                     let dat =
                     {
                         USERNO        : userno,
@@ -161,27 +177,7 @@
                     };
                     data.push(dat);
                 });
-
-                for(let i in MMLY.originArr)
-                {
-                    let originDat = MMLY.originArr[i];
-                    for(let j in data)
-                    {
-                        let newDat = data[j];
-                        if(originDat.USERNO == newDat.USERNO)
-                        {
-                            if(
-                                originDat.GRPMTYPE == newDat.GRPMTYPE &&
-                                originDat.GRPMPOSITION == newDat.GRPMPOSITION &&
-                                originDat.GRPMFINAUTH == newDat.GRPMFINAUTH
-                            )
-                            {
-                                data.splice(j, 1);
-                                break;
-                            }
-                        }
-                    }
-                }
+                console.log(data);
                 return data;
             },
 

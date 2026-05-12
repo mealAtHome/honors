@@ -80,16 +80,13 @@
             /*
                 페이지 데이터
 
-                GGF.Page.Option.insert
-                GGF.Page.Option.update
-
             /* ========================= */
             Data : {},
 
             show()
             {
                 if(MBKU.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); MBKU.close(); return; }
-                if(MBKU.Data.option == undefined) { MBKU.Data.option = GGF.Page.Option.insert; }
+                if(MBKU.Data.option == undefined) { MBKU.Data.option = "insert"; }
                 if(MBKU.Data.baccno == undefined) { MBKU.Data.baccno = ""; }
 
 
@@ -107,11 +104,11 @@
                     /* --------------- */
                     switch(MBKU.Data.option)
                     {
-                        case GGF.Page.Option.insert:
+                        case "insert":
                         {
                             break;
                         }
-                        case GGF.Page.Option.update:
+                        case "update":
                         {
                             /* 계좌정보조회 */
                             let mBankaccounts = Api.Bankaccount.selectByPk(MBKU.Data.baccno, "none", "toast");
@@ -159,7 +156,7 @@
                     $("#MBKU-div-banks > .MBank-makeBankForChoose-tbl-forChoose > tbody > tr > td").each(function()
                     {
                         let bankcode = $(this).attr("bankcode");
-                        let tab      = $(this).attr("tab");
+                        let tab = $(this).attr("tab");
                         if(tab == "tab")
                             bacccode = bankcode;
                     });
@@ -169,19 +166,18 @@
                     let baccacct      = $("#MBKU-inputText-baccacct").val();
                     let baccname      = $("#MBKU-inputText-baccname").val();
 
+                    /* validation */
+                    if(Common.isEmpty(bacccode)) { Common.toast("은행을 선택해주세요."); return; }
+                    if(Common.isEmpty(baccnickname)) { Common.toast("계좌이름을 입력해주세요."); return; }
+                    if(Common.isEmpty(baccacct)) { Common.toast("계좌번호를 입력해주세요."); return; }
+                    if(Common.isEmpty(baccname)) { Common.toast("예금주명을 입력해주세요."); return; }
+
                     /* execute api */
                     Common.showProgress();
                     setTimeout(function()
                     {
                         let grpno = MBKU.Data.grpno;
-                        let mApiResponse = Api.Bankaccount.insertForGrp(
-                              grpno
-                            , baccnickname
-                            , bacccode
-                            , baccacct
-                            , baccname
-                            , "toast"
-                            , "toast");
+                        let mApiResponse = Api.Bankaccount.insertForGrp(grpno, baccnickname, bacccode, baccacct, baccname, GGF.toast, GGF.toast);
                         if(mApiResponse.isSuccess())
                             Navigation.moveBack();
 

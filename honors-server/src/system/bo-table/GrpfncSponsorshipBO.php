@@ -205,7 +205,7 @@ class GrpfncSponsorshipBO extends _CommonBO
                     from
                         dual
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncaBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);
@@ -226,7 +226,7 @@ class GrpfncSponsorshipBO extends _CommonBO
 
                 /* process */
                 $query = "delete from grpfnc_sponsorship where grpno = '$GRPNO' and sponidx = $SPONIDX";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
 
                 /* recal */
                 $grpfncaBO->recalGrpfncSponsorshiptotalByPkForInside($GRPNO);

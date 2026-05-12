@@ -270,7 +270,7 @@ class AddrBO extends _CommonBO
                         ,'$ADDR_DETAIL'
                     )
                 ";
-                $rslt = GGsql::exeQuery($query);
+                GGsql::exeQuery($query);
                 break;
             }
         }

@@ -92,7 +92,7 @@ class MUsers extends _MCommon
                     <span class="common-tag-block common-tag-strong">유저</span>
                     <span class="common-tag-block">${model.getName()} ${model.getBirthyear() != "" ? `(${model.getBirthyearShort()})` : ""}</span>
                     <span class="common-tag-block common-tag-fontsize09">
-                        ${model.getPhone()         != "" ? `<span class="common-tag-block common-tag-colorGrey">${model.getPhone()}</span>` : ""}
+                        ${model.getPhone()         != "" ? `<span class="common-tag-block common-tag-colorGrey commonEvent-tag-phoneCall" phone-call="${model.getPhone()}">${model.getPhone()}</span>` : ""}
                         ${model.getHascarflgCvrt() != "" ? `<span class="common-tag-block common-tag-colorGrey">${model.getHascarflgCvrt()}</span>` : ""}
                     </span>
                 </div>

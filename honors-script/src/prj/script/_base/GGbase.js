@@ -136,6 +136,7 @@ var GGbase =
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-textarea.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-ul.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-user.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common-event/common-event.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-common.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-MBank.css?v=${scriptVersion}`);

@@ -1,27 +1,23 @@
 GGC.Bankaccount =
 {
+    /* ----- */
+    /* defaultflg */
+    /* ----- */
     defaultflgCvrt(val)
     {
-        let rslt = "";
-        switch(val)
-        {
-            case GGF.Bankaccount.Defaultflg.Y : rslt = "기본계좌"; break;
-            case GGF.Bankaccount.Defaultflg.N : rslt = "일반계좌"; break;
-        }
-        return rslt;
+        if(val == GGF.Y) return "기본계좌";
+        if(val == GGF.N) return "일반계좌";
+        return "";
     },
-
-    defaultflgCard(val)
+    defaultflgFeel(val)
     {
-        let rslt = "";
-        let converted = GGC.Bankaccount.defaultflgCvrt(val);
-        switch(val)
-        {
-            case GGF.Bankaccount.Defaultflg.Y : rslt = `<span class="common-span-card" bankaccount-defaultflg="${val}">${converted}</span>`; break;
-            case GGF.Bankaccount.Defaultflg.N : rslt = `<span class="common-span-card" bankaccount-defaultflg="${val}">${converted}</span>`; break;
-        }
-        return rslt;
+        if(val == GGF.Y) return "hold";
+        if(val == GGF.N) return "prog";
+        return "";
     },
+    defaultflgCard(val) { return `<span class="common-tag-card" card-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
+    defaultflgFont(val) { return `<span class="common-tag-font" font-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
+
 };
 
 GGC.GrpMember =
