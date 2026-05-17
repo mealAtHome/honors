@@ -7,5 +7,5 @@
 .commonEvent-tag-phoneCall {
     /* color: var(--color-blue); */
     cursor: pointer;
-    /* text-decoration: underline; */
+    text-decoration: underline;
 }

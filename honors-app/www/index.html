@@ -49,16 +49,16 @@
 
         <script>
             const ajaxDelayTime = 300; /* ajax 지연시간 */
-            const VERSION = "10010";
-            const SCRIPT_MERGE = false;
+            const VERSION = "10011";
+            const SCRIPT_MERGE = true; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
             const LOCALMODE = true;
             var scriptloaded = false;
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
             var ServerInfo =
             {
-                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'http://api.yogimoim.com/honors-server'; },
-                getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'http://res.yogimoim.com'; }, /* http://localhost:8081 */
-                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'http://script.yogimoim.com'; },
+                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'http://mapi.yogimoim.com/honors-server'; },
+                getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'http://mres.yogimoim.com'; }, /* http://localhost:8081 */
+                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'http://mscr.yogimoim.com'; },
             };
             var initApp = function()
             {

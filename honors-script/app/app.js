@@ -152,7 +152,7 @@ var Api =
         /* 필수 파라메터 추가 */
         /* -------- */
         ajaxData.MODE           = LOCALMODE;
-        ajaxData.VERSION        = versionSv;
+        ajaxData.VERSION        = VERSION;
         ajaxData.LANG           = GGstorage.getLang();
         ajaxData.APIKEY         = GGstorage.getApikey();
         ajaxData.SERVICE_LAYER  = GGstorage.getAppmode();
