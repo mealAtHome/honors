@@ -56,9 +56,9 @@
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
             var ServerInfo =
             {
-                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'http://mapi.yogimoim.com/honors-server'; },
-                getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'http://mres.yogimoim.com'; }, /* http://localhost:8081 */
-                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'http://mscr.yogimoim.com'; },
+                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'http://m-api.yogimoim.com'; },
+                getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'http://m-res.yogimoim.com'; }, /* http://localhost:8081 */
+                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'http://m-src.yogimoim.com'; },
             };
             var initApp = function()
             {

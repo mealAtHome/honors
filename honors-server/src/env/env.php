@@ -44,13 +44,14 @@ if($mode == "true")
 }
 else
 {
+    /* server */
     define("DB_IP"     , "localhost");
     define("DB_USER"   , "sadmin");
     define("DB_PW"     , "svwy@pf!");
     define("DB_NAME"   , "honors".VERSIONDB);
     define("DB_PORT"   , 3306);
-    define("ROOT_RES"  , "$documentRoot/honors-res");
-    define("ROOT"      , "$documentRoot/honors-server-".VERSIONSV);
+    define("ROOT_RES"  , "/opt/honors-res");
+    define("ROOT"      , "$documentRoot");
     define("LOG_ROOT"  , "/var/log/joon");
 }
 
