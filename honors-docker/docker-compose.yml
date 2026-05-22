@@ -1,6 +1,27 @@
 version: '3.8'
 services:
 
+    # for develop
+    app:
+        #platform: "linux/arm64/v8"
+        build: "./app"
+        container_name: "honors-app"
+        volumes:
+            - ./app/conf/apache2:/usr/local/apache2/conf
+            - ../honors-app:/var/www/html/honors-app
+        ports:
+            - 8085:80
+
+    build:
+        #platform: "linux/arm64/v8"
+        build: "./build"
+        container_name: "honors-build"
+        volumes:
+            - ./build/conf/apache2:/usr/local/apache2/conf
+            - ../honors-build:/var/www/html/honors-build
+        ports:
+            - 8082:80
+
     db:
         #platform: "linux/arm64/v8"
         build: "./db"
@@ -56,13 +77,3 @@ services:
         ports:
             - 8083:80
 
-    # for develop
-    app:
-        #platform: "linux/arm64/v8"
-        build: "./app"
-        container_name: "honors-app"
-        volumes:
-            - ./app/conf/apache2:/usr/local/apache2/conf
-            - ../honors-app:/var/www/html/honors-app
-        ports:
-            - 8082:80

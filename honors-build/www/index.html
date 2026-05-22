@@ -50,12 +50,13 @@
         <script>
             const ajaxDelayTime = 300; /* ajax 지연시간 */
             const VERSION = "10011";
-            const SCRIPT_MERGE = true; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
-            const LOCALMODE = false;
+            const SCRIPT_MERGE = false; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
+            const LOCALMODE = true;
             var scriptloaded = false;
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
             var ServerInfo =
             {
+                getAppHost()      { return LOCALMODE ? 'http://localhost:8085'               : 'http://m-app.yogimoim.com'; },
                 getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'http://m-api.yogimoim.com'; },
                 getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'http://m-res.yogimoim.com'; }, /* http://localhost:8081 */
                 getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'http://m-src.yogimoim.com'; },
