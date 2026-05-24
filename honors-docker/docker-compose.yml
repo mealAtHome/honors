@@ -72,8 +72,8 @@ services:
         build: "./main"
         container_name: "honors-main"
         volumes:
-            - ./main/conf/apache2:/usr/local/apache2/conf
+            - ./main/conf/apache2:/etc/apache2
             - ../honors-main:/var/www/html/honors-main
+            - ../honors-res:/var/www/html/honors-res
         ports:
             - 8083:80
-
