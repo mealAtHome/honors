@@ -105,8 +105,8 @@ var Api =
     setMsgForRslt(rslt, noticeOK, noticeFail)
     {
         /* set MSG */
-        if(rslt.CODE == Api.succeed && (rslt.MSG == "" || rslt.MSG == undefined)) rslt.MSG = $.i18n("(common)succeed");
-        if(rslt.CODE != Api.succeed && (rslt.MSG == "" || rslt.MSG == undefined)) rslt.MSG = $.i18n("(common)failed");
+        if(rslt.CODE == Api.succeed && (rslt.MSG == "" || rslt.MSG == undefined)) rslt.MSG = $.i18n("성공하였습니다.");
+        if(rslt.CODE != Api.succeed && (rslt.MSG == "" || rslt.MSG == undefined)) rslt.MSG = $.i18n("실패하였습니다.");
 
         /* alert */
         if(rslt.CODE == Api.succeed) Common.noticeOK   (noticeOK  , rslt.MSG);

@@ -11,7 +11,7 @@
         <!-- ========================= -->
         <!-- fav -->
         <!-- ========================= -->
-        <link rel="icon" href="res/fav.ico" type="image/x-icon">
+        <link rel="icon" href="/_system/res/fav.ico" type="image/x-icon">
 
         <!-- ========================= -->
         <!-- libraries -->
@@ -23,9 +23,23 @@
         <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.parser.js"></script>
         <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.emitter.js"></script>
         <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.language.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/jquery-toast-plugin-master/src/jquery.toast.js"></script>
+        <link rel="stylesheet" href="https://m-src.yogimoim.com/lib/jquery-toast-plugin-master/src/jquery.toast.css" />
 
-        <script src="./lib/jquery-toast-plugin-master/src/jquery.toast.js"></script>
-        <link rel="stylesheet" href="./lib/jquery-toast-plugin-master/src/jquery.toast.css" />
+        <script>
+            const ajaxDelayTime = 300; /* ajax 지연시간 */
+            const VERSION = "10011";
+            const SCRIPT_MERGE = true; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
+            const LOCALMODE = false;
+            var scriptloaded = false;
+            var ServerInfo =
+            {
+                getAppHost()      { return LOCALMODE ? 'http://localhost:8085'               : 'http://m-app.yogimoim.com'; },
+                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'http://m-api.yogimoim.com'; },
+                getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'http://m-res.yogimoim.com'; }, /* http://localhost:8081 */
+                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'http://m-src.yogimoim.com'; },
+            };
+        </script>
 
         <style>
             /* =============== */
@@ -78,6 +92,8 @@
         </style>
         <style>
             #index-tbl-userinfo > tbody > tr > td { padding: 0.4em; }
+            #index-input-id { text-align: left; }
+            #index-input-pw { text-align: left; }
         </style>
     </head>
     <body>
@@ -148,12 +164,16 @@
             /* ========================= */
             /* load script first */
             /* ========================= */
+            let scriptHost = ServerInfo.getScriptHost();
             let head = document.getElementsByTagName('head')[0];
+            let now = Date.now();
             let scriptArr = [];
-            scriptArr.push(`./js/script/base-GGF/GGF.js?${scriptver}`);
-            scriptArr.push(`./js/script/base/serverinfo.js?${scriptver}`);
-            scriptArr.push(`./js/script/base/gg-storage.js?${scriptver}`);
-            scriptArr.push(`./js/script/base/gg-base.js?${scriptver}`);
+            scriptArr.push(`${scriptHost}/src/prj/script/_base/version.js?v=${now}`);
+            scriptArr.push(`${scriptHost}/src/common/script/_base/GGF.js`);
+            scriptArr.push(`${scriptHost}/src/prj/script/_base/GGF/GGF-all.js`);
+            scriptArr.push(`${scriptHost}/src/prj/script/_base/GGbase.js`);
+            scriptArr.push(`${scriptHost}/src/common/script/_base/GGstorage.js`);
+            scriptArr.push(`${scriptHost}/src/prj/script/_base/GGstorage.Prj.js`);
 
             /* recursive for load js */
             let scriptLoad = function(scriptArr, index)
