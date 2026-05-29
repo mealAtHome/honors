@@ -34,10 +34,10 @@
             var scriptloaded = false;
             var ServerInfo =
             {
-                getAppHost()      { return LOCALMODE ? 'http://localhost:8085'               : 'http://m-app.yogimoim.com'; },
-                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'http://m-api.yogimoim.com'; },
-                getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'http://m-res.yogimoim.com'; }, /* http://localhost:8081 */
-                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'http://m-src.yogimoim.com'; },
+                getAppHost()      { return LOCALMODE ? 'http://localhost:8085'               : 'https://m-app.yogimoim.com'; },
+                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'https://m-api.yogimoim.com'; },
+                getResourceHost() { return LOCALMODE ? 'http://res.yogimoim.com'             : 'https://m-res.yogimoim.com'; }, /* http://localhost:8081 */
+                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'https://m-src.yogimoim.com'; },
             };
         </script>
 
