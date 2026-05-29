@@ -16,13 +16,13 @@
         <!-- ========================= -->
         <!-- libraries -->
         <!-- ========================= -->
-        <script src="https://m-src.yogimoim/lib/jquery-3.3.1.min.js"></script>
-        <script src="https://m-src.yogimoim/lib/i18n/src/jquery.i18n.js"></script>
-        <script src="https://m-src.yogimoim/lib/i18n/src/jquery.i18n.messagestore.js"></script>
-        <script src="https://m-src.yogimoim/lib/i18n/src/jquery.i18n.fallbacks.js"></script>
-        <script src="https://m-src.yogimoim/lib/i18n/src/jquery.i18n.parser.js"></script>
-        <script src="https://m-src.yogimoim/lib/i18n/src/jquery.i18n.emitter.js"></script>
-        <script src="https://m-src.yogimoim/lib/i18n/src/jquery.i18n.language.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/jquery-3.3.1.min.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.messagestore.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.fallbacks.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.parser.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.emitter.js"></script>
+        <script src="https://m-src.yogimoim.com/lib/i18n/src/jquery.i18n.language.js"></script>
 
         <script src="./lib/jquery-toast-plugin-master/src/jquery.toast.js"></script>
         <link rel="stylesheet" href="./lib/jquery-toast-plugin-master/src/jquery.toast.css" />
