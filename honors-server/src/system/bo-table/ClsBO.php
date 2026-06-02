@@ -41,30 +41,30 @@ class ClsBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30)              / NO  */
-    const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14)              / NO  */
-    const FIELD__CLSSTATUS                  = "clsstatus";                  /* (  ) char(30)              / NO  */
-    const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) char(4)               / YES */
-    const FIELD__CLSTITLE                   = "clstitle";                   /* (  ) char(50)              / NO  */
-    const FIELD__CLSCONTENT                 = "clscontent";                 /* (  ) varchar(255)          / YES  */
-    const FIELD__CLSSTARTDT                 = "clsstartdt";                 /* (  ) datetime              / NO  */
-    const FIELD__CLSCLOSEDT                 = "clsclosedt";                 /* (  ) datetime              / NO  */
-    const FIELD__CLSGROUND                  = "clsground";                  /* (  ) char(50)              / NO  */
-    const FIELD__CLSGROUNDADDR              = "clsgroundaddr";              /* (  ) char(50)              / YES */
-    const FIELD__CLSBILLAPPLYPRICE          = "clsbillapplyprice";          /* (  ) int                   / NO  */
-    const FIELD__CLSBILLAPPLYUNIT           = "clsbillapplyunit";           /* (  ) int                   / NO  */
-    const FIELD__CLSAPPLYSTARTDT            = "clsapplystartdt";            /* (  ) datetime              / NO  */
-    const FIELD__CLSAPPLYCLOSEDT            = "clsapplyclosedt";            /* (  ) datetime              / NO  */
-    const FIELD__CLSUSERNOREG               = "clsusernoreg";               /* (  ) char(30)              / YES */
-    const FIELD__CLSUSERNOADM               = "clsusernoadm";               /* (  ) char(30)              / YES */
-    const FIELD__CLSUSERNOSUB               = "clsusernosub";               /* (  ) char(30)              / YES */
-    const FIELD__CLSBILLSALES               = "clsbillsales";               /* (  ) int(11)               / YES */
-    const FIELD__CLSBILLPURCHASE            = "clsbillpurchase";            /* (  ) int(11)               / YES */
-    const FIELD__CLSBILLFINAL               = "clsbillfinal";               /* (  ) int(11)               / YES */
-    const FIELD__GRPFINANCEREFLECTFLG       = "grpfinancereflectflg";       /* (  ) enum('y','n','skip')  / YES */
-    const FIELD__PURCHASEIDX_MAXUSED        = "purchaseidx_maxused";        /* (  ) int(11)               / YES */
-    const FIELD__CLSMODIDT                  = "clsmodidt";                  /* (  ) datetime              / YES */
-    const FIELD__CLSREGDT                   = "clsregdt";                   /* (  ) datetime              / YES */
+    const FIELD__GRPNO                      = "grpno";                      /* (PK) char(30)                / NO  */
+    const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14)                / NO  */
+    const FIELD__CLSSTATUS                  = "clsstatus";                  /* (  ) char(30)                / NO  */
+    const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) char(4)                 / YES */
+    const FIELD__CLSTITLE                   = "clstitle";                   /* (  ) char(50)                / NO  */
+    const FIELD__CLSCONTENT                 = "clscontent";                 /* (  ) varchar(255)            / YES  */
+    const FIELD__CLSSTARTDT                 = "clsstartdt";                 /* (  ) datetime                / NO  */
+    const FIELD__CLSCLOSEDT                 = "clsclosedt";                 /* (  ) datetime                / NO  */
+    const FIELD__CLSGROUND                  = "clsground";                  /* (  ) char(50)                / NO  */
+    const FIELD__CLSGROUNDADDR              = "clsgroundaddr";              /* (  ) char(50)                / YES */
+    const FIELD__CLSBILLAPPLYPRICE          = "clsbillapplyprice";          /* (  ) int                     / NO  */
+    const FIELD__CLSBILLAPPLYUNIT           = "clsbillapplyunit";           /* (  ) int                     / NO  */
+    const FIELD__CLSAPPLYSTARTDT            = "clsapplystartdt";            /* (  ) datetime                / NO  */
+    const FIELD__CLSAPPLYCLOSEDT            = "clsapplyclosedt";            /* (  ) datetime                / NO  */
+    const FIELD__CLSUSERNOREG               = "clsusernoreg";               /* (  ) char(30)                / YES */
+    const FIELD__CLSUSERNOADM               = "clsusernoadm";               /* (  ) char(30)                / YES */
+    const FIELD__CLSUSERNOSUB               = "clsusernosub";               /* (  ) char(30)                / YES */
+    const FIELD__CLSBILLSALES               = "clsbillsales";               /* (  ) int(11)                 / YES */
+    const FIELD__CLSBILLPURCHASE            = "clsbillpurchase";            /* (  ) int(11)                 / YES */
+    const FIELD__CLSBILLFINAL               = "clsbillfinal";               /* (  ) int(11)                 / YES */
+    const FIELD__GRPFINANCEREFLECTFLG       = "grpfinancereflectflg";       /* (  ) enum('y','n','unable')  / YES */
+    const FIELD__PURCHASEIDX_MAXUSED        = "purchaseidx_maxused";        /* (  ) int(11)                 / YES */
+    const FIELD__CLSMODIDT                  = "clsmodidt";                  /* (  ) datetime                / YES */
+    const FIELD__CLSREGDT                   = "clsregdt";                   /* (  ) datetime                / YES */
 
     /* ========================= */
     /* enum */

@@ -139,6 +139,7 @@ class GrpMemberBO extends _CommonBO
                             when userprv.priv_phone = 'all' then u.phone
                             when userprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
                             when userprv.priv_phone = 'mng' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone end
+                            when userprv.priv_phone is null then u.phone
                         end
                     when grpmprv.priv_phone = 'all' then u.phone
                     when grpmprv.priv_phone = 'grp' then case when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub', '$grpmtypeMember') then u.phone end
