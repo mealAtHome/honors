@@ -1,0 +1,145 @@
+@import "../../_import/scss/__import";
+
+/* ============================== */
+/* main button */
+/* ============================== */
+.common-btn-outline,
+.common-btn-inline,
+.common-btn-round,
+.common-btn-radio
+{
+    display:inline-block;
+    padding:0.4em 0.5em;
+    white-space: nowrap;
+    line-height:1.4;
+    text-decoration: none;
+    /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12); */
+    background-color: white;
+    border-radius: $borderRadius;
+}
+.common-btn-outline:hover,
+.common-btn-inline:hover,
+.common-btn-round:hover,
+.common-btn-radio:hover
+{
+    outline:none;
+    cursor: pointer;
+}
+.common-btn-round { border-radius: 100%; }
+
+/* mixin */
+@mixin btnOutlineNormal   ($color) { border: 1px solid $color; color            : $color;                   } @mixin btnOutlineActive ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
+@mixin btnInlineNormal    ($color) { border: 1px solid $color; background-color : $color;  color : #ffffff; } @mixin btnInlineActive  ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
+@mixin btnOutlineDisabled ($color) { border: 1px solid $color; background-color : #ffffff; color : $color;  }
+@mixin btnInlineDisabled  ($color) { border: 1px solid $color; background-color : #646464; color : #ffffff; }
+
+
+/* round */
+.common-btn-round                               { @include btnOutlineNormal($colorMain); }
+.common-btn-round[btn-type=choosed]             { @include btnOutlineNormal($colorMain); }
+.common-btn-round[btn-type=cancel]              { @include btnOutlineNormal($colorCncl); }
+.common-btn-round[btn-type=warning]             { @include btnOutlineNormal($colorCncl); }
+.common-btn-round[btn-type=error]               { @include btnOutlineNormal($colorErrr); }
+.common-btn-round[btn-type=error]               { @include btnOutlineNormal($colorErrr); }
+.common-btn-round:active                        { @include btnOutlineActive($colorMain); }
+.common-btn-round[btn-type=choosed]:active      { @include btnOutlineActive($colorMain); }
+.common-btn-round[btn-type=cancel]:active       { @include btnOutlineActive($colorCncl); }
+.common-btn-round[btn-type=warning]:active      { @include btnOutlineActive($colorCncl); }
+.common-btn-round[btn-type=error]:active        { @include btnOutlineActive($colorErrr); }
+.common-btn-round[btn-type=error]:active        { @include btnOutlineActive($colorErrr); }
+
+/* outline */
+.common-btn-outline                             { @include btnOutlineNormal($colorMain); }
+.common-btn-outline[btn-type=choosed]           { @include btnOutlineNormal($colorMain); }
+.common-btn-outline[btn-type=cancel]            { @include btnOutlineNormal($colorCncl); }
+.common-btn-outline[btn-type=warning]           { @include btnOutlineNormal($colorCncl); }
+.common-btn-outline[btn-type=error]             { @include btnOutlineNormal($colorErrr); }
+.common-btn-outline[btn-type=delete]            { @include btnOutlineNormal($colorErrr); }
+.common-btn-outline:active                      { @include btnOutlineActive($colorMain); }
+.common-btn-outline[btn-type=choosed]:active    { @include btnOutlineActive($colorMain); }
+.common-btn-outline[btn-type=cancel]:active     { @include btnOutlineActive($colorCncl); }
+.common-btn-outline[btn-type=warning]:active    { @include btnOutlineActive($colorCncl); }
+.common-btn-outline[btn-type=error]:active      { @include btnOutlineActive($colorErrr); }
+.common-btn-outline[btn-type=delete]:active     { @include btnOutlineActive($colorErrr); }
+.common-btn-outline:disabled                    { @include btnOutlineDisabled($colorMain); }
+
+/* inline */
+.common-btn-inline                                      { @include btnInlineNormal($colorMain); }
+.common-btn-inline[btn-type=cancel]                     { @include btnInlineNormal($colorCncl); }
+.common-btn-inline[btn-type=delete]                     { @include btnInlineNormal($colorErrr); }
+.common-btn-inline:active                               { @include btnInlineActive($colorMain); }
+.common-btn-inline[btn-type=cancel]:active              { @include btnInlineActive($colorCncl); }
+.common-btn-inline[btn-type=delete]:active              { @include btnInlineActive($colorErrr); }
+.common-btn-inline:disabled                             { @include btnInlineDisabled($colorMain); }
+
+
+/* radio */
+.common-btn-radio[tab=""]                               { @include btnOutlineNormal($colorMain); }
+.common-btn-radio[tab=tab]                              { @include btnInlineNormal($colorMain); }
+.common-btn-radio[btn-type=cancel][tab=""]              { @include btnOutlineNormal($colorCncl); }
+.common-btn-radio[btn-type=cancel][tab=tab]             { @include btnInlineNormal($colorCncl); }
+.common-btn-radio:disabled[tab=""]                      { @include btnOutlineDisabled($colorMain); }
+.common-btn-radio:disabled[tab=tab]                     { @include btnInlineDisabled($colorMain); }
+.common-btn-radio:disabled[btn-type=cancel][tab=""]     { @include btnOutlineDisabled($colorCncl); }
+.common-btn-radio:disabled[btn-type=cancel][tab=tab]    { @include btnInlineDisabled($colorCncl); }
+
+/* button size */
+.common-btn-outline[btn-size=large]   { display:block; margin:0.3em auto; padding:0.8em; min-width:12em; max-width:90%; }
+.common-btn-inline[btn-size=large]    { display:block; margin:0.3em auto; padding:0.8em; min-width:12em; max-width:90%; white-space:nowrap; }
+.common-btn-outline[btn-size=search]  { display:inline-block; padding:0.3em 0.4em; }
+
+/* -------------------- */
+/* noline */
+/* -------------------- */
+.common-btn-noline,
+.common-btn-nolineSave
+{
+    display:inline-block;
+    padding:0.5em;
+    background-color:transparent;
+    border-radius: 0.5em;
+    white-space: nowrap;
+    border: none;
+    line-height:1.4;
+}
+.common-btn-nolineSave:hover,
+.common-btn-noline:hover
+{
+    outline:none;
+    cursor: pointer;
+}
+
+.common-btn-noline                          { color:$colorMain; }
+.common-btn-noline[btn-type=cancel]         { color:$colorCncl; }
+.common-btn-noline[btn-type=warning]        { color:$colorCncl; }
+.common-btn-noline[btn-type=error]          { color:$colorErrr; }
+.common-btn-noline:active                   { background-color:rgba($colorMain, 0.3); }
+.common-btn-noline:active[btn-type=cancel]  { background-color:rgba($colorCncl, 0.3); }
+.common-btn-noline:active[btn-type=warning] { background-color:rgba($colorCncl, 0.3); }
+.common-btn-noline:active[btn-type=error]   { background-color:rgba($colorErrr, 0.3); }
+
+/* -------------------- */
+/* 페이지 바닥에 깔리는 버튼 */
+/* -------------------- */
+.common-btn-footer
+{
+    display:inline-block;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    width:100%;
+    background-color:$colorMain;
+    color: white;
+    font-size:1.1em;
+    line-height: 1.1em;
+    padding:0.8em 0.4em;
+    border:none;
+}
+.common-btn-footer:hover
+{
+    cursor:pointer;
+}
+.common-btn-footer:active
+{
+    background-color:rgba($colorMain, 0.4);
+}

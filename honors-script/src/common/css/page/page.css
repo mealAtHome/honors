@@ -1,14 +1,14 @@
 /* ============================== */
 /* screen background */
 /* ============================== */
-.page { background-color: #f8f9fa; }
+.page { background-color: #F0F2F8; }
 .page__content
 {
     line-height: 1.6;
     vertical-align: middle;
-    background-color: #f8f9fa;
+    background-color: #F0F2F8;
 }
-.page__background { background-color: #f8f9fa; }
+.page__background { background-color: #F0F2F8; }
 
 input { line-height: 1.5; }
 
@@ -19,4 +19,3 @@ input { line-height: 1.5; }
     font-size:inherit;
     padding-right: 0.4em;
 }
-

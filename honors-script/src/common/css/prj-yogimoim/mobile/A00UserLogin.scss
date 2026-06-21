@@ -1,0 +1,104 @@
+@import "../../_import/scss/__import";
+
+#ULGN-div-top
+{
+    display:block;
+    width:100%;
+    height:100%;
+    background-color: rgba(255,255,255,1);
+    overflow: auto;
+}
+
+#ULGN-span-version
+{
+    position:absolute;
+    left:0.5em;
+    top:0.5em;
+    font-size:0.9em;
+    color: rgb(150,150,150);
+}
+#ULGN-span-version::before
+{
+    content: "v";
+}
+// #ULGN-img-server
+// {
+//     position:absolute;
+//     height:1.5em;
+//     right:0.5em;
+//     top:0.5em;
+//     border:1px solid rgb(220,220,220);
+// }
+
+/* ================ */
+/* logo */
+/* ================ */
+// .ULGN-img-icon
+// {
+//     display:block;
+//     margin:0.3em auto;
+// }
+#ULGN-span-title
+{
+    display:block;
+    font-size:3em;
+    font-weight:normal;
+    color: $colorMain;
+    line-height: 1.2em;
+}
+.ULGN-div-titleAccent
+{
+    display:block;
+    width:4em;
+    height:0.2em;
+    margin:0.2em 0em;
+    background-color: $colorSide;
+}
+
+/* ================ */
+/* 로그인 input */
+/* ================ */
+.ULGN-input-text
+{
+    display:block;
+    width:15em;
+    height:auto;
+    border: 0.05em solid $colorBody;
+    font-size:1.2em;
+    text-align:left;
+    background: transparent;
+    border-radius: $borderRadius;
+    margin: 0.5em auto;
+    padding: 0.3em 0.5em;
+}
+.ULGN-input-text:focus
+{
+    border: 0.1em solid $colorMain;
+    box-shadow:none;
+}
+.ULGN-img-input
+{
+    margin-top:0.4em;
+    height:1.2em;
+    vertical-align: top;
+}
+
+/* ================ */
+/* 로그인 페이지 버튼들 */
+/* ================ */
+.ULGN-login-btn
+{
+    display:block;
+    margin:0.8em auto;
+    width:18em;
+    height:3em;
+}
+
+#ULGN-tbl-bottomRight
+{
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    text-align: right;
+    font-size: 0.9em;
+}

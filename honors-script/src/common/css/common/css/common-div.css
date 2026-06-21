@@ -1,0 +1,823 @@
+@charset "UTF-8";
+div {
+  display: block;
+}
+
+/*=================================*/
+/* flex */
+/*=================================*/
+.common-div-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+/*=================================*/
+/* dot */
+/*=================================*/
+.common-div-dot {
+  width: 0.6em;
+  height: 0.6em;
+  background: #3D6BF5;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/*=================================*/
+/* header */
+/*=================================*/
+.common-div-headerTop {
+  background: #fff;
+  padding: 0.6em 0.8em;
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  border-bottom: 0.5px solid #E4E7F0;
+}
+
+.common-div-sectionHeader {
+  font-size: 1em;
+  font-weight: 500;
+  color: #7A8099;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0em 0em 0.8em 0em;
+}
+
+/*=================================*/
+/* div for button list */
+/*=================================*/
+.common-div-btnList > * {
+  margin-bottom: 0.2em;
+}
+
+/*=================================*/
+/* div for yearToMin */
+/*=================================*/
+.common-div-yearToMin {
+  white-space: nowrap;
+}
+
+.common-div-yearToMin > input {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.common-div-yearToMin > input:nth-child(1) {
+  width: 8em;
+}
+
+.common-div-yearToMin > input:nth-child(2) {
+  width: 3em;
+}
+
+.common-div-yearToMin > input:nth-child(3) {
+  width: 3em;
+}
+
+/* ============================== */
+/* 입력 폼 전용 */
+/* ============================== */
+/* 폼에 연동된 프로그래스 */
+.common-div-progressContainer {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.8em;
+}
+
+.common-div-progressBar {
+  width: 0%;
+  height: 100%;
+  background: rgb(2, 6, 84);
+  border-radius: 15px 0 0 15px;
+  transition: width 0.4s ease; /* 부드러운 애니메이션 */
+}
+
+/* 폼 자체 */
+.common-div-slideformParent {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+.common-div-slideformChild {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 4em);
+  height: auto;
+  font-size: 1em;
+  padding: 1em 2em;
+}
+
+.common-div-slideformChild[slideform-status=exit] {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease; /* display:none; */
+}
+
+.common-div-slideformChild[slideform-status=open] {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.common-div-slideformChild[slideform-status=wait] {
+  transform: translateX(100%);
+  transition: transform 0.3s ease; /* display:none; */
+}
+
+/* 일반 폼 */
+.common-div-formChild {
+  display: block;
+  width: calc(100% - 4em);
+  height: auto;
+  font-size: 1em;
+  padding: 1em 2em;
+}
+
+.common-div-formChild > .common-div-formField:nth-child(1) {
+  margin-top: 1em;
+}
+
+/* 폼 내 */
+.common-div-formTitle {
+  text-align: left;
+  margin: 1em 0em 2em;
+  padding: 0em;
+  box-sizing: content-box;
+}
+
+.common-div-formTitle > span:nth-child(1) {
+  display: block;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: rgb(2, 6, 84);
+}
+
+.common-div-formTitle > span:nth-child(2) {
+  display: block;
+}
+
+.common-div-formField {
+  text-align: left;
+  margin: 2em 0em;
+  padding: 0em;
+  box-sizing: content-box;
+}
+
+.common-div-formField > span:nth-child(1) {
+  display: block;
+  font-size: 1.1em;
+  margin: 0.3em 0em 0em;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
+.common-div-formField > span:nth-child(2) {
+  display: block;
+  font-size: 0.9em;
+  margin: 0em 0em 0.4em;
+  font-weight: normal;
+  line-height: 1.5em;
+}
+
+/* ============================== */
+/* 입력 폼 전용 */
+/* ============================== */
+.common-div-form {
+  text-align: center;
+  margin: 0.6em 0.6em 1em;
+  padding: 0em;
+  box-sizing: content-box;
+}
+
+.common-div-form > span:nth-child(1) {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.common-div-form > span:nth-child(2) {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+/* ============================== */
+/* 인덴트 */
+/* ============================== */
+.common-div-indent {
+  display: block;
+  margin: 0.4em;
+  padding: 0em;
+}
+
+.common-div-indent > span {
+  display: block;
+}
+
+.common-div-indent > span::before {
+  content: "・";
+  vertical-align: middle;
+}
+
+/* ============================== */
+/* 목록형 버튼을 위한 DIV */
+/* ============================== */
+.common-div-manages {
+  text-align: center;
+}
+
+.common-div-manages > button {
+  display: block;
+  width: 15em;
+  max-width: 80%;
+  margin: 0.7em auto;
+  padding: 0.7em;
+}
+
+/* ============================== */
+/* gg-html.js 의 svg 부모 */
+/* ============================== */
+.common-div-svgTop {
+  display: inline-block;
+  margin: 0.3em;
+  vertical-align: middle;
+}
+
+/* ============================== */
+/* 그림자진 DIV */
+/* ============================== */
+.common-div-card {
+  position: relative;
+  /* margin  : 0.6em 0.8em 0.8em 0.6em; */
+  border-radius: 0.8em;
+  padding: 0.8em 0.8em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: left;
+  background-color: white;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.common-div-card[card-type=warning] {
+  color: rgb(125, 25, 25);
+  background-color: rgba(255, 51, 51, 0.1);
+  box-shadow: 1px 1px 7px 2px rgba(255, 51, 51, 0.8);
+}
+
+.common-div-card[card-type=notice] {
+  color: rgb(125, 25, 25);
+  background-color: #dbe7ff;
+  box-shadow: none;
+}
+
+/* ============================== */
+/* 에러 메시지용 */
+/* ============================== */
+.common-div-msg {
+  margin: 0.8em 1em 1em 0.8em;
+  padding: 0.5em 0.5em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.common-div-msg[common-div-msg-type=error] {
+  color: rgb(125, 25, 25);
+  background-color: rgba(255, 51, 51, 0.1);
+  box-shadow: 1px 1px 7px 2px rgba(255, 51, 51, 0.8);
+}
+
+.common-div-msg[common-div-msg-type=warning] {
+  color: rgb(95, 95, 12);
+  background-color: rgba(95, 192, 31, 0.1);
+  box-shadow: 1px 1px 7px 2px rgba(195, 192, 31, 0.8);
+}
+
+.common-div-msg[common-div-msg-type=allow] {
+  color: rgb(7, 69, 14);
+  background-color: rgba(7, 69, 14, 0.1);
+  box-shadow: 1px 1px 7px 2px rgba(7, 69, 14, 0.8);
+}
+
+/* ============================== */
+/* 패드를 사용하지 않는 DIV */
+/* ============================== */
+.common-div-mobile {
+  max-width: 400px;
+  padding: 0em 0em;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: content-box;
+}
+
+/* -------------------- */
+/* 툴바 */
+/* -------------------- */
+.common-div-headerPadding {
+  width: 100%;
+  height: 52px;
+}
+
+/* .common-div-header ~ .common-div-slideformChild { padding-top: 60px; } */
+.common-div-header {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  background: #ffffff;
+  width: 100%;
+  height: 52px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.common-div-header > div[header=back] {
+  display: inline-block;
+  width: auto;
+  line-height: 52px;
+}
+
+.common-div-header > div[header=title] {
+  display: inline-block;
+  width: auto;
+  line-height: 52px;
+  padding-left: 0.5em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* -------------------- */
+/* 헤더 메뉴버튼 */
+/* -------------------- */
+.common-div-headerMenuBtn {
+  height: 26px;
+  width: 30px;
+  margin: 9px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  background-image: url("../../res/icon/menu.png");
+  background-repeat: no-repeat;
+  background-position: center middle;
+  background-size: 100% 100%;
+}
+
+/* ============================== */
+/* 페이지네이션 */
+/* ============================== */
+.common-div-pagenationTop {
+  margin: 0.5em 0em;
+  text-align: center;
+  /* padding:0.3em; */
+  overflow-x: auto;
+  box-sizing: content-box;
+}
+
+.common-div-pagenationBtnTop {
+  display: inline-block;
+  border-radius: 38px;
+  background-color: rgb(230, 230, 230);
+}
+
+.common-btn-pagenationBtn {
+  display: inline-block;
+  width: 38px;
+  height: 38px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 100%;
+  border: none;
+  line-height: 37px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.common-btn-pagenationBtn[tab=tab] {
+  background-color: rgb(2, 6, 84);
+  color: white;
+  /* font-weight: bold; */
+}
+
+/* ============================== */
+/* block 상태가 되며, 다른 div에 간섭하지 않도록 쿠션이 생긴다.  */
+/* ============================== */
+/* common-div-cushion + text-align:center */
+.common-div-empty {
+  height: 1em;
+  box-sizing: border-box;
+}
+
+.common-div-mass {
+  margin: 0.3em;
+  padding: 0.3em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: center;
+}
+
+.common-div-mass > table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 100% 의 width를 가지고, 안의 내용물이 길어진다면, x-scroll을 생성 */
+.common-div-scrollX {
+  width: 100%;
+  overflow-x: auto;
+  box-sizing: content-box;
+  padding-bottom: 0.3em;
+}
+
+.common-div-cushion {
+  display: block;
+  margin: 0.8em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: left;
+}
+
+.common-div-cushionULR {
+  display: block;
+  margin: 0.8em 0.8em 0em 0.8em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: left;
+}
+
+.common-div-cushionTLR {
+  display: block;
+  margin: 0.8em 0.8em 0em 0.8em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: left;
+}
+
+.common-div-cushionTop {
+  display: block;
+  margin: 0em 0.8em 0.8em 0.8em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: left;
+}
+
+.common-div-cushionUp {
+  display: block;
+  margin: 0.8em 0em 0em 0em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: inherit;
+}
+
+.common-div-cushionUD {
+  display: block;
+  margin: 0.8em 0em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: inherit;
+}
+
+.common-div-cushionD {
+  display: block;
+  margin: 0em 0em 0.8em 0em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: inherit;
+}
+
+.common-div-cushionLeft {
+  display: block;
+  margin: 0em 0em 0em 0.8em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: inherit;
+}
+
+.common-div-cushionUL {
+  display: block;
+  margin: 0.8em 0em 0em 0.8em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: inherit;
+}
+
+.common-div-cushionLRD {
+  display: block;
+  margin: 0em 0.8em 0.8em 0.8em;
+  padding: 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+  text-align: inherit;
+}
+
+/* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
+.common-div-cushion > .common-div-cushionUD:nth-child(1) {
+  margin: 0em 0em 0.3em 0em;
+  padding: 0em 0em 0.3em 0em;
+}
+
+.common-div-cushionUD > .common-div-card:nth-child(1) {
+  margin-top: 0.2em;
+}
+
+/* 쿠션 아래의 첫번째, formField 는 marginTop:0.4em; */
+.common-div-cushion > .common-div-formField:nth-child(1) {
+  margin-top: 0.4em;
+}
+
+/* 페이지 아래에 무조건 공백을 삽입 */
+.common-div-cushionFooter {
+  height: 4em;
+  width: 100%;
+}
+
+/* ============================== */
+/* block 상태가 되며, 내용이 길어지면 흘러넘치게 한다.  */
+/* ============================== */
+.common-div-flowCushion {
+  margin: 0.3em;
+  padding: 0.3em;
+  white-space: normal;
+  box-sizing: content-box;
+}
+
+/* ============================== */
+/* 테이블용 div (스크롤바가 생긴다) */
+/* ============================== */
+.common-div-table {
+  width: 100%;
+  margin: 0.2em 0em;
+  padding: 0.5em 0em;
+  overflow-x: auto;
+  box-sizing: content-box;
+}
+
+/*=================================*/
+/* 최상위 DIV */
+/*=================================*/
+/* 페이지 안의 부제목 topDiv */
+.common-div-subTitle {
+  display: table;
+  width: 100%;
+  margin: 0.3em 0em;
+  padding: 0em;
+  box-sizing: content-box;
+  text-align: left;
+  border-bottom: 1px solid rgb(2, 6, 84);
+}
+
+/* 페이지 안의 부제목 span */
+.common-div-subTitle > span:nth-child(1) {
+  display: inline-table;
+  color: rgb(2, 6, 84);
+  font-weight: 900;
+  /* background-color:#ff7415; */
+  padding: 0.3em 0.7em 0.3em 0.3em;
+  line-height: 1.6em;
+  vertical-align: bottom;
+}
+
+.common-div-subTitle > span:nth-child(1)::before {
+  background-image: url("../../res/icon/subtitle_header.png");
+  background-size: 100% 100%;
+  display: inline-block;
+  width: 2.23em;
+  height: 1em;
+  vertical-align: middle;
+  margin-right: 0.3em;
+  margin-bottom: 0.2em;
+  content: "";
+}
+
+/* 페이지 안의 부제목 topDiv */
+.common-div-subTitle > button {
+  margin: 0.4em 0em 0.4em 0.4em;
+}
+
+/* ============================== */
+/* input 아래에 표시되는 유효성검사 결과 */
+/* ============================== */
+.common-div-validationResult {
+  display: block;
+  text-align: center;
+  font-size: 0.8em;
+  padding: 0.3em;
+}
+
+/* ============================== */
+/* POP 페이지에 표시되는 타이틀, 검색div */
+/* ============================== */
+/* 타이틀 div */
+.common-div-popTitle {
+  width: 100%;
+  margin: 0em auto;
+  box-sizing: content-box;
+  /* border-bottom: 1px solid rgb(150,150,150); */
+  text-align: center;
+  padding: 0.7em 0em;
+}
+
+/* 타이틀 */
+.common-div-popTitle > span {
+  font-size: 1.1em;
+  line-height: 1.4em;
+  font-weight: bold;
+}
+
+/* ============================== */
+/* 기본 이미지 표현 DIV */
+/* ============================== */
+.common-div-defaultImgCoverMini {
+  width: 4em;
+  height: 4em;
+  margin: 1em auto;
+  background-size: 100% !important;
+  background-position: revert;
+  background-repeat: no-repeat;
+  border: 1px solid #dee2e6;
+  box-sizing: content-box;
+}
+
+.common-div-defaultImgCover {
+  width: 9em;
+  height: 9em;
+  margin: 1em auto;
+  background-size: 100% !important;
+  background-position: revert;
+  background-repeat: no-repeat;
+  border: 1px solid #dee2e6;
+  box-sizing: content-box;
+}
+
+.common-div-defaultImg {
+  width: 9em;
+  height: 9em;
+  margin: 1em auto;
+  background-size: 100% !important;
+  background-position: revert;
+  /* background-image:url('../../res/logo/logo.png'); */
+  background-repeat: no-repeat;
+  border: 1px solid #dee2e6;
+  box-sizing: content-box;
+}
+
+/* .common-div-menuImg
+{
+    width:9em;
+    height:9em;
+    margin:1em auto;
+    background-size:100% !important;
+    background-position: center;
+    background-image:url('../../res/logo/logo.png');
+    background-repeat: no-repeat;
+    border:1px solid #dee2e6;
+} */
+/* ============================== */
+/* 설명문구 삽입 시 */
+/* ============================== */
+.common-div-announce {
+  margin: 0.6em;
+  padding: 0.4em;
+  text-align: left;
+  line-height: 1.7;
+  background-color: #ddd;
+}
+
+/* ============================== */
+/* 체크박스 / 라디오박스 용 div */
+/* ============================== */
+.common-div-switch {
+  text-align: left;
+}
+
+/* ============================== */
+/* 페이지전용 */
+/* ============================== */
+.common-div-pageTop {
+  margin: 0.5em auto;
+  max-width: 500px;
+}
+
+/* ============================== */
+/* 캘린더 달력용 DIV */
+/* ============================== */
+.common-div-calendarSquareYear {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: rgb(2, 6, 84);
+}
+
+.common-div-calendarSquare {
+  background: linear-gradient(135deg, #020654 0%, #0a2472 100%);
+  color: white;
+  width: 3.6em;
+  height: 3.6em;
+  padding: 0.4em;
+  border-radius: 1em;
+  white-space: nowrap;
+  box-shadow: 0px 2px 4px rgba(2, 6, 84, 0.4);
+}
+
+.common-div-calendarSquare > div:nth-child(1) {
+  font-size: 0.9em;
+  line-height: 0.9em;
+  text-align: center;
+  font-weight: normal;
+}
+
+.common-div-calendarSquare > div:nth-child(2) {
+  font-size: 1.4em;
+  line-height: 1.4em;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ByPoint */
+.common-div-calendarSquare[point-of-date=passed] {
+  background: #f0f0f0;
+  color: #999;
+}
+
+/* ByPoint */
+.common-div-calendarSquare[point-of-date=within] {
+  background: rgb(2, 6, 84);
+  color: white;
+}
+
+/* ByPoint */
+.common-div-calendarSquare[point-of-date=upcoming] {
+  background: white;
+  color: #666;
+}
+
+/* ByType */
+.common-div-calendarSquare[common-type=alone] {
+  width: 2.6em;
+  height: 2.6em;
+  padding: 0.3em;
+}
+
+/* ByType */
+.common-div-calendarSquare[common-type=alone] > div:nth-child(1) {
+  line-height: 2.6em;
+  font-size: 1em;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ByType */
+.common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span {
+  font-size: 1.2em;
+}
+
+.common-div-calendarSquareWeekTop > button {
+  background: white;
+  border: 2px solid #e0e0e0;
+  color: #666;
+  padding: 0.5em 0.8em;
+  border-radius: 0.8em;
+  font-size: 1em;
+  font-weight: normal;
+  cursor: pointer;
+  /* transition: all 0.3s ease; */
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  margin-left: 0.3em;
+}
+
+.common-div-calendarSquareWeekTop > button:nth-child(1) {
+  margin-left: 0em;
+}
+
+/* ByPoint */
+.common-div-calendarSquareWeekTop > button[point-of-date=passed] {
+  background: #f0f0f0;
+  color: #999;
+  border: 2px solid #d0d0d0;
+}
+
+/* ByPoint */
+.common-div-calendarSquareWeekTop > button[point-of-date=within] {
+  color: rgb(2, 6, 84);
+  border: 2px solid rgb(2, 6, 84);
+}
+
+/* ByPoint */
+.common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {
+  color: #666;
+  border: 2px solid #e0e0e0;
+}

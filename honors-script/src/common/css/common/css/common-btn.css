@@ -1,0 +1,345 @@
+@charset "UTF-8";
+/* ============================== */
+/* main button */
+/* ============================== */
+.common-btn-outline,
+.common-btn-inline,
+.common-btn-round,
+.common-btn-radio {
+  display: inline-block;
+  padding: 0.4em 0.5em;
+  white-space: nowrap;
+  line-height: 1.4;
+  text-decoration: none;
+  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12); */
+  background-color: white;
+  border-radius: 0.4em;
+}
+
+.common-btn-outline:hover,
+.common-btn-inline:hover,
+.common-btn-round:hover,
+.common-btn-radio:hover {
+  outline: none;
+  cursor: pointer;
+}
+
+.common-btn-round {
+  border-radius: 100%;
+}
+
+/* mixin */
+/* round */
+.common-btn-round {
+  border: 1px solid rgb(2, 6, 84);
+  color: rgb(2, 6, 84);
+}
+
+.common-btn-round[btn-type=choosed] {
+  border: 1px solid rgb(2, 6, 84);
+  color: rgb(2, 6, 84);
+}
+
+.common-btn-round[btn-type=cancel] {
+  border: 1px solid #FF7415;
+  color: #FF7415;
+}
+
+.common-btn-round[btn-type=warning] {
+  border: 1px solid #FF7415;
+  color: #FF7415;
+}
+
+.common-btn-round[btn-type=error] {
+  border: 1px solid rgb(206, 39, 39);
+  color: rgb(206, 39, 39);
+}
+
+.common-btn-round[btn-type=error] {
+  border: 1px solid rgb(206, 39, 39);
+  color: rgb(206, 39, 39);
+}
+
+.common-btn-round:active {
+  border-color: rgba(2, 6, 84, 0.3);
+  background-color: rgba(2, 6, 84, 0.3);
+}
+
+.common-btn-round[btn-type=choosed]:active {
+  border-color: rgba(2, 6, 84, 0.3);
+  background-color: rgba(2, 6, 84, 0.3);
+}
+
+.common-btn-round[btn-type=cancel]:active {
+  border-color: rgba(255, 116, 21, 0.3);
+  background-color: rgba(255, 116, 21, 0.3);
+}
+
+.common-btn-round[btn-type=warning]:active {
+  border-color: rgba(255, 116, 21, 0.3);
+  background-color: rgba(255, 116, 21, 0.3);
+}
+
+.common-btn-round[btn-type=error]:active {
+  border-color: rgba(206, 39, 39, 0.3);
+  background-color: rgba(206, 39, 39, 0.3);
+}
+
+.common-btn-round[btn-type=error]:active {
+  border-color: rgba(206, 39, 39, 0.3);
+  background-color: rgba(206, 39, 39, 0.3);
+}
+
+/* outline */
+.common-btn-outline {
+  border: 1px solid rgb(2, 6, 84);
+  color: rgb(2, 6, 84);
+}
+
+.common-btn-outline[btn-type=choosed] {
+  border: 1px solid rgb(2, 6, 84);
+  color: rgb(2, 6, 84);
+}
+
+.common-btn-outline[btn-type=cancel] {
+  border: 1px solid #FF7415;
+  color: #FF7415;
+}
+
+.common-btn-outline[btn-type=warning] {
+  border: 1px solid #FF7415;
+  color: #FF7415;
+}
+
+.common-btn-outline[btn-type=error] {
+  border: 1px solid rgb(206, 39, 39);
+  color: rgb(206, 39, 39);
+}
+
+.common-btn-outline[btn-type=delete] {
+  border: 1px solid rgb(206, 39, 39);
+  color: rgb(206, 39, 39);
+}
+
+.common-btn-outline:active {
+  border-color: rgba(2, 6, 84, 0.3);
+  background-color: rgba(2, 6, 84, 0.3);
+}
+
+.common-btn-outline[btn-type=choosed]:active {
+  border-color: rgba(2, 6, 84, 0.3);
+  background-color: rgba(2, 6, 84, 0.3);
+}
+
+.common-btn-outline[btn-type=cancel]:active {
+  border-color: rgba(255, 116, 21, 0.3);
+  background-color: rgba(255, 116, 21, 0.3);
+}
+
+.common-btn-outline[btn-type=warning]:active {
+  border-color: rgba(255, 116, 21, 0.3);
+  background-color: rgba(255, 116, 21, 0.3);
+}
+
+.common-btn-outline[btn-type=error]:active {
+  border-color: rgba(206, 39, 39, 0.3);
+  background-color: rgba(206, 39, 39, 0.3);
+}
+
+.common-btn-outline[btn-type=delete]:active {
+  border-color: rgba(206, 39, 39, 0.3);
+  background-color: rgba(206, 39, 39, 0.3);
+}
+
+.common-btn-outline:disabled {
+  border: 1px solid rgb(2, 6, 84);
+  background-color: #ffffff;
+  color: rgb(2, 6, 84);
+}
+
+/* inline */
+.common-btn-inline {
+  border: 1px solid rgb(2, 6, 84);
+  background-color: rgb(2, 6, 84);
+  color: #ffffff;
+}
+
+.common-btn-inline[btn-type=cancel] {
+  border: 1px solid #FF7415;
+  background-color: #FF7415;
+  color: #ffffff;
+}
+
+.common-btn-inline[btn-type=delete] {
+  border: 1px solid rgb(206, 39, 39);
+  background-color: rgb(206, 39, 39);
+  color: #ffffff;
+}
+
+.common-btn-inline:active {
+  border-color: rgba(2, 6, 84, 0.3);
+  background-color: rgba(2, 6, 84, 0.3);
+}
+
+.common-btn-inline[btn-type=cancel]:active {
+  border-color: rgba(255, 116, 21, 0.3);
+  background-color: rgba(255, 116, 21, 0.3);
+}
+
+.common-btn-inline[btn-type=delete]:active {
+  border-color: rgba(206, 39, 39, 0.3);
+  background-color: rgba(206, 39, 39, 0.3);
+}
+
+.common-btn-inline:disabled {
+  border: 1px solid rgb(2, 6, 84);
+  background-color: #646464;
+  color: #ffffff;
+}
+
+/* radio */
+.common-btn-radio[tab=""] {
+  border: 1px solid rgb(2, 6, 84);
+  color: rgb(2, 6, 84);
+}
+
+.common-btn-radio[tab=tab] {
+  border: 1px solid rgb(2, 6, 84);
+  background-color: rgb(2, 6, 84);
+  color: #ffffff;
+}
+
+.common-btn-radio[btn-type=cancel][tab=""] {
+  border: 1px solid #FF7415;
+  color: #FF7415;
+}
+
+.common-btn-radio[btn-type=cancel][tab=tab] {
+  border: 1px solid #FF7415;
+  background-color: #FF7415;
+  color: #ffffff;
+}
+
+.common-btn-radio:disabled[tab=""] {
+  border: 1px solid rgb(2, 6, 84);
+  background-color: #ffffff;
+  color: rgb(2, 6, 84);
+}
+
+.common-btn-radio:disabled[tab=tab] {
+  border: 1px solid rgb(2, 6, 84);
+  background-color: #646464;
+  color: #ffffff;
+}
+
+.common-btn-radio:disabled[btn-type=cancel][tab=""] {
+  border: 1px solid #FF7415;
+  background-color: #ffffff;
+  color: #FF7415;
+}
+
+.common-btn-radio:disabled[btn-type=cancel][tab=tab] {
+  border: 1px solid #FF7415;
+  background-color: #646464;
+  color: #ffffff;
+}
+
+/* button size */
+.common-btn-outline[btn-size=large] {
+  display: block;
+  margin: 0.3em auto;
+  padding: 0.8em;
+  min-width: 12em;
+  max-width: 90%;
+}
+
+.common-btn-inline[btn-size=large] {
+  display: block;
+  margin: 0.3em auto;
+  padding: 0.8em;
+  min-width: 12em;
+  max-width: 90%;
+  white-space: nowrap;
+}
+
+.common-btn-outline[btn-size=search] {
+  display: inline-block;
+  padding: 0.3em 0.4em;
+}
+
+/* -------------------- */
+/* noline */
+/* -------------------- */
+.common-btn-noline,
+.common-btn-nolineSave {
+  display: inline-block;
+  padding: 0.5em;
+  background-color: transparent;
+  border-radius: 0.5em;
+  white-space: nowrap;
+  border: none;
+  line-height: 1.4;
+}
+
+.common-btn-nolineSave:hover,
+.common-btn-noline:hover {
+  outline: none;
+  cursor: pointer;
+}
+
+.common-btn-noline {
+  color: rgb(2, 6, 84);
+}
+
+.common-btn-noline[btn-type=cancel] {
+  color: #FF7415;
+}
+
+.common-btn-noline[btn-type=warning] {
+  color: #FF7415;
+}
+
+.common-btn-noline[btn-type=error] {
+  color: rgb(206, 39, 39);
+}
+
+.common-btn-noline:active {
+  background-color: rgba(2, 6, 84, 0.3);
+}
+
+.common-btn-noline:active[btn-type=cancel] {
+  background-color: rgba(255, 116, 21, 0.3);
+}
+
+.common-btn-noline:active[btn-type=warning] {
+  background-color: rgba(255, 116, 21, 0.3);
+}
+
+.common-btn-noline:active[btn-type=error] {
+  background-color: rgba(206, 39, 39, 0.3);
+}
+
+/* -------------------- */
+/* 페이지 바닥에 깔리는 버튼 */
+/* -------------------- */
+.common-btn-footer {
+  display: inline-block;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background-color: rgb(2, 6, 84);
+  color: white;
+  font-size: 1.1em;
+  line-height: 1.1em;
+  padding: 0.8em 0.4em;
+  border: none;
+}
+
+.common-btn-footer:hover {
+  cursor: pointer;
+}
+
+.common-btn-footer:active {
+  background-color: rgba(2, 6, 84, 0.4);
+}

@@ -1,0 +1,347 @@
+@charset "UTF-8";
+.common-tag-indent04 {
+  padding-left: 0.4em;
+}
+
+.common-tag-indent08 {
+  padding-left: 0.8em;
+}
+
+.common-tag-indent12 {
+  padding-left: 1.2em;
+}
+
+.common-tag-marginTop10 {
+  margin-top: 1em;
+}
+
+.common-tag-paddingUD02 {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+.common-tag-padding02 {
+  padding: 0.2em;
+}
+
+.common-tag-padding03 {
+  padding: 0.3em;
+}
+
+.common-tag-padding04 {
+  padding: 0.4em;
+}
+
+.common-tag-padding05 {
+  padding: 0.5em;
+}
+
+.common-tag-cushionL {
+  margin: 0em 0em 0em 0.6em;
+}
+
+.common-tag-cushionUp {
+  margin: 0.6em 0em 0em 0em;
+}
+
+.common-tag-cushionUD {
+  margin: 0.6em 0em 0.6em 0em;
+}
+
+.common-tag-cushionDw03 {
+  margin-bottom: 0.3em;
+}
+
+/* 모든 태그에 적용이 가능한 클래스 모음 */
+.common-tag-strong {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.common-tag-textCenter {
+  text-align: center;
+}
+
+.common-tag-blockCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.common-tag-alignC {
+  text-align: center;
+}
+
+.common-tag-alignR {
+  text-align: right;
+}
+
+.common-tag-alignL {
+  text-align: left;
+}
+
+.common-tag-fontLight {
+  color: #666;
+  font-weight: normal;
+}
+
+/* ============================== */
+/* 색칠 */
+/* ============================== */
+.common-tag-bgcolorGray {
+  background-color: rgba(2, 6, 84, 0.2);
+}
+
+.common-tag-bgcolorSign04 {
+  background-color: rgba(2, 6, 84, 0.4);
+}
+
+/* ============================== */
+/* 아래 보더라인 */
+/* ============================== */
+.common-tag-hrD {
+  border-bottom: 2px dashed #ccc;
+}
+
+/* ============================== */
+/* 쿠션 */
+/* ============================== */
+.common-tag-block {
+  display: block;
+  line-height: 1.6;
+}
+
+.common-tag-inlineBlock {
+  display: inline-block;
+  line-height: 1.6;
+}
+
+.common-tag-marginUp {
+  display: block;
+  margin-top: 0.4em;
+}
+
+.common-tag-marginUp06 {
+  display: block;
+  margin-top: 0.6em;
+}
+
+.common-tag-marginUp08 {
+  display: block;
+  margin-top: 0.8em;
+}
+
+.common-tag-marginUD {
+  display: block;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.common-tag-padding06 {
+  padding: 0.6em;
+}
+
+.common-tag-paddingRight04 {
+  padding-right: 0.4em;
+}
+
+/* ============================== */
+/* fixed 고정 TAG */
+/* ============================== */
+.common-tag-fixedTopRight {
+  display: inline-block;
+  position: fixed;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+.common-tag-announce {
+  display: block;
+  padding: 0.4em;
+  text-align: left;
+  line-height: 1.4;
+  background-color: #ddd;
+}
+
+/* ============================== */
+/* 글자크기 */
+/* ============================== */
+.common-tag-fontsize08 {
+  font-size: 0.8em;
+}
+
+.common-tag-fontsize09 {
+  font-size: 0.9em;
+}
+
+.common-tag-fontsize10 {
+  font-size: 1em;
+}
+
+.common-tag-fontsize11 {
+  font-size: 1.1em;
+}
+
+.common-tag-fontsize12 {
+  font-size: 1.2em;
+}
+
+.common-tag-fontsize13 {
+  font-size: 1.3em;
+}
+
+.common-tag-fontsize14 {
+  font-size: 1.4em;
+}
+
+.common-tag-fontsize15 {
+  font-size: 1.5em;
+}
+
+.common-tag-paddingLR08 {
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+}
+
+.common-tag-lineheight14 {
+  line-height: 1.4;
+}
+
+.common-tag-lineheight15 {
+  line-height: 1.5;
+}
+
+.common-tag-lineheight16 {
+  line-height: 1.6;
+}
+
+.common-tag-lineheight17 {
+  line-height: 1.7;
+}
+
+.common-tag-lineheight18 {
+  line-height: 1.8;
+}
+
+.common-tag-lineheight19 {
+  line-height: 1.9;
+}
+
+.common-tag-lineheight20 {
+  line-height: 2;
+}
+
+.common-tag-bold {
+  font-weight: bold;
+}
+
+.common-tag-colorWarn {
+  color: rgb(255, 116, 21);
+}
+
+.common-tag-colorPstv {
+  color: rgb(0, 128, 0);
+}
+
+.common-tag-colorNgtv {
+  color: rgb(255, 0, 0);
+}
+
+.common-tag-colorGrey {
+  color: rgb(128, 128, 128);
+}
+
+.common-tag-colorGray {
+  color: rgb(128, 128, 128);
+}
+
+.common-tag-font[font-color=hold] {
+  color: rgb(212, 173, 0);
+  border: none;
+  background-color: none;
+}
+
+.common-tag-font[font-color=prog] {
+  color: rgb(3, 154, 0);
+  border: none;
+  background-color: none;
+}
+
+.common-tag-font[font-color=pstv] {
+  color: rgb(0, 2, 120);
+  border: none;
+  background-color: none;
+}
+
+.common-tag-font[font-color=ngtv] {
+  color: rgb(120, 0, 0);
+  border: none;
+  background-color: none;
+}
+
+.common-tag-card {
+  display: inline-block;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0.3em 0.6em;
+}
+
+.common-tag-card[card-color=hold] {
+  color: rgb(212, 173, 0);
+  border: 2px solid rgb(212, 173, 0);
+  background-color: rgba(212, 173, 0, 0.3);
+}
+
+.common-tag-card[card-color=prog] {
+  color: rgb(3, 154, 0);
+  border: 2px solid rgb(3, 154, 0);
+  background-color: rgba(3, 154, 0, 0.3);
+}
+
+.common-tag-card[card-color=pstv] {
+  color: rgb(0, 2, 120);
+  border: 2px solid rgb(0, 2, 120);
+  background-color: rgba(0, 2, 120, 0.3);
+}
+
+.common-tag-card[card-color=ngtv] {
+  color: rgb(120, 0, 0);
+  border: 2px solid rgb(120, 0, 0);
+  background-color: rgba(120, 0, 0, 0.3);
+}
+
+.common-tag-positionAbsUR {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+.common-tag-me[me=y] {
+  background-color: rgba(2, 6, 84, 0.1);
+}
+
+.common-span-me[me=y] {
+  font-weight: bold;
+  color: rgb(2, 6, 84);
+}
+
+.tag-color-sign {
+  color: rgb(27, 42, 107);
+}
+
+.tag-color-cornflowerBlue {
+  color: #8898CC;
+}
+
+.tag-color-gray {
+  color: #7A8099;
+}
+
+.border-bottom-sep05 {
+  border-bottom: 0.5px solid #E4E7F0;
+}
+
+.common-color-body {
+  color: #7A8099;
+}

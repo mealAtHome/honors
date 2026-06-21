@@ -125,7 +125,7 @@ Navigation.getURL = function(str)
     let url = "";
     switch(str)
     {
-        case Navigation.Page.A00UserLogin                                  : url = `${host}/app/A00-user/A00-UserLogin.html?${scriptVersion}`; break;
+        case Navigation.Page.A00UserLogin                                  : url = `${host}/app/A00-user/A00UserLogin.html?${scriptVersion}`; break;
         case Navigation.Page.A01UserInsert                                 : url = `${host}/app/A00-user/A01-UserInsert.html?${scriptVersion}`; break;
         case Navigation.Page.A02UserPrivacyDelete                          : url = `${host}/app/A00-user/A02-UserPrivacyDelete.html?${scriptVersion}`; break;
         case Navigation.Page.A11UserMainHome                               : url = `${host}/app/A00-user/A11-UserMainHome.html?${scriptVersion}`; break;

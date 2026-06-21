@@ -3,27 +3,23 @@ class MSystemBoard
     constructor(dat)
     {
         /* dat */     this.sbindex       = GGC.Common.int(dat.sbindex);
-        /* dat */     this.sb_level       = GGC.Common.enum(dat.sb_level);
-        /* dat */     this.sb_title       = GGC.Common.char(dat.sb_title);
-        /* dat */     this.is_open        = GGC.Common.enum(dat.is_open);
-        /* dat */     this.is_cus         = GGC.Common.enum(dat.is_cus);
-        /* dat */     this.is_biz         = GGC.Common.enum(dat.is_biz);
-        /* dat */     this.is_main        = GGC.Common.enum(dat.is_main);
-        /* dat */     this.url            = GGC.Common.char(dat.url);
-        /* dat */     this.modidt         = GGC.Common.datetime(dat.modidt);
-        /* dat */     this.regidt         = GGC.Common.datetime(dat.regidt);
-        /* custom */  this.fullUrl        = `${ServerInfo.getServerHost()}/src/z-res/_system_board/${this.getUrl()}`;
-        /* custom */  this.regidtPretty   = GGdate.toYMDDHI(new Date(this.getRegidt()));
-        /* pk */      this.pk             = `sbindex="${this.sbindex}"`;
+        /* dat */     this.sblevel       = GGC.Common.enum(dat.sblevel);
+        /* dat */     this.sbtitle       = GGC.Common.char(dat.sbtitle);
+        /* dat */     this.isopen        = GGC.Common.enum(dat.isopen);
+        /* dat */     this.ismain        = GGC.Common.enum(dat.ismain);
+        /* dat */     this.url           = GGC.Common.char(dat.url);
+        /* dat */     this.modidt        = GGC.Common.datetime(dat.modidt);
+        /* dat */     this.regidt        = GGC.Common.datetime(dat.regidt);
+        /* custom */  this.fullUrl       = `${ServerInfo.getServerHost()}/src/z-res/_system_board/${this.getUrl()}`;
+        /* custom */  this.regidtPretty  = GGdate.toYMDDHI(new Date(this.getRegidt()));
+        /* pk */      this.pk            = `sbindex="${this.sbindex}"`;
     }
 
-    /* dat */     getSbIndex()          { return this.sbindex; }
-    /* dat */     getSbLevel()          { return this.sb_level; }
-    /* dat */     getSbTitle()          { return this.sb_title; }
-    /* dat */     getIsOpen()           { return this.is_open; }
-    /* dat */     getIsCus()            { return this.is_cus; }
-    /* dat */     getIsBiz()            { return this.is_biz; }
-    /* dat */     getIsMain()           { return this.is_main; }
+    /* dat */     getSbindex()          { return this.sbindex; }
+    /* dat */     getSblevel()          { return this.sblevel; }
+    /* dat */     getSbtitle()          { return this.sbtitle; }
+    /* dat */     getIsopen()           { return this.isopen; }
+    /* dat */     getIsmain()           { return this.ismain; }
     /* dat */     getUrl()              { return this.url; }
     /* dat */     getModidt()           { return this.modidt; }
     /* dat */     getRegidt()           { return this.regidt; }
@@ -35,22 +31,20 @@ class MSystemBoard
     {
         let html =
         `
-            <div
-                class="MSystemBoard-makeMainBanner-div-top commonEvent-tag-hyperlink common-tap"
+            <div class="common-div-card common-div-flex commonEvent-tag-hyperlink common-tap"
+                card-type="notice"
                 hyperlink="${Navigation.Page.Z22SystemBoardDetail}"
                 hyperlink-viewmode="page"
                 ${this.getPk()}
             >
-                <div class="common-div-cushionD">
-                    <span class="common-span-subcontent" style="margin-left:0.1em;">${this.getRegidtPretty()}</span><br>
-                    <span class="common-span-content">${this.getSbTitle()}</span>
+                <div class="common-div-dot"></div>
+                <div>
+                    <div class="common-span-content">${this.getSbtitle()}</div>
+                    <div class="common-span-subcontent">${this.getRegidtPretty()}</div>
                 </div>
-                <img
-                    class="MSystemBoard-makeMainBanner-img"
-                    src="${this.getFullUrl()}/banner.png"
-                >
             </div>
         `;
+        /* <img class="MSystemBoard-makeMainBanner-img" src="${this.getFullUrl()}/banner.png"> */
         return html;
     }
 
@@ -71,8 +65,8 @@ class MSystemBoard
                                 <div class="MSystemBoard-makeHorizon-div-image" style="background-image:url('${this.getFullUrl()}/thumbnail.png')"></div>
                             </td>
                             <td>
-                                <span class="common-span-block common-span-content">${this.getSbTitle()}</span>
-                                <span class="common-span-block common-span-subcontent">${this.getRegidtPretty()}</span>
+                                <div class="common-span-content">${this.getSbtitle()}</div>
+                                <div class="common-span-subcontent">${this.getRegidtPretty()}</div>
                             </td>
                         </tr>
                     </tbody>
@@ -112,7 +106,7 @@ class MSystemBoards extends _MCommon
         `
             <div class="MSystemBoards-makeMainBanners-top">
                 ${html}
-                <button class="MSystemBoards-makeMainBanners-btn-more common-btn-outline common-btn-more">공지사항 더 보기</button>
+                <!-- <button class="MSystemBoards-makeMainBanners-btn-more common-btn-outline">공지사항 더 보기</button> -->
             </div>
         `;
         $(el).html(html);

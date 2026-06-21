@@ -115,27 +115,26 @@ var GGbase =
         /* ==================== */
         /* add css */
         /* ==================== */
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-btn.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div-backBtn.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div-checkbox.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-div-dialog.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-hr.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-img.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-input.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-label-checkbox.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-p.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-radio.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-search.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-select.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-span.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-switch.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-tag.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-tbl.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-textarea.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-ul.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/common-user.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-btn.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div-backBtn.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div-checkbox.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div-dialog.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-hr.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-img.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-input.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-label-checkbox.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-p.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-radio.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-search.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-select.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-span.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-switch.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-tag.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-tbl.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-ul.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-user.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common-event/common-event.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-common.css?v=${scriptVersion}`);
@@ -153,6 +152,7 @@ var GGbase =
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MGrpfncSponsorship.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/entity/entity-MSchedulebyweek.css?v=${scriptVersion}`);
         /* project */ cssArr.push(`${scriptHost}/src/prj/css/page/index.css?v=${scriptVersion}`);
+        /* project */ cssArr.push(`${scriptHost}/src/common/css/prj-yogimoim/css/A00UserLogin.css?v=${scriptVersion}`);
 
         if(SCRIPT_MERGE)
         {

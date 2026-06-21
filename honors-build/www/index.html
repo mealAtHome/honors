@@ -37,13 +37,17 @@
         <script src="./lib/i18n/src/jquery.i18n.parser.js"></script>
         <script src="./lib/i18n/src/jquery.i18n.emitter.js"></script>
         <script src="./lib/i18n/src/jquery.i18n.language.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler.min.css" /> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js"></script> -->
         <!-- <script src="./lib/jquery.doubletap.js"></script> -->
 
         <script>
             const ajaxDelayTime = 300; /* ajax 지연시간 */
             const VERSION = "10011";
-            const SCRIPT_MERGE = true; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
-            const LOCALMODE = false;
+            const SCRIPT_MERGE = false; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
+            const LOCALMODE = true;
             var scriptloaded = false;
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
             var ServerInfo =
@@ -267,11 +271,11 @@
                 <table class="common-tbl-normal" tbl-type="noborder">
                     <tbody>
                         <tr>
-                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMHM" hyperlink-viewmode="page" tab="">홈</td>
-                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMGP" hyperlink-viewmode="page" tab="">그룹</td>
-                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMCL" hyperlink-viewmode="page" tab="">일정</td>
-                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMST" hyperlink-viewmode="page" tab="">정산</td>
-                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMMG" hyperlink-viewmode="page" tab="">설정</td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMHM" hyperlink-viewmode="page" tab=""><i class="ti ti-home"         aria-hidden="true"></i><div class="common-tag-fontsize09">홈</div></td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMGP" hyperlink-viewmode="page" tab=""><i class="ti ti-users"        aria-hidden="true"></i><div class="common-tag-fontsize09">그룹</div></td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMCL" hyperlink-viewmode="page" tab=""><i class="ti ti-calendar"     aria-hidden="true"></i><div class="common-tag-fontsize09">일정</div></td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMST" hyperlink-viewmode="page" tab=""><i class="ti ti-credit-card"  aria-hidden="true"></i><div class="common-tag-fontsize09">정산</div></td>
+                            <td class="commonEvent-tag-hyperlink common-tap" hyperlink="UMMG" hyperlink-viewmode="page" tab=""><i class="ti ti-settings"     aria-hidden="true"></i><div class="common-tag-fontsize09">설정</div></td>
                         </tr>
                     </tbody>
                 </table>
