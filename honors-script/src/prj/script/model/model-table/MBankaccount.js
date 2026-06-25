@@ -72,7 +72,7 @@ class MBankaccount
                 <span class="common-tag-block"></span>
                 <span class="common-tag-block">${this.getBankname()}&nbsp;${this.getBaccacct()}</span>
                 <span class="common-tag-block">예금주명 : ${this.getBaccname()}</span>
-                <div class="common-tag-block common-tag-fontsize09 common-tag-paddingUD02">
+                <div class="common-tag-block common-tag-fontsize09 common-tag-paddingUD">
                     ${btnHtml}
                 </div>
             </div>

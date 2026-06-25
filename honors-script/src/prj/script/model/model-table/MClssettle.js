@@ -204,7 +204,7 @@ class MClssettles extends _MCommon
             html +=
             `
                 <div class="MGrpMembers-make-div-modelTop common-div-card">
-                    <span class="common-tag-block common-tag-strong common-tag-cushionDw03">정산상세 - ${model.getUsername()}</span>
+                    <span class="common-tag-block common-tag-strong common-tag-cushionDw">정산상세 - ${model.getUsername()}</span>
                     <span class="common-tag-block ">${model.getGrpname()}</span>
                     <span class="common-tag-block ">${model.getClstitle()}</span>
                     <span class="common-tag-block common-tag-colorGrey common-tag-fontsize08">${model.getClsPeriod()}</span>

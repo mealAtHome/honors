@@ -33,11 +33,6 @@
 /* ================ */
 /* logo */
 /* ================ */
-// .ULGN-img-icon
-// {
-//     display:block;
-//     margin:0.3em auto;
-// }
 #ULGN-span-title
 {
     display:block;
@@ -50,8 +45,8 @@
 {
     display:block;
     width:4em;
-    height:0.2em;
-    margin:0.2em 0em;
+    height:$space02;
+    margin:$space02 0em;
     background-color: $colorSide;
 }
 
@@ -78,7 +73,7 @@
 }
 .ULGN-img-input
 {
-    margin-top:0.4em;
+    margin-top:$space04;
     height:1.2em;
     vertical-align: top;
 }
@@ -89,7 +84,7 @@
 .ULGN-login-btn
 {
     display:block;
-    margin:0.8em auto;
+    margin:$space08 auto;
     width:18em;
     height:3em;
 }
@@ -102,3 +97,20 @@
     text-align: right;
     font-size: 0.9em;
 }
+
+/* ================ */
+/* --- 또는 --- */
+/* ================ */
+.ULGN-div-divider
+{
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin: $space02 auto $space04;
+    width: 15em;
+}
+.ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; background: $colorLine; }
+.ULGN-div-divider > div:nth-child(2) { color: $colorLine; }
+.ULGN-div-divider > div:nth-child(3) { flex: 1; height: 0.05em; background: $colorLine; }
+
+

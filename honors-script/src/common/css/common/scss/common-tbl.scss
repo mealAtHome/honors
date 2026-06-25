@@ -19,7 +19,7 @@
     width:100%;
     border:none;
 }
-.common-tbl-footer > tbody > tr > td { text-align: center; padding:0.5em; border-width: 0; background-color:rgba(2, 6, 84, 1.0); }
+.common-tbl-footer > tbody > tr > td { text-align: center; padding:0.5em; border-width: 0; background-color:$colorMain; }
 .common-tbl-footer > tbody > tr > td               { width:  5%; text-align:  left; }
 .common-tbl-footer > tbody > tr > td[td-type=last] { width: 95%; text-align: right; }
 
@@ -61,7 +61,7 @@
 /* title */
 .common-tbl-title > tbody > tr > td:nth-child(1) > span:nth-child(1)
 {
-    color:rgb(2,6,84);
+    color:$colorMain;
     font-weight: 900;
     padding:0.3em 0.7em 0.3em 0.3em;
     font-size:1.2em;
@@ -76,7 +76,7 @@
     border-collapse:collapse;
     margin: 0em 0em 0.5em;
     padding: 0em;
-    border-bottom: 1px solid rgb(2,6,84);
+    border-bottom: 1px solid $colorMain;
 }
 .common-tbl-dialogtitle > tbody > tr > td                   { padding:0.5em; white-space: nowrap; }
 .common-tbl-dialogtitle > tbody > tr > td:nth-child(1)      { vertical-align: middle; width:20%; text-align: left; }
@@ -85,7 +85,7 @@
 /* title */
 .common-tbl-dialogtitle > tbody > tr > td:nth-child(1) > span:nth-child(1)
 {
-    color:rgb(2,6,84);
+    color:$colorMain;
     font-weight: 900;
     padding:0.3em 0.7em 0.3em 0.3em;
     font-size:1.2em;
@@ -115,16 +115,16 @@
     width:100%;
     margin: 1em 0em 0.3em 0em;
     padding: 0em;
-    /* border-bottom: 1px solid rgb(2,6,84); */
+    /* border-bottom: 1px solid $colorMain; */
 }
-.common-tbl-subtitle > tbody > tr > td:nth-child(1)      { vertical-align : middle; padding-left:0.6em; } /* 타이틀 */
-.common-tbl-subtitle > tbody > tr > td:nth-last-child(1) { vertical-align : middle; padding-right:0.6em; } /* 마지막 td */
+.common-tbl-subtitle > tbody > tr > td:nth-child(1)      { vertical-align : middle; padding-left:$space06; } /* 타이틀 */
+.common-tbl-subtitle > tbody > tr > td:nth-last-child(1) { vertical-align : middle; padding-right:$space06; } /* 마지막 td */
 
 /* 페이지 안의 부제목 span */
 .common-tbl-subtitle > tbody > tr > td:nth-child(1) > span:nth-child(1)
 {
     display: inline-table;
-    color:rgb(2,6,84);
+    color:$colorMain;
     font-weight: 900;
     padding:0.3em 0.7em 0.3em 0.3em;
     line-height:1.4em;
@@ -141,14 +141,14 @@
     height: 1em;
     vertical-align: middle;
     margin-right:0.3em;
-    margin-bottom:0.2em;
+    margin-bottom:$space02;
     content:"";
 }
 */
 .common-tbl-subtitle > tbody > tr > td:nth-child(1) { text-align: left;  width:90%; }
 .common-tbl-subtitle > tbody > tr > td:nth-child(2) { text-align: right; white-space: nowrap; }
 .common-tbl-subtitle > tbody > tr > td:nth-child(2) * { white-space: nowrap;}
-.common-tbl-subtitle button { margin:0.2em 0.1em 0.2em 0em; }
+.common-tbl-subtitle button { margin:$space02 0.1em $space02 0em; }
 
 /* ============================== */
 /* tab */
@@ -176,7 +176,7 @@
 {
     padding: 0.5em 0.7em;
     border-radius: 3em;
-    color: rgba(2, 6, 84, 1.0);
+    color: $colorMain;
     line-height: 1.6;
 }
 .common-tbl-tab > tbody > tr > td[tab="space"]
@@ -190,7 +190,7 @@
 {
     color: white;
     border-radius: 3em;
-    background-color: rgba(2, 6, 84, 1.0);
+    background-color: $colorMain;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
 .common-tbl-tab > tbody > tr > td[tab="tab"]:active
@@ -222,9 +222,9 @@
 }
 .common-tbl-lineTab > tbody > tr > td
 {
-    padding:0.5em 0.8em;
+    padding:0.5em $space08;
     border-top    : 4px solid rgb(200,200,200);
-    border-bottom : 2px solid rgba(2, 6, 84, 1.0);
+    border-bottom : 2px solid $colorMain;
     border-left   : 2px solid rgb(200,200,200);
     /* border-right  : 2px solid rgb(200,200,200); */
 }
@@ -232,18 +232,18 @@
 {
     width:90%;
     border:none;
-    border-bottom : 2px solid rgba(2, 6, 84, 1.0);
+    border-bottom : 2px solid $colorMain;
     border-left   : 2px solid rgb(200,200,200);
     padding:0em 0.3em;
 }
 .common-tbl-lineTab > tbody > tr > td[tab="tab"]
 {
     font-weight   : bold;
-    border-top    : 4px solid rgba(2, 6, 84, 1.0);
-    border-left   : 2px solid rgba(2, 6, 84, 1.0) !important;
-    border-right  : 2px solid rgba(2, 6, 84, 1.0) !important;
+    border-top    : 4px solid $colorMain;
+    border-left   : 2px solid $colorMain !important;
+    border-right  : 2px solid $colorMain !important;
     border-bottom : none;
-    color         : rgba(2, 6, 84, 1.0);
+    color         : $colorMain;
 }
 .common-tbl-lineTab > tbody > tr > td[tab=""]:active,
 .common-tbl-lineTab > tbody > tr > td[tab="tab"]:active
@@ -299,7 +299,7 @@
 .common-tbl-default > tbody > tr > td,
 .common-tbl-default > tbody > tr > th
 {
-    padding:0.4em;
+    padding:$space04;
     line-height: 1.6;
 }
 
@@ -314,7 +314,7 @@
 .common-tbl-sort > thead > tr > th,
 .common-tbl-sort > tbody > tr > th
 {
-    padding:0.4em;
+    padding:$space04;
     background-color:#e9ecef;
     border:1px solid #dee2e6;
     white-space: nowrap;
@@ -324,7 +324,7 @@
 .common-tbl-sort > tfoot > tr > td,
 .common-tbl-sort > tbody > tr > td
 {
-    padding:0.4em;
+    padding:$space04;
     border:1px solid #dee2e6;
 }
 
@@ -346,7 +346,7 @@
 .common-tbl-normal > tfoot > tr > th,
 .common-tbl-normal > tfoot > tr > td
 {
-    padding:0.4em;
+    padding:$space04;
     background-color:#e9ecef;
     white-space: nowrap;
     text-align:center;
@@ -356,7 +356,7 @@
 .common-tbl-normal > tfoot > tr > td,
 .common-tbl-normal > tbody > tr > td
 {
-    padding:0.4em;
+    padding:$space04;
 }
 
 /*
@@ -419,15 +419,15 @@
 .common-tbl-slideformFooterBtn  > tbody > tr > td  { border:none; }
 
 .common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td              { width:100%; }
-.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td > button     { width:100%; padding:0.6em; }
+.common-tbl-slideformFooterBtn[tbl-type="button1"] > tbody > tr > td > button     { width:100%; padding:$space06; }
 
 .common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td:nth-child(1) { width:20%;  padding-right : 0.3em; }
 .common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td:nth-child(2) { width:100%; padding-left  : 0.3em; }
-.common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td > button     { width:100%; padding:0.6em; }
+.common-tbl-slideformFooterBtn[tbl-type="button2"] > tbody > tr > td > button     { width:100%; padding:$space06; }
 
 .common-tbl-slideformFooterBtn[tbl-type="liner2"] > tbody > tr > td:nth-child(1) { width:50%; padding-right : 0.3em; }
 .common-tbl-slideformFooterBtn[tbl-type="liner2"] > tbody > tr > td:nth-child(2) { width:50%; padding-left  : 0.3em; }
-.common-tbl-slideformFooterBtn[tbl-type="liner2"] > tbody > tr > td > button     { width:100%; padding:0.6em; }
+.common-tbl-slideformFooterBtn[tbl-type="liner2"] > tbody > tr > td > button     { width:100%; padding:$space06; }
 
 
 /* ============================== */
@@ -440,7 +440,7 @@
     border-collapse: collapse;
     margin:1em auto;
 }
-.common-tbl-summary > tbody > tr > * { padding:0.4em; border:1px solid rgb(150,150,150); }
+.common-tbl-summary > tbody > tr > * { padding:$space04; border:1px solid rgb(150,150,150); }
 .common-tbl-summary > tbody > tr > th
 {
     font-weight: normal;
@@ -456,7 +456,7 @@
     border-collapse: collapse;
 }
 
-.common-tbl-horizon > tbody > tr > * { padding:0.4em; border: 1px solid rgb(150,150,150); }
+.common-tbl-horizon > tbody > tr > * { padding:$space04; border: 1px solid rgb(150,150,150); }
 .common-tbl-horizon > tbody > tr > th { text-align:right; background-color: #e9ecef; }
 .common-tbl-horizon > tbody > tr > td { text-align:center; }
 
@@ -480,7 +480,7 @@
 .common-tbl-vertical > tbody > tr > th,
 .common-tbl-vertical > tbody > tr > td
 {
-    padding:0.4em;
+    padding:$space04;
 }
 .common-tbl-vertical[tbl-type="normal"]   { border:1px solid #dee2e6; }
 .common-tbl-vertical[tbl-type="normal"]   > tbody > tr > th { background-color:#e9ecef; border:1px solid #dee2e6; }

@@ -60,7 +60,7 @@
 /* When the checkbox button is checked, add a blue background */
 .common-label-checkbox > input[type=checkbox]:checked ~ span
 {
-    background-color: rgba(2, 6, 84, 1.0);
+    background-color: $colorMain;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */

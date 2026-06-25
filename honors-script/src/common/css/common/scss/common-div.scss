@@ -9,7 +9,7 @@ div { display: block; }
 {
     display:flex;
     align-items:center;
-    gap: $marginA;
+    gap: $space08;
 }
 
 /*=================================*/
@@ -17,8 +17,8 @@ div { display: block; }
 /*=================================*/
 .common-div-dot
 {
-    width: 0.6em;
-    height: 0.6em;
+    width: $space06;
+    height: $space06;
     background: #3D6BF5;
     border-radius: 50%;
     flex-shrink: 0;
@@ -31,7 +31,7 @@ div { display: block; }
 .common-div-headerTop
 {
     background: #fff;
-    padding: $marginB $marginA;
+    padding: $space06 $space08;
     /* display: flex; */
     /* justify-content: space-between; */
     /* align-items: center; */
@@ -40,12 +40,11 @@ div { display: block; }
 
 .common-div-sectionHeader
 {
-    font-size: 1em;
-    font-weight: 500;
+        font-weight: 500;
     color: $colorBody;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin: $marginDown;
+    margin: $space02own;
 }
 
 
@@ -54,7 +53,7 @@ div { display: block; }
 /*=================================*/
 .common-div-btnList > *
 {
-    margin-bottom: $marginD;
+    margin-bottom: $space02;
 }
 
 /*=================================*/
@@ -85,7 +84,7 @@ div { display: block; }
     background: #e0e0e0;
     overflow: hidden;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: $marginA;
+    margin-bottom: $space08;
 }
 
 .common-div-progressBar {
@@ -111,7 +110,6 @@ div { display: block; }
     left: 0;
     width: calc(100% - 4em);
     height: auto;
-    font-size: 1em;
     padding: 1em 2em;
 }
 .common-div-slideformChild[slideform-status='exit'] { transform: translateX(-100%); transition: transform 0.3s ease; /* display:none; */ }
@@ -123,7 +121,6 @@ div { display: block; }
     display: block;
     width: calc(100% - 4em);
     height: auto;
-    font-size: 1em;
     padding: 1em 2em;
 }
 .common-div-formChild > .common-div-formField:nth-child(1) { margin-top: 1em; }
@@ -133,7 +130,7 @@ div { display: block; }
 {
     text-align: left;
     margin: 1em 0em 2em;
-    padding: 0.0em;
+    padding: $spaceZZ;
     box-sizing: content-box;
 }
 .common-div-formTitle > span:nth-child(1) { display:block; font-size:1.4em; font-weight:bold; color: $colorMain; }
@@ -142,11 +139,11 @@ div { display: block; }
 {
     text-align: left;
     margin: 2em 0em;
-    padding: 0.0em;
+    padding: $spaceZZ;
     box-sizing: content-box;
 }
-.common-div-formField > span:nth-child(1) { display:block; font-size:1.1em; margin: 0.3em 0em 0.0em; font-weight: bold; line-height: 1.5em; }
-.common-div-formField > span:nth-child(2) { display:block; font-size:0.9em; margin: 0.0em 0em 0.4em; font-weight: normal; line-height: 1.5em; }
+.common-div-formField > span:nth-child(1) { display:block; font-size:1.1em; margin: 0.3em 0em $spaceZZ; font-weight: bold; line-height: 1.5em; }
+.common-div-formField > span:nth-child(2) { display:block; font-size:0.9em; margin: $spaceZZ 0em $space04; font-weight: normal; line-height: 1.5em; }
 
 /* ============================== */
 /* 입력 폼 전용 */
@@ -154,8 +151,8 @@ div { display: block; }
 .common-div-form
 {
     text-align: center;
-    margin: 0.6em 0.6em 1em;
-    padding: 0.0em;
+    margin: $space06 $space06 1em;
+    padding: $spaceZZ;
     box-sizing: content-box;
 }
 .common-div-form > span:nth-child(1)
@@ -176,8 +173,8 @@ div { display: block; }
 .common-div-indent
 {
     display : block;
-    margin  : 0.4em;
-    padding : 0.0em;
+    margin  : $space04;
+    padding : $spaceZZ;
 }
 .common-div-indent > span { display:block; }
 .common-div-indent > span::before { content:"・"; vertical-align: middle;}
@@ -214,33 +211,35 @@ div { display: block; }
 .common-div-card
 {
     position: relative;
-    /* margin  : 0.6em 0.8em 0.8em 0.6em; */
-    border-radius: 0.8em;
-    padding : 0.8em 0.8em;
+    /* margin  : $space06 $space08 $space08 $space06; */
+    border-radius: $space08;
+    padding : $space08 $space08;
     overflow-x: auto;
     box-sizing: content-box;
     text-align: left;
     background-color: white;
     box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.2);
 }
-.common-div-card[card-type=warning] { color:rgb( 125,  25,  25); background-color: rgba( 255,  51,  51, 0.1); box-shadow: 1px 1px 7px 2px rgba( 255,  51,  51, 0.8); }
-.common-div-card[card-type=notice]  { color:rgb( 125,  25,  25); background-color: #dbe7ff; box-shadow: none; }
+
+.common-div-card[card-type=warning] { color:$colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
+.common-div-card[card-type=notice]  { color:$colorNtceFont; background-color: $colorNtceBack; box-shadow: $colorNtceShad; }
+.common-div-card[card-type=hero]    { color:$colorHeroFont; background-color: $colorHeroBack; box-shadow: $colorHeroShad; }
 
 /* ============================== */
 /* 에러 메시지용 */
 /* ============================== */
 .common-div-msg
 {
-    margin  : 0.8em 1em 1em 0.8em;
+    margin  : $space08 1em 1em $space08;
     padding : 0.5em 0.5em;
     overflow-x: auto;
     box-sizing: content-box;
     text-align: left;
     line-height:1.6;
 }
-.common-div-msg[common-div-msg-type=error]   { color:rgb( 125,  25,  25); background-color: rgba( 255,  51,  51, 0.1); box-shadow: 1px 1px 7px 2px rgba( 255,  51,  51, 0.8); }
-.common-div-msg[common-div-msg-type=warning] { color:rgb(  95,  95,  12); background-color: rgba(  95, 192,  31, 0.1); box-shadow: 1px 1px 7px 2px rgba( 195, 192,  31, 0.8); }
-.common-div-msg[common-div-msg-type=allow]   { color:rgb(   7,  69,  14); background-color: rgba(   7,  69,  14, 0.1); box-shadow: 1px 1px 7px 2px rgba(   7,  69,  14, 0.8); }
+.common-div-msg[common-div-msg-type=error]   { color:$colorErrrFont; background-color: $colorErrrBack; box-shadow: $colorErrrShad; }
+.common-div-msg[common-div-msg-type=warning] { color:$colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
+.common-div-msg[common-div-msg-type=allow]   { color:$colorAllwFont; background-color: $colorAllwBack; box-shadow: $colorAllwShad; }
 
 /* ============================== */
 /* 패드를 사용하지 않는 DIV */
@@ -359,23 +358,19 @@ div { display: block; }
     padding-bottom:0.3em;
 }
 
-.common-div-cushion     { display: block; margin: 0.8em;                   padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionULR  { display: block; margin: 0.8em 0.8em 0.0em 0.8em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionTLR  { display: block; margin: 0.8em 0.8em 0.0em 0.8em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionTop  { display: block; margin: 0.0em 0.8em 0.8em 0.8em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionUp   { display: block; margin: 0.8em 0.0em 0.0em 0.0em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionUD   { display: block; margin: 0.8em 0.0em;             padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionD    { display: block; margin: 0.0em 0.0em 0.8em 0.0em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionLeft { display: block; margin: 0.0em 0.0em 0.0em 0.8em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionUL   { display: block; margin: 0.8em 0.0em 0.0em 0.8em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionLRD  { display: block; margin: 0.0em 0.8em 0.8em 0.8em; padding: 0.0em; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushion     { display: block; margin: $space08;                             padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: left;    }
+.common-div-cushionUp   { display: block; margin: $space08 $spaceZZ $spaceZZ $spaceZZ;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionUD   { display: block; margin: $space08 $spaceZZ;                    padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionD    { display: block; margin: $spaceZZ $spaceZZ $space08 $spaceZZ;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionLeft { display: block; margin: $spaceZZ $spaceZZ $spaceZZ $space08;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionUL   { display: block; margin: $space08 $spaceZZ $spaceZZ $space08;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
-.common-div-cushion > .common-div-cushionUD:nth-child(1) { margin     : 0.0em 0.0em 0.3em 0.0em; padding : 0.0em 0.0em 0.3em 0.0em; }
-.common-div-cushionUD > .common-div-card:nth-child(1)    { margin-top : 0.2em; }
+.common-div-cushion > .common-div-cushionUD:nth-child(1) { margin     : $spaceZZ $spaceZZ 0.3em $spaceZZ; padding : $spaceZZ $spaceZZ 0.3em $spaceZZ; }
+.common-div-cushionUD > .common-div-card:nth-child(1)    { margin-top : $space02; }
 
-/* 쿠션 아래의 첫번째, formField 는 marginTop:0.4em; */
-.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: 0.4em; }
+/* 쿠션 아래의 첫번째, formField 는 marginTop:$space04; */
+.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $space04; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter
@@ -401,7 +396,7 @@ div { display: block; }
 .common-div-table
 {
     width:100%;
-    margin:0.2em 0em;
+    margin:$space02 0em;
     padding:0.5em 0em;
     overflow-x: auto;
     box-sizing: content-box;
@@ -420,14 +415,14 @@ div { display: block; }
     padding: 0em;
     box-sizing: content-box;
     text-align: left;
-    border-bottom: 1px solid rgb(2,6,84);
+    border-bottom: 1px solid $colorMain;
 }
 
 /* 페이지 안의 부제목 span */
 .common-div-subTitle > span:nth-child(1)
 {
     display: inline-table;
-    color:rgb(2,6,84);
+    color:$colorMain;
     font-weight: 900;
     /* background-color:#ff7415; */
     padding:0.3em 0.7em 0.3em 0.3em;
@@ -443,12 +438,12 @@ div { display: block; }
     height: 1em;
     vertical-align: middle;
     margin-right:0.3em;
-    margin-bottom:0.2em;
+    margin-bottom:$space02;
     content:"";
 }
 
 /* 페이지 안의 부제목 topDiv */
-.common-div-subTitle > button { margin:0.4em 0em 0.4em 0.4em; }
+.common-div-subTitle > button { margin:$space04 0em $space04 $space04; }
 
 
 /* ============================== */
@@ -458,7 +453,7 @@ div { display: block; }
 {
     display: block;
     text-align: center;
-    font-size:0.8em;
+    font-size:$space08;
     padding:0.3em;
 }
 
@@ -539,8 +534,8 @@ div { display: block; }
 /* ============================== */
 .common-div-announce
 {
-    margin:0.6em;
-    padding:0.4em;
+    margin:$space06;
+    padding:$space04;
     text-align: left;
     line-height: 1.7;
     background-color: #ddd;
@@ -579,7 +574,7 @@ div { display: block; }
     color: white;
     width: 3.6em;
     height: 3.6em;
-    padding: 0.4em;
+    padding: $space04;
     border-radius: 1em;
     white-space: nowrap;
     box-shadow: 0px 2px 4px rgba(2, 6, 84, 0.4);
@@ -599,10 +594,9 @@ div { display: block; }
     background: white;
     border: 2px solid #e0e0e0;
     color: #666;
-    padding: 0.5em 0.8em;
-    border-radius: 0.8em;
-    font-size: 1em;
-    font-weight: normal;
+    padding: 0.5em $space08;
+    border-radius: $space08;
+        font-weight: normal;
     cursor: pointer;
     /* transition: all 0.3s ease; */
     text-decoration: none;

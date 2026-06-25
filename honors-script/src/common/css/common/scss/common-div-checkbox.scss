@@ -31,7 +31,7 @@
 .common-label-check
 {
     display:block;
-    margin:0.2em;
+    margin:$space02;
 }
 
 .common-div-checkbox
@@ -62,7 +62,7 @@
     width: 40%;
     height: 80%;
     border: solid white;
-    border-width: 0 0.2em 0.2em 0;
+    border-width: 0 $space02 $space02 0;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);

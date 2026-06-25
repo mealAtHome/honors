@@ -34,7 +34,7 @@
 /* ============================== */
 /* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
 /* ============================== */
-.common-span-color { color: rgba(2, 6, 84, 1.0); }
+.common-span-color { color: $colorMain; }
 
 /* ============================== */
 /* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
@@ -54,15 +54,15 @@
 .common-span-label[label_type=outline],
 .common-span-label
 {
-    color: rgba(2, 6, 84, 1.0);
+    color: $colorMain;
     background-color: transparent;
-    border: 1px solid rgba(2, 6, 84, 1.0);
+    border: 1px solid $colorMain;
 }
 .common-span-label[label_type=inline]
 {
     color: white;
-    background-color: rgba(2, 6, 84, 1.0);
-    border: 1px solid rgba(2, 6, 84, 1.0);
+    background-color: $colorMain;
+    border: 1px solid $colorMain;
 }
 
 /* ============================== */
@@ -70,7 +70,7 @@
 /* ============================== */
 .common-span-record-subTitle
 {
-    padding: 0.4em;
+    padding: $space04;
     border: 1px solid gray;
     font-weight:900;
     display:inline-block;
@@ -83,8 +83,8 @@
 {
     font-size:0.9em;
     white-space: nowrap;
-    padding: 0.3em 0.4em;
-    margin:0.1em 0.0em;
+    padding: 0.3em $space04;
+    margin:0.1em $spaceZZ;
 }
 .common-span-tag[common-span-tag="none"]   { display:none; }
 .common-span-tag[common-span-tag="blue"]   { color:rgb(54, 54, 255);  border:2px solid rgb(110,110,255);   background-color: rgb(200,200,255); }
@@ -114,7 +114,7 @@
     display     : inline-block;
     font-size   : 1em;
     font-weight : 600;
-    padding     : 0.3em 0.6em;
+    padding     : 0.3em $space06;
 }
 .common-span-mini
 {
@@ -166,7 +166,7 @@
     font-weight : normal;
 }
 .common-span-msg[span-type="normal"]       { color:black;                    }
-.common-span-msg[span-type="success"]      { color:rgba(2, 6, 84, 1.0);      }
+.common-span-msg[span-type="success"]      { color:$colorMain;      }
 .common-span-msg[span-type="warning"]      { color:rgba(255, 116, 21, 1.0);  }
 .common-span-msg[span-type="error"]        { color:rgba(139, 0, 0, 1.0); ;   }
 .common-span-msg[span-type="critical"]     { color:rgba(139, 0, 0, 1.0); ;   }

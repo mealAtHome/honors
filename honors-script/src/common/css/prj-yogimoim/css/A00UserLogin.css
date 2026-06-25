@@ -82,3 +82,30 @@
   text-align: right;
   font-size: 0.9em;
 }
+
+/* ================ */
+/* --- 또는 --- */
+/* ================ */
+.ULGN-div-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0.2em auto 0.4em;
+  width: 15em;
+}
+
+.ULGN-div-divider > div:nth-child(1) {
+  flex: 1;
+  height: 0.05em;
+  background: #7A8099;
+}
+
+.ULGN-div-divider > div:nth-child(2) {
+  color: #7A8099;
+}
+
+.ULGN-div-divider > div:nth-child(3) {
+  flex: 1;
+  height: 0.05em;
+  background: #7A8099;
+}

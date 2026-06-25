@@ -1,17 +1,33 @@
+/* 메인색상 */
 $colorMain: rgb(2, 6, 84);
+
 $colorSide: #3D6BF5;
-$colorCncl: #FF7415;
-$colorErrr: rgb(206, 39, 39);
 $colorHead: #1B2A6B;
 $colorBody: #7A8099;
 $colorLine: #7A8099;
 
-$marginA: 0.8em;
-$marginB: 0.6em;
-$marginC: 0.4em;
-$marginD: 0.2em;
+/* 상태색상 */
+$colorHero: rgb(2, 6, 84);    $colorHeroFont: darken($colorHero, 20%); $colorHeroBack: transparentize($colorHero, 0.8); $colorHeroShad: 1px 1px 7px 2px rgba(2, 6, 84, 0.8);
+$colorCncl: #FF7415;          $colorCnclFont: darken($colorCncl, 20%); $colorCnclBack: transparentize($colorCncl, 0.8); $colorCnclShad: 1px 1px 7px 2px rgba(255, 150, 0, 0.8);
+$colorAllw: rgb(0, 150, 0);   $colorAllwFont: darken($colorAllw, 20%); $colorAllwBack: transparentize($colorAllw, 0.8); $colorAllwShad: 1px 1px 7px 2px rgba(0, 255, 0, 0.8);
+$colorNtce: rgb(55, 75, 155); $colorNtceFont: darken($colorNtce, 20%); $colorNtceBack: transparentize($colorNtce, 0.8); $colorNtceShad: 1px 1px 7px 2px rgba(55, 75, 155, 0.8);
+$colorWarn: rgb(180, 150, 0); $colorWarnFont: darken($colorWarn, 20%); $colorWarnBack: transparentize($colorWarn, 0.8); $colorWarnShad: 1px 1px 7px 2px rgba(255, 255, 0, 0.8);
+$colorErrr: rgb(206, 39, 39); $colorErrrFont: darken($colorErrr, 20%); $colorErrrBack: transparentize($colorErrr, 0.8); $colorErrrShad: 1px 1px 7px 2px rgba(255, 51, 51, 0.8);
 
-$marginDown : 0em 0em $marginA 0em;
+$space10: 1.0em;
+$space08: 0.8em;
+$space06: 0.6em;
+$space04: 0.4em;
+$space03: 0.3em;
+$space02: 0.2em;
+$spaceZZ: 0.0em;
+
+$space02own : 0em 0em $space08 0em;
 
 $borderRadius: 0.4em;
 
+/* mixin */
+@mixin btnOutlineNormal   ($color) { border: 1px solid $color; color            : $color;                   } @mixin btnOutlineActive ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
+@mixin btnInlineNormal    ($color) { border: 1px solid $color; background-color : $color;  color : #ffffff; } @mixin btnInlineActive  ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
+@mixin btnOutlineDisabled ($color) { border: 1px solid $color; background-color : #ffffff; color : $color;  }
+@mixin btnInlineDisabled  ($color) { border: 1px solid $color; background-color : #646464; color : #ffffff; }

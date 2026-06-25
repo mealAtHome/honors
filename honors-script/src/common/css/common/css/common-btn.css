@@ -2,6 +2,7 @@
 /* ============================== */
 /* main button */
 /* ============================== */
+.common-btn-light,
 .common-btn-outline,
 .common-btn-inline,
 .common-btn-round,
@@ -16,6 +17,7 @@
   border-radius: 0.4em;
 }
 
+.common-btn-light,
 .common-btn-outline:hover,
 .common-btn-inline:hover,
 .common-btn-round:hover,
@@ -155,6 +157,23 @@
   border: 1px solid rgb(2, 6, 84);
   background-color: #ffffff;
   color: rgb(2, 6, 84);
+}
+
+/* outline */
+.common-btn-light {
+  border: 1px solid #7A8099;
+  color: #7A8099;
+}
+
+.common-btn-light:active {
+  border-color: rgba(122, 128, 153, 0.3);
+  background-color: rgba(122, 128, 153, 0.3);
+}
+
+.common-btn-light:disabled {
+  border: 1px solid #7A8099;
+  background-color: #ffffff;
+  color: #7A8099;
 }
 
 /* inline */
