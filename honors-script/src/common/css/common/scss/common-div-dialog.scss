@@ -11,7 +11,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: $colorBlckBack;
     height:100%;
     width:100%;
 }
@@ -24,7 +24,7 @@
     overflow-y: scroll;
     background-color: white;
     border-radius: 1em 1em 0em 0em;
-    box-shadow: 5px -5px 5px rgb(150,150,150);
+    box-shadow: $colorBlckShad;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -43,7 +43,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: $colorBlckBack;
     height:100%;
     width:100%;
 }
@@ -86,7 +86,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: $colorBlckBack;
     height:100%;
     width:100%;
 }
@@ -109,7 +109,7 @@
 }
 
 /* ========================== */
-/* dialog : 다이얼로그 */
+/* dialog: 다이얼로그 */
 /* ========================== */
 .common-div-fullDialogContainer
 {
@@ -125,7 +125,7 @@
     box-sizing: border-box;
     bottom:200%;
 }
-.common-div-fullDialogContainer[device_kind="pc"]
+.common-div-fullDialogContainer[device_kind=pc]
 {
     width:auto;
     width:800px;
@@ -148,7 +148,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: $colorBlckBack;
     height:100%;
     width:100%;
 }

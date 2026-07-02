@@ -3,7 +3,7 @@
 /* 스위치
 
 <label class="common-label-switch">
-    <input type="checkbox">
+    <input type=checkbox>
     <span></span>
 </label>
 
@@ -55,8 +55,8 @@
     border-radius: 50%;
 }
 
-.common-label-switch > input:checked + span { background-color: rgba(2, 6, 84, 0.8); }
-.common-label-switch > input:focus   + span { box-shadow: 0 0 1px rgba(2, 6, 84, 0.8); }
+.common-label-switch > input:checked + span { background-color: $colorMain; }
+.common-label-switch > input:focus   + span { box-shadow: $colorMainShad; }
 .common-label-switch > input:checked + span:before
 {
     -webkit-transform: translateX(26px);

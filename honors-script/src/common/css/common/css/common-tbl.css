@@ -1,53 +1,10 @@
 @charset "UTF-8";
-/*=================================*/
-/* table auto width */
-/*=================================*/
-.common-tbl-autowidth {
-  width: auto;
-}
-
-.common-tbl-autowidth > tbody, thead > tr > th, td {
-  width: auto;
-}
-
-/*=================================*/
-/* table to footer */
-/*=================================*/
-.common-tbl-footer {
-  /* display:block; */
-  position: fixed;
-  border-collapse: collapse;
-  bottom: 0px;
-  left: 0px;
-  width: 100%;
-  border: none;
-}
-
-.common-tbl-footer > tbody > tr > td {
-  text-align: center;
-  padding: 0.5em;
-  border-width: 0;
-  background-color: rgb(2, 6, 84);
-}
-
-.common-tbl-footer > tbody > tr > td {
-  width: 5%;
-  text-align: left;
-}
-
-.common-tbl-footer > tbody > tr > td[td-type=last] {
-  width: 95%;
-  text-align: right;
-}
-
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 /*=================================*/
 /* table to center */
 /*=================================*/
-.common-tbl-center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .common-tbl-textCenter,
 .common-tbl-textCenter > tbody > tr > td,
 .common-tbl-textCenter > tbody > tr > th,
@@ -58,159 +15,6 @@
   text-align: center;
 }
 
-/*=================================*/
-/* page title */
-/*=================================*/
-.common-tbl-title {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0em 0em 0.5em;
-  padding: 0em;
-}
-
-.common-tbl-title > tbody > tr > td {
-  white-space: nowrap;
-}
-
-.common-tbl-title > tbody > tr > td:nth-child(1) {
-  vertical-align: middle;
-  width: 20%;
-  text-align: left;
-}
-
-.common-tbl-title > tbody > tr > td:nth-child(2) {
-  vertical-align: bottom;
-  width: 80%;
-  text-align: right;
-}
-
-/* title */
-.common-tbl-title > tbody > tr > td:nth-child(1) > span:nth-child(1) {
-  color: rgb(2, 6, 84);
-  font-weight: 900;
-  padding: 0.3em 0.7em 0.3em 0.3em;
-  font-size: 1.2em;
-}
-
-/*=================================*/
-/* dialog title */
-/*=================================*/
-.common-tbl-dialogtitle {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 0em 0em 0.5em;
-  padding: 0em;
-  border-bottom: 1px solid rgb(2, 6, 84);
-}
-
-.common-tbl-dialogtitle > tbody > tr > td {
-  padding: 0.5em;
-  white-space: nowrap;
-}
-
-.common-tbl-dialogtitle > tbody > tr > td:nth-child(1) {
-  vertical-align: middle;
-  width: 20%;
-  text-align: left;
-}
-
-.common-tbl-dialogtitle > tbody > tr > td:nth-child(2) {
-  vertical-align: bottom;
-  width: 80%;
-  text-align: right;
-}
-
-/* title */
-.common-tbl-dialogtitle > tbody > tr > td:nth-child(1) > span:nth-child(1) {
-  color: rgb(2, 6, 84);
-  font-weight: 900;
-  padding: 0.3em 0.7em 0.3em 0.3em;
-  font-size: 1.2em;
-}
-
-/*=================================*/
-/* page subtitle */
-/*=================================*/
-/*
-    sample code
-
-    <table class="common-tbl-subtitle">
-        <tbody>
-            <tr>
-                <td><span data-i18n="">정산계좌</span></td>
-            </tr>
-        </tbody>
-    </table>
- */
-.common-div-cushion > .common-tbl-subtitle {
-  margin: 0em;
-}
-
-.common-div-cushion > .common-tbl-subtitle > tbody > tr > td:nth-child(1) {
-  padding-left: 0em;
-}
-
-.common-tbl-subtitle {
-  border-collapse: collapse;
-  display: block;
-  min-width: 100%;
-  width: 100%;
-  margin: 1em 0em 0.3em 0em;
-  padding: 0em;
-  /* border-bottom: 1px solid rgb(2,6,84); */
-}
-
-.common-tbl-subtitle > tbody > tr > td:nth-child(1) {
-  vertical-align: middle;
-  padding-left: 0.6em;
-} /* 타이틀 */
-.common-tbl-subtitle > tbody > tr > td:nth-last-child(1) {
-  vertical-align: middle;
-  padding-right: 0.6em;
-} /* 마지막 td */
-/* 페이지 안의 부제목 span */
-.common-tbl-subtitle > tbody > tr > td:nth-child(1) > span:nth-child(1) {
-  display: inline-table;
-  color: rgb(2, 6, 84);
-  font-weight: 900;
-  padding: 0.3em 0.7em 0.3em 0.3em;
-  line-height: 1.4em;
-  font-size: 1.1em;
-  vertical-align: bottom;
-}
-
-/*
-.common-tbl-subtitle > tbody > tr > td:nth-child(1) > span:nth-child(1)::before
-{
-    background-image: url('../../res/icon/subtitle_header.png');
-    background-size : 100% 100%;
-    display: inline-block;
-    width: 2.23em;
-    height: 1em;
-    vertical-align: middle;
-    margin-right:0.3em;
-    margin-bottom:0.2em;
-    content:"";
-}
-*/
-.common-tbl-subtitle > tbody > tr > td:nth-child(1) {
-  text-align: left;
-  width: 90%;
-}
-
-.common-tbl-subtitle > tbody > tr > td:nth-child(2) {
-  text-align: right;
-  white-space: nowrap;
-}
-
-.common-tbl-subtitle > tbody > tr > td:nth-child(2) * {
-  white-space: nowrap;
-}
-
-.common-tbl-subtitle button {
-  margin: 0.2em 0.1em 0.2em 0em;
-}
-
 /* ============================== */
 /* tab */
 /*
@@ -218,10 +22,10 @@
         <table class="common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="UD-td-entity" tab="" entity_type="player" data-i18n="(UD)managing player"><!-- 연동선수 --></td>
-                    <td class="UD-td-entity" tab="" entity_type="team"   data-i18n="(UD)managing team"  ><!-- 관리 팀 --></td>
-                    <td class="UD-td-entity" tab="" entity_type="league" data-i18n="(UD)managing league"><!-- 관리 리그 --></td>
-                    <td tab="space"></td>
+                    <td class="UD-td-entity" tab="" entity_type=player data-i18n="(UD)managing player"><!-- 연동선수 --></td>
+                    <td class="UD-td-entity" tab="" entity_type=team   data-i18n="(UD)managing team"  ><!-- 관리 팀 --></td>
+                    <td class="UD-td-entity" tab="" entity_type=league data-i18n="(UD)managing league"><!-- 관리 리그 --></td>
+                    <td tab=space></td>
                 </tr>
             </tbody>
         </table>
@@ -265,10 +69,10 @@
         <table class="common-tbl-lineTab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="UD-td-entity" tab="" entity_type="player" data-i18n="(UD)managing player"><!-- 연동선수 --></td>
-                    <td class="UD-td-entity" tab="" entity_type="team"   data-i18n="(UD)managing team"  ><!-- 관리 팀 --></td>
-                    <td class="UD-td-entity" tab="" entity_type="league" data-i18n="(UD)managing league"><!-- 관리 리그 --></td>
-                    <td tab="space"></td>
+                    <td class="UD-td-entity" tab="" entity_type=player data-i18n="(UD)managing player"><!-- 연동선수 --></td>
+                    <td class="UD-td-entity" tab="" entity_type=team   data-i18n="(UD)managing team"  ><!-- 관리 팀 --></td>
+                    <td class="UD-td-entity" tab="" entity_type=league data-i18n="(UD)managing league"><!-- 관리 리그 --></td>
+                    <td tab=space></td>
                 </tr>
             </tbody>
         </table>
@@ -285,7 +89,7 @@
   border-top: 4px solid rgb(200, 200, 200);
   border-bottom: 2px solid rgb(2, 6, 84);
   border-left: 2px solid rgb(200, 200, 200);
-  /* border-right  : 2px solid rgb(200,200,200); */
+  /* border-right: 2px solid rgb(200,200,200); */
 }
 
 .common-tbl-lineTab > tbody > tr > td[tab=space] {
@@ -425,7 +229,7 @@
 }
 
 /*
-    class="common-tbl-normal" tbl-type="noborder"
+    class="common-tbl-normal" tbl-type=noborder
 */
 .common-tbl-normal[tbl-type=normal] {
   border: 1px solid #dee2e6;
@@ -663,7 +467,7 @@
 }
 
 /* ============================== */
-/* TABLE : 세로형 테이블 */
+/* TABLE: 세로형 테이블 */
 /* ============================== */
 .common-tbl-vertical {
   text-align: center;
@@ -794,7 +598,7 @@
 }
 
 /* ============================== */
-/* TABLE : 테이블 안에 테이블을 활용할 시 */
+/* TABLE: 테이블 안에 테이블을 활용할 시 */
 /* ============================== */
 .common-tbl-inside {
   width: 100%;
@@ -802,7 +606,7 @@
 }
 
 /* ============================== */
-/* TABLE : 라디오 버튼용 */
+/* TABLE: 라디오 버튼용 */
 /* ============================== */
 .common-tbl-radio {
   line-height: 1.4;
@@ -832,7 +636,7 @@
 }
 
 /* ============================== */
-/* TABLE : 유형입력용 */
+/* TABLE: 유형입력용 */
 /* ============================== */
 .common-tbl-type > tbody > tr > th {
   text-align: left;

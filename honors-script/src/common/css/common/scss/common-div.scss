@@ -40,7 +40,7 @@ div { display: block; }
 
 .common-div-sectionHeader
 {
-        font-weight: 500;
+    font-weight: 500;
     color: $colorBody;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -172,9 +172,9 @@ div { display: block; }
 /* ============================== */
 .common-div-indent
 {
-    display : block;
-    margin  : $space04;
-    padding : $spaceZZ;
+    display: block;
+    margin: $space04;
+    padding: $spaceZZ;
 }
 .common-div-indent > span { display:block; }
 .common-div-indent > span::before { content:"・"; vertical-align: middle;}
@@ -211,35 +211,35 @@ div { display: block; }
 .common-div-card
 {
     position: relative;
-    /* margin  : $space06 $space08 $space08 $space06; */
+    /* margin: $space06 $space08 $space08 $space06; */
     border-radius: $space08;
-    padding : $space08 $space08;
+    padding: $space08 $space08;
     overflow-x: auto;
     box-sizing: content-box;
     text-align: left;
     background-color: white;
-    box-shadow: 1px 1px 4px 1px rgba(0,0,0,0.2);
+    box-shadow: $colorBlckShad;
 }
 
-.common-div-card[card-type=warning] { color:$colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
-.common-div-card[card-type=notice]  { color:$colorNtceFont; background-color: $colorNtceBack; box-shadow: $colorNtceShad; }
-.common-div-card[card-type=hero]    { color:$colorHeroFont; background-color: $colorHeroBack; box-shadow: $colorHeroShad; }
+.common-div-card[card-type=warning] { color: $colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
+.common-div-card[card-type=notice]  { color: $colorNtceFont; background-color: $colorNtceBack; box-shadow: $colorNtceShad; }
+.common-div-card[card-type=hero]    { color: $colorHeroFont; background-color: $colorHeroBack; box-shadow: $colorHeroShad; }
 
 /* ============================== */
 /* 에러 메시지용 */
 /* ============================== */
 .common-div-msg
 {
-    margin  : $space08 1em 1em $space08;
-    padding : 0.5em 0.5em;
+    margin: $space08 1em 1em $space08;
+    padding: 0.5em 0.5em;
     overflow-x: auto;
     box-sizing: content-box;
     text-align: left;
     line-height:1.6;
 }
-.common-div-msg[common-div-msg-type=error]   { color:$colorErrrFont; background-color: $colorErrrBack; box-shadow: $colorErrrShad; }
-.common-div-msg[common-div-msg-type=warning] { color:$colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
-.common-div-msg[common-div-msg-type=allow]   { color:$colorAllwFont; background-color: $colorAllwBack; box-shadow: $colorAllwShad; }
+.common-div-msg[common-div-msg-type=error]   { color: $colorErrrFont; background-color: $colorErrrBack; box-shadow: $colorErrrShad; }
+.common-div-msg[common-div-msg-type=warning] { color: $colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
+.common-div-msg[common-div-msg-type=allow]   { color: $colorAllwFont; background-color: $colorAllwBack; box-shadow: $colorAllwShad; }
 
 /* ============================== */
 /* 패드를 사용하지 않는 DIV */
@@ -267,7 +267,7 @@ div { display: block; }
     background: #ffffff;
     width: 100%;
     height: 52px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: $colorBlckShad;
 }
 .common-div-header > div[header=back]  { display:inline-block; width:auto; line-height:52px; }
 .common-div-header > div[header=title] { display:inline-block; width:auto; line-height:52px; padding-left:0.5em; font-size:1.2em; font-weight:bold; }
@@ -320,7 +320,7 @@ div { display: block; }
 }
 .common-btn-pagenationBtn[tab=tab]
 {
-    background-color:$colorMain;
+    background-color: $colorMain;
     color:white;
     /* font-weight: bold; */
 }
@@ -366,10 +366,10 @@ div { display: block; }
 .common-div-cushionUL   { display: block; margin: $space08 $spaceZZ $spaceZZ $space08;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
-.common-div-cushion > .common-div-cushionUD:nth-child(1) { margin     : $spaceZZ $spaceZZ 0.3em $spaceZZ; padding : $spaceZZ $spaceZZ 0.3em $spaceZZ; }
-.common-div-cushionUD > .common-div-card:nth-child(1)    { margin-top : $space02; }
+.common-div-cushion > .common-div-cushionUD:nth-child(1) { margin: $spaceZZ $spaceZZ 0.3em $spaceZZ; padding: $spaceZZ $spaceZZ 0.3em $spaceZZ; }
+.common-div-cushionUD > .common-div-card:nth-child(1)    { margin-top: $space02; }
 
-/* 쿠션 아래의 첫번째, formField 는 marginTop:$space04; */
+/* 쿠션 아래의 첫번째, formField 는 marginTop: $space04; */
 .common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $space04; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
@@ -380,182 +380,15 @@ div { display: block; }
 }
 
 /* ============================== */
-/* block 상태가 되며, 내용이 길어지면 흘러넘치게 한다.  */
-/* ============================== */
-.common-div-flowCushion
-{
-    margin:0.3em;
-    padding:0.3em;
-    white-space: normal;
-    box-sizing: content-box;
-}
-
-/* ============================== */
-/* 테이블용 div (스크롤바가 생긴다) */
-/* ============================== */
-.common-div-table
-{
-    width:100%;
-    margin:$space02 0em;
-    padding:0.5em 0em;
-    overflow-x: auto;
-    box-sizing: content-box;
-}
-
-/*=================================*/
-/* 최상위 DIV */
-/*=================================*/
-
-/* 페이지 안의 부제목 topDiv */
-.common-div-subTitle
-{
-    display: table;
-    width:100%;
-    margin: 0.3em 0em;
-    padding: 0em;
-    box-sizing: content-box;
-    text-align: left;
-    border-bottom: 1px solid $colorMain;
-}
-
-/* 페이지 안의 부제목 span */
-.common-div-subTitle > span:nth-child(1)
-{
-    display: inline-table;
-    color:$colorMain;
-    font-weight: 900;
-    /* background-color:#ff7415; */
-    padding:0.3em 0.7em 0.3em 0.3em;
-    line-height:1.6em;
-    vertical-align: bottom;
-}
-.common-div-subTitle > span:nth-child(1)::before
-{
-    background-image: url('../../res/icon/subtitle_header.png');
-    background-size : 100% 100%;
-    display: inline-block;
-    width: 2.23em;
-    height: 1em;
-    vertical-align: middle;
-    margin-right:0.3em;
-    margin-bottom:$space02;
-    content:"";
-}
-
-/* 페이지 안의 부제목 topDiv */
-.common-div-subTitle > button { margin:$space04 0em $space04 $space04; }
-
-
-/* ============================== */
-/* input 아래에 표시되는 유효성검사 결과 */
-/* ============================== */
-.common-div-validationResult
-{
-    display: block;
-    text-align: center;
-    font-size:$space08;
-    padding:0.3em;
-}
-
-/* ============================== */
-/* POP 페이지에 표시되는 타이틀, 검색div */
-/* ============================== */
-/* 타이틀 div */
-.common-div-popTitle
-{
-    width:100%;
-    margin:0em auto;
-    box-sizing: content-box;
-    /* border-bottom: 1px solid rgb(150,150,150); */
-    text-align: center;
-    padding:0.7em 0em;
-}
-/* 타이틀 */
-.common-div-popTitle > span
-{
-    font-size: 1.1em;
-    line-height: 1.4em;
-    font-weight: bold;
-}
-
-/* ============================== */
-/* 기본 이미지 표현 DIV */
-/* ============================== */
-.common-div-defaultImgCoverMini
-{
-    width:4em;
-    height:4em;
-    margin:1em auto;
-    background-size:100% !important;
-    background-position: revert;
-    background-repeat: no-repeat;
-    border:1px solid #dee2e6;
-    box-sizing: content-box;
-}
-.common-div-defaultImgCover
-{
-    width:9em;
-    height:9em;
-    margin:1em auto;
-    background-size:100% !important;
-    background-position: revert;
-    background-repeat: no-repeat;
-    border:1px solid #dee2e6;
-    box-sizing: content-box;
-}
-.common-div-defaultImg
-{
-    width:9em;
-    height:9em;
-    margin:1em auto;
-    background-size:100% !important;
-    background-position: revert;
-    /* background-image:url('../../res/logo/logo.png'); */
-    background-repeat: no-repeat;
-    border:1px solid #dee2e6;
-    box-sizing: content-box;
-}
-
-
-/* .common-div-menuImg
-{
-    width:9em;
-    height:9em;
-    margin:1em auto;
-    background-size:100% !important;
-    background-position: center;
-    background-image:url('../../res/logo/logo.png');
-    background-repeat: no-repeat;
-    border:1px solid #dee2e6;
-} */
-
-/* ============================== */
 /* 설명문구 삽입 시 */
 /* ============================== */
 .common-div-announce
 {
-    margin:$space06;
-    padding:$space04;
+    margin: $space06;
+    padding: $space04;
     text-align: left;
     line-height: 1.7;
     background-color: #ddd;
-}
-
-/* ============================== */
-/* 체크박스 / 라디오박스 용 div */
-/* ============================== */
-.common-div-switch
-{
-    text-align: left;
-}
-
-/* ============================== */
-/* 페이지전용 */
-/* ============================== */
-.common-div-pageTop
-{
-    margin:0.5em auto;
-    max-width:500px;
 }
 
 /* ============================== */
@@ -577,14 +410,14 @@ div { display: block; }
     padding: $space04;
     border-radius: 1em;
     white-space: nowrap;
-    box-shadow: 0px 2px 4px rgba(2, 6, 84, 0.4);
+    box-shadow: $colorMainShad;
 }
 .common-div-calendarSquare > div:nth-child(1) { font-size: 0.9em; line-height:0.9em; text-align: center; font-weight: normal; }
 .common-div-calendarSquare > div:nth-child(2) { font-size: 1.4em; line-height:1.4em; text-align: center; font-weight: bold; }
 
-/* ByPoint */   .common-div-calendarSquare[point-of-date="passed"]    { background: #f0f0f0; color: #999; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date="within"]    { background: $colorMain; color: white; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date="upcoming"]  { background: white; color: #666; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { background: #f0f0f0; color: #999; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { background: $colorMain; color: white; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { background: white; color: #666; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; padding: 0.3em; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height:2.6em; font-size: 1em; text-align: center; font-weight: bold; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { font-size: 1.2em; }
@@ -596,7 +429,7 @@ div { display: block; }
     color: #666;
     padding: 0.5em $space08;
     border-radius: $space08;
-        font-weight: normal;
+    font-weight: normal;
     cursor: pointer;
     /* transition: all 0.3s ease; */
     text-decoration: none;

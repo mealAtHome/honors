@@ -1,3 +1,7 @@
+@charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 .common-select-outline {
   max-width: 15em;
   padding: 0.2em 1em 0.2em 0.2em;

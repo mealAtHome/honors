@@ -1,3 +1,7 @@
+@charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 .common-div-backBtn::before {
   background-image: url("../../res/icon/back.png");
   background-size: 60% 60%;
@@ -21,9 +25,9 @@
   background-color: white;
   width: 2.6em;
   height: 2.6em;
-  box-shadow: 0.1em 0.1em 0.1em grey;
+  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.8);
 }
 
 .common-div-backBtn:active {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
 }

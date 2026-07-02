@@ -1,9 +1,12 @@
 @charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 /* Samplecode */
 /*
     <label class="common-label-checkbox">
         <input
-            type="checkbox"
+            type=checkbox
             name=""
             value="5"
         />

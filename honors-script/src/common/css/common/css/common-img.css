@@ -1,3 +1,7 @@
+@charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 .common-img-userBig {
   border: 1px solid rgb(230, 230, 230);
   width: 6em;

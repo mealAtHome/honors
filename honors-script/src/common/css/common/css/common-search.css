@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 /* =============== */
 /* 검색용 인풋박스 */
 /* =============== */
@@ -12,7 +15,6 @@
 .common-search-div-top > button {
   padding-left: 1em;
   padding-right: 1em;
-  font-size: 1em;
   line-height: 1.5;
   vertical-align: middle;
 }

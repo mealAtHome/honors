@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 /*
     よく使われるHTMLのCSSを定義する
 */
@@ -11,69 +14,8 @@
 /* ============================== */
 /* 클릭 시, 백그라운드 색으로 액션을 표현 */
 /* ============================== */
-/* .common-onspage-top > .page__content { position:static; } */
-/* ============================== */
-/* 클릭 시, 백그라운드 색으로 액션을 표현 */
-/* ============================== */
-.common-background-blue {
-  background-color: rgba(2, 6, 84, 0.1);
-}
-
-/* ============================== */
-/* 클릭 시, 백그라운드 색으로 액션을 표현 */
-/* ============================== */
 .common-tap:active {
   background-color: rgba(220, 220, 220, 0.5);
-}
-
-/* ============================== */
-/* btn color */
-/* ============================== */
-.common-btn-blue {
-  background-color: transparent;
-  color: #0076ff;
-  border: 1px solid #0076ff;
-}
-
-.common-btn-blueOK {
-  background-color: #0076ff !important;
-  color: white;
-}
-
-.common-btn-green {
-  background-color: transparent;
-  color: darkgreen;
-  border: 1px solid darkgreen;
-}
-
-.common-btn-greenOK {
-  background-color: darkgreen !important;
-  color: white;
-}
-
-.common-btn-orange {
-  background-color: transparent !important;
-  color: darkorange;
-  border: 1px solid darkorange !important;
-}
-
-.common-btn-orangeOK {
-  background-color: darkOrange !important;
-  color: white;
-  border: 1px solid darkorange !important;
-}
-
-/* ============================== */
-/* input */
-/* ============================== */
-input {
-  text-align: center;
-}
-
-.common-div-validationResult {
-  display: block;
-  margin: 0.3em auto;
-  font-size: 0.8em;
 }
 
 .common-text-insertPage {

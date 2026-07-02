@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 .common-hr-card {
   margin: 1em 1em 1.4em 0.8em;
   border: 1px dashed #ccc;

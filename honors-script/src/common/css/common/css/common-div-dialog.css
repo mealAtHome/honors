@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 /* ========================== */
 /* 템플레이트 전용 다이얼로그 */
 /* ========================== */
@@ -22,7 +25,7 @@
   overflow-y: scroll;
   background-color: white;
   border-radius: 1em 1em 0em 0em;
-  box-shadow: 5px -5px 5px rgb(150, 150, 150);
+  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.8);
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -100,7 +103,7 @@
 }
 
 /* ========================== */
-/* dialog : 다이얼로그 */
+/* dialog: 다이얼로그 */
 /* ========================== */
 .common-div-fullDialogContainer {
   z-index: 998;

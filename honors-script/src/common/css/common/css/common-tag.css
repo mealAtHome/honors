@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 .common-tag-indent04 {
   padding-left: 0.4em;
 }
@@ -15,29 +18,46 @@
   margin-top: 1em;
 }
 
-.common-tag-paddingUD02 {
+.common-tag-marginUp {
+  display: block;
+  margin-top: 0.4em;
+}
+
+.common-tag-marginUp06 {
+  display: block;
+  margin-top: 0.6em;
+}
+
+.common-tag-marginUp08 {
+  display: block;
+  margin-top: 0.8em;
+}
+
+.common-tag-marginUD {
+  display: block;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.common-tag-padding06 {
+  padding: 0.6em;
+}
+
+.common-tag-paddingRight04 {
+  padding-right: 0.4em;
+}
+
+.common-tag-paddingUD {
   padding-top: 0.2em;
   padding-bottom: 0.2em;
-}
-
-.common-tag-padding02 {
-  padding: 0.2em;
-}
-
-.common-tag-padding03 {
-  padding: 0.3em;
 }
 
 .common-tag-padding04 {
   padding: 0.4em;
 }
 
-.common-tag-padding05 {
-  padding: 0.5em;
-}
-
-.common-tag-cushionL {
-  margin: 0em 0em 0em 0.6em;
+.common-tag-cushion {
+  margin: 0.6em;
 }
 
 .common-tag-cushionUp {
@@ -48,8 +68,8 @@
   margin: 0.6em 0em 0.6em 0em;
 }
 
-.common-tag-cushionDw03 {
-  margin-bottom: 0.3em;
+.common-tag-cushionDw {
+  margin-bottom: 0.4em;
 }
 
 /* 모든 태그에 적용이 가능한 클래스 모음 */
@@ -98,13 +118,6 @@
 }
 
 /* ============================== */
-/* 아래 보더라인 */
-/* ============================== */
-.common-tag-hrD {
-  border-bottom: 2px dashed #ccc;
-}
-
-/* ============================== */
 /* 쿠션 */
 /* ============================== */
 .common-tag-block {
@@ -115,35 +128,6 @@
 .common-tag-inlineBlock {
   display: inline-block;
   line-height: 1.6;
-}
-
-.common-tag-marginUp {
-  display: block;
-  margin-top: 0.4em;
-}
-
-.common-tag-marginUp06 {
-  display: block;
-  margin-top: 0.6em;
-}
-
-.common-tag-marginUp08 {
-  display: block;
-  margin-top: 0.8em;
-}
-
-.common-tag-marginUD {
-  display: block;
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
-}
-
-.common-tag-padding06 {
-  padding: 0.6em;
-}
-
-.common-tag-paddingRight04 {
-  padding-right: 0.4em;
 }
 
 /* ============================== */
@@ -338,8 +322,8 @@
   color: #7A8099;
 }
 
-.border-bottom-sep05 {
-  border-bottom: 0.5px solid #E4E7F0;
+.common-color-main {
+  color: rgb(2, 6, 84);
 }
 
 .common-color-body {

@@ -13,21 +13,23 @@ $colorAllw: rgb(0, 150, 0);   $colorAllwFont: darken($colorAllw, 20%); $colorAll
 $colorNtce: rgb(55, 75, 155); $colorNtceFont: darken($colorNtce, 20%); $colorNtceBack: transparentize($colorNtce, 0.8); $colorNtceShad: 1px 1px 7px 2px rgba(55, 75, 155, 0.8);
 $colorWarn: rgb(180, 150, 0); $colorWarnFont: darken($colorWarn, 20%); $colorWarnBack: transparentize($colorWarn, 0.8); $colorWarnShad: 1px 1px 7px 2px rgba(255, 255, 0, 0.8);
 $colorErrr: rgb(206, 39, 39); $colorErrrFont: darken($colorErrr, 20%); $colorErrrBack: transparentize($colorErrr, 0.8); $colorErrrShad: 1px 1px 7px 2px rgba(255, 51, 51, 0.8);
+$colorBlck: rgb(0, 0, 0);     $colorBlckFont: darken($colorBlck, 20%); $colorBlckBack: transparentize($colorBlck, 0.8); $colorBlckShad: 1px 1px 7px 2px rgba(0, 0, 0, 0.8);
 
-$space10: 1.0em;
-$space08: 0.8em;
-$space06: 0.6em;
-$space04: 0.4em;
-$space03: 0.3em;
-$space02: 0.2em;
 $spaceZZ: 0.0em;
+$space02: 0.2em;
+$space03: 0.3em;
+$space04: 0.4em;
+$space06: 0.6em;
+$space08: 0.8em;
+$space10: 1.0em;
+$space12: 1.2em;
 
-$space02own : 0em 0em $space08 0em;
+$space02own: 0em 0em $space08 0em;
 
 $borderRadius: 0.4em;
 
 /* mixin */
-@mixin btnOutlineNormal   ($color) { border: 1px solid $color; color            : $color;                   } @mixin btnOutlineActive ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
-@mixin btnInlineNormal    ($color) { border: 1px solid $color; background-color : $color;  color : #ffffff; } @mixin btnInlineActive  ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
-@mixin btnOutlineDisabled ($color) { border: 1px solid $color; background-color : #ffffff; color : $color;  }
-@mixin btnInlineDisabled  ($color) { border: 1px solid $color; background-color : #646464; color : #ffffff; }
+@mixin btnOutlineNormal   ($color) { border: 1px solid $color;                            color: $color;  } @mixin btnOutlineActive ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
+@mixin btnInlineNormal    ($color) { border: 1px solid $color; background-color: $color;  color: #ffffff; } @mixin btnInlineActive  ($color) { border-color: rgba($color, 0.3); background-color: rgba($color, 0.3); }
+@mixin btnOutlineDisabled ($color) { border: 1px solid $color; background-color: #ffffff; color: $color;  }
+@mixin btnInlineDisabled  ($color) { border: 1px solid $color; background-color: #646464; color: #ffffff; }

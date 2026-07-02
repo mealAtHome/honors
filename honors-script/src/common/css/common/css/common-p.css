@@ -1,4 +1,7 @@
 @charset "UTF-8";
+/* 메인색상 */
+/* 상태색상 */
+/* mixin */
 /* ------------------------------ */
 /* p 타이틀 */
 /* ------------------------------ */
@@ -27,14 +30,6 @@
   margin-top: 0em;
 }
 
-.common-div-cushionLRD > .common-p-title {
-  margin-top: 0em;
-}
-
-.common-div-cushionTop > .common-p-title {
-  margin-top: 0em;
-}
-
 .common-p-entityTitle {
   display: block;
   margin: 0.4em 0em; /* top bottom */
@@ -49,14 +44,6 @@
 }
 
 .common-div-cushion > .common-p-entityTitle {
-  margin-top: 0em;
-}
-
-.common-div-cushionLRD > .common-p-entityTitle {
-  margin-top: 0em;
-}
-
-.common-div-cushionTop > .common-p-entityTitle {
   margin-top: 0em;
 }
 

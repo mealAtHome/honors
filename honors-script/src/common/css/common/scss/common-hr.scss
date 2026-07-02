@@ -13,7 +13,7 @@
 .common-hr-marginSUDw  { margin: 0.3em   0em 0.3em   0em;  border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
 
 
-.common-hr-card[type="strong"]    { margin:   1em   1em    1.4em  $space08;  border: 1px dashed rgb(2, 6, 84); } /* card 사이의 hr */
-.common-hr-padding[type="strong"] { margin: $space06 $space06;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
-.common-hr-normal[type="strong"]  { margin: $space08   0em    $space06;         border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
-.common-hr-full[type="strong"]    { margin: $space06   0em;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
+.common-hr-card[type=strong]    { margin:   1em   1em    1.4em  $space08;  border: 1px dashed rgb(2, 6, 84); } /* card 사이의 hr */
+.common-hr-padding[type=strong] { margin: $space06 $space06;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
+.common-hr-normal[type=strong]  { margin: $space08   0em    $space06;         border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
+.common-hr-full[type=strong]    { margin: $space06   0em;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */

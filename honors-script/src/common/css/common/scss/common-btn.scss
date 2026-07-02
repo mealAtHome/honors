@@ -10,15 +10,17 @@
 .common-btn-radio
 {
     display:inline-block;
-    padding:$space04 0.5em;
+    padding: $space04 0.5em;
     white-space: nowrap;
     line-height:1.4;
     text-decoration: none;
-    /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12); */
+    box-shadow: $colorBlckShad;
     background-color: white;
     border-radius: $borderRadius;
 }
-.common-btn-light,
+.common-btn-round { border-radius: 100%; }
+
+.common-btn-light:hover,
 .common-btn-outline:hover,
 .common-btn-inline:hover,
 .common-btn-round:hover,
@@ -27,9 +29,6 @@
     outline:none;
     cursor: pointer;
 }
-.common-btn-round { border-radius: 100%; }
-
-
 
 
 /* round */
@@ -87,8 +86,8 @@
 .common-btn-radio:disabled[btn-type=cancel][tab=tab]    { @include btnInlineDisabled($colorCncl); }
 
 /* button size */
-.common-btn-outline[btn-size=large]   { display:block; margin:0.3em auto; padding:$space08; min-width:12em; max-width:90%; }
-.common-btn-inline[btn-size=large]    { display:block; margin:0.3em auto; padding:$space08; min-width:12em; max-width:90%; white-space:nowrap; }
+.common-btn-outline[btn-size=large]   { display:block; margin:0.3em auto; padding: $space08; min-width:12em; max-width:90%; }
+.common-btn-inline[btn-size=large]    { display:block; margin:0.3em auto; padding: $space08; min-width:12em; max-width:90%; white-space:nowrap; }
 .common-btn-outline[btn-size=search]  { display:inline-block; padding:0.3em $space04; }
 
 /* -------------------- */
@@ -99,7 +98,7 @@
 {
     display:inline-block;
     padding:0.5em;
-    background-color:transparent;
+    background-color: transparent;
     border-radius: 0.5em;
     white-space: nowrap;
     border: none;
@@ -112,14 +111,14 @@
     cursor: pointer;
 }
 
-.common-btn-noline                          { color:$colorMain; }
-.common-btn-noline[btn-type=cancel]         { color:$colorCncl; }
-.common-btn-noline[btn-type=warning]        { color:$colorCncl; }
-.common-btn-noline[btn-type=error]          { color:$colorErrr; }
-.common-btn-noline:active                   { background-color:rgba($colorMain, 0.3); }
-.common-btn-noline:active[btn-type=cancel]  { background-color:rgba($colorCncl, 0.3); }
-.common-btn-noline:active[btn-type=warning] { background-color:rgba($colorCncl, 0.3); }
-.common-btn-noline:active[btn-type=error]   { background-color:rgba($colorErrr, 0.3); }
+.common-btn-noline                          { color: $colorMain; }
+.common-btn-noline[btn-type=cancel]         { color: $colorCncl; }
+.common-btn-noline[btn-type=warning]        { color: $colorCncl; }
+.common-btn-noline[btn-type=error]          { color: $colorErrr; }
+.common-btn-noline:active                   { background-color: $colorMainBack; }
+.common-btn-noline:active[btn-type=cancel]  { background-color: $colorCnclBack; }
+.common-btn-noline:active[btn-type=warning] { background-color: $colorCnclBack; }
+.common-btn-noline:active[btn-type=error]   { background-color: $colorErrrBack; }
 
 /* -------------------- */
 /* 페이지 바닥에 깔리는 버튼 */
@@ -131,11 +130,11 @@
     bottom:0px;
     left:0px;
     width:100%;
-    background-color:$colorMain;
+    background-color: $colorMain;
     color: white;
     font-size:1.1em;
     line-height: 1.1em;
-    padding:$space08 $space04;
+    padding: $space08 $space04;
     border:none;
 }
 .common-btn-footer:hover
@@ -144,5 +143,5 @@
 }
 .common-btn-footer:active
 {
-    background-color:rgba($colorMain, 0.4);
+    background-color: $colorMainBack;
 }
