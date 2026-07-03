@@ -2,7 +2,7 @@
 
 #ULGN-div-top
 {
-    display: block;
+    @include displayBk;
     width: 100%;
     height: 100%;
     background-color: rgba(255,255,255,1);
@@ -14,39 +14,31 @@
     position: absolute;
     left: 0.5em;
     top: 0.5em;
-    @include fontsize09;
+    @include fonts09;
     color: rgb(150,150,150);
 }
 #ULGN-span-version::before
 {
     content: "v";
 }
-// #ULGN-img-server
-// {
-//     position: absolute;
-//     height: 1.5em;
-//     right: 0.5em;
-//     top: 0.5em;
-//     border: 1px solid rgb(220,220,220);
-// }
 
 /* ================ */
 /* logo */
 /* ================ */
 #ULGN-span-title
 {
-    display: block;
+    @include displayBk;
     font-size: 3em;
-    font-weight: normal;
+    @include fontwn;
     color: $colorMain;
-    line-height: 1.2em;
+    @include lineh16;
 }
 .ULGN-div-titleAccent
 {
-    display: block;
+    @include displayBk;
     width: 4em;
     height: $space02;
-    margin: $space02 0em;
+    @include marginUD02;
     background-color: $colorSide;
 }
 
@@ -55,16 +47,17 @@
 /* ================ */
 .ULGN-input-text
 {
-    display: block;
+    @include displayBk;
     width: 15em;
     height: auto;
     border: 0.05em solid $colorBody;
-    @include fontsize12;
+    @include fonts12;
     text-align: left;
     background: transparent;
     border-radius: $borderRadius;
-    margin: 0.5em auto;
-    padding: 0.3em 0.5em;
+    @include marginUD05;
+    @include marginAuto;
+    @include padding04;
 }
 .ULGN-input-text:focus
 {
@@ -73,7 +66,7 @@
 }
 .ULGN-img-input
 {
-    margin-top: $space04;
+    @include marginUp04;
     height: 1.2em;
     vertical-align: top;
 }
@@ -83,8 +76,9 @@
 /* ================ */
 .ULGN-login-btn
 {
-    display: block;
-    margin: $space08 auto;
+    @include displayBk;
+    @include marginUD08;
+    @include marginAuto;
     width: 18em;
     height: 3em;
 }
@@ -95,7 +89,7 @@
     bottom: 1em;
     right: 1em;
     text-align: right;
-    @include fontsize09;
+    @include fonts09;
 }
 
 /* ================ */
@@ -106,7 +100,9 @@
     display: flex;
     align-items: center;
     gap: 0.5em;
-    margin: $space02 auto $space04;
+    @include marginUp02;
+    @include marginUp04;
+    @include marginAuto;
     width: 15em;
 }
 .ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; background: $colorLine; }

@@ -1,34 +1,28 @@
 @import "../../_import/scss/__import";
 
-.common-indent04 { padding-left: $space04; }
-.common-indent08 { padding-left: $space08; }
-.common-indent12 { padding-left: $space12; }
-
-.common-marginTop10 { margin-top: 1.0em; }
-.common-marginUp    { display: block; margin-top: $space04; }
-.common-marginUp06  { display: block; margin-top: $space06; }
-.common-marginUp08  { display: block; margin-top: $space08; }
-.common-marginUD    { display: block; margin-top: $space04; margin-bottom: $space04; }
-.common-padding06   { padding: $space06; }
-.common-paddingRight04 { padding-right: $space04; }
-
-.common-paddingUD { padding-top: $space02; padding-bottom: $space02; }
-.common-padding04 { padding: $space04; }
-
-.common-cushion   { margin: $space06; }
-.common-cushionUp { margin: $space06 $spaceZZ $spaceZZ $spaceZZ; }
-.common-cushionUD { margin: $space06 $spaceZZ $space06 $spaceZZ; }
-
-.common-cushionDw { margin-bottom: $space04; }
+.common-indent04    { @include displayBk; @include paddingLt04; }
+.common-indent08    { @include displayBk; @include paddingLt08; }
+.common-indent12    { @include displayBk; @include paddingLt12; }
+.common-marginUp10  { @include displayBk; @include marginUp10; }
+.common-marginUp08  { @include displayBk; @include marginUp08; }
+.common-marginUp    { @include displayBk; @include marginUp04; }
+.common-marginUD    { @include displayBk; @include marginUD04; }
+.common-marginLt03  { @include displayBk; @include marginLt03; }
+.common-paddingUp05 {                     @include paddingUp05; }
+.common-paddingUD   {                     @include paddingUD02; }
+.common-cushion     { @include displayBk; @include margin06; }
+.common-cushionUp   { @include displayBk; @include marginUp06; }
+.common-cushionUD   { @include displayBk; @include marginUD06; }
+.common-cushionDw   { @include displayBk; @include marginDw04; }
+.common-marginDw03  { @include displayBk; @include marginDw03; }
 
 /* 모든 태그에 적용이 가능한 클래스 모음 */
-.common-strong     { font-weight: bold; @include fontsize11; }
+.common-strong     { @include fontwb; @include fonts11; }
 .common-textCenter { text-align: center; }
 .common-blockCenter
 {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    @include displayBk;
+    @include marginAuto;
     text-align: center;
 }
 
@@ -36,7 +30,7 @@
 .common-alignR { text-align: right; }
 .common-alignL { text-align: left; }
 
-.common-fontLight { color:#666; font-weight: normal; }
+.common-fontLight { color:#666; @include fontwn; }
 
 /* ============================== */
 /* 색칠 */
@@ -49,13 +43,13 @@
 /* ============================== */
 .common-block
 {
-    display: block;
-    line-height: 1.6;
+    @include displayBk;
+    @include lineh16;
 }
 .common-inlineBlock
 {
-    display: inline-block;
-    line-height: 1.6;
+    @include displayIn;
+    @include lineh16;
 }
 
 /* ============================== */
@@ -63,7 +57,7 @@
 /* ============================== */
 .common-fixedTopRight
 {
-    display: inline-block;
+    @include displayIn;
     position: fixed;
     top: 0.5em;
     right: 0.5em;
@@ -71,22 +65,22 @@
 
 .common-announce
 {
-    display: block;
-    padding: $space04;
+    @include displayBk;
+    @include padding04;
     text-align: left;
-    line-height: 1.4;
+    @include lineh14;
     background-color: #ddd;
 }
 
 /* ============================== */
 /* 글자크기 */
 /* ============================== */
-.common-fontsize08 { @include fontsize08; }
-.common-fontsize09 { @include fontsize09; }
-.common-fontsize11 { @include fontsize11; }
-.common-fontsize12 { @include fontsize12; }
+.common-fontsize08 { @include fonts08; }
+.common-fontsize09 { @include fonts09; }
+.common-fontsize11 { @include fonts11; }
+.common-fontsize12 { @include fonts12; }
 
-.common-bold      { font-weight: bold; }
+.common-bold      { @include fontwb; }
 .common-colorWarn { color: rgba(255, 116, 21, 1.0); }
 .common-colorPstv { color: rgba(0, 128, 0, 1.0); }
 .common-colorNgtv { color: rgba(255, 0, 0, 1.0); }
@@ -101,9 +95,10 @@
 
 .common-card
 {
-    display: inline-block;
-    font-weight: 600;
-    padding: 0.3em $space06;
+    @include displayIn;
+    @include fontwn;
+    @include paddingUD03;
+    @include paddingLR06;
 }
 .common-card[card-color=hold]      { color: rgb(212 , 173 , 0   ); border: 2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
 .common-card[card-color=prog]      { color: rgb(  3 , 154 , 0   ); border: 2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
@@ -114,7 +109,7 @@
 .common-positionAbsUR { position: absolute; top: 0.5em; right: 0.5em; }
 
 .common-me[me=y]  { background-color: rgba(2, 6, 84, 0.1); }
-.common-span-me[me=y] { font-weight: bold; color: $colorMain; }
+.common-span-me[me=y] { @include fontwb; color: $colorMain; }
 
 .tag-color-sign           { color: rgb(27, 42, 107); }
 .tag-color-cornflowerBlue { color:#8898CC; }

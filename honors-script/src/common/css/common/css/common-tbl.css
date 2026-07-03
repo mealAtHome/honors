@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 /*=================================*/
 /* table to center */
@@ -38,7 +41,10 @@
 }
 
 .common-tbl-tab > tbody > tr > td {
-  padding: 0.5em 0.7em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
   border-radius: 3em;
   color: rgb(2, 6, 84);
   line-height: 1.6;
@@ -207,8 +213,10 @@
 /* ============================== */
 .common-tbl-slideformFooterBtn {
   width: 100%;
-  /* max-width: 300px; */
-  margin: 1em auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
   border-collapse: collapse;
 }
 

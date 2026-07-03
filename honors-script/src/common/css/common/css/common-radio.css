@@ -1,13 +1,15 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 /* Customize the label (the container) */
 .common-label-radio {
   display: block;
   position: relative;
   padding-left: 30px;
-  /* margin-bottom: 12px; */
   cursor: pointer;
   height: 26px;
   font-size: 22px;

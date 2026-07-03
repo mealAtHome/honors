@@ -16,11 +16,10 @@
 /* Customize the label (the container) */
 .common-label-checkbox
 {
-    display: inline-block;
+    @include displayIn;
     vertical-align: middle;
     position: relative;
     padding-left: 26px;
-    /* margin-bottom: 12px; */
     cursor: pointer;
     height: 26px;
     font-size: 22px;
@@ -74,7 +73,7 @@
 /* Show the indicator (dot/circle) when checked */
 .common-label-checkbox > input[type=checkbox]:checked ~ span:after
 {
-    display: block;
+    @include displayBk;
 }
 
 /* Style the indicator (dot/circle) */

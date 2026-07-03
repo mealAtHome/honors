@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 #ULGN-div-top {
   display: block;
@@ -30,14 +33,15 @@
   font-size: 3em;
   font-weight: normal;
   color: rgb(2, 6, 84);
-  line-height: 1.2em;
+  line-height: 1.6;
 }
 
 .ULGN-div-titleAccent {
   display: block;
   width: 4em;
   height: 0.2em;
-  margin: 0.2em 0em;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
   background-color: #3D6BF5;
 }
 
@@ -53,8 +57,11 @@
   text-align: left;
   background: transparent;
   border-radius: 0.4em;
-  margin: 0.5em auto;
-  padding: 0.3em 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.4em;
 }
 
 .ULGN-input-text:focus {
@@ -73,7 +80,10 @@
 /* ================ */
 .ULGN-login-btn {
   display: block;
-  margin: 0.8em auto;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  margin-left: auto;
+  margin-right: auto;
   width: 18em;
   height: 3em;
 }

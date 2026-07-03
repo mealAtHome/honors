@@ -1,19 +1,13 @@
 @import "../../_import/scss/__import";
 
-.common-hr-card        { margin:   1em   1em 1.4em $space08;  border: 1px dashed #ccc; } /* card 사이의 hr */
-.common-hr-padding     { margin: $space06 $space06;              border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-.common-hr-normal      { margin: $space08   0em $space06;         border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-.common-hr-full        { margin: 0.3em   0em;              border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-.common-hr-paddingLR   { margin:   0em $space06;              border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-.common-hr-paddingUD   { margin: $space06   0em;              border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-.common-hr-paddingTop  { margin: $space06   0em   0em   0em;  border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-.common-hr-margin      { margin:   0em   0em   0em   0em;  border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-card        { @include margin08;       border: 1px dashed #ccc; } /* card 사이의 hr */
+.common-hr-padding06   { @include margin06;       border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-paddingLR   { @include marginLR06;     border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-paddingUD06 { @include marginUD06;     border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-paddingUD03 { @include marginUD03;     border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
+.common-hr-paddingUp06 { @include marginUUp06;    border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
 
-.common-hr-marginSAll  { margin: 0.3em 0.3em 0.3em 0.3em;  border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-.common-hr-marginSUDw  { margin: 0.3em   0em 0.3em   0em;  border: 1px dashed #ccc; } /* 일반 html 사이의 hr */
-
-
-.common-hr-card[type=strong]    { margin:   1em   1em    1.4em  $space08;  border: 1px dashed rgb(2, 6, 84); } /* card 사이의 hr */
-.common-hr-padding[type=strong] { margin: $space06 $space06;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
-.common-hr-normal[type=strong]  { margin: $space08   0em    $space06;         border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
-.common-hr-full[type=strong]    { margin: $space06   0em;                  border: 1px dashed rgb(2, 6, 84); } /* 일반 html 사이의 hr */
+.common-hr-card[type=strong]    { border: 1px dashed $colorMain; } /* card 사이의 hr */
+.common-hr-padding[type=strong] { border: 1px dashed $colorMain; } /* 일반 html 사이의 hr */
+.common-hr-normal[type=strong]  { border: 1px dashed $colorMain; } /* 일반 html 사이의 hr */
+.common-hr-full[type=strong]    { border: 1px dashed $colorMain; } /* 일반 html 사이의 hr */

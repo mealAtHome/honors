@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 .common-span-strong {
   font-size: 1.2em;
@@ -9,7 +12,8 @@
 
 .common-span-block {
   display: block;
-  margin: 0.3em auto;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
 }
 
 .common-span-content {
@@ -27,7 +31,10 @@
 /* ============================== */
 .common-span-validationAnnounce {
   display: block;
-  margin: 0.3em auto;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 0.9em;
 }
 
@@ -43,12 +50,12 @@
 /* ============================== */
 .common-span-label {
   display: inline-block;
-  padding: 0.5em;
   margin: 0.1em 0em;
+  padding: 0.5em;
   background-color: transparent;
   border-radius: 0.3em;
   font-size: 0.9em;
-  line-height: 0.9em;
+  line-height: 1.4;
   white-space: nowrap;
   /* box-sizing: border-box; */
 }
@@ -72,7 +79,7 @@
 .common-span-record-subTitle {
   padding: 0.4em;
   border: 1px solid gray;
-  font-weight: 900;
+  font-weight: bold;
   display: inline-block;
 }
 
@@ -124,7 +131,7 @@
 /* ============================== */
 .common-span-must {
   color: red;
-  font-weight: 900;
+  font-weight: bold;
 }
 
 /* ============================== */
@@ -132,13 +139,13 @@
 /* ============================== */
 .common-span-card {
   display: inline-block;
-  font-weight: 600;
+  font-weight: normal;
   padding: 0.3em 0.6em;
 }
 
 .common-span-mini {
   display: inline-block;
-  font-weight: 600;
+  font-weight: normal;
   padding: 0.1em 0.3em;
 }
 

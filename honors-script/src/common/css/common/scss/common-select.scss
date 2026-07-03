@@ -3,13 +3,15 @@
 .common-select-outline
 {
     max-width: 15em;
-    padding: $space02 1em $space02 $space02;
+    @include paddingUD02;
+    @include paddingRt10;
+    @include paddingLt02;
     outline: none;
     text-align-last: center;
     vertical-align: middle;
     font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
     border-radius: 0.5em;
-    line-height: 1.2em;
+    @include lineh16;
     text-align: center;
     height: 2.2em;
     background-color: white;

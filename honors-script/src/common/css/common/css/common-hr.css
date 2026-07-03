@@ -1,33 +1,36 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 .common-hr-card {
-  margin: 1em 1em 1.4em 0.8em;
+  margin: 0.8em;
   border: 1px dashed #ccc;
 } /* card 사이의 hr */
-.common-hr-padding {
-  margin: 0.6em 0.6em;
-  border: 1px dashed #ccc;
-} /* 일반 html 사이의 hr */
-.common-hr-normal {
-  margin: 0.8em 0em 0.6em;
-  border: 1px dashed #ccc;
-} /* 일반 html 사이의 hr */
-.common-hr-full {
-  margin: 0.3em 0em;
+.common-hr-padding06 {
+  margin: 0.6em;
   border: 1px dashed #ccc;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingLR {
-  margin: 0em 0.6em;
+  margin-left: 0.6em;
+  margin-right: 0.6em;
   border: 1px dashed #ccc;
 } /* 일반 html 사이의 hr */
-.common-hr-paddingUD {
-  margin: 0.6em 0em;
+.common-hr-paddingUD06 {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
   border: 1px dashed #ccc;
 } /* 일반 html 사이의 hr */
-.common-hr-paddingTop {
-  margin: 0.6em 0em 0em 0em;
+.common-hr-paddingUD03 {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  border: 1px dashed #ccc;
+} /* 일반 html 사이의 hr */
+.common-hr-paddingUp06 {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
   border: 1px dashed #ccc;
 } /* 일반 html 사이의 hr */
 .common-hr-margin {

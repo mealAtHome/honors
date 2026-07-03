@@ -1,17 +1,23 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 .common-select-outline {
   max-width: 15em;
   padding: 0.2em 1em 0.2em 0.2em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  padding-right: 1em;
   outline: none;
   -moz-text-align-last: center;
        text-align-last: center;
   vertical-align: middle;
   font-family: -apple-system, "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
   border-radius: 0.5em;
-  line-height: 1.2em;
+  line-height: 1.6;
   text-align: center;
   height: 2.2em;
   background-color: white;

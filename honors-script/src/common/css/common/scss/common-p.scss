@@ -5,41 +5,41 @@
 /* ------------------------------ */
 .common-p-thankyou
 {
-    margin: 0.5em 0em 0.5em 0em;
+    @include marginUD05;
     text-align: center;
-    @include fontsize12;
+    @include fonts12;
     color: $colorMain;
-    font-weight: bold;
+    @include fontwb;
 }
 
 .common-p-title
 {
-    display: block;
-    margin: $space04 0em; /* top bottom */
+    @include displayBk;
+    @include marginUD04;
     color: $colorMain;
-    font-weight: bold;
-    line-height: 1.4em;
-    @include fontsize11;
+    @include fontwb;
+    @include lineh14;
+    @include fonts11;
 }
-.common-div-card       > .common-p-title { margin-top: 0em; }
-.common-div-cushion    > .common-p-title { margin-top: 0em; }
+.common-div-card       > .common-p-title { @include marginUpZZ; }
+.common-div-cushion    > .common-p-title { @include marginUpZZ; }
 
 .common-p-entityTitle
 {
-    display: block;
-    margin: $space04 0em; /* top bottom */
+    @include displayBk;
+    @include marginUD04;
     color: gray;
-    font-weight: bold;
-    line-height: 1.4em;
+    @include fontwb;
+    @include lineh14;
     font-size: 1em;
 }
-.common-div-card       > .common-p-entityTitle { margin-top: 0em; }
-.common-div-cushion    > .common-p-entityTitle { margin-top: 0em; }
+.common-div-card       > .common-p-entityTitle { @include marginUpZZ; }
+.common-div-cushion    > .common-p-entityTitle { @include marginUpZZ; }
 
 /* ------------------------------ */
 /* insert 페이지의 타이틀 */
 /* ------------------------------ */
-.common-p-insertTitle > span { display: block; margin: 0em auto; text-align: center; }
-.common-p-insertTitle > span:nth-child(1) { @include fontsize11; color: $colorMain; }
-.common-p-insertTitle > span:nth-child(2) { @include fontsize09; }
-.common-p-insertTitle > span:nth-child(3) { @include fontsize09; }
+.common-p-insertTitle > span { @include displayBk; @include marginUDZZ; @include marginAuto; text-align: center; }
+.common-p-insertTitle > span:nth-child(1) { @include fonts11; color: $colorMain; }
+.common-p-insertTitle > span:nth-child(2) { @include fonts09; }
+.common-p-insertTitle > span:nth-child(3) { @include fonts09; }

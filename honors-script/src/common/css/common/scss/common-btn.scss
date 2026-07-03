@@ -9,10 +9,10 @@
 .common-btn-round,
 .common-btn-radio
 {
-    display: inline-block;
-    padding: $space04 $space05;
+    @include displayIn;
+    @include padding04;
     white-space: nowrap;
-    line-height: 1.4;
+    @include lineh14;
     text-decoration: none;
     box-shadow: $colorBlckShad;
     background-color: white;
@@ -86,9 +86,9 @@
 .common-btn-radio:disabled[btn-type=cancel][tab=tab]    { @include btnInlineDisabled($colorCncl); }
 
 /* button size */
-.common-btn-outline[btn-size=large]   { display: block; margin: 0.3em auto; padding: $space08; min-width: 12em; max-width: 90%; }
-.common-btn-inline[btn-size=large]    { display: block; margin: 0.3em auto; padding: $space08; min-width: 12em; max-width: 90%; white-space: nowrap; }
-.common-btn-outline[btn-size=search]  { display: inline-block; padding: 0.3em $space04; }
+.common-btn-outline[btn-size=large]   { @include displayBk; @include marginUD03; @include marginAuto; @include padding08; min-width: 12em; max-width: 90%; }
+.common-btn-inline[btn-size=large]    { @include displayBk; @include marginUD03; @include marginAuto; @include padding08; min-width: 12em; max-width: 90%; white-space: nowrap; }
+.common-btn-outline[btn-size=search]  { @include displayIn; @include padding04; }
 
 /* -------------------- */
 /* noline */
@@ -96,12 +96,12 @@
 .common-btn-noline,
 .common-btn-nolineSave
 {
-    display: inline-block;
-    padding: 0.5em;
+    @include displayIn;
+    @include padding05;
     background-color: transparent;
     white-space: nowrap;
     border: none;
-    line-height: 1.4;
+    @include lineh14;
 }
 .common-btn-nolineSave:hover,
 .common-btn-noline:hover
@@ -124,16 +124,17 @@
 /* -------------------- */
 .common-btn-footer
 {
-    display: inline-block;
+    @include displayIn;
     position: fixed;
     bottom: 0px;
     left: 0px;
     width: 100%;
     background-color: $colorMain;
     color: white;
-    @include fontsize11;
-    line-height: 1.1em;
-    padding: $space08 $space04;
+    @include fonts11;
+    @include lineh16;;
+    @include paddingUD08;
+    @include paddingLR04;
     border: none;
 }
 .common-btn-footer:hover

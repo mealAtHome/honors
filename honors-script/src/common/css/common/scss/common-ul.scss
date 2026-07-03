@@ -12,14 +12,16 @@
 */
 .common-ul-announce
 {
-    display: block;
-    padding: 1em 1em 1em 2em;
+    @include displayBk;
+    @include paddingUD10;
+    @include paddingLt20;
+    @include paddingRt10;
     background-color: rgb(230,230,230);
-    @include fontsize09;
+    @include fonts09;
     text-align: left;
-    line-height: 1.5em;
+    @include lineh16;
     list-style-type: disc;
-    margin: 0em;
+    @include marginZZ;
 }
-.common-ul-announce > li { margin-bottom: 0.3em; }
-.common-ul-announce > li:nth-last-child(1) { margin-bottom: 0em; }
+.common-ul-announce > li {  @include marginDw03; }
+.common-ul-announce > li:nth-last-child(1) { @include marginDwZZ; }

@@ -2,13 +2,14 @@
 
 .common-span-strong
 {
-    @include fontsize12;
-    font-weight: bold;
+    @include fonts12;
+    @include fontwb;
 }
 .common-span-block
 {
-    display: block;
-    margin: 0.3em auto;
+    @include displayBk;
+    @include marginUD03;
+
 }
 .common-span-content
 {
@@ -16,9 +17,9 @@
 }
 .common-span-subcontent
 {
-    @include fontsize09;
+    @include fonts09;
     color: $colorBody;
-    line-height: 1.4;
+    @include lineh14;
 }
 
 /* ============================== */
@@ -26,9 +27,10 @@
 /* ============================== */
 .common-span-validationAnnounce
 {
-    display: block;
-    margin: 0.3em auto;
-    @include fontsize09;
+    @include displayBk;
+    @include marginUD03;
+    @include marginAuto;
+    @include fonts09;
 }
 
 /* ============================== */
@@ -41,13 +43,14 @@
 /* ============================== */
 .common-span-label
 {
-    display: inline-block;
-    padding: 0.5em;
-    margin: 0.1em 0em;
+    @include displayIn;
+    @include marginUD01;
+    @include marginLRZZ;
+    @include padding05;
     background-color: transparent;
     border-radius: 0.3em;
-    @include fontsize09;
-    line-height: 0.9em;
+    @include fonts09;
+    @include lineh14;
     white-space: nowrap;
     /* box-sizing: border-box; */
 }
@@ -70,10 +73,10 @@
 /* ============================== */
 .common-span-record-subTitle
 {
-    padding: $space04;
+    @include padding04;
     border: 1px solid gray;
-    font-weight: 900;
-    display: inline-block;
+    @include fontwb;
+    @include displayIn;
 }
 
 /* ============================== */
@@ -81,10 +84,12 @@
 /* ============================== */
 .common-span-tag
 {
-    @include fontsize09;
+    @include fonts09;
     white-space: nowrap;
-    padding: 0.3em $space04;
-    margin: 0.1em $spaceZZ;
+    @include paddingUD03;
+    @include paddingRL04;
+    @include marginUD01;
+    @include marginLR00;
 }
 .common-span-tag[common-span-tag=none]   { display: none; }
 .common-span-tag[common-span-tag=blue]   { color: rgb(54, 54, 255);  border: 2px solid rgb(110,110,255);   background-color: rgb(200,200,255); }
@@ -103,7 +108,7 @@
 .common-span-must
 {
     color: red;
-    font-weight: 900;
+    @include fontwb;
 }
 
 /* ============================== */
@@ -111,15 +116,17 @@
 /* ============================== */
 .common-span-card
 {
-    display: inline-block;
-    font-weight: 600;
-    padding: 0.3em $space06;
+    @include displayIn;
+    @include fontwn;
+    @include paddingUD03;
+    @include paddingLR06;
 }
 .common-span-mini
 {
-    display: inline-block;
-    font-weight: 600;
-    padding: 0.1em 0.3em;
+    @include displayIn;
+    @include fontwn;
+    @include paddingUD01;
+    @include paddingLR03;
 }
 
 .common-span-mini[span-type=succeed]  , .common-span-card[span-type=succeed]  { color: blue;       border: 2px solid rgb(110,110,255); background-color: rgb(200,200,255); }
@@ -159,8 +166,8 @@
 /* ============================== */
 .common-span-msg
 {
-    display: inline-block;
-    font-weight: normal;
+    @include displayIn;
+    @include fontwn;
 }
 .common-span-msg[span-type=normal]       { color: black;                    }
 .common-span-msg[span-type=success]      { color: $colorMain;      }

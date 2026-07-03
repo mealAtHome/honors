@@ -36,9 +36,9 @@
 
 pre, xmp
 {
-    display: inline-block;
-    margin: 0em;
-    line-height: 1.6em;
+    @include displayIn;
+    @include marginZZ;
+    @include lineh16;
     word-break: break-all;
     white-space: pre-wrap;
     font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;

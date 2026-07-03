@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 /* ============================== */
 /* 안내메시지 */
@@ -14,11 +17,14 @@
 */
 .common-ul-announce {
   display: block;
-  padding: 1em 1em 1em 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 1em;
   background-color: rgb(230, 230, 230);
   font-size: 0.9em;
   text-align: left;
-  line-height: 1.5em;
+  line-height: 1.6;
   list-style-type: disc;
   margin: 0em;
 }

@@ -128,7 +128,7 @@ class MBankaccounts extends _MCommon
         let html =
         `
             <div class="common-div-card" card-type="warning">
-                <div class="common-div-cushionD">
+                <div class="common-div-cushionDw">
                     정산/환불용 계좌를 등록하여주시기 바랍니다.
                 </div>
                 <button class="common-btn-outline common-block" btn-type="warning" onclick="Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate);">계좌등록</button>

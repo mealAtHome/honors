@@ -7,13 +7,12 @@
 {
     width: 13em;
     font-size: 1em;
-    line-height: 1.5;
+    @include lineh16;
     vertical-align: middle;
 }
 .common-search-div-top > button
 {
-    padding-left: 1em;
-    padding-right: 1em;
-    line-height: 1.5;
+    @include lineh16;
+    @include paddingLR10;
     vertical-align: middle;
 }

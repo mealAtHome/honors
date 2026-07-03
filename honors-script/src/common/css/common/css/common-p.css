@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 /* ------------------------------ */
 /* p 타이틀 */
@@ -18,7 +21,7 @@
   margin: 0.4em 0em; /* top bottom */
   color: rgb(2, 6, 84);
   font-weight: bold;
-  line-height: 1.4em;
+  line-height: 1.4;
   font-size: 1.1em;
 }
 
@@ -35,7 +38,7 @@
   margin: 0.4em 0em; /* top bottom */
   color: gray;
   font-weight: bold;
-  line-height: 1.4em;
+  line-height: 1.4;
   font-size: 1em;
 }
 
@@ -52,7 +55,8 @@
 /* ------------------------------ */
 .common-p-insertTitle > span {
   display: block;
-  margin: 0em auto;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
 }
 

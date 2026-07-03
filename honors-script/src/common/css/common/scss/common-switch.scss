@@ -13,7 +13,7 @@
 .common-label-switch
 {
     position: relative;
-    display: inline-block;
+    @include displayIn;
     width: 60px;
     height: 34px;
 }

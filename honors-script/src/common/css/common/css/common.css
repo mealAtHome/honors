@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 /*
     よく使われるHTMLのCSSを定義する
@@ -37,7 +40,7 @@
 pre, xmp {
   display: inline-block;
   margin: 0em;
-  line-height: 1.6em;
+  line-height: 1.6;
   word-break: break-all;
   white-space: pre-wrap;
   font-family: -apple-system, "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;

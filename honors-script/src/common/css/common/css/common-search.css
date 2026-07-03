@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 /* =============== */
 /* 검색용 인풋박스 */
@@ -8,13 +11,13 @@
 .common-search-div-top > input[type=text] {
   width: 13em;
   font-size: 1em;
-  line-height: 1.5;
+  line-height: 1.6;
   vertical-align: middle;
 }
 
 .common-search-div-top > button {
+  line-height: 1.6;
   padding-left: 1em;
   padding-right: 1em;
-  line-height: 1.5;
   vertical-align: middle;
 }

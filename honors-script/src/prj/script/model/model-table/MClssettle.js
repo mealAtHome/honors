@@ -192,7 +192,7 @@ class MClssettles extends _MCommon
                         <span class="common-block">입금계좌</span>
                         <span class="common-block">
                             <span style="vertical-align:middle">${model.getBankname()} ${model.getBaccacct()} ${model.getBaccname()}</span>
-                            <button class="common-btn-outline MClssettle-make-btn-copyBacc" copytext="${model.getBankname()} ${model.getBaccacct()}" style="margin-left:0.2em;">복사</button>
+                            <button class="common-btn-outline MClssettle-make-btn-copyBacc common-marginLt03" copytext="${model.getBankname()} ${model.getBaccacct()}">복사</button>
                         </span>
                     </div>
                 `;

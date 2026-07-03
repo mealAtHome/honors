@@ -1,31 +1,28 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 .common-indent04 {
+  display: block;
   padding-left: 0.4em;
 }
 
 .common-indent08 {
+  display: block;
   padding-left: 0.8em;
 }
 
 .common-indent12 {
+  display: block;
   padding-left: 1.2em;
 }
 
-.common-marginTop10 {
+.common-marginUp10 {
+  display: block;
   margin-top: 1em;
-}
-
-.common-marginUp {
-  display: block;
-  margin-top: 0.4em;
-}
-
-.common-marginUp06 {
-  display: block;
-  margin-top: 0.6em;
 }
 
 .common-marginUp08 {
@@ -33,18 +30,17 @@
   margin-top: 0.8em;
 }
 
-.common-marginUD {
+.common-marginUp {
   display: block;
   margin-top: 0.4em;
+}
+
+.common-marginUD {
+  display: block;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  margin-top: 0.4em;
   margin-bottom: 0.4em;
-}
-
-.common-padding06 {
-  padding: 0.6em;
-}
-
-.common-paddingRight04 {
-  padding-right: 0.4em;
 }
 
 .common-paddingUD {
@@ -52,23 +48,24 @@
   padding-bottom: 0.2em;
 }
 
-.common-padding04 {
-  padding: 0.4em;
-}
-
 .common-cushion {
+  display: block;
   margin: 0.6em;
 }
 
 .common-cushionUp {
-  margin: 0.6em 0em 0em 0em;
+  display: block;
+  margin-top: 0.6em;
 }
 
 .common-cushionUD {
-  margin: 0.6em 0em 0.6em 0em;
+  display: block;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
 }
 
 .common-cushionDw {
+  display: block;
   margin-bottom: 0.4em;
 }
 
@@ -217,7 +214,7 @@
 
 .common-card {
   display: inline-block;
-  font-weight: 600;
+  font-weight: normal;
   padding: 0.3em 0.6em;
 }
 

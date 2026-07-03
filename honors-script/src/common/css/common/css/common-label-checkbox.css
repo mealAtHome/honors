@@ -1,6 +1,9 @@
 @charset "UTF-8";
 /* 메인색상 */
 /* 상태색상 */
+/* ------ */
+/* margin */
+/* ------ */
 /* mixin */
 /* Samplecode */
 /*
@@ -20,7 +23,6 @@
   vertical-align: middle;
   position: relative;
   padding-left: 26px;
-  /* margin-bottom: 12px; */
   cursor: pointer;
   height: 26px;
   font-size: 22px;

@@ -6,8 +6,8 @@
 .common-div-formField > .common-input-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
 .common-input-field
 {
-    padding: 0.3em 0em;
-    @include fontsize11;
+    @include paddingUD03;
+    @include fonts11;
     border: none;
     border-bottom: 1px solid #ccc;
     text-align: left;
@@ -18,8 +18,8 @@
 .common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
 .common-textarea-field
 {
-  padding: 0.3em;
-  @include fontsize11;
+  @include padding03;
+  @include fonts11;
   border: 1px solid #ccc;
   background-color: transparent;
 }
@@ -35,8 +35,8 @@
     /* -webkit-appearance: none; */
 
     /* box-sizing: content-box; */
-    padding: 0.3em;
-    @include fontsize11;
+    @include padding03;
+    @include fonts11;
     border: 1px solid #ccc;
 }
 
@@ -57,8 +57,8 @@
     /* -webkit-appearance: none; */
 
     box-sizing: initial;
-    padding: 0.3em;
-    @include fontsize11;
+    @include padding03;
+    @include fonts11;
     border: none;
 }
 
@@ -69,8 +69,8 @@
   /* -webkit-appearance: none; */
 
   /* box-sizing: content-box; */
-  padding: 0.3em;
-  @include fontsize11;
+  @include padding03;
+  @include fonts11;
   border: 1px solid #ccc;
 }
 

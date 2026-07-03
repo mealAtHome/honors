@@ -1,6 +1,6 @@
 @import "../../_import/scss/__import";
 
-div { display: block; }
+div { @include displayBk; }
 
 /*=================================*/
 /* flex */
@@ -30,8 +30,10 @@ div { display: block; }
 /*=================================*/
 .common-div-headerTop
 {
+    @include displayBk;
+    @include paddingUD06;
+    @include paddingLR08;
     background: #fff;
-    padding: $space06 $space08;
     /* display: flex; */
     /* justify-content: space-between; */
     /* align-items: center; */
@@ -40,11 +42,11 @@ div { display: block; }
 
 .common-div-sectionHeader
 {
-    font-weight: 500;
+    @include fontwn;
     color: $colorBody;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin: $spaceDw08;
+    @include marginDw08;
 }
 
 
@@ -53,7 +55,7 @@ div { display: block; }
 /*=================================*/
 .common-div-btnList > *
 {
-    margin-bottom: $space02;
+    @include marginDw02;
 }
 
 /*=================================*/
@@ -65,7 +67,7 @@ div { display: block; }
 }
 .common-div-yearToMin > input
 {
-    display: inline-block;
+    @include displayIn;
     text-align: center;
     vertical-align: middle;
 }
@@ -84,7 +86,7 @@ div { display: block; }
     background: #e0e0e0;
     overflow: hidden;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: $space08;
+    @include marginDw08;
 }
 
 .common-div-progressBar {
@@ -98,8 +100,8 @@ div { display: block; }
 /* 폼 자체 */
 .common-div-slideformParent {
     position: relative;
-    margin: 0;
-    padding: 0;
+    @include marginZZ;
+    @include paddingZZ;
     width: 100%;
     min-height: 100%;
     overflow-x: hidden;
@@ -110,7 +112,8 @@ div { display: block; }
     left: 0;
     width: calc(100% - 4em);
     height: auto;
-    padding: 1em 2em;
+    @include paddingUD10;
+    @include paddingLR20;
 }
 .common-div-slideformChild[slideform-status='exit'] { transform: translateX(-100%); transition: transform 0.3s ease; /* display: none; */ }
 .common-div-slideformChild[slideform-status='open'] { transform: translateX(0);     transition: transform 0.3s ease; }
@@ -118,32 +121,34 @@ div { display: block; }
 
 /* 일반 폼 */
 .common-div-formChild {
-    display: block;
+    @include displayBk;
     width: calc(100% - 4em);
     height: auto;
-    padding: 1em 2em;
+    @include paddingUD10;
+    @include paddingLR20;
 }
-.common-div-formChild > .common-div-formField:nth-child(1) { margin-top: 1em; }
+.common-div-formChild > .common-div-formField:nth-child(1) { @include marginUp10; }
 
 /* 폼 내 */
 .common-div-formTitle
 {
     text-align: left;
-    margin: 1em 0em 2em;
-    padding: $spaceZZ;
+    @include marginUp10;
+    @include marginDw20;
+    @include paddingZZ;
     box-sizing: content-box;
 }
-.common-div-formTitle > span:nth-child(1) { display: block; @include fontsize14; font-weight: bold; color: $colorMain; }
-.common-div-formTitle > span:nth-child(2) { display: block; }
+.common-div-formTitle > span:nth-child(1) { @include displayBk; @include fonts14; @include fontwb; color: $colorMain; }
+.common-div-formTitle > span:nth-child(2) { @include displayBk; }
 .common-div-formField
 {
     text-align: left;
-    margin: 2em 0em;
-    padding: $spaceZZ;
+    @include marginUD20;
+    @include paddingZZ;
     box-sizing: content-box;
 }
-.common-div-formField > span:nth-child(1) { display: block; @include fontsize11; margin: 0.3em 0em $spaceZZ; font-weight: bold; line-height: 1.5em; }
-.common-div-formField > span:nth-child(2) { display: block; @include fontsize09; margin: $spaceZZ 0em $space04; font-weight: normal; line-height: 1.5em; }
+.common-div-formField > span:nth-child(1) { @include displayBk; @include fonts11; @include marginUp04; @include marginDwZZ; @include fontwb; @include lineh16; }
+.common-div-formField > span:nth-child(2) { @include displayBk; @include fonts09; @include marginUpZZ; @include marginDw04; @include fontwn; @include lineh16; }
 
 /* ============================== */
 /* 입력 폼 전용 */
@@ -151,19 +156,19 @@ div { display: block; }
 .common-div-form
 {
     text-align: center;
-    margin: $space06 $space06 1em;
-    padding: $spaceZZ;
+    @include margin10;
+    @include paddingZZ;
     box-sizing: content-box;
 }
 .common-div-form > span:nth-child(1)
 {
-    @include fontsize12;
-    font-weight: bold;
+    @include fonts12;
+    @include fontwb;
 }
 .common-div-form > span:nth-child(2)
 {
     font-size: 1em;
-    font-weight: normal;
+    @include fontwn;
 }
 
 
@@ -172,11 +177,11 @@ div { display: block; }
 /* ============================== */
 .common-div-indent
 {
-    display: block;
-    margin: $space04;
-    padding: $spaceZZ;
+    @include displayBk;
+    @include margin04;
+    @include paddingZZ;
 }
-.common-div-indent > span { display: block; }
+.common-div-indent > span { @include displayBk; }
 .common-div-indent > span::before { content:"・"; vertical-align: middle;}
 
 /* ============================== */
@@ -188,11 +193,12 @@ div { display: block; }
 }
 .common-div-manages > button
 {
-    display: block;
+    @include displayBk;
     width: 15em;
     max-width: 80%;
-    margin: 0.7em auto;
-    padding: 0.7em;
+    @include marginUp07;
+    @include marginAuto;
+    @include padding07;
 }
 
 /* ============================== */
@@ -200,8 +206,8 @@ div { display: block; }
 /* ============================== */
 .common-div-svgTop
 {
-    display: inline-block;
-    margin: 0.3em;
+    @include displayIn;
+    @include margin03;
     vertical-align: middle;
 }
 
@@ -211,9 +217,8 @@ div { display: block; }
 .common-div-card
 {
     position: relative;
-    /* margin: $space06 $space08 $space08 $space06; */
     border-radius: $space08;
-    padding: $space08 $space08;
+    @include padding08;
     overflow-x: auto;
     box-sizing: content-box;
     text-align: left;
@@ -230,12 +235,12 @@ div { display: block; }
 /* ============================== */
 .common-div-msg
 {
-    margin: $space08 1em 1em $space08;
-    padding: 0.5em 0.5em;
+    @include margin08;
+    @include padding05;
     overflow-x: auto;
     box-sizing: content-box;
     text-align: left;
-    line-height: 1.6;
+    @include lineh16;
 }
 .common-div-msg[common-div-msg-type=error]   { color: $colorErrrFont; background-color: $colorErrrBack; box-shadow: $colorErrrShad; }
 .common-div-msg[common-div-msg-type=warning] { color: $colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
@@ -247,9 +252,7 @@ div { display: block; }
 .common-div-mobile
 {
     max-width: 400px;
-    padding: 0em 0em;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    @include paddingZZ;
     box-sizing: content-box;
 }
 
@@ -257,7 +260,6 @@ div { display: block; }
 /* 툴바 */
 /* -------------------- */
 .common-div-headerPadding { width: 100%; height: 52px; }
-/* .common-div-header ~ .common-div-slideformChild { padding-top: 60px; } */
 .common-div-header
 {
     position: absolute;
@@ -269,8 +271,8 @@ div { display: block; }
     height: 52px;
     box-shadow: $colorBlckShad;
 }
-.common-div-header > div[header=back]  { display: inline-block; width: auto; line-height: 52px; }
-.common-div-header > div[header=title] { display: inline-block; width: auto; line-height: 52px; padding-left: 0.5em; @include fontsize12; font-weight: bold; }
+.common-div-header > div[header=back]  { @include displayIn; width: auto; line-height: 52px; }
+.common-div-header > div[header=title] { @include displayIn; width: auto; line-height: 52px; @include paddingLt05; @include fonts12; @include fontwb; }
 
 
 /* -------------------- */
@@ -294,21 +296,20 @@ div { display: block; }
 /* ============================== */
 .common-div-pagenationTop
 {
-    margin: 0.5em 0em;
+    @include marginUD06;
     text-align: center;
-    /* padding: 0.3em; */
     overflow-x: auto;
     box-sizing: content-box;
 }
 .common-div-pagenationBtnTop
 {
-    display: inline-block;
+    @include displayIn;
     border-radius: 38px;
     background-color: rgb(230,230,230);
 }
 .common-btn-pagenationBtn
 {
-    display: inline-block;
+    @include displayIn;
     width: 38px;
     height: 38px;
     background-color: rgb(230,230,230);
@@ -322,10 +323,8 @@ div { display: block; }
 {
     background-color: $colorMain;
     color: white;
-    /* font-weight: bold; */
+    /* @include fontwb; */
 }
-
-
 
 /* ============================== */
 /* block 상태가 되며, 다른 div에 간섭하지 않도록 쿠션이 생긴다.  */
@@ -338,39 +337,33 @@ div { display: block; }
 }
 .common-div-mass
 {
-    margin: 0.3em;
-    padding: 0.3em;
+    @include margin03;
+    @include padding03;
     overflow-x: auto;
     box-sizing: content-box;
     text-align: center;
 }
-.common-div-mass > table
-{
-    margin-left: auto;
-    margin-right: auto;
-}
+.common-div-mass > table { @include marginAuto; }
 /* 100% 의 width를 가지고, 안의 내용물이 길어진다면, x-scroll을 생성 */
 .common-div-scrollX
 {
     width: 100%;
     overflow-x: auto;
     box-sizing: content-box;
-    padding-bottom: 0.3em;
+    @include paddingDw03;
 }
 
-.common-div-cushion     { display: block; margin: $space08;                             padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionUp   { display: block; margin: $space08 $spaceZZ $spaceZZ $spaceZZ;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionUD   { display: block; margin: $space08 $spaceZZ;                    padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionD    { display: block; margin: $spaceZZ $spaceZZ $space08 $spaceZZ;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionLeft { display: block; margin: $spaceZZ $spaceZZ $spaceZZ $space08;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionUL   { display: block; margin: $space08 $spaceZZ $spaceZZ $space08;  padding: $spaceZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushion     { @include displayBk; @include margin08;   @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: left;    }
+.common-div-cushionUp   { @include displayBk; @include marginUp08; @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionUD   { @include displayBk; @include marginUD08; @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushionDw   { @include displayBk; @include marginDw08; @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
-.common-div-cushion > .common-div-cushionUD:nth-child(1) { margin: $spaceZZ $spaceZZ 0.3em $spaceZZ; padding: $spaceZZ $spaceZZ 0.3em $spaceZZ; }
-.common-div-cushionUD > .common-div-card:nth-child(1)    { margin-top: $space02; }
+.common-div-cushion   > .common-div-cushionUD:nth-child(1) { @include marginDw08; }
+.common-div-cushionUD > .common-div-card:nth-child(1)      { @include marginUp02; }
 
 /* 쿠션 아래의 첫번째, formField 는 marginTop: $space04; */
-.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $space04; }
+.common-div-cushion > .common-div-formField:nth-child(1) { @include marginUp04; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter
@@ -384,10 +377,10 @@ div { display: block; }
 /* ============================== */
 .common-div-announce
 {
-    margin: $space06;
-    padding: $space04;
+    @include margin06;
+    @include padding04;
     text-align: left;
-    line-height: 1.7;
+    @include lineh16;
     background-color: #ddd;
 }
 
@@ -396,8 +389,8 @@ div { display: block; }
 /* ============================== */
 .common-div-calendarSquareYear
 {
-    @include fontsize12;
-    font-weight: bold;
+    @include fonts12;
+    @include fontwb;
     color: $colorMain;
 }
 
@@ -407,38 +400,39 @@ div { display: block; }
     color: white;
     width: 3.6em;
     height: 3.6em;
-    padding: $space04;
+    @include padding04;
     border-radius: 1em;
     white-space: nowrap;
     box-shadow: $colorMainShad;
 }
-.common-div-calendarSquare > div:nth-child(1) { @include fontsize09; line-height: 0.9em; text-align: center; font-weight: normal; }
-.common-div-calendarSquare > div:nth-child(2) { @include fontsize14; line-height: 1.4em; text-align: center; font-weight: bold; }
+.common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include lineh14; text-align: center; @include fontwn; }
+.common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include lineh14; text-align: center; @include fontwb; }
 
 /* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { background: #f0f0f0; color: #999; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { background: $colorMain; color: white; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { background: white; color: #666; }
-/* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; padding: 0.3em; }
-/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; font-size: 1em; text-align: center; font-weight: bold; }
-/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fontsize12; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; @include padding03; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; font-size: 1em; text-align: center; @include fontwb; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fonts12; }
 
 .common-div-calendarSquareWeekTop > button
 {
     background: white;
     border: 2px solid #e0e0e0;
     color: #666;
-    padding: 0.5em $space08;
+    @include paddingUD04;
+    @include paddingLR08;
     border-radius: $space08;
-    font-weight: normal;
+    @include fontwn;
     cursor: pointer;
     /* transition: all 0.3s ease; */
     text-decoration: none;
-    display: inline-block;
+    @include displayIn;
     position: relative;
     overflow: hidden;
-    margin-left: 0.3em;
+    @include marginLt03;
 }
-.common-div-calendarSquareWeekTop > button:nth-child(1) { margin-left: 0em; }
+.common-div-calendarSquareWeekTop > button:nth-child(1) {  @include marginLtZZ; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { background: #f0f0f0; color: #999;          border: 2px solid #d0d0d0; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                        color: $colorMain;     border: 2px solid $colorMain; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                        color: #666;          border: 2px solid #e0e0e0; }
