@@ -19,7 +19,7 @@ div { @include displayBk; }
 {
     width: 0.6em;
     height: 0.6em;
-    background: #3D6BF5;
+    @include backSide;
     @include radiusHalf;
     flex-shrink: 0;
 }
@@ -33,7 +33,7 @@ div { @include displayBk; }
     @include displayBk;
     @include padUD06;
     @include padLR08;
-    background: #fff;
+    @include backWhit;
     /* display: flex; */
     /* justify-content: space-between; */
     /* align-items: center; */
@@ -43,7 +43,7 @@ div { @include displayBk; }
 .common-div-sectionHeader
 {
     @include fontwN;
-    color: $colorBody;
+    @include fontBody;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     @include marDw08;
@@ -84,9 +84,9 @@ div { @include displayBk; }
 {
     @include widthFull;
     height: 6px;
-    background: #e0e0e0;
+    @include backGy23;
     overflow: hidden;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 5px $coloraBlck10;
     @include marDw08;
 }
 
@@ -94,7 +94,7 @@ div { @include displayBk; }
 {
     width: 0%;
     @include heightFull;
-    background: $colorMain;
+    @include backMain;
     border-radius: 1em 0 0 1em;
     transition: width 0.4s ease; /* 부드러운 애니메이션 */
 }
@@ -142,7 +142,7 @@ div { @include displayBk; }
     @include marDw20;
     @include padZZ;
 }
-.common-div-formTitle > span:nth-child(1) { @include displayBk; @include fonts14; @include fontwB; color: $colorMain; }
+.common-div-formTitle > span:nth-child(1) { @include displayBk; @include fonts14; @include fontwB; @include fontMain; }
 .common-div-formTitle > span:nth-child(2) { @include displayBk; }
 .common-div-formField
 {
@@ -217,13 +217,13 @@ div { @include displayBk; }
     @include overflowX;
     @include boxsizeC;
     @include alignL;
-    background-color: white;
+    @include colorWhit;
     box-shadow: $colorBlckShad;
 }
 
-.common-div-card[card-type=warning] { color: $colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
-.common-div-card[card-type=notice]  { color: $colorNtceFont; background-color: $colorNtceBack; box-shadow: $colorNtceShad; }
-.common-div-card[card-type=hero]    { color: $colorHeroFont; background-color: $colorHeroBack; box-shadow: $colorHeroShad; }
+.common-div-card[card-type=warning] { @include fontWarnFont; @include colorWarnBack; box-shadow: $colorWarnShad; }
+.common-div-card[card-type=notice]  { @include fontNtceFont; @include colorNtceBack; box-shadow: $colorNtceShad; }
+.common-div-card[card-type=hero]    { @include fontHeroFont; @include colorHeroBack; box-shadow: $colorHeroShad; }
 
 /* ============================== */
 /* 에러 메시지용 */
@@ -237,9 +237,9 @@ div { @include displayBk; }
     @include alignL;
     @include fonth16;
 }
-.common-div-msg[common-div-msg-type=error]   { color: $colorErrrFont; background-color: $colorErrrBack; box-shadow: $colorErrrShad; }
-.common-div-msg[common-div-msg-type=warning] { color: $colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
-.common-div-msg[common-div-msg-type=allow]   { color: $colorAllwFont; background-color: $colorAllwBack; box-shadow: $colorAllwShad; }
+.common-div-msg[common-div-msg-type=error]   { @include fontErrrFont; @include colorErrrBack; box-shadow: $colorErrrShad; }
+.common-div-msg[common-div-msg-type=warning] { @include fontWarnFont; @include colorWarnBack; box-shadow: $colorWarnShad; }
+.common-div-msg[common-div-msg-type=allow]   { @include fontAllwFont; @include colorAllwBack; box-shadow: $colorAllwShad; }
 
 /* ============================== */
 /* 패드를 사용하지 않는 DIV */
@@ -261,7 +261,7 @@ div { @include displayBk; }
     position: absolute;
     left: 0;
     right: 0;
-    background-color: white;
+    @include colorWhit;
     @include widthFull;
     height: 52px;
     box-shadow: $colorBlckShad;
@@ -283,14 +283,14 @@ div { @include displayBk; }
 {
     @include displayIn;
     border-radius: 38px;
-    background-color: rgb(230,230,230);
+    @include backGy23;
 }
 .common-btn-pagenationBtn
 {
     @include displayIn;
     width: 38px;
     height: 38px;
-    background-color: rgb(230,230,230);
+    @include backGy23;
     @include radiusFull;
     border: none;
     line-height: 37px;
@@ -299,8 +299,8 @@ div { @include displayBk; }
 }
 .common-btn-pagenationBtn[tab=tab]
 {
-    background-color: $colorMain;
-    color: white;
+    @include backMain;
+    @include fontWhit;
     /* @include fontwB; */
 }
 
@@ -358,7 +358,7 @@ div { @include displayBk; }
     @include pad04;
     @include alignL;
     @include fonth16;
-    background-color: #ddd;
+    @include backGy23;
 }
 
 /* ============================== */
@@ -368,13 +368,13 @@ div { @include displayBk; }
 {
     @include fonts12;
     @include fontwB;
-    color: $colorMain;
+    @include fontMain;
 }
 
 .common-div-calendarSquare
 {
     background: linear-gradient(135deg, #020654 0%, #0a2472 100%);
-    color: white;
+    @include fontWhit;
     width: 3.6em;
     height: 3.6em;
     @include pad04;
@@ -385,18 +385,18 @@ div { @include displayBk; }
 .common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include fonth14; @include alignC; @include fontwN; }
 .common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; @include alignC; @include fontwB; }
 
-/* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { background: #f0f0f0; color: #999; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { background: $colorMain; color: white; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { background: white; color: #666; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { @include backGy23;  @include fontGy15; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { @include backMain;  @include fontWhit; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { @include backWhit; @include fontGy10; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; @include pad03; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; @include fonts10; @include alignC; @include fontwB; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fonts12; }
 
 .common-div-calendarSquareWeekTop > button
 {
-    background: white;
-    border: 2px solid #e0e0e0;
-    color: #666;
+    @include colorWhit;
+    border: 2px solid $colorGy23;
+    @include fontGy10;
     @include padUD04;
     @include padLR08;
     @include radiusCurv04;
@@ -410,6 +410,6 @@ div { @include displayBk; }
     @include marLt03;
 }
 .common-div-calendarSquareWeekTop > button:nth-child(1) {  @include marLtZZ; }
-/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { background: #f0f0f0; color: #999;          border: 2px solid #d0d0d0; }
-/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                        color: $colorMain;     border: 2px solid $colorMain; }
-/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                        color: #666;          border: 2px solid #e0e0e0; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { @include backGy23;     @include fontGy15; border: 2px solid $colorGy20; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                        @include fontMain; border: 2px solid $colorMain; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                        @include fontGy10; border: 2px solid $colorGy23; }

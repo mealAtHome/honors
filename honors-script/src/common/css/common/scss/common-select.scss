@@ -14,5 +14,5 @@
     @include fonth16;
     @include alignC;
     height: 2.2em;
-    background-color: white;
+    @include colorWhit;
 }

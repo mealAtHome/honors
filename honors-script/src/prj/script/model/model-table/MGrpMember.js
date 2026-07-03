@@ -86,9 +86,9 @@ class MGrpMember
                     ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
                 <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
                 <span class="common-block common-fonts09">
-                    ${mUser.getPhone()         != "" ? `<span class="common-block common-colorGrey commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
-                    ${mUser.getAddress()       != "" ? `<span class="common-block common-colorGrey">${mUser.getAddress()}</span>` : ""}
-                    ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorGrey">${mUser.getHascarflgCvrt()}</span>` : ""}
+                    ${mUser.getPhone()         != "" ? `<span class="common-block common-colorGray commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
+                    ${mUser.getAddress()       != "" ? `<span class="common-block common-colorGray">${mUser.getAddress()}</span>` : ""}
+                    ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorGray">${mUser.getHascarflgCvrt()}</span>` : ""}
                 </span>
                 ${buttonHtmlFinal}
             </div>
@@ -136,9 +136,9 @@ class MGrpMember
                     ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
                 <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
                 <span class="common-block common-fonts09">
-                    ${mUser.getPhone()         != "" ? `<span class="common-block common-colorGrey commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
-                    ${mUser.getAddress()       != "" ? `<span class="common-block common-colorGrey">${mUser.getAddress()}</span>` : ""}
-                    ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorGrey">${mUser.getHascarflgCvrt()}</span>` : ""}
+                    ${mUser.getPhone()         != "" ? `<span class="common-block common-colorGray commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
+                    ${mUser.getAddress()       != "" ? `<span class="common-block common-colorGray">${mUser.getAddress()}</span>` : ""}
+                    ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorGray">${mUser.getHascarflgCvrt()}</span>` : ""}
                 </span>
             </div>
         `;

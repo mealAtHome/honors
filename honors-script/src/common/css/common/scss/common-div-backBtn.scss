@@ -21,12 +21,12 @@
     top: 0.5em;
     left: 0.5em;
     @include radiusFull;
-    background-color: white;
+    @include colorWhit;
     width: 2.6em;
     height: 2.6em;
     box-shadow: $colorBlckShad;
 }
 .common-div-backBtn:active
 {
-    background-color: $colorBlckBack;
+    @include colorBlckBack;
 }

@@ -35,7 +35,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 34px;
@@ -49,13 +49,13 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    @include colorWhit;
     @include radiusHalf;
+    -webkit-transition: .4s;
+            transition: .4s;
 }
 
-.common-label-switch > input:checked + span { background-color: $colorMain; }
+.common-label-switch > input:checked + span { @include backMain; }
 .common-label-switch > input:focus   + span { box-shadow: $colorMainShad; }
 .common-label-switch > input:checked + span:before
 {

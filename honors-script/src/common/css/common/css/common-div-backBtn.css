@@ -1,10 +1,21 @@
-@charset "UTF-8";
-/* 메인색상 */
-/* 상태색상 */
-/* ------ */
-/* margin */
-/* ------ */
-/* mixin */
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+/* ========================= */
+/* btns */
+/* ========================= */
 .common-div-backBtn::before {
   background-image: url("../../res/icon/back.png");
   background-size: 60% 60%;
@@ -25,12 +36,12 @@
   top: 0.5em;
   left: 0.5em;
   border-radius: 100%;
-  background-color: white;
+  background: #FFFFFF;
   width: 2.6em;
   height: 2.6em;
-  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.8);
+  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.2);
 }
 
 .common-div-backBtn:active {
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
 }

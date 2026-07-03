@@ -40,7 +40,7 @@
     @include padUD05;
     @include padLR06;
     @include radius30;
-    color: $colorMain;
+    @include fontMain;
     @include fonth16;
 }
 .common-tbl-tab > tbody > tr > td[tab=space]
@@ -53,14 +53,14 @@
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
-    color: white;
+    @include fontWhit;
     @include radius30;
-    background-color: $colorMain;
+    @include backMain;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
 .common-tbl-tab > tbody > tr > td[tab=tab]:active
 {
-    background-color: $colorMainBack;
+    @include colorMainBack;
 }
 
 /* ============================== */
@@ -85,7 +85,7 @@
 .common-tbl-normal > tfoot > tr > td
 {
     @include pad04;
-    background-color:#e9ecef;
+    background:#e9ecef;
     white-space: nowrap;
     @include alignC;
     @include fontwB;
@@ -141,7 +141,7 @@
 .common-tbl-slideformFooterBtn > tbody > tr > th
 {
     @include padZZ;
-    background-color:#e9ecef;
+    background:#e9ecef;
     white-space: nowrap;
     @include alignC;
 }
@@ -184,22 +184,22 @@
     @include pad04;
 }
 .common-tbl-vertical[tbl-type=normal]    { border: 1px solid #dee2e6; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background-color:#e9ecef; border: 1px solid #dee2e6; }
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background:#e9ecef; border: 1px solid #dee2e6; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { width: 5%;  @include alignR; @include fontwB; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid #dee2e6; white-space: normal;}
 
 .common-tbl-vertical[tbl-type=minimal]   { border: 1px solid #dee2e6; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background-color:#e9ecef; border: 1px solid #dee2e6; }
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background:#e9ecef; border: 1px solid #dee2e6; }
 .common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { width: 5%;  @include alignR; @include fontwN; }
 .common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid #dee2e6; white-space: normal;}
 
 .common-tbl-vertical[tbl-type=noborder]  { border: none; }
-.common-tbl-vertical[tbl-type=noborder]  > thead > tr > th { background-color: rgba(0,0,0,0); }
+.common-tbl-vertical[tbl-type=noborder]  > thead > tr > th { background: rgba(0,0,0,0); }
 .common-tbl-vertical[tbl-type=noborder]  > tbody > tr > th { width: 5%;  @include alignR; border: none; @include fontwB; }
 .common-tbl-vertical[tbl-type=noborder]  > tbody > tr > td { width: 95%; @include alignL;  border: none; white-space: normal; }
 
 .common-tbl-vertical[tbl-type=rowborder] { border: none; }
-.common-tbl-vertical[tbl-type=rowborder] > thead > tr > th { background-color: rgba(0,0,0,0); border: none; }
+.common-tbl-vertical[tbl-type=rowborder] > thead > tr > th { background: rgba(0,0,0,0); border: none; }
 
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { width: 5%;  @include alignR; border: none; @include fontwB; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { width: 95%; @include alignL;  border: none; white-space: normal; }

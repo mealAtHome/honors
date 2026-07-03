@@ -372,14 +372,3 @@ GGC.Common =
     },
 
 };
-
-GGC.Attr =
-{
-    getCommonSpanTag(val="", none="", blue="", yellow="", red="")
-    {
-        if     (val == none)   return `common-span-tag="none"`;
-        else if(val == blue)   return `common-span-tag="blue"`;
-        else if(val == yellow) return `common-span-tag="yellow"`;
-        else if(val == red)    return `common-span-tag="red"`;
-    }
-}

@@ -8,7 +8,7 @@
     @include marUD05;
     @include alignC;
     @include fonts12;
-    color: $colorMain;
+    @include fontMain;
     @include fontwB;
 }
 
@@ -16,7 +16,7 @@
 {
     @include displayBk;
     @include marUD04;
-    color: $colorMain;
+    @include fontMain;
     @include fontwB;
     @include fonth14;
     @include fonts11;
@@ -40,6 +40,6 @@
 /* insert 페이지의 타이틀 */
 /* ------------------------------ */
 .common-p-insertTitle > span { @include displayBk; @include marUDZZ; @include marAuto; @include alignC; }
-.common-p-insertTitle > span:nth-child(1) { @include fonts11; color: $colorMain; }
+.common-p-insertTitle > span:nth-child(1) { @include fonts11; @include fontMain; }
 .common-p-insertTitle > span:nth-child(2) { @include fonts09; }
 .common-p-insertTitle > span:nth-child(3) { @include fonts09; }

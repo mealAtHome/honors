@@ -15,7 +15,7 @@
     @include fonth14;
     text-decoration: none;
     box-shadow: $colorBlckShad;
-    background-color: white;
+    @include colorWhit;
     @include radiusCurv04;
 }
 .common-btn-round { @include radiusFull; }
@@ -98,7 +98,7 @@
 {
     @include displayIn;
     @include pad05;
-    background-color: transparent;
+    @include transparent;
     white-space: nowrap;
     border: none;
     @include fonth14;
@@ -110,14 +110,14 @@
     cursor: pointer;
 }
 
-.common-btn-noline                          { color: $colorMain; }
-.common-btn-noline[btn-type=cancel]         { color: $colorCncl; }
-.common-btn-noline[btn-type=warning]        { color: $colorCncl; }
-.common-btn-noline[btn-type=error]          { color: $colorErrr; }
-.common-btn-noline:active                   { background-color: $colorMainBack; }
-.common-btn-noline:active[btn-type=cancel]  { background-color: $colorCnclBack; }
-.common-btn-noline:active[btn-type=warning] { background-color: $colorCnclBack; }
-.common-btn-noline:active[btn-type=error]   { background-color: $colorErrrBack; }
+.common-btn-noline                          { @include fontMain; }
+.common-btn-noline[btn-type=cancel]         { @include fontCncl; }
+.common-btn-noline[btn-type=warning]        { @include fontCncl; }
+.common-btn-noline[btn-type=error]          { @include fontErrr; }
+.common-btn-noline:active                   { @include colorMainBack; }
+.common-btn-noline:active[btn-type=cancel]  { @include colorCnclBack; }
+.common-btn-noline:active[btn-type=warning] { @include colorCnclBack; }
+.common-btn-noline:active[btn-type=error]   { @include colorErrrBack; }
 
 /* -------------------- */
 /* 페이지 바닥에 깔리는 버튼 */
@@ -129,8 +129,8 @@
     bottom: 0px;
     left: 0px;
     @include widthFull;
-    background-color: $colorMain;
-    color: white;
+    @include backMain;
+    @include fontWhit;
     @include fonts11;
     @include fonth16;;
     @include padUD08;
@@ -143,5 +143,5 @@
 }
 .common-btn-footer:active
 {
-    background-color: $colorMainBack;
+    @include colorMainBack;
 }

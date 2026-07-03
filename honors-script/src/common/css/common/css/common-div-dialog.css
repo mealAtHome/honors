@@ -1,10 +1,22 @@
 @charset "UTF-8";
-/* 메인색상 */
-/* 상태색상 */
-/* ------ */
-/* margin */
-/* ------ */
-/* mixin */
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+/* ========================= */
+/* btns */
+/* ========================= */
 /* ========================== */
 /* 템플레이트 전용 다이얼로그 */
 /* ========================== */
@@ -15,7 +27,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   height: 100%;
   width: 100%;
 }
@@ -26,9 +38,9 @@
   width: 100%;
   height: 90%;
   overflow-y: scroll;
-  background-color: white;
+  background: #FFFFFF;
   border-radius: 1em 1em 0em 0em;
-  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.8);
+  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.2);
   padding: 0em;
   margin: 0em;
   box-sizing: border-box;
@@ -46,7 +58,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   height: 100%;
   width: 100%;
 }
@@ -57,7 +69,7 @@
   width: 90%;
   height: 85%;
   overflow-y: scroll;
-  background-color: white;
+  background: #FFFFFF;
   padding: 0em;
   margin: 0em;
   box-sizing: border-box;
@@ -69,7 +81,6 @@
 .common-dialog-div-btns {
   display: inline-block;
   z-index: 998;
-  /* background-color: white; */
   position: absolute;
   top: 10px;
   right: 10px;
@@ -85,7 +96,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   height: 100%;
   width: 100%;
 }
@@ -96,7 +107,7 @@
   width: 90%;
   height: 85%;
   overflow-y: scroll;
-  background-color: white;
+  background: #FFFFFF;
   padding: 0em;
   margin: 0em;
   box-sizing: border-box;
@@ -114,7 +125,7 @@
   width: 100%;
   height: 94%;
   overflow-y: auto;
-  background-color: white;
+  background: #FFFFFF;
   border-radius: 1em 1em 0em 0em;
   padding: 0em;
   margin: 0em;
@@ -126,7 +137,6 @@
   width: auto;
   width: 800px;
   height: 800px;
-  border-radius: 0em;
   left: 50%;
   margin-left: -400px;
   margin-bottom: -400px;
@@ -142,7 +152,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   height: 100%;
   width: 100%;
 }

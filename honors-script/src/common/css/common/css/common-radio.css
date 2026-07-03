@@ -1,10 +1,21 @@
-@charset "UTF-8";
-/* 메인색상 */
-/* 상태색상 */
-/* ------ */
-/* margin */
-/* ------ */
-/* mixin */
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+/* ========================= */
+/* btns */
+/* ========================= */
 /* Customize the label (the container) */
 .common-label-radio {
   display: block;
@@ -34,18 +45,18 @@
   left: 0;
   height: 26px;
   width: 26px;
-  background-color: #eee;
+  background: #eee;
   border-radius: 50%;
 }
 
 /* On mouse-over, add a grey background color */
 .common-label-radio:hover input[type=radio] ~ span {
-  background-color: #ccc;
+  background: #ccc;
 }
 
 /* When the radio button is checked, add a blue background */
 .common-label-radio > input[type=radio]:checked ~ span {
-  background-color: rgb(2, 6, 84);
+  background: #020654;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -67,5 +78,5 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: white;
+  background: #FFFFFF;
 }

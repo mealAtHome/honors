@@ -11,7 +11,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: $colorBlckBack;
+    @include colorBlckBack;
     @include heightFull;
     @include widthFull;
 }
@@ -22,7 +22,7 @@
     @include widthFull;
     height: 90%;
     overflow-y: scroll;
-    background-color: white;
+    @include colorWhit;
     border-radius: 1em 1em 0em 0em;
     box-shadow: $colorBlckShad;
     @include padZZ;
@@ -43,7 +43,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: $colorBlckBack;
+    @include colorBlckBack;
     @include heightFull;
     @include widthFull;
 }
@@ -54,7 +54,7 @@
     width: 90%;
     height: 85%;
     overflow-y: scroll;
-    background-color: white;
+    @include colorWhit;
 
     @include padZZ;
     @include marZZ;
@@ -85,7 +85,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: $colorBlckBack;
+    @include colorBlckBack;
     @include heightFull;
     @include widthFull;
 }
@@ -96,7 +96,7 @@
     width: 90%;
     height: 85%;
     overflow-y: scroll;
-    background-color: white;
+    @include colorWhit;
 
     @include padZZ;
     @include marZZ;
@@ -117,7 +117,7 @@
     @include widthFull;
     height: 94%;
     overflow-y: auto;
-    background-color: white;
+    @include colorWhit;
     border-radius: 1em 1em 0em 0em;
     @include padZZ;
     @include marZZ;
@@ -146,7 +146,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    background-color: $colorBlckBack;
+    @include colorBlckBack;
     @include heightFull;
     @include widthFull;
 }

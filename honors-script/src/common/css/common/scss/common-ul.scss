@@ -16,7 +16,7 @@
     @include padUD10;
     @include padLt20;
     @include padRt10;
-    background-color: rgb(230,230,230);
+    @include backGy23;
     @include fonts09;
     @include alignL;
     @include fonth16;

@@ -91,7 +91,7 @@ class MGrpMemberPointhists extends _MCommon
                             </tr>
                             <tr>
                                 <td colspan="2" class="common-alignR">
-                                    <span class="common-colorGrey common-fonts09">잔액 ${model.getPointleftWon()}</span>
+                                    <span class="common-colorGray common-fonts09">잔액 ${model.getPointleftWon()}</span>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,19 +1,41 @@
-/* 메인색상 */
-$colorMain:#020654;
-$colorSide:#3D6BF5;
-$colorHead:#1B2A6B;
-$colorBody:#7A8099;
-$colorLine:#7A8099;
+/* ========================= */
+/* colors main */
+/* ========================= */
+$colorMain:#020654; @mixin fontMain { color:$colorMain; } @mixin backMain { background:$colorMain; }
+$colorSide:#3D6BF5; @mixin fontSide { color:$colorSide; } @mixin backSide { background:$colorSide; }
+$colorHead:#1B2A6B; @mixin fontHead { color:$colorHead; } @mixin backHead { background:$colorHead; }
+$colorBody:#7A8099; @mixin fontBody { color:$colorBody; } @mixin backBody { background:$colorBody; }
+$colorLine:#7A8099; @mixin fontLine { color:$colorLine; } @mixin backLine { background:$colorLine; }
 
-/* 상태색상 */
-$colorHero:rgb(2, 6, 84);    $colorHeroFont:darken($colorHero, 20%); $colorHeroBack:transparentize($colorHero, 0.8); $colorHeroShad:1px 1px 7px 2px rgba(2, 6, 84, 0.8);
-$colorCncl:#FF7415;          $colorCnclFont:darken($colorCncl, 20%); $colorCnclBack:transparentize($colorCncl, 0.8); $colorCnclShad:1px 1px 7px 2px rgba(255, 150, 0, 0.8);
-$colorAllw:rgb(0, 150, 0);   $colorAllwFont:darken($colorAllw, 20%); $colorAllwBack:transparentize($colorAllw, 0.8); $colorAllwShad:1px 1px 7px 2px rgba(0, 255, 0, 0.8);
-$colorNtce:rgb(55, 75, 155); $colorNtceFont:darken($colorNtce, 20%); $colorNtceBack:transparentize($colorNtce, 0.8); $colorNtceShad:1px 1px 7px 2px rgba(55, 75, 155, 0.8);
-$colorWarn:rgb(180, 150, 0); $colorWarnFont:darken($colorWarn, 20%); $colorWarnBack:transparentize($colorWarn, 0.8); $colorWarnShad:1px 1px 7px 2px rgba(255, 255, 0, 0.8);
-$colorErrr:rgb(206, 39, 39); $colorErrrFont:darken($colorErrr, 20%); $colorErrrBack:transparentize($colorErrr, 0.8); $colorErrrShad:1px 1px 7px 2px rgba(255, 51, 51, 0.8);
-$colorBlck:rgb(0, 0, 0);     $colorBlckFont:darken($colorBlck, 20%); $colorBlckBack:transparentize($colorBlck, 0.8); $colorBlckShad:1px 1px 7px 2px rgba(0, 0, 0, 0.8);
+/* ========================= */
+/* colors */
+/* ========================= */
+@mixin transparent { background:transparent; }
 
+$colorHero:#020654;            $colorHeroFont:darken($colorHero, 20%); $colorHeroBack:transparentize($colorHero, 0.8); $colorHeroShad:1px 1px 7px 2px transparentize($colorHero, 0.8); @mixin fontHero { color:$colorHero; } @mixin backHero { background:$colorHero; } @mixin colorHeroBack { background:$colorHeroBack; }
+$colorPstv:#000278;            $colorPstvFont:darken($colorPstv, 20%); $colorPstvBack:transparentize($colorPstv, 0.8); $colorPstvShad:1px 1px 7px 2px transparentize($colorPstv, 0.8); @mixin fontPstv { color:$colorPstv; } @mixin backPstv { background:$colorPstv; } @mixin colorPstvBack { background:$colorPstvBack; }
+$colorAllw:#009600;            $colorAllwFont:darken($colorAllw, 20%); $colorAllwBack:transparentize($colorAllw, 0.8); $colorAllwShad:1px 1px 7px 2px transparentize($colorAllw, 0.8); @mixin fontAllw { color:$colorAllw; } @mixin backAllw { background:$colorAllw; } @mixin colorAllwBack { background:$colorAllwBack; }
+$colorProg:#039a00;            $colorProgFont:darken($colorProg, 20%); $colorProgBack:transparentize($colorProg, 0.8); $colorProgShad:1px 1px 7px 2px transparentize($colorProg, 0.8); @mixin fontProg { color:$colorProg; } @mixin backProg { background:$colorProg; } @mixin colorProgBack { background:$colorProgBack; }
+$colorNtce:#374B9B;            $colorNtceFont:darken($colorNtce, 20%); $colorNtceBack:transparentize($colorNtce, 0.8); $colorNtceShad:1px 1px 7px 2px transparentize($colorNtce, 0.8); @mixin fontNtce { color:$colorNtce; } @mixin backNtce { background:$colorNtce; } @mixin colorNtceBack { background:$colorNtceBack; }
+$colorHold:#d4ad00;            $colorHoldFont:darken($colorHold, 20%); $colorHoldBack:transparentize($colorHold, 0.8); $colorHoldShad:1px 1px 7px 2px transparentize($colorHold, 0.8); @mixin fontHold { color:$colorHold; } @mixin backHold { background:$colorHold; } @mixin colorHoldBack { background:$colorHoldBack; }
+$colorCncl:#FF7415;            $colorCnclFont:darken($colorCncl, 20%); $colorCnclBack:transparentize($colorCncl, 0.8); $colorCnclShad:1px 1px 7px 2px transparentize($colorCncl, 0.8); @mixin fontCncl { color:$colorCncl; } @mixin backCncl { background:$colorCncl; } @mixin colorCnclBack { background:$colorCnclBack; }
+$colorWarn:#FF7415;            $colorWarnFont:darken($colorWarn, 20%); $colorWarnBack:transparentize($colorWarn, 0.8); $colorWarnShad:1px 1px 7px 2px transparentize($colorWarn, 0.8); @mixin fontWarn { color:$colorWarn; } @mixin backWarn { background:$colorWarn; } @mixin colorWarnBack { background:$colorWarnBack; }
+$colorErrr:#ce2727;            $colorErrrFont:darken($colorErrr, 20%); $colorErrrBack:transparentize($colorErrr, 0.8); $colorErrrShad:1px 1px 7px 2px transparentize($colorErrr, 0.8); @mixin fontErrr { color:$colorErrr; } @mixin backErrr { background:$colorErrr; } @mixin colorErrrBack { background:$colorErrrBack; }
+$colorNgtv:#780000;            $colorNgtvFont:darken($colorNgtv, 20%); $colorNgtvBack:transparentize($colorNgtv, 0.8); $colorNgtvShad:1px 1px 7px 2px transparentize($colorNgtv, 0.8); @mixin fontNgtv { color:$colorNgtv; } @mixin backNgtv { background:$colorNgtv; } @mixin colorNgtvBack { background:$colorNgtvBack; }
+$colorBlck:#000000;            $colorBlckFont:darken($colorBlck, 20%); $colorBlckBack:transparentize($colorBlck, 0.8); $colorBlckShad:1px 1px 7px 2px transparentize($colorBlck, 0.8); @mixin fontBlck { color:$colorBlck; } @mixin backBlck { background:$colorBlck; } @mixin colorBlckBack { background:$colorBlckBack; }
+$colorGray:rgb(128, 128, 128); $colorGrayFont:darken($colorGray, 20%); $colorGrayBack:transparentize($colorGray, 0.8); $colorGrayShad:1px 1px 7px 2px transparentize($colorGray, 0.8); @mixin fontGray { color:$colorGray; } @mixin backGray { background:$colorGray; } @mixin colorGrayBack { background:$colorGrayBack; }
+$colorWhit:rgb(255, 255, 255); $colorWhitFont:darken($colorWhit, 20%); $colorWhitBack:transparentize($colorWhit, 0.8); $colorWhitShad:1px 1px 7px 2px transparentize($colorWhit, 0.8); @mixin fontWhit { color:$colorWhit; } @mixin backWhit { background:$colorWhit; } @mixin colorWhitBack { background:$colorWhitBack; }
+$colorDiss:rgb(100, 100, 100); $colorDissFont:darken($colorDiss, 20%); $colorDissBack:transparentize($colorDiss, 0.8); $colorDissShad:1px 1px 7px 2px transparentize($colorDiss, 0.8); @mixin fontDiss { color:$colorDiss; } @mixin backDiss { background:$colorDiss; } @mixin colorDissBack { background:$colorDissBack; }
+$colorGy23:rgb(230, 230, 230); $colorGy23Font:darken($colorGy23, 20%); $colorGy23Back:transparentize($colorGy23, 0.8); $colorGy23Shad:1px 1px 7px 2px transparentize($colorGy23, 0.8); @mixin fontGy23 { color:$colorGy23; } @mixin backGy23 { background:$colorGy23; } @mixin colorGy23Back { background:$colorGy23Back; }
+$colorGy19:rgb(190, 190, 190); $colorGy19Font:darken($colorGy19, 20%); $colorGy19Back:transparentize($colorGy19, 0.8); $colorGy19Shad:1px 1px 7px 2px transparentize($colorGy19, 0.8); @mixin fontGy19 { color:$colorGy19; } @mixin backGy19 { background:$colorGy19; } @mixin colorGy19Back { background:$colorGy19Back; }
+$colorGy15:rgb(150, 150, 150); $colorGy15Font:darken($colorGy15, 20%); $colorGy15Back:transparentize($colorGy15, 0.8); $colorGy15Shad:1px 1px 7px 2px transparentize($colorGy15, 0.8); @mixin fontGy15 { color:$colorGy15; } @mixin backGy15 { background:$colorGy15; } @mixin colorGy15Back { background:$colorGy15Back; }
+$colorGy10:rgb(100, 100, 100); $colorGy10Font:darken($colorGy10, 20%); $colorGy10Back:transparentize($colorGy10, 0.8); $colorGy10Shad:1px 1px 7px 2px transparentize($colorGy10, 0.8); @mixin fontGy10 { color:$colorGy10; } @mixin backGy10 { background:$colorGy10; } @mixin colorGy10Back { background:$colorGy10Back; }
+
+$coloraBlck10: transparentize($colorGray, 0.9);
+
+/* ========================= */
+/* spacing */
+/* ========================= */
 $spaceZZ:0.0em;
 $space02:0.2em;
 $space03:0.3em;
@@ -26,8 +48,11 @@ $space12:1.2em;
 $space20:2.0em;
 $spaceDw08:0em 0em $space08 0em;
 
-$borderRadius:0.4em;
+/* ========================= */
+/* styles */
+/* ========================= */
 
+$borderRadius:0.4em;
 @mixin radiusCurv04 { border-radius:0.4em; }
 @mixin radiusCurv08 { border-radius:0.8em; }
 @mixin radiusCurv10 { border-radius:1.0em; }
@@ -61,9 +86,10 @@ $borderRadius:0.4em;
 
 
 
-/* ------ */
-/* margin */
-/* ------ */
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+
 @mixin marLR  ($margin) { margin-left:$margin; margin-right:$margin;   } @mixin padLR ($margin) { padding-left:$margin; padding-right:$margin; }
 @mixin marUD  ($margin) { margin-top:$margin; margin-bottom:$margin;   } @mixin padUD ($margin) { padding-top:$margin; padding-bottom:$margin; }
 @mixin marUp  ($margin) { margin-top:$margin;                          } @mixin padUp ($margin) { padding-top:$margin; }
@@ -118,9 +144,11 @@ $borderRadius:0.4em;
 @mixin marRt10   { @include marRt($space10);  } @mixin padRt10   { @include padRt($space10); }
 
 
+/* ========================= */
+/* btns */
+/* ========================= */
 
-/* mixin */
-@mixin btnOutlineNormal   ($color) { border:1px solid $color;                           color:$color;  } @mixin btnOutlineActive ($color) { border-color:rgba($color, 0.3); background-color:rgba($color, 0.3); }
-@mixin btnInlineNormal    ($color) { border:1px solid $color; background-color:$color;  color:#ffffff; } @mixin btnInlineActive  ($color) { border-color:rgba($color, 0.3); background-color:rgba($color, 0.3); }
-@mixin btnOutlineDisabled ($color) { border:1px solid $color; background-color:#ffffff; color:$color;  }
-@mixin btnInlineDisabled  ($color) { border:1px solid $color; background-color:#646464; color:#ffffff; }
+@mixin btnOutlineNormal   ($color) { border:1px solid $color;                           color:$color;     } @mixin btnOutlineActive ($color) { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
+@mixin btnInlineNormal    ($color) { border:1px solid $color; background:$color;        color:$colorWhit; } @mixin btnInlineActive  ($color) { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
+@mixin btnOutlineDisabled ($color) { border:1px solid $color; background:$colorWhit;    color:$color;     }
+@mixin btnInlineDisabled  ($color) { border:1px solid $color; background:$colorDiss;    color:$colorWhit; }

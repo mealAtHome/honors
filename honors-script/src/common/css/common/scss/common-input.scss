@@ -3,7 +3,7 @@
 /* ========================= */
 /* 각 인풋박스 */
 /* ========================= */
-.common-div-formField > .common-input-field { @include widthFull; max-width: 500px; @include boxsizeB; outline: none; background-color: transparent; }
+.common-div-formField > .common-input-field { @include widthFull; max-width: 500px; @include boxsizeB; outline: none; @include transparent; }
 .common-input-field
 {
     @include padUD03;
@@ -11,19 +11,19 @@
     border: none;
     border-bottom: 1px solid #ccc;
     @include alignL;
-    background-color: transparent;
+    @include transparent;
 }
-.common-input-field:focus { border: none; border-bottom: 3px solid rgb(2, 6, 84); }
+.common-input-field:focus { border: none; border-bottom: 3px solid $colorMain; }
 
-.common-div-formField > .common-textarea-field { @include widthFull; max-width: 500px; @include boxsizeB; outline: none; background-color: transparent; }
+.common-div-formField > .common-textarea-field { @include widthFull; max-width: 500px; @include boxsizeB; outline: none; @include transparent; }
 .common-textarea-field
 {
   @include pad03;
   @include fonts11;
   border: 1px solid #ccc;
-  background-color: transparent;
+  @include transparent;
 }
-.common-textarea-field:focus { border: 1px solid rgb(2, 6, 84); border-bottom: 3px solid rgb(2, 6, 84); }
+.common-textarea-field:focus { border: 1px solid $colorMain; border-bottom: 3px solid $colorMain; }
 
 /* ========================= */
 /* 각 인풋박스 (기존) */
@@ -46,8 +46,8 @@
     /* -moz-appearance: none; */
     /* -webkit-appearance: none; */
 
-    border: 1px solid rgb(255, 215, 0);
-    box-shadow: 0px 0px 5px rgb(255, 215, 0);
+    border: 1px solid $colorMain;
+    box-shadow: 0px 0px 5px $colorMain;
 }
 
 .common-text
@@ -80,7 +80,7 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
 
-  border: 1px solid rgb(255, 215, 0);
-  box-shadow: 0px 0px 5px rgb(255, 215, 0);
+  border: 1px solid $colorMain;
+  box-shadow: 0px 0px 5px $colorMain;
 }
 
