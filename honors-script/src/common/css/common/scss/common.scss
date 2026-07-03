@@ -20,10 +20,10 @@
 
 .common-text-insertPage
 {
-    width:70%;
+    width: 70%;
     text-align: center;
 }
-.common-text-insertPage[device_kind=web] { width:50%; }
+.common-text-insertPage[device_kind=web] { width: 50%; }
 
 /* ============================== */
 /* INPUT */
@@ -36,11 +36,11 @@
 
 pre, xmp
 {
-    display:inline-block;
-    margin:0em;
+    display: inline-block;
+    margin: 0em;
     line-height: 1.6em;
     word-break: break-all;
-    white-space:pre-wrap;
+    white-space: pre-wrap;
     font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
 }
 textarea

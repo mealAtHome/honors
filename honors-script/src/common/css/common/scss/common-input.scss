@@ -3,27 +3,27 @@
 /* ========================= */
 /* 각 인풋박스 */
 /* ========================= */
-.common-div-formField > .common-input-field { width:100%; max-width:500px; box-sizing:border-box; outline:none; background-color:transparent; }
+.common-div-formField > .common-input-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
 .common-input-field
 {
-    padding:0.3em 0em;
-    font-size:1.1em;
-    border:none;
-    border-bottom:1px solid #ccc;
-    text-align:left;
-    background-color:transparent;
+    padding: 0.3em 0em;
+    font-size: 1.1em;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+    background-color: transparent;
 }
-.common-input-field:focus { border:none; border-bottom:3px solid rgb(2, 6, 84); }
+.common-input-field:focus { border: none; border-bottom: 3px solid rgb(2, 6, 84); }
 
-.common-div-formField > .common-textarea-field { width:100%; max-width:500px; box-sizing:border-box; outline:none; background-color:transparent; }
+.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
 .common-textarea-field
 {
-  padding:0.3em;
-  font-size:1.1em;
-  border:1px solid #ccc;
-  background-color:transparent;
+  padding: 0.3em;
+  font-size: 1.1em;
+  border: 1px solid #ccc;
+  background-color: transparent;
 }
-.common-textarea-field:focus { border:1px solid rgb(2, 6, 84); border-bottom:3px solid rgb(2, 6, 84); }
+.common-textarea-field:focus { border: 1px solid rgb(2, 6, 84); border-bottom: 3px solid rgb(2, 6, 84); }
 
 /* ========================= */
 /* 각 인풋박스 (기존) */
@@ -35,7 +35,7 @@
     /* -webkit-appearance: none; */
 
     /* box-sizing: content-box; */
-    padding:0.3em;
+    padding: 0.3em;
     font-size: 1.1em;
     border: 1px solid #ccc;
 }
@@ -46,7 +46,7 @@
     /* -moz-appearance: none; */
     /* -webkit-appearance: none; */
 
-    border:1px solid rgb(255, 215, 0);
+    border: 1px solid rgb(255, 215, 0);
     box-shadow: 0px 0px 5px rgb(255, 215, 0);
 }
 
@@ -57,7 +57,7 @@
     /* -webkit-appearance: none; */
 
     box-sizing: initial;
-    padding:0.3em;
+    padding: 0.3em;
     font-size: 1.1em;
     border: none;
 }
@@ -69,7 +69,7 @@
   /* -webkit-appearance: none; */
 
   /* box-sizing: content-box; */
-  padding:0.3em;
+  padding: 0.3em;
   font-size: 1.1em;
   border: 1px solid #ccc;
 }
@@ -80,7 +80,7 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
 
-  border:1px solid rgb(255, 215, 0);
+  border: 1px solid rgb(255, 215, 0);
   box-shadow: 0px 0px 5px rgb(255, 215, 0);
 }
 

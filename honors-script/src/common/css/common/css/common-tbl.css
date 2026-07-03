@@ -63,148 +63,14 @@
 }
 
 /* ============================== */
-/* lineTab */
-/*
-    <div class="common-div-cushion">
-        <table class="common-tbl-lineTab commonEvent-tbl-tab">
-            <tbody>
-                <tr>
-                    <td class="UD-td-entity" tab="" entity_type=player data-i18n="(UD)managing player"><!-- 연동선수 --></td>
-                    <td class="UD-td-entity" tab="" entity_type=team   data-i18n="(UD)managing team"  ><!-- 관리 팀 --></td>
-                    <td class="UD-td-entity" tab="" entity_type=league data-i18n="(UD)managing league"><!-- 관리 리그 --></td>
-                    <td tab=space></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
- */
+/* common-tbl-sort */
 /* ============================== */
-.common-tbl-lineTab {
-  border-collapse: collapse;
-  white-space: nowrap;
-}
-
-.common-tbl-lineTab > tbody > tr > td {
-  padding: 0.5em 0.8em;
-  border-top: 4px solid rgb(200, 200, 200);
-  border-bottom: 2px solid rgb(2, 6, 84);
-  border-left: 2px solid rgb(200, 200, 200);
-  /* border-right: 2px solid rgb(200,200,200); */
-}
-
-.common-tbl-lineTab > tbody > tr > td[tab=space] {
-  width: 90%;
-  border: none;
-  border-bottom: 2px solid rgb(2, 6, 84);
-  border-left: 2px solid rgb(200, 200, 200);
-  padding: 0em 0.3em;
-}
-
-.common-tbl-lineTab > tbody > tr > td[tab=tab] {
-  font-weight: bold;
-  border-top: 4px solid rgb(2, 6, 84);
-  border-left: 2px solid rgb(2, 6, 84) !important;
-  border-right: 2px solid rgb(2, 6, 84) !important;
-  border-bottom: none;
-  color: rgb(2, 6, 84);
-}
-
-.common-tbl-lineTab > tbody > tr > td[tab=""]:active,
-.common-tbl-lineTab > tbody > tr > td[tab=tab]:active {
-  background-color: #e9ecef;
-}
-
-/* ============================== */
-/* button group */
-/* ============================== */
-.common-tbl-btnGroup {
-  border-collapse: collapse;
-  white-space: normal;
-}
-
-/* nowrap은 첫 번째 버튼에만 해당함 */
-.common-tbl-btnGroup > tbody > tr:nth-child(1) > td {
-  white-space: nowrap;
-}
-
-.common-tbl-btnGroup > tbody > tr > td {
-  padding: 0.3em 0.5em;
-}
-
-/* 색 지정 등 */
-.common-tbl-btnGroup > tbody > tr > td[tab=""],
-.common-tbl-btnGroup > tbody > tr > td[tab=tab] {
-  border: 1px solid rgb(2, 6, 84);
-  color: rgb(2, 6, 84);
-}
-
-.common-tbl-btnGroup > tbody > tr > td[tab=tab] {
-  color: white;
-  background-color: rgb(2, 6, 84);
-}
-
-.commonEvent-tbl-btnGroup > tbody > tr > td[tab=""]:active,
-.commonEvent-tbl-btnGroup > tbody > tr > td[tab=tab]:active {
-  background-color: rgba(2, 6, 84, 0.4);
-}
-
-.common-tbl-btnGroup > tbody > tr > td[tab=space] {
-  width: 90%;
-}
-
-/* ============================== */
-/* 테이블 기본 */
-/* ============================== */
-.common-tbl-default > thead > tr > td,
-.common-tbl-default > thead > tr > th,
-.common-tbl-default > tbody > tr > td,
-.common-tbl-default > tbody > tr > th {
-  padding: 0.4em;
-  line-height: 1.6;
-}
-
-/* ============================== */
-/* common-tbl */
-/* ============================== */
-.common-tbl-sort {
-  border-collapse: collapse;
-}
-
-.common-tbl-sort {
-  border: 1px solid #dee2e6;
-}
-
-.common-tbl-sort > thead > tr > th,
-.common-tbl-sort > tbody > tr > th {
-  padding: 0.4em;
-  background-color: #e9ecef;
-  border: 1px solid #dee2e6;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.common-tbl-sort > thead > tr > td,
-.common-tbl-sort > tfoot > tr > td,
-.common-tbl-sort > tbody > tr > td {
-  padding: 0.4em;
-  border: 1px solid #dee2e6;
-}
-
 /* 정렬 상태에 따른 컨텐츠 */
-.common-tbl-sort > thead > tr > th[sort_status=not]:after {
-  content: "";
-}
-
-.common-tbl-sort > thead > tr > th[sort_status=desc]:after {
-  content: " ▼";
-}
-
-.common-tbl-sort > thead > tr > th[sort_status=asc]:after {
-  content: " ▲";
-}
-
+/* .common-tbl-sort > thead > tr > th[sort_status=not]:after  { content: ""; } */
+/* .common-tbl-sort > thead > tr > th[sort_status=desc]:after { content: " ▼"; } */
+/* .common-tbl-sort > thead > tr > th[sort_status=asc]:after  { content: " ▲"; } */
 /* ============================== */
-/* common-tbl */
+/* common-tbl-normal */
 /* ============================== */
 .common-tbl-normal {
   border-collapse: collapse;
@@ -341,7 +207,7 @@
 /* ============================== */
 .common-tbl-slideformFooterBtn {
   width: 100%;
-  /* max-width:300px; */
+  /* max-width: 300px; */
   margin: 1em auto;
   border-collapse: collapse;
 }
@@ -413,57 +279,6 @@
 .common-tbl-slideformFooterBtn[tbl-type=liner2] > tbody > tr > td > button {
   width: 100%;
   padding: 0.6em;
-}
-
-/* ============================== */
-/* 집계용 테이블 */
-/* ============================== */
-.common-tbl-summary {
-  white-space: nowrap;
-  min-width: 15em;
-  border-collapse: collapse;
-  margin: 1em auto;
-}
-
-.common-tbl-summary > tbody > tr > * {
-  padding: 0.4em;
-  border: 1px solid rgb(150, 150, 150);
-}
-
-.common-tbl-summary > tbody > tr > th {
-  font-weight: normal;
-  background-color: #e9ecef;
-}
-
-/* ============================== */
-/* TABLE */
-/* =============z================= */
-/* horizon table */
-.common-tbl-horizon {
-  border-collapse: collapse;
-}
-
-.common-tbl-horizon > tbody > tr > * {
-  padding: 0.4em;
-  border: 1px solid rgb(150, 150, 150);
-}
-
-.common-tbl-horizon > tbody > tr > th {
-  text-align: right;
-  background-color: #e9ecef;
-}
-
-.common-tbl-horizon > tbody > tr > td {
-  text-align: center;
-}
-
-/* tr line */
-.common-tbl-trLine {
-  border-collapse: collapse;
-}
-
-.common-tbl-trLine > tbody > tr > td {
-  border-bottom: 1px dashed grey;
 }
 
 /* ============================== */
@@ -571,12 +386,18 @@
   white-space: normal;
 }
 
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th,
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th {
+  border-top: 1px solid rgb(220, 220, 220);
+}
+
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td {
   border-top: 1px solid rgb(220, 220, 220);
 }
 
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th,
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th {
+  border-top: none;
+}
+
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > td {
   border-top: none;
 }
@@ -595,44 +416,6 @@
 
 .common-tbl-vertical[tbl-width=auto] > tbody > tr > th {
   width: auto;
-}
-
-/* ============================== */
-/* TABLE: 테이블 안에 테이블을 활용할 시 */
-/* ============================== */
-.common-tbl-inside {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-/* ============================== */
-/* TABLE: 라디오 버튼용 */
-/* ============================== */
-.common-tbl-radio {
-  line-height: 1.4;
-  width: 100%;
-}
-
-.common-tbl-radio > tbody > tr > td:nth-child(1) {
-  width: 1%;
-}
-
-.common-tbl-radio > tbody > tr > td:nth-child(2) {
-  width: 99%;
-}
-
-.common-tbl-radio > tbody > tr > td {
-  vertical-align: top;
-  padding: 0.3em;
-}
-
-.common-tbl-radio > tbody > tr > td > label {
-  display: block;
-}
-
-.common-tbl-nobold > thead > tr > th,
-.common-tbl-nobold > tbody > tr > th {
-  font-weight: normal;
 }
 
 /* ============================== */

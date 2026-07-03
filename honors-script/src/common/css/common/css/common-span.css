@@ -132,14 +132,12 @@
 /* ============================== */
 .common-span-card {
   display: inline-block;
-  font-size: 1em;
   font-weight: 600;
   padding: 0.3em 0.6em;
 }
 
 .common-span-mini {
   display: inline-block;
-  font-size: 1em;
   font-weight: 600;
   padding: 0.1em 0.3em;
 }
@@ -252,7 +250,6 @@
 /* ============================== */
 .common-span-msg {
   display: inline-block;
-  font-size: 1em;
   font-weight: normal;
 }
 
