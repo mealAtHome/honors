@@ -34,7 +34,7 @@
     height: 26px;
     width: 26px;
     background-color: #eee;
-    border-radius: 50%;
+    @include radiusHalf;
 }
 
 /* On mouse-over, add a grey background color */
@@ -70,6 +70,6 @@
     left: 9px;
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    @include radiusHalf;
     background: white;
 }

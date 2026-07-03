@@ -3,22 +3,22 @@
 /* ========================= */
 /* 각 인풋박스 */
 /* ========================= */
-.common-div-formField > .common-input-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
+.common-div-formField > .common-input-field { @include widthFull; max-width: 500px; @include boxsizeB; outline: none; background-color: transparent; }
 .common-input-field
 {
-    @include paddingUD03;
+    @include padUD03;
     @include fonts11;
     border: none;
     border-bottom: 1px solid #ccc;
-    text-align: left;
+    @include alignL;
     background-color: transparent;
 }
 .common-input-field:focus { border: none; border-bottom: 3px solid rgb(2, 6, 84); }
 
-.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
+.common-div-formField > .common-textarea-field { @include widthFull; max-width: 500px; @include boxsizeB; outline: none; background-color: transparent; }
 .common-textarea-field
 {
-  @include padding03;
+  @include pad03;
   @include fonts11;
   border: 1px solid #ccc;
   background-color: transparent;
@@ -34,8 +34,8 @@
     /* -moz-appearance: none; */
     /* -webkit-appearance: none; */
 
-    /* box-sizing: content-box; */
-    @include padding03;
+    /* @include boxsizeC; */
+    @include pad03;
     @include fonts11;
     border: 1px solid #ccc;
 }
@@ -57,7 +57,7 @@
     /* -webkit-appearance: none; */
 
     box-sizing: initial;
-    @include padding03;
+    @include pad03;
     @include fonts11;
     border: none;
 }
@@ -68,8 +68,8 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
 
-  /* box-sizing: content-box; */
-  @include padding03;
+  /* @include boxsizeC; */
+  @include pad03;
   @include fonts11;
   border: 1px solid #ccc;
 }

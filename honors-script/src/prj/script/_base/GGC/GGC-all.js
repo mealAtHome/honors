@@ -16,7 +16,7 @@ GGC.Bankaccount =
         return "";
     },
     defaultflgCard(val) { return `<span class="common-card" card-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
-    defaultflgFont(val) { return `<span class="common-font" font-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
+    defaultflgFont(val) { return `<span class="common-colorPick" font-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
 
 };
 

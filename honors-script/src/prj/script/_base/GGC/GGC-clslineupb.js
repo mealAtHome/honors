@@ -24,6 +24,6 @@ GGC.Clslineupb =
         return rslt;
     },
     prepaidflgCard(val) { return `<span class="common-card" card-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
-    prepaidflgFont(val) { return `<span class="common-font" font-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
+    prepaidflgFont(val) { return `<span class="common-colorPick" font-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
 
 }

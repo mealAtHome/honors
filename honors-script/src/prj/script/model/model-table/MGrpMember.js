@@ -70,7 +70,7 @@ class MGrpMember
         {
             buttonHtmlFinal =
             `
-                <span class="common-block common-marginUD common-fontsize09">
+                <span class="common-block common-marUD common-fonts09">
                     ${buttonHtml}
                 </span>
             `;
@@ -85,7 +85,7 @@ class MGrpMember
                     ${Common.isEmpty(model.getGrpmposition()) ? "" : ` - ${model.getGrpmposition()}`}
                     ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
                 <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
-                <span class="common-block common-fontsize09">
+                <span class="common-block common-fonts09">
                     ${mUser.getPhone()         != "" ? `<span class="common-block common-colorGrey commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
                     ${mUser.getAddress()       != "" ? `<span class="common-block common-colorGrey">${mUser.getAddress()}</span>` : ""}
                     ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorGrey">${mUser.getHascarflgCvrt()}</span>` : ""}
@@ -135,7 +135,7 @@ class MGrpMember
                     ${Common.isEmpty(model.getGrpmposition()) ? "" : ` - ${model.getGrpmposition()}`}
                     ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
                 <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
-                <span class="common-block common-fontsize09">
+                <span class="common-block common-fonts09">
                     ${mUser.getPhone()         != "" ? `<span class="common-block common-colorGrey commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
                     ${mUser.getAddress()       != "" ? `<span class="common-block common-colorGrey">${mUser.getAddress()}</span>` : ""}
                     ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorGrey">${mUser.getHascarflgCvrt()}</span>` : ""}

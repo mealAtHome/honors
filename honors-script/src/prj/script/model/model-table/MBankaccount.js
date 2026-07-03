@@ -45,7 +45,7 @@ class MBankaccount
     {
         let btnHtml = ``;
         if(this.getDefaultflg() == GGF.Y)
-            btnHtml += `<span class="common-inlineBlock">${this.getDefaultflgCard()}</span>`;
+            btnHtml += `<span class="common-inline">${this.getDefaultflgCard()}</span>`;
         switch(mode)
         {
             case "choose":
@@ -72,7 +72,7 @@ class MBankaccount
                 <span class="common-block"></span>
                 <span class="common-block">${this.getBankname()}&nbsp;${this.getBaccacct()}</span>
                 <span class="common-block">예금주명 : ${this.getBaccname()}</span>
-                <div class="common-block common-fontsize09 common-paddingUD">
+                <div class="common-block common-fonts09 common-padUD">
                     ${btnHtml}
                 </div>
             </div>

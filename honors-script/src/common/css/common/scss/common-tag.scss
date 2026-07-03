@@ -1,117 +1,64 @@
 @import "../../_import/scss/__import";
 
-.common-indent04    { @include displayBk; @include paddingLt04; }
-.common-indent08    { @include displayBk; @include paddingLt08; }
-.common-indent12    { @include displayBk; @include paddingLt12; }
-.common-marginUp10  { @include displayBk; @include marginUp10; }
-.common-marginUp08  { @include displayBk; @include marginUp08; }
-.common-marginUp    { @include displayBk; @include marginUp04; }
-.common-marginUD    { @include displayBk; @include marginUD04; }
-.common-marginLt03  { @include displayBk; @include marginLt03; }
-.common-paddingUp05 {                     @include paddingUp05; }
-.common-paddingUD   {                     @include paddingUD02; }
-.common-cushion     { @include displayBk; @include margin06; }
-.common-cushionUp   { @include displayBk; @include marginUp06; }
-.common-cushionUD   { @include displayBk; @include marginUD06; }
-.common-cushionDw   { @include displayBk; @include marginDw04; }
-.common-marginDw03  { @include displayBk; @include marginDw03; }
-
-/* 모든 태그에 적용이 가능한 클래스 모음 */
-.common-strong     { @include fontwb; @include fonts11; }
-.common-textCenter { text-align: center; }
-.common-blockCenter
-{
-    @include displayBk;
-    @include marginAuto;
-    text-align: center;
-}
-
-.common-alignC { text-align: center; }
-.common-alignR { text-align: right; }
-.common-alignL { text-align: left; }
-
-.common-fontLight { color:#666; @include fontwn; }
-
-/* ============================== */
-/* 색칠 */
-/* ============================== */
-.common-bgcolorGray    { background-color: rgba(2, 6, 84, 0.2); }
-.common-bgcolorSign04  { background-color: rgba(2, 6, 84, 0.4); }
-
-/* ============================== */
-/* 쿠션 */
-/* ============================== */
-.common-block
-{
-    @include displayBk;
-    @include lineh16;
-}
-.common-inlineBlock
-{
-    @include displayIn;
-    @include lineh16;
-}
-
-/* ============================== */
-/* fixed 고정 TAG */
-/* ============================== */
-.common-fixedTopRight
-{
-    @include displayIn;
-    position: fixed;
-    top: 0.5em;
-    right: 0.5em;
-}
-
-.common-announce
-{
-    @include displayBk;
-    @include padding04;
-    text-align: left;
-    @include lineh14;
-    background-color: #ddd;
-}
+.common-block           { @include displayBk; @include fonth16; }
+.common-inline          { @include displayIn; @include fonth16; }
+.common-indent04        { @include displayBk; @include padLt04; }
+.common-indent08        { @include displayBk; @include padLt08; }
+.common-indent12        { @include displayBk; @include padLt12; }
+.common-marUD           { @include displayBk; @include marUD04; }
+.common-marUp           { @include displayBk; @include marUp04; }
+.common-marUp10         { @include displayBk; @include marUp10; }
+.common-marUp08         { @include displayBk; @include marUp08; }
+.common-marDw03         { @include displayBk; @include marDw03; }
+.common-marLt03         { @include displayBk; @include marLt03; }
+.common-padUD           {                     @include padUD02; }
+.common-padUp05         {                     @include padUp05; }
+.common-cushionUp       { @include displayBk; @include marUp06; }
+.common-cushionUD       { @include displayBk; @include marUD06; }
+.common-cushionDw       { @include displayBk; @include marDw04; }
+.common-strong          { @include fontwB; @include fonts11; }
+.common-alignC          { @include alignC; }
+.common-alignR          { @include alignR; }
+.common-alignL          { @include alignL; }
 
 /* ============================== */
 /* 글자크기 */
 /* ============================== */
-.common-fontsize08 { @include fonts08; }
-.common-fontsize09 { @include fonts09; }
-.common-fontsize11 { @include fonts11; }
-.common-fontsize12 { @include fonts12; }
+.common-fonts08 { @include fonts08; }
+.common-fonts09 { @include fonts09; }
+.common-fonts11 { @include fonts11; }
+.common-fonts12 { @include fonts12; }
 
-.common-bold      { @include fontwb; }
-.common-colorWarn { color: rgba(255, 116, 21, 1.0); }
-.common-colorPstv { color: rgba(0, 128, 0, 1.0); }
-.common-colorNgtv { color: rgba(255, 0, 0, 1.0); }
-.common-colorGrey { color: rgba(128, 128, 128, 1.0); }
-.common-colorGray { color: rgba(128, 128, 128, 1.0); }
-
-
-.common-font[font-color=hold]      { color: rgb(212 , 173 , 0   ); border: none; background-color: none; }
-.common-font[font-color=prog]      { color: rgb(  3 , 154 , 0   ); border: none; background-color: none; }
-.common-font[font-color=pstv]      { color: rgb(  0 ,   2 , 120 ); border: none; background-color: none; }
-.common-font[font-color=ngtv]      { color: rgb(120 ,   0 , 0   ); border: none; background-color: none; }
+.common-bold                            { @include fontwB; }
+.common-colorWarn                       { color: #ff7415; }
+.common-colorPstv                       { color: #008000; }
+.common-colorNgtv                       { color: #ff0000; }
+.common-colorGrey                       { color: #808080; }
+.common-colorGray                       { color: #808080; }
+.common-colorPick[font-color=hold]      { color: #d4ad00; border: none; background-color: none; }
+.common-colorPick[font-color=prog]      { color: #039a00; border: none; background-color: none; }
+.common-colorPick[font-color=pstv]      { color: #000278; border: none; background-color: none; }
+.common-colorPick[font-color=ngtv]      { color: #780000; border: none; background-color: none; }
 
 .common-card
 {
     @include displayIn;
-    @include fontwn;
-    @include paddingUD03;
-    @include paddingLR06;
+    @include fontwN;
+    @include padUD03;
+    @include padLR06;
 }
-.common-card[card-color=hold]      { color: rgb(212 , 173 , 0   ); border: 2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
-.common-card[card-color=prog]      { color: rgb(  3 , 154 , 0   ); border: 2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
-.common-card[card-color=pstv]      { color: rgb(  0 ,   2 , 120 ); border: 2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
-.common-card[card-color=ngtv]      { color: rgb(120 ,   0 , 0   ); border: 2px solid rgb(120 ,   0 , 0   ); background-color: rgb(120 ,   0 , 0   , 0.3); }
+.common-card[card-color=hold]      { color: #d4ad00; border: 2px solid #d4ad00; background-color: rgb(212 , 173 , 0   , 0.3); }
+.common-card[card-color=prog]      { color: #039a00; border: 2px solid #039a00; background-color: rgb(  3 , 154 , 0   , 0.3); }
+.common-card[card-color=pstv]      { color: #000278; border: 2px solid #000278; background-color: rgb(  0 ,   2 , 120 , 0.3); }
+.common-card[card-color=ngtv]      { color: #780000; border: 2px solid #780000; background-color: rgb(120 ,   0 , 0   , 0.3); }
 
 
-.common-positionAbsUR { position: absolute; top: 0.5em; right: 0.5em; }
+.common-absoluteUR { position: absolute; top: 0.5em; right: 0.5em; }
 
-.common-me[me=y]  { background-color: rgba(2, 6, 84, 0.1); }
-.common-span-me[me=y] { @include fontwb; color: $colorMain; }
+.common-me[me=y]      { background-color: rgba(2, 6, 84, 0.1); }
+.common-span-me[me=y] { @include fontwB; color: $colorMain; }
 
-.tag-color-sign           { color: rgb(27, 42, 107); }
+.tag-color-sign           { color:#1b2a6b; }
 .tag-color-cornflowerBlue { color:#8898CC; }
 .tag-color-gray           { color:#7A8099; }
 

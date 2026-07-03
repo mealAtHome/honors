@@ -17,7 +17,7 @@
 .common-label-checkbox
 {
     @include displayIn;
-    vertical-align: middle;
+    @include verticalM;
     position: relative;
     padding-left: 26px;
     cursor: pointer;

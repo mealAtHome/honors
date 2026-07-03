@@ -1,6 +1,5 @@
 /* 메인색상 */
-$colorMain:rgb(2, 6, 84);
-
+$colorMain:#020654;
 $colorSide:#3D6BF5;
 $colorHead:#1B2A6B;
 $colorBody:#7A8099;
@@ -29,76 +28,94 @@ $spaceDw08:0em 0em $space08 0em;
 
 $borderRadius:0.4em;
 
-@mixin fonts08   { font-size:0.8em; }
-@mixin fonts09   { font-size:0.9em; }
-@mixin fonts10   { font-size:1.0em; }
-@mixin fonts11   { font-size:1.1em; }
-@mixin fonts12   { font-size:1.2em; }
-@mixin fonts14   { font-size:1.4em; }
-@mixin fonts30   { font-size:3.0em; }
-@mixin fontwn    { font-weight:normal; }
-@mixin fontwb    { font-weight:bold; }
-@mixin displayIn { display:inline-block; }
-@mixin displayBk { display:block; }
-@mixin lineh12   { line-height:1.2; }
-@mixin lineh14   { line-height:1.4; }
-@mixin lineh16   { line-height:1.6; }
+@mixin radiusCurv04 { border-radius:0.4em; }
+@mixin radiusCurv08 { border-radius:0.8em; }
+@mixin radiusCurv10 { border-radius:1.0em; }
+@mixin radiusCurv30 { border-radius:3.0em; }
+@mixin radiusHalf   { border-radius:50%; }
+@mixin radiusFull   { border-radius:100%; }
+
+@mixin displayIn    { display:inline-block; }
+@mixin displayBk    { display:block; }
+@mixin widthFull    { width:100%; }
+@mixin heightFull   { height:100%; }
+@mixin fonts08      { font-size:0.8em; }
+@mixin fonts09      { font-size:0.9em; }
+@mixin fonts10      { font-size:1.0em; }
+@mixin fonts11      { font-size:1.1em; }
+@mixin fonts12      { font-size:1.2em; }
+@mixin fonts14      { font-size:1.4em; }
+@mixin fonts30      { font-size:3.0em; }
+@mixin fontwN       { font-weight:normal; }
+@mixin fontwB       { font-weight:bold; }
+@mixin fonth12      { line-height:1.2; }
+@mixin fonth14      { line-height:1.4; }
+@mixin fonth16      { line-height:1.6; }
+@mixin alignC       { text-align:center; }
+@mixin alignR       { text-align:right; }
+@mixin alignL       { text-align:left; }
+@mixin verticalM    { vertical-align:middle; }
+@mixin boxsizeB     { box-sizing:border-box; }
+@mixin boxsizeC     { box-sizing:content-box; }
+@mixin overflowX    { overflow-x:auto; }
+
+
 
 /* ------ */
 /* margin */
 /* ------ */
-@mixin marginLR  ($margin) { margin-left:$margin; margin-right:$margin;   } @mixin paddingLR ($margin) { padding-left:$margin; padding-right:$margin; }
-@mixin marginUD  ($margin) { margin-top:$margin; margin-bottom:$margin;   } @mixin paddingUD ($margin) { padding-top:$margin; padding-bottom:$margin; }
-@mixin marginUp  ($margin) { margin-top:$margin;                          } @mixin paddingUp ($margin) { padding-top:$margin; }
-@mixin marginDw  ($margin) { margin-bottom:$margin;                       } @mixin paddingDw ($margin) { padding-bottom:$margin; }
-@mixin marginLt  ($margin) { margin-left:$margin;                         } @mixin paddingLt ($margin) { padding-left:$margin; }
-@mixin marginRt  ($margin) { margin-right:$margin;                        } @mixin paddingRt ($margin) { padding-right:$margin; }
+@mixin marLR  ($margin) { margin-left:$margin; margin-right:$margin;   } @mixin padLR ($margin) { padding-left:$margin; padding-right:$margin; }
+@mixin marUD  ($margin) { margin-top:$margin; margin-bottom:$margin;   } @mixin padUD ($margin) { padding-top:$margin; padding-bottom:$margin; }
+@mixin marUp  ($margin) { margin-top:$margin;                          } @mixin padUp ($margin) { padding-top:$margin; }
+@mixin marDw  ($margin) { margin-bottom:$margin;                       } @mixin padDw ($margin) { padding-bottom:$margin; }
+@mixin marLt  ($margin) { margin-left:$margin;                         } @mixin padLt ($margin) { padding-left:$margin; }
+@mixin marRt  ($margin) { margin-right:$margin;                        } @mixin padRt ($margin) { padding-right:$margin; }
 
-@mixin margin03     { margin:$space03;              } @mixin padding03     { padding:$space03; }
-@mixin margin04     { margin:$space04;              } @mixin padding04     { padding:$space04; }
-@mixin margin05     { margin:$space05;              } @mixin padding05     { padding:$space05; }
-@mixin margin06     { margin:$space06;              } @mixin padding06     { padding:$space06; }
-@mixin margin08     { margin:$space08;              } @mixin padding08     { padding:$space08; }
-@mixin marginZZ     { margin:$spaceZZ;              } @mixin paddingZZ     { padding:$spaceZZ; }
-@mixin marginAuto   { @include marginLR(auto);      } @mixin paddingAuto   { @include paddingLR(auto); }
-@mixin marginUpZZ   { @include marginUp($spaceZZ);  } @mixin paddingUpZZ   { @include paddingUp($spaceZZ); }
-@mixin marginUp04   { @include marginUp($space04);  } @mixin paddingUp04   { @include paddingUp($space04); }
-@mixin marginUp05   { @include marginUp($space05);  } @mixin paddingUp05   { @include paddingUp($space05); }
-@mixin marginUp06   { @include marginUp($space06);  } @mixin paddingUp06   { @include paddingUp($space06); }
-@mixin marginUp07   { @include marginUp($space07);  } @mixin paddingUp07   { @include paddingUp($space07); }
-@mixin marginUp08   { @include marginUp($space08);  } @mixin paddingUp08   { @include paddingUp($space08); }
-@mixin marginUp10   { @include marginUp($space10);  } @mixin paddingUp10   { @include paddingUp($space10); }
-@mixin marginUD01   { @include marginUD($space01);  } @mixin paddingUD01   { @include paddingUD($space01); }
-@mixin marginUD02   { @include marginUD($space02);  } @mixin paddingUD02   { @include paddingUD($space02); }
-@mixin marginUD03   { @include marginUD($space03);  } @mixin paddingUD03   { @include paddingUD($space03); }
-@mixin marginUD05   { @include marginUD($space05);  } @mixin paddingUD05   { @include paddingUD($space05); }
-@mixin marginUD06   { @include marginUD($space06);  } @mixin paddingUD06   { @include paddingUD($space06); }
-@mixin marginUD08   { @include marginUD($space08);  } @mixin paddingUD08   { @include paddingUD($space08); }
-@mixin marginUD10   { @include marginUD($space10);  } @mixin paddingUD10   { @include paddingUD($space10); }
-@mixin marginUD20   { @include marginUD($space20);  } @mixin paddingUD20   { @include paddingUD($space20); }
-@mixin marginLRZZ   { @include marginLR($spaceZZ);  } @mixin paddingLRZZ   { @include paddingLR($spaceZZ); }
-@mixin marginLR04   { @include marginLR($space04);  } @mixin paddingLR04   { @include paddingLR($space04); }
-@mixin marginLR06   { @include marginLR($space06);  } @mixin paddingLR06   { @include paddingLR($space06); }
-@mixin marginLR08   { @include marginLR($space08);  } @mixin paddingLR08   { @include paddingLR($space08); }
-@mixin marginLR10   { @include marginLR($space10);  } @mixin paddingLR10   { @include paddingLR($space10); }
-@mixin marginLR20   { @include marginLR($space20);  } @mixin paddingLR20   { @include paddingLR($space20); }
-@mixin marginDwZZ   { @include marginDw($spaceZZ);  } @mixin paddingDwZZ   { @include paddingDw($spaceZZ); }
-@mixin marginDw02   { @include marginDw($space02);  } @mixin paddingDw02   { @include paddingDw($space02); }
-@mixin marginDw03   { @include marginDw($space03);  } @mixin paddingDw03   { @include paddingDw($space03); }
-@mixin marginDw04   { @include marginDw($space04);  } @mixin paddingDw04   { @include paddingDw($space04); }
-@mixin marginDw08   { @include marginDw($space08);  } @mixin paddingDw08   { @include paddingDw($space08); }
-@mixin marginDw10   { @include marginDw($space10);  } @mixin paddingDw10   { @include paddingDw($space10); }
-@mixin marginDw20   { @include marginDw($space20);  } @mixin paddingDw20   { @include paddingDw($space20); }
-@mixin marginLtZZ   { @include marginLt($spaceZZ);  } @mixin paddingLtZZ   { @include paddingLt($spaceZZ); }
-@mixin marginLt03   { @include marginLt($space03);  } @mixin paddingLt03   { @include paddingLt($space03); }
-@mixin marginLt04   { @include marginLt($space04);  } @mixin paddingLt04   { @include paddingLt($space04); }
-@mixin marginLt05   { @include marginLt($space05);  } @mixin paddingLt05   { @include paddingLt($space05); }
-@mixin marginLt08   { @include marginLt($space08);  } @mixin paddingLt08   { @include paddingLt($space08); }
-@mixin marginLt10   { @include marginLt($space10);  } @mixin paddingLt10   { @include paddingLt($space10); }
-@mixin marginLt12   { @include marginLt($space12);  } @mixin paddingLt12   { @include paddingLt($space12); }
-@mixin marginLt20   { @include marginLt($space20);  } @mixin paddingLt20   { @include paddingLt($space20); }
-@mixin marginRt03   { @include marginRt($space03);  } @mixin paddingRt03   { @include paddingRt($space03); }
-@mixin marginRt10   { @include marginRt($space10);  } @mixin paddingRt10   { @include paddingRt($space10); }
+@mixin mar03     { margin:$space03;              } @mixin pad03     { padding:$space03; }
+@mixin mar04     { margin:$space04;              } @mixin pad04     { padding:$space04; }
+@mixin mar05     { margin:$space05;              } @mixin pad05     { padding:$space05; }
+@mixin mar06     { margin:$space06;              } @mixin pad06     { padding:$space06; }
+@mixin mar08     { margin:$space08;              } @mixin pad08     { padding:$space08; }
+@mixin marZZ     { margin:$spaceZZ;              } @mixin padZZ     { padding:$spaceZZ; }
+@mixin marAuto   { @include marLR(auto);      } @mixin padAuto   { @include padLR(auto); }
+@mixin marUpZZ   { @include marUp($spaceZZ);  } @mixin padUpZZ   { @include padUp($spaceZZ); }
+@mixin marUp04   { @include marUp($space04);  } @mixin padUp04   { @include padUp($space04); }
+@mixin marUp05   { @include marUp($space05);  } @mixin padUp05   { @include padUp($space05); }
+@mixin marUp06   { @include marUp($space06);  } @mixin padUp06   { @include padUp($space06); }
+@mixin marUp07   { @include marUp($space07);  } @mixin padUp07   { @include padUp($space07); }
+@mixin marUp08   { @include marUp($space08);  } @mixin padUp08   { @include padUp($space08); }
+@mixin marUp10   { @include marUp($space10);  } @mixin padUp10   { @include padUp($space10); }
+@mixin marUD01   { @include marUD($space01);  } @mixin padUD01   { @include padUD($space01); }
+@mixin marUD02   { @include marUD($space02);  } @mixin padUD02   { @include padUD($space02); }
+@mixin marUD03   { @include marUD($space03);  } @mixin padUD03   { @include padUD($space03); }
+@mixin marUD05   { @include marUD($space05);  } @mixin padUD05   { @include padUD($space05); }
+@mixin marUD06   { @include marUD($space06);  } @mixin padUD06   { @include padUD($space06); }
+@mixin marUD08   { @include marUD($space08);  } @mixin padUD08   { @include padUD($space08); }
+@mixin marUD10   { @include marUD($space10);  } @mixin padUD10   { @include padUD($space10); }
+@mixin marUD20   { @include marUD($space20);  } @mixin padUD20   { @include padUD($space20); }
+@mixin marLRZZ   { @include marLR($spaceZZ);  } @mixin padLRZZ   { @include padLR($spaceZZ); }
+@mixin marLR04   { @include marLR($space04);  } @mixin padLR04   { @include padLR($space04); }
+@mixin marLR06   { @include marLR($space06);  } @mixin padLR06   { @include padLR($space06); }
+@mixin marLR08   { @include marLR($space08);  } @mixin padLR08   { @include padLR($space08); }
+@mixin marLR10   { @include marLR($space10);  } @mixin padLR10   { @include padLR($space10); }
+@mixin marLR20   { @include marLR($space20);  } @mixin padLR20   { @include padLR($space20); }
+@mixin marDwZZ   { @include marDw($spaceZZ);  } @mixin padDwZZ   { @include padDw($spaceZZ); }
+@mixin marDw02   { @include marDw($space02);  } @mixin padDw02   { @include padDw($space02); }
+@mixin marDw03   { @include marDw($space03);  } @mixin padDw03   { @include padDw($space03); }
+@mixin marDw04   { @include marDw($space04);  } @mixin padDw04   { @include padDw($space04); }
+@mixin marDw08   { @include marDw($space08);  } @mixin padDw08   { @include padDw($space08); }
+@mixin marDw10   { @include marDw($space10);  } @mixin padDw10   { @include padDw($space10); }
+@mixin marDw20   { @include marDw($space20);  } @mixin padDw20   { @include padDw($space20); }
+@mixin marLtZZ   { @include marLt($spaceZZ);  } @mixin padLtZZ   { @include padLt($spaceZZ); }
+@mixin marLt03   { @include marLt($space03);  } @mixin padLt03   { @include padLt($space03); }
+@mixin marLt04   { @include marLt($space04);  } @mixin padLt04   { @include padLt($space04); }
+@mixin marLt05   { @include marLt($space05);  } @mixin padLt05   { @include padLt($space05); }
+@mixin marLt08   { @include marLt($space08);  } @mixin padLt08   { @include padLt($space08); }
+@mixin marLt10   { @include marLt($space10);  } @mixin padLt10   { @include padLt($space10); }
+@mixin marLt12   { @include marLt($space12);  } @mixin padLt12   { @include padLt($space12); }
+@mixin marLt20   { @include marLt($space20);  } @mixin padLt20   { @include padLt($space20); }
+@mixin marRt03   { @include marRt($space03);  } @mixin padRt03   { @include padRt($space03); }
+@mixin marRt10   { @include marRt($space10);  } @mixin padRt10   { @include padRt($space10); }
 
 
 

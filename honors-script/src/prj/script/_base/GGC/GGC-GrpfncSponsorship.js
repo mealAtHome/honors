@@ -16,5 +16,5 @@ GGC.GrpfncSponsorship =
         return "";
     },
     spontypeCard(val) { return `<span class="common-card" card-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
-    spontypeFont(val) { return `<span class="common-font" font-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
+    spontypeFont(val) { return `<span class="common-colorPick" font-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
 }

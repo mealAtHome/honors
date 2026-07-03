@@ -18,9 +18,9 @@ class MAddressSigungu
     {
         let html =
         `
-            <div class="MAddressSigungu-makeInline-div-top common-fontsize09" sdidx="${sdidx}" sdname="${sdname}" sggidx="${sggidx}" sggname="${sggname}">
+            <div class="MAddressSigungu-makeInline-div-top common-fonts09" sdidx="${sdidx}" sdname="${sdname}" sggidx="${sggidx}" sggname="${sggname}">
                 <span style="vertical-align:middle;">${sdname} ${sggname}</span>
-                <button class="MAddressSigungu-makeInline-btn-delete common-btn-noline common-fontsize09" btn-type="cancel" style="padding:0.3em;" sdidx="${sdidx}" sggidx="${sggidx}">삭제</button>
+                <button class="MAddressSigungu-makeInline-btn-delete common-btn-noline common-fonts09" btn-type="cancel" style="padding:0.3em;" sdidx="${sdidx}" sggidx="${sggidx}">삭제</button>
             </div>
         `;
         return html;

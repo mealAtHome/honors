@@ -3,12 +3,12 @@
 .common-span-strong
 {
     @include fonts12;
-    @include fontwb;
+    @include fontwB;
 }
 .common-span-block
 {
     @include displayBk;
-    @include marginUD03;
+    @include marUD03;
 
 }
 .common-span-content
@@ -19,7 +19,7 @@
 {
     @include fonts09;
     color: $colorBody;
-    @include lineh14;
+    @include fonth14;
 }
 
 /* ============================== */
@@ -28,8 +28,8 @@
 .common-span-validationAnnounce
 {
     @include displayBk;
-    @include marginUD03;
-    @include marginAuto;
+    @include marUD03;
+    @include marAuto;
     @include fonts09;
 }
 
@@ -44,15 +44,15 @@
 .common-span-label
 {
     @include displayIn;
-    @include marginUD01;
-    @include marginLRZZ;
-    @include padding05;
+    @include marUD01;
+    @include marLRZZ;
+    @include pad05;
     background-color: transparent;
     border-radius: 0.3em;
     @include fonts09;
-    @include lineh14;
+    @include fonth14;
     white-space: nowrap;
-    /* box-sizing: border-box; */
+    /* @include boxsizeB; */
 }
 .common-span-label[label_type=outline],
 .common-span-label
@@ -73,9 +73,9 @@
 /* ============================== */
 .common-span-record-subTitle
 {
-    @include padding04;
+    @include pad04;
     border: 1px solid gray;
-    @include fontwb;
+    @include fontwB;
     @include displayIn;
 }
 
@@ -86,10 +86,10 @@
 {
     @include fonts09;
     white-space: nowrap;
-    @include paddingUD03;
-    @include paddingRL04;
-    @include marginUD01;
-    @include marginLR00;
+    @include padUD03;
+    @include padRL04;
+    @include marUD01;
+    @include marLR00;
 }
 .common-span-tag[common-span-tag=none]   { display: none; }
 .common-span-tag[common-span-tag=blue]   { color: rgb(54, 54, 255);  border: 2px solid rgb(110,110,255);   background-color: rgb(200,200,255); }
@@ -108,7 +108,7 @@
 .common-span-must
 {
     color: red;
-    @include fontwb;
+    @include fontwB;
 }
 
 /* ============================== */
@@ -117,16 +117,16 @@
 .common-span-card
 {
     @include displayIn;
-    @include fontwn;
-    @include paddingUD03;
-    @include paddingLR06;
+    @include fontwN;
+    @include padUD03;
+    @include padLR06;
 }
 .common-span-mini
 {
     @include displayIn;
-    @include fontwn;
-    @include paddingUD01;
-    @include paddingLR03;
+    @include fontwN;
+    @include padUD01;
+    @include padLR03;
 }
 
 .common-span-mini[span-type=succeed]  , .common-span-card[span-type=succeed]  { color: blue;       border: 2px solid rgb(110,110,255); background-color: rgb(200,200,255); }
@@ -167,7 +167,7 @@
 .common-span-msg
 {
     @include displayIn;
-    @include fontwn;
+    @include fontwN;
 }
 .common-span-msg[span-type=normal]       { color: black;                    }
 .common-span-msg[span-type=success]      { color: $colorMain;      }

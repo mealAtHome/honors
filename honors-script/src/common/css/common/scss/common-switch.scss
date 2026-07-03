@@ -41,7 +41,7 @@
     border-radius: 34px;
 }
 
-.common-label-switch > span: before
+.common-label-switch > span:before
 {
     position: absolute;
     content: "";
@@ -52,12 +52,12 @@
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-    border-radius: 50%;
+    @include radiusHalf;
 }
 
 .common-label-switch > input:checked + span { background-color: $colorMain; }
 .common-label-switch > input:focus   + span { box-shadow: $colorMainShad; }
-.common-label-switch > input:checked + span: before
+.common-label-switch > input:checked + span:before
 {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);

@@ -12,22 +12,22 @@
     left: 0;
     bottom: 0;
     background-color: $colorBlckBack;
-    height: 100%;
-    width: 100%;
+    @include heightFull;
+    @include widthFull;
 }
 .common-div-templateDialog-container
 {
     z-index: 998;
     position: absolute;
-    width: 100%;
+    @include widthFull;
     height: 90%;
     overflow-y: scroll;
     background-color: white;
     border-radius: 1em 1em 0em 0em;
     box-shadow: $colorBlckShad;
-    @include paddingZZ;
-    @include marginZZ;
-    box-sizing: border-box;
+    @include padZZ;
+    @include marZZ;
+    @include boxsizeB;
     left: 0%;
     bottom: 0%;
 }
@@ -44,8 +44,8 @@
     left: 0;
     bottom: 0;
     background-color: $colorBlckBack;
-    height: 100%;
-    width: 100%;
+    @include heightFull;
+    @include widthFull;
 }
 .common-div-aDialogContainer
 {
@@ -56,9 +56,9 @@
     overflow-y: scroll;
     background-color: white;
 
-    @include paddingZZ;
-    @include marginZZ;
-    box-sizing: border-box;
+    @include padZZ;
+    @include marZZ;
+    @include boxsizeB;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -68,7 +68,6 @@
 {
     @include displayIn;
     z-index: 998;
-    /* background-color: white; */
     position: absolute;
     top: 10px;
     right: 10px;
@@ -87,8 +86,8 @@
     left: 0;
     bottom: 0;
     background-color: $colorBlckBack;
-    height: 100%;
-    width: 100%;
+    @include heightFull;
+    @include widthFull;
 }
 .common-div-dialogContainer
 {
@@ -99,9 +98,9 @@
     overflow-y: scroll;
     background-color: white;
 
-    @include paddingZZ;
-    @include marginZZ;
-    box-sizing: border-box;
+    @include padZZ;
+    @include marZZ;
+    @include boxsizeB;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -115,14 +114,14 @@
 {
     z-index: 998;
     position: fixed;
-    width: 100%;
+    @include widthFull;
     height: 94%;
     overflow-y: auto;
     background-color: white;
     border-radius: 1em 1em 0em 0em;
-    @include paddingZZ;
-    @include marginZZ;
-    box-sizing: border-box;
+    @include padZZ;
+    @include marZZ;
+    @include boxsizeB;
     bottom: 200%;
 }
 .common-div-fullDialogContainer[device_kind=pc]
@@ -130,7 +129,6 @@
     width: auto;
     width: 800px;
     height: 800px;
-    border-radius: 0em;
     left: 50%;
     margin-left: -400px;
     margin-bottom: -400px;
@@ -149,22 +147,22 @@
     left: 0;
     bottom: 0;
     background-color: $colorBlckBack;
-    height: 100%;
-    width: 100%;
+    @include heightFull;
+    @include widthFull;
 }
 .common-div-progress
 {
     z-index: 1000;
-    text-align: center;
+    @include alignC;
     position: fixed;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
 
-    @include paddingZZ;
-    @include marginZZ;
-    box-sizing: border-box;
+    @include padZZ;
+    @include marZZ;
+    @include boxsizeB;
 }
 
 /* ------------ */

@@ -10,15 +10,15 @@
 .common-btn-radio
 {
     @include displayIn;
-    @include padding04;
+    @include pad04;
     white-space: nowrap;
-    @include lineh14;
+    @include fonth14;
     text-decoration: none;
     box-shadow: $colorBlckShad;
     background-color: white;
-    border-radius: $borderRadius;
+    @include radiusCurv04;
 }
-.common-btn-round { border-radius: 100%; }
+.common-btn-round { @include radiusFull; }
 
 .common-btn-light:hover,
 .common-btn-outline:hover,
@@ -86,9 +86,9 @@
 .common-btn-radio:disabled[btn-type=cancel][tab=tab]    { @include btnInlineDisabled($colorCncl); }
 
 /* button size */
-.common-btn-outline[btn-size=large]   { @include displayBk; @include marginUD03; @include marginAuto; @include padding08; min-width: 12em; max-width: 90%; }
-.common-btn-inline[btn-size=large]    { @include displayBk; @include marginUD03; @include marginAuto; @include padding08; min-width: 12em; max-width: 90%; white-space: nowrap; }
-.common-btn-outline[btn-size=search]  { @include displayIn; @include padding04; }
+.common-btn-outline[btn-size=large]   { @include displayBk; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; }
+.common-btn-inline[btn-size=large]    { @include displayBk; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; white-space: nowrap; }
+.common-btn-outline[btn-size=search]  { @include displayIn; @include pad04; }
 
 /* -------------------- */
 /* noline */
@@ -97,11 +97,11 @@
 .common-btn-nolineSave
 {
     @include displayIn;
-    @include padding05;
+    @include pad05;
     background-color: transparent;
     white-space: nowrap;
     border: none;
-    @include lineh14;
+    @include fonth14;
 }
 .common-btn-nolineSave:hover,
 .common-btn-noline:hover
@@ -128,13 +128,13 @@
     position: fixed;
     bottom: 0px;
     left: 0px;
-    width: 100%;
+    @include widthFull;
     background-color: $colorMain;
     color: white;
     @include fonts11;
-    @include lineh16;;
-    @include paddingUD08;
-    @include paddingLR04;
+    @include fonth16;;
+    @include padUD08;
+    @include padLR04;
     border: none;
 }
 .common-btn-footer:hover

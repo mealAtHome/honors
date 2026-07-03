@@ -9,7 +9,7 @@ div { @include displayBk; }
 {
     display: flex;
     align-items: center;
-    gap: $space08;
+    gap: 0.8em;
 }
 
 /*=================================*/
@@ -17,10 +17,10 @@ div { @include displayBk; }
 /*=================================*/
 .common-div-dot
 {
-    width: $space06;
-    height: $space06;
+    width: 0.6em;
+    height: 0.6em;
     background: #3D6BF5;
-    border-radius: 50%;
+    @include radiusHalf;
     flex-shrink: 0;
 }
 
@@ -31,8 +31,8 @@ div { @include displayBk; }
 .common-div-headerTop
 {
     @include displayBk;
-    @include paddingUD06;
-    @include paddingLR08;
+    @include padUD06;
+    @include padLR08;
     background: #fff;
     /* display: flex; */
     /* justify-content: space-between; */
@@ -42,11 +42,11 @@ div { @include displayBk; }
 
 .common-div-sectionHeader
 {
-    @include fontwn;
+    @include fontwN;
     color: $colorBody;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    @include marginDw08;
+    @include marDw08;
 }
 
 
@@ -55,7 +55,7 @@ div { @include displayBk; }
 /*=================================*/
 .common-div-btnList > *
 {
-    @include marginDw02;
+    @include marDw02;
 }
 
 /*=================================*/
@@ -68,8 +68,8 @@ div { @include displayBk; }
 .common-div-yearToMin > input
 {
     @include displayIn;
-    text-align: center;
-    vertical-align: middle;
+    @include alignC;
+    @include verticalM;
 }
 .common-div-yearToMin > input:nth-child(1) { width: 8em; }
 .common-div-yearToMin > input:nth-child(2) { width: 3em; }
@@ -80,97 +80,92 @@ div { @include displayBk; }
 /* ============================== */
 
 /* 폼에 연동된 프로그래스 */
-.common-div-progressContainer {
-    width: 100%;
+.common-div-progressContainer
+{
+    @include widthFull;
     height: 6px;
     background: #e0e0e0;
     overflow: hidden;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
-    @include marginDw08;
+    @include marDw08;
 }
 
-.common-div-progressBar {
+.common-div-progressBar
+{
     width: 0%;
-    height: 100%;
+    @include heightFull;
     background: $colorMain;
-    border-radius: 15px 0 0 15px;
+    border-radius: 1em 0 0 1em;
     transition: width 0.4s ease; /* 부드러운 애니메이션 */
 }
 
 /* 폼 자체 */
-.common-div-slideformParent {
+.common-div-slideformParent
+{
     position: relative;
-    @include marginZZ;
-    @include paddingZZ;
-    width: 100%;
-    min-height: 100%;
+    @include widthFull;
+    @include heightFull;
+    @include marZZ;
+    @include padZZ;
     overflow-x: hidden;
 }
-.common-div-slideformChild {
+.common-div-slideformChild
+{
     position: absolute;
     top: 0;
     left: 0;
     width: calc(100% - 4em);
     height: auto;
-    @include paddingUD10;
-    @include paddingLR20;
+    @include padUD10;
+    @include padLR20;
 }
-.common-div-slideformChild[slideform-status='exit'] { transform: translateX(-100%); transition: transform 0.3s ease; /* display: none; */ }
-.common-div-slideformChild[slideform-status='open'] { transform: translateX(0);     transition: transform 0.3s ease; }
-.common-div-slideformChild[slideform-status='wait'] { transform: translateX(100%);  transition: transform 0.3s ease; /* display: none; */ }
+.common-div-slideformChild[slideform-status=exit] { transform: translateX(-100%); transition: transform 0.3s ease; /* display: none; */ }
+.common-div-slideformChild[slideform-status=open] { transform: translateX(0);     transition: transform 0.3s ease; }
+.common-div-slideformChild[slideform-status=wait] { transform: translateX(100%);  transition: transform 0.3s ease; /* display: none; */ }
 
 /* 일반 폼 */
-.common-div-formChild {
+.common-div-formChild
+{
     @include displayBk;
     width: calc(100% - 4em);
     height: auto;
-    @include paddingUD10;
-    @include paddingLR20;
+    @include padUD10;
+    @include padLR20;
 }
-.common-div-formChild > .common-div-formField:nth-child(1) { @include marginUp10; }
+.common-div-formChild > .common-div-formField:nth-child(1) { @include marUp10; }
 
 /* 폼 내 */
 .common-div-formTitle
 {
-    text-align: left;
-    @include marginUp10;
-    @include marginDw20;
-    @include paddingZZ;
-    box-sizing: content-box;
+    @include alignL;
+    @include marUp10;
+    @include marDw20;
+    @include padZZ;
 }
-.common-div-formTitle > span:nth-child(1) { @include displayBk; @include fonts14; @include fontwb; color: $colorMain; }
+.common-div-formTitle > span:nth-child(1) { @include displayBk; @include fonts14; @include fontwB; color: $colorMain; }
 .common-div-formTitle > span:nth-child(2) { @include displayBk; }
 .common-div-formField
 {
-    text-align: left;
-    @include marginUD20;
-    @include paddingZZ;
-    box-sizing: content-box;
+    @include alignL;
+    @include marUD20;
+    @include padZZ;
+    @include boxsizeC;
 }
-.common-div-formField > span:nth-child(1) { @include displayBk; @include fonts11; @include marginUp04; @include marginDwZZ; @include fontwb; @include lineh16; }
-.common-div-formField > span:nth-child(2) { @include displayBk; @include fonts09; @include marginUpZZ; @include marginDw04; @include fontwn; @include lineh16; }
+.common-div-formField > span:nth-child(1) { @include displayBk; @include fonts11; @include marUp04; @include marDwZZ; @include fontwB; @include fonth16; }
+.common-div-formField > span:nth-child(2) { @include displayBk; @include fonts09; @include marUpZZ; @include marDw04; @include fontwN; @include fonth16; }
 
 /* ============================== */
 /* 입력 폼 전용 */
 /* ============================== */
 .common-div-form
 {
-    text-align: center;
-    @include margin10;
-    @include paddingZZ;
-    box-sizing: content-box;
+    @include alignC;
+    @include mar10;
+    @include padZZ;
+    @include boxsizeC;
 }
-.common-div-form > span:nth-child(1)
-{
-    @include fonts12;
-    @include fontwb;
-}
-.common-div-form > span:nth-child(2)
-{
-    font-size: 1em;
-    @include fontwn;
-}
-
+.common-div-form > span:nth-child(1) { @include fonts12; @include fontwB; }
+.common-div-form > span:nth-child(2) { @include fonts10; @include fontwN; }
 
 /* ============================== */
 /* 인덴트 */
@@ -178,27 +173,27 @@ div { @include displayBk; }
 .common-div-indent
 {
     @include displayBk;
-    @include margin04;
-    @include paddingZZ;
+    @include mar04;
+    @include padZZ;
 }
 .common-div-indent > span { @include displayBk; }
-.common-div-indent > span::before { content:"・"; vertical-align: middle;}
+.common-div-indent > span::before { content:"・"; @include verticalM;}
 
 /* ============================== */
 /* 목록형 버튼을 위한 DIV */
 /* ============================== */
 .common-div-manages
 {
-    text-align: center;
+    @include alignC;
 }
 .common-div-manages > button
 {
     @include displayBk;
     width: 15em;
     max-width: 80%;
-    @include marginUp07;
-    @include marginAuto;
-    @include padding07;
+    @include marUp07;
+    @include marAuto;
+    @include pad07;
 }
 
 /* ============================== */
@@ -207,8 +202,8 @@ div { @include displayBk; }
 .common-div-svgTop
 {
     @include displayIn;
-    @include margin03;
-    vertical-align: middle;
+    @include mar03;
+    @include verticalM;
 }
 
 /* ============================== */
@@ -217,11 +212,11 @@ div { @include displayBk; }
 .common-div-card
 {
     position: relative;
-    border-radius: $space08;
-    @include padding08;
-    overflow-x: auto;
-    box-sizing: content-box;
-    text-align: left;
+    @include radiusCurv08;
+    @include pad08;
+    @include overflowX;
+    @include boxsizeC;
+    @include alignL;
     background-color: white;
     box-shadow: $colorBlckShad;
 }
@@ -235,12 +230,12 @@ div { @include displayBk; }
 /* ============================== */
 .common-div-msg
 {
-    @include margin08;
-    @include padding05;
-    overflow-x: auto;
-    box-sizing: content-box;
-    text-align: left;
-    @include lineh16;
+    @include mar08;
+    @include pad05;
+    @include overflowX;
+    @include boxsizeC;
+    @include alignL;
+    @include fonth16;
 }
 .common-div-msg[common-div-msg-type=error]   { color: $colorErrrFont; background-color: $colorErrrBack; box-shadow: $colorErrrShad; }
 .common-div-msg[common-div-msg-type=warning] { color: $colorWarnFont; background-color: $colorWarnBack; box-shadow: $colorWarnShad; }
@@ -252,54 +247,37 @@ div { @include displayBk; }
 .common-div-mobile
 {
     max-width: 400px;
-    @include paddingZZ;
-    box-sizing: content-box;
+    @include padZZ;
+    @include boxsizeC;
 }
 
 /* -------------------- */
 /* 툴바 */
 /* -------------------- */
-.common-div-headerPadding { width: 100%; height: 52px; }
+.common-div-headerPadding { @include widthFull; height: 52px; }
 .common-div-header
 {
+    z-index: 10000;
     position: absolute;
     left: 0;
     right: 0;
-    z-index: 10000;
-    background: #ffffff;
-    width: 100%;
+    background-color: white;
+    @include widthFull;
     height: 52px;
     box-shadow: $colorBlckShad;
 }
 .common-div-header > div[header=back]  { @include displayIn; width: auto; line-height: 52px; }
-.common-div-header > div[header=title] { @include displayIn; width: auto; line-height: 52px; @include paddingLt05; @include fonts12; @include fontwb; }
-
-
-/* -------------------- */
-/* 헤더 메뉴버튼 */
-/* -------------------- */
-.common-div-headerMenuBtn
-{
-    height: 26px;
-    width: 30px;
-    margin: 9px;
-    border: none;
-    background-color: rgb(255,255,255);
-    background-image: url("../../res/icon/menu.png");
-    background-repeat: no-repeat;
-    background-position: center middle;
-    background-size: 100% 100%;
-}
+.common-div-header > div[header=title] { @include displayIn; width: auto; line-height: 52px; @include padLt05; @include fonts12; @include fontwB; }
 
 /* ============================== */
 /* 페이지네이션 */
 /* ============================== */
 .common-div-pagenationTop
 {
-    @include marginUD06;
-    text-align: center;
-    overflow-x: auto;
-    box-sizing: content-box;
+    @include marUD06;
+    @include alignC;
+    @include overflowX;
+    @include boxsizeC;
 }
 .common-div-pagenationBtnTop
 {
@@ -313,17 +291,17 @@ div { @include displayBk; }
     width: 38px;
     height: 38px;
     background-color: rgb(230,230,230);
-    border-radius: 100%;
+    @include radiusFull;
     border: none;
     line-height: 37px;
-    text-align: center;
-    vertical-align: middle;;
+    @include alignC;
+    @include verticalM;;
 }
 .common-btn-pagenationBtn[tab=tab]
 {
     background-color: $colorMain;
     color: white;
-    /* @include fontwb; */
+    /* @include fontwB; */
 }
 
 /* ============================== */
@@ -333,43 +311,42 @@ div { @include displayBk; }
 .common-div-empty
 {
     height: 1em;
-    box-sizing: border-box;
+    @include boxsizeB;
 }
 .common-div-mass
 {
-    @include margin03;
-    @include padding03;
-    overflow-x: auto;
-    box-sizing: content-box;
-    text-align: center;
+    @include mar03;
+    @include pad03;
+    @include overflowX;
+    @include boxsizeC;
+    @include alignC;
 }
-.common-div-mass > table { @include marginAuto; }
-/* 100% 의 width를 가지고, 안의 내용물이 길어진다면, x-scroll을 생성 */
+.common-div-mass > table { @include marAuto; }
+
 .common-div-scrollX
 {
-    width: 100%;
-    overflow-x: auto;
-    box-sizing: content-box;
-    @include paddingDw03;
+    @include widthFull;
+    @include overflowX;
+    @include boxsizeB;
+    @include padDw03;
 }
-
-.common-div-cushion     { @include displayBk; @include margin08;   @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: left;    }
-.common-div-cushionUp   { @include displayBk; @include marginUp08; @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionUD   { @include displayBk; @include marginUD08; @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
-.common-div-cushionDw   { @include displayBk; @include marginDw08; @include paddingZZ; overflow-x: auto; box-sizing: content-box; text-align: inherit; }
+.common-div-cushion     { @include displayBk; @include mar08;   @include padZZ; @include overflowX; @include boxsizeB; @include alignL;    }
+.common-div-cushionUp   { @include displayBk; @include marUp08; @include padZZ; @include overflowX; @include boxsizeB; }
+.common-div-cushionUD   { @include displayBk; @include marUD08; @include padZZ; @include overflowX; @include boxsizeB; }
+.common-div-cushionDw   { @include displayBk; @include marDw08; @include padZZ; @include overflowX; @include boxsizeB; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
-.common-div-cushion   > .common-div-cushionUD:nth-child(1) { @include marginDw08; }
-.common-div-cushionUD > .common-div-card:nth-child(1)      { @include marginUp02; }
+.common-div-cushion   > .common-div-cushionUD:nth-child(1) { @include marDw08; }
+.common-div-cushionUD > .common-div-card:nth-child(1)      { @include marUp02; }
 
 /* 쿠션 아래의 첫번째, formField 는 marginTop: $space04; */
-.common-div-cushion > .common-div-formField:nth-child(1) { @include marginUp04; }
+.common-div-cushion > .common-div-formField:nth-child(1) { @include marUp04; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter
 {
     height: 4em;
-    width: 100%;
+    @include widthFull;
 }
 
 /* ============================== */
@@ -377,10 +354,10 @@ div { @include displayBk; }
 /* ============================== */
 .common-div-announce
 {
-    @include margin06;
-    @include padding04;
-    text-align: left;
-    @include lineh16;
+    @include mar06;
+    @include pad04;
+    @include alignL;
+    @include fonth16;
     background-color: #ddd;
 }
 
@@ -390,7 +367,7 @@ div { @include displayBk; }
 .common-div-calendarSquareYear
 {
     @include fonts12;
-    @include fontwb;
+    @include fontwB;
     color: $colorMain;
 }
 
@@ -400,19 +377,19 @@ div { @include displayBk; }
     color: white;
     width: 3.6em;
     height: 3.6em;
-    @include padding04;
+    @include pad04;
     border-radius: 1em;
     white-space: nowrap;
     box-shadow: $colorMainShad;
 }
-.common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include lineh14; text-align: center; @include fontwn; }
-.common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include lineh14; text-align: center; @include fontwb; }
+.common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include fonth14; @include alignC; @include fontwN; }
+.common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; @include alignC; @include fontwB; }
 
 /* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { background: #f0f0f0; color: #999; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { background: $colorMain; color: white; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { background: white; color: #666; }
-/* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; @include padding03; }
-/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; font-size: 1em; text-align: center; @include fontwb; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; @include pad03; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; @include fonts10; @include alignC; @include fontwB; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fonts12; }
 
 .common-div-calendarSquareWeekTop > button
@@ -420,19 +397,19 @@ div { @include displayBk; }
     background: white;
     border: 2px solid #e0e0e0;
     color: #666;
-    @include paddingUD04;
-    @include paddingLR08;
-    border-radius: $space08;
-    @include fontwn;
+    @include padUD04;
+    @include padLR08;
+    @include radiusCurv04;
+    @include fontwN;
     cursor: pointer;
     /* transition: all 0.3s ease; */
     text-decoration: none;
     @include displayIn;
     position: relative;
     overflow: hidden;
-    @include marginLt03;
+    @include marLt03;
 }
-.common-div-calendarSquareWeekTop > button:nth-child(1) {  @include marginLtZZ; }
+.common-div-calendarSquareWeekTop > button:nth-child(1) {  @include marLtZZ; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { background: #f0f0f0; color: #999;          border: 2px solid #d0d0d0; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                        color: $colorMain;     border: 2px solid $colorMain; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                        color: #666;          border: 2px solid #e0e0e0; }

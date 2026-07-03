@@ -13,15 +13,15 @@
 .common-ul-announce
 {
     @include displayBk;
-    @include paddingUD10;
-    @include paddingLt20;
-    @include paddingRt10;
+    @include padUD10;
+    @include padLt20;
+    @include padRt10;
     background-color: rgb(230,230,230);
     @include fonts09;
-    text-align: left;
-    @include lineh16;
+    @include alignL;
+    @include fonth16;
     list-style-type: disc;
-    @include marginZZ;
+    @include marZZ;
 }
-.common-ul-announce > li {  @include marginDw03; }
-.common-ul-announce > li:nth-last-child(1) { @include marginDwZZ; }
+.common-ul-announce > li {  @include marDw03; }
+.common-ul-announce > li:nth-last-child(1) { @include marDwZZ; }

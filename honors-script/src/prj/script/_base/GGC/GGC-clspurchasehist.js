@@ -18,5 +18,5 @@ GGC.Clspurchasehist =
         return "";
     },
     histtypeCard(val) { return `<span class="common-card" card-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
-    histtypeFont(val) { return `<span class="common-font" font-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
+    histtypeFont(val) { return `<span class="common-colorPick" font-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
 }

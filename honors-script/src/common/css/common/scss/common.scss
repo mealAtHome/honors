@@ -7,7 +7,7 @@
 {
     font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
     /* font-size: inherit; */
-    vertical-align: middle;
+    @include verticalM;
 }
 
 /* ============================== */
@@ -21,7 +21,7 @@
 .common-text-insertPage
 {
     width: 70%;
-    text-align: center;
+    @include alignC;
 }
 .common-text-insertPage[device_kind=web] { width: 50%; }
 
@@ -31,14 +31,14 @@
 
 .common-text
 {
-    text-align: center;
+    @include alignC;
 }
 
 pre, xmp
 {
     @include displayIn;
-    @include marginZZ;
-    @include lineh16;
+    @include marZZ;
+    @include fonth16;
     word-break: break-all;
     white-space: pre-wrap;
     font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
@@ -46,4 +46,9 @@ pre, xmp
 textarea
 {
     font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+}
+
+table
+{
+    border-collapse: collapse;
 }
