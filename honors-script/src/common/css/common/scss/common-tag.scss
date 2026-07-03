@@ -1,30 +1,30 @@
 @import "../../_import/scss/__import";
 
-.common-tag-indent04 { padding-left: $space04; }
-.common-tag-indent08 { padding-left: $space08; }
-.common-tag-indent12 { padding-left: 1.2em; }
+.common-indent04 { padding-left: $space04; }
+.common-indent08 { padding-left: $space08; }
+.common-indent12 { padding-left: $space12; }
 
-.common-tag-marginTop10 { margin-top: 1.0em; }
-.common-tag-marginUp    { display: block; margin-top: $space04; }
-.common-tag-marginUp06  { display: block; margin-top: $space06; }
-.common-tag-marginUp08  { display: block; margin-top: $space08; }
-.common-tag-marginUD    { display: block; margin-top: $space04; margin-bottom: $space04; }
-.common-tag-padding06   { padding: $space06; }
-.common-tag-paddingRight04 { padding-right: $space04; }
+.common-marginTop10 { margin-top: 1.0em; }
+.common-marginUp    { display: block; margin-top: $space04; }
+.common-marginUp06  { display: block; margin-top: $space06; }
+.common-marginUp08  { display: block; margin-top: $space08; }
+.common-marginUD    { display: block; margin-top: $space04; margin-bottom: $space04; }
+.common-padding06   { padding: $space06; }
+.common-paddingRight04 { padding-right: $space04; }
 
-.common-tag-paddingUD { padding-top: $space02; padding-bottom: $space02; }
-.common-tag-padding04 { padding: $space04; }
+.common-paddingUD { padding-top: $space02; padding-bottom: $space02; }
+.common-padding04 { padding: $space04; }
 
-.common-tag-cushion   { margin: $space06; }
-.common-tag-cushionUp { margin: $space06 $spaceZZ $spaceZZ $spaceZZ; }
-.common-tag-cushionUD { margin: $space06 $spaceZZ $space06 $spaceZZ; }
+.common-cushion   { margin: $space06; }
+.common-cushionUp { margin: $space06 $spaceZZ $spaceZZ $spaceZZ; }
+.common-cushionUD { margin: $space06 $spaceZZ $space06 $spaceZZ; }
 
-.common-tag-cushionDw { margin-bottom: $space04; }
+.common-cushionDw { margin-bottom: $space04; }
 
 /* 모든 태그에 적용이 가능한 클래스 모음 */
-.common-tag-strong     { font-weight: bold; font-size: 1.1em; }
-.common-tag-textCenter { text-align: center; }
-.common-tag-blockCenter
+.common-strong     { font-weight: bold; @include fontsize11; }
+.common-textCenter { text-align: center; }
+.common-blockCenter
 {
     display: block;
     margin-left: auto;
@@ -32,27 +32,27 @@
     text-align: center;
 }
 
-.common-tag-alignC { text-align: center; }
-.common-tag-alignR { text-align: right; }
-.common-tag-alignL { text-align: left; }
+.common-alignC { text-align: center; }
+.common-alignR { text-align: right; }
+.common-alignL { text-align: left; }
 
-.common-tag-fontLight { color:#666; font-weight: normal; }
+.common-fontLight { color:#666; font-weight: normal; }
 
 /* ============================== */
 /* 색칠 */
 /* ============================== */
-.common-tag-bgcolorGray    { background-color: rgba(2, 6, 84, 0.2); }
-.common-tag-bgcolorSign04  { background-color: rgba(2, 6, 84, 0.4); }
+.common-bgcolorGray    { background-color: rgba(2, 6, 84, 0.2); }
+.common-bgcolorSign04  { background-color: rgba(2, 6, 84, 0.4); }
 
 /* ============================== */
 /* 쿠션 */
 /* ============================== */
-.common-tag-block
+.common-block
 {
     display: block;
     line-height: 1.6;
 }
-.common-tag-inlineBlock
+.common-inlineBlock
 {
     display: inline-block;
     line-height: 1.6;
@@ -61,7 +61,7 @@
 /* ============================== */
 /* fixed 고정 TAG */
 /* ============================== */
-.common-tag-fixedTopRight
+.common-fixedTopRight
 {
     display: inline-block;
     position: fixed;
@@ -69,7 +69,7 @@
     right: 0.5em;
 }
 
-.common-tag-announce
+.common-announce
 {
     display: block;
     padding: $space04;
@@ -81,54 +81,39 @@
 /* ============================== */
 /* 글자크기 */
 /* ============================== */
-.common-tag-fontsize08 { font-size: $space08; }
-.common-tag-fontsize09 { font-size: 0.9em; }
-.common-tag-fontsize10 { font-size: 1.0em; }
-.common-tag-fontsize11 { font-size: 1.1em; }
-.common-tag-fontsize12 { font-size: 1.2em; }
-.common-tag-fontsize13 { font-size: 1.3em; }
-.common-tag-fontsize14 { font-size: 1.4em; }
-.common-tag-fontsize15 { font-size: 1.5em; }
+.common-fontsize08 { @include fontsize08; }
+.common-fontsize09 { @include fontsize09; }
+.common-fontsize11 { @include fontsize11; }
+.common-fontsize12 { @include fontsize12; }
 
-.common-tag-paddingLR08 { padding-left: $space08; padding-right: $space08; }
-
-.common-tag-lineheight14 { line-height: 1.4; }
-.common-tag-lineheight15 { line-height: 1.5; }
-.common-tag-lineheight16 { line-height: 1.6; }
-.common-tag-lineheight17 { line-height: 1.7; }
-.common-tag-lineheight18 { line-height: 1.8; }
-.common-tag-lineheight19 { line-height: 1.9; }
-.common-tag-lineheight20 { line-height: 2.0; }
+.common-bold      { font-weight: bold; }
+.common-colorWarn { color: rgba(255, 116, 21, 1.0); }
+.common-colorPstv { color: rgba(0, 128, 0, 1.0); }
+.common-colorNgtv { color: rgba(255, 0, 0, 1.0); }
+.common-colorGrey { color: rgba(128, 128, 128, 1.0); }
+.common-colorGray { color: rgba(128, 128, 128, 1.0); }
 
 
-.common-tag-bold      { font-weight: bold; }
-.common-tag-colorWarn { color: rgba(255, 116, 21, 1.0); }
-.common-tag-colorPstv { color: rgba(0, 128, 0, 1.0); }
-.common-tag-colorNgtv { color: rgba(255, 0, 0, 1.0); }
-.common-tag-colorGrey { color: rgba(128, 128, 128, 1.0); }
-.common-tag-colorGray { color: rgba(128, 128, 128, 1.0); }
+.common-font[font-color=hold]      { color: rgb(212 , 173 , 0   ); border: none; background-color: none; }
+.common-font[font-color=prog]      { color: rgb(  3 , 154 , 0   ); border: none; background-color: none; }
+.common-font[font-color=pstv]      { color: rgb(  0 ,   2 , 120 ); border: none; background-color: none; }
+.common-font[font-color=ngtv]      { color: rgb(120 ,   0 , 0   ); border: none; background-color: none; }
 
-
-.common-tag-font[font-color=hold]      { color: rgb(212 , 173 , 0   ); border: none; background-color: none; }
-.common-tag-font[font-color=prog]      { color: rgb(  3 , 154 , 0   ); border: none; background-color: none; }
-.common-tag-font[font-color=pstv]      { color: rgb(  0 ,   2 , 120 ); border: none; background-color: none; }
-.common-tag-font[font-color=ngtv]      { color: rgb(120 ,   0 , 0   ); border: none; background-color: none; }
-
-.common-tag-card
+.common-card
 {
     display: inline-block;
     font-weight: 600;
     padding: 0.3em $space06;
 }
-.common-tag-card[card-color=hold]      { color: rgb(212 , 173 , 0   ); border: 2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
-.common-tag-card[card-color=prog]      { color: rgb(  3 , 154 , 0   ); border: 2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
-.common-tag-card[card-color=pstv]      { color: rgb(  0 ,   2 , 120 ); border: 2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
-.common-tag-card[card-color=ngtv]      { color: rgb(120 ,   0 , 0   ); border: 2px solid rgb(120 ,   0 , 0   ); background-color: rgb(120 ,   0 , 0   , 0.3); }
+.common-card[card-color=hold]      { color: rgb(212 , 173 , 0   ); border: 2px solid rgb(212 , 173 , 0   ); background-color: rgb(212 , 173 , 0   , 0.3); }
+.common-card[card-color=prog]      { color: rgb(  3 , 154 , 0   ); border: 2px solid rgb(  3 , 154 , 0   ); background-color: rgb(  3 , 154 , 0   , 0.3); }
+.common-card[card-color=pstv]      { color: rgb(  0 ,   2 , 120 ); border: 2px solid rgb(  0 ,   2 , 120 ); background-color: rgb(  0 ,   2 , 120 , 0.3); }
+.common-card[card-color=ngtv]      { color: rgb(120 ,   0 , 0   ); border: 2px solid rgb(120 ,   0 , 0   ); background-color: rgb(120 ,   0 , 0   , 0.3); }
 
 
-.common-tag-positionAbsUR { position: absolute; top: 0.5em; right: 0.5em; }
+.common-positionAbsUR { position: absolute; top: 0.5em; right: 0.5em; }
 
-.common-tag-me[me=y]  { background-color: rgba(2, 6, 84, 0.1); }
+.common-me[me=y]  { background-color: rgba(2, 6, 84, 0.1); }
 .common-span-me[me=y] { font-weight: bold; color: $colorMain; }
 
 .tag-color-sign           { color: rgb(27, 42, 107); }

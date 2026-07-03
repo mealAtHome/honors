@@ -15,8 +15,8 @@ GGC.Bankaccount =
         if(val == GGF.N) return "prog";
         return "";
     },
-    defaultflgCard(val) { return `<span class="common-tag-card" card-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
-    defaultflgFont(val) { return `<span class="common-tag-font" font-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
+    defaultflgCard(val) { return `<span class="common-card" card-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
+    defaultflgFont(val) { return `<span class="common-font" font-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
 
 };
 
@@ -50,16 +50,16 @@ GGC.GrpMemberPointhist =
     {
         let rslt = GGC.GrpMemberPointhist.pointtype(point);
         if(point >= 0)
-            return `<span class="common-tag-colorPstv">${rslt}</span>`;
+            return `<span class="common-colorPstv">${rslt}</span>`;
         else if(point < 0)
-            return `<span class="common-tag-colorNgtv">${rslt}</span>`;
+            return `<span class="common-colorNgtv">${rslt}</span>`;
     },
     pointPretty(point)
     {
         let rslt = GGC.Common.priceWon(point);
         if(point >= 0)
-            return `<span class="common-tag-colorPstv">${rslt}</span>`;
+            return `<span class="common-colorPstv">${rslt}</span>`;
         else if(point < 0)
-            return `<span class="common-tag-colorNgtv">${rslt}</span>`;
+            return `<span class="common-colorNgtv">${rslt}</span>`;
     },
 }

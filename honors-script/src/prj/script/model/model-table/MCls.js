@@ -108,21 +108,21 @@ class MCls
                     <tbody>
                         <tr>
                             <td><div class="common-img-label" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
-                            <td><span class="common-tag-block common-tag-fontsize10">${model.getGrpname()}</span></td>
+                            <td><span class="common-block">${model.getGrpname()}</span></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="common-div-cushionUp">
-                    <div class="common-tag-block">
-                        <span class="common-tag-fontsize11 common-tag-strong">일정</span>
-                        <span class="common-tag-fontsize09"></span>
+                    <div class="common-block">
+                        <span class="common-fontsize11 common-strong">일정</span>
+                        <span class="common-fontsize09"></span>
                     </div>
-                    <span class="common-tag-block">${model.getClstitle()}</span>
+                    <span class="common-block">${model.getClstitle()}</span>
                     <div class="common-div-cushionUD">
-                        ${true         ? `<span class="common-tag-inlineBlock">${model.getClsstatusCard()}</span>` : ""}
-                        ${this.isEnd() ? `<span class="common-tag-inlineBlock">${model.getClssettleflgCard()}</span>` : ""}
+                        ${true         ? `<span class="common-inlineBlock">${model.getClsstatusCard()}</span>` : ""}
+                        ${this.isEnd() ? `<span class="common-inlineBlock">${model.getClssettleflgCard()}</span>` : ""}
                     </div>
-                    <div class="common-div-cushionUp common-div-btnList common-tag-fontsize09">
+                    <div class="common-div-cushionUp common-div-btnList common-fontsize09">
                         ${btnHtml}
                     </div>
                 </div>

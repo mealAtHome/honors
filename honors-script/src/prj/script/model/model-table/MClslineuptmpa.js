@@ -22,7 +22,7 @@ class MClslineuptmpa
     make(btnHtml="")
     {
         if(btnHtml != "")
-            btnHtml = `<div class="common-div-cushionUp"><div class="common-div-btnList common-tag-fontsize09">${btnHtml}</div></div>`;
+            btnHtml = `<div class="common-div-cushionUp"><div class="common-div-btnList common-fontsize09">${btnHtml}</div></div>`;
         let html =
         `
             <div class="MClslineuptmpa-make-div-modelTop common-div-card">
@@ -30,7 +30,7 @@ class MClslineuptmpa
                 <table class="common-tbl-normal" tbl-type="noborder">
                     <tbody>
                         <tr>
-                            <td><span class="common-tag-block common-tag-fontsize10">${this.getLineuptitle()}</span></td>
+                            <td><span class="common-block">${this.getLineuptitle()}</span></td>
                         </tr>
                     </tbody>
                 </table>

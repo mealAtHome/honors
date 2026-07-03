@@ -28,8 +28,8 @@ GGC.Cls =
         }
         return rslt;
     },
-    clsstatusCard(val) { return `<span class="common-tag-card" card-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
-    clsstatusFont(val) { return `<span class="common-tag-font" font-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
+    clsstatusCard(val) { return `<span class="common-card" card-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
+    clsstatusFont(val) { return `<span class="common-font" font-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
 
     /* ----- */
     /* clssettleflg */
@@ -54,8 +54,8 @@ GGC.Cls =
         }
         return rslt;
     },
-    clssettleflgCard(val) { return `<span class="common-tag-card" card-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
-    clssettleflgFont(val) { return `<span class="common-tag-font" font-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
+    clssettleflgCard(val) { return `<span class="common-card" card-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
+    clssettleflgFont(val) { return `<span class="common-font" font-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
 
 
     /* ----- */
@@ -83,7 +83,7 @@ GGC.Cls =
         }
         return rslt;
     },
-    getGrpfinancereflectflgCard(val) { return `<span class="common-tag-card" card-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
-    getGrpfinancereflectflgFont(val) { return `<span class="common-tag-font" font-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
+    getGrpfinancereflectflgCard(val) { return `<span class="common-card" card-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
+    getGrpfinancereflectflgFont(val) { return `<span class="common-font" font-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
 
 }

@@ -2,106 +2,106 @@
 /* 메인색상 */
 /* 상태색상 */
 /* mixin */
-.common-tag-indent04 {
+.common-indent04 {
   padding-left: 0.4em;
 }
 
-.common-tag-indent08 {
+.common-indent08 {
   padding-left: 0.8em;
 }
 
-.common-tag-indent12 {
+.common-indent12 {
   padding-left: 1.2em;
 }
 
-.common-tag-marginTop10 {
+.common-marginTop10 {
   margin-top: 1em;
 }
 
-.common-tag-marginUp {
+.common-marginUp {
   display: block;
   margin-top: 0.4em;
 }
 
-.common-tag-marginUp06 {
+.common-marginUp06 {
   display: block;
   margin-top: 0.6em;
 }
 
-.common-tag-marginUp08 {
+.common-marginUp08 {
   display: block;
   margin-top: 0.8em;
 }
 
-.common-tag-marginUD {
+.common-marginUD {
   display: block;
   margin-top: 0.4em;
   margin-bottom: 0.4em;
 }
 
-.common-tag-padding06 {
+.common-padding06 {
   padding: 0.6em;
 }
 
-.common-tag-paddingRight04 {
+.common-paddingRight04 {
   padding-right: 0.4em;
 }
 
-.common-tag-paddingUD {
+.common-paddingUD {
   padding-top: 0.2em;
   padding-bottom: 0.2em;
 }
 
-.common-tag-padding04 {
+.common-padding04 {
   padding: 0.4em;
 }
 
-.common-tag-cushion {
+.common-cushion {
   margin: 0.6em;
 }
 
-.common-tag-cushionUp {
+.common-cushionUp {
   margin: 0.6em 0em 0em 0em;
 }
 
-.common-tag-cushionUD {
+.common-cushionUD {
   margin: 0.6em 0em 0.6em 0em;
 }
 
-.common-tag-cushionDw {
+.common-cushionDw {
   margin-bottom: 0.4em;
 }
 
 /* 모든 태그에 적용이 가능한 클래스 모음 */
-.common-tag-strong {
+.common-strong {
   font-weight: bold;
   font-size: 1.1em;
 }
 
-.common-tag-textCenter {
+.common-textCenter {
   text-align: center;
 }
 
-.common-tag-blockCenter {
+.common-blockCenter {
   display: block;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
 }
 
-.common-tag-alignC {
+.common-alignC {
   text-align: center;
 }
 
-.common-tag-alignR {
+.common-alignR {
   text-align: right;
 }
 
-.common-tag-alignL {
+.common-alignL {
   text-align: left;
 }
 
-.common-tag-fontLight {
+.common-fontLight {
   color: #666;
   font-weight: normal;
 }
@@ -109,23 +109,23 @@
 /* ============================== */
 /* 색칠 */
 /* ============================== */
-.common-tag-bgcolorGray {
+.common-bgcolorGray {
   background-color: rgba(2, 6, 84, 0.2);
 }
 
-.common-tag-bgcolorSign04 {
+.common-bgcolorSign04 {
   background-color: rgba(2, 6, 84, 0.4);
 }
 
 /* ============================== */
 /* 쿠션 */
 /* ============================== */
-.common-tag-block {
+.common-block {
   display: block;
   line-height: 1.6;
 }
 
-.common-tag-inlineBlock {
+.common-inlineBlock {
   display: inline-block;
   line-height: 1.6;
 }
@@ -133,14 +133,14 @@
 /* ============================== */
 /* fixed 고정 TAG */
 /* ============================== */
-.common-tag-fixedTopRight {
+.common-fixedTopRight {
   display: inline-block;
   position: fixed;
   top: 0.5em;
   right: 0.5em;
 }
 
-.common-tag-announce {
+.common-announce {
   display: block;
   padding: 0.4em;
   text-align: left;
@@ -151,156 +151,107 @@
 /* ============================== */
 /* 글자크기 */
 /* ============================== */
-.common-tag-fontsize08 {
+.common-fontsize08 {
   font-size: 0.8em;
 }
 
-.common-tag-fontsize09 {
+.common-fontsize09 {
   font-size: 0.9em;
 }
 
-.common-tag-fontsize10 {
-  font-size: 1em;
-}
-
-.common-tag-fontsize11 {
+.common-fontsize11 {
   font-size: 1.1em;
 }
 
-.common-tag-fontsize12 {
+.common-fontsize12 {
   font-size: 1.2em;
 }
 
-.common-tag-fontsize13 {
-  font-size: 1.3em;
-}
-
-.common-tag-fontsize14 {
-  font-size: 1.4em;
-}
-
-.common-tag-fontsize15 {
-  font-size: 1.5em;
-}
-
-.common-tag-paddingLR08 {
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-}
-
-.common-tag-lineheight14 {
-  line-height: 1.4;
-}
-
-.common-tag-lineheight15 {
-  line-height: 1.5;
-}
-
-.common-tag-lineheight16 {
-  line-height: 1.6;
-}
-
-.common-tag-lineheight17 {
-  line-height: 1.7;
-}
-
-.common-tag-lineheight18 {
-  line-height: 1.8;
-}
-
-.common-tag-lineheight19 {
-  line-height: 1.9;
-}
-
-.common-tag-lineheight20 {
-  line-height: 2;
-}
-
-.common-tag-bold {
+.common-bold {
   font-weight: bold;
 }
 
-.common-tag-colorWarn {
+.common-colorWarn {
   color: rgb(255, 116, 21);
 }
 
-.common-tag-colorPstv {
+.common-colorPstv {
   color: rgb(0, 128, 0);
 }
 
-.common-tag-colorNgtv {
+.common-colorNgtv {
   color: rgb(255, 0, 0);
 }
 
-.common-tag-colorGrey {
+.common-colorGrey {
   color: rgb(128, 128, 128);
 }
 
-.common-tag-colorGray {
+.common-colorGray {
   color: rgb(128, 128, 128);
 }
 
-.common-tag-font[font-color=hold] {
+.common-font[font-color=hold] {
   color: rgb(212, 173, 0);
   border: none;
   background-color: none;
 }
 
-.common-tag-font[font-color=prog] {
+.common-font[font-color=prog] {
   color: rgb(3, 154, 0);
   border: none;
   background-color: none;
 }
 
-.common-tag-font[font-color=pstv] {
+.common-font[font-color=pstv] {
   color: rgb(0, 2, 120);
   border: none;
   background-color: none;
 }
 
-.common-tag-font[font-color=ngtv] {
+.common-font[font-color=ngtv] {
   color: rgb(120, 0, 0);
   border: none;
   background-color: none;
 }
 
-.common-tag-card {
+.common-card {
   display: inline-block;
   font-weight: 600;
   padding: 0.3em 0.6em;
 }
 
-.common-tag-card[card-color=hold] {
+.common-card[card-color=hold] {
   color: rgb(212, 173, 0);
   border: 2px solid rgb(212, 173, 0);
   background-color: rgba(212, 173, 0, 0.3);
 }
 
-.common-tag-card[card-color=prog] {
+.common-card[card-color=prog] {
   color: rgb(3, 154, 0);
   border: 2px solid rgb(3, 154, 0);
   background-color: rgba(3, 154, 0, 0.3);
 }
 
-.common-tag-card[card-color=pstv] {
+.common-card[card-color=pstv] {
   color: rgb(0, 2, 120);
   border: 2px solid rgb(0, 2, 120);
   background-color: rgba(0, 2, 120, 0.3);
 }
 
-.common-tag-card[card-color=ngtv] {
+.common-card[card-color=ngtv] {
   color: rgb(120, 0, 0);
   border: 2px solid rgb(120, 0, 0);
   background-color: rgba(120, 0, 0, 0.3);
 }
 
-.common-tag-positionAbsUR {
+.common-positionAbsUR {
   position: absolute;
   top: 0.5em;
   right: 0.5em;
 }
 
-.common-tag-me[me=y] {
+.common-me[me=y] {
   background-color: rgba(2, 6, 84, 0.1);
 }
 

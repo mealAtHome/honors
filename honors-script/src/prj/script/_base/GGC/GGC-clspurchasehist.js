@@ -17,6 +17,6 @@ GGC.Clspurchasehist =
         if(val == GGF.Clspurchasehist.Histtype.DELETE) return "ngtv";
         return "";
     },
-    histtypeCard(val) { return `<span class="common-tag-card" card-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
-    histtypeFont(val) { return `<span class="common-tag-font" font-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
+    histtypeCard(val) { return `<span class="common-card" card-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
+    histtypeFont(val) { return `<span class="common-font" font-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
 }

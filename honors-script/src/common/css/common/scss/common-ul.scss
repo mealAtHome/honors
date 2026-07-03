@@ -15,7 +15,7 @@
     display: block;
     padding: 1em 1em 1em 2em;
     background-color: rgb(230,230,230);
-    font-size: 0.9em;
+    @include fontsize09;
     text-align: left;
     line-height: 1.5em;
     list-style-type: disc;

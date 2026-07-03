@@ -44,7 +44,7 @@ div { display: block; }
     color: $colorBody;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin: $space02own;
+    margin: $spaceDw08;
 }
 
 
@@ -133,7 +133,7 @@ div { display: block; }
     padding: $spaceZZ;
     box-sizing: content-box;
 }
-.common-div-formTitle > span:nth-child(1) { display: block; font-size: 1.4em; font-weight: bold; color: $colorMain; }
+.common-div-formTitle > span:nth-child(1) { display: block; @include fontsize14; font-weight: bold; color: $colorMain; }
 .common-div-formTitle > span:nth-child(2) { display: block; }
 .common-div-formField
 {
@@ -142,8 +142,8 @@ div { display: block; }
     padding: $spaceZZ;
     box-sizing: content-box;
 }
-.common-div-formField > span:nth-child(1) { display: block; font-size: 1.1em; margin: 0.3em 0em $spaceZZ; font-weight: bold; line-height: 1.5em; }
-.common-div-formField > span:nth-child(2) { display: block; font-size: 0.9em; margin: $spaceZZ 0em $space04; font-weight: normal; line-height: 1.5em; }
+.common-div-formField > span:nth-child(1) { display: block; @include fontsize11; margin: 0.3em 0em $spaceZZ; font-weight: bold; line-height: 1.5em; }
+.common-div-formField > span:nth-child(2) { display: block; @include fontsize09; margin: $spaceZZ 0em $space04; font-weight: normal; line-height: 1.5em; }
 
 /* ============================== */
 /* 입력 폼 전용 */
@@ -157,7 +157,7 @@ div { display: block; }
 }
 .common-div-form > span:nth-child(1)
 {
-    font-size: 1.2em;
+    @include fontsize12;
     font-weight: bold;
 }
 .common-div-form > span:nth-child(2)
@@ -270,7 +270,7 @@ div { display: block; }
     box-shadow: $colorBlckShad;
 }
 .common-div-header > div[header=back]  { display: inline-block; width: auto; line-height: 52px; }
-.common-div-header > div[header=title] { display: inline-block; width: auto; line-height: 52px; padding-left: 0.5em; font-size: 1.2em; font-weight: bold; }
+.common-div-header > div[header=title] { display: inline-block; width: auto; line-height: 52px; padding-left: 0.5em; @include fontsize12; font-weight: bold; }
 
 
 /* -------------------- */
@@ -396,7 +396,7 @@ div { display: block; }
 /* ============================== */
 .common-div-calendarSquareYear
 {
-    font-size: 1.2em;
+    @include fontsize12;
     font-weight: bold;
     color: $colorMain;
 }
@@ -412,15 +412,15 @@ div { display: block; }
     white-space: nowrap;
     box-shadow: $colorMainShad;
 }
-.common-div-calendarSquare > div:nth-child(1) { font-size: 0.9em; line-height: 0.9em; text-align: center; font-weight: normal; }
-.common-div-calendarSquare > div:nth-child(2) { font-size: 1.4em; line-height: 1.4em; text-align: center; font-weight: bold; }
+.common-div-calendarSquare > div:nth-child(1) { @include fontsize09; line-height: 0.9em; text-align: center; font-weight: normal; }
+.common-div-calendarSquare > div:nth-child(2) { @include fontsize14; line-height: 1.4em; text-align: center; font-weight: bold; }
 
 /* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { background: #f0f0f0; color: #999; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { background: $colorMain; color: white; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { background: white; color: #666; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; padding: 0.3em; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; font-size: 1em; text-align: center; font-weight: bold; }
-/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { font-size: 1.2em; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fontsize12; }
 
 .common-div-calendarSquareWeekTop > button
 {

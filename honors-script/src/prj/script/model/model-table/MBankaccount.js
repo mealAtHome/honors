@@ -45,7 +45,7 @@ class MBankaccount
     {
         let btnHtml = ``;
         if(this.getDefaultflg() == GGF.Y)
-            btnHtml += `<span class="common-tag-inlineBlock">${this.getDefaultflgCard()}</span>`;
+            btnHtml += `<span class="common-inlineBlock">${this.getDefaultflgCard()}</span>`;
         switch(mode)
         {
             case "choose":
@@ -65,14 +65,14 @@ class MBankaccount
         let html =
         `
             <div class="MBankaccount-make-div-top common-div-card">
-                <div class="common-tag-block">
-                    <span class="common-tag-strong">계좌</span>
+                <div class="common-block">
+                    <span class="common-strong">계좌</span>
                     <span>${this.getBaccnickname()}</span>
                 </div>
-                <span class="common-tag-block"></span>
-                <span class="common-tag-block">${this.getBankname()}&nbsp;${this.getBaccacct()}</span>
-                <span class="common-tag-block">예금주명 : ${this.getBaccname()}</span>
-                <div class="common-tag-block common-tag-fontsize09 common-tag-paddingUD">
+                <span class="common-block"></span>
+                <span class="common-block">${this.getBankname()}&nbsp;${this.getBaccacct()}</span>
+                <span class="common-block">예금주명 : ${this.getBaccname()}</span>
+                <div class="common-block common-fontsize09 common-paddingUD">
                     ${btnHtml}
                 </div>
             </div>
@@ -131,7 +131,7 @@ class MBankaccounts extends _MCommon
                 <div class="common-div-cushionD">
                     정산/환불용 계좌를 등록하여주시기 바랍니다.
                 </div>
-                <button class="common-btn-outline common-tag-block" btn-type="warning" onclick="Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate);">계좌등록</button>
+                <button class="common-btn-outline common-block" btn-type="warning" onclick="Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate);">계좌등록</button>
             </div>
         `;
         return html;

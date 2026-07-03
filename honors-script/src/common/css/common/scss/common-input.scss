@@ -7,7 +7,7 @@
 .common-input-field
 {
     padding: 0.3em 0em;
-    font-size: 1.1em;
+    @include fontsize11;
     border: none;
     border-bottom: 1px solid #ccc;
     text-align: left;
@@ -19,7 +19,7 @@
 .common-textarea-field
 {
   padding: 0.3em;
-  font-size: 1.1em;
+  @include fontsize11;
   border: 1px solid #ccc;
   background-color: transparent;
 }
@@ -36,7 +36,7 @@
 
     /* box-sizing: content-box; */
     padding: 0.3em;
-    font-size: 1.1em;
+    @include fontsize11;
     border: 1px solid #ccc;
 }
 
@@ -58,7 +58,7 @@
 
     box-sizing: initial;
     padding: 0.3em;
-    font-size: 1.1em;
+    @include fontsize11;
     border: none;
 }
 
@@ -70,7 +70,7 @@
 
   /* box-sizing: content-box; */
   padding: 0.3em;
-  font-size: 1.1em;
+  @include fontsize11;
   border: 1px solid #ccc;
 }
 

@@ -6,7 +6,7 @@ var CommonEvent =
     init()
     {
         $('body').on('keyup',  '.commonEvent-number-pricePretty',              $.proxy(CommonEvent.pricePretty, this));            /* 가격 입력 시, 정리된 가격을 표시 */
-        $('body').on('click',  '.common-tag-checkbox',                         $.proxy(CommonEvent.tagCheckbox, this));
+        $('body').on('click',  '.common-checkbox',                         $.proxy(CommonEvent.tagCheckbox, this));
         $('body').on('click',  '.common-tr-checkTr',                           $.proxy(CommonEvent.checkTr, this));
         $('body').on('click',  '.commonEvent-btn-viewDetail',                  $.proxy(CommonEvent.pop, this));
         $('body').on('click',  '.common-th-record',                            $.proxy(CommonEvent.toastRecord, this));
@@ -604,7 +604,7 @@ var CommonEvent =
     }, /* end radio */
 
     /* ========================== */
-    /* common-tag-checkbox 라는 클래스를 가진 엘리먼트에 체크박스 효과를 부여함 */
+    /* common-checkbox 라는 클래스를 가진 엘리먼트에 체크박스 효과를 부여함 */
     /*
         attributes
           [*] checkbox_mode    : ["single", "multi"]
@@ -619,9 +619,9 @@ var CommonEvent =
     {
         /* 클래스 선택 */
         let target = $(e.target);
-        if(!target.hasClass("common-tag-checkbox"))
+        if(!target.hasClass("common-checkbox"))
         {
-            target = target.parents(".common-tag-checkbox");
+            target = target.parents(".common-checkbox");
         }
 
         let checkboxMode    = target.attr("checkbox_mode");
@@ -631,7 +631,7 @@ var CommonEvent =
         /* single 의 경우, 다른 모든 체크박스를 해제한다. */
         if(checkboxMode == "single")
         {
-            $(".common-tag-checkbox[checkbox_name="+checkboxName+"]").attr("checkbox_checked", "n");
+            $(".common-checkbox[checkbox_name="+checkboxName+"]").attr("checkbox_checked", "n");
         }
 
         /* 선택된 상태라면 선택해제, 선택되지 않은상태라면 선택으로 전환 */

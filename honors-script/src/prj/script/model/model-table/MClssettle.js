@@ -188,9 +188,9 @@ class MClssettles extends _MCommon
             {
                 baccHtml +=
                 `
-                    <div class="common-tag-marginUp08 common-tag-alignL common-tag-fontsize09">
-                        <span class="common-tag-block">입금계좌</span>
-                        <span class="common-tag-block">
+                    <div class="common-marginUp08 common-alignL common-fontsize09">
+                        <span class="common-block">입금계좌</span>
+                        <span class="common-block">
                             <span style="vertical-align:middle">${model.getBankname()} ${model.getBaccacct()} ${model.getBaccname()}</span>
                             <button class="common-btn-outline MClssettle-make-btn-copyBacc" copytext="${model.getBankname()} ${model.getBaccacct()}" style="margin-left:0.2em;">복사</button>
                         </span>
@@ -204,23 +204,23 @@ class MClssettles extends _MCommon
             html +=
             `
                 <div class="MGrpMembers-make-div-modelTop common-div-card">
-                    <span class="common-tag-block common-tag-strong common-tag-cushionDw">정산상세 - ${model.getUsername()}</span>
-                    <span class="common-tag-block ">${model.getGrpname()}</span>
-                    <span class="common-tag-block ">${model.getClstitle()}</span>
-                    <span class="common-tag-block common-tag-colorGrey common-tag-fontsize08">${model.getClsPeriod()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-bold">${model.getBillfinalWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">기준금액:${model.getBillstandardWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">사전정산:${model.getBillprepaidWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구추가:${model.getBilladjustmentWon()}</span>
-                    <span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">청구차감:${model.getBilldiscountWon()}</span>
-                    ${model.getBillpointed() >= 1  ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">사전정산:${model.getBillpointedWon()}</span>` : ""}
-                    ${model.getBillmemo()    != "" ? `<span class="common-tag-block common-tag-alignR common-tag-colorGrey common-tag-fontsize08">보정사유:${model.getBillmemo()}</span>` : ""}
-                    <span class="common-tag-block common-tag-marginUp common-tag-fontsize09">
+                    <span class="common-block common-strong common-cushionDw">정산상세 - ${model.getUsername()}</span>
+                    <span class="common-block ">${model.getGrpname()}</span>
+                    <span class="common-block ">${model.getClstitle()}</span>
+                    <span class="common-block common-colorGrey common-fontsize08">${model.getClsPeriod()}</span>
+                    <span class="common-block common-alignR common-bold">${model.getBillfinalWon()}</span>
+                    <span class="common-block common-alignR common-colorGrey common-fontsize08">기준금액:${model.getBillstandardWon()}</span>
+                    <span class="common-block common-alignR common-colorGrey common-fontsize08">사전정산:${model.getBillprepaidWon()}</span>
+                    <span class="common-block common-alignR common-colorGrey common-fontsize08">청구추가:${model.getBilladjustmentWon()}</span>
+                    <span class="common-block common-alignR common-colorGrey common-fontsize08">청구차감:${model.getBilldiscountWon()}</span>
+                    ${model.getBillpointed() >= 1  ? `<span class="common-block common-alignR common-colorGrey common-fontsize08">사전정산:${model.getBillpointedWon()}</span>` : ""}
+                    ${model.getBillmemo()    != "" ? `<span class="common-block common-alignR common-colorGrey common-fontsize08">보정사유:${model.getBillmemo()}</span>` : ""}
+                    <span class="common-block common-marginUp common-fontsize09">
                         <button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>일정상세</button>
                         ${btnHtml}
                     </span>
                     ${baccHtml}
-                    <div class="common-tag-positionAbsUR">${model.getSettleStatusCard()}</div>
+                    <div class="common-positionAbsUR">${model.getSettleStatusCard()}</div>
                 </div>
             `;
         }

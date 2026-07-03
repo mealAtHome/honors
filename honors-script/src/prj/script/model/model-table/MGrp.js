@@ -77,10 +77,10 @@ class MGrp
                         <tr>
                             <td><div class="Mgrp-make-div-image" style="background-image:url('${this.getGrpimgPath()}')"></div></td>
                             <td>
-                                <span class="common-tag-block common-tag-fontsize11">${this.getGrpname()}</span>
-                                <span class="common-tag-block">
-                                    <span class="common-tag-block common-tag-fontsize10">대표 ${this.getGrpmanagerName()}</span>
-                                    <span class="common-tag-block common-tag-fontsize09">TEL. ${this.getGrpmanagerPhone()}</span>
+                                <span class="common-block common-fontsize11">${this.getGrpname()}</span>
+                                <span class="common-block">
+                                    <span class="common-block">대표 ${this.getGrpmanagerName()}</span>
+                                    <span class="common-block common-fontsize09">TEL. ${this.getGrpmanagerPhone()}</span>
                                 </span>
                             </td>
                         </tr>
@@ -137,15 +137,15 @@ class MGrps extends _MCommon
                             <tr>
                                 <td><div class="Mgrp-make-div-image" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
                                 <td>
-                                    <span class="common-tag-block common-tag-fontsize11">${model.getGrpname()}</span>
-                                    <span class="common-tag-block">
-                                        <span class="common-tag-block common-tag-fontsize10">대표 ${model.getGrpmanagerName()}</span>
-                                        <span class="common-tag-block common-tag-fontsize09">TEL. ${model.getGrpmanagerPhone()}</span>
+                                    <span class="common-block common-fontsize11">${model.getGrpname()}</span>
+                                    <span class="common-block">
+                                        <span class="common-block">대표 ${model.getGrpmanagerName()}</span>
+                                        <span class="common-block common-fontsize09">TEL. ${model.getGrpmanagerPhone()}</span>
                                     </span>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="common-tag-fontsize09" style="text-align:right;">
+                                <td colspan="2" class="common-fontsize09" style="text-align:right;">
                                     ${buttonHtml}
                                 </td>
                             </tr>

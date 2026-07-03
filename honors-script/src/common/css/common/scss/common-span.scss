@@ -2,7 +2,7 @@
 
 .common-span-strong
 {
-    font-size: 1.2em;
+    @include fontsize12;
     font-weight: bold;
 }
 .common-span-block
@@ -16,7 +16,7 @@
 }
 .common-span-subcontent
 {
-    font-size: 0.9em;
+    @include fontsize09;
     color: $colorBody;
     line-height: 1.4;
 }
@@ -28,7 +28,7 @@
 {
     display: block;
     margin: 0.3em auto;
-    font-size: 0.9em;
+    @include fontsize09;
 }
 
 /* ============================== */
@@ -46,7 +46,7 @@
     margin: 0.1em 0em;
     background-color: transparent;
     border-radius: 0.3em;
-    font-size: 0.9em;
+    @include fontsize09;
     line-height: 0.9em;
     white-space: nowrap;
     /* box-sizing: border-box; */
@@ -81,7 +81,7 @@
 /* ============================== */
 .common-span-tag
 {
-    font-size: 0.9em;
+    @include fontsize09;
     white-space: nowrap;
     padding: 0.3em $space04;
     margin: 0.1em $spaceZZ;

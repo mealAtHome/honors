@@ -25,9 +25,9 @@
     <!-- 일정상세 -->
     <!-- --------------- -->
     <div class="common-div-cushion">
-        <div class="common-tag-fontsize11" style="font-weight:bold;">
-            <span class="common-tag-fontsize10">일정 : </span>
-            <span class="common-tag-fontsize10" id="CUPU-span-clstitle"></span>
+        <div class="common-fontsize11" style="font-weight:bold;">
+            <span class="common-fontsize10">일정 : </span>
+            <span class="common-fontsize10" id="CUPU-span-clstitle"></span>
         </div>
     </div>
 
@@ -52,14 +52,14 @@
     <div class="CUPU-div-maintab" tab="input">
         <div class="common-div-cushion">
             <p class="common-p-title">구매품목</p>
-            <span class="common-tag-block common-tag-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
+            <span class="common-block common-fontsize09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
             <div class="common-div-cushionUD">
-                <div class="common-tag-fontsize09">
+                <div class="common-fontsize09">
                     <button id="CUPU-btn-addPurchaseRow" class="common-btn-outline">＋품목추가</button>
                 </div>
             </div>
             <div class="common-div-scrollX">
-                <table id="CUPU-tbl-purchase" class="common-tbl-normal common-tag-fontsize09" tbl-type="rowborder">
+                <table id="CUPU-tbl-purchase" class="common-tbl-normal common-fontsize09" tbl-type="rowborder">
                     <thead>
                         <tr>
                             <th colspan="2">품목</th>
@@ -85,9 +85,9 @@
     <div class="CUPU-div-maintab" tab="history" style="display:none;">
         <div class="common-div-cushion">
             <p class="common-p-title">구매이력</p>
-            <span class="common-tag-block common-tag-fontsize09">※표시되는 데이터는 변경직전의 데이터입니다.</span>
+            <span class="common-block common-fontsize09">※표시되는 데이터는 변경직전의 데이터입니다.</span>
             <div class="common-div-scrollX">
-                <div id="CUPU-div-purchasehist" class="common-tag-fontsize09"></div>
+                <div id="CUPU-div-purchasehist" class="common-fontsize09"></div>
             </div>
         </div>
     </div>
@@ -163,7 +163,7 @@
                 let html =
                 `
                     <tr purchaseidx="${mClspurchase.getPurchaseidx()}" deleteflg="n">
-                        <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outline common-tag-fontsize09" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
+                        <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outline common-fontsize09" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
                         <td col="productname"   ><input type="text"   class="common-input-text CUPU-input-productname"    value="${mClspurchase.getProductname()}"  style="width:100%;" /></td>
                         <td col="productbill"   ><input type="number" class="common-input-text CUPU-input-productbill"    value="${mClspurchase.getProductbill()}"  style="width:100%;" /></td>
                         <td col="purchasememo"  ><input type="text"   class="common-input-text CUPU-input-purchasememo"   value="${mClspurchase.getPurchasememo()}" style="width:100%;" /></td>
