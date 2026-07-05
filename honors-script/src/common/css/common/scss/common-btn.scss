@@ -14,7 +14,7 @@
     @include fonth14;
     text-decoration: none;
     @include colorBlckShad;
-    @include colorWhit;
+    @include colorWhitFont;
     @include radiusCurv04;
 }
 .common-btn-round { @include radiusFull; }

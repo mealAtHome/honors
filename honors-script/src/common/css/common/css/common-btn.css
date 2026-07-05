@@ -1,4 +1,45 @@
 @charset "UTF-8";
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* #020654 */
+/* #1B2A6B */
+/* #3D6BF5 */
+/* #7A8099 */
+/* #cfd2e1 */
+/* #7A8099 */
+/* #000278 */
+/* #009600 */
+/* #039a00 */
+/* #374B9B */
+/* #d4ad00 */
+/* #FF7415 */
+/* #FF7415 */
+/* #ce2727 */
+/* #780000 */
+/* #000000 */
+/* #ffffff */
+/* #636363 */
+/* #e6e6e6 */
+/* #bebebe */
+/* #969696 */
+/* #808080 */
+/* #646464 */
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+/* ========================= */
+/* btns */
+/* ========================= */
 /* ============================== */
 /* main button */
 /* ============================== */
@@ -8,16 +49,19 @@
 .common-btn-round,
 .common-btn-radio {
   display: inline-block;
-  padding: 0.4em 0.5em;
-  white-space: nowrap;
+  padding: 0.4em;
   line-height: 1.4;
   text-decoration: none;
-  /* box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12); */
-  background-color: white;
+  box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
   border-radius: 0.4em;
 }
 
-.common-btn-light,
+.common-btn-round {
+  border-radius: 100%;
+}
+
+.common-btn-light:hover,
 .common-btn-outline:hover,
 .common-btn-inline:hover,
 .common-btn-round:hover,
@@ -26,11 +70,6 @@
   cursor: pointer;
 }
 
-.common-btn-round {
-  border-radius: 100%;
-}
-
-/* mixin */
 /* round */
 .common-btn-round {
   border: 1px solid rgb(2, 6, 84);
@@ -43,13 +82,13 @@
 }
 
 .common-btn-round[btn-type=cancel] {
-  border: 1px solid #FF7415;
-  color: #FF7415;
+  border: 1px solid rgb(255, 116, 21);
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-round[btn-type=warning] {
-  border: 1px solid #FF7415;
-  color: #FF7415;
+  border: 1px solid rgb(255, 116, 21);
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-round[btn-type=error] {
@@ -64,32 +103,32 @@
 
 .common-btn-round:active {
   border-color: rgba(2, 6, 84, 0.3);
-  background-color: rgba(2, 6, 84, 0.3);
+  background: rgba(2, 6, 84, 0.3);
 }
 
 .common-btn-round[btn-type=choosed]:active {
   border-color: rgba(2, 6, 84, 0.3);
-  background-color: rgba(2, 6, 84, 0.3);
+  background: rgba(2, 6, 84, 0.3);
 }
 
 .common-btn-round[btn-type=cancel]:active {
   border-color: rgba(255, 116, 21, 0.3);
-  background-color: rgba(255, 116, 21, 0.3);
+  background: rgba(255, 116, 21, 0.3);
 }
 
 .common-btn-round[btn-type=warning]:active {
   border-color: rgba(255, 116, 21, 0.3);
-  background-color: rgba(255, 116, 21, 0.3);
+  background: rgba(255, 116, 21, 0.3);
 }
 
 .common-btn-round[btn-type=error]:active {
   border-color: rgba(206, 39, 39, 0.3);
-  background-color: rgba(206, 39, 39, 0.3);
+  background: rgba(206, 39, 39, 0.3);
 }
 
 .common-btn-round[btn-type=error]:active {
   border-color: rgba(206, 39, 39, 0.3);
-  background-color: rgba(206, 39, 39, 0.3);
+  background: rgba(206, 39, 39, 0.3);
 }
 
 /* outline */
@@ -104,13 +143,13 @@
 }
 
 .common-btn-outline[btn-type=cancel] {
-  border: 1px solid #FF7415;
-  color: #FF7415;
+  border: 1px solid rgb(255, 116, 21);
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-outline[btn-type=warning] {
-  border: 1px solid #FF7415;
-  color: #FF7415;
+  border: 1px solid rgb(255, 116, 21);
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-outline[btn-type=error] {
@@ -125,95 +164,95 @@
 
 .common-btn-outline:active {
   border-color: rgba(2, 6, 84, 0.3);
-  background-color: rgba(2, 6, 84, 0.3);
+  background: rgba(2, 6, 84, 0.3);
 }
 
 .common-btn-outline[btn-type=choosed]:active {
   border-color: rgba(2, 6, 84, 0.3);
-  background-color: rgba(2, 6, 84, 0.3);
+  background: rgba(2, 6, 84, 0.3);
 }
 
 .common-btn-outline[btn-type=cancel]:active {
   border-color: rgba(255, 116, 21, 0.3);
-  background-color: rgba(255, 116, 21, 0.3);
+  background: rgba(255, 116, 21, 0.3);
 }
 
 .common-btn-outline[btn-type=warning]:active {
   border-color: rgba(255, 116, 21, 0.3);
-  background-color: rgba(255, 116, 21, 0.3);
+  background: rgba(255, 116, 21, 0.3);
 }
 
 .common-btn-outline[btn-type=error]:active {
   border-color: rgba(206, 39, 39, 0.3);
-  background-color: rgba(206, 39, 39, 0.3);
+  background: rgba(206, 39, 39, 0.3);
 }
 
 .common-btn-outline[btn-type=delete]:active {
   border-color: rgba(206, 39, 39, 0.3);
-  background-color: rgba(206, 39, 39, 0.3);
+  background: rgba(206, 39, 39, 0.3);
 }
 
 .common-btn-outline:disabled {
   border: 1px solid rgb(2, 6, 84);
-  background-color: #ffffff;
+  background: rgb(255, 255, 255);
   color: rgb(2, 6, 84);
 }
 
 /* outline */
 .common-btn-light {
-  border: 1px solid #7A8099;
-  color: #7A8099;
+  border: 1px solid rgb(122, 128, 153);
+  color: rgb(122, 128, 153);
 }
 
 .common-btn-light:active {
   border-color: rgba(122, 128, 153, 0.3);
-  background-color: rgba(122, 128, 153, 0.3);
+  background: rgba(122, 128, 153, 0.3);
 }
 
 .common-btn-light:disabled {
-  border: 1px solid #7A8099;
-  background-color: #ffffff;
-  color: #7A8099;
+  border: 1px solid rgb(122, 128, 153);
+  background: rgb(255, 255, 255);
+  color: rgb(122, 128, 153);
 }
 
 /* inline */
 .common-btn-inline {
   border: 1px solid rgb(2, 6, 84);
-  background-color: rgb(2, 6, 84);
-  color: #ffffff;
+  background: rgb(2, 6, 84);
+  color: rgb(255, 255, 255);
 }
 
 .common-btn-inline[btn-type=cancel] {
-  border: 1px solid #FF7415;
-  background-color: #FF7415;
-  color: #ffffff;
+  border: 1px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+  color: rgb(255, 255, 255);
 }
 
 .common-btn-inline[btn-type=delete] {
   border: 1px solid rgb(206, 39, 39);
-  background-color: rgb(206, 39, 39);
-  color: #ffffff;
+  background: rgb(206, 39, 39);
+  color: rgb(255, 255, 255);
 }
 
 .common-btn-inline:active {
   border-color: rgba(2, 6, 84, 0.3);
-  background-color: rgba(2, 6, 84, 0.3);
+  background: rgba(2, 6, 84, 0.3);
 }
 
 .common-btn-inline[btn-type=cancel]:active {
   border-color: rgba(255, 116, 21, 0.3);
-  background-color: rgba(255, 116, 21, 0.3);
+  background: rgba(255, 116, 21, 0.3);
 }
 
 .common-btn-inline[btn-type=delete]:active {
   border-color: rgba(206, 39, 39, 0.3);
-  background-color: rgba(206, 39, 39, 0.3);
+  background: rgba(206, 39, 39, 0.3);
 }
 
 .common-btn-inline:disabled {
   border: 1px solid rgb(2, 6, 84);
-  background-color: #646464;
-  color: #ffffff;
+  background: rgb(100, 100, 100);
+  color: rgb(255, 255, 255);
 }
 
 /* radio */
@@ -224,49 +263,52 @@
 
 .common-btn-radio[tab=tab] {
   border: 1px solid rgb(2, 6, 84);
-  background-color: rgb(2, 6, 84);
-  color: #ffffff;
+  background: rgb(2, 6, 84);
+  color: rgb(255, 255, 255);
 }
 
 .common-btn-radio[btn-type=cancel][tab=""] {
-  border: 1px solid #FF7415;
-  color: #FF7415;
+  border: 1px solid rgb(255, 116, 21);
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-radio[btn-type=cancel][tab=tab] {
-  border: 1px solid #FF7415;
-  background-color: #FF7415;
-  color: #ffffff;
+  border: 1px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+  color: rgb(255, 255, 255);
 }
 
 .common-btn-radio:disabled[tab=""] {
   border: 1px solid rgb(2, 6, 84);
-  background-color: #ffffff;
+  background: rgb(255, 255, 255);
   color: rgb(2, 6, 84);
 }
 
 .common-btn-radio:disabled[tab=tab] {
   border: 1px solid rgb(2, 6, 84);
-  background-color: #646464;
-  color: #ffffff;
+  background: rgb(100, 100, 100);
+  color: rgb(255, 255, 255);
 }
 
 .common-btn-radio:disabled[btn-type=cancel][tab=""] {
-  border: 1px solid #FF7415;
-  background-color: #ffffff;
-  color: #FF7415;
+  border: 1px solid rgb(255, 116, 21);
+  background: rgb(255, 255, 255);
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-radio:disabled[btn-type=cancel][tab=tab] {
-  border: 1px solid #FF7415;
-  background-color: #646464;
-  color: #ffffff;
+  border: 1px solid rgb(255, 116, 21);
+  background: rgb(100, 100, 100);
+  color: rgb(255, 255, 255);
 }
 
 /* button size */
 .common-btn-outline[btn-size=large] {
   display: block;
-  margin: 0.3em auto;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0.8em;
   min-width: 12em;
   max-width: 90%;
@@ -274,16 +316,18 @@
 
 .common-btn-inline[btn-size=large] {
   display: block;
-  margin: 0.3em auto;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  margin-left: auto;
+  margin-right: auto;
   padding: 0.8em;
   min-width: 12em;
   max-width: 90%;
-  white-space: nowrap;
 }
 
 .common-btn-outline[btn-size=search] {
   display: inline-block;
-  padding: 0.3em 0.4em;
+  padding: 0.4em;
 }
 
 /* -------------------- */
@@ -293,9 +337,7 @@
 .common-btn-nolineSave {
   display: inline-block;
   padding: 0.5em;
-  background-color: transparent;
-  border-radius: 0.5em;
-  white-space: nowrap;
+  background: transparent;
   border: none;
   line-height: 1.4;
 }
@@ -311,11 +353,11 @@
 }
 
 .common-btn-noline[btn-type=cancel] {
-  color: #FF7415;
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-noline[btn-type=warning] {
-  color: #FF7415;
+  color: rgb(255, 116, 21);
 }
 
 .common-btn-noline[btn-type=error] {
@@ -323,19 +365,19 @@
 }
 
 .common-btn-noline:active {
-  background-color: rgba(2, 6, 84, 0.3);
+  background: rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }
 
 .common-btn-noline:active[btn-type=cancel] {
-  background-color: rgba(255, 116, 21, 0.3);
+  background: rgb(255, 227.2, 208.2);
 }
 
 .common-btn-noline:active[btn-type=warning] {
-  background-color: rgba(255, 116, 21, 0.3);
+  background: rgb(255, 227.2, 208.2);
 }
 
 .common-btn-noline:active[btn-type=error] {
-  background-color: rgba(206, 39, 39, 0.3);
+  background: rgb(246.5632653061, 210.4367346939, 210.4367346939);
 }
 
 /* -------------------- */
@@ -347,11 +389,14 @@
   bottom: 0px;
   left: 0px;
   width: 100%;
-  background-color: rgb(2, 6, 84);
-  color: white;
+  background: rgb(2, 6, 84);
+  color: rgb(255, 255, 255);
   font-size: 1.1em;
-  line-height: 1.1em;
-  padding: 0.8em 0.4em;
+  line-height: 1.6;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
   border: none;
 }
 
@@ -360,5 +405,5 @@
 }
 
 .common-btn-footer:active {
-  background-color: rgba(2, 6, 84, 0.4);
+  background: rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }

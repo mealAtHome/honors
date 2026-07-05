@@ -210,7 +210,7 @@ div { @include displayBk; }
     @include overflowX;
     @include boxsizeC;
     @include alignL;
-    @include colorWhit;
+    @include colorWhitFont;
     @include colorBlckShad;
 }
 .common-div-card[card-type=warning] { @include colorWarnFont; @include colorWarnBackTrans; @include colorWarnShad; }
@@ -253,7 +253,7 @@ div { @include displayBk; }
     position: absolute;
     left: 0;
     right: 0;
-    @include colorWhit;
+    @include colorWhitFont;
     width: 100%;
     height: 52px;
     @include colorBlckShad;
@@ -385,7 +385,7 @@ div { @include displayBk; }
 
 .common-div-calendarSquareWeekTop > button
 {
-    @include colorWhit;
+    @include colorWhitFont;
     border: 2px solid $colorGy23;
     @include colorGy10Font;
     @include padUD04;

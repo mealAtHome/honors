@@ -5,6 +5,29 @@
 /* ========================= */
 /* colors */
 /* ========================= */
+/* #020654 */
+/* #1B2A6B */
+/* #3D6BF5 */
+/* #7A8099 */
+/* #cfd2e1 */
+/* #7A8099 */
+/* #000278 */
+/* #009600 */
+/* #039a00 */
+/* #374B9B */
+/* #d4ad00 */
+/* #FF7415 */
+/* #FF7415 */
+/* #ce2727 */
+/* #780000 */
+/* #000000 */
+/* #ffffff */
+/* #636363 */
+/* #e6e6e6 */
+/* #bebebe */
+/* #969696 */
+/* #808080 */
+/* #646464 */
 /* ========================= */
 /* spacing */
 /* ========================= */
@@ -27,7 +50,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: #cccccc;
   height: 100%;
   width: 100%;
 }
@@ -38,7 +61,7 @@
   width: 100%;
   height: 90%;
   overflow-y: scroll;
-  background: #FFFFFF;
+  color: rgb(255, 255, 255);
   border-radius: 1em 1em 0em 0em;
   box-shadow: 1px 1px 7px 2px rgba(0, 0, 0, 0.2);
   padding: 0em;
@@ -58,7 +81,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: #cccccc;
   height: 100%;
   width: 100%;
 }
@@ -69,7 +92,7 @@
   width: 90%;
   height: 85%;
   overflow-y: scroll;
-  background: #FFFFFF;
+  color: rgb(255, 255, 255);
   padding: 0em;
   margin: 0em;
   box-sizing: border-box;
@@ -96,7 +119,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: #cccccc;
   height: 100%;
   width: 100%;
 }
@@ -107,7 +130,7 @@
   width: 90%;
   height: 85%;
   overflow-y: scroll;
-  background: #FFFFFF;
+  color: rgb(255, 255, 255);
   padding: 0em;
   margin: 0em;
   box-sizing: border-box;
@@ -125,7 +148,7 @@
   width: 100%;
   height: 94%;
   overflow-y: auto;
-  background: #FFFFFF;
+  color: rgb(255, 255, 255);
   border-radius: 1em 1em 0em 0em;
   padding: 0em;
   margin: 0em;
@@ -152,7 +175,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: #cccccc;
   height: 100%;
   width: 100%;
 }
@@ -243,7 +266,7 @@
   animation-fill-mode: forwards;
 }
 
-@keyframes index-dialog-pullDownAction {
+@keyframes index-dialog-pullDownFastAction {
   0% {
     bottom: 0%;
   }

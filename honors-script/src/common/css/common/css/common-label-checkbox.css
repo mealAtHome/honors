@@ -5,6 +5,29 @@
 /* ========================= */
 /* colors */
 /* ========================= */
+/* #020654 */
+/* #1B2A6B */
+/* #3D6BF5 */
+/* #7A8099 */
+/* #cfd2e1 */
+/* #7A8099 */
+/* #000278 */
+/* #009600 */
+/* #039a00 */
+/* #374B9B */
+/* #d4ad00 */
+/* #FF7415 */
+/* #FF7415 */
+/* #ce2727 */
+/* #780000 */
+/* #000000 */
+/* #ffffff */
+/* #636363 */
+/* #e6e6e6 */
+/* #bebebe */
+/* #969696 */
+/* #808080 */
+/* #646464 */
 /* ========================= */
 /* spacing */
 /* ========================= */
@@ -59,17 +82,17 @@
   left: 0;
   height: 26px;
   width: 26px;
-  background: #eee;
+  background: #fafafa;
 }
 
-/* On mouse-over, add a grey background color */
+/* On mouse-over, add a gray background color */
 .common-label-checkbox:hover input[type=checkbox] ~ span {
-  background: #ccc;
+  background: #f2f2f2;
 }
 
 /* When the checkbox button is checked, add a blue background */
 .common-label-checkbox > input[type=checkbox]:checked ~ span {
-  background: #020654;
+  background: rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -90,5 +113,5 @@
   left: 9px;
   width: 8px;
   height: 8px;
-  background: #FFFFFF;
+  color: rgb(255, 255, 255);
 }
