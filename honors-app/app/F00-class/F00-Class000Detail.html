@@ -517,12 +517,12 @@
                 let isMyName   = username == CLSD.Storage.myUsername ? "y" : "n";
                 let html =
                 `
-                    <tr class="common-me" me="${isMyUserno}">
+                    <tr class="common-mineHead" me="${isMyUserno}">
                         <td>${ordernoHtml}</td>
                         <td>${positionHtml}</td>
-                        <td><span class="common-span-me" me="${isMyName}">${applyHtml}</span></td>
-                        <td><span class="common-span-me" me="${isMyName}">${applyerHtml}</span></td>
-                        <td><span class="common-span-me" me="${isMyName}">${prepaidflgHtml}</span></td>
+                        <td><span class="common-mineBody" me="${isMyName}">${applyHtml}</span></td>
+                        <td><span class="common-mineBody" me="${isMyName}">${applyerHtml}</span></td>
+                        <td><span class="common-mineBody" me="${isMyName}">${prepaidflgHtml}</span></td>
                         <td col="etc">${model.getEtc()}</td>
                     </tr>
                 `;

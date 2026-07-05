@@ -110,14 +110,14 @@
     cursor: pointer;
 }
 
-.common-btn-noline                          { @include fontMain; }
-.common-btn-noline[btn-type=cancel]         { @include fontCncl; }
-.common-btn-noline[btn-type=warning]        { @include fontCncl; }
-.common-btn-noline[btn-type=error]          { @include fontErrr; }
-.common-btn-noline:active                   { @include colorMainBack; }
-.common-btn-noline:active[btn-type=cancel]  { @include colorCnclBack; }
-.common-btn-noline:active[btn-type=warning] { @include colorCnclBack; }
-.common-btn-noline:active[btn-type=error]   { @include colorErrrBack; }
+.common-btn-noline                          { @include colorMainFont; }
+.common-btn-noline[btn-type=cancel]         { @include colorCnclFont; }
+.common-btn-noline[btn-type=warning]        { @include colorCnclFont; }
+.common-btn-noline[btn-type=error]          { @include colorErrrFont; }
+.common-btn-noline:active                   { @include colorMainBackTrans; }
+.common-btn-noline:active[btn-type=cancel]  { @include colorCnclBackTrans; }
+.common-btn-noline:active[btn-type=warning] { @include colorCnclBackTrans; }
+.common-btn-noline:active[btn-type=error]   { @include colorErrrBackTrans; }
 
 /* -------------------- */
 /* 페이지 바닥에 깔리는 버튼 */
@@ -129,19 +129,13 @@
     bottom: 0px;
     left: 0px;
     @include widthFull;
-    @include backMain;
-    @include fontWhit;
+    @include colorMainBackSolid;
+    @include colorWhitFont;
     @include fonts11;
     @include fonth16;;
     @include padUD08;
     @include padLR04;
     border: none;
 }
-.common-btn-footer:hover
-{
-    cursor: pointer;
-}
-.common-btn-footer:active
-{
-    @include colorMainBack;
-}
+.common-btn-footer:hover  { cursor: pointer; }
+.common-btn-footer:active { @include colorMainBackTrans; }

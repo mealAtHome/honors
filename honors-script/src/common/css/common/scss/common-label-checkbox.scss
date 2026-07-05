@@ -47,19 +47,19 @@
     left: 0;
     height: 26px;
     width: 26px;
-    @include backGy23;
+    @include colorGy23BackTrans;
 }
 
 /* On mouse-over, add a gray background color */
 .common-label-checkbox:hover input[type=checkbox] ~ span
 {
-    @include backGy19;
+    @include colorGy19BackTrans;
 }
 
 /* When the checkbox button is checked, add a blue background */
 .common-label-checkbox > input[type=checkbox]:checked ~ span
 {
-    @include backMain;
+    @include colorMainBackTrans;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */

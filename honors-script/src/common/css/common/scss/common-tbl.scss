@@ -40,7 +40,7 @@
     @include padUD05;
     @include padLR06;
     @include radius30;
-    @include fontMain;
+    @include colorMainFont;
     @include fonth16;
 }
 .common-tbl-tab > tbody > tr > td[tab=space]
@@ -53,14 +53,14 @@
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
-    @include fontWhit;
+    @include colorWhitFont;
     @include radius30;
-    @include backMain;
+    @include colorMainBackSolid;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
 .common-tbl-tab > tbody > tr > td[tab=tab]:active
 {
-    @include colorMainBack;
+    @include colorMainBackSolid;
 }
 
 /* ============================== */

@@ -11,7 +11,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    @include colorBlckBack;
+    @include colorBlckBackTrans;
     @include heightFull;
     @include widthFull;
 }
@@ -43,7 +43,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    @include colorBlckBack;
+    @include colorBlckBackTrans;
     @include heightFull;
     @include widthFull;
 }
@@ -85,7 +85,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    @include colorBlckBack;
+    @include colorBlckBackTrans;
     @include heightFull;
     @include widthFull;
 }
@@ -146,7 +146,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    @include colorBlckBack;
+    @include colorBlckBackTrans;
     @include heightFull;
     @include widthFull;
 }
@@ -230,7 +230,7 @@
     animation-duration: 0.2s;
     animation-fill-mode: forwards;
 }
-@keyframes index-dialog-pullDownAction
+@keyframes index-dialog-pullDownFastAction
 {
     0%      { bottom: 0%; }
     100%    { bottom: -100%; }

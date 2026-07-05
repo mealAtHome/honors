@@ -30,7 +30,7 @@
     @include displayBk;
     font-size: 3em;
     @include fontwN;
-    @include fontMain;
+    @include colorMainFont;
     @include fonth16;
 }
 .ULGN-div-titleAccent
@@ -39,7 +39,7 @@
     width: 4em;
     height: $space02;
     @include marUD02;
-    @include backSide;
+    @include colorSideBackSolid;
 }
 
 /* ================ */
@@ -106,7 +106,7 @@
     width: 15em;
 }
 .ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; @include colorLine; }
-.ULGN-div-divider > div:nth-child(2) { @include fontLine; }
+.ULGN-div-divider > div:nth-child(2) { @include colorLineFont; }
 .ULGN-div-divider > div:nth-child(3) { flex: 1; height: 0.05em; @include colorLine; }
 
 

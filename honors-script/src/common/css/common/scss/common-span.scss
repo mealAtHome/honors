@@ -5,12 +5,12 @@
 
 .common-span-content
 {
-    @include fontHead;
+    @include colorHeadFont;
 }
 .common-span-subcontent
 {
     @include fonts09;
-    @include fontBody;
+    @include colorBodyFont;
     @include fonth14;
 }
 
@@ -28,7 +28,7 @@
 /* ============================== */
 /* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
 /* ============================== */
-.common-span-color { @include fontMain; }
+.common-span-color { @include colorMainFont; }
 
 /* ============================== */
 /* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
@@ -49,14 +49,14 @@
 .common-span-label[label_type=outline],
 .common-span-label
 {
-    @include fontMain;
+    @include colorMainFont;
     @include transparent;
     border: 1px solid $colorMain;
 }
 .common-span-label[label_type=inline]
 {
-    @include fontWhit;
-    @include backMain;
+    @include colorWhitFont;
+    @include colorMainBackTrans;
     border: 1px solid $colorMain;
 }
 
@@ -128,7 +128,7 @@
     @include fontwN;
 }
 .common-span-msg[span-type=normal]       { color: black;                    }
-.common-span-msg[span-type=success]      { @include fontMain;      }
+.common-span-msg[span-type=success]      { @include colorMainFont;      }
 .common-span-msg[span-type=warning]      { color: rgba(255, 116, 21, 1.0);  }
 .common-span-msg[span-type=error]        { color: rgba(139, 0, 0, 1.0); ;   }
 .common-span-msg[span-type=critical]     { color: rgba(139, 0, 0, 1.0); ;   }
