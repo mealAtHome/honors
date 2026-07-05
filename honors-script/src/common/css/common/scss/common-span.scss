@@ -1,4 +1,4 @@
-@import "../../_import/scss/__import";
+@use "../../_import/scss/__import" as *;
 
 .common-span-strong { @include fonts12; @include fontwB; }
 .common-span-block  { @include displayBk; @include marUD03; }

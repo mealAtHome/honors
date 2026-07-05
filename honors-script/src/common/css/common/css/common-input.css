@@ -5,6 +5,29 @@
 /* ========================= */
 /* colors */
 /* ========================= */
+/* #020654 */
+/* #1B2A6B */
+/* #3D6BF5 */
+/* #7A8099 */
+/* #cfd2e1 */
+/* #7A8099 */
+/* #000278 */
+/* #009600 */
+/* #039a00 */
+/* #374B9B */
+/* #d4ad00 */
+/* #FF7415 */
+/* #FF7415 */
+/* #ce2727 */
+/* #780000 */
+/* #000000 */
+/* #ffffff */
+/* #636363 */
+/* #e6e6e6 */
+/* #bebebe */
+/* #969696 */
+/* #808080 */
+/* #646464 */
 /* ========================= */
 /* spacing */
 /* ========================= */
@@ -33,14 +56,14 @@
   padding-bottom: 0.3em;
   font-size: 1.1em;
   border: none;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid rgb(122, 128, 153);
   text-align: left;
   background: transparent;
 }
 
 .common-input-field:focus {
   border: none;
-  border-bottom: 3px solid #020654;
+  border-bottom: 3px solid rgb(2, 6, 84);
 }
 
 .common-div-formField > .common-textarea-field {
@@ -54,13 +77,13 @@
 .common-textarea-field {
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(122, 128, 153);
   background: transparent;
 }
 
 .common-textarea-field:focus {
-  border: 1px solid #020654;
-  border-bottom: 3px solid #020654;
+  border: 1px solid rgb(2, 6, 84);
+  border-bottom: 3px solid rgb(2, 6, 84);
 }
 
 /* ========================= */
@@ -73,15 +96,15 @@
   /* @include boxsizeC; */
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-input-text:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 1px solid #020654;
-  box-shadow: 0px 0px 5px #020654;
+  border: 1px solid rgb(2, 6, 84);
+  box-shadow: 0px 0px 5px rgb(2, 6, 84);
 }
 
 .common-text {
@@ -101,13 +124,13 @@
   /* @include boxsizeC; */
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-textarea:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 1px solid #020654;
-  box-shadow: 0px 0px 5px #020654;
+  border: 1px solid rgb(2, 6, 84);
+  box-shadow: 0px 0px 5px rgb(2, 6, 84);
 }

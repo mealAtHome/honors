@@ -1,11 +1,11 @@
-@import "../../_import/scss/__import";
+@use "../../_import/scss/__import" as *;
 
 #ULGN-div-top
 {
     @include displayBk;
     width: 100%;
     height: 100%;
-    @include colorWhitBack;
+    @include colorWhitBackSolid;
     overflow: auto;
 }
 

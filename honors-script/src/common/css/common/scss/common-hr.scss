@@ -1,4 +1,4 @@
-@import "../../_import/scss/__import";
+@use "../../_import/scss/__import" as *;
 
 .common-hr-card        { @include mar08;       border: 1px dashed $colorLine; } /* card 사이의 hr */
 .common-hr-padding06   { @include mar06;       border: 1px dashed $colorLine; } /* 일반 html 사이의 hr */

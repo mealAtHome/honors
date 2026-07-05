@@ -1,4 +1,4 @@
-@import "../../_import/scss/__import";
+@use "../../_import/scss/__import" as *;
 
 /* Customize the label (the container) */
 .common-label-radio
