@@ -31,10 +31,6 @@
     </div>
  */
 /* ============================== */
-.common-tbl-tab
-{
-    white-space: nowrap;
-}
 .common-tbl-tab > tbody > tr > td
 {
     @include padUD05;
@@ -76,7 +72,6 @@
 /* ============================== */
 .common-tbl-normal
 {
-    border-collapse: collapse;
     @include fonth16;
 }
 .common-tbl-normal > thead > tr > th,
@@ -85,8 +80,7 @@
 .common-tbl-normal > tfoot > tr > td
 {
     @include pad04;
-    background:#e9ecef;
-    white-space: nowrap;
+    @include colorGrndBackSolid;
     @include alignC;
     @include fontwB;
 }
@@ -100,11 +94,11 @@
 /*
     class="common-tbl-normal" tbl-type=noborder
 */
-.common-tbl-normal[tbl-type=normal]                       { border: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=normal]    > thead > tr > th  { border: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=normal]    > tbody > tr > th  { border: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=normal]    > tbody > tr > td  { border: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=normal]    > tfoot > tr > td  { border: 1px solid #dee2e6; }
+.common-tbl-normal[tbl-type=normal]                       { border: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=normal]    > thead > tr > th  { border: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=normal]    > tbody > tr > th  { border: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=normal]    > tbody > tr > td  { border: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=normal]    > tfoot > tr > td  { border: 1px solid $colorLine; }
 
 .common-tbl-normal[tbl-type=noborder]                     { border: none; }
 .common-tbl-normal[tbl-type=noborder]  > thead > tr > th  { border: none; }
@@ -112,20 +106,20 @@
 .common-tbl-normal[tbl-type=noborder]  > tbody > tr > td  { border: none; }
 .common-tbl-normal[tbl-type=noborder]  > tfoot > tr > td  { border: none; }
 
-.common-tbl-normal[tbl-type=rowborder]                    { border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=rowborder] > thead > tr > th  { border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=rowborder] > tbody > tr > th  { border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=rowborder] > tbody > tr > td  { border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=rowborder] > tfoot > tr > td  { border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6; }
+.common-tbl-normal[tbl-type=rowborder]                    { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=rowborder] > thead > tr > th  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=rowborder] > tbody > tr > th  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=rowborder] > tbody > tr > td  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=rowborder] > tfoot > tr > td  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
 
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th                      { border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-child(1)         { border-left: none;                border-right: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-last-child(1)    { border-left: 1px solid #dee2e6; border-right: none; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > th                      { border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td                      { border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1)         { border-left: none;                border-right: 1px solid #dee2e6; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 1px solid #dee2e6; border-right: none; }
-.common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 1px solid #dee2e6; border-right: 1px solid #dee2e6; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-last-child(1)    { border-left: 1px solid $colorLine; border-right: none; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > th                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 1px solid $colorLine; border-right: none; }
+.common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
 
 /* ============================== */
 /* 슬라이드 입력폼용 테이블 */
@@ -135,14 +129,12 @@
     width: calc(100%);
     @include marUD10;
     @include marAuto;
-    border-collapse: collapse;
 }
 .common-tbl-slideformFooterBtn > thead > tr > th,
 .common-tbl-slideformFooterBtn > tbody > tr > th
 {
     @include padZZ;
-    background:#e9ecef;
-    white-space: nowrap;
+    @include colorGrndBackSolid;
     @include alignC;
 }
 .common-tbl-slideformFooterBtn > thead > tr > td,
@@ -156,16 +148,16 @@
 .common-tbl-slideformFooterBtn  > tbody > tr > th  { border: none; }
 .common-tbl-slideformFooterBtn  > tbody > tr > td  { border: none; }
 
-.common-tbl-slideformFooterBtn[tbl-type=button1] > tbody > tr > td              { @include widthFull; }
-.common-tbl-slideformFooterBtn[tbl-type=button1] > tbody > tr > td > button     { @include widthFull; @include pad06; }
+.common-tbl-slideformFooterBtn[tbl-type=button1] > tbody > tr > td              { width: 100%; }
+.common-tbl-slideformFooterBtn[tbl-type=button1] > tbody > tr > td > button     { width: 100%; @include pad06; }
 
-.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(1) { width: 20%;  @include padRt03; }
-.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(2) { @include widthFull; @include padLt03; }
-.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td > button     { @include widthFull; @include pad06; }
+.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(1) { width: 20%;         @include padRt03; }
+.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(2) { width: 100%; @include padLt03; }
+.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td > button     { width: 100%; @include pad06; }
 
-.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(1) { width: 50%;  @include padRt03; }
-.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(2) { width: 50%;  @include padLt03; }
-.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td > button     { @include widthFull; @include pad06; }
+.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(1) { width: 50%;         @include padRt03; }
+.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(2) { width: 50%;         @include padLt03; }
+.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td > button     { width: 100%; @include pad06; }
 
 /* ============================== */
 /* TABLE: 세로형 테이블 */
@@ -173,8 +165,6 @@
 .common-tbl-vertical
 {
     @include alignC;
-    border-collapse: collapse;
-    white-space: nowrap;
     @include fonth14;
 }
 .common-tbl-vertical > thead > tr > th,
@@ -183,30 +173,29 @@
 {
     @include pad04;
 }
-.common-tbl-vertical[tbl-type=normal]    { border: 1px solid #dee2e6; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background:#e9ecef; border: 1px solid #dee2e6; }
+.common-tbl-vertical[tbl-type=normal]    { border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { @include colorGrndBackSolid; border: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { width: 5%;  @include alignR; @include fontwB; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid #dee2e6; white-space: normal;}
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid $colorLine; }
 
-.common-tbl-vertical[tbl-type=minimal]   { border: 1px solid #dee2e6; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background:#e9ecef; border: 1px solid #dee2e6; }
+.common-tbl-vertical[tbl-type=minimal]   { border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { @include colorGrndBackSolid; border: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { width: 5%;  @include alignR; @include fontwN; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid #dee2e6; white-space: normal;}
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid $colorLine; }
 
 .common-tbl-vertical[tbl-type=noborder]  { border: none; }
-.common-tbl-vertical[tbl-type=noborder]  > thead > tr > th { background: rgba(0,0,0,0); }
 .common-tbl-vertical[tbl-type=noborder]  > tbody > tr > th { width: 5%;  @include alignR; border: none; @include fontwB; }
-.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > td { width: 95%; @include alignL;  border: none; white-space: normal; }
+.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > td { width: 95%; @include alignL;  border: none;  }
 
 .common-tbl-vertical[tbl-type=rowborder] { border: none; }
-.common-tbl-vertical[tbl-type=rowborder] > thead > tr > th { background: rgba(0,0,0,0); border: none; }
+.common-tbl-vertical[tbl-type=rowborder] > thead > tr > th { border: none; }
 
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { width: 5%;  @include alignR; border: none; @include fontwB; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { width: 95%; @include alignL;  border: none; white-space: normal; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { border-top: 1px solid rgb(220,220,220); }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { border-top: 1px solid rgb(220,220,220); }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th { border-top: none; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > td { border-top: none; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { width: 95%; @include alignL;  border: none; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { @include borderTopLine1px; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { @include borderTopLine1px; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th { @include borderTopNone; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > td { @include borderTopNone; }
 
 .common-tbl-vertical[tbl-width=auto] > thead > tr > td { width: auto; }
 .common-tbl-vertical[tbl-width=auto] > thead > tr > th { width: auto; }
@@ -218,4 +207,4 @@
 /* ============================== */
 .common-tbl-type > tbody > tr > th           { @include alignL; }
 .common-tbl-type > tbody > tr > th > button  { min-width: 6.5em; }
-.common-tbl-type > tbody > tr > td           { @include fonts09; color: rgb(100, 100, 100); }
+.common-tbl-type > tbody > tr > td           { @include fonts09; @include colorBodyFont; }

@@ -40,10 +40,9 @@
     @include marLRZZ;
     @include pad05;
     @include transparent;
-    border-radius: 0.3em;
+    @include radiusCurv04;
     @include fonts09;
     @include fonth14;
-    white-space: nowrap;
     /* @include boxsizeB; */
 }
 .common-span-label[label_type=outline],
@@ -58,15 +57,6 @@
     @include colorWhitFont;
     @include colorMainBackTrans;
     border: 1px solid $colorMain;
-}
-
-/* ============================== */
-/* insert 페이지에서 특정 항목을 반드시 입력해야할 때, 사용 */
-/* ============================== */
-.common-span-must
-{
-    color: red;
-    @include fontwB;
 }
 
 /* ============================== */
@@ -117,18 +107,3 @@
 /* rgb( 4   , 55  , 242 ) Ultramarine */
 /* rgb( 34  , 139 , 34  ) Forest Green */
 /* rgb( 210 , 43  , 43  ) Cadmium Red */
-
-
-/* ============================== */
-/* noBorder 형태의 span */
-/* ============================== */
-.common-span-msg
-{
-    @include displayIn;
-    @include fontwN;
-}
-.common-span-msg[span-type=normal]       { color: black;                    }
-.common-span-msg[span-type=success]      { @include colorMainFont;      }
-.common-span-msg[span-type=warning]      { color: rgba(255, 116, 21, 1.0);  }
-.common-span-msg[span-type=error]        { color: rgba(139, 0, 0, 1.0); ;   }
-.common-span-msg[span-type=critical]     { color: rgba(139, 0, 0, 1.0); ;   }

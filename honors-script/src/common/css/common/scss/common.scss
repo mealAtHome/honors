@@ -15,7 +15,7 @@
 /* ============================== */
 .common-tap:active
 {
-    background: rgba(220,220,220,0.5);
+    @include colorMainBackTrans;
 }
 
 .common-text-insertPage
@@ -50,5 +50,6 @@ textarea
 
 table
 {
+    white-space: nowrap;
     border-collapse: collapse;
 }

@@ -34,10 +34,7 @@ div { @include displayBk; }
     @include padUD06;
     @include padLR08;
     @include colorWhitBackSolid;
-    /* display: flex; */
-    /* justify-content: space-between; */
-    /* align-items: center; */
-    border-bottom: 0.5px solid #E4E7F0;
+    border-bottom: 0.5px solid $colorLine;
 }
 
 .common-div-sectionHeader
@@ -61,10 +58,6 @@ div { @include displayBk; }
 /*=================================*/
 /* div for yearToMin */
 /*=================================*/
-.common-div-yearToMin
-{
-    white-space: nowrap;
-}
 .common-div-yearToMin > input
 {
     @include displayIn;
@@ -82,7 +75,7 @@ div { @include displayBk; }
 /* 폼에 연동된 프로그래스 */
 .common-div-progressContainer
 {
-    @include widthFull;
+    width: 100%;
     height: 6px;
     @include colorGy23BackTrans;
     overflow: hidden;
@@ -93,7 +86,7 @@ div { @include displayBk; }
 .common-div-progressBar
 {
     width: 0%;
-    @include heightFull;
+    height: 100%;
     @include colorMainBackSolid;
     border-radius: 1em 0 0 1em;
     transition: width 0.4s ease; /* 부드러운 애니메이션 */
@@ -103,8 +96,8 @@ div { @include displayBk; }
 .common-div-slideformParent
 {
     position: relative;
-    @include widthFull;
-    @include heightFull;
+    width: 100%;
+    height: 100%;
     @include marZZ;
     @include padZZ;
     overflow-x: hidden;
@@ -218,11 +211,11 @@ div { @include displayBk; }
     @include boxsizeC;
     @include alignL;
     @include colorWhit;
-    box-shadow: $colorBlckShad;
+    @include colorBlckShad;
 }
-.common-div-card[card-type=warning] { @include colorWarnFont; @include colorWarnBackTrans; box-shadow: $colorWarnShad; }
-.common-div-card[card-type=notice]  { @include colorNtceFont; @include colorNtceBackTrans; box-shadow: $colorNtceShad; }
-.common-div-card[card-type=hero]    { @include colorMainFont; @include colorMainBackTrans; box-shadow: $colorMainShad; }
+.common-div-card[card-type=warning] { @include colorWarnFont; @include colorWarnBackTrans; @include colorWarnShad; }
+.common-div-card[card-type=notice]  { @include colorNtceFont; @include colorNtceBackTrans; @include colorNtceShad; }
+.common-div-card[card-type=hero]    { @include colorMainFont; @include colorMainBackTrans; @include colorMainShad; }
 
 /* ============================== */
 /* 에러 메시지용 */
@@ -236,9 +229,9 @@ div { @include displayBk; }
     @include alignL;
     @include fonth16;
 }
-.common-div-msg[common-div-msg-type=error]   { @include colorErrrFont; @include colorErrrBackTrans; box-shadow: $colorErrrShad; }
-.common-div-msg[common-div-msg-type=warning] { @include colorWarnFont; @include colorWarnBackTrans; box-shadow: $colorWarnShad; }
-.common-div-msg[common-div-msg-type=allow]   { @include colorAllwFont; @include colorAllwBackTrans; box-shadow: $colorAllwShad; }
+.common-div-msg[common-div-msg-type=error]   { @include colorErrrFont; @include colorErrrBackTrans; @include colorErrrShad; }
+.common-div-msg[common-div-msg-type=warning] { @include colorWarnFont; @include colorWarnBackTrans; @include colorWarnShad; }
+.common-div-msg[common-div-msg-type=allow]   { @include colorAllwFont; @include colorAllwBackTrans; @include colorAllwShad; }
 
 /* ============================== */
 /* 패드를 사용하지 않는 DIV */
@@ -253,7 +246,7 @@ div { @include displayBk; }
 /* -------------------- */
 /* 툴바 */
 /* -------------------- */
-.common-div-headerPadding { @include widthFull; height: 52px; }
+.common-div-headerPadding { width: 100%; height: 52px; }
 .common-div-header
 {
     z-index: 10000;
@@ -261,9 +254,9 @@ div { @include displayBk; }
     left: 0;
     right: 0;
     @include colorWhit;
-    @include widthFull;
+    width: 100%;
     height: 52px;
-    box-shadow: $colorBlckShad;
+    @include colorBlckShad;
 }
 .common-div-header > div[header=back]  { @include displayIn; width: auto; line-height: 52px; }
 .common-div-header > div[header=title] { @include displayIn; width: auto; line-height: 52px; @include padLt05; @include fonts12; @include fontwB; }
@@ -324,7 +317,7 @@ div { @include displayBk; }
 
 .common-div-scrollX
 {
-    @include widthFull;
+    width: 100%;
     @include overflowX;
     @include boxsizeB;
     @include padDw03;
@@ -338,14 +331,14 @@ div { @include displayBk; }
 .common-div-cushion   > .common-div-cushionUD:nth-child(1) { @include marDw08; }
 .common-div-cushionUD > .common-div-card:nth-child(1)      { @include marUp02; }
 
-/* 쿠션 아래의 첫번째, formField 는 marginTop: $space04; */
+/* 쿠션 아래의 첫번째, formField 는 marginTop: 0.4em; */
 .common-div-cushion > .common-div-formField:nth-child(1) { @include marUp04; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter
 {
     height: 4em;
-    @include widthFull;
+    width: 100%;
 }
 
 /* ============================== */
@@ -378,8 +371,7 @@ div { @include displayBk; }
     height: 3.6em;
     @include pad04;
     border-radius: 1em;
-    white-space: nowrap;
-    box-shadow: $colorMainShad;
+    @include colorMainShad;
 }
 .common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include fonth14; @include alignC; @include fontwN; }
 .common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; @include alignC; @include fontwB; }

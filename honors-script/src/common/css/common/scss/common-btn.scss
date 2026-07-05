@@ -11,10 +11,9 @@
 {
     @include displayIn;
     @include pad04;
-    white-space: nowrap;
     @include fonth14;
     text-decoration: none;
-    box-shadow: $colorBlckShad;
+    @include colorBlckShad;
     @include colorWhit;
     @include radiusCurv04;
 }
@@ -87,7 +86,7 @@
 
 /* button size */
 .common-btn-outline[btn-size=large]   { @include displayBk; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; }
-.common-btn-inline[btn-size=large]    { @include displayBk; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; white-space: nowrap; }
+.common-btn-inline[btn-size=large]    { @include displayBk; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; }
 .common-btn-outline[btn-size=search]  { @include displayIn; @include pad04; }
 
 /* -------------------- */
@@ -99,7 +98,6 @@
     @include displayIn;
     @include pad05;
     @include transparent;
-    white-space: nowrap;
     border: none;
     @include fonth14;
 }
@@ -128,7 +126,7 @@
     position: fixed;
     bottom: 0px;
     left: 0px;
-    @include widthFull;
+    width: 100%;
     @include colorMainBackSolid;
     @include colorWhitFont;
     @include fonts11;

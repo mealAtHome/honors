@@ -82,11 +82,11 @@ class MGrpMemberPointhists extends _MCommon
                             <tr>
                                 <td class="common-alignL">
                                     <span class="common-block common-fonts09">${model.getRegidt()}</span>
-                                    <span class="common-block common-bold">${model.getPointmemo()}</span>
+                                    <span class="common-block common-fontwB">${model.getPointmemo()}</span>
                                 </td>
                                 <td class="common-alignR">
                                     <span class="common-block common-fonts09">${model.getPointtypePretty()}</span>
-                                    <span class="common-block common-bold">${model.getPointPretty()}</span>
+                                    <span class="common-block common-fontwB">${model.getPointPretty()}</span>
                                 </td>
                             </tr>
                             <tr>

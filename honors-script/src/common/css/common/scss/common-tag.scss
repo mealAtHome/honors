@@ -10,12 +10,7 @@
 .common-indent12        { @include displayBk; @include padLt12; }
 .common-marUD           { @include displayBk; @include marUD04; }
 .common-marUp           { @include displayBk; @include marUp04; }
-.common-marUp10         { @include displayBk; @include marUp10; }
-.common-marUp08         { @include displayBk; @include marUp08; }
-.common-marDw03         { @include displayBk; @include marDw03; }
-.common-marLt03         { @include displayBk; @include marLt03; }
 .common-padUD           {                     @include padUD02; }
-.common-padUp05         {                     @include padUp05; }
 .common-cushionUp       { @include displayBk; @include marUp06; }
 .common-cushionUD       { @include displayBk; @include marUD06; }
 .common-cushionDw       { @include displayBk; @include marDw04; }
@@ -23,16 +18,7 @@
 /* --------------- */
 /* font style */
 /* --------------- */
-.common-fonts08 { @include fonts08; }
-.common-fonts09 { @include fonts09; }
-.common-fonts11 { @include fonts11; }
-.common-fonts12 { @include fonts12; }
-.common-strong  { @include fontwB; @include fonts11; }
-.common-alignC  { @include alignC; }
-.common-alignR  { @include alignR; }
-.common-alignL  { @include alignL; }
-.common-bold    { @include fontwB; }
-
+.common-strong         { @include fontwB; @include fonts11; }
 .common-mineHead[me=y] { @include colorMainBackTrans; }
 .common-mineBody[me=y] { @include fontwB; @include colorMainFont; }
 

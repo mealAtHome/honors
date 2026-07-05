@@ -35,7 +35,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #ccc;
+    background: $colorLine;
     -webkit-transition: .4s;
     transition: .4s;
     border-radius: 34px;
@@ -56,7 +56,7 @@
 }
 
 .common-label-switch > input:checked + span { @include colorMainBackTrans; }
-.common-label-switch > input:focus   + span { box-shadow: $colorMainShad; }
+.common-label-switch > input:focus   + span { @include colorMainShad; }
 .common-label-switch > input:checked + span:before
 {
     -webkit-transform: translateX(26px);

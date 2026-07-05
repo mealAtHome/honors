@@ -7,8 +7,8 @@
     background-repeat: no-repeat;
     background-position: center;
     @include displayIn;
-    @include widthFull;
-    @include heightFull;
+    width: 100%;
+    height: 100%;
     @include verticalM;
     @include marRt03;
     @include marDw02;
@@ -24,7 +24,7 @@
     @include colorWhit;
     width: 2.6em;
     height: 2.6em;
-    box-shadow: $colorBlckShad;
+    @include colorBlckShad;
 }
 .common-div-backBtn:active
 {

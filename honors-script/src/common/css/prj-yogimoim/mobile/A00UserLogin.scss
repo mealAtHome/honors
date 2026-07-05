@@ -3,9 +3,9 @@
 #ULGN-div-top
 {
     @include displayBk;
-    @include widthFull;
-    @include heightFull;
-    background: rgba(255,255,255,1);
+    width: 100%;
+    height: 100%;
+    @include colorWhitBack;
     overflow: auto;
 }
 
@@ -15,7 +15,7 @@
     left: 0.5em;
     top: 0.5em;
     @include fonts09;
-    color: rgb(150,150,150);
+    @include colorBodyFont;
 }
 #ULGN-span-version::before
 {
@@ -37,7 +37,7 @@
 {
     @include displayBk;
     width: 4em;
-    height: $space02;
+    height: 0.2em;
     @include marUD02;
     @include colorSideBackSolid;
 }
@@ -54,7 +54,7 @@
     @include fonts12;
     @include alignL;
     @include transparent;
-    border-radius: $borderRadius;
+    @include radiusCurv04;
     @include marUD05;
     @include marAuto;
     @include pad04;
