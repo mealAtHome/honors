@@ -8,29 +8,29 @@
 /* colors */
 /* ========================= */
 @mixin transparent { background:transparent; }
-$colorMain:rgb(2   , 6   , 84  ); /* #020654 */ $colorMainBack:color.scale($colorMain, $lightness:80%); @mixin colorMainShad { box-shadow:1px 1px 7px 2px transparentize($colorMain, 0.8); } @mixin colorMainFont { color:$colorMain; } @mixin colorMainBackSolid { background:$colorMain; } @mixin colorMainBackTrans { background:$colorMainBack; }
-$colorHead:rgb(27  , 42  , 107 ); /* #1B2A6B */ $colorHeadBack:color.scale($colorHead, $lightness:80%); @mixin colorHeadShad { box-shadow:1px 1px 7px 2px transparentize($colorHead, 0.8); } @mixin colorHeadFont { color:$colorHead; } @mixin colorHeadBackSolid { background:$colorHead; } @mixin colorHeadBackTrans { background:$colorHeadBack; }
-$colorSide:rgb(61  , 107 , 245 ); /* #3D6BF5 */ $colorSideBack:color.scale($colorSide, $lightness:80%); @mixin colorSideShad { box-shadow:1px 1px 7px 2px transparentize($colorSide, 0.8); } @mixin colorSideFont { color:$colorSide; } @mixin colorSideBackSolid { background:$colorSide; } @mixin colorSideBackTrans { background:$colorSideBack; }
-$colorBody:rgb(122 , 128 , 153 ); /* #7A8099 */ $colorBodyBack:color.scale($colorBody, $lightness:80%); @mixin colorBodyShad { box-shadow:1px 1px 7px 2px transparentize($colorBody, 0.8); } @mixin colorBodyFont { color:$colorBody; } @mixin colorBodyBackSolid { background:$colorBody; } @mixin colorBodyBackTrans { background:$colorBodyBack; }
-$colorGrnd:rgb(207 , 210 , 225 ); /* #cfd2e1 */ $colorGrndBack:color.scale($colorGrnd, $lightness:80%); @mixin colorGrndShad { box-shadow:1px 1px 7px 2px transparentize($colorGrnd, 0.8); } @mixin colorGrndFont { color:$colorGrnd; } @mixin colorGrndBackSolid { background:$colorGrnd; } @mixin colorGrndBackTrans { background:$colorGrndBack; }
-$colorLine:rgb(122 , 128 , 153 ); /* #7A8099 */ $colorLineBack:color.scale($colorLine, $lightness:80%); @mixin colorLineShad { box-shadow:1px 1px 7px 2px transparentize($colorLine, 0.8); } @mixin colorLineFont { color:$colorLine; } @mixin colorLineBackSolid { background:$colorLine; } @mixin colorLineBackTrans { background:$colorLineBack; }
-$colorPstv:rgb(0   , 2   , 120 ); /* #000278 */ $colorPstvBack:color.scale($colorPstv, $lightness:80%); @mixin colorPstvShad { box-shadow:1px 1px 7px 2px transparentize($colorPstv, 0.8); } @mixin colorPstvFont { color:$colorPstv; } @mixin colorPstvBackSolid { background:$colorPstv; } @mixin colorPstvBackTrans { background:$colorPstvBack; }
-$colorAllw:rgb(0   , 150 , 0   ); /* #009600 */ $colorAllwBack:color.scale($colorAllw, $lightness:80%); @mixin colorAllwShad { box-shadow:1px 1px 7px 2px transparentize($colorAllw, 0.8); } @mixin colorAllwFont { color:$colorAllw; } @mixin colorAllwBackSolid { background:$colorAllw; } @mixin colorAllwBackTrans { background:$colorAllwBack; }
-$colorProg:rgb(3   , 154 , 0   ); /* #039a00 */ $colorProgBack:color.scale($colorProg, $lightness:80%); @mixin colorProgShad { box-shadow:1px 1px 7px 2px transparentize($colorProg, 0.8); } @mixin colorProgFont { color:$colorProg; } @mixin colorProgBackSolid { background:$colorProg; } @mixin colorProgBackTrans { background:$colorProgBack; }
-$colorNtce:rgb(55  , 75  , 155 ); /* #374B9B */ $colorNtceBack:color.scale($colorNtce, $lightness:80%); @mixin colorNtceShad { box-shadow:1px 1px 7px 2px transparentize($colorNtce, 0.8); } @mixin colorNtceFont { color:$colorNtce; } @mixin colorNtceBackSolid { background:$colorNtce; } @mixin colorNtceBackTrans { background:$colorNtceBack; }
-$colorHold:rgb(212 , 173 , 0   ); /* #d4ad00 */ $colorHoldBack:color.scale($colorHold, $lightness:80%); @mixin colorHoldShad { box-shadow:1px 1px 7px 2px transparentize($colorHold, 0.8); } @mixin colorHoldFont { color:$colorHold; } @mixin colorHoldBackSolid { background:$colorHold; } @mixin colorHoldBackTrans { background:$colorHoldBack; }
-$colorCncl:rgb(255 , 116 , 21  ); /* #FF7415 */ $colorCnclBack:color.scale($colorCncl, $lightness:80%); @mixin colorCnclShad { box-shadow:1px 1px 7px 2px transparentize($colorCncl, 0.8); } @mixin colorCnclFont { color:$colorCncl; } @mixin colorCnclBackSolid { background:$colorCncl; } @mixin colorCnclBackTrans { background:$colorCnclBack; }
-$colorWarn:rgb(255 , 116 , 21  ); /* #FF7415 */ $colorWarnBack:color.scale($colorWarn, $lightness:80%); @mixin colorWarnShad { box-shadow:1px 1px 7px 2px transparentize($colorWarn, 0.8); } @mixin colorWarnFont { color:$colorWarn; } @mixin colorWarnBackSolid { background:$colorWarn; } @mixin colorWarnBackTrans { background:$colorWarnBack; }
-$colorErrr:rgb(206 , 39  , 39  ); /* #ce2727 */ $colorErrrBack:color.scale($colorErrr, $lightness:80%); @mixin colorErrrShad { box-shadow:1px 1px 7px 2px transparentize($colorErrr, 0.8); } @mixin colorErrrFont { color:$colorErrr; } @mixin colorErrrBackSolid { background:$colorErrr; } @mixin colorErrrBackTrans { background:$colorErrrBack; }
-$colorNgtv:rgb(120 , 0   , 0   ); /* #780000 */ $colorNgtvBack:color.scale($colorNgtv, $lightness:80%); @mixin colorNgtvShad { box-shadow:1px 1px 7px 2px transparentize($colorNgtv, 0.8); } @mixin colorNgtvFont { color:$colorNgtv; } @mixin colorNgtvBackSolid { background:$colorNgtv; } @mixin colorNgtvBackTrans { background:$colorNgtvBack; }
-$colorBlck:rgb(0   , 0   , 0   ); /* #000000 */ $colorBlckBack:color.scale($colorBlck, $lightness:80%); @mixin colorBlckShad { box-shadow:1px 1px 7px 2px transparentize($colorBlck, 0.8); } @mixin colorBlckFont { color:$colorBlck; } @mixin colorBlckBackSolid { background:$colorBlck; } @mixin colorBlckBackTrans { background:$colorBlckBack; }
-$colorWhit:rgb(255 , 255 , 255 ); /* #ffffff */ $colorWhitBack:color.scale($colorWhit, $lightness:80%); @mixin colorWhitShad { box-shadow:1px 1px 7px 2px transparentize($colorWhit, 0.8); } @mixin colorWhitFont { color:$colorWhit; } @mixin colorWhitBackSolid { background:$colorWhit; } @mixin colorWhitBackTrans { background:$colorWhitBack; }
-$colorDiss:rgb(100 , 100 , 100 ); /* #636363 */ $colorDissBack:color.scale($colorDiss, $lightness:80%); @mixin colorDissShad { box-shadow:1px 1px 7px 2px transparentize($colorDiss, 0.8); } @mixin colorDissFont { color:$colorDiss; } @mixin colorDissBackSolid { background:$colorDiss; } @mixin colorDissBackTrans { background:$colorDissBack; }
-$colorGy23:rgb(230 , 230 , 230 ); /* #e6e6e6 */ $colorGy23Back:color.scale($colorGy23, $lightness:80%); @mixin colorGy23Shad { box-shadow:1px 1px 7px 2px transparentize($colorGy23, 0.8); } @mixin colorGy23Font { color:$colorGy23; } @mixin colorGy23BackSolid { background:$colorGy23; } @mixin colorGy23BackTrans { background:$colorGy23Back; }
-$colorGy19:rgb(190 , 190 , 190 ); /* #bebebe */ $colorGy19Back:color.scale($colorGy19, $lightness:80%); @mixin colorGy19Shad { box-shadow:1px 1px 7px 2px transparentize($colorGy19, 0.8); } @mixin colorGy19Font { color:$colorGy19; } @mixin colorGy19BackSolid { background:$colorGy19; } @mixin colorGy19BackTrans { background:$colorGy19Back; }
-$colorGy15:rgb(150 , 150 , 150 ); /* #969696 */ $colorGy15Back:color.scale($colorGy15, $lightness:80%); @mixin colorGy15Shad { box-shadow:1px 1px 7px 2px transparentize($colorGy15, 0.8); } @mixin colorGy15Font { color:$colorGy15; } @mixin colorGy15BackSolid { background:$colorGy15; } @mixin colorGy15BackTrans { background:$colorGy15Back; }
-$colorGy12:rgb(128 , 128 , 128 ); /* #808080 */ $colorGy12Back:color.scale($colorGy12, $lightness:80%); @mixin colorGy12Shad { box-shadow:1px 1px 7px 2px transparentize($colorGy12, 0.8); } @mixin colorGy12Font { color:$colorGy12; } @mixin colorGy12BackSolid { background:$colorGy12; } @mixin colorGy12BackTrans { background:$colorGy12Back; }
-$colorGy10:rgb(100 , 100 , 100 ); /* #646464 */ $colorGy10Back:color.scale($colorGy10, $lightness:80%); @mixin colorGy10Shad { box-shadow:1px 1px 7px 2px transparentize($colorGy10, 0.8); } @mixin colorGy10Font { color:$colorGy10; } @mixin colorGy10BackSolid { background:$colorGy10; } @mixin colorGy10BackTrans { background:$colorGy10Back; }
+$colorMain:rgb(2   , 6   , 84  ); /* #020654 */ $colorMainBack:color.scale($colorMain, $lightness:80%); @mixin colorMainShad { box-shadow:1px 1px 7px 2px color.scale($colorMain, $lightness:80%); } @mixin colorMainFont { color:$colorMain; } @mixin colorMainBackSolid { background:$colorMain; } @mixin colorMainBackTrans { background:$colorMainBack; } .common-colorPick[font-colro=Main] { color:$colorMain;} .common-colorMain { color:$colorMain;} .common-card[card-color=main] { color:$colorMain; border: 2px solid $colorMain; @include colorMainBackSolid; }
+$colorHead:rgb(27  , 42  , 107 ); /* #1B2A6B */ $colorHeadBack:color.scale($colorHead, $lightness:80%); @mixin colorHeadShad { box-shadow:1px 1px 7px 2px color.scale($colorHead, $lightness:80%); } @mixin colorHeadFont { color:$colorHead; } @mixin colorHeadBackSolid { background:$colorHead; } @mixin colorHeadBackTrans { background:$colorHeadBack; } .common-colorPick[font-colro=Head] { color:$colorHead;} .common-colorHead { color:$colorHead;} .common-card[card-color=head] { color:$colorHead; border: 2px solid $colorHead; @include colorHeadBackSolid; }
+$colorSide:rgb(61  , 107 , 245 ); /* #3D6BF5 */ $colorSideBack:color.scale($colorSide, $lightness:80%); @mixin colorSideShad { box-shadow:1px 1px 7px 2px color.scale($colorSide, $lightness:80%); } @mixin colorSideFont { color:$colorSide; } @mixin colorSideBackSolid { background:$colorSide; } @mixin colorSideBackTrans { background:$colorSideBack; } .common-colorPick[font-colro=Side] { color:$colorSide;} .common-colorSide { color:$colorSide;} .common-card[card-color=side] { color:$colorSide; border: 2px solid $colorSide; @include colorSideBackSolid; }
+$colorBody:rgb(122 , 128 , 153 ); /* #7A8099 */ $colorBodyBack:color.scale($colorBody, $lightness:80%); @mixin colorBodyShad { box-shadow:1px 1px 7px 2px color.scale($colorBody, $lightness:80%); } @mixin colorBodyFont { color:$colorBody; } @mixin colorBodyBackSolid { background:$colorBody; } @mixin colorBodyBackTrans { background:$colorBodyBack; } .common-colorPick[font-colro=Body] { color:$colorBody;} .common-colorBody { color:$colorBody;} .common-card[card-color=body] { color:$colorBody; border: 2px solid $colorBody; @include colorBodyBackSolid; }
+$colorGrnd:rgb(207 , 210 , 225 ); /* #cfd2e1 */ $colorGrndBack:color.scale($colorGrnd, $lightness:80%); @mixin colorGrndShad { box-shadow:1px 1px 7px 2px color.scale($colorGrnd, $lightness:80%); } @mixin colorGrndFont { color:$colorGrnd; } @mixin colorGrndBackSolid { background:$colorGrnd; } @mixin colorGrndBackTrans { background:$colorGrndBack; } .common-colorPick[font-colro=Grnd] { color:$colorGrnd;} .common-colorGrnd { color:$colorGrnd;} .common-card[card-color=grnd] { color:$colorGrnd; border: 2px solid $colorGrnd; @include colorGrndBackSolid; }
+$colorLine:rgb(122 , 128 , 153 ); /* #7A8099 */ $colorLineBack:color.scale($colorLine, $lightness:80%); @mixin colorLineShad { box-shadow:1px 1px 7px 2px color.scale($colorLine, $lightness:80%); } @mixin colorLineFont { color:$colorLine; } @mixin colorLineBackSolid { background:$colorLine; } @mixin colorLineBackTrans { background:$colorLineBack; } .common-colorPick[font-colro=Line] { color:$colorLine;} .common-colorLine { color:$colorLine;} .common-card[card-color=line] { color:$colorLine; border: 2px solid $colorLine; @include colorLineBackSolid; }
+$colorPstv:rgb(0   , 2   , 120 ); /* #000278 */ $colorPstvBack:color.scale($colorPstv, $lightness:80%); @mixin colorPstvShad { box-shadow:1px 1px 7px 2px color.scale($colorPstv, $lightness:80%); } @mixin colorPstvFont { color:$colorPstv; } @mixin colorPstvBackSolid { background:$colorPstv; } @mixin colorPstvBackTrans { background:$colorPstvBack; } .common-colorPick[font-colro=pstv] { color:$colorPstv;} .common-colorPstv { color:$colorPstv;} .common-card[card-color=pstv] { color:$colorPstv; border: 2px solid $colorPstv; @include colorPstvBackSolid; }
+$colorAllw:rgb(0   , 150 , 0   ); /* #009600 */ $colorAllwBack:color.scale($colorAllw, $lightness:80%); @mixin colorAllwShad { box-shadow:1px 1px 7px 2px color.scale($colorAllw, $lightness:80%); } @mixin colorAllwFont { color:$colorAllw; } @mixin colorAllwBackSolid { background:$colorAllw; } @mixin colorAllwBackTrans { background:$colorAllwBack; } .common-colorPick[font-colro=allw] { color:$colorAllw;} .common-colorAllw { color:$colorAllw;} .common-card[card-color=allw] { color:$colorAllw; border: 2px solid $colorAllw; @include colorAllwBackSolid; }
+$colorProg:rgb(3   , 154 , 0   ); /* #039a00 */ $colorProgBack:color.scale($colorProg, $lightness:80%); @mixin colorProgShad { box-shadow:1px 1px 7px 2px color.scale($colorProg, $lightness:80%); } @mixin colorProgFont { color:$colorProg; } @mixin colorProgBackSolid { background:$colorProg; } @mixin colorProgBackTrans { background:$colorProgBack; } .common-colorPick[font-colro=prog] { color:$colorProg;} .common-colorProg { color:$colorProg;} .common-card[card-color=prog] { color:$colorProg; border: 2px solid $colorProg; @include colorProgBackSolid; }
+$colorNtce:rgb(55  , 75  , 155 ); /* #374B9B */ $colorNtceBack:color.scale($colorNtce, $lightness:80%); @mixin colorNtceShad { box-shadow:1px 1px 7px 2px color.scale($colorNtce, $lightness:80%); } @mixin colorNtceFont { color:$colorNtce; } @mixin colorNtceBackSolid { background:$colorNtce; } @mixin colorNtceBackTrans { background:$colorNtceBack; } .common-colorPick[font-colro=ntce] { color:$colorNtce;} .common-colorNtce { color:$colorNtce;} .common-card[card-color=ntce] { color:$colorNtce; border: 2px solid $colorNtce; @include colorNtceBackSolid; }
+$colorHold:rgb(212 , 173 , 0   ); /* #d4ad00 */ $colorHoldBack:color.scale($colorHold, $lightness:80%); @mixin colorHoldShad { box-shadow:1px 1px 7px 2px color.scale($colorHold, $lightness:80%); } @mixin colorHoldFont { color:$colorHold; } @mixin colorHoldBackSolid { background:$colorHold; } @mixin colorHoldBackTrans { background:$colorHoldBack; } .common-colorPick[font-colro=hold] { color:$colorHold;} .common-colorHold { color:$colorHold;} .common-card[card-color=hold] { color:$colorHold; border: 2px solid $colorHold; @include colorHoldBackSolid; }
+$colorCncl:rgb(255 , 116 , 21  ); /* #FF7415 */ $colorCnclBack:color.scale($colorCncl, $lightness:80%); @mixin colorCnclShad { box-shadow:1px 1px 7px 2px color.scale($colorCncl, $lightness:80%); } @mixin colorCnclFont { color:$colorCncl; } @mixin colorCnclBackSolid { background:$colorCncl; } @mixin colorCnclBackTrans { background:$colorCnclBack; } .common-colorPick[font-colro=cncl] { color:$colorCncl;} .common-colorCncl { color:$colorCncl;} .common-card[card-color=cncl] { color:$colorCncl; border: 2px solid $colorCncl; @include colorCnclBackSolid; }
+$colorWarn:rgb(255 , 116 , 21  ); /* #FF7415 */ $colorWarnBack:color.scale($colorWarn, $lightness:80%); @mixin colorWarnShad { box-shadow:1px 1px 7px 2px color.scale($colorWarn, $lightness:80%); } @mixin colorWarnFont { color:$colorWarn; } @mixin colorWarnBackSolid { background:$colorWarn; } @mixin colorWarnBackTrans { background:$colorWarnBack; } .common-colorPick[font-colro=warn] { color:$colorWarn;} .common-colorWarn { color:$colorWarn;} .common-card[card-color=warn] { color:$colorWarn; border: 2px solid $colorWarn; @include colorWarnBackSolid; }
+$colorErrr:rgb(206 , 39  , 39  ); /* #ce2727 */ $colorErrrBack:color.scale($colorErrr, $lightness:80%); @mixin colorErrrShad { box-shadow:1px 1px 7px 2px color.scale($colorErrr, $lightness:80%); } @mixin colorErrrFont { color:$colorErrr; } @mixin colorErrrBackSolid { background:$colorErrr; } @mixin colorErrrBackTrans { background:$colorErrrBack; } .common-colorPick[font-colro=errr] { color:$colorErrr;} .common-colorErrr { color:$colorErrr;} .common-card[card-color=errr] { color:$colorErrr; border: 2px solid $colorErrr; @include colorErrrBackSolid; }
+$colorNgtv:rgb(120 , 0   , 0   ); /* #780000 */ $colorNgtvBack:color.scale($colorNgtv, $lightness:80%); @mixin colorNgtvShad { box-shadow:1px 1px 7px 2px color.scale($colorNgtv, $lightness:80%); } @mixin colorNgtvFont { color:$colorNgtv; } @mixin colorNgtvBackSolid { background:$colorNgtv; } @mixin colorNgtvBackTrans { background:$colorNgtvBack; } .common-colorPick[font-colro=ngtv] { color:$colorNgtv;} .common-colorNgtv { color:$colorNgtv;} .common-card[card-color=ngtv] { color:$colorNgtv; border: 2px solid $colorNgtv; @include colorNgtvBackSolid; }
+$colorBlck:rgb(0   , 0   , 0   ); /* #000000 */ $colorBlckBack:color.scale($colorBlck, $lightness:80%); @mixin colorBlckShad { box-shadow:1px 1px 7px 2px color.scale($colorBlck, $lightness:80%); } @mixin colorBlckFont { color:$colorBlck; } @mixin colorBlckBackSolid { background:$colorBlck; } @mixin colorBlckBackTrans { background:$colorBlckBack; } .common-colorPick[font-colro=blck] { color:$colorBlck;} .common-colorBlck { color:$colorBlck;} .common-card[card-color=blck] { color:$colorBlck; border: 2px solid $colorBlck; @include colorBlckBackSolid; }
+$colorWhit:rgb(255 , 255 , 255 ); /* #ffffff */ $colorWhitBack:color.scale($colorWhit, $lightness:80%); @mixin colorWhitShad { box-shadow:1px 1px 7px 2px color.scale($colorWhit, $lightness:80%); } @mixin colorWhitFont { color:$colorWhit; } @mixin colorWhitBackSolid { background:$colorWhit; } @mixin colorWhitBackTrans { background:$colorWhitBack; } .common-colorPick[font-colro=whit] { color:$colorWhit;} .common-colorWhit { color:$colorWhit;} .common-card[card-color=whit] { color:$colorWhit; border: 2px solid $colorWhit; @include colorWhitBackSolid; }
+$colorDiss:rgb(100 , 100 , 100 ); /* #636363 */ $colorDissBack:color.scale($colorDiss, $lightness:80%); @mixin colorDissShad { box-shadow:1px 1px 7px 2px color.scale($colorDiss, $lightness:80%); } @mixin colorDissFont { color:$colorDiss; } @mixin colorDissBackSolid { background:$colorDiss; } @mixin colorDissBackTrans { background:$colorDissBack; } .common-colorPick[font-colro=diss] { color:$colorDiss;} .common-colorDiss { color:$colorDiss;} .common-card[card-color=diss] { color:$colorDiss; border: 2px solid $colorDiss; @include colorDissBackSolid; }
+$colorGy23:rgb(230 , 230 , 230 ); /* #e6e6e6 */ $colorGy23Back:color.scale($colorGy23, $lightness:80%); @mixin colorGy23Shad { box-shadow:1px 1px 7px 2px color.scale($colorGy23, $lightness:80%); } @mixin colorGy23Font { color:$colorGy23; } @mixin colorGy23BackSolid { background:$colorGy23; } @mixin colorGy23BackTrans { background:$colorGy23Back; } .common-colorPick[font-colro=gy23] { color:$colorGy23;} .common-colorGy23 { color:$colorGy23;} .common-card[card-color=gy23] { color:$colorGy23; border: 2px solid $colorGy23; @include colorGy23BackSolid; }
+$colorGy19:rgb(190 , 190 , 190 ); /* #bebebe */ $colorGy19Back:color.scale($colorGy19, $lightness:80%); @mixin colorGy19Shad { box-shadow:1px 1px 7px 2px color.scale($colorGy19, $lightness:80%); } @mixin colorGy19Font { color:$colorGy19; } @mixin colorGy19BackSolid { background:$colorGy19; } @mixin colorGy19BackTrans { background:$colorGy19Back; } .common-colorPick[font-colro=gy19] { color:$colorGy19;} .common-colorGy19 { color:$colorGy19;} .common-card[card-color=gy19] { color:$colorGy19; border: 2px solid $colorGy19; @include colorGy19BackSolid; }
+$colorGy15:rgb(150 , 150 , 150 ); /* #969696 */ $colorGy15Back:color.scale($colorGy15, $lightness:80%); @mixin colorGy15Shad { box-shadow:1px 1px 7px 2px color.scale($colorGy15, $lightness:80%); } @mixin colorGy15Font { color:$colorGy15; } @mixin colorGy15BackSolid { background:$colorGy15; } @mixin colorGy15BackTrans { background:$colorGy15Back; } .common-colorPick[font-colro=gy15] { color:$colorGy15;} .common-colorGy15 { color:$colorGy15;} .common-card[card-color=gy15] { color:$colorGy15; border: 2px solid $colorGy15; @include colorGy15BackSolid; }
+$colorGy12:rgb(128 , 128 , 128 ); /* #808080 */ $colorGy12Back:color.scale($colorGy12, $lightness:80%); @mixin colorGy12Shad { box-shadow:1px 1px 7px 2px color.scale($colorGy12, $lightness:80%); } @mixin colorGy12Font { color:$colorGy12; } @mixin colorGy12BackSolid { background:$colorGy12; } @mixin colorGy12BackTrans { background:$colorGy12Back; } .common-colorPick[font-colro=gy12] { color:$colorGy12;} .common-colorGy12 { color:$colorGy12;} .common-card[card-color=gy12] { color:$colorGy12; border: 2px solid $colorGy12; @include colorGy12BackSolid; }
+$colorGy10:rgb(100 , 100 , 100 ); /* #646464 */ $colorGy10Back:color.scale($colorGy10, $lightness:80%); @mixin colorGy10Shad { box-shadow:1px 1px 7px 2px color.scale($colorGy10, $lightness:80%); } @mixin colorGy10Font { color:$colorGy10; } @mixin colorGy10BackSolid { background:$colorGy10; } @mixin colorGy10BackTrans { background:$colorGy10Back; } .common-colorPick[font-colro=gy10] { color:$colorGy10;} .common-colorGy10 { color:$colorGy10;} .common-card[card-color=gy10] { color:$colorGy10; border: 2px solid $colorGy10; @include colorGy10BackSolid; }
 @mixin backgroundTrans { background:transparent; }
 @mixin borderAllNone   { border:none; }
 @mixin borderTopNone   { border-top:none; }
@@ -39,6 +39,7 @@ $colorGy10:rgb(100 , 100 , 100 ); /* #646464 */ $colorGy10Back:color.scale($colo
 /* spacing */
 /* ========================= */
 $spaceZZ:0.0em;
+$space01:0.1em;
 $space02:0.2em;
 $space03:0.3em;
 $space04:0.4em;
@@ -64,28 +65,28 @@ $borderRadius:0.4em;
 @mixin radiusHalf   { border-radius:50%; }
 @mixin radiusFull   { border-radius:100%; }
 
-@mixin displayIn    { display:inline-block; }
-@mixin displayBk    { display:block; }
-@mixin heightFull   { height:100%; }
-@mixin fonts08      { font-size:0.8em; }
-@mixin fonts09      { font-size:0.9em; }
-@mixin fonts10      { font-size:1.0em; }
-@mixin fonts11      { font-size:1.1em; }
-@mixin fonts12      { font-size:1.2em; }
-@mixin fonts14      { font-size:1.4em; }
-@mixin fonts30      { font-size:3.0em; }
-@mixin fontwN       { font-weight:normal; }
-@mixin fontwB       { font-weight:bold; }
-@mixin fonth12      { line-height:1.2; }
-@mixin fonth14      { line-height:1.4; }
-@mixin fonth16      { line-height:1.6; }
-@mixin alignC       { text-align:center; }
-@mixin alignR       { text-align:right; }
-@mixin alignL       { text-align:left; }
-@mixin verticalM    { vertical-align:middle; }
-@mixin boxsizeB     { box-sizing:border-box; }
-@mixin boxsizeC     { box-sizing:content-box; }
-@mixin overflowX    { overflow-x:auto; }
+@mixin displayIn    { display:inline-block;     }           .common-displayIn   { @include displayIn;       }
+@mixin displayBk    { display:block;            }           .common-displayBk   { @include displayBk;       }
+@mixin heightFull   { height:100%;              }           .common-heightFull  { @include heightFull;      }
+@mixin fonts08      { font-size:0.8em;          }           .common-fonts08     { @include fonts08;         }
+@mixin fonts09      { font-size:0.9em;          }           .common-fonts09     { @include fonts09;         }
+@mixin fonts10      { font-size:1.0em;          }           .common-fonts10     { @include fonts10;         }
+@mixin fonts11      { font-size:1.1em;          }           .common-fonts11     { @include fonts11;         }
+@mixin fonts12      { font-size:1.2em;          }           .common-fonts12     { @include fonts12;         }
+@mixin fonts14      { font-size:1.4em;          }           .common-fonts14     { @include fonts14;         }
+@mixin fonts30      { font-size:3.0em;          }           .common-fonts30     { @include fonts30;         }
+@mixin fontwN       { font-weight:normal;       }           .common-fontwN      { @include fontwN;          }
+@mixin fontwB       { font-weight:bold;         }           .common-fontwB      { @include fontwB;          }
+@mixin fonth12      { line-height:1.2;          }           .common-fonth12     { @include fonth12;         }
+@mixin fonth14      { line-height:1.4;          }           .common-fonth14     { @include fonth14;         }
+@mixin fonth16      { line-height:1.6;          }           .common-fonth16     { @include fonth16;         }
+@mixin alignC       { text-align:center;        }           .common-alignC      { @include alignC;          }
+@mixin alignR       { text-align:right;         }           .common-alignR      { @include alignR;          }
+@mixin alignL       { text-align:left;          }           .common-alignL      { @include alignL;          }
+@mixin verticalM    { vertical-align:middle;    }           .common-verticalM   { @include verticalM;       }
+@mixin boxsizeB     { box-sizing:border-box;    }           .common-boxsizeB    { @include boxsizeB;        }
+@mixin boxsizeC     { box-sizing:content-box;   }           .common-boxsizeC    { @include boxsizeC;        }
+@mixin overflowX    { overflow-x:auto;          }           .common-overflowX   { @include overflowX;       }
 
 
 
@@ -100,55 +101,58 @@ $borderRadius:0.4em;
 @mixin marLt  ($margin) { margin-left:$margin;                         } @mixin padLt ($margin) { padding-left:$margin; }
 @mixin marRt  ($margin) { margin-right:$margin;                        } @mixin padRt ($margin) { padding-right:$margin; }
 
-@mixin mar03     { margin:$space03;           } @mixin pad03     { padding:$space03;         }
-@mixin mar04     { margin:$space04;           } @mixin pad04     { padding:$space04;         }
-@mixin mar05     { margin:$space05;           } @mixin pad05     { padding:$space05;         }
-@mixin mar06     { margin:$space06;           } @mixin pad06     { padding:$space06;         }
-@mixin mar08     { margin:$space08;           } @mixin pad08     { padding:$space08;         }
-@mixin mar10     { margin:$space10;           } @mixin pad10     { padding:$space10;         }
-@mixin marZZ     { margin:$spaceZZ;           } @mixin padZZ     { padding:$spaceZZ;         }
-@mixin marAuto   { @include marLR(auto);      } @mixin padAuto   { @include padLR(auto);     }
-@mixin marUpZZ   { @include marUp($spaceZZ);  } @mixin padUpZZ   { @include padUp($spaceZZ); }
-@mixin marUp04   { @include marUp($space04);  } @mixin padUp04   { @include padUp($space04); }
-@mixin marUp05   { @include marUp($space05);  } @mixin padUp05   { @include padUp($space05); }
-@mixin marUp06   { @include marUp($space06);  } @mixin padUp06   { @include padUp($space06); }
-@mixin marUp07   { @include marUp($space07);  } @mixin padUp07   { @include padUp($space07); }
-@mixin marUp08   { @include marUp($space08);  } @mixin padUp08   { @include padUp($space08); }
-@mixin marUp10   { @include marUp($space10);  } @mixin padUp10   { @include padUp($space10); }
-@mixin marUp20   { @include marUp($space20);  } @mixin padUp20   { @include padUp($space20); }
-@mixin marUp40   { @include marUp($space40);  } @mixin padUp40   { @include padUp($space40); }
-@mixin marUD01   { @include marUD($space01);  } @mixin padUD01   { @include padUD($space01); }
-@mixin marUD02   { @include marUD($space02);  } @mixin padUD02   { @include padUD($space02); }
-@mixin marUD03   { @include marUD($space03);  } @mixin padUD03   { @include padUD($space03); }
-@mixin marUD05   { @include marUD($space05);  } @mixin padUD05   { @include padUD($space05); }
-@mixin marUD06   { @include marUD($space06);  } @mixin padUD06   { @include padUD($space06); }
-@mixin marUD08   { @include marUD($space08);  } @mixin padUD08   { @include padUD($space08); }
-@mixin marUD10   { @include marUD($space10);  } @mixin padUD10   { @include padUD($space10); }
-@mixin marUD20   { @include marUD($space20);  } @mixin padUD20   { @include padUD($space20); }
-@mixin marLRZZ   { @include marLR($spaceZZ);  } @mixin padLRZZ   { @include padLR($spaceZZ); }
-@mixin marLR04   { @include marLR($space04);  } @mixin padLR04   { @include padLR($space04); }
-@mixin marLR06   { @include marLR($space06);  } @mixin padLR06   { @include padLR($space06); }
-@mixin marLR08   { @include marLR($space08);  } @mixin padLR08   { @include padLR($space08); }
-@mixin marLR10   { @include marLR($space10);  } @mixin padLR10   { @include padLR($space10); }
-@mixin marLR20   { @include marLR($space20);  } @mixin padLR20   { @include padLR($space20); }
-@mixin marDwZZ   { @include marDw($spaceZZ);  } @mixin padDwZZ   { @include padDw($spaceZZ); }
-@mixin marDw02   { @include marDw($space02);  } @mixin padDw02   { @include padDw($space02); }
-@mixin marDw03   { @include marDw($space03);  } @mixin padDw03   { @include padDw($space03); }
-@mixin marDw04   { @include marDw($space04);  } @mixin padDw04   { @include padDw($space04); }
-@mixin marDw08   { @include marDw($space08);  } @mixin padDw08   { @include padDw($space08); }
-@mixin marDw10   { @include marDw($space10);  } @mixin padDw10   { @include padDw($space10); }
-@mixin marDw20   { @include marDw($space20);  } @mixin padDw20   { @include padDw($space20); }
-@mixin marLtZZ   { @include marLt($spaceZZ);  } @mixin padLtZZ   { @include padLt($spaceZZ); }
-@mixin marLt03   { @include marLt($space03);  } @mixin padLt03   { @include padLt($space03); }
-@mixin marLt04   { @include marLt($space04);  } @mixin padLt04   { @include padLt($space04); }
-@mixin marLt05   { @include marLt($space05);  } @mixin padLt05   { @include padLt($space05); }
-@mixin marLt08   { @include marLt($space08);  } @mixin padLt08   { @include padLt($space08); }
-@mixin marLt10   { @include marLt($space10);  } @mixin padLt10   { @include padLt($space10); }
-@mixin marLt12   { @include marLt($space12);  } @mixin padLt12   { @include padLt($space12); }
-@mixin marLt20   { @include marLt($space20);  } @mixin padLt20   { @include padLt($space20); }
-@mixin marRt03   { @include marRt($space03);  } @mixin padRt03   { @include padRt($space03); }
-@mixin marRt10   { @include marRt($space10);  } @mixin padRt10   { @include padRt($space10); }
-
+@mixin mar03     { margin:$space03;           } @mixin pad03     { padding:$space03;         } .common-mar03    { @include mar03; }
+@mixin mar04     { margin:$space04;           } @mixin pad04     { padding:$space04;         } .common-mar04    { @include mar04; }
+@mixin mar05     { margin:$space05;           } @mixin pad05     { padding:$space05;         } .common-mar05    { @include mar05; }
+@mixin mar06     { margin:$space06;           } @mixin pad06     { padding:$space06;         } .common-mar06    { @include mar06; }
+@mixin mar08     { margin:$space08;           } @mixin pad08     { padding:$space08;         } .common-mar08    { @include mar08; }
+@mixin mar10     { margin:$space10;           } @mixin pad10     { padding:$space10;         } .common-mar10    { @include mar10; }
+@mixin marZZ     { margin:$spaceZZ;           } @mixin padZZ     { padding:$spaceZZ;         } .common-marZZ    { @include marZZ; }
+@mixin marAuto   { @include marLR(auto);      } @mixin padAuto   { @include padLR(auto);     } .common-marAuto  { @include marAuto; }
+@mixin marUpZZ   { @include marUp($spaceZZ);  } @mixin padUpZZ   { @include padUp($spaceZZ); } .common-marUpZZ  { @include marUpZZ; }
+@mixin marUp02   { @include marUp($space02);  } @mixin padUp02   { @include padUp($space02); } .common-marUp02  { @include marUp02; }
+@mixin marUp04   { @include marUp($space04);  } @mixin padUp04   { @include padUp($space04); } .common-marUp04  { @include marUp04; }
+@mixin marUp05   { @include marUp($space05);  } @mixin padUp05   { @include padUp($space05); } .common-marUp05  { @include marUp05; }
+@mixin marUp06   { @include marUp($space06);  } @mixin padUp06   { @include padUp($space06); } .common-marUp06  { @include marUp06; }
+@mixin marUp08   { @include marUp($space08);  } @mixin padUp08   { @include padUp($space08); } .common-marUp08  { @include marUp08; }
+@mixin marUp10   { @include marUp($space10);  } @mixin padUp10   { @include padUp($space10); } .common-marUp10  { @include marUp10; }
+@mixin marUp20   { @include marUp($space20);  } @mixin padUp20   { @include padUp($space20); } .common-marUp20  { @include marUp20; }
+@mixin marUp40   { @include marUp($space40);  } @mixin padUp40   { @include padUp($space40); } .common-marUp40  { @include marUp40; }
+@mixin marUDZZ   { @include marUD($spaceZZ);  } @mixin padUDZZ   { @include padUD($spaceZZ); } .common-marUDZZ  { @include marUDZZ; }
+@mixin marUD01   { @include marUD($space01);  } @mixin padUD01   { @include padUD($space01); } .common-marUD01  { @include marUD01; }
+@mixin marUD02   { @include marUD($space02);  } @mixin padUD02   { @include padUD($space02); } .common-marUD02  { @include marUD02; }
+@mixin marUD03   { @include marUD($space03);  } @mixin padUD03   { @include padUD($space03); } .common-marUD03  { @include marUD03; }
+@mixin marUD04   { @include marUD($space04);  } @mixin padUD04   { @include padUD($space04); } .common-marUD04  { @include marUD04; }
+@mixin marUD05   { @include marUD($space05);  } @mixin padUD05   { @include padUD($space05); } .common-marUD05  { @include marUD05; }
+@mixin marUD06   { @include marUD($space06);  } @mixin padUD06   { @include padUD($space06); } .common-marUD06  { @include marUD06; }
+@mixin marUD08   { @include marUD($space08);  } @mixin padUD08   { @include padUD($space08); } .common-marUD08  { @include marUD08; }
+@mixin marUD10   { @include marUD($space10);  } @mixin padUD10   { @include padUD($space10); } .common-marUD10  { @include marUD10; }
+@mixin marUD20   { @include marUD($space20);  } @mixin padUD20   { @include padUD($space20); } .common-marUD20  { @include marUD20; }
+@mixin marLRZZ   { @include marLR($spaceZZ);  } @mixin padLRZZ   { @include padLR($spaceZZ); } .common-marLRZZ  { @include marLRZZ; }
+@mixin marLR03   { @include marLR($space03);  } @mixin padLR03   { @include padLR($space03); } .common-marLR03  { @include marLR03; }
+@mixin marLR04   { @include marLR($space04);  } @mixin padLR04   { @include padLR($space04); } .common-marLR04  { @include marLR04; }
+@mixin marLR06   { @include marLR($space06);  } @mixin padLR06   { @include padLR($space06); } .common-marLR06  { @include marLR06; }
+@mixin marLR08   { @include marLR($space08);  } @mixin padLR08   { @include padLR($space08); } .common-marLR08  { @include marLR08; }
+@mixin marLR10   { @include marLR($space10);  } @mixin padLR10   { @include padLR($space10); } .common-marLR10  { @include marLR10; }
+@mixin marLR20   { @include marLR($space20);  } @mixin padLR20   { @include padLR($space20); } .common-marLR20  { @include marLR20; }
+@mixin marDwZZ   { @include marDw($spaceZZ);  } @mixin padDwZZ   { @include padDw($spaceZZ); } .common-marDwZZ  { @include marDwZZ; }
+@mixin marDw02   { @include marDw($space02);  } @mixin padDw02   { @include padDw($space02); } .common-marDw02  { @include marDw02; }
+@mixin marDw03   { @include marDw($space03);  } @mixin padDw03   { @include padDw($space03); } .common-marDw03  { @include marDw03; }
+@mixin marDw04   { @include marDw($space04);  } @mixin padDw04   { @include padDw($space04); } .common-marDw04  { @include marDw04; }
+@mixin marDw08   { @include marDw($space08);  } @mixin padDw08   { @include padDw($space08); } .common-marDw08  { @include marDw08; }
+@mixin marDw10   { @include marDw($space10);  } @mixin padDw10   { @include padDw($space10); } .common-marDw10  { @include marDw10; }
+@mixin marDw20   { @include marDw($space20);  } @mixin padDw20   { @include padDw($space20); } .common-marDw20  { @include marDw20; }
+@mixin marLtZZ   { @include marLt($spaceZZ);  } @mixin padLtZZ   { @include padLt($spaceZZ); } .common-marLtZZ  { @include marLtZZ; }
+@mixin marLt02   { @include marLt($space02);  } @mixin padLt02   { @include padLt($space02); } .common-marLt02  { @include marLt02; }
+@mixin marLt03   { @include marLt($space03);  } @mixin padLt03   { @include padLt($space03); } .common-marLt03  { @include marLt03; }
+@mixin marLt04   { @include marLt($space04);  } @mixin padLt04   { @include padLt($space04); } .common-marLt04  { @include marLt04; }
+@mixin marLt05   { @include marLt($space05);  } @mixin padLt05   { @include padLt($space05); } .common-marLt05  { @include marLt05; }
+@mixin marLt08   { @include marLt($space08);  } @mixin padLt08   { @include padLt($space08); } .common-marLt08  { @include marLt08; }
+@mixin marLt10   { @include marLt($space10);  } @mixin padLt10   { @include padLt($space10); } .common-marLt10  { @include marLt10; }
+@mixin marLt12   { @include marLt($space12);  } @mixin padLt12   { @include padLt($space12); } .common-marLt12  { @include marLt12; }
+@mixin marLt20   { @include marLt($space20);  } @mixin padLt20   { @include padLt($space20); } .common-marLt20  { @include marLt20; }
+@mixin marRt03   { @include marRt($space03);  } @mixin padRt03   { @include padRt($space03); } .common-marRt03  { @include marRt03; }
+@mixin marRt10   { @include marRt($space10);  } @mixin padRt10   { @include padRt($space10); } .common-marRt10  { @include marRt10; }
 
 /* ========================= */
 /* btns */

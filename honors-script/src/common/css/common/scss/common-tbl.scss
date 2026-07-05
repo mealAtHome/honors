@@ -35,7 +35,7 @@
 {
     @include padUD05;
     @include padLR06;
-    @include radius30;
+    @include radiusCurv30;
     @include colorMainFont;
     @include fonth16;
 }
@@ -43,14 +43,14 @@
 {
     width: 90%;
     border: none;
-    @include padUD00;
+    @include padUDZZ;
     @include padLR03;
     @include alignR;
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
     @include colorWhitFont;
-    @include radius30;
+    @include radiusCurv30;
     @include colorMainBackSolid;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
@@ -192,8 +192,8 @@
 
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { width: 5%;  @include alignR; border: none; @include fontwB; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { width: 95%; @include alignL;  border: none; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { @include borderTopLine1px; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { @include borderTopLine1px; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { border-top: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { border-top: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th { @include borderTopNone; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > td { @include borderTopNone; }
 

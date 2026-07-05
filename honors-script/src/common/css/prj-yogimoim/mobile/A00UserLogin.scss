@@ -105,8 +105,8 @@
     @include marAuto;
     width: 15em;
 }
-.ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; @include colorLine; }
+.ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; @include colorLineBackSolid; }
 .ULGN-div-divider > div:nth-child(2) { @include colorLineFont; }
-.ULGN-div-divider > div:nth-child(3) { flex: 1; height: 0.05em; @include colorLine; }
+.ULGN-div-divider > div:nth-child(3) { flex: 1; height: 0.05em; @include colorLineBackSolid; }
 
 

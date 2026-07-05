@@ -1,97 +1,97 @@
 @use "../../_import/scss/__import" as *;
 
-.common-colorPick[font-colro=Main] { color:$colorMain;} .common-colorMain { color:$colorPstv;} .common-card[card-color=pstv] { color:$colorPstv; border: 2px solid $colorPstv; background: $colorPstvBackSolid; }
-.common-colorPick[font-colro=Head] { color:$colorHead;} .common-colorHead { color:$colorHead;} .common-card[card-color=head] { color:$colorHead; border: 2px solid $colorHead; background: $colorHeadBackSolid; }
-.common-colorPick[font-colro=Side] { color:$colorSide;} .common-colorSide { color:$colorSide;} .common-card[card-color=side] { color:$colorSide; border: 2px solid $colorSide; background: $colorSideBackSolid; }
-.common-colorPick[font-colro=Body] { color:$colorBody;} .common-colorBody { color:$colorBody;} .common-card[card-color=body] { color:$colorBody; border: 2px solid $colorBody; background: $colorBodyBackSolid; }
-.common-colorPick[font-colro=Grnd] { color:$colorGrnd;} .common-colorGrnd { color:$colorGrnd;} .common-card[card-color=grnd] { color:$colorGrnd; border: 2px solid $colorGrnd; background: $colorGrndBackSolid; }
-.common-colorPick[font-colro=Line] { color:$colorLine;} .common-colorLine { color:$colorLine;} .common-card[card-color=line] { color:$colorLine; border: 2px solid $colorLine; background: $colorLineBackSolid; }
-.common-colorPick[font-colro=pstv] { color:$colorPstv;} .common-colorPstv { color:$colorPstv;} .common-card[card-color=pstv] { color:$colorPstv; border: 2px solid $colorPstv; background: $colorPstvBackSolid; }
-.common-colorPick[font-colro=allw] { color:$colorAllw;} .common-colorAllw { color:$colorAllw;} .common-card[card-color=allw] { color:$colorAllw; border: 2px solid $colorAllw; background: $colorAllwBackSolid; }
-.common-colorPick[font-colro=prog] { color:$colorProg;} .common-colorProg { color:$colorProg;} .common-card[card-color=prog] { color:$colorProg; border: 2px solid $colorProg; background: $colorProgBackSolid; }
-.common-colorPick[font-colro=ntce] { color:$colorNtce;} .common-colorNtce { color:$colorNtce;} .common-card[card-color=ntce] { color:$colorNtce; border: 2px solid $colorNtce; background: $colorNtceBackSolid; }
-.common-colorPick[font-colro=hold] { color:$colorHold;} .common-colorHold { color:$colorHold;} .common-card[card-color=hold] { color:$colorHold; border: 2px solid $colorHold; background: $colorHoldBackSolid; }
-.common-colorPick[font-colro=cncl] { color:$colorCncl;} .common-colorCncl { color:$colorCncl;} .common-card[card-color=cncl] { color:$colorCncl; border: 2px solid $colorCncl; background: $colorCnclBackSolid; }
-.common-colorPick[font-colro=warn] { color:$colorWarn;} .common-colorWarn { color:$colorWarn;} .common-card[card-color=warn] { color:$colorWarn; border: 2px solid $colorWarn; background: $colorWarnBackSolid; }
-.common-colorPick[font-colro=errr] { color:$colorErrr;} .common-colorErrr { color:$colorErrr;} .common-card[card-color=errr] { color:$colorErrr; border: 2px solid $colorErrr; background: $colorErrrBackSolid; }
-.common-colorPick[font-colro=ngtv] { color:$colorNgtv;} .common-colorNgtv { color:$colorNgtv;} .common-card[card-color=ngtv] { color:$colorNgtv; border: 2px solid $colorNgtv; background: $colorNgtvBackSolid; }
-.common-colorPick[font-colro=blck] { color:$colorBlck;} .common-colorBlck { color:$colorBlck;} .common-card[card-color=blck] { color:$colorBlck; border: 2px solid $colorBlck; background: $colorBlckBackSolid; }
-.common-colorPick[font-colro=whit] { color:$colorWhit;} .common-colorWhit { color:$colorWhit;} .common-card[card-color=whit] { color:$colorWhit; border: 2px solid $colorWhit; background: $colorWhitBackSolid; }
-.common-colorPick[font-colro=diss] { color:$colorDiss;} .common-colorDiss { color:$colorDiss;} .common-card[card-color=diss] { color:$colorDiss; border: 2px solid $colorDiss; background: $colorDissBackSolid; }
-.common-colorPick[font-colro=gy23] { color:$colorGy23;} .common-colorGy23 { color:$colorGy23;} .common-card[card-color=gy23] { color:$colorGy23; border: 2px solid $colorGy23; background: $colorGy23BackSolid; }
-.common-colorPick[font-colro=gy19] { color:$colorGy19;} .common-colorGy19 { color:$colorGy19;} .common-card[card-color=gy19] { color:$colorGy19; border: 2px solid $colorGy19; background: $colorGy19BackSolid; }
-.common-colorPick[font-colro=gy15] { color:$colorGy15;} .common-colorGy15 { color:$colorGy15;} .common-card[card-color=gy15] { color:$colorGy15; border: 2px solid $colorGy15; background: $colorGy15BackSolid; }
-.common-colorPick[font-colro=gy12] { color:$colorGy12;} .common-colorGy12 { color:$colorGy12;} .common-card[card-color=gy12] { color:$colorGy12; border: 2px solid $colorGy12; background: $colorGy12BackSolid; }
-.common-colorPick[font-colro=gy10] { color:$colorGy10;} .common-colorGy10 { color:$colorGy10;} .common-card[card-color=gy10] { color:$colorGy10; border: 2px solid $colorGy10; background: $colorGy10BackSolid; }
-.common-displayIn { @include displayIn; }
-.common-displayBk { @include displayBk; }
-.common-heightFull { @include heightFull; }
-.common-fonts08 { @include fonts08; }
-.common-fonts09 { @include fonts09; }
-.common-fonts10 { @include fonts10; }
-.common-fonts11 { @include fonts11; }
-.common-fonts12 { @include fonts12; }
-.common-fonts14 { @include fonts14; }
-.common-fonts30 { @include fonts30; }
-.common-fontwN { @include fontwN; }
-.common-fontwB { @include fontwB; }
-.common-fonth12 { @include fonth12; }
-.common-fonth14 { @include fonth14; }
-.common-fonth16 { @include fonth16; }
-.common-alignC  { @include alignC; }
-.common-alignR  { @include alignR; }
-.common-alignL  { @include alignL; }
-.common-verticalM { @include verticalM; }
-.common-boxsizeB { @include boxsizeB; }
-.common-boxsizeC { @include boxsizeC; }
-.common-overflowX { @include overflowX; }
-.common-mar03    { @include mar03; }
-.common-mar04    { @include mar04; }
-.common-mar05    { @include mar05; }
-.common-mar06    { @include mar06; }
-.common-mar08    { @include mar08; }
-.common-marZZ    { @include marZZ; }
-.common-marAuto  { @include marAuto; }
-.common-marUpZZ  { @include marUpZZ; }
-.common-marUp04  { @include marUp04; }
-.common-marUp05  { @include marUp05; }
-.common-marUp06  { @include marUp06; }
-.common-marUp07  { @include marUp07; }
-.common-marUp08  { @include marUp08; }
-.common-marUp10  { @include marUp10; }
-.common-marUp20  { @include marUp20; }
-.common-marUp40  { @include marUp40; }
-.common-marUD01  { @include marUD01; }
-.common-marUD02  { @include marUD02; }
-.common-marUD03  { @include marUD03; }
-.common-marUD05  { @include marUD05; }
-.common-marUD06  { @include marUD06; }
-.common-marUD08  { @include marUD08; }
-.common-marUD10  { @include marUD10; }
-.common-marUD20  { @include marUD20; }
-.common-marLRZZ  { @include marLRZZ; }
-.common-marLR04  { @include marLR04; }
-.common-marLR06  { @include marLR06; }
-.common-marLR08  { @include marLR08; }
-.common-marLR10  { @include marLR10; }
-.common-marLR20  { @include marLR20; }
-.common-marDwZZ  { @include marDwZZ; }
-.common-marDw02  { @include marDw02; }
-.common-marDw03  { @include marDw03; }
-.common-marDw04  { @include marDw04; }
-.common-marDw08  { @include marDw08; }
-.common-marDw10  { @include marDw10; }
-.common-marDw20  { @include marDw20; }
-.common-marLtZZ  { @include marLtZZ; }
-.common-marLt03  { @include marLt03; }
-.common-marLt04  { @include marLt04; }
-.common-marLt05  { @include marLt05; }
-.common-marLt08  { @include marLt08; }
-.common-marLt10  { @include marLt10; }
-.common-marLt12  { @include marLt12; }
-.common-marLt20  { @include marLt20; }
-.common-marRt03  { @include marRt03; }
-.common-marRt10  { @include marRt10; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

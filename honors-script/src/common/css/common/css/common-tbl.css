@@ -1,10 +1,681 @@
 @charset "UTF-8";
-/* 메인색상 */
-/* 상태색상 */
-/* ------ */
-/* margin */
-/* ------ */
-/* mixin */
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* #020654 */
+.common-colorPick[font-colro=Main] {
+  color: rgb(2, 6, 84);
+}
+
+.common-colorMain {
+  color: rgb(2, 6, 84);
+}
+
+.common-card[card-color=main] {
+  color: rgb(2, 6, 84);
+  border: 2px solid rgb(2, 6, 84);
+  background: rgb(2, 6, 84);
+}
+
+/* #1B2A6B */
+.common-colorPick[font-colro=Head] {
+  color: rgb(27, 42, 107);
+}
+
+.common-colorHead {
+  color: rgb(27, 42, 107);
+}
+
+.common-card[card-color=head] {
+  color: rgb(27, 42, 107);
+  border: 2px solid rgb(27, 42, 107);
+  background: rgb(27, 42, 107);
+}
+
+/* #3D6BF5 */
+.common-colorPick[font-colro=Side] {
+  color: rgb(61, 107, 245);
+}
+
+.common-colorSide {
+  color: rgb(61, 107, 245);
+}
+
+.common-card[card-color=side] {
+  color: rgb(61, 107, 245);
+  border: 2px solid rgb(61, 107, 245);
+  background: rgb(61, 107, 245);
+}
+
+/* #7A8099 */
+.common-colorPick[font-colro=Body] {
+  color: rgb(122, 128, 153);
+}
+
+.common-colorBody {
+  color: rgb(122, 128, 153);
+}
+
+.common-card[card-color=body] {
+  color: rgb(122, 128, 153);
+  border: 2px solid rgb(122, 128, 153);
+  background: rgb(122, 128, 153);
+}
+
+/* #cfd2e1 */
+.common-colorPick[font-colro=Grnd] {
+  color: rgb(207, 210, 225);
+}
+
+.common-colorGrnd {
+  color: rgb(207, 210, 225);
+}
+
+.common-card[card-color=grnd] {
+  color: rgb(207, 210, 225);
+  border: 2px solid rgb(207, 210, 225);
+  background: rgb(207, 210, 225);
+}
+
+/* #7A8099 */
+.common-colorPick[font-colro=Line] {
+  color: rgb(122, 128, 153);
+}
+
+.common-colorLine {
+  color: rgb(122, 128, 153);
+}
+
+.common-card[card-color=line] {
+  color: rgb(122, 128, 153);
+  border: 2px solid rgb(122, 128, 153);
+  background: rgb(122, 128, 153);
+}
+
+/* #000278 */
+.common-colorPick[font-colro=pstv] {
+  color: rgb(0, 2, 120);
+}
+
+.common-colorPstv {
+  color: rgb(0, 2, 120);
+}
+
+.common-card[card-color=pstv] {
+  color: rgb(0, 2, 120);
+  border: 2px solid rgb(0, 2, 120);
+  background: rgb(0, 2, 120);
+}
+
+/* #009600 */
+.common-colorPick[font-colro=allw] {
+  color: rgb(0, 150, 0);
+}
+
+.common-colorAllw {
+  color: rgb(0, 150, 0);
+}
+
+.common-card[card-color=allw] {
+  color: rgb(0, 150, 0);
+  border: 2px solid rgb(0, 150, 0);
+  background: rgb(0, 150, 0);
+}
+
+/* #039a00 */
+.common-colorPick[font-colro=prog] {
+  color: rgb(3, 154, 0);
+}
+
+.common-colorProg {
+  color: rgb(3, 154, 0);
+}
+
+.common-card[card-color=prog] {
+  color: rgb(3, 154, 0);
+  border: 2px solid rgb(3, 154, 0);
+  background: rgb(3, 154, 0);
+}
+
+/* #374B9B */
+.common-colorPick[font-colro=ntce] {
+  color: rgb(55, 75, 155);
+}
+
+.common-colorNtce {
+  color: rgb(55, 75, 155);
+}
+
+.common-card[card-color=ntce] {
+  color: rgb(55, 75, 155);
+  border: 2px solid rgb(55, 75, 155);
+  background: rgb(55, 75, 155);
+}
+
+/* #d4ad00 */
+.common-colorPick[font-colro=hold] {
+  color: rgb(212, 173, 0);
+}
+
+.common-colorHold {
+  color: rgb(212, 173, 0);
+}
+
+.common-card[card-color=hold] {
+  color: rgb(212, 173, 0);
+  border: 2px solid rgb(212, 173, 0);
+  background: rgb(212, 173, 0);
+}
+
+/* #FF7415 */
+.common-colorPick[font-colro=cncl] {
+  color: rgb(255, 116, 21);
+}
+
+.common-colorCncl {
+  color: rgb(255, 116, 21);
+}
+
+.common-card[card-color=cncl] {
+  color: rgb(255, 116, 21);
+  border: 2px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+}
+
+/* #FF7415 */
+.common-colorPick[font-colro=warn] {
+  color: rgb(255, 116, 21);
+}
+
+.common-colorWarn {
+  color: rgb(255, 116, 21);
+}
+
+.common-card[card-color=warn] {
+  color: rgb(255, 116, 21);
+  border: 2px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+}
+
+/* #ce2727 */
+.common-colorPick[font-colro=errr] {
+  color: rgb(206, 39, 39);
+}
+
+.common-colorErrr {
+  color: rgb(206, 39, 39);
+}
+
+.common-card[card-color=errr] {
+  color: rgb(206, 39, 39);
+  border: 2px solid rgb(206, 39, 39);
+  background: rgb(206, 39, 39);
+}
+
+/* #780000 */
+.common-colorPick[font-colro=ngtv] {
+  color: rgb(120, 0, 0);
+}
+
+.common-colorNgtv {
+  color: rgb(120, 0, 0);
+}
+
+.common-card[card-color=ngtv] {
+  color: rgb(120, 0, 0);
+  border: 2px solid rgb(120, 0, 0);
+  background: rgb(120, 0, 0);
+}
+
+/* #000000 */
+.common-colorPick[font-colro=blck] {
+  color: rgb(0, 0, 0);
+}
+
+.common-colorBlck {
+  color: rgb(0, 0, 0);
+}
+
+.common-card[card-color=blck] {
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  background: rgb(0, 0, 0);
+}
+
+/* #ffffff */
+.common-colorPick[font-colro=whit] {
+  color: rgb(255, 255, 255);
+}
+
+.common-colorWhit {
+  color: rgb(255, 255, 255);
+}
+
+.common-card[card-color=whit] {
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
+}
+
+/* #636363 */
+.common-colorPick[font-colro=diss] {
+  color: rgb(100, 100, 100);
+}
+
+.common-colorDiss {
+  color: rgb(100, 100, 100);
+}
+
+.common-card[card-color=diss] {
+  color: rgb(100, 100, 100);
+  border: 2px solid rgb(100, 100, 100);
+  background: rgb(100, 100, 100);
+}
+
+/* #e6e6e6 */
+.common-colorPick[font-colro=gy23] {
+  color: rgb(230, 230, 230);
+}
+
+.common-colorGy23 {
+  color: rgb(230, 230, 230);
+}
+
+.common-card[card-color=gy23] {
+  color: rgb(230, 230, 230);
+  border: 2px solid rgb(230, 230, 230);
+  background: rgb(230, 230, 230);
+}
+
+/* #bebebe */
+.common-colorPick[font-colro=gy19] {
+  color: rgb(190, 190, 190);
+}
+
+.common-colorGy19 {
+  color: rgb(190, 190, 190);
+}
+
+.common-card[card-color=gy19] {
+  color: rgb(190, 190, 190);
+  border: 2px solid rgb(190, 190, 190);
+  background: rgb(190, 190, 190);
+}
+
+/* #969696 */
+.common-colorPick[font-colro=gy15] {
+  color: rgb(150, 150, 150);
+}
+
+.common-colorGy15 {
+  color: rgb(150, 150, 150);
+}
+
+.common-card[card-color=gy15] {
+  color: rgb(150, 150, 150);
+  border: 2px solid rgb(150, 150, 150);
+  background: rgb(150, 150, 150);
+}
+
+/* #808080 */
+.common-colorPick[font-colro=gy12] {
+  color: rgb(128, 128, 128);
+}
+
+.common-colorGy12 {
+  color: rgb(128, 128, 128);
+}
+
+.common-card[card-color=gy12] {
+  color: rgb(128, 128, 128);
+  border: 2px solid rgb(128, 128, 128);
+  background: rgb(128, 128, 128);
+}
+
+/* #646464 */
+.common-colorPick[font-colro=gy10] {
+  color: rgb(100, 100, 100);
+}
+
+.common-colorGy10 {
+  color: rgb(100, 100, 100);
+}
+
+.common-card[card-color=gy10] {
+  color: rgb(100, 100, 100);
+  border: 2px solid rgb(100, 100, 100);
+  background: rgb(100, 100, 100);
+}
+
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+.common-displayIn {
+  display: inline-block;
+}
+
+.common-displayBk {
+  display: block;
+}
+
+.common-heightFull {
+  height: 100%;
+}
+
+.common-fonts08 {
+  font-size: 0.8em;
+}
+
+.common-fonts09 {
+  font-size: 0.9em;
+}
+
+.common-fonts10 {
+  font-size: 1em;
+}
+
+.common-fonts11 {
+  font-size: 1.1em;
+}
+
+.common-fonts12 {
+  font-size: 1.2em;
+}
+
+.common-fonts14 {
+  font-size: 1.4em;
+}
+
+.common-fonts30 {
+  font-size: 3em;
+}
+
+.common-fontwN {
+  font-weight: normal;
+}
+
+.common-fontwB {
+  font-weight: bold;
+}
+
+.common-fonth12 {
+  line-height: 1.2;
+}
+
+.common-fonth14 {
+  line-height: 1.4;
+}
+
+.common-fonth16 {
+  line-height: 1.6;
+}
+
+.common-alignC {
+  text-align: center;
+}
+
+.common-alignR {
+  text-align: right;
+}
+
+.common-alignL {
+  text-align: left;
+}
+
+.common-verticalM {
+  vertical-align: middle;
+}
+
+.common-boxsizeB {
+  box-sizing: border-box;
+}
+
+.common-boxsizeC {
+  box-sizing: content-box;
+}
+
+.common-overflowX {
+  overflow-x: auto;
+}
+
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+.common-mar03 {
+  margin: 0.3em;
+}
+
+.common-mar04 {
+  margin: 0.4em;
+}
+
+.common-mar05 {
+  margin: 0.5em;
+}
+
+.common-mar06 {
+  margin: 0.6em;
+}
+
+.common-mar08 {
+  margin: 0.8em;
+}
+
+.common-mar10 {
+  margin: 1em;
+}
+
+.common-marZZ {
+  margin: 0em;
+}
+
+.common-marAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.common-marUpZZ {
+  margin-top: 0em;
+}
+
+.common-marUp02 {
+  margin-top: 0.2em;
+}
+
+.common-marUp04 {
+  margin-top: 0.4em;
+}
+
+.common-marUp05 {
+  margin-top: 0.5em;
+}
+
+.common-marUp06 {
+  margin-top: 0.6em;
+}
+
+.common-marUp08 {
+  margin-top: 0.8em;
+}
+
+.common-marUp10 {
+  margin-top: 1em;
+}
+
+.common-marUp20 {
+  margin-top: 2em;
+}
+
+.common-marUp40 {
+  margin-top: 4em;
+}
+
+.common-marUDZZ {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.common-marUD01 {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+.common-marUD02 {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.common-marUD03 {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.common-marUD04 {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.common-marUD05 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.common-marUD06 {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+.common-marUD08 {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+.common-marUD10 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.common-marUD20 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.common-marLRZZ {
+  margin-left: 0em;
+  margin-right: 0em;
+}
+
+.common-marLR03 {
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.common-marLR04 {
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+}
+
+.common-marLR06 {
+  margin-left: 0.6em;
+  margin-right: 0.6em;
+}
+
+.common-marLR08 {
+  margin-left: 0.8em;
+  margin-right: 0.8em;
+}
+
+.common-marLR10 {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.common-marLR20 {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.common-marDwZZ {
+  margin-bottom: 0em;
+}
+
+.common-marDw02 {
+  margin-bottom: 0.2em;
+}
+
+.common-marDw03 {
+  margin-bottom: 0.3em;
+}
+
+.common-marDw04 {
+  margin-bottom: 0.4em;
+}
+
+.common-marDw08 {
+  margin-bottom: 0.8em;
+}
+
+.common-marDw10 {
+  margin-bottom: 1em;
+}
+
+.common-marDw20 {
+  margin-bottom: 2em;
+}
+
+.common-marLtZZ {
+  margin-left: 0em;
+}
+
+.common-marLt02 {
+  margin-left: 0.2em;
+}
+
+.common-marLt03 {
+  margin-left: 0.3em;
+}
+
+.common-marLt04 {
+  margin-left: 0.4em;
+}
+
+.common-marLt05 {
+  margin-left: 0.5em;
+}
+
+.common-marLt08 {
+  margin-left: 0.8em;
+}
+
+.common-marLt10 {
+  margin-left: 1em;
+}
+
+.common-marLt12 {
+  margin-left: 1.2em;
+}
+
+.common-marLt20 {
+  margin-left: 2em;
+}
+
+.common-marRt03 {
+  margin-right: 0.3em;
+}
+
+.common-marRt10 {
+  margin-right: 1em;
+}
+
+/* ========================= */
+/* btns */
+/* ========================= */
 /*=================================*/
 /* table to center */
 /*=================================*/
@@ -35,11 +706,6 @@
     </div>
  */
 /* ============================== */
-.common-tbl-tab {
-  border-collapse: collapse;
-  white-space: nowrap;
-}
-
 .common-tbl-tab > tbody > tr > td {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
@@ -53,19 +719,22 @@
 .common-tbl-tab > tbody > tr > td[tab=space] {
   width: 90%;
   border: none;
-  padding: 0em 0.3em;
+  padding-top: 0em;
+  padding-bottom: 0em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
   text-align: right;
 }
 
 .common-tbl-tab > tbody > tr > td[tab=tab] {
-  color: white;
+  color: rgb(255, 255, 255);
   border-radius: 3em;
-  background-color: rgb(2, 6, 84);
+  background: rgb(2, 6, 84);
 }
 
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
 .common-tbl-tab > tbody > tr > td[tab=tab]:active {
-  background-color: rgba(2, 6, 84, 0.3);
+  background: rgb(2, 6, 84);
 }
 
 /* ============================== */
@@ -79,7 +748,6 @@
 /* common-tbl-normal */
 /* ============================== */
 .common-tbl-normal {
-  border-collapse: collapse;
   line-height: 1.6;
 }
 
@@ -88,8 +756,7 @@
 .common-tbl-normal > tfoot > tr > th,
 .common-tbl-normal > tfoot > tr > td {
   padding: 0.4em;
-  background-color: #e9ecef;
-  white-space: nowrap;
+  background: rgb(207, 210, 225);
   text-align: center;
   font-weight: bold;
 }
@@ -104,23 +771,23 @@
     class="common-tbl-normal" tbl-type=noborder
 */
 .common-tbl-normal[tbl-type=normal] {
-  border: 1px solid #dee2e6;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=normal] > thead > tr > th {
-  border: 1px solid #dee2e6;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=normal] > tbody > tr > th {
-  border: 1px solid #dee2e6;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=normal] > tbody > tr > td {
-  border: 1px solid #dee2e6;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=normal] > tfoot > tr > td {
-  border: 1px solid #dee2e6;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=noborder] {
@@ -144,68 +811,68 @@
 }
 
 .common-tbl-normal[tbl-type=rowborder] {
-  border-top: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid rgb(122, 128, 153);
+  border-bottom: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=rowborder] > thead > tr > th {
-  border-top: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid rgb(122, 128, 153);
+  border-bottom: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=rowborder] > tbody > tr > th {
-  border-top: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid rgb(122, 128, 153);
+  border-bottom: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=rowborder] > tbody > tr > td {
-  border-top: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid rgb(122, 128, 153);
+  border-bottom: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=rowborder] > tfoot > tr > td {
-  border-top: 1px solid #dee2e6;
-  border-bottom: 1px solid #dee2e6;
+  border-top: 1px solid rgb(122, 128, 153);
+  border-bottom: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=colborder] > thead > tr > th {
-  border-left: 1px solid #dee2e6;
-  border-right: 1px solid #dee2e6;
+  border-left: 1px solid rgb(122, 128, 153);
+  border-right: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-child(1) {
   border-left: none;
-  border-right: 1px solid #dee2e6;
+  border-right: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-last-child(1) {
-  border-left: 1px solid #dee2e6;
+  border-left: 1px solid rgb(122, 128, 153);
   border-right: none;
 }
 
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > th {
-  border-left: 1px solid #dee2e6;
-  border-right: 1px solid #dee2e6;
+  border-left: 1px solid rgb(122, 128, 153);
+  border-right: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > td {
-  border-left: 1px solid #dee2e6;
-  border-right: 1px solid #dee2e6;
+  border-left: 1px solid rgb(122, 128, 153);
+  border-right: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1) {
   border-left: none;
-  border-right: 1px solid #dee2e6;
+  border-right: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1) {
-  border-left: 1px solid #dee2e6;
+  border-left: 1px solid rgb(122, 128, 153);
   border-right: none;
 }
 
 .common-tbl-normal[tbl-type=colborder] > tfoot > tr > td {
-  border-left: 1px solid #dee2e6;
-  border-right: 1px solid #dee2e6;
+  border-left: 1px solid rgb(122, 128, 153);
+  border-right: 1px solid rgb(122, 128, 153);
 }
 
 /* ============================== */
@@ -217,14 +884,12 @@
   margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
-  border-collapse: collapse;
 }
 
 .common-tbl-slideformFooterBtn > thead > tr > th,
 .common-tbl-slideformFooterBtn > tbody > tr > th {
   padding: 0em;
-  background-color: #e9ecef;
-  white-space: nowrap;
+  background: rgb(207, 210, 225);
   text-align: center;
 }
 
@@ -294,8 +959,6 @@
 /* ============================== */
 .common-tbl-vertical {
   text-align: center;
-  border-collapse: collapse;
-  white-space: nowrap;
   line-height: 1.4;
 }
 
@@ -306,12 +969,12 @@
 }
 
 .common-tbl-vertical[tbl-type=normal] {
-  border: 1px solid #dee2e6;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=normal] > tbody > tr > th {
-  background-color: #e9ecef;
-  border: 1px solid #dee2e6;
+  background: rgb(207, 210, 225);
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=normal] > tbody > tr > th {
@@ -323,17 +986,16 @@
 .common-tbl-vertical[tbl-type=normal] > tbody > tr > td {
   width: 95%;
   text-align: left;
-  border: 1px solid #dee2e6;
-  white-space: normal;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=minimal] {
-  border: 1px solid #dee2e6;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=minimal] > tbody > tr > th {
-  background-color: #e9ecef;
-  border: 1px solid #dee2e6;
+  background: rgb(207, 210, 225);
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=minimal] > tbody > tr > th {
@@ -345,16 +1007,11 @@
 .common-tbl-vertical[tbl-type=minimal] > tbody > tr > td {
   width: 95%;
   text-align: left;
-  border: 1px solid #dee2e6;
-  white-space: normal;
+  border: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=noborder] {
   border: none;
-}
-
-.common-tbl-vertical[tbl-type=noborder] > thead > tr > th {
-  background-color: rgba(0, 0, 0, 0);
 }
 
 .common-tbl-vertical[tbl-type=noborder] > tbody > tr > th {
@@ -368,7 +1025,6 @@
   width: 95%;
   text-align: left;
   border: none;
-  white-space: normal;
 }
 
 .common-tbl-vertical[tbl-type=rowborder] {
@@ -376,7 +1032,6 @@
 }
 
 .common-tbl-vertical[tbl-type=rowborder] > thead > tr > th {
-  background-color: rgba(0, 0, 0, 0);
   border: none;
 }
 
@@ -391,15 +1046,14 @@
   width: 95%;
   text-align: left;
   border: none;
-  white-space: normal;
 }
 
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th {
-  border-top: 1px solid rgb(220, 220, 220);
+  border-top: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td {
-  border-top: 1px solid rgb(220, 220, 220);
+  border-top: 1px solid rgb(122, 128, 153);
 }
 
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th {
@@ -439,5 +1093,5 @@
 
 .common-tbl-type > tbody > tr > td {
   font-size: 0.9em;
-  color: rgb(100, 100, 100);
+  color: rgb(122, 128, 153);
 }

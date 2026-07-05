@@ -1,10 +1,694 @@
 @charset "UTF-8";
-/* 메인색상 */
-/* 상태색상 */
-/* ------ */
-/* margin */
-/* ------ */
-/* mixin */
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* #020654 */
+.common-colorPick[font-colro=Main] {
+  color: rgb(2, 6, 84);
+}
+
+.common-colorMain {
+  color: rgb(2, 6, 84);
+}
+
+.common-card[card-color=main] {
+  color: rgb(2, 6, 84);
+  border: 2px solid rgb(2, 6, 84);
+  background: rgb(2, 6, 84);
+}
+
+/* #1B2A6B */
+.common-colorPick[font-colro=Head] {
+  color: rgb(27, 42, 107);
+}
+
+.common-colorHead {
+  color: rgb(27, 42, 107);
+}
+
+.common-card[card-color=head] {
+  color: rgb(27, 42, 107);
+  border: 2px solid rgb(27, 42, 107);
+  background: rgb(27, 42, 107);
+}
+
+/* #3D6BF5 */
+.common-colorPick[font-colro=Side] {
+  color: rgb(61, 107, 245);
+}
+
+.common-colorSide {
+  color: rgb(61, 107, 245);
+}
+
+.common-card[card-color=side] {
+  color: rgb(61, 107, 245);
+  border: 2px solid rgb(61, 107, 245);
+  background: rgb(61, 107, 245);
+}
+
+/* #7A8099 */
+.common-colorPick[font-colro=Body] {
+  color: rgb(122, 128, 153);
+}
+
+.common-colorBody {
+  color: rgb(122, 128, 153);
+}
+
+.common-card[card-color=body] {
+  color: rgb(122, 128, 153);
+  border: 2px solid rgb(122, 128, 153);
+  background: rgb(122, 128, 153);
+}
+
+/* #cfd2e1 */
+.common-colorPick[font-colro=Grnd] {
+  color: rgb(207, 210, 225);
+}
+
+.common-colorGrnd {
+  color: rgb(207, 210, 225);
+}
+
+.common-card[card-color=grnd] {
+  color: rgb(207, 210, 225);
+  border: 2px solid rgb(207, 210, 225);
+  background: rgb(207, 210, 225);
+}
+
+/* #7A8099 */
+.common-colorPick[font-colro=Line] {
+  color: rgb(122, 128, 153);
+}
+
+.common-colorLine {
+  color: rgb(122, 128, 153);
+}
+
+.common-card[card-color=line] {
+  color: rgb(122, 128, 153);
+  border: 2px solid rgb(122, 128, 153);
+  background: rgb(122, 128, 153);
+}
+
+/* #000278 */
+.common-colorPick[font-colro=pstv] {
+  color: rgb(0, 2, 120);
+}
+
+.common-colorPstv {
+  color: rgb(0, 2, 120);
+}
+
+.common-card[card-color=pstv] {
+  color: rgb(0, 2, 120);
+  border: 2px solid rgb(0, 2, 120);
+  background: rgb(0, 2, 120);
+}
+
+/* #009600 */
+.common-colorPick[font-colro=allw] {
+  color: rgb(0, 150, 0);
+}
+
+.common-colorAllw {
+  color: rgb(0, 150, 0);
+}
+
+.common-card[card-color=allw] {
+  color: rgb(0, 150, 0);
+  border: 2px solid rgb(0, 150, 0);
+  background: rgb(0, 150, 0);
+}
+
+/* #039a00 */
+.common-colorPick[font-colro=prog] {
+  color: rgb(3, 154, 0);
+}
+
+.common-colorProg {
+  color: rgb(3, 154, 0);
+}
+
+.common-card[card-color=prog] {
+  color: rgb(3, 154, 0);
+  border: 2px solid rgb(3, 154, 0);
+  background: rgb(3, 154, 0);
+}
+
+/* #374B9B */
+.common-colorPick[font-colro=ntce] {
+  color: rgb(55, 75, 155);
+}
+
+.common-colorNtce {
+  color: rgb(55, 75, 155);
+}
+
+.common-card[card-color=ntce] {
+  color: rgb(55, 75, 155);
+  border: 2px solid rgb(55, 75, 155);
+  background: rgb(55, 75, 155);
+}
+
+/* #d4ad00 */
+.common-colorPick[font-colro=hold] {
+  color: rgb(212, 173, 0);
+}
+
+.common-colorHold {
+  color: rgb(212, 173, 0);
+}
+
+.common-card[card-color=hold] {
+  color: rgb(212, 173, 0);
+  border: 2px solid rgb(212, 173, 0);
+  background: rgb(212, 173, 0);
+}
+
+/* #FF7415 */
+.common-colorPick[font-colro=cncl] {
+  color: rgb(255, 116, 21);
+}
+
+.common-colorCncl {
+  color: rgb(255, 116, 21);
+}
+
+.common-card[card-color=cncl] {
+  color: rgb(255, 116, 21);
+  border: 2px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+}
+
+/* #FF7415 */
+.common-colorPick[font-colro=warn] {
+  color: rgb(255, 116, 21);
+}
+
+.common-colorWarn {
+  color: rgb(255, 116, 21);
+}
+
+.common-card[card-color=warn] {
+  color: rgb(255, 116, 21);
+  border: 2px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+}
+
+/* #ce2727 */
+.common-colorPick[font-colro=errr] {
+  color: rgb(206, 39, 39);
+}
+
+.common-colorErrr {
+  color: rgb(206, 39, 39);
+}
+
+.common-card[card-color=errr] {
+  color: rgb(206, 39, 39);
+  border: 2px solid rgb(206, 39, 39);
+  background: rgb(206, 39, 39);
+}
+
+/* #780000 */
+.common-colorPick[font-colro=ngtv] {
+  color: rgb(120, 0, 0);
+}
+
+.common-colorNgtv {
+  color: rgb(120, 0, 0);
+}
+
+.common-card[card-color=ngtv] {
+  color: rgb(120, 0, 0);
+  border: 2px solid rgb(120, 0, 0);
+  background: rgb(120, 0, 0);
+}
+
+/* #000000 */
+.common-colorPick[font-colro=blck] {
+  color: rgb(0, 0, 0);
+}
+
+.common-colorBlck {
+  color: rgb(0, 0, 0);
+}
+
+.common-card[card-color=blck] {
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  background: rgb(0, 0, 0);
+}
+
+/* #ffffff */
+.common-colorPick[font-colro=whit] {
+  color: rgb(255, 255, 255);
+}
+
+.common-colorWhit {
+  color: rgb(255, 255, 255);
+}
+
+.common-card[card-color=whit] {
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
+}
+
+/* #636363 */
+.common-colorPick[font-colro=diss] {
+  color: rgb(100, 100, 100);
+}
+
+.common-colorDiss {
+  color: rgb(100, 100, 100);
+}
+
+.common-card[card-color=diss] {
+  color: rgb(100, 100, 100);
+  border: 2px solid rgb(100, 100, 100);
+  background: rgb(100, 100, 100);
+}
+
+/* #e6e6e6 */
+.common-colorPick[font-colro=gy23] {
+  color: rgb(230, 230, 230);
+}
+
+.common-colorGy23 {
+  color: rgb(230, 230, 230);
+}
+
+.common-card[card-color=gy23] {
+  color: rgb(230, 230, 230);
+  border: 2px solid rgb(230, 230, 230);
+  background: rgb(230, 230, 230);
+}
+
+/* #bebebe */
+.common-colorPick[font-colro=gy19] {
+  color: rgb(190, 190, 190);
+}
+
+.common-colorGy19 {
+  color: rgb(190, 190, 190);
+}
+
+.common-card[card-color=gy19] {
+  color: rgb(190, 190, 190);
+  border: 2px solid rgb(190, 190, 190);
+  background: rgb(190, 190, 190);
+}
+
+/* #969696 */
+.common-colorPick[font-colro=gy15] {
+  color: rgb(150, 150, 150);
+}
+
+.common-colorGy15 {
+  color: rgb(150, 150, 150);
+}
+
+.common-card[card-color=gy15] {
+  color: rgb(150, 150, 150);
+  border: 2px solid rgb(150, 150, 150);
+  background: rgb(150, 150, 150);
+}
+
+/* #808080 */
+.common-colorPick[font-colro=gy12] {
+  color: rgb(128, 128, 128);
+}
+
+.common-colorGy12 {
+  color: rgb(128, 128, 128);
+}
+
+.common-card[card-color=gy12] {
+  color: rgb(128, 128, 128);
+  border: 2px solid rgb(128, 128, 128);
+  background: rgb(128, 128, 128);
+}
+
+/* #646464 */
+.common-colorPick[font-colro=gy10] {
+  color: rgb(100, 100, 100);
+}
+
+.common-colorGy10 {
+  color: rgb(100, 100, 100);
+}
+
+.common-card[card-color=gy10] {
+  color: rgb(100, 100, 100);
+  border: 2px solid rgb(100, 100, 100);
+  background: rgb(100, 100, 100);
+}
+
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+.common-displayIn {
+  display: inline-block;
+}
+
+.common-displayBk {
+  display: block;
+}
+
+.common-heightFull {
+  height: 100%;
+}
+
+.common-fonts08 {
+  font-size: 0.8em;
+}
+
+.common-fonts09 {
+  font-size: 0.9em;
+}
+
+.common-fonts10 {
+  font-size: 1em;
+}
+
+.common-fonts11 {
+  font-size: 1.1em;
+}
+
+.common-fonts12 {
+  font-size: 1.2em;
+}
+
+.common-fonts14 {
+  font-size: 1.4em;
+}
+
+.common-fonts30 {
+  font-size: 3em;
+}
+
+.common-fontwN {
+  font-weight: normal;
+}
+
+.common-fontwB {
+  font-weight: bold;
+}
+
+.common-fonth12 {
+  line-height: 1.2;
+}
+
+.common-fonth14 {
+  line-height: 1.4;
+}
+
+.common-fonth16 {
+  line-height: 1.6;
+}
+
+.common-alignC {
+  text-align: center;
+}
+
+.common-alignR {
+  text-align: right;
+}
+
+.common-alignL {
+  text-align: left;
+}
+
+.common-verticalM {
+  vertical-align: middle;
+}
+
+.common-boxsizeB {
+  box-sizing: border-box;
+}
+
+.common-boxsizeC {
+  box-sizing: content-box;
+}
+
+.common-overflowX {
+  overflow-x: auto;
+}
+
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+.common-mar03 {
+  margin: 0.3em;
+}
+
+.common-mar04 {
+  margin: 0.4em;
+}
+
+.common-mar05 {
+  margin: 0.5em;
+}
+
+.common-mar06 {
+  margin: 0.6em;
+}
+
+.common-mar08 {
+  margin: 0.8em;
+}
+
+.common-mar10 {
+  margin: 1em;
+}
+
+.common-marZZ {
+  margin: 0em;
+}
+
+.common-marAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.common-marUpZZ {
+  margin-top: 0em;
+}
+
+.common-marUp02 {
+  margin-top: 0.2em;
+}
+
+.common-marUp04 {
+  margin-top: 0.4em;
+}
+
+.common-marUp05 {
+  margin-top: 0.5em;
+}
+
+.common-marUp06 {
+  margin-top: 0.6em;
+}
+
+.common-marUp08 {
+  margin-top: 0.8em;
+}
+
+.common-marUp10 {
+  margin-top: 1em;
+}
+
+.common-marUp20 {
+  margin-top: 2em;
+}
+
+.common-marUp40 {
+  margin-top: 4em;
+}
+
+.common-marUDZZ {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.common-marUD01 {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+.common-marUD02 {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.common-marUD03 {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.common-marUD04 {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.common-marUD05 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.common-marUD06 {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+.common-marUD08 {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+.common-marUD10 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.common-marUD20 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.common-marLRZZ {
+  margin-left: 0em;
+  margin-right: 0em;
+}
+
+.common-marLR03 {
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.common-marLR04 {
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+}
+
+.common-marLR06 {
+  margin-left: 0.6em;
+  margin-right: 0.6em;
+}
+
+.common-marLR08 {
+  margin-left: 0.8em;
+  margin-right: 0.8em;
+}
+
+.common-marLR10 {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.common-marLR20 {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.common-marDwZZ {
+  margin-bottom: 0em;
+}
+
+.common-marDw02 {
+  margin-bottom: 0.2em;
+}
+
+.common-marDw03 {
+  margin-bottom: 0.3em;
+}
+
+.common-marDw04 {
+  margin-bottom: 0.4em;
+}
+
+.common-marDw08 {
+  margin-bottom: 0.8em;
+}
+
+.common-marDw10 {
+  margin-bottom: 1em;
+}
+
+.common-marDw20 {
+  margin-bottom: 2em;
+}
+
+.common-marLtZZ {
+  margin-left: 0em;
+}
+
+.common-marLt02 {
+  margin-left: 0.2em;
+}
+
+.common-marLt03 {
+  margin-left: 0.3em;
+}
+
+.common-marLt04 {
+  margin-left: 0.4em;
+}
+
+.common-marLt05 {
+  margin-left: 0.5em;
+}
+
+.common-marLt08 {
+  margin-left: 0.8em;
+}
+
+.common-marLt10 {
+  margin-left: 1em;
+}
+
+.common-marLt12 {
+  margin-left: 1.2em;
+}
+
+.common-marLt20 {
+  margin-left: 2em;
+}
+
+.common-marRt03 {
+  margin-right: 0.3em;
+}
+
+.common-marRt10 {
+  margin-right: 1em;
+}
+
+/* ========================= */
+/* btns */
+/* ========================= */
+/* --------------- */
+/* margin, padding */
+/* --------------- */
+.common-block {
+  display: block;
+  line-height: 1.6;
+}
+
+.common-inline {
+  display: inline-block;
+  line-height: 1.6;
+}
+
 .common-indent04 {
   display: block;
   padding-left: 0.4em;
@@ -20,37 +704,20 @@
   padding-left: 1.2em;
 }
 
-.common-marginUp10 {
+.common-marUD {
   display: block;
-  margin-top: 1em;
-}
-
-.common-marginUp08 {
-  display: block;
-  margin-top: 0.8em;
-}
-
-.common-marginUp {
-  display: block;
-  margin-top: 0.4em;
-}
-
-.common-marginUD {
-  display: block;
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
   margin-top: 0.4em;
   margin-bottom: 0.4em;
 }
 
-.common-paddingUD {
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+.common-marUp {
+  display: block;
+  margin-top: 0.4em;
 }
 
-.common-cushion {
-  display: block;
-  margin: 0.6em;
+.common-padUD {
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
 }
 
 .common-cushionUp {
@@ -69,210 +736,40 @@
   margin-bottom: 0.4em;
 }
 
-/* 모든 태그에 적용이 가능한 클래스 모음 */
+/* --------------- */
+/* font style */
+/* --------------- */
 .common-strong {
   font-weight: bold;
   font-size: 1.1em;
 }
 
-.common-textCenter {
-  text-align: center;
+.common-mineHead[me=y] {
+  background: rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }
 
-.common-blockCenter {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-.common-alignC {
-  text-align: center;
-}
-
-.common-alignR {
-  text-align: right;
-}
-
-.common-alignL {
-  text-align: left;
-}
-
-.common-fontLight {
-  color: #666;
-  font-weight: normal;
-}
-
-/* ============================== */
-/* 색칠 */
-/* ============================== */
-.common-bgcolorGray {
-  background-color: rgba(2, 6, 84, 0.2);
-}
-
-.common-bgcolorSign04 {
-  background-color: rgba(2, 6, 84, 0.4);
-}
-
-/* ============================== */
-/* 쿠션 */
-/* ============================== */
-.common-block {
-  display: block;
-  line-height: 1.6;
-}
-
-.common-inlineBlock {
-  display: inline-block;
-  line-height: 1.6;
-}
-
-/* ============================== */
-/* fixed 고정 TAG */
-/* ============================== */
-.common-fixedTopRight {
-  display: inline-block;
-  position: fixed;
-  top: 0.5em;
-  right: 0.5em;
-}
-
-.common-announce {
-  display: block;
-  padding: 0.4em;
-  text-align: left;
-  line-height: 1.4;
-  background-color: #ddd;
-}
-
-/* ============================== */
-/* 글자크기 */
-/* ============================== */
-.common-fontsize08 {
-  font-size: 0.8em;
-}
-
-.common-fontsize09 {
-  font-size: 0.9em;
-}
-
-.common-fontsize11 {
-  font-size: 1.1em;
-}
-
-.common-fontsize12 {
-  font-size: 1.2em;
-}
-
-.common-bold {
+.common-mineBody[me=y] {
   font-weight: bold;
+  color: rgb(2, 6, 84);
 }
 
-.common-colorWarn {
-  color: rgb(255, 116, 21);
-}
-
-.common-colorPstv {
-  color: rgb(0, 128, 0);
-}
-
-.common-colorNgtv {
-  color: rgb(255, 0, 0);
-}
-
-.common-colorGrey {
-  color: rgb(128, 128, 128);
-}
-
-.common-colorGray {
-  color: rgb(128, 128, 128);
-}
-
-.common-font[font-color=hold] {
-  color: rgb(212, 173, 0);
-  border: none;
-  background-color: none;
-}
-
-.common-font[font-color=prog] {
-  color: rgb(3, 154, 0);
-  border: none;
-  background-color: none;
-}
-
-.common-font[font-color=pstv] {
-  color: rgb(0, 2, 120);
-  border: none;
-  background-color: none;
-}
-
-.common-font[font-color=ngtv] {
-  color: rgb(120, 0, 0);
-  border: none;
-  background-color: none;
-}
-
+/* --------------- */
+/* common-card */
+/* --------------- */
 .common-card {
   display: inline-block;
   font-weight: normal;
-  padding: 0.3em 0.6em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
 }
 
-.common-card[card-color=hold] {
-  color: rgb(212, 173, 0);
-  border: 2px solid rgb(212, 173, 0);
-  background-color: rgba(212, 173, 0, 0.3);
-}
-
-.common-card[card-color=prog] {
-  color: rgb(3, 154, 0);
-  border: 2px solid rgb(3, 154, 0);
-  background-color: rgba(3, 154, 0, 0.3);
-}
-
-.common-card[card-color=pstv] {
-  color: rgb(0, 2, 120);
-  border: 2px solid rgb(0, 2, 120);
-  background-color: rgba(0, 2, 120, 0.3);
-}
-
-.common-card[card-color=ngtv] {
-  color: rgb(120, 0, 0);
-  border: 2px solid rgb(120, 0, 0);
-  background-color: rgba(120, 0, 0, 0.3);
-}
-
-.common-positionAbsUR {
+/* --------------- */
+/* 고정 */
+/* --------------- */
+.common-absoluteUR {
   position: absolute;
   top: 0.5em;
   right: 0.5em;
-}
-
-.common-me[me=y] {
-  background-color: rgba(2, 6, 84, 0.1);
-}
-
-.common-span-me[me=y] {
-  font-weight: bold;
-  color: rgb(2, 6, 84);
-}
-
-.tag-color-sign {
-  color: rgb(27, 42, 107);
-}
-
-.tag-color-cornflowerBlue {
-  color: #8898CC;
-}
-
-.tag-color-gray {
-  color: #7A8099;
-}
-
-.common-color-main {
-  color: rgb(2, 6, 84);
-}
-
-.common-color-body {
-  color: #7A8099;
 }

@@ -184,9 +184,9 @@ div { @include displayBk; }
     @include displayBk;
     width: 15em;
     max-width: 80%;
-    @include marUp07;
+    @include marUp06;
     @include marAuto;
-    @include pad07;
+    @include pad06;
 }
 
 /* ============================== */
@@ -401,6 +401,6 @@ div { @include displayBk; }
     @include marLt03;
 }
 .common-div-calendarSquareWeekTop > button:nth-child(1) {  @include marLtZZ; }
-/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { @include colorGy23BackTrans; @include colorGy15Font; border: 2px solid $colorGy20; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { @include colorGy23BackTrans; @include colorGy15Font; border: 2px solid $colorGy19; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                              @include colorMainFont; border: 2px solid $colorMain; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                              @include colorGy10Font; border: 2px solid $colorGy23; }

@@ -1,4 +1,681 @@
 @charset "UTF-8";
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* #020654 */
+.common-colorPick[font-colro=Main] {
+  color: rgb(2, 6, 84);
+}
+
+.common-colorMain {
+  color: rgb(2, 6, 84);
+}
+
+.common-card[card-color=main] {
+  color: rgb(2, 6, 84);
+  border: 2px solid rgb(2, 6, 84);
+  background: rgb(2, 6, 84);
+}
+
+/* #1B2A6B */
+.common-colorPick[font-colro=Head] {
+  color: rgb(27, 42, 107);
+}
+
+.common-colorHead {
+  color: rgb(27, 42, 107);
+}
+
+.common-card[card-color=head] {
+  color: rgb(27, 42, 107);
+  border: 2px solid rgb(27, 42, 107);
+  background: rgb(27, 42, 107);
+}
+
+/* #3D6BF5 */
+.common-colorPick[font-colro=Side] {
+  color: rgb(61, 107, 245);
+}
+
+.common-colorSide {
+  color: rgb(61, 107, 245);
+}
+
+.common-card[card-color=side] {
+  color: rgb(61, 107, 245);
+  border: 2px solid rgb(61, 107, 245);
+  background: rgb(61, 107, 245);
+}
+
+/* #7A8099 */
+.common-colorPick[font-colro=Body] {
+  color: rgb(122, 128, 153);
+}
+
+.common-colorBody {
+  color: rgb(122, 128, 153);
+}
+
+.common-card[card-color=body] {
+  color: rgb(122, 128, 153);
+  border: 2px solid rgb(122, 128, 153);
+  background: rgb(122, 128, 153);
+}
+
+/* #cfd2e1 */
+.common-colorPick[font-colro=Grnd] {
+  color: rgb(207, 210, 225);
+}
+
+.common-colorGrnd {
+  color: rgb(207, 210, 225);
+}
+
+.common-card[card-color=grnd] {
+  color: rgb(207, 210, 225);
+  border: 2px solid rgb(207, 210, 225);
+  background: rgb(207, 210, 225);
+}
+
+/* #7A8099 */
+.common-colorPick[font-colro=Line] {
+  color: rgb(122, 128, 153);
+}
+
+.common-colorLine {
+  color: rgb(122, 128, 153);
+}
+
+.common-card[card-color=line] {
+  color: rgb(122, 128, 153);
+  border: 2px solid rgb(122, 128, 153);
+  background: rgb(122, 128, 153);
+}
+
+/* #000278 */
+.common-colorPick[font-colro=pstv] {
+  color: rgb(0, 2, 120);
+}
+
+.common-colorPstv {
+  color: rgb(0, 2, 120);
+}
+
+.common-card[card-color=pstv] {
+  color: rgb(0, 2, 120);
+  border: 2px solid rgb(0, 2, 120);
+  background: rgb(0, 2, 120);
+}
+
+/* #009600 */
+.common-colorPick[font-colro=allw] {
+  color: rgb(0, 150, 0);
+}
+
+.common-colorAllw {
+  color: rgb(0, 150, 0);
+}
+
+.common-card[card-color=allw] {
+  color: rgb(0, 150, 0);
+  border: 2px solid rgb(0, 150, 0);
+  background: rgb(0, 150, 0);
+}
+
+/* #039a00 */
+.common-colorPick[font-colro=prog] {
+  color: rgb(3, 154, 0);
+}
+
+.common-colorProg {
+  color: rgb(3, 154, 0);
+}
+
+.common-card[card-color=prog] {
+  color: rgb(3, 154, 0);
+  border: 2px solid rgb(3, 154, 0);
+  background: rgb(3, 154, 0);
+}
+
+/* #374B9B */
+.common-colorPick[font-colro=ntce] {
+  color: rgb(55, 75, 155);
+}
+
+.common-colorNtce {
+  color: rgb(55, 75, 155);
+}
+
+.common-card[card-color=ntce] {
+  color: rgb(55, 75, 155);
+  border: 2px solid rgb(55, 75, 155);
+  background: rgb(55, 75, 155);
+}
+
+/* #d4ad00 */
+.common-colorPick[font-colro=hold] {
+  color: rgb(212, 173, 0);
+}
+
+.common-colorHold {
+  color: rgb(212, 173, 0);
+}
+
+.common-card[card-color=hold] {
+  color: rgb(212, 173, 0);
+  border: 2px solid rgb(212, 173, 0);
+  background: rgb(212, 173, 0);
+}
+
+/* #FF7415 */
+.common-colorPick[font-colro=cncl] {
+  color: rgb(255, 116, 21);
+}
+
+.common-colorCncl {
+  color: rgb(255, 116, 21);
+}
+
+.common-card[card-color=cncl] {
+  color: rgb(255, 116, 21);
+  border: 2px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+}
+
+/* #FF7415 */
+.common-colorPick[font-colro=warn] {
+  color: rgb(255, 116, 21);
+}
+
+.common-colorWarn {
+  color: rgb(255, 116, 21);
+}
+
+.common-card[card-color=warn] {
+  color: rgb(255, 116, 21);
+  border: 2px solid rgb(255, 116, 21);
+  background: rgb(255, 116, 21);
+}
+
+/* #ce2727 */
+.common-colorPick[font-colro=errr] {
+  color: rgb(206, 39, 39);
+}
+
+.common-colorErrr {
+  color: rgb(206, 39, 39);
+}
+
+.common-card[card-color=errr] {
+  color: rgb(206, 39, 39);
+  border: 2px solid rgb(206, 39, 39);
+  background: rgb(206, 39, 39);
+}
+
+/* #780000 */
+.common-colorPick[font-colro=ngtv] {
+  color: rgb(120, 0, 0);
+}
+
+.common-colorNgtv {
+  color: rgb(120, 0, 0);
+}
+
+.common-card[card-color=ngtv] {
+  color: rgb(120, 0, 0);
+  border: 2px solid rgb(120, 0, 0);
+  background: rgb(120, 0, 0);
+}
+
+/* #000000 */
+.common-colorPick[font-colro=blck] {
+  color: rgb(0, 0, 0);
+}
+
+.common-colorBlck {
+  color: rgb(0, 0, 0);
+}
+
+.common-card[card-color=blck] {
+  color: rgb(0, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  background: rgb(0, 0, 0);
+}
+
+/* #ffffff */
+.common-colorPick[font-colro=whit] {
+  color: rgb(255, 255, 255);
+}
+
+.common-colorWhit {
+  color: rgb(255, 255, 255);
+}
+
+.common-card[card-color=whit] {
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  background: rgb(255, 255, 255);
+}
+
+/* #636363 */
+.common-colorPick[font-colro=diss] {
+  color: rgb(100, 100, 100);
+}
+
+.common-colorDiss {
+  color: rgb(100, 100, 100);
+}
+
+.common-card[card-color=diss] {
+  color: rgb(100, 100, 100);
+  border: 2px solid rgb(100, 100, 100);
+  background: rgb(100, 100, 100);
+}
+
+/* #e6e6e6 */
+.common-colorPick[font-colro=gy23] {
+  color: rgb(230, 230, 230);
+}
+
+.common-colorGy23 {
+  color: rgb(230, 230, 230);
+}
+
+.common-card[card-color=gy23] {
+  color: rgb(230, 230, 230);
+  border: 2px solid rgb(230, 230, 230);
+  background: rgb(230, 230, 230);
+}
+
+/* #bebebe */
+.common-colorPick[font-colro=gy19] {
+  color: rgb(190, 190, 190);
+}
+
+.common-colorGy19 {
+  color: rgb(190, 190, 190);
+}
+
+.common-card[card-color=gy19] {
+  color: rgb(190, 190, 190);
+  border: 2px solid rgb(190, 190, 190);
+  background: rgb(190, 190, 190);
+}
+
+/* #969696 */
+.common-colorPick[font-colro=gy15] {
+  color: rgb(150, 150, 150);
+}
+
+.common-colorGy15 {
+  color: rgb(150, 150, 150);
+}
+
+.common-card[card-color=gy15] {
+  color: rgb(150, 150, 150);
+  border: 2px solid rgb(150, 150, 150);
+  background: rgb(150, 150, 150);
+}
+
+/* #808080 */
+.common-colorPick[font-colro=gy12] {
+  color: rgb(128, 128, 128);
+}
+
+.common-colorGy12 {
+  color: rgb(128, 128, 128);
+}
+
+.common-card[card-color=gy12] {
+  color: rgb(128, 128, 128);
+  border: 2px solid rgb(128, 128, 128);
+  background: rgb(128, 128, 128);
+}
+
+/* #646464 */
+.common-colorPick[font-colro=gy10] {
+  color: rgb(100, 100, 100);
+}
+
+.common-colorGy10 {
+  color: rgb(100, 100, 100);
+}
+
+.common-card[card-color=gy10] {
+  color: rgb(100, 100, 100);
+  border: 2px solid rgb(100, 100, 100);
+  background: rgb(100, 100, 100);
+}
+
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+.common-displayIn {
+  display: inline-block;
+}
+
+.common-displayBk {
+  display: block;
+}
+
+.common-heightFull {
+  height: 100%;
+}
+
+.common-fonts08 {
+  font-size: 0.8em;
+}
+
+.common-fonts09 {
+  font-size: 0.9em;
+}
+
+.common-fonts10 {
+  font-size: 1em;
+}
+
+.common-fonts11 {
+  font-size: 1.1em;
+}
+
+.common-fonts12 {
+  font-size: 1.2em;
+}
+
+.common-fonts14 {
+  font-size: 1.4em;
+}
+
+.common-fonts30 {
+  font-size: 3em;
+}
+
+.common-fontwN {
+  font-weight: normal;
+}
+
+.common-fontwB {
+  font-weight: bold;
+}
+
+.common-fonth12 {
+  line-height: 1.2;
+}
+
+.common-fonth14 {
+  line-height: 1.4;
+}
+
+.common-fonth16 {
+  line-height: 1.6;
+}
+
+.common-alignC {
+  text-align: center;
+}
+
+.common-alignR {
+  text-align: right;
+}
+
+.common-alignL {
+  text-align: left;
+}
+
+.common-verticalM {
+  vertical-align: middle;
+}
+
+.common-boxsizeB {
+  box-sizing: border-box;
+}
+
+.common-boxsizeC {
+  box-sizing: content-box;
+}
+
+.common-overflowX {
+  overflow-x: auto;
+}
+
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+.common-mar03 {
+  margin: 0.3em;
+}
+
+.common-mar04 {
+  margin: 0.4em;
+}
+
+.common-mar05 {
+  margin: 0.5em;
+}
+
+.common-mar06 {
+  margin: 0.6em;
+}
+
+.common-mar08 {
+  margin: 0.8em;
+}
+
+.common-mar10 {
+  margin: 1em;
+}
+
+.common-marZZ {
+  margin: 0em;
+}
+
+.common-marAuto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.common-marUpZZ {
+  margin-top: 0em;
+}
+
+.common-marUp02 {
+  margin-top: 0.2em;
+}
+
+.common-marUp04 {
+  margin-top: 0.4em;
+}
+
+.common-marUp05 {
+  margin-top: 0.5em;
+}
+
+.common-marUp06 {
+  margin-top: 0.6em;
+}
+
+.common-marUp08 {
+  margin-top: 0.8em;
+}
+
+.common-marUp10 {
+  margin-top: 1em;
+}
+
+.common-marUp20 {
+  margin-top: 2em;
+}
+
+.common-marUp40 {
+  margin-top: 4em;
+}
+
+.common-marUDZZ {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.common-marUD01 {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+.common-marUD02 {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.common-marUD03 {
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+}
+
+.common-marUD04 {
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+.common-marUD05 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.common-marUD06 {
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+.common-marUD08 {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+.common-marUD10 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.common-marUD20 {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.common-marLRZZ {
+  margin-left: 0em;
+  margin-right: 0em;
+}
+
+.common-marLR03 {
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
+.common-marLR04 {
+  margin-left: 0.4em;
+  margin-right: 0.4em;
+}
+
+.common-marLR06 {
+  margin-left: 0.6em;
+  margin-right: 0.6em;
+}
+
+.common-marLR08 {
+  margin-left: 0.8em;
+  margin-right: 0.8em;
+}
+
+.common-marLR10 {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.common-marLR20 {
+  margin-left: 2em;
+  margin-right: 2em;
+}
+
+.common-marDwZZ {
+  margin-bottom: 0em;
+}
+
+.common-marDw02 {
+  margin-bottom: 0.2em;
+}
+
+.common-marDw03 {
+  margin-bottom: 0.3em;
+}
+
+.common-marDw04 {
+  margin-bottom: 0.4em;
+}
+
+.common-marDw08 {
+  margin-bottom: 0.8em;
+}
+
+.common-marDw10 {
+  margin-bottom: 1em;
+}
+
+.common-marDw20 {
+  margin-bottom: 2em;
+}
+
+.common-marLtZZ {
+  margin-left: 0em;
+}
+
+.common-marLt02 {
+  margin-left: 0.2em;
+}
+
+.common-marLt03 {
+  margin-left: 0.3em;
+}
+
+.common-marLt04 {
+  margin-left: 0.4em;
+}
+
+.common-marLt05 {
+  margin-left: 0.5em;
+}
+
+.common-marLt08 {
+  margin-left: 0.8em;
+}
+
+.common-marLt10 {
+  margin-left: 1em;
+}
+
+.common-marLt12 {
+  margin-left: 1.2em;
+}
+
+.common-marLt20 {
+  margin-left: 2em;
+}
+
+.common-marRt03 {
+  margin-right: 0.3em;
+}
+
+.common-marRt10 {
+  margin-right: 1em;
+}
+
+/* ========================= */
+/* btns */
+/* ========================= */
 div {
   display: block;
 }
@@ -18,7 +695,7 @@ div {
 .common-div-dot {
   width: 0.6em;
   height: 0.6em;
-  background: #3D6BF5;
+  background: rgb(61, 107, 245);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -27,21 +704,21 @@ div {
 /* header */
 /*=================================*/
 .common-div-headerTop {
-  background: #fff;
-  padding: 0.6em 0.8em;
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  border-bottom: 0.5px solid #E4E7F0;
+  display: block;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  background: rgb(255, 255, 255);
+  border-bottom: 0.5px solid rgb(122, 128, 153);
 }
 
 .common-div-sectionHeader {
-  font-size: 1em;
-  font-weight: 500;
-  color: #7A8099;
+  font-weight: normal;
+  color: rgb(122, 128, 153);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin: 0em 0em 0.8em 0em;
+  margin-bottom: 0.8em;
 }
 
 /*=================================*/
@@ -54,10 +731,6 @@ div {
 /*=================================*/
 /* div for yearToMin */
 /*=================================*/
-.common-div-yearToMin {
-  white-space: nowrap;
-}
-
 .common-div-yearToMin > input {
   display: inline-block;
   text-align: center;
@@ -83,9 +756,9 @@ div {
 .common-div-progressContainer {
   width: 100%;
   height: 6px;
-  background: #e0e0e0;
+  background: #fafafa;
   overflow: hidden;
-  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 5px rgb(229.6, 229.6, 229.6);
   margin-bottom: 0.8em;
 }
 
@@ -93,17 +766,17 @@ div {
   width: 0%;
   height: 100%;
   background: rgb(2, 6, 84);
-  border-radius: 15px 0 0 15px;
+  border-radius: 1em 0 0 1em;
   transition: width 0.4s ease; /* 부드러운 애니메이션 */
 }
 
 /* 폼 자체 */
 .common-div-slideformParent {
   position: relative;
-  margin: 0;
-  padding: 0;
   width: 100%;
-  min-height: 100%;
+  height: 100%;
+  margin: 0em;
+  padding: 0em;
   overflow-x: hidden;
 }
 
@@ -113,13 +786,15 @@ div {
   left: 0;
   width: calc(100% - 4em);
   height: auto;
-  font-size: 1em;
-  padding: 1em 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .common-div-slideformChild[slideform-status=exit] {
   transform: translateX(-100%);
-  transition: transform 0.3s ease; /* display:none; */
+  transition: transform 0.3s ease; /* display: none; */
 }
 
 .common-div-slideformChild[slideform-status=open] {
@@ -129,7 +804,7 @@ div {
 
 .common-div-slideformChild[slideform-status=wait] {
   transform: translateX(100%);
-  transition: transform 0.3s ease; /* display:none; */
+  transition: transform 0.3s ease; /* display: none; */
 }
 
 /* 일반 폼 */
@@ -137,8 +812,10 @@ div {
   display: block;
   width: calc(100% - 4em);
   height: auto;
-  font-size: 1em;
-  padding: 1em 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .common-div-formChild > .common-div-formField:nth-child(1) {
@@ -148,9 +825,9 @@ div {
 /* 폼 내 */
 .common-div-formTitle {
   text-align: left;
-  margin: 1em 0em 2em;
+  margin-top: 1em;
+  margin-bottom: 2em;
   padding: 0em;
-  box-sizing: content-box;
 }
 
 .common-div-formTitle > span:nth-child(1) {
@@ -166,7 +843,8 @@ div {
 
 .common-div-formField {
   text-align: left;
-  margin: 2em 0em;
+  margin-top: 2em;
+  margin-bottom: 2em;
   padding: 0em;
   box-sizing: content-box;
 }
@@ -174,17 +852,19 @@ div {
 .common-div-formField > span:nth-child(1) {
   display: block;
   font-size: 1.1em;
-  margin: 0.3em 0em 0em;
+  margin-top: 0.4em;
+  margin-bottom: 0em;
   font-weight: bold;
-  line-height: 1.5em;
+  line-height: 1.6;
 }
 
 .common-div-formField > span:nth-child(2) {
   display: block;
   font-size: 0.9em;
-  margin: 0em 0em 0.4em;
+  margin-top: 0em;
+  margin-bottom: 0.4em;
   font-weight: normal;
-  line-height: 1.5em;
+  line-height: 1.6;
 }
 
 /* ============================== */
@@ -192,7 +872,7 @@ div {
 /* ============================== */
 .common-div-form {
   text-align: center;
-  margin: 0.6em 0.6em 1em;
+  margin: 1em;
   padding: 0em;
   box-sizing: content-box;
 }
@@ -236,8 +916,10 @@ div {
   display: block;
   width: 15em;
   max-width: 80%;
-  margin: 0.7em auto;
-  padding: 0.7em;
+  margin-top: 0.6em;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.6em;
 }
 
 /* ============================== */
@@ -254,34 +936,39 @@ div {
 /* ============================== */
 .common-div-card {
   position: relative;
-  /* margin  : 0.6em 0.8em 0.8em 0.6em; */
   border-radius: 0.8em;
-  padding: 0.8em 0.8em;
+  padding: 0.8em;
   overflow-x: auto;
   box-sizing: content-box;
   text-align: left;
-  background-color: white;
-  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.2);
+  color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 7px 2px #cccccc;
 }
 
 .common-div-card[card-type=warning] {
-  color: rgb(125, 25, 25);
-  background-color: rgba(255, 51, 51, 0.1);
-  box-shadow: 1px 1px 7px 2px rgba(255, 51, 51, 0.8);
+  color: rgb(255, 116, 21);
+  background: rgb(255, 227.2, 208.2);
+  box-shadow: 1px 1px 7px 2px rgb(255, 227.2, 208.2);
 }
 
 .common-div-card[card-type=notice] {
-  color: rgb(125, 25, 25);
-  background-color: #dbe7ff;
-  box-shadow: none;
+  color: rgb(55, 75, 155);
+  background: rgb(210.7142857143, 216.4285714286, 239.2857142857);
+  box-shadow: 1px 1px 7px 2px rgb(210.7142857143, 216.4285714286, 239.2857142857);
+}
+
+.common-div-card[card-type=hero] {
+  color: rgb(2, 6, 84);
+  background: rgb(172.1720930233, 176.1162790698, 253.0279069767);
+  box-shadow: 1px 1px 7px 2px rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }
 
 /* ============================== */
 /* 에러 메시지용 */
 /* ============================== */
 .common-div-msg {
-  margin: 0.8em 1em 1em 0.8em;
-  padding: 0.5em 0.5em;
+  margin: 0.8em;
+  padding: 0.5em;
   overflow-x: auto;
   box-sizing: content-box;
   text-align: left;
@@ -289,21 +976,21 @@ div {
 }
 
 .common-div-msg[common-div-msg-type=error] {
-  color: rgb(125, 25, 25);
-  background-color: rgba(255, 51, 51, 0.1);
-  box-shadow: 1px 1px 7px 2px rgba(255, 51, 51, 0.8);
+  color: rgb(206, 39, 39);
+  background: rgb(246.5632653061, 210.4367346939, 210.4367346939);
+  box-shadow: 1px 1px 7px 2px rgb(246.5632653061, 210.4367346939, 210.4367346939);
 }
 
 .common-div-msg[common-div-msg-type=warning] {
-  color: rgb(95, 95, 12);
-  background-color: rgba(95, 192, 31, 0.1);
-  box-shadow: 1px 1px 7px 2px rgba(195, 192, 31, 0.8);
+  color: rgb(255, 116, 21);
+  background: rgb(255, 227.2, 208.2);
+  box-shadow: 1px 1px 7px 2px rgb(255, 227.2, 208.2);
 }
 
 .common-div-msg[common-div-msg-type=allow] {
-  color: rgb(7, 69, 14);
-  background-color: rgba(7, 69, 14, 0.1);
-  box-shadow: 1px 1px 7px 2px rgba(7, 69, 14, 0.8);
+  color: rgb(0, 150, 0);
+  background: #b7ffb7;
+  box-shadow: 1px 1px 7px 2px #b7ffb7;
 }
 
 /* ============================== */
@@ -311,9 +998,7 @@ div {
 /* ============================== */
 .common-div-mobile {
   max-width: 400px;
-  padding: 0em 0em;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  padding: 0em;
   box-sizing: content-box;
 }
 
@@ -325,16 +1010,15 @@ div {
   height: 52px;
 }
 
-/* .common-div-header ~ .common-div-slideformChild { padding-top: 60px; } */
 .common-div-header {
+  z-index: 10000;
   position: absolute;
   left: 0;
   right: 0;
-  z-index: 10000;
-  background: #ffffff;
+  color: rgb(255, 255, 255);
   width: 100%;
   height: 52px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 7px 2px #cccccc;
 }
 
 .common-div-header > div[header=back] {
@@ -352,28 +1036,13 @@ div {
   font-weight: bold;
 }
 
-/* -------------------- */
-/* 헤더 메뉴버튼 */
-/* -------------------- */
-.common-div-headerMenuBtn {
-  height: 26px;
-  width: 30px;
-  margin: 9px;
-  border: none;
-  background-color: rgb(255, 255, 255);
-  background-image: url("../../res/icon/menu.png");
-  background-repeat: no-repeat;
-  background-position: center middle;
-  background-size: 100% 100%;
-}
-
 /* ============================== */
 /* 페이지네이션 */
 /* ============================== */
 .common-div-pagenationTop {
-  margin: 0.5em 0em;
+  margin-top: 0.6em;
+  margin-bottom: 0.6em;
   text-align: center;
-  /* padding:0.3em; */
   overflow-x: auto;
   box-sizing: content-box;
 }
@@ -381,14 +1050,14 @@ div {
 .common-div-pagenationBtnTop {
   display: inline-block;
   border-radius: 38px;
-  background-color: rgb(230, 230, 230);
+  background: #fafafa;
 }
 
 .common-btn-pagenationBtn {
   display: inline-block;
   width: 38px;
   height: 38px;
-  background-color: rgb(230, 230, 230);
+  background: rgb(230, 230, 230);
   border-radius: 100%;
   border: none;
   line-height: 37px;
@@ -397,15 +1066,15 @@ div {
 }
 
 .common-btn-pagenationBtn[tab=tab] {
-  background-color: rgb(2, 6, 84);
-  color: white;
-  /* font-weight: bold; */
+  background: rgb(2, 6, 84);
+  color: rgb(255, 255, 255);
+  /* @include fontwB; */
 }
 
 /* ============================== */
 /* block 상태가 되며, 다른 div에 간섭하지 않도록 쿠션이 생긴다.  */
 /* ============================== */
-/* common-div-cushion + text-align:center */
+/* common-div-cushion + text-align: center */
 .common-div-empty {
   height: 1em;
   box-sizing: border-box;
@@ -424,11 +1093,10 @@ div {
   margin-right: auto;
 }
 
-/* 100% 의 width를 가지고, 안의 내용물이 길어진다면, x-scroll을 생성 */
 .common-div-scrollX {
   width: 100%;
   overflow-x: auto;
-  box-sizing: content-box;
+  box-sizing: border-box;
   padding-bottom: 0.3em;
 }
 
@@ -437,102 +1105,45 @@ div {
   margin: 0.8em;
   padding: 0em;
   overflow-x: auto;
-  box-sizing: content-box;
-  text-align: left;
-}
-
-.common-div-cushionULR {
-  display: block;
-  margin: 0.8em 0.8em 0em 0.8em;
-  padding: 0em;
-  overflow-x: auto;
-  box-sizing: content-box;
-  text-align: left;
-}
-
-.common-div-cushionTLR {
-  display: block;
-  margin: 0.8em 0.8em 0em 0.8em;
-  padding: 0em;
-  overflow-x: auto;
-  box-sizing: content-box;
-  text-align: left;
-}
-
-.common-div-cushionTop {
-  display: block;
-  margin: 0em 0.8em 0.8em 0.8em;
-  padding: 0em;
-  overflow-x: auto;
-  box-sizing: content-box;
+  box-sizing: border-box;
   text-align: left;
 }
 
 .common-div-cushionUp {
   display: block;
-  margin: 0.8em 0em 0em 0em;
+  margin-top: 0.8em;
   padding: 0em;
   overflow-x: auto;
-  box-sizing: content-box;
-  text-align: inherit;
+  box-sizing: border-box;
 }
 
 .common-div-cushionUD {
   display: block;
-  margin: 0.8em 0em;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
   padding: 0em;
   overflow-x: auto;
-  box-sizing: content-box;
-  text-align: inherit;
+  box-sizing: border-box;
 }
 
-.common-div-cushionD {
+.common-div-cushionDw {
   display: block;
-  margin: 0em 0em 0.8em 0em;
+  margin-bottom: 0.8em;
   padding: 0em;
   overflow-x: auto;
-  box-sizing: content-box;
-  text-align: inherit;
-}
-
-.common-div-cushionLeft {
-  display: block;
-  margin: 0em 0em 0em 0.8em;
-  padding: 0em;
-  overflow-x: auto;
-  box-sizing: content-box;
-  text-align: inherit;
-}
-
-.common-div-cushionUL {
-  display: block;
-  margin: 0.8em 0em 0em 0.8em;
-  padding: 0em;
-  overflow-x: auto;
-  box-sizing: content-box;
-  text-align: inherit;
-}
-
-.common-div-cushionLRD {
-  display: block;
-  margin: 0em 0.8em 0.8em 0.8em;
-  padding: 0em;
-  overflow-x: auto;
-  box-sizing: content-box;
-  text-align: inherit;
+  box-sizing: border-box;
 }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
 .common-div-cushion > .common-div-cushionUD:nth-child(1) {
-  margin: 0em 0em 0.3em 0em;
-  padding: 0em 0em 0.3em 0em;
+  margin-bottom: 0.8em;
 }
 
 .common-div-cushionUD > .common-div-card:nth-child(1) {
   margin-top: 0.2em;
 }
 
-/* 쿠션 아래의 첫번째, formField 는 marginTop:0.4em; */
+/* 쿠션 아래의 첫번째, formField 는 marginTop: 0.4em; */
 .common-div-cushion > .common-div-formField:nth-child(1) {
   margin-top: 0.4em;
 }
@@ -544,170 +1155,14 @@ div {
 }
 
 /* ============================== */
-/* block 상태가 되며, 내용이 길어지면 흘러넘치게 한다.  */
-/* ============================== */
-.common-div-flowCushion {
-  margin: 0.3em;
-  padding: 0.3em;
-  white-space: normal;
-  box-sizing: content-box;
-}
-
-/* ============================== */
-/* 테이블용 div (스크롤바가 생긴다) */
-/* ============================== */
-.common-div-table {
-  width: 100%;
-  margin: 0.2em 0em;
-  padding: 0.5em 0em;
-  overflow-x: auto;
-  box-sizing: content-box;
-}
-
-/*=================================*/
-/* 최상위 DIV */
-/*=================================*/
-/* 페이지 안의 부제목 topDiv */
-.common-div-subTitle {
-  display: table;
-  width: 100%;
-  margin: 0.3em 0em;
-  padding: 0em;
-  box-sizing: content-box;
-  text-align: left;
-  border-bottom: 1px solid rgb(2, 6, 84);
-}
-
-/* 페이지 안의 부제목 span */
-.common-div-subTitle > span:nth-child(1) {
-  display: inline-table;
-  color: rgb(2, 6, 84);
-  font-weight: 900;
-  /* background-color:#ff7415; */
-  padding: 0.3em 0.7em 0.3em 0.3em;
-  line-height: 1.6em;
-  vertical-align: bottom;
-}
-
-.common-div-subTitle > span:nth-child(1)::before {
-  background-image: url("../../res/icon/subtitle_header.png");
-  background-size: 100% 100%;
-  display: inline-block;
-  width: 2.23em;
-  height: 1em;
-  vertical-align: middle;
-  margin-right: 0.3em;
-  margin-bottom: 0.2em;
-  content: "";
-}
-
-/* 페이지 안의 부제목 topDiv */
-.common-div-subTitle > button {
-  margin: 0.4em 0em 0.4em 0.4em;
-}
-
-/* ============================== */
-/* input 아래에 표시되는 유효성검사 결과 */
-/* ============================== */
-.common-div-validationResult {
-  display: block;
-  text-align: center;
-  font-size: 0.8em;
-  padding: 0.3em;
-}
-
-/* ============================== */
-/* POP 페이지에 표시되는 타이틀, 검색div */
-/* ============================== */
-/* 타이틀 div */
-.common-div-popTitle {
-  width: 100%;
-  margin: 0em auto;
-  box-sizing: content-box;
-  /* border-bottom: 1px solid rgb(150,150,150); */
-  text-align: center;
-  padding: 0.7em 0em;
-}
-
-/* 타이틀 */
-.common-div-popTitle > span {
-  font-size: 1.1em;
-  line-height: 1.4em;
-  font-weight: bold;
-}
-
-/* ============================== */
-/* 기본 이미지 표현 DIV */
-/* ============================== */
-.common-div-defaultImgCoverMini {
-  width: 4em;
-  height: 4em;
-  margin: 1em auto;
-  background-size: 100% !important;
-  background-position: revert;
-  background-repeat: no-repeat;
-  border: 1px solid #dee2e6;
-  box-sizing: content-box;
-}
-
-.common-div-defaultImgCover {
-  width: 9em;
-  height: 9em;
-  margin: 1em auto;
-  background-size: 100% !important;
-  background-position: revert;
-  background-repeat: no-repeat;
-  border: 1px solid #dee2e6;
-  box-sizing: content-box;
-}
-
-.common-div-defaultImg {
-  width: 9em;
-  height: 9em;
-  margin: 1em auto;
-  background-size: 100% !important;
-  background-position: revert;
-  /* background-image:url('../../res/logo/logo.png'); */
-  background-repeat: no-repeat;
-  border: 1px solid #dee2e6;
-  box-sizing: content-box;
-}
-
-/* .common-div-menuImg
-{
-    width:9em;
-    height:9em;
-    margin:1em auto;
-    background-size:100% !important;
-    background-position: center;
-    background-image:url('../../res/logo/logo.png');
-    background-repeat: no-repeat;
-    border:1px solid #dee2e6;
-} */
-/* ============================== */
 /* 설명문구 삽입 시 */
 /* ============================== */
 .common-div-announce {
   margin: 0.6em;
   padding: 0.4em;
   text-align: left;
-  line-height: 1.7;
-  background-color: #ddd;
-}
-
-/* ============================== */
-/* 체크박스 / 라디오박스 용 div */
-/* ============================== */
-.common-div-switch {
-  text-align: left;
-}
-
-/* ============================== */
-/* 페이지전용 */
-/* ============================== */
-.common-div-pageTop {
-  margin: 0.5em auto;
-  max-width: 500px;
+  line-height: 1.6;
+  background: #fafafa;
 }
 
 /* ============================== */
@@ -721,45 +1176,44 @@ div {
 
 .common-div-calendarSquare {
   background: linear-gradient(135deg, #020654 0%, #0a2472 100%);
-  color: white;
+  color: rgb(255, 255, 255);
   width: 3.6em;
   height: 3.6em;
   padding: 0.4em;
   border-radius: 1em;
-  white-space: nowrap;
-  box-shadow: 0px 2px 4px rgba(2, 6, 84, 0.4);
+  box-shadow: 1px 1px 7px 2px rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }
 
 .common-div-calendarSquare > div:nth-child(1) {
   font-size: 0.9em;
-  line-height: 0.9em;
+  line-height: 1.4;
   text-align: center;
   font-weight: normal;
 }
 
 .common-div-calendarSquare > div:nth-child(2) {
   font-size: 1.4em;
-  line-height: 1.4em;
+  line-height: 1.4;
   text-align: center;
   font-weight: bold;
 }
 
 /* ByPoint */
 .common-div-calendarSquare[point-of-date=passed] {
-  background: #f0f0f0;
-  color: #999;
+  background: #fafafa;
+  color: rgb(150, 150, 150);
 }
 
 /* ByPoint */
 .common-div-calendarSquare[point-of-date=within] {
-  background: rgb(2, 6, 84);
-  color: white;
+  background: rgb(172.1720930233, 176.1162790698, 253.0279069767);
+  color: rgb(255, 255, 255);
 }
 
 /* ByPoint */
 .common-div-calendarSquare[point-of-date=upcoming] {
   background: white;
-  color: #666;
+  color: rgb(100, 100, 100);
 }
 
 /* ByType */
@@ -783,12 +1237,14 @@ div {
 }
 
 .common-div-calendarSquareWeekTop > button {
-  background: white;
-  border: 2px solid #e0e0e0;
-  color: #666;
-  padding: 0.5em 0.8em;
-  border-radius: 0.8em;
-  font-size: 1em;
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(230, 230, 230);
+  color: rgb(100, 100, 100);
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  border-radius: 0.4em;
   font-weight: normal;
   cursor: pointer;
   /* transition: all 0.3s ease; */
@@ -805,9 +1261,9 @@ div {
 
 /* ByPoint */
 .common-div-calendarSquareWeekTop > button[point-of-date=passed] {
-  background: #f0f0f0;
-  color: #999;
-  border: 2px solid #d0d0d0;
+  background: #fafafa;
+  color: rgb(150, 150, 150);
+  border: 2px solid rgb(190, 190, 190);
 }
 
 /* ByPoint */
@@ -818,6 +1274,6 @@ div {
 
 /* ByPoint */
 .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {
-  color: #666;
-  border: 2px solid #e0e0e0;
+  color: rgb(100, 100, 100);
+  border: 2px solid rgb(230, 230, 230);
 }
