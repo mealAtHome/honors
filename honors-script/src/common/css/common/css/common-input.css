@@ -615,7 +615,7 @@
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
-  outer: none;
+  outline: none;
   background: transparent;
 }
 
@@ -638,7 +638,7 @@
   width: 100%;
   max-width: 500px;
   box-sizing: border-box;
-  outer: none;
+  outline: none;
   background: transparent;
 }
 
