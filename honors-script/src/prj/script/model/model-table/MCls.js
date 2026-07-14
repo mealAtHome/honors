@@ -159,24 +159,24 @@ class MClss extends _MCommon
             /* ----- */
             /* clsstatus 에 따른 버튼표시 */
             /* ----- */
-            let btnHtml = `<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`;
+            let btnHtml = `<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`;
             if(isManager)
             {
                 switch(model.getClsstatus())
                 {
                     case GGF.Cls.Clsstatus.EDIT:
                     {
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate000Default}" hyperlink-viewmode="page" option="update" ${model.getPk()}>일정수정</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010LineupUpdate}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-editToIng" ${model.getPk()}>일정공개</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-deleteCls" btn-type="delete" ${model.getPk()}>일정삭제</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate000Default}" hyperlink-viewmode="page" option="update" ${model.getPk()}>일정수정</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010LineupUpdate}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outer MClss-make-btn-editToIng" ${model.getPk()}>일정공개</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outer MClss-make-btn-deleteCls" btn-type="delete" ${model.getPk()}>일정삭제</button>`;
                         break;
                     }
                     case GGF.Cls.Clsstatus.ING:
                     {
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010LineupUpdate}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline MClss-make-btn-ingToEnd" ${model.getPk()}>일정종료</button>`;
-                        btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate030Cancel}" hyperlink-viewmode="page" btn-type="cancel" ${model.getPk()}>일정취소</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate010LineupUpdate}" hyperlink-viewmode="page" option="update" ${model.getPk()}>참가설정</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outer MClss-make-btn-ingToEnd" ${model.getPk()}>일정종료</button>`;
+                        btnHtml += `&nbsp;<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate030Cancel}" hyperlink-viewmode="page" btn-type="cancel" ${model.getPk()}>일정취소</button>`;
                         break;
                     }
                     case GGF.Cls.Clsstatus.END:
@@ -184,8 +184,8 @@ class MClss extends _MCommon
                         switch(model.getClssettleflg())
                         {
                             case GGF.Cls.Clssettleflg.EDIT:
-                                btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020SettleEdit}"   hyperlink-viewmode="page" ${model.getPk()}>정산입력</button>`;
-                                btnHtml += `&nbsp;<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate026Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매입력</button>`;
+                                btnHtml += `&nbsp;<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate020SettleEdit}"   hyperlink-viewmode="page" ${model.getPk()}>정산입력</button>`;
+                                btnHtml += `&nbsp;<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F10ClassUpdate026Purchase}" hyperlink-viewmode="page" ${model.getPk()}>구매입력</button>`;
                                 break;
                             case GGF.Cls.Clssettleflg.DONE:
                                 break;
@@ -280,7 +280,7 @@ class MClss extends _MCommon
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            let btnHtml = `<button class="common-btn-inline MClss-make-btn-choose" ${model.getPk()}>선택하기</button>`;
+            let btnHtml = `<button class="common-btn-inner MClss-make-btn-choose" ${model.getPk()}>선택하기</button>`;
             html += model.make(btnHtml);
         }
         $(el).html(this.mergePagenation(html));
@@ -301,8 +301,8 @@ class MClss extends _MCommon
             `
                 <tr>
                     <td style="text-align:center;">
-                        <button class="common-btn-outline MClss-makeTableForFinanceReflect-btn-toY" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.N ? `style="display:none;"` : ``}>반영설정</button>
-                        <button class="common-btn-outline MClss-makeTableForFinanceReflect-btn-toN" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.Y ? `style="display:none;"` : ``}>반영해제</button>
+                        <button class="common-btn-outer MClss-makeTableForFinanceReflect-btn-toY" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.N ? `style="display:none;"` : ``}>반영설정</button>
+                        <button class="common-btn-outer MClss-makeTableForFinanceReflect-btn-toN" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.Y ? `style="display:none;"` : ``}>반영해제</button>
                     </td>
                     <td style="text-align:center;">${model.getGrpfinancereflectflgFont()}</td>
                     <td>${model.getClsstartdtYMDdd()}</td>

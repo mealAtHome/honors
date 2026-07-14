@@ -45,7 +45,7 @@
     @include fonth14;
     /* @include boxsizeB; */
 }
-.common-span-label[label_type=outline],
+.common-span-label[label_type=outer],
 .common-span-label
 {
     @include colorMainFont;

@@ -823,7 +823,7 @@ var CommonEvent =
         <td>
             <span>선택할 수 있는 사이드메뉴 개수</span>
             <button
-                class="commonEvent-btn-plusMinus common-btn-outline borderRound"
+                class="commonEvent-btn-plusMinus common-btn-outer borderRound"
                 event_plusminus_type="minus"
                 event_plusminus_unit="1"
             >－</button>
@@ -834,7 +834,7 @@ var CommonEvent =
                 event_plusminus_max="2"
             >1</span>개
             <button
-                class="commonEvent-btn-plusMinus common-btn-outline borderRound"
+                class="commonEvent-btn-plusMinus common-btn-outer borderRound"
                 event_plusminus_type="plus"
                 event_plusminus_unit="1"
             >＋</button>

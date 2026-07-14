@@ -50,13 +50,13 @@ class MBankaccount
         {
             case "choose":
             {
-                btnHtml += `<button class="common-btn-outline MBankaccount-make-btn-choose" ${this.getPk()} el="${chooseEl}">선택</button>`;
+                btnHtml += `<button class="common-btn-outer MBankaccount-make-btn-choose" ${this.getPk()} el="${chooseEl}">선택</button>`;
                 break;
             }
             default:
             {
                 if(this.getDefaultflg() == GGF.N || this.getDefaultflg() == "")
-                    btnHtml += `<button class="common-btn-outline MBankaccount-make-btn-delete" btn-type="cancel" ${this.getPk()}>삭제</button>`;
+                    btnHtml += `<button class="common-btn-outer MBankaccount-make-btn-delete" btn-type="cancel" ${this.getPk()}>삭제</button>`;
                 break;
             }
         }
@@ -131,7 +131,7 @@ class MBankaccounts extends _MCommon
                 <div class="common-div-cushionDw">
                     정산/환불용 계좌를 등록하여주시기 바랍니다.
                 </div>
-                <button class="common-btn-outline common-block" btn-type="warning" onclick="Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate);">계좌등록</button>
+                <button class="common-btn-outer common-block" btn-type="warning" onclick="Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate);">계좌등록</button>
             </div>
         `;
         return html;

@@ -125,8 +125,8 @@ class MGrps extends _MCommon
             let buttonHtml = "";
             switch(option)
             {
-                case "makeForView"        : { buttonHtml = `<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`; break; }
-                case "makeForChooseGrp"   : { buttonHtml = `<button class="common-btn-inline Mgrp-make-btn-login" grpno="${model.getGrpno()}">선택하기</button>`; break; }
+                case "makeForView"        : { buttonHtml = `<button class="common-btn-inner commonEvent-tag-hyperlink" btn-type="detail" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`; break; }
+                case "makeForChooseGrp"   : { buttonHtml = `<button class="common-btn-inner Mgrp-make-btn-login" grpno="${model.getGrpno()}">선택하기</button>`; break; }
                 case "makeForChooseGrp2"  : { buttonHtml = `<button class="CUDE-btn-chooseGrp commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-chooseGrp" tab="" grpno="${model.getGrpno()}">선택</button>`; break; }
             }
             html +=

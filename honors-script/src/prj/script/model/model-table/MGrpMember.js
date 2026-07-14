@@ -190,18 +190,18 @@ class MGrpMembers extends _MCommon
                 {
                     if(isManager)
                     {
-                        buttonHtml += `<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}>멤버상세</button>&nbsp;`;
+                        buttonHtml += `<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}>멤버상세</button>&nbsp;`;
 
                         if(model.isUsertypeTemp())
                         {
-                            buttonHtml += `<button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B72GrpMemberMergeTemp}" hyperlink-viewmode="page" ${model.getPk()}>멤버병합</button>&nbsp;`;
+                            buttonHtml += `<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B72GrpMemberMergeTemp}" hyperlink-viewmode="page" ${model.getPk()}>멤버병합</button>&nbsp;`;
                         }
                     }
                     break;
                 }
                 case "makeForChoose":
                 {
-                    buttonHtml += `<button class="common-btn-inline  MGrpMember-make-btn-choose" ${model.getPk()}>선택하기</button>&nbsp;`;
+                    buttonHtml += `<button class="common-btn-inner  MGrpMember-make-btn-choose" ${model.getPk()}>선택하기</button>&nbsp;`;
                     break;
                 }
             }

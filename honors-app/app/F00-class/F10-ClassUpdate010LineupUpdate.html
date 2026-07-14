@@ -37,9 +37,9 @@
     <div class="common-div-cushion">
 
         <div id="CUTF-div-lineupFix" class="common-fonts09">
-            <button id="CUTF-btn-save" class="common-btn-outline">💿저장</button>
-            <button id="CUTF-btn-lineupAdd" class="common-btn-outline">➕추가</button>
-            <button id="CUTF-btn-lineuptmp" class="common-btn-outline">🗃️템플릿</button>
+            <button id="CUTF-btn-save" class="common-btn-outer">💿저장</button>
+            <button id="CUTF-btn-lineupAdd" class="common-btn-outer">➕추가</button>
+            <button id="CUTF-btn-lineuptmp" class="common-btn-outer">🗃️템플릿</button>
         </div>
         <div id="CUTF-div-lineupBtn" class="common-fonts09"></div>
         <hr class="common-hr-paddingUD06"/>
@@ -199,9 +199,9 @@
                             <input type="text" class="CUTF-input-lineupname CUTF-input-common common-input-text common-fonts09" lineupidx="${lineupidx}" value="${lineupname}">
                         </p>
                         <div class="common-div-cushionUD common-fonts09">
-                            <button class="common-btn-outline CUTF-btn-deleteLineup" btn-type="delete" recovery="${recovery}" lineupidx="${lineupidx}">🗑️삭제</button>
-                            <button class="common-btn-outline CUTF-btn-rowAdd">➕행추가</button>
-                            <button class="common-btn-outline CUTF-btn-lineuptmp" class="common-btn-outline" lineupidx="${lineupidx}">🗃️템플릿</button>
+                            <button class="common-btn-outer CUTF-btn-deleteLineup" btn-type="delete" recovery="${recovery}" lineupidx="${lineupidx}">🗑️삭제</button>
+                            <button class="common-btn-outer CUTF-btn-rowAdd">➕행추가</button>
+                            <button class="common-btn-outer CUTF-btn-lineuptmp" class="common-btn-outer" lineupidx="${lineupidx}">🗃️템플릿</button>
                         </div>
 
                         <div class="common-div-scrollX">
@@ -290,8 +290,8 @@
                 let html =
                 `
                     <tr class="CUTF-tr-lineup" orderno="">
-                        <td col="delt"><button class="common-btn-outline CUTF-btn-delete" btn-type="cancel" orderno="">삭제</button></td>
-                        ${CUTF.isClsstatusIng() == false ? `<td col="numb"><select class="common-select-outline CUTF-select-orderno" orderno=""></select></td>` : ""}
+                        <td col="delt"><button class="common-btn-outer CUTF-btn-delete" btn-type="cancel" orderno="">삭제</button></td>
+                        ${CUTF.isClsstatusIng() == false ? `<td col="numb"><select class="common-select-outer CUTF-select-orderno" orderno=""></select></td>` : ""}
                         ${CUTF.isClsstatusIng() == true  ? `<td col="numb"><span class="CUTF-span-orderno"></span></td>` : ""}
                         <td col="batf"><label class="common-label-switch"><input type="checkbox" class="CUTF-input-battingflg" checked                                  orderno=""/><span></span></label></td>
                         <td col="pstn"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-position"   value=""                                 orderno=""/></td>

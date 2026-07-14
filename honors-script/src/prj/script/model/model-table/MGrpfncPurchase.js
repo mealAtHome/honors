@@ -59,7 +59,7 @@ class MGrpfncPurchases extends _MCommon
             html +=
             `
                 <tr>
-                    <td col="delete"                ><button class="MGrpfncPurchase-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()} ${disable}>삭제</td>
+                    <td col="delete"                ><button class="MGrpfncPurchase-makeTable-btn-delete common-btn-outer" btn-type="cancel" ${model.getPk()} ${disable}>삭제</td>
                     <td col="purchaseidx"           >${model.getPurchaseidx()}</td>
                     <td col="regdt"                 >${model.getRegdt()}</td>
                     <td col="purchaseitem"          >${model.getPurchaseitem()}</td>

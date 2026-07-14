@@ -57,7 +57,7 @@ class MGrpfncLosses extends _MCommon
             html +=
             `
                 <tr>
-                    <td col="delete"            ><button class="MGrpfncLoss-makeTable-btn-delete common-btn-outline" btn-type="cancel" ${model.getPk()} ${disable}>삭제</td>
+                    <td col="delete"            ><button class="MGrpfncLoss-makeTable-btn-delete common-btn-outer" btn-type="cancel" ${model.getPk()} ${disable}>삭제</td>
                     <td col="lossidx"           >${model.getLossidx()}</td>
                     <td col="regdt"             >${model.getRegdt()}</td>
                     <td col="lossitem"          >${model.getLossitem()}</td>

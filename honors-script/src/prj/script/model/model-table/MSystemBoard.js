@@ -106,7 +106,7 @@ class MSystemBoards extends _MCommon
         `
             <div class="MSystemBoards-makeMainBanners-top">
                 ${html}
-                <!-- <button class="MSystemBoards-makeMainBanners-btn-more common-btn-outline">공지사항 더 보기</button> -->
+                <!-- <button class="MSystemBoards-makeMainBanners-btn-more common-btn-outer">공지사항 더 보기</button> -->
             </div>
         `;
         $(el).html(html);

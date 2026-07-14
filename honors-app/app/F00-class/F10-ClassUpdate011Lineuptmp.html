@@ -28,8 +28,8 @@
             <table id="CULT-tbl-menuTop" class="common-tbl-normal" tbl-type="colborder">
                 <tbody>
                     <tr>
-                        <td><button class="common-btn-outline CULT-btn-menu" id="CULT-btn-toSaveTab">저장하기</button></td>
-                        <td><button class="common-btn-outline CULT-btn-menu" id="CULT-btn-toLoadTab">불러오기</button></td>
+                        <td><button class="common-btn-outer CULT-btn-menu" id="CULT-btn-toSaveTab">저장하기</button></td>
+                        <td><button class="common-btn-outer CULT-btn-menu" id="CULT-btn-toLoadTab">불러오기</button></td>
                     </tr>
                     <tr>
                         <td style="vertical-align:top; line-height:1.6em;">현재 라인업을<br> 템플릿으로 저장</td>
@@ -68,7 +68,7 @@
         <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
             <tbody>
                 <tr>
-                    <td><button id="CULT-btn-save" class="common-btn-inline">저장</button></td>
+                    <td><button id="CULT-btn-save" class="common-btn-inner">저장</button></td>
                 </tr>
             </tbody>
         </table>
@@ -114,8 +114,8 @@
         <table class="common-tbl-slideformFooterBtn" tbl-type="liner2">
             <tbody>
                 <tr>
-                    <td><button id="CULT-btn-tmpApplyNow" class="common-btn-inline">현재라인업 적용</button></td>
-                    <td><button id="CULT-btn-tmpApplyAll" class="common-btn-inline">전체라인업 적용</button></td>
+                    <td><button id="CULT-btn-tmpApplyNow" class="common-btn-inner">현재라인업 적용</button></td>
+                    <td><button id="CULT-btn-tmpApplyAll" class="common-btn-inner">전체라인업 적용</button></td>
                 </tr>
             </tbody>
         </table>
@@ -229,7 +229,7 @@
                 let btnHtml = "";
                 switch(divType)
                 {
-                    case "save" : { btnHtml = `<button class="CULT-btn-deleteLineup common-btn-outline common-fonts09" btn-type="delete" div-type="${divType}" lineupidx="${lineupidx}" style="margin-left:1em;">삭제</button>`; break; }
+                    case "save" : { btnHtml = `<button class="CULT-btn-deleteLineup common-btn-outer common-fonts09" btn-type="delete" div-type="${divType}" lineupidx="${lineupidx}" style="margin-left:1em;">삭제</button>`; break; }
                     case "tmp"  : { btnHtml = ``; break; }
                 }
 
@@ -313,7 +313,7 @@
                     for(let i in mClsModels)
                     {
                         let model = mClsModels[i];
-                        let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outline" grpno="${grpno}" clsno="${model.getClsno()}">상세보기</button>`;
+                        let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outer" grpno="${grpno}" clsno="${model.getClsno()}">상세보기</button>`;
                         html += model.make(btnHtml);
                     }
                     if(mClss.getPagecnt() > 1)
@@ -657,7 +657,7 @@
                             {
                                 let model = mClslineuptmpasModels[i];
                                 let lineupgroup = model.getLineupgroup();
-                                let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outline" grpno="${model.getGrpno()}" lineupgroup="${lineupgroup}">상세보기</button>`;
+                                let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outer" grpno="${model.getGrpno()}" lineupgroup="${lineupgroup}">상세보기</button>`;
                                 html += model.make(btnHtml);
                             }
                             $("#CULT-div-defList").html(html);
@@ -680,7 +680,7 @@
                             {
                                 let model = mClslineuptmpasModels[i];
                                 let lineupgroup = model.getLineupgroup();
-                                let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outline" grpno="${model.getGrpno()}" lineupgroup="${lineupgroup}">상세보기</button>`;
+                                let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outer" grpno="${model.getGrpno()}" lineupgroup="${lineupgroup}">상세보기</button>`;
                                 html += model.make(btnHtml);
                             }
                             $("#CULT-div-tmpList").html(html);

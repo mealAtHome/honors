@@ -238,7 +238,7 @@ class MGovAddrs extends _MCommon
                 <tr>
                     <td>
                         <button
-                            class="common-btn-outline MGovAddr-makeForSearch-btn-address"
+                            class="common-btn-outer MGovAddr-makeForSearch-btn-address"
                             adm_cd="${dat.admCd}"
                             bd_kdcd="${dat.bdKdcd}"
                             bd_mgt_sn="${dat.bdMgtSn}"

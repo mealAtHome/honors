@@ -1,12 +1,12 @@
 @use "../../_import/scss/__import" as *;
 
-.common-select-outline
+.common-select-outer
 {
     max-width: 15em;
     @include padUD02;
     @include padRt10;
     @include padLt02;
-    outline: none;
+    outer: none;
     text-align-last: center;
     @include verticalM;
     font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;

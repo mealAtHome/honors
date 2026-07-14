@@ -105,7 +105,7 @@
                                 <td col="">${memberStatus}</td>
                                 <td col="">${mUser.getName()}</td>
                                 <td col="">
-                                    <select class="common-select-outline MMLY-select-grpmtype" ${model.getPk()} ${disabled}>
+                                    <select class="common-select-outer MMLY-select-grpmtype" ${model.getPk()} ${disabled}>
                                         <option value="mng"     ${model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNG     ? "selected" : ""}>매니저</option>
                                         <option value="mngsub"  ${model.getGrpmtype() == GGF.GrpMember.Grpmtype.MNGSUB  ? "selected" : ""}>부매니저</option>
                                         <option value="member"  ${model.getGrpmtype() == GGF.GrpMember.Grpmtype.MEMBER  ? "selected" : ""}>멤버</option>

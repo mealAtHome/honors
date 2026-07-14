@@ -55,9 +55,9 @@
             <span class="common-block common-fonts09">※좌우로 스크롤을 움직여 정산정보를 입력할 수 있습니다.</span>
             <div class="common-div-cushionUD">
                 <div class="common-fonts09">
-                    <button id="CUST-btn-saveSettle"     class="common-btn-outline">💿임시저장</button>
-                    <button id="CUST-btn-resetSettle"    class="common-btn-outline">🔃초기화</button>
-                    <button id="CUST-btn-applyPoint"     class="common-btn-outline">💰잔여금적용</button>
+                    <button id="CUST-btn-saveSettle"     class="common-btn-outer">💿임시저장</button>
+                    <button id="CUST-btn-resetSettle"    class="common-btn-outer">🔃초기화</button>
+                    <button id="CUST-btn-applyPoint"     class="common-btn-outer">💰잔여금적용</button>
                 </div>
             </div>
             <div class="common-div-cushionUD">
@@ -92,7 +92,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="2" style="text-align:left;">
-                                <button id="CUST-btn-addSettleItem"  class="common-btn-outline">＋참가자추가</button>
+                                <button id="CUST-btn-addSettleItem"  class="common-btn-outer">＋참가자추가</button>
                             </td>
                             <td><span id="CUST-span-billstandSummary"></span></td>
                             <td><span id="CUST-span-billprepaidSummary"></span></td>
@@ -214,7 +214,7 @@
             addRowForSettleByClssettletmp(model)
             {
                 /* 사전정산을 가진 행은 수정을 못한다 */
-                let deleteBtn = `<button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button>`;
+                let deleteBtn = `<button class="CUST-btn-deleteRowForSettle common-btn-outer" btn-type="cancel" userno="${model.getUserno()}">삭제</button>`;
                 if(model.hasBillprepaid())
                     deleteBtn = "확정";
 
@@ -239,7 +239,7 @@
             addRowForSettleByClslineupb(model)
             {
                 /* 사전정산을 가진 행은 수정을 못한다 */
-                let deleteBtn = `<button class="CUST-btn-deleteRowForSettle common-btn-outline" btn-type="cancel" userno="${model.getUserno()}">삭제</button>`;
+                let deleteBtn = `<button class="CUST-btn-deleteRowForSettle common-btn-outer" btn-type="cancel" userno="${model.getUserno()}">삭제</button>`;
                 if(model.isPrepaid())
                     deleteBtn = "확정";
 

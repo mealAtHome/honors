@@ -55,7 +55,7 @@
             <span class="common-block common-fonts09">※일정에 사용된 금액을 기입하는 테이블입니다.</span>
             <div class="common-div-cushionUD">
                 <div class="common-fonts09">
-                    <button id="CUPU-btn-addPurchaseRow" class="common-btn-outline">＋품목추가</button>
+                    <button id="CUPU-btn-addPurchaseRow" class="common-btn-outer">＋품목추가</button>
                 </div>
             </div>
             <div class="common-div-scrollX">
@@ -163,7 +163,7 @@
                 let html =
                 `
                     <tr purchaseidx="${mClspurchase.getPurchaseidx()}" deleteflg="n">
-                        <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outline common-fonts09" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
+                        <td col="btn"           ><button class="CUPU-btn-deleteRowForPurchase common-btn-outer common-fonts09" btn-type="cancel" purchaseidx="${mClspurchase.getPurchaseidx()}">삭제</button></td>
                         <td col="productname"   ><input type="text"   class="common-input-text CUPU-input-productname"    value="${mClspurchase.getProductname()}"  style="width:100%;" /></td>
                         <td col="productbill"   ><input type="number" class="common-input-text CUPU-input-productbill"    value="${mClspurchase.getProductbill()}"  style="width:100%;" /></td>
                         <td col="purchasememo"  ><input type="text"   class="common-input-text CUPU-input-purchasememo"   value="${mClspurchase.getPurchasememo()}" style="width:100%;" /></td>

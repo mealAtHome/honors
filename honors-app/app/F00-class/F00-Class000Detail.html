@@ -27,11 +27,11 @@
     <!-- 메뉴 -->
     <!-- ========================= -->
     <div class="common-div-cushion common-fonts09">
-        <button id="CLSD-btn-textCls"      class="common-btn-outline">일정요약</button>
-        <button id="CLSD-btn-textApply"    class="common-btn-outline">참가요약</button>
-        <button id="CLSD-btn-textSettle"   class="common-btn-outline" style="display:none;">정산요약</button>
-        <button id="CLSD-btn-editSettle"   class="common-btn-outline" style="display:none;">정산</button>
-        <button id="CLSD-btn-editPurchase" class="common-btn-outline" style="display:none;">구매</button>
+        <button id="CLSD-btn-textCls"      class="common-btn-outer">일정요약</button>
+        <button id="CLSD-btn-textApply"    class="common-btn-outer">참가요약</button>
+        <button id="CLSD-btn-textSettle"   class="common-btn-outer" style="display:none;">정산요약</button>
+        <button id="CLSD-btn-editSettle"   class="common-btn-outer" style="display:none;">정산</button>
+        <button id="CLSD-btn-editPurchase" class="common-btn-outer" style="display:none;">구매</button>
         <hr class="common-hr-paddingUp06"/>
     </div>
 
@@ -68,8 +68,8 @@
                                 <!--
                                     <tr>
                                         <td colspan="2" style="text-align:left;">
-                                            <button id="CLSD-btn-grpfinancereflectflgToY" class="common-btn-outline" btn-type="normal">반영</button>
-                                            <button id="CLSD-btn-grpfinancereflectflgToN" class="common-btn-outline" btn-type="cancel">해제</button>
+                                            <button id="CLSD-btn-grpfinancereflectflgToY" class="common-btn-outer" btn-type="normal">반영</button>
+                                            <button id="CLSD-btn-grpfinancereflectflgToN" class="common-btn-outer" btn-type="cancel">해제</button>
                                         </td>
                                     </tr>
                                 -->
@@ -274,7 +274,7 @@
                                 let model = models[i];
                                 let settlestatusHtml = model.getSettlestatusFont();
                                 if(model.isSettlestatusDone() == false)
-                                    settlestatusHtml = `<button class="common-btn-outline CLSD-btn-settlestatusToDone" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">입금확정</button>`;
+                                    settlestatusHtml = `<button class="common-btn-outer CLSD-btn-settlestatusToDone" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">입금확정</button>`;
 
                                 /* 청구금액 (billfinal + billprepaid + billpointed) */
                                 let billrequired = model.getBillfinal() + model.getBillprepaid() + model.getBillpointed();
@@ -283,7 +283,7 @@
                                 let html =
                                 `
                                     <tr>
-                                        <td class="common-alignC"><button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D21DetailClssettle}" hyperlink-viewmode="dialog" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">상세</button></td>
+                                        <td class="common-alignC"><button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.D21DetailClssettle}" hyperlink-viewmode="dialog" grpno="${model.getGrpno()}" clsno="${model.getClsno()}" userno="${model.getUserno()}">상세</button></td>
                                         <td class="common-alignC">${settlestatusHtml}</td>
                                         <td class="common-alignC">${model.getUsername()}</td>
                                         <td class="common-alignR">${billrequiredWon}</td>
@@ -471,7 +471,7 @@
                         applyHtml =
                         `
                             <input type="text" class="common-input-text CLSD-input-username" value="${username}" disabled/>
-                            <button class="common-btn-outline CLSD-btn-cancelForLineup2" btn-type="cancel" ${pk}>취소</button>
+                            <button class="common-btn-outer CLSD-btn-cancelForLineup2" btn-type="cancel" ${pk}>취소</button>
                         `;
                     }
                 }
@@ -483,7 +483,7 @@
                         applyHtml =
                         `
                             <input type="text" class="common-input-text CLSD-input-username" value="${username}" ${pk} disabled/>
-                            <button class="common-btn-outline CLSD-btn-applyForLineup2" ${pk} lineupname="${model.getLineupname()}" position="${position}" bill="${model.getBillWon()}">참가</button>
+                            <button class="common-btn-outer CLSD-btn-applyForLineup2" ${pk} lineupname="${model.getLineupname()}" position="${position}" bill="${model.getBillWon()}">참가</button>
                         `;
                     }
                 }
@@ -496,7 +496,7 @@
                 {
                     applyerHtml = "-";
                     if(CLSD.isManager && CLSD.mCls.isClssettleflgEdit())
-                        applyerHtml = `<button class="common-btn-outline CLSD-btn-applyStead" ${pk}>대리접수</button>`;
+                        applyerHtml = `<button class="common-btn-outer CLSD-btn-applyStead" ${pk}>대리접수</button>`;
                 }
 
                 /* ----- */
@@ -506,8 +506,8 @@
                 let prepaidflg = model.getPrepaidflg();
                 if(CLSD.isManager && model.hasApplyer() && CLSD.mCls.isClssettleflgEdit())
                 {
-                    if(prepaidflg == GGF.Y) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToN" btn-type="cancel" ${pk}>취소</button>`;
-                    if(prepaidflg == GGF.N) prepaidflgHtml = `<button class="common-btn-outline CLSD-btn-prepaidflgToY" btn-type="normal" ${pk}>완료</button>`;
+                    if(prepaidflg == GGF.Y) prepaidflgHtml = `<button class="common-btn-outer CLSD-btn-prepaidflgToN" btn-type="cancel" ${pk}>취소</button>`;
+                    if(prepaidflg == GGF.N) prepaidflgHtml = `<button class="common-btn-outer CLSD-btn-prepaidflgToY" btn-type="normal" ${pk}>완료</button>`;
                 }
 
                 /* ----- */

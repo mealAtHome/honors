@@ -111,7 +111,7 @@ class MSchedulealls extends _MCommon
                 tbody +=
                 `
                     <button
-                        class="MScheduleall-btn-week common-btn-outline commonEvent-tag-hyperlink"
+                        class="MScheduleall-btn-week common-btn-outer commonEvent-tag-hyperlink"
                         point-of-date="${modelJ.getPointOfDate()}"
                         ${modelJ.getPk()}
                         hyperlink="${Navigation.Page.G20ScheduleByWeek}"

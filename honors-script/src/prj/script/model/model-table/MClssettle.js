@@ -147,12 +147,12 @@ class MClssettles extends _MCommon
                 case GGF.Clssettle.Settlestatus.WAIT :
                 {
                     if(isMe)
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToMemb" ${model.getPk()} btn-type="normal">입금완료</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToMemb" ${model.getPk()} btn-type="normal">입금완료</button> `;
 
                     if(isManager)
                     {
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToDone" ${model.getPk()} btn-type="normal">입금확인</button> `;
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToLoss" ${model.getPk()} btn-type="delete">손실처리</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToDone" ${model.getPk()} btn-type="normal">입금확인</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToLoss" ${model.getPk()} btn-type="delete">손실처리</button> `;
                     }
                     break;
                 }
@@ -160,8 +160,8 @@ class MClssettles extends _MCommon
                 {
                     if(isManager)
                     {
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToDone" ${model.getPk()} btn-type="normal">입금확인</button> `;
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToLoss" ${model.getPk()} btn-type="delete">손실처리</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToDone" ${model.getPk()} btn-type="normal">입금확인</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToLoss" ${model.getPk()} btn-type="delete">손실처리</button> `;
                     }
                     break;
                 }
@@ -170,15 +170,15 @@ class MClssettles extends _MCommon
                     if(isManager)
                     {
                         if(model.isIn5MinWhenSettledonedt())
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToWait" ${model.getPk()} btn-type="cancel">입금확인취소</button> `;
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToLoss" ${model.getPk()} btn-type="delete">손실처리</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToWait" ${model.getPk()} btn-type="cancel">입금확인취소</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToLoss" ${model.getPk()} btn-type="delete">손실처리</button> `;
                     }
                     break;
                 }
                 case GGF.Clssettle.Settlestatus.LOSS :
                 {
                     if(isManager)
-                        btnHtml += ` <button class="common-btn-outline MClssettle-make-btn-settlestatusToDone" ${model.getPk()} btn-type="normal">입금확인</button> `;
+                        btnHtml += ` <button class="common-btn-outer MClssettle-make-btn-settlestatusToDone" ${model.getPk()} btn-type="normal">입금확인</button> `;
                     break;
                 }
             }
@@ -192,7 +192,7 @@ class MClssettles extends _MCommon
                         <span class="common-block">입금계좌</span>
                         <span class="common-block">
                             <span style="vertical-align:middle">${model.getBankname()} ${model.getBaccacct()} ${model.getBaccname()}</span>
-                            <button class="common-btn-outline MClssettle-make-btn-copyBacc common-marLt03" copytext="${model.getBankname()} ${model.getBaccacct()}">복사</button>
+                            <button class="common-btn-outer MClssettle-make-btn-copyBacc common-marLt03" copytext="${model.getBankname()} ${model.getBaccacct()}">복사</button>
                         </span>
                     </div>
                 `;
@@ -216,7 +216,7 @@ class MClssettles extends _MCommon
                     ${model.getBillpointed() >= 1  ? `<span class="common-block common-alignR common-colorBody common-fonts08">사전정산:${model.getBillpointedWon()}</span>` : ""}
                     ${model.getBillmemo()    != "" ? `<span class="common-block common-alignR common-colorBody common-fonts08">보정사유:${model.getBillmemo()}</span>` : ""}
                     <span class="common-block common-marUp common-fonts09">
-                        <button class="common-btn-outline commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>일정상세</button>
+                        <button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>일정상세</button>
                         ${btnHtml}
                     </span>
                     ${baccHtml}

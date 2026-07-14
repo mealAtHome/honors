@@ -4,6 +4,7 @@
 /* ========================= */
 /* colors */
 /* ========================= */
+/* #1B4BB8 */
 /* rgb(2   , 6   , 84  ); #020654 */
 .common-colorFont[font-color=main] {
   color: #020654;
@@ -17,6 +18,21 @@
   color: #020654;
   border: 2px solid #020654;
   background: #020654;
+}
+
+/* rgb(2   , 6   , 84  ); #020654 */
+.common-colorFont[font-color=dark] {
+  color: #020421;
+}
+
+.common-colorDark {
+  color: #020421;
+}
+
+.common-card[card-color=dark] {
+  color: #020421;
+  border: 2px solid #020421;
+  background: #020421;
 }
 
 /* rgb(27  , 42  , 107 ); #1B2A6B */
@@ -154,6 +170,21 @@
   background: #2865ff;
 }
 
+/* rgb(234 , 240 , 255 ); #EAF0FF */
+.common-colorFont[font-color=dtil] {
+  color: #EAF0FF;
+}
+
+.common-colorDtil {
+  color: #EAF0FF;
+}
+
+.common-card[card-color=dtil] {
+  color: #EAF0FF;
+  border: 2px solid #EAF0FF;
+  background: #EAF0FF;
+}
+
 /* rgb(212 , 173 , 0   ); #d4ad00 */
 .common-colorFont[font-color=hold] {
   color: #d4ad00;
@@ -227,21 +258,6 @@
   color: #780000;
   border: 2px solid #780000;
   background: #780000;
-}
-
-/* rgb(100 , 100 , 100 ); #636363 */
-.common-colorFont[font-color=diss] {
-  color: #646464;
-}
-
-.common-colorDiss {
-  color: #646464;
-}
-
-.common-card[card-color=diss] {
-  color: #646464;
-  border: 2px solid #646464;
-  background: #646464;
 }
 
 /* rgb(100 , 100 , 100 ); #636363 */
@@ -529,6 +545,10 @@
 
 .common-marDw04 {
   margin-bottom: 0.4em;
+}
+
+.common-marDw06 {
+  margin-bottom: 0.6em;
 }
 
 .common-marDw08 {
