@@ -80,7 +80,7 @@
 .common-tbl-normal > tfoot > tr > td
 {
     @include pad04;
-    @include colorGrndBackSolid;
+    background-color: $colorBodyBack;
     @include alignC;
     @include fontwB;
 }
@@ -134,7 +134,7 @@
 .common-tbl-slideformFooterBtn > tbody > tr > th
 {
     @include padZZ;
-    @include colorGrndBackSolid;
+    background-color: $colorBodyBack;
     @include alignC;
 }
 .common-tbl-slideformFooterBtn > thead > tr > td,
@@ -174,12 +174,12 @@
     @include pad04;
 }
 .common-tbl-vertical[tbl-type=normal]    { border: 1px solid $colorLine; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { @include colorGrndBackSolid; border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background-color: $colorBodyBack; border: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { width: 5%;  @include alignR; @include fontwB; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid $colorLine; }
 
 .common-tbl-vertical[tbl-type=minimal]   { border: 1px solid $colorLine; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { @include colorGrndBackSolid; border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background-color: $colorBodyBack; border: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { width: 5%;  @include alignR; @include fontwN; }
 .common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid $colorLine; }
 

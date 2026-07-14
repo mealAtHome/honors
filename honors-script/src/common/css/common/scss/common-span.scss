@@ -39,7 +39,7 @@
     @include marUD01;
     @include marLRZZ;
     @include pad05;
-    @include transparent;
+    @include backgroundTrans;
     @include radiusCurv04;
     @include fonts09;
     @include fonth14;
@@ -49,7 +49,7 @@
 .common-span-label
 {
     @include colorMainFont;
-    @include transparent;
+    @include backgroundTrans;
     border: 1px solid $colorMain;
 }
 .common-span-label[label_type=inline]

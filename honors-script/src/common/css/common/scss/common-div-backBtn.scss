@@ -24,9 +24,9 @@
     @include colorWhitFont;
     width: 2.6em;
     height: 2.6em;
-    @include colorBlckShad;
+    @include colorMainShad;
 }
 .common-div-backBtn:active
 {
-    @include colorBlckBackTrans;
+    @include colorMainBackTrans;
 }

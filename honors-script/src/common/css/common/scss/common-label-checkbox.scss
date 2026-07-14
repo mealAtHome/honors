@@ -47,13 +47,13 @@
     left: 0;
     height: 26px;
     width: 26px;
-    @include colorGy23BackTrans;
+    @include colorInfoBackTrans;
 }
 
 /* On mouse-over, add a gray background color */
 .common-label-checkbox:hover input[type=checkbox] ~ span
 {
-    @include colorGy19BackTrans;
+    @include colorSideBackTrans;
 }
 
 /* When the checkbox button is checked, add a blue background */

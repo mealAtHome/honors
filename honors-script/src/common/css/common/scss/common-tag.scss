@@ -18,6 +18,7 @@
 /* --------------- */
 /* font style */
 /* --------------- */
+.common-accent         { @include fontwB; }
 .common-strong         { @include fontwB; @include fonts11; }
 .common-mineHead[me=y] { @include colorMainBackTrans; }
 .common-mineBody[me=y] { @include fontwB; @include colorMainFont; }

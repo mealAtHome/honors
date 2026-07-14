@@ -33,14 +33,14 @@
     left: 0;
     height: 26px;
     width: 26px;
-    @include colorGy23BackTrans;
+    @include colorInfoBackTrans;
     @include radiusHalf;
 }
 
 /* On mouse-over, add a gray background color */
 .common-label-radio:hover input[type=radio] ~ span
 {
-    @include colorGy19BackTrans;
+    @include colorSideBackTrans;
 }
 
 /* When the radio button is checked, add a blue background */

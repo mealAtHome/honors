@@ -19,7 +19,7 @@ div { @include displayBk; }
 {
     width: 0.6em;
     height: 0.6em;
-    @include colorSideBackSolid;
+    @include colorNtceBackSolid;
     @include radiusHalf;
     flex-shrink: 0;
 }
@@ -77,9 +77,9 @@ div { @include displayBk; }
 {
     width: 100%;
     height: 6px;
-    @include colorGy23BackTrans;
+    @include colorInfoBackTrans;
     overflow: hidden;
-    box-shadow: inset 0 2px 5px $colorGy12Back;
+    box-shadow: inset 0 2px 5px $colorBodyBack;
     @include marDw08;
 }
 
@@ -211,11 +211,11 @@ div { @include displayBk; }
     @include boxsizeC;
     @include alignL;
     @include colorWhitFont;
-    @include colorBlckShad;
+    /* @include colorMainShad; */
 }
-.common-div-card[card-type=warning] { @include colorWarnFont; @include colorWarnBackTrans; @include colorWarnShad; }
-.common-div-card[card-type=notice]  { @include colorNtceFont; @include colorNtceBackTrans; @include colorNtceShad; }
-.common-div-card[card-type=hero]    { @include colorMainFont; @include colorMainBackTrans; @include colorMainShad; }
+.common-div-card[card-type=warning] { @include colorWarnFont; background: $colorWarnBack; /* @include colorWarnShad; */ }
+.common-div-card[card-type=notice]  { @include colorNtceFont; background: $colorNtceBack; /* @include colorNtceShad; */ }
+.common-div-card[card-type=hero]    { @include colorMainFont; background: $colorMainBack; /* @include colorMainShad; */ }
 
 /* ============================== */
 /* 에러 메시지용 */
@@ -229,17 +229,18 @@ div { @include displayBk; }
     @include alignL;
     @include fonth16;
 }
-.common-div-msg[common-div-msg-type=error]   { @include colorErrrFont; @include colorErrrBackTrans; @include colorErrrShad; }
-.common-div-msg[common-div-msg-type=warning] { @include colorWarnFont; @include colorWarnBackTrans; @include colorWarnShad; }
-.common-div-msg[common-div-msg-type=allow]   { @include colorAllwFont; @include colorAllwBackTrans; @include colorAllwShad; }
+.common-div-msg[common-div-msg-type=error]   { @include colorErrrFont; background: $colorErrrBack; /* @include colorErrrShad; */ }
+.common-div-msg[common-div-msg-type=warning] { @include colorWarnFont; background: $colorWarnBack; /* @include colorWarnShad; */ }
+.common-div-msg[common-div-msg-type=allow]   { @include colorAllwFont; background: $colorAllwBack; /* @include colorAllwShad; */ }
 
 /* ============================== */
 /* 패드를 사용하지 않는 DIV */
 /* ============================== */
 .common-div-mobile
 {
-    max-width: 400px;
+    max-width: 600px;
     @include padZZ;
+    @include marAuto;
     @include boxsizeC;
 }
 
@@ -256,7 +257,7 @@ div { @include displayBk; }
     @include colorWhitFont;
     width: 100%;
     height: 52px;
-    @include colorBlckShad;
+    /* @include colorMainShad; */
 }
 .common-div-header > div[header=back]  { @include displayIn; width: auto; line-height: 52px; }
 .common-div-header > div[header=title] { @include displayIn; width: auto; line-height: 52px; @include padLt05; @include fonts12; @include fontwB; }
@@ -275,14 +276,14 @@ div { @include displayBk; }
 {
     @include displayIn;
     border-radius: 38px;
-    @include colorGy23BackTrans;
+    @include colorInfoBackTrans;
 }
 .common-btn-pagenationBtn
 {
     @include displayIn;
     width: 38px;
     height: 38px;
-    @include colorGy23BackSolid;
+    @include colorInfoBackSolid;
     @include radiusFull;
     border: none;
     line-height: 37px;
@@ -350,7 +351,7 @@ div { @include displayBk; }
     @include pad04;
     @include alignL;
     @include fonth16;
-    @include colorGy23BackTrans;
+    @include colorInfoBackTrans;
 }
 
 /* ============================== */
@@ -376,9 +377,9 @@ div { @include displayBk; }
 .common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include fonth14; @include alignC; @include fontwN; }
 .common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; @include alignC; @include fontwB; }
 
-/* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { @include colorGy23BackTrans; @include colorGy15Font; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { @include colorInfoBackTrans; @include colorBodyFont; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { @include colorMainBackTrans; @include colorWhitFont; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { @include colorWhitBackTrans; @include colorGy10Font; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { @include colorWhitBackTrans; @include colorBodyFont; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; @include pad03; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; @include fonts10; @include alignC; @include fontwB; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fonts12; }
@@ -386,8 +387,8 @@ div { @include displayBk; }
 .common-div-calendarSquareWeekTop > button
 {
     @include colorWhitFont;
-    border: 2px solid $colorGy23;
-    @include colorGy10Font;
+    border: 2px solid $colorInfo;
+    @include colorBodyFont;
     @include padUD04;
     @include padLR08;
     @include radiusCurv04;
@@ -401,6 +402,6 @@ div { @include displayBk; }
     @include marLt03;
 }
 .common-div-calendarSquareWeekTop > button:nth-child(1) {  @include marLtZZ; }
-/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { @include colorGy23BackTrans; @include colorGy15Font; border: 2px solid $colorGy19; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { @include colorInfoBackTrans; @include colorBodyFont; border: 2px solid $colorSide; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                              @include colorMainFont; border: 2px solid $colorMain; }
-/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                              @include colorGy10Font; border: 2px solid $colorGy23; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                              @include colorBodyFont; border: 2px solid $colorInfo; }

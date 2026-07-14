@@ -87,7 +87,7 @@ GGC.Common =
     /* ============================== */
     pricePretty  (val=0) { return GGC.Common.numToHangul(val); },
     priceWon     (val=0) { return GGC.Common.comma(val) + "원"; },
-    priceWonFont (val) { return `<span class="common-colorPick" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.comma(val)}원</span>`; },
+    priceWonFont (val) { return `<span class="common-colorFont" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.comma(val)}원</span>`; },
     priceHan     (val=0) { return GGC.Common.numToHangul(val); },
 
     /* 기호가 붙는 옵션가격 */
@@ -98,7 +98,7 @@ GGC.Common =
             rslt = "+" + rslt;
         return rslt;
     },
-    wonColor(val) { return `<span class="common-colorPick" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */
+    wonColor(val) { return `<span class="common-colorFont" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */
 
 
     /* ============================== */

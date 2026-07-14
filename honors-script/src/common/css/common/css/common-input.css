@@ -5,349 +5,259 @@
 /* ========================= */
 /* colors */
 /* ========================= */
-/* #020654 */
-.common-colorPick[font-colro=Main] {
-  color: rgb(2, 6, 84);
+/* rgb(2   , 6   , 84  ); #020654 */
+.common-colorFont[font-color=main] {
+  color: #020654;
 }
 
 .common-colorMain {
-  color: rgb(2, 6, 84);
+  color: #020654;
 }
 
 .common-card[card-color=main] {
-  color: rgb(2, 6, 84);
-  border: 2px solid rgb(2, 6, 84);
-  background: rgb(2, 6, 84);
+  color: #020654;
+  border: 2px solid #020654;
+  background: #020654;
 }
 
-/* #1B2A6B */
-.common-colorPick[font-colro=Head] {
-  color: rgb(27, 42, 107);
+/* rgb(27  , 42  , 107 ); #1B2A6B */
+.common-colorFont[font-color=head] {
+  color: #1b2a6b;
 }
 
 .common-colorHead {
-  color: rgb(27, 42, 107);
+  color: #1b2a6b;
 }
 
 .common-card[card-color=head] {
-  color: rgb(27, 42, 107);
-  border: 2px solid rgb(27, 42, 107);
-  background: rgb(27, 42, 107);
+  color: #1b2a6b;
+  border: 2px solid #1b2a6b;
+  background: #1b2a6b;
 }
 
-/* #3D6BF5 */
-.common-colorPick[font-colro=Side] {
-  color: rgb(61, 107, 245);
+/* rgb(61  , 107 , 245 ); #3D6BF5 */
+.common-colorFont[font-color=side] {
+  color: #3d6bf5;
 }
 
 .common-colorSide {
-  color: rgb(61, 107, 245);
+  color: #3d6bf5;
 }
 
 .common-card[card-color=side] {
-  color: rgb(61, 107, 245);
-  border: 2px solid rgb(61, 107, 245);
-  background: rgb(61, 107, 245);
+  color: #3d6bf5;
+  border: 2px solid #3d6bf5;
+  background: #3d6bf5;
 }
 
-/* #7A8099 */
-.common-colorPick[font-colro=Body] {
-  color: rgb(122, 128, 153);
+/* rgb(122 , 128 , 153 ); #7A8099 */
+.common-colorFont[font-color=body] {
+  color: #3c435c;
 }
 
 .common-colorBody {
-  color: rgb(122, 128, 153);
+  color: #3c435c;
 }
 
 .common-card[card-color=body] {
-  color: rgb(122, 128, 153);
-  border: 2px solid rgb(122, 128, 153);
-  background: rgb(122, 128, 153);
+  color: #3c435c;
+  border: 2px solid #3c435c;
+  background: #3c435c;
 }
 
-/* #cfd2e1 */
-.common-colorPick[font-colro=Grnd] {
-  color: rgb(207, 210, 225);
-}
-
-.common-colorGrnd {
-  color: rgb(207, 210, 225);
-}
-
-.common-card[card-color=grnd] {
-  color: rgb(207, 210, 225);
-  border: 2px solid rgb(207, 210, 225);
-  background: rgb(207, 210, 225);
-}
-
-/* #7A8099 */
-.common-colorPick[font-colro=Line] {
-  color: rgb(122, 128, 153);
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
+.common-colorFont[font-color=line] {
+  color: #e4e7f0;
 }
 
 .common-colorLine {
-  color: rgb(122, 128, 153);
+  color: #e4e7f0;
 }
 
 .common-card[card-color=line] {
-  color: rgb(122, 128, 153);
-  border: 2px solid rgb(122, 128, 153);
-  background: rgb(122, 128, 153);
+  color: #e4e7f0;
+  border: 2px solid #e4e7f0;
+  background: #e4e7f0;
 }
 
-/* #000278 */
-.common-colorPick[font-colro=pstv] {
-  color: rgb(0, 2, 120);
+/* rgb(0   , 2   , 120 ); #000278 */
+.common-colorFont[font-color=pstv] {
+  color: #000278;
 }
 
 .common-colorPstv {
-  color: rgb(0, 2, 120);
+  color: #000278;
 }
 
 .common-card[card-color=pstv] {
-  color: rgb(0, 2, 120);
-  border: 2px solid rgb(0, 2, 120);
-  background: rgb(0, 2, 120);
+  color: #000278;
+  border: 2px solid #000278;
+  background: #000278;
 }
 
-/* #009600 */
-.common-colorPick[font-colro=allw] {
-  color: rgb(0, 150, 0);
+/* rgb(0   , 150 , 0   ); #009600 */
+.common-colorFont[font-color=allw] {
+  color: #009600;
 }
 
 .common-colorAllw {
-  color: rgb(0, 150, 0);
+  color: #009600;
 }
 
 .common-card[card-color=allw] {
-  color: rgb(0, 150, 0);
-  border: 2px solid rgb(0, 150, 0);
-  background: rgb(0, 150, 0);
+  color: #009600;
+  border: 2px solid #009600;
+  background: #009600;
 }
 
-/* #039a00 */
-.common-colorPick[font-colro=prog] {
-  color: rgb(3, 154, 0);
+/* rgb(3   , 154 , 0   ); #039a00 */
+.common-colorFont[font-color=prog] {
+  color: #039a00;
 }
 
 .common-colorProg {
-  color: rgb(3, 154, 0);
+  color: #039a00;
 }
 
 .common-card[card-color=prog] {
-  color: rgb(3, 154, 0);
-  border: 2px solid rgb(3, 154, 0);
-  background: rgb(3, 154, 0);
+  color: #039a00;
+  border: 2px solid #039a00;
+  background: #039a00;
 }
 
-/* #374B9B */
-.common-colorPick[font-colro=ntce] {
-  color: rgb(55, 75, 155);
+/* rgb(40  , 101 , 255 ); #d9e4ff */
+.common-colorFont[font-color=ntce] {
+  color: #2865ff;
 }
 
 .common-colorNtce {
-  color: rgb(55, 75, 155);
+  color: #2865ff;
 }
 
 .common-card[card-color=ntce] {
-  color: rgb(55, 75, 155);
-  border: 2px solid rgb(55, 75, 155);
-  background: rgb(55, 75, 155);
+  color: #2865ff;
+  border: 2px solid #2865ff;
+  background: #2865ff;
 }
 
-/* #d4ad00 */
-.common-colorPick[font-colro=hold] {
-  color: rgb(212, 173, 0);
+/* rgb(40  , 101 , 255 ); #d9e4ff */
+.common-colorFont[font-color=info] {
+  color: #2865ff;
+}
+
+.common-colorInfo {
+  color: #2865ff;
+}
+
+.common-card[card-color=info] {
+  color: #2865ff;
+  border: 2px solid #2865ff;
+  background: #2865ff;
+}
+
+/* rgb(212 , 173 , 0   ); #d4ad00 */
+.common-colorFont[font-color=hold] {
+  color: #d4ad00;
 }
 
 .common-colorHold {
-  color: rgb(212, 173, 0);
+  color: #d4ad00;
 }
 
 .common-card[card-color=hold] {
-  color: rgb(212, 173, 0);
-  border: 2px solid rgb(212, 173, 0);
-  background: rgb(212, 173, 0);
+  color: #d4ad00;
+  border: 2px solid #d4ad00;
+  background: #d4ad00;
 }
 
-/* #FF7415 */
-.common-colorPick[font-colro=cncl] {
-  color: rgb(255, 116, 21);
+/* rgb(255 , 116 , 21  ); #FF7415 */
+.common-colorFont[font-color=cncl] {
+  color: #ff7415;
 }
 
 .common-colorCncl {
-  color: rgb(255, 116, 21);
+  color: #ff7415;
 }
 
 .common-card[card-color=cncl] {
-  color: rgb(255, 116, 21);
-  border: 2px solid rgb(255, 116, 21);
-  background: rgb(255, 116, 21);
+  color: #ff7415;
+  border: 2px solid #ff7415;
+  background: #ff7415;
 }
 
-/* #FF7415 */
-.common-colorPick[font-colro=warn] {
-  color: rgb(255, 116, 21);
+/* rgb(255 , 116 , 21  ); #FF7415 */
+.common-colorFont[font-color=warn] {
+  color: #ff7415;
 }
 
 .common-colorWarn {
-  color: rgb(255, 116, 21);
+  color: #ff7415;
 }
 
 .common-card[card-color=warn] {
-  color: rgb(255, 116, 21);
-  border: 2px solid rgb(255, 116, 21);
-  background: rgb(255, 116, 21);
+  color: #ff7415;
+  border: 2px solid #ff7415;
+  background: #ff7415;
 }
 
-/* #ce2727 */
-.common-colorPick[font-colro=errr] {
-  color: rgb(206, 39, 39);
+/* rgb(206 , 39  , 39  ); #ce2727 */
+.common-colorFont[font-color=errr] {
+  color: #ce2727;
 }
 
 .common-colorErrr {
-  color: rgb(206, 39, 39);
+  color: #ce2727;
 }
 
 .common-card[card-color=errr] {
-  color: rgb(206, 39, 39);
-  border: 2px solid rgb(206, 39, 39);
-  background: rgb(206, 39, 39);
+  color: #ce2727;
+  border: 2px solid #ce2727;
+  background: #ce2727;
 }
 
-/* #780000 */
-.common-colorPick[font-colro=ngtv] {
-  color: rgb(120, 0, 0);
+/* rgb(120 , 0   , 0   ); #780000 */
+.common-colorFont[font-color=ngtv] {
+  color: #780000;
 }
 
 .common-colorNgtv {
-  color: rgb(120, 0, 0);
+  color: #780000;
 }
 
 .common-card[card-color=ngtv] {
-  color: rgb(120, 0, 0);
-  border: 2px solid rgb(120, 0, 0);
-  background: rgb(120, 0, 0);
+  color: #780000;
+  border: 2px solid #780000;
+  background: #780000;
 }
 
-/* #000000 */
-.common-colorPick[font-colro=blck] {
-  color: rgb(0, 0, 0);
-}
-
-.common-colorBlck {
-  color: rgb(0, 0, 0);
-}
-
-.common-card[card-color=blck] {
-  color: rgb(0, 0, 0);
-  border: 2px solid rgb(0, 0, 0);
-  background: rgb(0, 0, 0);
-}
-
-/* #ffffff */
-.common-colorPick[font-colro=whit] {
-  color: rgb(255, 255, 255);
-}
-
-.common-colorWhit {
-  color: rgb(255, 255, 255);
-}
-
-.common-card[card-color=whit] {
-  color: rgb(255, 255, 255);
-  border: 2px solid rgb(255, 255, 255);
-  background: rgb(255, 255, 255);
-}
-
-/* #636363 */
-.common-colorPick[font-colro=diss] {
-  color: rgb(100, 100, 100);
+/* rgb(100 , 100 , 100 ); #636363 */
+.common-colorFont[font-color=diss] {
+  color: #646464;
 }
 
 .common-colorDiss {
-  color: rgb(100, 100, 100);
+  color: #646464;
 }
 
 .common-card[card-color=diss] {
-  color: rgb(100, 100, 100);
-  border: 2px solid rgb(100, 100, 100);
-  background: rgb(100, 100, 100);
+  color: #646464;
+  border: 2px solid #646464;
+  background: #646464;
 }
 
-/* #e6e6e6 */
-.common-colorPick[font-colro=gy23] {
-  color: rgb(230, 230, 230);
+/* rgb(100 , 100 , 100 ); #636363 */
+.common-colorFont[font-color=whit] {
+  color: #ffffff;
 }
 
-.common-colorGy23 {
-  color: rgb(230, 230, 230);
+.common-colorWhit {
+  color: #ffffff;
 }
 
-.common-card[card-color=gy23] {
-  color: rgb(230, 230, 230);
-  border: 2px solid rgb(230, 230, 230);
-  background: rgb(230, 230, 230);
-}
-
-/* #bebebe */
-.common-colorPick[font-colro=gy19] {
-  color: rgb(190, 190, 190);
-}
-
-.common-colorGy19 {
-  color: rgb(190, 190, 190);
-}
-
-.common-card[card-color=gy19] {
-  color: rgb(190, 190, 190);
-  border: 2px solid rgb(190, 190, 190);
-  background: rgb(190, 190, 190);
-}
-
-/* #969696 */
-.common-colorPick[font-colro=gy15] {
-  color: rgb(150, 150, 150);
-}
-
-.common-colorGy15 {
-  color: rgb(150, 150, 150);
-}
-
-.common-card[card-color=gy15] {
-  color: rgb(150, 150, 150);
-  border: 2px solid rgb(150, 150, 150);
-  background: rgb(150, 150, 150);
-}
-
-/* #808080 */
-.common-colorPick[font-colro=gy12] {
-  color: rgb(128, 128, 128);
-}
-
-.common-colorGy12 {
-  color: rgb(128, 128, 128);
-}
-
-.common-card[card-color=gy12] {
-  color: rgb(128, 128, 128);
-  border: 2px solid rgb(128, 128, 128);
-  background: rgb(128, 128, 128);
-}
-
-/* #646464 */
-.common-colorPick[font-colro=gy10] {
-  color: rgb(100, 100, 100);
-}
-
-.common-colorGy10 {
-  color: rgb(100, 100, 100);
-}
-
-.common-card[card-color=gy10] {
-  color: rgb(100, 100, 100);
-  border: 2px solid rgb(100, 100, 100);
-  background: rgb(100, 100, 100);
+.common-card[card-color=whit] {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  background: #ffffff;
 }
 
 /* ========================= */
@@ -551,6 +461,11 @@
   margin-bottom: 0.6em;
 }
 
+.common-marUD07 {
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+}
+
 .common-marUD08 {
   margin-top: 0.8em;
   margin-bottom: 0.8em;
@@ -674,9 +589,6 @@
 }
 
 /* ========================= */
-/* btns */
-/* ========================= */
-/* ========================= */
 /* 각 인풋박스 */
 /* ========================= */
 .common-div-formField > .common-input-field {
@@ -692,14 +604,14 @@
   padding-bottom: 0.3em;
   font-size: 1.1em;
   border: none;
-  border-bottom: 1px solid rgb(122, 128, 153);
+  border-bottom: 1px solid #e4e7f0;
   text-align: left;
   background: transparent;
 }
 
 .common-input-field:focus {
   border: none;
-  border-bottom: 3px solid rgb(2, 6, 84);
+  border-bottom: 3px solid #020654;
 }
 
 .common-div-formField > .common-textarea-field {
@@ -713,13 +625,13 @@
 .common-textarea-field {
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid rgb(122, 128, 153);
+  border: 1px solid #e4e7f0;
   background: transparent;
 }
 
 .common-textarea-field:focus {
-  border: 1px solid rgb(2, 6, 84);
-  border-bottom: 3px solid rgb(2, 6, 84);
+  border: 1px solid #020654;
+  border-bottom: 3px solid #020654;
 }
 
 /* ========================= */
@@ -732,15 +644,15 @@
   /* @include boxsizeC; */
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid rgb(122, 128, 153);
+  border: 1px solid #e4e7f0;
 }
 
 .common-input-text:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 1px solid rgb(2, 6, 84);
-  box-shadow: 0px 0px 5px rgb(2, 6, 84);
+  border: 1px solid #020654;
+  box-shadow: 0px 0px 5px #020654;
 }
 
 .common-text {
@@ -760,13 +672,13 @@
   /* @include boxsizeC; */
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid rgb(122, 128, 153);
+  border: 1px solid #e4e7f0;
 }
 
 .common-textarea:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 1px solid rgb(2, 6, 84);
-  box-shadow: 0px 0px 5px rgb(2, 6, 84);
+  border: 1px solid #020654;
+  box-shadow: 0px 0px 5px #020654;
 }

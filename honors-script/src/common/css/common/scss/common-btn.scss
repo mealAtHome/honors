@@ -3,27 +3,36 @@
 /* ============================== */
 /* main button */
 /* ============================== */
+@mixin btnOutlineNormal   ($color) { border:1px solid $color;                        color:$color;     } @mixin btnOutlineActive ($color) { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
+@mixin btnInlineNormal    ($color) { border:1px solid $color; background:$color;     color:$colorWhit; } @mixin btnInlineActive  ($color) { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
+@mixin btnOutlineDisabled ($color) { border:1px solid $color; background:$colorWhit; color:$color;     }
+@mixin btnInlineDisabled  ($color) { border:1px solid $color; background:$colorDiss; color:$colorWhit; }
+
 .common-btn-light,
 .common-btn-outline,
 .common-btn-inline,
 .common-btn-round,
-.common-btn-radio
+.common-btn-radio,
+.common-btn-flat
 {
     @include displayIn;
     @include pad04;
     @include fonth14;
     text-decoration: none;
-    @include colorBlckShad;
-    @include colorWhitFont;
+    /* @include colorMainShad; */
+    /* @include colorWhitFont; */
     @include radiusCurv04;
+    @include colorWhitBackSolid;
 }
 .common-btn-round { @include radiusFull; }
+.common-btn-flat  { background-color: transparent; color: $colorBody; border: 1px solid $colorMain; }
 
 .common-btn-light:hover,
 .common-btn-outline:hover,
 .common-btn-inline:hover,
 .common-btn-round:hover,
-.common-btn-radio:hover
+.common-btn-radio:hover,
+.common-btn-flat:hover
 {
     outline: none;
     cursor: pointer;
@@ -97,7 +106,7 @@
 {
     @include displayIn;
     @include pad05;
-    @include transparent;
+    @include backgroundTrans;
     border: none;
     @include fonth14;
 }

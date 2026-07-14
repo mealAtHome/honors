@@ -20,5 +20,5 @@ GGC.Clssettle =
         return "";
     },
     settlestatusCard(val) { return `<span class="common-card" card-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
-    settlestatusFont(val) { return `<span class="common-colorPick" font-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
+    settlestatusFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
 }

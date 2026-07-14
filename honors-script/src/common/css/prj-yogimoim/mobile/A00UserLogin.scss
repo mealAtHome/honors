@@ -48,20 +48,19 @@
 .ULGN-input-text
 {
     @include displayBk;
-    width: 15em;
-    height: auto;
-    border: 0.05em solid $colorBody;
-    @include fonts12;
-    @include alignL;
-    @include transparent;
-    @include radiusCurv04;
+    width: 100%;
     @include marUD05;
     @include marAuto;
     @include pad04;
+    border: 1px solid $colorBody;
+    @include fonts12;
+    @include alignL;
+    @include backgroundTrans;
+    @include radiusCurv04;
 }
 .ULGN-input-text:focus
 {
-    border: 0.1em solid $colorMain;
+    border: 2px solid $colorMain;
     box-shadow: none;
 }
 .ULGN-img-input
@@ -77,10 +76,11 @@
 .ULGN-login-btn
 {
     @include displayBk;
+    width: 100%;
+    height: 3em;
     @include marUD08;
     @include marAuto;
-    width: 18em;
-    height: 3em;
+    @include padUD07;
 }
 
 #ULGN-tbl-bottomRight
@@ -105,8 +105,8 @@
     @include marAuto;
     width: 15em;
 }
-.ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; @include colorLineBackSolid; }
-.ULGN-div-divider > div:nth-child(2) { @include colorLineFont; }
-.ULGN-div-divider > div:nth-child(3) { flex: 1; height: 0.05em; @include colorLineBackSolid; }
+.ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; @include colorBodyBackSolid; }
+.ULGN-div-divider > div:nth-child(2) { @include colorBodyFont; }
+.ULGN-div-divider > div:nth-child(3) { flex: 1; height: 0.05em; @include colorBodyBackSolid; }
 
 
