@@ -7,24 +7,25 @@ class GGbackbtnHtml extends HTMLElement
     {
         this.innerHTML =
         `
-            <span style="fill:rgb(0,0,0); padding:0px 12px; height:100%; margin-left:6px;">
-                <svg
-                    style="display:inline-flex; line-height:52px;"
-                    width="16px"
-                    height="16px"
-                    viewBox="0 0 16 16"
-                    version="1.1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                >
-                    <defs></defs>
-                    <g stroke="none" stroke-width="1" fill-rule="evenodd">
-                        <g transform="translate(-32.000000, -32.000000)" fill-rule="nonzero">
-                            <polygon id="md-back-button-icon" points="48 39 35.83 39 41.42 33.41 40 32 32 40 40 48 41.41 46.59 35.83 41 48 41"></polygon>
+            <div style="fill:rgb(0,0,0); padding:0px 12px; height:100%; margin-left:6px;">
+                <div style="display:flex; align-items: center; height:100%;">
+                    <svg
+                        width="16px"
+                        height="16px"
+                        viewBox="0 0 16 16"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                    >
+                        <defs></defs>
+                        <g stroke="none" stroke-width="1" fill-rule="evenodd">
+                            <g transform="translate(-32.000000, -32.000000)" fill-rule="nonzero">
+                                <polygon id="md-back-button-icon" points="48 39 35.83 39 41.42 33.41 40 32 32 40 40 48 41.41 46.59 35.83 41 48 41"></polygon>
+                            </g>
                         </g>
-                    </g>
-                </svg>
-            </span>
+                    </svg>
+                </div>
+            </div>
         `;
     }
 }
