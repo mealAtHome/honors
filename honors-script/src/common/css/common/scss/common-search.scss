@@ -8,11 +8,11 @@
     width: 13em;
     @include fonts10;
     @include fonth16;
-    @include verticalM;
+    vertical-align: middle;
 }
 .common-search-div-top > button
 {
     @include fonth16;
     @include padLR10;
-    @include verticalM;
+    vertical-align: middle;
 }

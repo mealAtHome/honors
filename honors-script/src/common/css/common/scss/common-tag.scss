@@ -3,33 +3,33 @@
 /* --------------- */
 /* margin, padding */
 /* --------------- */
-.common-block           { @include displayBk; @include fonth16; }
-.common-inline          { @include displayIn; @include fonth16; }
-.common-indent04        { @include displayBk; @include padLt04; }
-.common-indent08        { @include displayBk; @include padLt08; }
-.common-indent12        { @include displayBk; @include padLt12; }
-.common-marUD           { @include displayBk; @include marUD04; }
-.common-marUp           { @include displayBk; @include marUp04; }
+.common-block           { display: block; @include fonth16; }
+.common-inline          { display: inline-block; @include fonth16; }
+.common-indent04        { display: block; @include padLt04; }
+.common-indent08        { display: block; @include padLt08; }
+.common-indent12        { display: block; @include padLt12; }
+.common-marUD           { display: block; @include marUD04; }
+.common-marUp           { display: block; @include marUp04; }
 .common-padUD           {                     @include padUD02; }
-.common-cushionUp       { @include displayBk; @include marUp06; }
-.common-cushionUD       { @include displayBk; @include marUD06; }
-.common-cushionDw       { @include displayBk; @include marDw04; }
+.common-cushionUp       { display: block; @include marUp06; }
+.common-cushionUD       { display: block; @include marUD06; }
+.common-cushionDw       { display: block; @include marDw04; }
 
 /* --------------- */
 /* font style */
 /* --------------- */
-.common-accent         { @include fontwB; }
-.common-strong         { @include fontwB; @include fonts11; }
+.common-accent         { font-weight: bold; }
+.common-strong         { font-weight: bold; @include fonts11; }
 .common-mineHead[me=y] { @include colorMainBackTrans; }
-.common-mineBody[me=y] { @include fontwB; @include colorMainFont; }
+.common-mineBody[me=y] { font-weight: bold; @include colorMainFont; }
 
 /* --------------- */
 /* common-card */
 /* --------------- */
 .common-card
 {
-    @include displayIn;
-    @include fontwN;
+    display: inline-block;
+    font-weight: normal;
     @include padUD03;
     @include padLR06;
 }

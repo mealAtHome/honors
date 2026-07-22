@@ -16,7 +16,7 @@
     font-size: 1em;
     font-weight: 400;
     line-height: 1.6em;
-    @include verticalM;
+    vertical-align: middle;
 }
 
 /* ============================== */
@@ -30,7 +30,7 @@
 .common-text-insertPage
 {
     width: 70%;
-    @include alignC;
+    text-align: center;
 }
 .common-text-insertPage[device_kind=web] { width: 50%; }
 
@@ -40,12 +40,12 @@
 
 .common-text
 {
-    @include alignC;
+    text-align: center;
 }
 
 pre, xmp
 {
-    @include displayIn;
+    display: inline-block;
     @include marZZ;
     @include fonth16;
     word-break: break-all;

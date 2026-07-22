@@ -6,18 +6,18 @@
 .common-p-thankyou
 {
     @include marUD05;
-    @include alignC;
+    text-align: center;
     @include fonts12;
     @include colorMainFont;
-    @include fontwB;
+    font-weight: bold;
 }
 
 .common-p-title
 {
-    @include displayBk;
+    display: block;
     @include marUD04;
     @include colorMainFont;
-    @include fontwB;
+    font-weight: bold;
     @include fonth14;
     @include fonts11;
 }
@@ -26,10 +26,10 @@
 
 .common-p-entityTitle
 {
-    @include displayBk;
+    display: block;
     @include marUD04;
     color: gray;
-    @include fontwB;
+    font-weight: bold;
     @include fonth14;
     @include fonts10;
 }
@@ -39,7 +39,7 @@
 /* ------------------------------ */
 /* insert 페이지의 타이틀 */
 /* ------------------------------ */
-.common-p-insertTitle > span { @include displayBk; @include marUDZZ; @include marAuto; @include alignC; }
+.common-p-insertTitle > span { display: block; @include marUDZZ; @include marAuto; text-align: center; }
 .common-p-insertTitle > span:nth-child(1) { @include fonts11; @include colorMainFont; }
 .common-p-insertTitle > span:nth-child(2) { @include fonts09; }
 .common-p-insertTitle > span:nth-child(3) { @include fonts09; }

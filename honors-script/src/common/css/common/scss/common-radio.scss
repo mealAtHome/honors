@@ -3,7 +3,7 @@
 /* Customize the label (the container) */
 .common-label-radio
 {
-    @include displayBk;
+    display: block;
     position: relative;
     padding-left: 30px;
     cursor: pointer;
@@ -60,7 +60,7 @@
 /* Show the indicator (dot/circle) when checked */
 .common-label-radio > input[type=radio]:checked ~ span:after
 {
-    @include displayBk;
+    display: block;
 }
 
 /* Style the indicator (dot/circle) */

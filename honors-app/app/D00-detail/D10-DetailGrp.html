@@ -3,11 +3,16 @@
     <!-- ======================== -->
     <!-- 페이지용 타이틀 -->
     <!-- ======================== -->
-    <ons-toolbar>
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="DGRP.close(true);"></gg-backbtn></div>
+        <div><span>모임상세</span></div>
+    </div>
+
+<!--     <ons-toolbar>
         <div class="left"><gg-backbtn onclick="DGRP.close(true);"></gg-backbtn></div>
         <div class="center">모임상세</div>
     </ons-toolbar>
-
+ -->
     <!-- ========================= -->
     <!-- 선택 -->
     <!-- ========================= -->
@@ -83,7 +88,7 @@
                 if(DGRP.Data.pagenoGrpm == undefined) { DGRP.Data.pagenoGrpm = 1; } /* 기본값 */
 
                 /* set searchkey */
-                $("#DGRP-input-searchKeyword").val(DGRP.Data.searchkey);
+                $("#DGRP-input-searchkey").val(DGRP.Data.searchkey);
 
                 /* init */
                 $(`.DGRP-td-searchtype[val='${DGRP.Data.searchtype}']`).click();

@@ -27,7 +27,7 @@
     @include colorMainShad;
     @include padZZ;
     @include marZZ;
-    @include boxsizeB;
+    box-sizing: border-box;
     left: 0%;
     bottom: 0%;
 }
@@ -58,7 +58,7 @@
 
     @include padZZ;
     @include marZZ;
-    @include boxsizeB;
+    box-sizing: border-box;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -66,7 +66,7 @@
 }
 .common-dialog-div-btns
 {
-    @include displayIn;
+    display: inline-block;
     z-index: 998;
     position: absolute;
     top: 10px;
@@ -100,7 +100,7 @@
 
     @include padZZ;
     @include marZZ;
-    @include boxsizeB;
+    box-sizing: border-box;
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
@@ -121,7 +121,7 @@
     border-radius: 1em 1em 0em 0em;
     @include padZZ;
     @include marZZ;
-    @include boxsizeB;
+    box-sizing: border-box;
     bottom: 200%;
 }
 .common-div-fullDialogContainer[device_kind=pc]
@@ -153,7 +153,7 @@
 .common-div-progress
 {
     z-index: 1000;
-    @include alignC;
+    text-align: center;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -162,7 +162,7 @@
 
     @include padZZ;
     @include marZZ;
-    @include boxsizeB;
+    box-sizing: border-box;
 }
 
 /* ------------ */

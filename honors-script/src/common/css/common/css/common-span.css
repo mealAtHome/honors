@@ -665,7 +665,7 @@
   border-radius: 0.4em;
   font-size: 0.9em;
   line-height: 1.4;
-  /* @include boxsizeB; */
+  /* box-sizing: border-box; */
 }
 
 .common-span-label[label_type=outer],

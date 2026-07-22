@@ -11,7 +11,7 @@
 .common-tbl-textCenter > tfoot > tr > td,
 .common-tbl-textCenter > tfoot > tr > th
 {
-    @include alignC;
+    text-align: center;
 }
 
 /* ============================== */
@@ -45,7 +45,7 @@
     border: none;
     @include padUDZZ;
     @include padLR03;
-    @include alignR;
+    text-align: right;
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
@@ -81,8 +81,8 @@
 {
     @include pad04;
     background-color: $colorBodyBack;
-    @include alignC;
-    @include fontwB;
+    text-align: center;
+    font-weight: bold;
 }
 .common-tbl-normal > thead > tr > td,
 .common-tbl-normal > tfoot > tr > td,
@@ -135,7 +135,7 @@
 {
     @include padZZ;
     background-color: $colorBodyBack;
-    @include alignC;
+    text-align: center;
 }
 .common-tbl-slideformFooterBtn > thead > tr > td,
 .common-tbl-slideformFooterBtn > tfoot > tr > td,
@@ -164,7 +164,7 @@
 /* ============================== */
 .common-tbl-vertical
 {
-    @include alignC;
+    text-align: center;
     @include fonth14;
 }
 .common-tbl-vertical > thead > tr > th,
@@ -175,23 +175,23 @@
 }
 .common-tbl-vertical[tbl-type=normal]    { border: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background-color: $colorBodyBack; border: 1px solid $colorLine; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { width: 5%;  @include alignR; @include fontwB; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { width: 5%;  text-align: right; font-weight: bold; }
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorLine; }
 
 .common-tbl-vertical[tbl-type=minimal]   { border: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background-color: $colorBodyBack; border: 1px solid $colorLine; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { width: 5%;  @include alignR; @include fontwN; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; @include alignL;  border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { width: 5%;  text-align: right; font-weight: normal; }
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorLine; }
 
 .common-tbl-vertical[tbl-type=noborder]  { border: none; }
-.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > th { width: 5%;  @include alignR; border: none; @include fontwB; }
-.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > td { width: 95%; @include alignL;  border: none;  }
+.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > th { width: 5%;  text-align: right; border: none; font-weight: bold; }
+.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > td { width: 95%; text-align: left;  border: none;  }
 
 .common-tbl-vertical[tbl-type=rowborder] { border: none; }
 .common-tbl-vertical[tbl-type=rowborder] > thead > tr > th { border: none; }
 
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { width: 5%;  @include alignR; border: none; @include fontwB; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { width: 95%; @include alignL;  border: none; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { width: 5%;  text-align: right; border: none; font-weight: bold; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { width: 95%; text-align: left;  border: none; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { border-top: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { border-top: 1px solid $colorLine; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th { @include borderTopNone; }
@@ -205,6 +205,6 @@
 /* ============================== */
 /* TABLE: 유형입력용 */
 /* ============================== */
-.common-tbl-type > tbody > tr > th           { @include alignL; }
+.common-tbl-type > tbody > tr > th           { text-align: left; }
 .common-tbl-type > tbody > tr > th > button  { min-width: 6.5em; }
 .common-tbl-type > tbody > tr > td           { @include fonts09; @include colorBodyFont; }

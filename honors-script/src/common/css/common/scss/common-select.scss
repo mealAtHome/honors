@@ -8,11 +8,11 @@
     @include padLt02;
     outline: none;
     text-align-last: center;
-    @include verticalM;
+    vertical-align: middle;
     @include fontDefault;
     border-radius: 0.5em;
     @include fonth16;
-    @include alignC;
+    text-align: center;
     height: 2.2em;
     @include colorWhitFont;
 }

@@ -1,6 +1,6 @@
 @use "../../_import/scss/__import" as *;
 
-div { @include displayBk; }
+div { display: block; }
 
 /*=================================*/
 /* flex */
@@ -30,7 +30,7 @@ div { @include displayBk; }
 /*=================================*/
 .common-div-headerTop
 {
-    @include displayBk;
+    display: block;
     @include padUD06;
     @include padLR08;
     @include colorWhitBackSolid;
@@ -39,12 +39,31 @@ div { @include displayBk; }
 
 .common-div-sectionHeader
 {
-    @include fontwN;
+    font-weight: normal;
     @include colorBodyFont;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     @include marDw08;
 }
+
+/*=================================*/
+/* header - toolbar */
+/*=================================*/
+.common-div-toolbar
+{
+    position: sticky;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    height:3em;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    box-sizing: border-box;
+    background-color: white;
+}
+.common-div-toolbar > div:nth-child(2) { padding-left: 1em; }
+.common-div-toolbar > div:nth-child(2) > span { font-size:1.2em; font-weight:bold; }
 
 
 /*=================================*/
@@ -60,9 +79,9 @@ div { @include displayBk; }
 /*=================================*/
 .common-div-yearToMin > input
 {
-    @include displayIn;
-    @include alignC;
-    @include verticalM;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
 }
 .common-div-yearToMin > input:nth-child(1) { width: 8em; }
 .common-div-yearToMin > input:nth-child(2) { width: 3em; }
@@ -119,7 +138,7 @@ div { @include displayBk; }
 /* 일반 폼 */
 .common-div-formChild
 {
-    @include displayBk;
+    display: block;
     width: calc(100% - 4em);
     height: auto;
     @include padUD10;
@@ -130,58 +149,58 @@ div { @include displayBk; }
 /* 폼 내 */
 .common-div-formTitle
 {
-    @include alignL;
+    text-align: left;
     @include marUp10;
     @include marDw20;
     @include padZZ;
 }
-.common-div-formTitle > span:nth-child(1) { @include displayBk; @include fonts14; @include fontwB; @include colorMainFont; }
-.common-div-formTitle > span:nth-child(2) { @include displayBk; }
+.common-div-formTitle > span:nth-child(1) { display: block; @include fonts14; font-weight: bold; @include colorMainFont; }
+.common-div-formTitle > span:nth-child(2) { display: block; }
 .common-div-formField
 {
-    @include alignL;
+    text-align: left;
     @include marUD20;
     @include padZZ;
-    @include boxsizeC;
+    box-sizing: content-box;
 }
-.common-div-formField > span:nth-child(1) { @include displayBk; @include fonts11; @include marUp04; @include marDwZZ; @include fontwB; @include fonth16; }
-.common-div-formField > span:nth-child(2) { @include displayBk; @include fonts09; @include marUpZZ; @include marDw04; @include fontwN; @include fonth16; }
+.common-div-formField > span:nth-child(1) { display: block; @include fonts11; @include marUp04; @include marDwZZ; font-weight: bold; @include fonth16; }
+.common-div-formField > span:nth-child(2) { display: block; @include fonts09; @include marUpZZ; @include marDw04; font-weight: normal; @include fonth16; }
 
 /* ============================== */
 /* 입력 폼 전용 */
 /* ============================== */
 .common-div-form
 {
-    @include alignC;
+    text-align: center;
     @include mar10;
     @include padZZ;
-    @include boxsizeC;
+    box-sizing: content-box;
 }
-.common-div-form > span:nth-child(1) { @include fonts12; @include fontwB; }
-.common-div-form > span:nth-child(2) { @include fonts10; @include fontwN; }
+.common-div-form > span:nth-child(1) { @include fonts12; font-weight: bold; }
+.common-div-form > span:nth-child(2) { @include fonts10; font-weight: normal; }
 
 /* ============================== */
 /* 인덴트 */
 /* ============================== */
 .common-div-indent
 {
-    @include displayBk;
+    display: block;
     @include mar04;
     @include padZZ;
 }
-.common-div-indent > span { @include displayBk; }
-.common-div-indent > span::before { content:"・"; @include verticalM;}
+.common-div-indent > span { display: block; }
+.common-div-indent > span::before { content:"・"; vertical-align: middle;}
 
 /* ============================== */
 /* 목록형 버튼을 위한 DIV */
 /* ============================== */
 .common-div-manages
 {
-    @include alignC;
+    text-align: center;
 }
 .common-div-manages > button
 {
-    @include displayBk;
+    display: block;
     width: 15em;
     max-width: 80%;
     @include marUp06;
@@ -194,9 +213,9 @@ div { @include displayBk; }
 /* ============================== */
 .common-div-svgTop
 {
-    @include displayIn;
+    display: inline-block;
     @include mar03;
-    @include verticalM;
+    vertical-align: middle;
 }
 
 /* ============================== */
@@ -207,9 +226,9 @@ div { @include displayBk; }
     position: relative;
     @include radiusCurv08;
     @include pad08;
-    @include overflowX;
-    @include boxsizeC;
-    @include alignL;
+    overflow-x: scroll;
+    box-sizing: content-box;
+    text-align: left;
     /* @include colorWhitFont; */
     background: $colorWhitBack;
     border: 0.04em solid $colorLine;
@@ -225,9 +244,9 @@ div { @include displayBk; }
 {
     @include mar08;
     @include pad05;
-    @include overflowX;
-    @include boxsizeC;
-    @include alignL;
+    overflow-x: scroll;
+    box-sizing: content-box;
+    text-align: left;
     @include fonth16;
 }
 .common-div-msg[common-div-msg-type=error]   { @include colorErrrFont; background: $colorErrrBack; }
@@ -242,7 +261,7 @@ div { @include displayBk; }
     max-width: 600px;
     @include padZZ;
     @include marAuto;
-    @include boxsizeC;
+    box-sizing: content-box;
 }
 
 /* -------------------- */
@@ -259,8 +278,8 @@ div { @include displayBk; }
     width: 100%;
     height: 52px;
 }
-.common-div-header > div[header=back]  { @include displayIn; width: auto; line-height: 52px; }
-.common-div-header > div[header=title] { @include displayIn; width: auto; line-height: 52px; @include padLt05; @include fonts12; @include fontwB; }
+.common-div-header > div[header=back]  { display: inline-block; width: auto; line-height: 52px; }
+.common-div-header > div[header=title] { display: inline-block; width: auto; line-height: 52px; @include padLt05; @include fonts12; font-weight: bold; }
 
 /* ============================== */
 /* 페이지네이션 */
@@ -268,33 +287,33 @@ div { @include displayBk; }
 .common-div-pagenationTop
 {
     @include marUD06;
-    @include alignC;
-    @include overflowX;
-    @include boxsizeC;
+    text-align: center;
+    overflow-x: scroll;
+    box-sizing: content-box;
 }
 .common-div-pagenationBtnTop
 {
-    @include displayIn;
+    display: inline-block;
     border-radius: 38px;
     @include colorInfoBackTrans;
 }
 .common-btn-pagenationBtn
 {
-    @include displayIn;
+    display: inline-block;
     width: 38px;
     height: 38px;
     @include colorInfoBackSolid;
     @include radiusFull;
     border: none;
     line-height: 37px;
-    @include alignC;
-    @include verticalM;;
+    text-align: center;
+    vertical-align: middle;;
 }
 .common-btn-pagenationBtn[tab=tab]
 {
     @include colorMainBackSolid;
     @include colorWhitFont;
-    /* @include fontwB; */
+    /* font-weight: bold; */
 }
 
 /* ============================== */
@@ -304,29 +323,29 @@ div { @include displayBk; }
 .common-div-empty
 {
     height: 1em;
-    @include boxsizeB;
+    box-sizing: border-box;
 }
 .common-div-mass
 {
     @include mar03;
     @include pad03;
-    @include overflowX;
-    @include boxsizeC;
-    @include alignC;
+    overflow-x: scroll;
+    box-sizing: content-box;
+    text-align: center;
 }
 .common-div-mass > table { @include marAuto; }
 
 .common-div-scrollX
 {
     width: 100%;
-    @include overflowX;
-    @include boxsizeB;
+    overflow-x: scroll;
+    box-sizing: border-box;
     @include padDw03;
 }
-.common-div-cushion     { @include displayBk; @include mar08;   @include padZZ; @include overflowX; @include boxsizeB; @include alignL;    }
-.common-div-cushionUp   { @include displayBk; @include marUp08; @include padZZ; @include overflowX; @include boxsizeB; }
-.common-div-cushionUD   { @include displayBk; @include marUD08; @include padZZ; @include overflowX; @include boxsizeB; }
-.common-div-cushionDw   { @include displayBk; @include marDw08; @include padZZ; @include overflowX; @include boxsizeB; }
+.common-div-cushion     { display: block; @include mar08;   @include padZZ; overflow-x: scroll; box-sizing: border-box; text-align: left;    }
+.common-div-cushionUp   { display: block; @include marUp08; @include padZZ; overflow-x: scroll; box-sizing: border-box; }
+.common-div-cushionUD   { display: block; @include marUD08; @include padZZ; overflow-x: scroll; box-sizing: border-box; }
+.common-div-cushionDw   { display: block; @include marDw08; @include padZZ; overflow-x: scroll; box-sizing: border-box; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
 .common-div-cushion   > .common-div-cushionUD:nth-child(1) { @include marDw08; }
@@ -350,7 +369,7 @@ div { @include displayBk; }
 {
     @include mar06;
     @include pad04;
-    @include alignL;
+    text-align: left;
     @include fonth16;
     @include colorInfoBackTrans;
 }
@@ -361,7 +380,7 @@ div { @include displayBk; }
 .common-div-calendarSquareYear
 {
     @include fonts12;
-    @include fontwB;
+    font-weight: bold;
     @include colorMainFont;
 }
 
@@ -374,14 +393,14 @@ div { @include displayBk; }
     @include pad04;
     border-radius: 1em;
 }
-.common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include fonth14; @include alignC; @include fontwN; }
-.common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; @include alignC; @include fontwB; }
+.common-div-calendarSquare > div:nth-child(1) { @include fonts09; @include fonth14; text-align: center; font-weight: normal; }
+.common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; text-align: center; font-weight: bold; }
 
 /* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { @include colorInfoBackTrans; @include colorBodyFont; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { @include colorMainBackTrans; @include colorWhitFont; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { @include colorWhitBackTrans; @include colorBodyFont; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; @include pad03; }
-/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; @include fonts10; @include alignC; @include fontwB; }
+/* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; @include fonts10; text-align: center; font-weight: bold; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fonts12; }
 
 .common-div-calendarSquareWeekTop > button
@@ -392,11 +411,11 @@ div { @include displayBk; }
     @include padUD04;
     @include padLR08;
     @include radiusCurv04;
-    @include fontwN;
+    font-weight: normal;
     cursor: pointer;
     /* transition: all 0.3s ease; */
     text-decoration: none;
-    @include displayIn;
+    display: inline-block;
     position: relative;
     overflow: hidden;
     @include marLt03;

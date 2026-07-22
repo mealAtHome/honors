@@ -2,7 +2,7 @@
 
 #ULGN-div-top
 {
-    @include displayBk;
+    display: block;
     width: 100%;
     height: 100%;
     @include colorWhitBackSolid;
@@ -27,15 +27,15 @@
 /* ================ */
 #ULGN-span-title
 {
-    @include displayBk;
+    display: block;
     font-size: 3em;
-    @include fontwN;
+    font-weight: normal;
     @include colorMainFont;
     @include fonth16;
 }
 .ULGN-div-titleAccent
 {
-    @include displayBk;
+    display: block;
     width: 4em;
     height: 0.2em;
     @include marUD02;
@@ -47,14 +47,14 @@
 /* ================ */
 .ULGN-input-text
 {
-    @include displayBk;
+    display: block;
     width: 100%;
     @include marUD05;
     @include marAuto;
     @include pad04;
     border: 1px solid $colorBody;
     @include fonts12;
-    @include alignL;
+    text-align: left;
     @include backgroundTrans;
     @include radiusCurv04;
 }
@@ -75,7 +75,7 @@
 /* ================ */
 .ULGN-login-btn
 {
-    @include displayBk;
+    display: block;
     width: 100%;
     height: 3em;
     @include marUD08;
@@ -88,7 +88,7 @@
     position: absolute;
     bottom: 1em;
     right: 1em;
-    @include alignR;
+    text-align: right;
     @include fonts09;
 }
 

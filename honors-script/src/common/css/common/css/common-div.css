@@ -657,6 +657,31 @@ div {
 }
 
 /*=================================*/
+/* header - toolbar */
+/*=================================*/
+.common-div-toolbar {
+  position: sticky;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  height: 3em;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.common-div-toolbar > div:nth-child(2) {
+  padding-left: 1em;
+}
+
+.common-div-toolbar > div:nth-child(2) > span {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/*=================================*/
 /* div for button list */
 /*=================================*/
 .common-div-btnList > * {
@@ -873,7 +898,7 @@ div {
   position: relative;
   border-radius: 0.8em;
   padding: 0.8em;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: content-box;
   text-align: left;
   /* @include colorWhitFont; */
@@ -902,7 +927,7 @@ div {
 .common-div-msg {
   margin: 0.8em;
   padding: 0.5em;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: content-box;
   text-align: left;
   line-height: 1.6;
@@ -974,7 +999,7 @@ div {
   margin-top: 0.6em;
   margin-bottom: 0.6em;
   text-align: center;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: content-box;
 }
 
@@ -999,7 +1024,7 @@ div {
 .common-btn-pagenationBtn[tab=tab] {
   background: #020654;
   color: #ffffff;
-  /* @include fontwB; */
+  /* font-weight: bold; */
 }
 
 /* ============================== */
@@ -1014,7 +1039,7 @@ div {
 .common-div-mass {
   margin: 0.3em;
   padding: 0.3em;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: content-box;
   text-align: center;
 }
@@ -1026,7 +1051,7 @@ div {
 
 .common-div-scrollX {
   width: 100%;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: border-box;
   padding-bottom: 0.3em;
 }
@@ -1035,7 +1060,7 @@ div {
   display: block;
   margin: 0.8em;
   padding: 0em;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: border-box;
   text-align: left;
 }
@@ -1044,7 +1069,7 @@ div {
   display: block;
   margin-top: 0.8em;
   padding: 0em;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: border-box;
 }
 
@@ -1053,7 +1078,7 @@ div {
   margin-top: 0.8em;
   margin-bottom: 0.8em;
   padding: 0em;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: border-box;
 }
 
@@ -1061,7 +1086,7 @@ div {
   display: block;
   margin-bottom: 0.8em;
   padding: 0em;
-  overflow-x: auto;
+  overflow-x: scroll;
   box-sizing: border-box;
 }
 

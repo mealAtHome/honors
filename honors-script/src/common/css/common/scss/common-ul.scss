@@ -12,13 +12,13 @@
 */
 .common-ul-announce
 {
-    @include displayBk;
+    display: block;
     @include padUD10;
     @include padLt20;
     @include padRt10;
     @include colorInfoBackTrans;
     @include fonts09;
-    @include alignL;
+    text-align: left;
     @include fonth16;
     list-style-type: disc;
     @include marZZ;

@@ -3,24 +3,24 @@
 /* ========================= */
 /* 각 인풋박스 */
 /* ========================= */
-.common-div-formField > .common-input-field { width: 100%; max-width: 500px; @include boxsizeB; outline: none; @include backgroundTrans; }
+.common-div-formField > .common-input-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; @include backgroundTrans; }
 .common-input-field
 {
     @include padUD03;
     @include fonts11;
     border: none;
     border-bottom: 1px solid $colorLine;
-    @include alignL;
+    text-align: left;
     @include backgroundTrans;
 }
 .common-input-field:focus { border: none; border-bottom: 3px solid $colorMain; }
 
-.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; @include boxsizeB; outline: none; @include backgroundTrans; }
+.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; @include backgroundTrans; }
 .common-textarea-field
 {
   @include pad03;
   @include fonts11;
-  border: 1px solid $colorLine;
+ border: 1px solid $colorLine;
   @include backgroundTrans;
 }
 .common-textarea-field:focus { border: 1px solid $colorMain; border-bottom: 3px solid $colorMain; }
@@ -34,10 +34,10 @@
     /* -moz-appearance: none; */
     /* -webkit-appearance: none; */
 
-    /* @include boxsizeC; */
+    /* box-sizing: content-box; */
     @include pad03;
     @include fonts11;
-    border: 1px solid $colorLine;
+   border: 1px solid $colorLine;
 }
 
 .common-input-text:focus
@@ -68,10 +68,10 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
 
-  /* @include boxsizeC; */
+  /* box-sizing: content-box; */
   @include pad03;
   @include fonts11;
-  border: 1px solid $colorLine;
+ border: 1px solid $colorLine;
 }
 
 .common-textarea:focus
