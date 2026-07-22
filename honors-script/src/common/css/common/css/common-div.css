@@ -670,6 +670,7 @@ div {
   align-items: center;
   box-sizing: border-box;
   background-color: white;
+  border-bottom: 0.5px solid #e4e7f0;
 }
 
 .common-div-toolbar > div:nth-child(2) {
@@ -679,6 +680,11 @@ div {
 .common-div-toolbar > div:nth-child(2) > span {
   font-size: 1.2em;
   font-weight: bold;
+}
+
+.common-div-toolbar > div:nth-child(3) {
+  margin-left: auto;
+  padding-right: 1em;
 }
 
 /*=================================*/
