@@ -3,10 +3,19 @@
 /*
     よく使われるHTMLのCSSを定義する
 */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
 *
 {
-    font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
-    /* font-size: inherit; */
+    @include fontDefault;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.6em;
     @include verticalM;
 }
 
@@ -41,11 +50,11 @@ pre, xmp
     @include fonth16;
     word-break: break-all;
     white-space: pre-wrap;
-    font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+    @include fontDefault;
 }
 textarea
 {
-    font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+    @include fontDefault;
 }
 
 table

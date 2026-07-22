@@ -6,10 +6,10 @@
     @include padUD02;
     @include padRt10;
     @include padLt02;
-    outer: none;
+    outline: none;
     text-align-last: center;
     @include verticalM;
-    font-family: -apple-system, 'higashiome', 'SCDream3', 'Helvetica Neue', 'Helvetica', 'Arial', 'Lucida Grande', sans-serif;
+    @include fontDefault;
     border-radius: 0.5em;
     @include fonth16;
     @include alignC;

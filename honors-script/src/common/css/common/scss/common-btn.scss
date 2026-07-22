@@ -1,15 +1,16 @@
+@use "sass:color";
 @use "../../_import/scss/__import" as *;
 
 /* ============================== */
 /* main button */
 /* ============================== */
-@mixin btnOuterNormal   ($color)  { border:1px solid $color;                                background:lighten($color, 90%);   color:$color; }
-@mixin btnInnerNormal   ($color)  { border:1px solid scale-color($color, $lightness: -25%); background:$color;                 @if lightness($color) > 55% { color: scale-color($color, $lightness: -75%); } @else { color: scale-color($color, $lightness: 85%); } }
+@mixin btnOuterNormal   ($color)  { border:1px solid $color;                                background:color.scale($color, $lightness: 99%);    color:$color; }
+@mixin btnInnerNormal   ($color)  { border:1px solid color.scale($color, $lightness: -25%); background:$color;                                  @if color.channel($color, "lightness", $space: hsl) > 55% { color:color.scale($color, $lightness: -75%); } @else { color:color.scale($color, $lightness: 99%); } }
 @mixin btnOuterActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
 @mixin btnInnerActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
 
-@mixin btnOuterDisabled ($color)  { border:1px solid grayscale($color); background:$colorWhit;        color:$color; }
-@mixin btnInnerDisabled ($color)  { border:1px solid grayscale($color); background:grayscale($color); color:$color; }
+@mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorWhit;        color:$color; }
+@mixin btnInnerDisabled ($color)  { border:1px solid color.grayscale($color); background:color.grayscale($color); color:$color; }
 
 .common-btn-light,
 .common-btn-outer,
@@ -20,10 +21,10 @@
 {
     @include displayIn;
     @include pad04;
-    @include fonth14;
     text-decoration: none;
     @include radiusCurv04;
     @include colorWhitBackSolid;
+    @include fonth16;
 }
 .common-btn-round { @include radiusFull; }
 .common-btn-flat  { background-color: transparent; color: $colorBody; border: 1px solid $colorMain; }

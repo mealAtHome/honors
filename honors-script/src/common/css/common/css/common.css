@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /* ========================= */
+/* font main */
+/* ========================= */
+/* ========================= */
 /* colors main */
 /* ========================= */
 /* ========================= */
@@ -18,7 +21,7 @@
 .common-card[card-color=main] {
   color: #020654;
   border: 2px solid #020654;
-  background: #020654;
+  background-color: rgba(2, 6, 84, 0.2);
 }
 
 /* rgb(2   , 6   , 84  ); #020654 */
@@ -33,7 +36,7 @@
 .common-card[card-color=dark] {
   color: #020421;
   border: 2px solid #020421;
-  background: #020421;
+  background-color: rgba(2, 4, 33, 0.2);
 }
 
 /* rgb(27  , 42  , 107 ); #1B2A6B */
@@ -48,7 +51,7 @@
 .common-card[card-color=head] {
   color: #1b2a6b;
   border: 2px solid #1b2a6b;
-  background: #1b2a6b;
+  background-color: rgba(27, 42, 107, 0.2);
 }
 
 /* rgb(61  , 107 , 245 ); #3D6BF5 */
@@ -63,7 +66,7 @@
 .common-card[card-color=side] {
   color: #3d6bf5;
   border: 2px solid #3d6bf5;
-  background: #3d6bf5;
+  background-color: rgba(61, 107, 245, 0.2);
 }
 
 /* rgb(122 , 128 , 153 ); #7A8099 */
@@ -78,7 +81,7 @@
 .common-card[card-color=body] {
   color: #3c435c;
   border: 2px solid #3c435c;
-  background: #3c435c;
+  background-color: rgba(60, 67, 92, 0.2);
 }
 
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
@@ -93,7 +96,7 @@
 .common-card[card-color=line] {
   color: #e4e7f0;
   border: 2px solid #e4e7f0;
-  background: #e4e7f0;
+  background-color: rgba(228, 231, 240, 0.2);
 }
 
 /* rgb(0   , 2   , 120 ); #000278 */
@@ -108,7 +111,7 @@
 .common-card[card-color=pstv] {
   color: #000278;
   border: 2px solid #000278;
-  background: #000278;
+  background-color: rgba(0, 2, 120, 0.2);
 }
 
 /* rgb(0   , 150 , 0   ); #009600 */
@@ -123,7 +126,7 @@
 .common-card[card-color=allw] {
   color: #009600;
   border: 2px solid #009600;
-  background: #009600;
+  background-color: rgba(0, 150, 0, 0.2);
 }
 
 /* rgb(3   , 154 , 0   ); #039a00 */
@@ -138,7 +141,7 @@
 .common-card[card-color=prog] {
   color: #039a00;
   border: 2px solid #039a00;
-  background: #039a00;
+  background-color: rgba(3, 154, 0, 0.2);
 }
 
 /* rgb(40  , 101 , 255 ); #d9e4ff */
@@ -153,7 +156,7 @@
 .common-card[card-color=ntce] {
   color: #2865ff;
   border: 2px solid #2865ff;
-  background: #2865ff;
+  background-color: rgba(40, 101, 255, 0.2);
 }
 
 /* rgb(40  , 101 , 255 ); #d9e4ff */
@@ -168,7 +171,7 @@
 .common-card[card-color=info] {
   color: #2865ff;
   border: 2px solid #2865ff;
-  background: #2865ff;
+  background-color: rgba(40, 101, 255, 0.2);
 }
 
 /* rgb(234 , 240 , 255 ); #EAF0FF */
@@ -183,7 +186,7 @@
 .common-card[card-color=dtil] {
   color: #EAF0FF;
   border: 2px solid #EAF0FF;
-  background: #EAF0FF;
+  background-color: rgba(234, 240, 255, 0.2);
 }
 
 /* rgb(212 , 173 , 0   ); #d4ad00 */
@@ -198,7 +201,7 @@
 .common-card[card-color=hold] {
   color: #d4ad00;
   border: 2px solid #d4ad00;
-  background: #d4ad00;
+  background-color: rgba(212, 173, 0, 0.2);
 }
 
 /* rgb(255 , 116 , 21  ); #FF7415 */
@@ -213,7 +216,7 @@
 .common-card[card-color=cncl] {
   color: #ff7415;
   border: 2px solid #ff7415;
-  background: #ff7415;
+  background-color: rgba(255, 116, 21, 0.2);
 }
 
 /* rgb(255 , 116 , 21  ); #FF7415 */
@@ -228,7 +231,7 @@
 .common-card[card-color=warn] {
   color: #ff7415;
   border: 2px solid #ff7415;
-  background: #ff7415;
+  background-color: rgba(255, 116, 21, 0.2);
 }
 
 /* rgb(206 , 39  , 39  ); #ce2727 */
@@ -243,7 +246,7 @@
 .common-card[card-color=errr] {
   color: #ce2727;
   border: 2px solid #ce2727;
-  background: #ce2727;
+  background-color: rgba(206, 39, 39, 0.2);
 }
 
 /* rgb(120 , 0   , 0   ); #780000 */
@@ -258,7 +261,7 @@
 .common-card[card-color=ngtv] {
   color: #780000;
   border: 2px solid #780000;
-  background: #780000;
+  background-color: rgba(120, 0, 0, 0.2);
 }
 
 /* rgb(100 , 100 , 100 ); #636363 */
@@ -273,7 +276,7 @@
 .common-card[card-color=whit] {
   color: #ffffff;
   border: 2px solid #ffffff;
-  background: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* ========================= */
@@ -611,9 +614,17 @@
 /*
     よく使われるHTMLのCSSを定義する
 */
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
 * {
   font-family: -apple-system, "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
-  /* font-size: inherit; */
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.6em;
   vertical-align: middle;
 }
 
