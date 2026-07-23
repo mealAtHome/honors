@@ -85,6 +85,21 @@
 }
 
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
+.common-colorFont[font-color=edge] {
+  color: #c4c7ce;
+}
+
+.common-colorEdge {
+  color: #c4c7ce;
+}
+
+.common-card[card-color=edge] {
+  color: #c4c7ce;
+  border: 2px solid #c4c7ce;
+  background-color: rgba(196, 199, 206, 0.2);
+}
+
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
 .common-colorFont[font-color=line] {
   color: #e4e7f0;
 }
@@ -627,8 +642,8 @@
   padding-bottom: 0.3em;
   font-size: 1.1em;
   border: none;
-  border-bottom: 1px solid #e4e7f0;
   text-align: left;
+  border-bottom: 2px solid #c4c7ce;
   background: transparent;
 }
 
@@ -648,12 +663,12 @@
 .common-textarea-field {
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid #e4e7f0;
+  border: 2px solid #c4c7ce;
   background: transparent;
 }
 
 .common-textarea-field:focus {
-  border: 1px solid #020654;
+  border: 2px solid #020654;
   border-bottom: 3px solid #020654;
 }
 
@@ -667,15 +682,14 @@
   /* box-sizing: content-box; */
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid #e4e7f0;
+  border: 2px solid #c4c7ce;
 }
 
 .common-input-text:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 1px solid #020654;
-  box-shadow: 0px 0px 5px #020654;
+  border: 2px solid #020654;
 }
 
 .common-text {
@@ -695,13 +709,12 @@
   /* box-sizing: content-box; */
   padding: 0.3em;
   font-size: 1.1em;
-  border: 1px solid #e4e7f0;
+  border: 2px solid #c4c7ce;
 }
 
 .common-textarea:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 1px solid #020654;
-  box-shadow: 0px 0px 5px #020654;
+  border: 2px solid #020654;
 }

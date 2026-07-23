@@ -9,8 +9,8 @@
     @include padUD03;
     @include fonts11;
     border: none;
-    border-bottom: 1px solid $colorLine;
     text-align: left;
+    border-bottom: 2px solid $colorEdge;
     @include backgroundTrans;
 }
 .common-input-field:focus { border: none; border-bottom: 3px solid $colorMain; }
@@ -20,10 +20,10 @@
 {
   @include pad03;
   @include fonts11;
- border: 1px solid $colorLine;
+  border: 2px solid $colorEdge;
   @include backgroundTrans;
 }
-.common-textarea-field:focus { border: 1px solid $colorMain; border-bottom: 3px solid $colorMain; }
+.common-textarea-field:focus { border: 2px solid $colorMain; border-bottom: 3px solid $colorMain; }
 
 /* ========================= */
 /* 각 인풋박스 (기존) */
@@ -37,7 +37,7 @@
     /* box-sizing: content-box; */
     @include pad03;
     @include fonts11;
-   border: 1px solid $colorLine;
+    border: 2px solid $colorEdge;
 }
 
 .common-input-text:focus
@@ -46,8 +46,7 @@
     /* -moz-appearance: none; */
     /* -webkit-appearance: none; */
 
-    border: 1px solid $colorMain;
-    box-shadow: 0px 0px 5px $colorMain;
+    border: 2px solid $colorMain;
 }
 
 .common-text
@@ -64,23 +63,22 @@
 
 .common-textarea
 {
-  /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
-  /* -moz-appearance: none; */
-  /* -webkit-appearance: none; */
+    /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
+    /* -moz-appearance: none; */
+    /* -webkit-appearance: none; */
 
-  /* box-sizing: content-box; */
-  @include pad03;
-  @include fonts11;
- border: 1px solid $colorLine;
+    /* box-sizing: content-box; */
+    @include pad03;
+    @include fonts11;
+    border: 2px solid $colorEdge;
 }
 
 .common-textarea:focus
 {
-  /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
-  /* -moz-appearance: none; */
-  /* -webkit-appearance: none; */
+    /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
+    /* -moz-appearance: none; */
+    /* -webkit-appearance: none; */
 
-  border: 1px solid $colorMain;
-  box-shadow: 0px 0px 5px $colorMain;
+    border: 2px solid $colorMain;
 }
 

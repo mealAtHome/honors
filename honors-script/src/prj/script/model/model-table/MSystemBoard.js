@@ -92,35 +92,10 @@ class MSystemBoards extends _MCommon
 
     makeMainBanners(el="")
     {
-        /* =============== */
-        /* get each model's html */
-        /* =============== */
         let html = "";
         for(let i in this.getModels())
             html += this.getModels()[i].makeMainBanner();
-
-        /* =============== */
-        /* set html */
-        /* =============== */
-        html =
-        `
-            <div class="MSystemBoards-makeMainBanners-top">
-                ${html}
-                <!-- <button class="MSystemBoards-makeMainBanners-btn-more common-btn-outer">공지사항 더 보기</button> -->
-            </div>
-        `;
         $(el).html(html);
-
-        /* =============== */
-        /* set event */
-        /* =============== */
-
-        /* 공지사항 더 보기 */
-        $(`${el} .MSystemBoards-makeMainBanners-btn-more`).click(function()
-        {
-            Navigation.moveFrontPage(Navigation.Page.Z21SystemBoardList, {});
-        });
-
     }
 
     makeHorizon(el="")

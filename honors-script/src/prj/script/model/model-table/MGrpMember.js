@@ -125,24 +125,7 @@ class MGrpMember
         };
         let model = new MGrpMember(dat);
         let mUser = model.getMUser();
-
-        /* final html */
-        let html =
-        `
-            <div class="MGrpMembers-make-div-modelTop common-div-card">
-                <span class="common-block common-strong">
-                    ${model.getGrpmtypeCvrt()}
-                    ${Common.isEmpty(model.getGrpmposition()) ? "" : ` - ${model.getGrpmposition()}`}
-                    ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
-                <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
-                <span class="common-block common-fonts09">
-                    ${mUser.getPhone()         != "" ? `<span class="common-block common-colorBody commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
-                    ${mUser.getAddress()       != "" ? `<span class="common-block common-colorBody">${mUser.getAddress()}</span>` : ""}
-                    ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorBody">${mUser.getHascarflgCvrt()}</span>` : ""}
-                </span>
-            </div>
-        `;
-        return html;
+        return model.make();
     }
 
 }
@@ -207,6 +190,7 @@ class MGrpMembers extends _MCommon
             }
             html += model.make(buttonHtml);
         }
+        /* html = this.mergeCushionLR(html); */
         $(el).html(this.mergePagenation(html));
     }
 

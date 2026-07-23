@@ -4,12 +4,11 @@
 /* ============================== */
 /* main button */
 /* ============================== */
-@mixin btnOuterNormal   ($color)  { border:1px solid $color;                                background:color.scale($color, $lightness: 99%);    color:$color; }
-@mixin btnInnerNormal   ($color)  { border:1px solid color.scale($color, $lightness: -25%); background:$color;                                  @if color.channel($color, "lightness", $space: hsl) > 55% { color:color.scale($color, $lightness: -75%); } @else { color:color.scale($color, $lightness: 99%); } }
+@mixin btnOuterNormal   ($color)  { border:1px solid $color; background:color.scale($color, $lightness: 99%); color:$color; }
+@mixin btnInnerNormal   ($color)  { border:1px solid color.scale($color, $lightness: -25%); background:$color; @if color.channel($color, "lightness", $space: hsl) > 55% { color:color.scale($color, $lightness: -75%); } @else { color:color.scale($color, $lightness: 99%); } }
 @mixin btnOuterActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
 @mixin btnInnerActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
-
-@mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorWhit;        color:$color; }
+@mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorWhit; color:$color; }
 @mixin btnInnerDisabled ($color)  { border:1px solid color.grayscale($color); background:color.grayscale($color); color:$color; }
 
 .common-btn-light,
@@ -20,11 +19,12 @@
 .common-btn-flat
 {
     display: inline-block;
-    @include pad04;
+    @include padUD03;
+    @include padLR04;
     text-decoration: none;
     @include radiusCurv04;
     @include colorWhitBackSolid;
-    @include fonth16;
+    line-height: 1.5;
 }
 .common-btn-round { @include radiusFull; }
 .common-btn-flat  { background-color: transparent; color: $colorBody; border: 1px solid $colorMain; }
@@ -70,7 +70,7 @@
 /* button size */
 .common-btn-outer[btn-size=large]    { display: block; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; }
 .common-btn-inner[btn-size=large]    { display: block; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; }
-.common-btn-outer[btn-size=search]   { display: inline-block; @include pad04; }
+/* .common-btn-outer[btn-size=search]   { display: inline-block; @include pad04; } */
 
 /* -------------------- */
 /* noline */
@@ -82,7 +82,7 @@
     @include pad05;
     @include backgroundTrans;
     border: none;
-    @include fonth14;
+    line-height: 1.5;
 }
 .common-btn-nolineSave:hover,
 .common-btn-noline:hover
@@ -95,6 +95,7 @@
 /* noline */ .common-btn-noline[btn-type=cancel]         { @include colorCnclFont; } .common-btn-noline:active[btn-type=cancel]  { @include colorCnclBackTrans; }
 /* noline */ .common-btn-noline[btn-type=warning]        { @include colorCnclFont; } .common-btn-noline:active[btn-type=warning] { @include colorCnclBackTrans; }
 /* noline */ .common-btn-noline[btn-type=error]          { @include colorErrrFont; } .common-btn-noline:active[btn-type=error]   { @include colorErrrBackTrans; }
+/* noline */ .common-btn-noline[btn-type=body]           { @include colorBodyFont; } .common-btn-noline:active[btn-type=body]    { @include colorBodyBackTrans; }
 
 
 /* -------------------- */

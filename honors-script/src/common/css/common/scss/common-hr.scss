@@ -1,13 +1,13 @@
 @use "../../_import/scss/__import" as *;
 
-.common-hr-card        { @include mar08;       border: 1px dashed $colorLine; } /* card 사이의 hr */
-.common-hr-padding06   { @include mar06;       border: 1px dashed $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingLR   { @include marLR06;     border: 1px dashed $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingUD06 { @include marUD06;     border: 1px dashed $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingUD03 { @include marUD03;     border: 1px dashed $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingUp06 { @include marUp06;    border: 1px dashed $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-card        { @include mar08;       border: 1px solid $colorLine; } /* card 사이의 hr */
+.common-hr-paddingAA   { @include mar06;       border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingLR   { @include marLR06;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingUD06 { @include marUD06;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingUD03 { @include marUD03;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingUp06 { @include marUp06;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
 
-.common-hr-card[type=strong]    { border: 1px dashed $colorMain; } /* card 사이의 hr */
-.common-hr-padding[type=strong] { border: 1px dashed $colorMain; } /* 일반 html 사이의 hr */
-.common-hr-normal[type=strong]  { border: 1px dashed $colorMain; } /* 일반 html 사이의 hr */
-.common-hr-full[type=strong]    { border: 1px dashed $colorMain; } /* 일반 html 사이의 hr */
+.common-hr-card[type=strong]    { border: 1px solid $colorMain; } /* card 사이의 hr */
+.common-hr-padding[type=strong] { border: 1px solid $colorMain; } /* 일반 html 사이의 hr */
+.common-hr-normal[type=strong]  { border: 1px solid $colorMain; } /* 일반 html 사이의 hr */
+.common-hr-full[type=strong]    { border: 1px solid $colorMain; } /* 일반 html 사이의 hr */

@@ -85,6 +85,21 @@
 }
 
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
+.common-colorFont[font-color=edge] {
+  color: #c4c7ce;
+}
+
+.common-colorEdge {
+  color: #c4c7ce;
+}
+
+.common-card[card-color=edge] {
+  color: #c4c7ce;
+  border: 2px solid #c4c7ce;
+  background-color: rgba(196, 199, 206, 0.2);
+}
+
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
 .common-colorFont[font-color=line] {
   color: #e4e7f0;
 }

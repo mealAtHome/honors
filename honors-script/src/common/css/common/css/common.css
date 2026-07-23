@@ -85,6 +85,21 @@
 }
 
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
+.common-colorFont[font-color=edge] {
+  color: #c4c7ce;
+}
+
+.common-colorEdge {
+  color: #c4c7ce;
+}
+
+.common-card[card-color=edge] {
+  color: #c4c7ce;
+  border: 2px solid #c4c7ce;
+  background-color: rgba(196, 199, 206, 0.2);
+}
+
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
 .common-colorFont[font-color=line] {
   color: #e4e7f0;
 }
@@ -615,16 +630,27 @@
     よく使われるHTMLのCSSを定義する
 */
 @font-face {
-  font-family: "Pretendard";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2") format("woff2");
+  font-family: "NanumBarunGothic";
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot");
   font-weight: 400;
   font-display: swap;
 }
+@font-face {
+  font-family: "NanumBarunGothic";
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebBold.eot");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "NanumBarunGothic";
+  src: url("//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWebLight.eot");
+  font-weight: 300;
+  font-display: swap;
+}
 * {
-  font-family: -apple-system, "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+  font-family: "NanumBarunGothic", "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
   font-size: 1em;
   font-weight: 400;
-  line-height: 1.6em;
   vertical-align: middle;
 }
 
@@ -657,11 +683,11 @@ pre, xmp {
   line-height: 1.6;
   word-break: break-all;
   white-space: pre-wrap;
-  font-family: -apple-system, "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+  font-family: "NanumBarunGothic", "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
 }
 
 textarea {
-  font-family: -apple-system, "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
+  font-family: "NanumBarunGothic", "higashiome", "SCDream3", "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif;
 }
 
 table {

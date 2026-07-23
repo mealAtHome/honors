@@ -33,11 +33,11 @@
 /* ============================== */
 .common-tbl-tab > tbody > tr > td
 {
-    @include padUD05;
-    @include padLR06;
-    @include radiusCurv30;
+    @include padUD04;
+    @include padLR08;
+    border-radius: 2em;
     @include colorMainFont;
-    @include fonth16;
+    text-align: center;
 }
 .common-tbl-tab > tbody > tr > td[tab=space]
 {
@@ -50,7 +50,6 @@
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
     @include colorWhitFont;
-    @include radiusCurv30;
     @include colorMainBackSolid;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,

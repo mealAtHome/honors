@@ -73,6 +73,8 @@ class _MCommon
     /* ================================ */
     /* 페이지네이션 html을 반환한다 */
     /* ================================ */
+    mergeCushionLR(html) { return `<div class="common-div-cushionLR">${html}</div>`; }
+
     mergePagenation(html)
     {
         /* pagenation */

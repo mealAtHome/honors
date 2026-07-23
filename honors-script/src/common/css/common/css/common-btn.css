@@ -85,6 +85,21 @@
 }
 
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
+.common-colorFont[font-color=edge] {
+  color: #c4c7ce;
+}
+
+.common-colorEdge {
+  color: #c4c7ce;
+}
+
+.common-card[card-color=edge] {
+  color: #c4c7ce;
+  border: 2px solid #c4c7ce;
+  background-color: rgba(196, 199, 206, 0.2);
+}
+
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
 .common-colorFont[font-color=line] {
   color: #e4e7f0;
 }
@@ -621,11 +636,14 @@
 .common-btn-radio,
 .common-btn-flat {
   display: inline-block;
-  padding: 0.4em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  padding-left: 0.4em;
+  padding-right: 0.4em;
   text-decoration: none;
   border-radius: 0.4em;
   background: #ffffff;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .common-btn-round {
@@ -945,11 +963,7 @@
   max-width: 90%;
 }
 
-.common-btn-outer[btn-size=search] {
-  display: inline-block;
-  padding: 0.4em;
-}
-
+/* .common-btn-outer[btn-size=search]   { display: inline-block; @include pad04; } */
 /* -------------------- */
 /* noline */
 /* -------------------- */
@@ -959,7 +973,7 @@
   padding: 0.5em;
   background: transparent;
   border: none;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .common-btn-nolineSave:hover,
@@ -1002,6 +1016,15 @@
 
 .common-btn-noline:active[btn-type=error] {
   background: rgba(206, 39, 39, 0.2);
+}
+
+/* noline */
+.common-btn-noline[btn-type=body] {
+  color: #3c435c;
+}
+
+.common-btn-noline:active[btn-type=body] {
+  background: rgba(60, 67, 92, 0.2);
 }
 
 /* -------------------- */

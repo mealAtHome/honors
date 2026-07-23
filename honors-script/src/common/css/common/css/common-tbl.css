@@ -85,6 +85,21 @@
 }
 
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
+.common-colorFont[font-color=edge] {
+  color: #c4c7ce;
+}
+
+.common-colorEdge {
+  color: #c4c7ce;
+}
+
+.common-card[card-color=edge] {
+  color: #c4c7ce;
+  border: 2px solid #c4c7ce;
+  background-color: rgba(196, 199, 206, 0.2);
+}
+
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
 .common-colorFont[font-color=line] {
   color: #e4e7f0;
 }
@@ -642,13 +657,13 @@
  */
 /* ============================== */
 .common-tbl-tab > tbody > tr > td {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  padding-left: 0.6em;
-  padding-right: 0.6em;
-  border-radius: 3em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  border-radius: 2em;
   color: #020654;
-  line-height: 1.6;
+  text-align: center;
 }
 
 .common-tbl-tab > tbody > tr > td[tab=space] {
@@ -663,7 +678,6 @@
 
 .common-tbl-tab > tbody > tr > td[tab=tab] {
   color: #ffffff;
-  border-radius: 3em;
   background: #020654;
 }
 

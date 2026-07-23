@@ -203,7 +203,7 @@ class MClssettles extends _MCommon
             /* ----- */
             html +=
             `
-                <div class="MGrpMembers-make-div-modelTop common-div-card">
+                <div class="MClssettle-make-div-modelTop common-div-card">
                     <span class="common-block common-strong common-cushionDw">정산상세 - ${model.getUsername()}</span>
                     <span class="common-block ">${model.getGrpname()}</span>
                     <span class="common-block ">${model.getClstitle()}</span>

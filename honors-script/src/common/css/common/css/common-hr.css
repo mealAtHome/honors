@@ -85,6 +85,21 @@
 }
 
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
+.common-colorFont[font-color=edge] {
+  color: #c4c7ce;
+}
+
+.common-colorEdge {
+  color: #c4c7ce;
+}
+
+.common-card[card-color=edge] {
+  color: #c4c7ce;
+  border: 2px solid #c4c7ce;
+  background-color: rgba(196, 199, 206, 0.2);
+}
+
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
 .common-colorFont[font-color=line] {
   color: #e4e7f0;
 }
@@ -613,40 +628,40 @@
 
 .common-hr-card {
   margin: 0.8em;
-  border: 1px dashed #e4e7f0;
+  border: 1px solid #e4e7f0;
 } /* card 사이의 hr */
-.common-hr-padding06 {
+.common-hr-paddingAA {
   margin: 0.6em;
-  border: 1px dashed #e4e7f0;
+  border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingLR {
   margin-left: 0.6em;
   margin-right: 0.6em;
-  border: 1px dashed #e4e7f0;
+  border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingUD06 {
   margin-top: 0.6em;
   margin-bottom: 0.6em;
-  border: 1px dashed #e4e7f0;
+  border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingUD03 {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
-  border: 1px dashed #e4e7f0;
+  border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingUp06 {
   margin-top: 0.6em;
-  border: 1px dashed #e4e7f0;
+  border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-card[type=strong] {
-  border: 1px dashed #020654;
+  border: 1px solid #020654;
 } /* card 사이의 hr */
 .common-hr-padding[type=strong] {
-  border: 1px dashed #020654;
+  border: 1px solid #020654;
 } /* 일반 html 사이의 hr */
 .common-hr-normal[type=strong] {
-  border: 1px dashed #020654;
+  border: 1px solid #020654;
 } /* 일반 html 사이의 hr */
 .common-hr-full[type=strong] {
-  border: 1px dashed #020654;
+  border: 1px solid #020654;
 } /* 일반 html 사이의 hr */
