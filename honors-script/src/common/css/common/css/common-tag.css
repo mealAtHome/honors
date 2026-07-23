@@ -89,7 +89,7 @@
   color: #c4c7ce;
 }
 
-.common-colorEdge {
+.common-colorSept {
   color: #c4c7ce;
 }
 
@@ -284,7 +284,7 @@
   color: #ffffff;
 }
 
-.common-colorWhit {
+.common-colorSnow {
   color: #ffffff;
 }
 
@@ -624,6 +624,31 @@
 
 .common-marRt10 {
   margin-right: 1em;
+}
+
+/* --------------- */
+/* colors */
+/* --------------- */
+:root {
+  --colorMain:#020654;
+  --colorDark:#020421;
+  --colorHead:#1b2a6b;
+  --colorSide:#3d6bf5;
+  --colorBody:#3c435c;
+  --colorSept:#c4c7ce;
+  --colorLine:#e4e7f0;
+  --colorPstv:#000278;
+  --colorAllw:#009600;
+  --colorProg:#039a00;
+  --colorNtce:#2865ff;
+  --colorInfo:#2865ff;
+  --colorDtil:#EAF0FF;
+  --colorHold:#d4ad00;
+  --colorCncl:#ff7415;
+  --colorWarn:#ff7415;
+  --colorErrr:#ce2727;
+  --colorNgtv:#780000;
+  --colorSnow:#ffffff;
 }
 
 /* --------------- */

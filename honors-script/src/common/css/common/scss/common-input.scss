@@ -10,7 +10,7 @@
     @include fonts11;
     border: none;
     text-align: left;
-    border-bottom: 2px solid $colorEdge;
+    border-bottom: 2px solid $colorSept;
     @include backgroundTrans;
 }
 .common-input-field:focus { border: none; border-bottom: 3px solid $colorMain; }
@@ -20,7 +20,7 @@
 {
   @include pad03;
   @include fonts11;
-  border: 2px solid $colorEdge;
+  border: 2px solid $colorSept;
   @include backgroundTrans;
 }
 .common-textarea-field:focus { border: 2px solid $colorMain; border-bottom: 3px solid $colorMain; }
@@ -37,7 +37,7 @@
     /* box-sizing: content-box; */
     @include pad03;
     @include fonts11;
-    border: 2px solid $colorEdge;
+    border: 2px solid $colorSept;
 }
 
 .common-input-text:focus
@@ -70,7 +70,7 @@
     /* box-sizing: content-box; */
     @include pad03;
     @include fonts11;
-    border: 2px solid $colorEdge;
+    border: 2px solid $colorSept;
 }
 
 .common-textarea:focus

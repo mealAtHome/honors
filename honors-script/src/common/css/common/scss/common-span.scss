@@ -54,7 +54,7 @@
 }
 .common-span-label[label_type=inline]
 {
-    @include colorWhitFont;
+    @include colorSnowFont;
     @include colorMainBackTrans;
     border: 1px solid $colorMain;
 }

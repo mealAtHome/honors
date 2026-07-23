@@ -2,6 +2,32 @@
 @use "../../_import/scss/__import" as *;
 
 /* --------------- */
+/* colors */
+/* --------------- */
+:root
+{
+    --colorMain:#020654;
+    --colorDark:#020421;
+    --colorHead:#1b2a6b;
+    --colorSide:#3d6bf5;
+    --colorBody:#3c435c;
+    --colorSept:#c4c7ce;
+    --colorLine:#e4e7f0;
+    --colorPstv:#000278;
+    --colorAllw:#009600;
+    --colorProg:#039a00;
+    --colorNtce:#2865ff;
+    --colorInfo:#2865ff;
+    --colorDtil:#EAF0FF;
+    --colorHold:#d4ad00;
+    --colorCncl:#ff7415;
+    --colorWarn:#ff7415;
+    --colorErrr:#ce2727;
+    --colorNgtv:#780000;
+    --colorSnow:#ffffff;
+}
+
+/* --------------- */
 /* margin, padding */
 /* --------------- */
 .common-block           { display: block; @include fonth16; }
@@ -45,7 +71,7 @@
 ═══════════════════════════════════════ */
 .common-menuTop
 {
-    background: $colorWhit;
+    background: $colorSnow;
     border: 0.5px solid $colorLine;
     border-radius: 16px;
     overflow: hidden;

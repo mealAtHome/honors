@@ -49,7 +49,7 @@
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
-    @include colorWhitFont;
+    @include colorSnowFont;
     @include colorMainBackSolid;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
@@ -93,11 +93,11 @@
 /*
     class="common-tbl-normal" tbl-type=noborder
 */
-.common-tbl-normal[tbl-type=normal]                       { border: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=normal]    > thead > tr > th  { border: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=normal]    > tbody > tr > th  { border: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=normal]    > tbody > tr > td  { border: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=normal]    > tfoot > tr > td  { border: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=normal]                       { border: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > thead > tr > th  { border: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > tbody > tr > th  { border: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > tbody > tr > td  { border: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > tfoot > tr > td  { border: 1px solid $colorSept; }
 
 .common-tbl-normal[tbl-type=noborder]                     { border: none; }
 .common-tbl-normal[tbl-type=noborder]  > thead > tr > th  { border: none; }
@@ -105,20 +105,20 @@
 .common-tbl-normal[tbl-type=noborder]  > tbody > tr > td  { border: none; }
 .common-tbl-normal[tbl-type=noborder]  > tfoot > tr > td  { border: none; }
 
-.common-tbl-normal[tbl-type=rowborder]                    { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=rowborder] > thead > tr > th  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=rowborder] > tbody > tr > th  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=rowborder] > tbody > tr > td  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=rowborder] > tfoot > tr > td  { border-top: 1px solid $colorLine; border-bottom: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=rowborder]                    { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > thead > tr > th  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > tbody > tr > th  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > tbody > tr > td  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > tfoot > tr > td  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
 
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-last-child(1)    { border-left: 1px solid $colorLine; border-right: none; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > th                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 1px solid $colorLine; border-right: none; }
-.common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 1px solid $colorLine; border-right: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-last-child(1)    { border-left: 1px solid $colorSept; border-right: none; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > th                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 1px solid $colorSept; border-right: none; }
+.common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
 
 /* ============================== */
 /* 슬라이드 입력폼용 테이블 */
@@ -172,15 +172,15 @@
 {
     @include pad04;
 }
-.common-tbl-vertical[tbl-type=normal]    { border: 1px solid $colorLine; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background-color: $colorBodyBack; border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=normal]    { border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background-color: rgba($colorBody, 0.8); border: 1px solid $colorSept; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { width: 5%;  text-align: right; font-weight: bold; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorSept; }
 
-.common-tbl-vertical[tbl-type=minimal]   { border: 1px solid $colorLine; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background-color: $colorBodyBack; border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=minimal]   { border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background-color: rgba($colorBody, 0.8); border: 1px solid $colorSept; }
 .common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { width: 5%;  text-align: right; font-weight: normal; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorSept; }
 
 .common-tbl-vertical[tbl-type=noborder]  { border: none; }
 .common-tbl-vertical[tbl-type=noborder]  > tbody > tr > th { width: 5%;  text-align: right; border: none; font-weight: bold; }
@@ -191,8 +191,8 @@
 
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { width: 5%;  text-align: right; border: none; font-weight: bold; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { width: 95%; text-align: left;  border: none; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { border-top: 1px solid $colorLine; }
-.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { border-top: 1px solid $colorLine; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > th { border-top: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=rowborder] > tbody > tr > td { border-top: 1px solid $colorSept; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > th { @include borderTopNone; }
 .common-tbl-vertical[tbl-type=rowborder] > tbody > tr:nth-child(1) > td { @include borderTopNone; }
 

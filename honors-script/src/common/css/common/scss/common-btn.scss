@@ -8,7 +8,7 @@
 @mixin btnInnerNormal   ($color)  { border:1px solid color.scale($color, $lightness: -25%); background:$color; @if color.channel($color, "lightness", $space: hsl) > 55% { color:color.scale($color, $lightness: -75%); } @else { color:color.scale($color, $lightness: 99%); } }
 @mixin btnOuterActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
 @mixin btnInnerActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
-@mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorWhit; color:$color; }
+@mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorSnow; color:$color; }
 @mixin btnInnerDisabled ($color)  { border:1px solid color.grayscale($color); background:color.grayscale($color); color:$color; }
 
 .common-btn-light,
@@ -23,7 +23,7 @@
     @include padLR04;
     text-decoration: none;
     @include radiusCurv04;
-    @include colorWhitBackSolid;
+    @include colorSnowBackSolid;
     line-height: 1.5;
 }
 .common-btn-round { @include radiusFull; }
@@ -109,7 +109,7 @@
     left: 0px;
     width: 100%;
     @include colorMainBackSolid;
-    @include colorWhitFont;
+    @include colorSnowFont;
     @include fonts11;
     @include fonth16;;
     @include padUD08;
