@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../../_import/scss/__import" as *;
 
 /* 스위치
@@ -49,14 +50,14 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    @include colorWhitFont;
-    @include radiusHalf;
+    background-color: $colorWhit;
+    border-radius: 50%;
     -webkit-transition: .4s;
             transition: .4s;
 }
 
-.common-label-switch > input:checked + span { @include colorMainBackTrans; }
-.common-label-switch > input:focus   + span { @include colorMainShad; }
+.common-label-switch > input:checked + span { background-color: rgba($colorMain, 0.8); }
+.common-label-switch > input:focus   + span { box-shadow: 0 0 1px rgba($colorMain, 0.8); }
 .common-label-switch > input:checked + span:before
 {
     -webkit-transform: translateX(26px);

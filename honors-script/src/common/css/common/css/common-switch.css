@@ -669,17 +669,17 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
-  color: #ffffff;
+  background-color: #ffffff;
   border-radius: 50%;
   transition: 0.4s;
 }
 
 .common-label-switch > input:checked + span {
-  background: rgba(2, 6, 84, 0.2);
+  background-color: rgba(2, 6, 84, 0.8);
 }
 
 .common-label-switch > input:focus + span {
-  box-shadow: 1px 1px 7px 2px rgb(172.1720930233, 176.1162790698, 253.0279069767);
+  box-shadow: 0 0 1px rgba(2, 6, 84, 0.8);
 }
 
 .common-label-switch > input:checked + span:before {
