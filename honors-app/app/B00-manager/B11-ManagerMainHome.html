@@ -1,13 +1,32 @@
 <ons-page id="MMHM">
 
+    <div class="common-div-headerTop">
+        <table style="width:100%;">
+            <tbody>
+                <tr>
+                    <td style="text-align:left;">
+                        <div class="common-colorBody">안녕하세요</div>
+                        <div class="common-colorHead"><span id="MMHM-span-username" class="common-strong" style="vertical-align:bottom;"></span>&nbsp;님</div>
+                    </td>
+                    <td style="text-align:right;">
+                        <button id="MMHM-btn-toUser"    class="common-btn-inner  common-fonts09"><i class="ti ti-transform"></i>&nbsp;유저 홈</button>
+                        <button id="MMHM-btn-toAdmin"   class="common-btn-inner  common-fonts09" style="display:none;"><i class="ti ti-power" aria-hidden="true"></i>&nbsp;관리자 홈</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <!-- ========================= -->
     <!-- 모임 -->
     <!-- ========================= -->
-    <hr class="common-hr-paddingAA"/>
     <div class="common-div-cushion">
         <div id="MMHM-div-grp"></div>
     </div>
 
+    <!-- ========================= -->
+    <!-- 메뉴 -->
+    <!-- ========================= -->
     <hr class="common-hr-paddingAA"/>
     <div class="common-menuTop common-div-cushion">
         <a id="MMHM-btn-classes" class="common-menuItem" href="#">
@@ -65,14 +84,17 @@
 
                     /* 모임정보조회 */
                     let mGrp = Api.Grp.selectByPk(MMHM.Data.grpno);
-                    if(mGrp == null)
-                    {
-                        Common.error("모임정보가 없습니다.");
-                        return;
-                    }
-                    $("#MMHM-div-grp").html(mGrp.make());
+                    let mUser = Api.User.selectMe().getModel();
 
-                    /* 이 모임의 매니저인지 여부를 확인 */
+                    /* validation */
+                    if(mGrp == null)  { Common.error("모임정보가 없습니다."); return; }
+                    if(mUser == null) { Common.error("유저정보가 없습니다."); return; }
+
+                    /* to html */
+                    $("#MMHM-div-grp").html(mGrp.make());
+                    $("#MMHM-span-username").text(`${mUser.getName()}`);
+
+                    /* check isManager */
                     if(GGstorage.Prj.isManagerOfGrp(MMHM.Data.grpno) == false)
                     {
                         Common.toast("매니저 권한이 없습니다.");

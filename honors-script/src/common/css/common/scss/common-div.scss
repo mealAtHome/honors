@@ -69,7 +69,7 @@ div { display: block; }
 }
 .common-div-toolbar > div:nth-child(2) { padding-left: 0.5em; }
 .common-div-toolbar > div:nth-child(2) > span { font-size:1.2em; font-weight:bold; }
-.common-div-toolbar > div:nth-child(3) { margin-left: auto; padding-right: 1em; }
+.common-div-toolbar > div:nth-child(3) { margin-left: auto; }
 
 
 /*=================================*/
@@ -227,14 +227,11 @@ div { display: block; }
 /* ============================== */
 /* 그림자진 DIV */
 /* ============================== */
-.common-div-childMarginZero > div { @include marZZ; }
 .common-div-card
 {
     position: relative;
     @include radiusCurv08;
     @include pad08;
-    @include mar06;
-    @include marDw06;
     overflow-x: scroll;
     box-sizing: content-box;
     text-align: left;
@@ -246,6 +243,7 @@ div { display: block; }
 .common-div-card[card-type=notice]  { @include colorNtceFont; background: $colorNtceBack; }
 .common-div-card[card-type=hero]    { @include colorMainFont; background: $colorMainBack; }
 .common-div-card:first-child  { @include marUpZZ; }
+.common-div-card ~ .common-div-card { @include marUp06; }
 
 /* ============================== */
 /* 에러 메시지용 */

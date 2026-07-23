@@ -61,7 +61,7 @@ class MGrp
             btnHtml =
             `
                 <tr>
-                    <td colspan="2">
+                    <td colspan="2" class="common-fonts09" style="text-align:right;">
                         ${btnHtml}
                     </td>
                 </tr>
@@ -71,7 +71,7 @@ class MGrp
         let html = "";
         html +=
         `
-            <div class="Mgrp-make-div-top" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
+            <div class="Mgrp-make-div-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
                 <table class="Mgrp-make-tbl-top">
                     <tbody>
                         <tr>
@@ -117,7 +117,6 @@ class MGrps extends _MCommon
     makeForChooseGrp2(el) { this.make("makeForChooseGrp2", el); }
     make(option, el)
     {
-        let firstBtn = true;
         let html = "";
         for(let i in this.models)
         {
@@ -129,31 +128,7 @@ class MGrps extends _MCommon
                 case "makeForChooseGrp"   : { buttonHtml = `<button class="common-btn-inner Mgrp-make-btn-login" grpno="${model.getGrpno()}">선택하기</button>`; break; }
                 case "makeForChooseGrp2"  : { buttonHtml = `<button class="CUDE-btn-chooseGrp commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-chooseGrp" tab="" grpno="${model.getGrpno()}">선택</button>`; break; }
             }
-            html +=
-            `
-                <div class="Mgrp-make-div-top common-div-card" grpno="${model.getGrpno()}" grpmanager="${model.getGrpmanager()}">
-                    <table class="Mgrp-make-tbl-top">
-                        <tbody>
-                            <tr>
-                                <td><div class="Mgrp-make-div-image" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
-                                <td>
-                                    <span class="common-block common-fonts11">${model.getGrpname()}</span>
-                                    <span class="common-block">
-                                        <span class="common-block">대표 ${model.getGrpmanagerName()}</span>
-                                        <span class="common-block common-fonts09">TEL. ${model.getGrpmanagerPhone()}</span>
-                                    </span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="common-fonts09" style="text-align:right;">
-                                    ${buttonHtml}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            `;
-            firstBtn = false;
+            html += model.make(buttonHtml);
         }
         $(el).html(html);
 

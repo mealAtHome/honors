@@ -703,7 +703,6 @@ div {
 
 .common-div-toolbar > div:nth-child(3) {
   margin-left: auto;
-  padding-right: 1em;
 }
 
 /*=================================*/
@@ -919,16 +918,10 @@ div {
 /* ============================== */
 /* 그림자진 DIV */
 /* ============================== */
-.common-div-childMarginZero > div {
-  margin: 0em;
-}
-
 .common-div-card {
   position: relative;
   border-radius: 0.8em;
   padding: 0.8em;
-  margin: 0.6em;
-  margin-bottom: 0.6em;
   overflow-x: scroll;
   box-sizing: content-box;
   text-align: left;
@@ -954,6 +947,10 @@ div {
 
 .common-div-card:first-child {
   margin-top: 0em;
+}
+
+.common-div-card ~ .common-div-card {
+  margin-top: 0.6em;
 }
 
 /* ============================== */
