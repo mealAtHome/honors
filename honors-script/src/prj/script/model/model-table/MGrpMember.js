@@ -70,7 +70,7 @@ class MGrpMember
         {
             buttonHtmlFinal =
             `
-                <span class="common-block common-marUD common-fonts09">
+                <span class="common-div-cushionUD common-fonts09">
                     ${buttonHtml}
                 </span>
             `;

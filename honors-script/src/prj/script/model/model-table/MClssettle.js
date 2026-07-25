@@ -188,11 +188,11 @@ class MClssettles extends _MCommon
             {
                 baccHtml +=
                 `
-                    <div class="common-marUp08 common-alignL common-fonts09">
+                    <div class="common-alignL common-fonts09" style="margin-top:0.8em;">
                         <span class="common-block">입금계좌</span>
                         <span class="common-block">
                             <span style="vertical-align:middle">${model.getBankname()} ${model.getBaccacct()} ${model.getBaccname()}</span>
-                            <button class="common-btn-outer MClssettle-make-btn-copyBacc common-marLt03" copytext="${model.getBankname()} ${model.getBaccacct()}">복사</button>
+                            <button class="common-btn-outer MClssettle-make-btn-copyBacc" copytext="${model.getBankname()} ${model.getBaccacct()}" style="margin-left:0.3em;">복사</button>
                         </span>
                     </div>
                 `;
@@ -215,7 +215,7 @@ class MClssettles extends _MCommon
                     <span class="common-block common-alignR common-colorBody common-fonts08">청구차감:${model.getBilldiscountWon()}</span>
                     ${model.getBillpointed() >= 1  ? `<span class="common-block common-alignR common-colorBody common-fonts08">사전정산:${model.getBillpointedWon()}</span>` : ""}
                     ${model.getBillmemo()    != "" ? `<span class="common-block common-alignR common-colorBody common-fonts08">보정사유:${model.getBillmemo()}</span>` : ""}
-                    <span class="common-block common-marUp common-fonts09">
+                    <span class="common-block common-fonts09" style="margin-top:0.2em;">
                         <button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>일정상세</button>
                         ${btnHtml}
                     </span>

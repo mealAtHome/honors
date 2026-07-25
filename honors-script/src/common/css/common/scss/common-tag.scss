@@ -86,11 +86,12 @@
 .common-indent08        { display: block; padding-left: $padBase; }
 .common-indent12        { display: block; padding-left: $padFull; }
 .common-padTinyUD       {                 padding: $padTiny auto; }
-.common-marUD           { display: block; margin         : $marHalf 0em; }
-.common-marUp           { display: block; margin-top     : $marHalf; }
-.common-cushionUp       { display: block; margin-top     : $marBase; }
-.common-cushionUD       { display: block; margin         : $marBase 0em; }
-.common-cushionDw       { display: block; margin-bottom  : $marHalf; }
+.common-marUD           { display: block; margin: $marHalf 0em; }
+.common-marUp           { display: block; margin-top: $marHalf; }
+.common-cushionUp       { display: block; margin-top: $marBase; }
+.common-cushionUD       { display: block; margin: $marBase 0em; }
+.common-cushionDw       { display: block; margin-bottom: $marHalf; }
+.common-cushionTinyUD   { display: block; margin: $marTiny 0em; }
 
 /* --------------- */
 /* font style */

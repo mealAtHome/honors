@@ -301,8 +301,8 @@ class MClss extends _MCommon
             `
                 <tr>
                     <td style="text-align:center;">
-                        <button class="common-btn-outer MClss-makeTableForFinanceReflect-btn-toY" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.N ? `style="display:none;"` : ``}>반영설정</button>
-                        <button class="common-btn-outer MClss-makeTableForFinanceReflect-btn-toN" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.Y ? `style="display:none;"` : ``}>반영해제</button>
+                        <button class="common-btn-outer MClss-makeTableForFinanceReflect-btn-toY" btn-type="normal" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.N ? `style="display:none;"` : ``}>반영설정</button>
+                        <button class="common-btn-outer MClss-makeTableForFinanceReflect-btn-toN" btn-type="cancel" ${model.getPk()} ${grpfinancereflectflg != GGF.Cls.Grpfinancereflectflg.Y ? `style="display:none;"` : ``}>반영해제</button>
                     </td>
                     <td style="text-align:center;">${model.getGrpfinancereflectflgFont()}</td>
                     <td>${model.getClsstartdtYMDdd()}</td>

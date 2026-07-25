@@ -97,8 +97,8 @@ class GGscoreHtml extends HTMLElement
     {
         this.innerHTML =
         `
-            <div class="GGscore-div-top common-padUp05" style="text-align:center;">
-                <div class="common-marDw03>
+            <div class="GGscore-div-top" style="padding-top:0.5em; text-align:center;">
+                <div style="margin-bottom:0.3em;">
                     <svg class="commonEvent-svg-GGscore"    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="rgb(220,220,220)" style=""                 score="1" score-type="gray"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
                     <svg class="commonEvent-svg-GGscore"    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#ffd700"          style="display:none;"    score="1" score-type="gold"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>
                     <svg class="commonEvent-svg-GGscore"    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="rgb(220,220,220)" style=""                 score="2" score-type="gray"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg>

@@ -38,7 +38,8 @@
     display: block;
     width: 4em;
     height: 0.2em;
-    margin: $marTiny auto;
+    margin-top: $marTiny;
+    margin-bottom: $marTiny;
     @include colorSideBackSolid;
 }
 
