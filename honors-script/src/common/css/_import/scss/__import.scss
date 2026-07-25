@@ -31,7 +31,7 @@ $colorProg:#039a00; /* rgb(3   , 154 , 0   ); #039a00 */ $colorProgBack:color.sc
 $colorNtce:#2865ff; /* rgb(40  , 101 , 255 ); #d9e4ff */ $colorNtceBack:color.scale($colorNtce, $lightness:80%); @mixin colorNtceShad { box-shadow:1px 1px 7px 2px color.scale($colorNtce, $lightness:80%); } @mixin colorNtceFont { color:$colorNtce; } @mixin colorNtceBackSolid { background:$colorNtce; } @mixin colorNtceBackTrans { background:rgba($colorNtce,0.2); }
 $colorInfo:#3c435c; /* rgb(40  , 101 , 255 ); #d9e4ff */ $colorInfoBack:color.scale($colorInfo, $lightness:80%); @mixin colorInfoShad { box-shadow:1px 1px 7px 2px color.scale($colorInfo, $lightness:80%); } @mixin colorInfoFont { color:$colorInfo; } @mixin colorInfoBackSolid { background:$colorInfo; } @mixin colorInfoBackTrans { background:rgba($colorInfo,0.2); }
 $colorDtil:#EAF0FF; /* rgb(234 , 240 , 255 ); #EAF0FF */ $colorDtilBack:color.scale($colorDtil, $lightness:80%); @mixin colorDtilShad { box-shadow:1px 1px 7px 2px color.scale($colorDtil, $lightness:80%); } @mixin colorDtilFont { color:$colorDtil; } @mixin colorDtilBackSolid { background:$colorDtil; } @mixin colorDtilBackTrans { background:rgba($colorDtil,0.2); }
-$colorHold:#d4ad00; /* rgb(212 , 173 , 0   ); #d4ad00 */ $colorHoldBack:color.scale($colorHold, $lightness:80%); @mixin colorHoldShad { box-shadow:1px 1px 7px 2px color.scale($colorHold, $lightness:80%); } @mixin colorHoldFont { color:$colorHold; } @mixin colorHoldBackSolid { background:$colorHold; } @mixin colorHoldBackTrans { background:rgba($colorHold,0.2); }
+$colorHold:#ffb300; /* rgb(212 , 173 , 0   ); #d4ad00 */ $colorHoldBack:color.scale($colorHold, $lightness:80%); @mixin colorHoldShad { box-shadow:1px 1px 7px 2px color.scale($colorHold, $lightness:80%); } @mixin colorHoldFont { color:$colorHold; } @mixin colorHoldBackSolid { background:$colorHold; } @mixin colorHoldBackTrans { background:rgba($colorHold,0.2); }
 $colorCncl:#ff7415; /* rgb(255 , 116 , 21  ); #FF7415 */ $colorCnclBack:color.scale($colorCncl, $lightness:80%); @mixin colorCnclShad { box-shadow:1px 1px 7px 2px color.scale($colorCncl, $lightness:80%); } @mixin colorCnclFont { color:$colorCncl; } @mixin colorCnclBackSolid { background:$colorCncl; } @mixin colorCnclBackTrans { background:rgba($colorCncl,0.2); }
 $colorWarn:#ff7415; /* rgb(255 , 116 , 21  ); #FF7415 */ $colorWarnBack:color.scale($colorWarn, $lightness:80%); @mixin colorWarnShad { box-shadow:1px 1px 7px 2px color.scale($colorWarn, $lightness:80%); } @mixin colorWarnFont { color:$colorWarn; } @mixin colorWarnBackSolid { background:$colorWarn; } @mixin colorWarnBackTrans { background:rgba($colorWarn,0.2); }
 $colorErrr:#ce2727; /* rgb(206 , 39  , 39  ); #ce2727 */ $colorErrrBack:color.scale($colorErrr, $lightness:80%); @mixin colorErrrShad { box-shadow:1px 1px 7px 2px color.scale($colorErrr, $lightness:80%); } @mixin colorErrrFont { color:$colorErrr; } @mixin colorErrrBackSolid { background:$colorErrr; } @mixin colorErrrBackTrans { background:rgba($colorErrr,0.2); }
@@ -85,7 +85,6 @@ $borderRadiusDivCard:0.8em;
 @mixin boxsizeB     { box-sizing:border-box;    }
 @mixin boxsizeC     { box-sizing:content-box;   }
 @mixin overflowX    { overflow-x:auto;          }
-
 
 
 /* ========================= */

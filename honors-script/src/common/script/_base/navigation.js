@@ -331,6 +331,7 @@ var Navigation =
                         $('#index-dom')[0].bringPageTop(Navigation.getURL(movePage), {"animation": "lift"}).then(function()
                         {
                             $("#index-dom > ons-page[id!="+movePage+"]").remove();
+                            $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
                             Navigation.executeShow();
                         });
                     }
@@ -339,6 +340,7 @@ var Navigation =
                         $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "lift"}).then(function()
                         {
                             $("#index-dom > ons-page[id!="+movePage+"]").remove();
+                            $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
                         });
                     }
                 }

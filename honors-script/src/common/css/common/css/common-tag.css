@@ -73,7 +73,7 @@
   --colorNtce: #2865ff;
   --colorInfo: #3c435c;
   --colorDtil: #EAF0FF;
-  --colorHold: #d4ad00;
+  --colorHold: #ffb300;
   --colorCncl: #ff7415;
   --colorWarn: #ff7415;
   --colorErrr: #ce2727;
@@ -96,7 +96,7 @@
   --colorNtceRgb: 40, 101, 255;
   --colorInfoRgb: 60, 67, 92;
   --colorDtilRgb: 234, 240, 255;
-  --colorHoldRgb: 212, 173, 0;
+  --colorHoldRgb: 255, 179, 0;
   --colorCnclRgb: 255, 116, 21;
   --colorWarnRgb: 255, 116, 21;
   --colorErrrRgb: 206, 39, 39;
@@ -301,17 +301,17 @@
 }
 
 .common-colorFont[font-color=hold] {
-  color: #d4ad00;
+  color: #ffb300;
 }
 
 .common-colorHold {
-  color: #d4ad00;
+  color: #ffb300;
 }
 
 .common-card[card-color=hold] {
-  color: #d4ad00;
-  border: 2px solid #d4ad00;
-  background-color: rgba(212, 173, 0, 0.2);
+  color: #ffb300;
+  border: 2px solid #ffb300;
+  background-color: rgba(255, 179, 0, 0.2);
 }
 
 .common-colorFont[font-color=cncl] {

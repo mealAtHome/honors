@@ -6,49 +6,51 @@
 /* --------------- */
 :root
 {
-    --colorMain: #020654;
-    --colorDark: #020421;
-    --colorHead: #1b2a6b;
-    --colorSide: #3d6bf5;
-    --colorBody: #3c435c;
-    --colorCmmt: #7a7d84;
-    --colorSept: #c4c7ce;
-    --colorLine: #e4e7f0;
-    --colorPstv: #3d6bf5;
-    --colorAllw: #009600;
-    --colorProg: #039a00;
-    --colorNtce: #2865ff;
-    --colorInfo: #3c435c;
-    --colorDtil: #EAF0FF;
-    --colorHold: #d4ad00;
-    --colorCncl: #ff7415;
-    --colorWarn: #ff7415;
-    --colorErrr: #ce2727;
-    --colorNgtv: #780000;
-    --colorSnow: #ffffff;
+    --colorMain: #{$colorMain};
+    --colorDark: #{$colorDark};
+    --colorHead: #{$colorHead};
+    --colorSide: #{$colorSide};
+    --colorBody: #{$colorBody};
+    --colorCmmt: #{$colorCmmt};
+    --colorSept: #{$colorSept};
+    --colorLine: #{$colorLine};
+    --colorPstv: #{$colorPstv};
+    --colorAllw: #{$colorAllw};
+    --colorProg: #{$colorProg};
+    --colorNtce: #{$colorNtce};
+    --colorInfo: #{$colorInfo};
+    --colorDtil: #{$colorDtil};
+    --colorHold: #{$colorHold};
+    --colorCncl: #{$colorCncl};
+    --colorWarn: #{$colorWarn};
+    --colorErrr: #{$colorErrr};
+    --colorNgtv: #{$colorNgtv};
+    --colorSnow: #{$colorSnow};
 }
+
+@function rgb-values($c) { @return #{color.channel($c, "red", $space: rgb)}, #{color.channel($c, "green", $space: rgb)}, #{color.channel($c, "blue", $space: rgb)}; }
 :root
 {
-    --colorMainRgb: 2, 6, 84;
-    --colorDarkRgb: 2, 4, 33;
-    --colorHeadRgb: 27, 42, 107;
-    --colorSideRgb: 61, 107, 245;
-    --colorBodyRgb: 60, 67, 92;
-    --colorCmmtRgb: 122, 125, 132;
-    --colorSeptRgb: 196, 199, 206;
-    --colorLineRgb: 228, 231, 240;
-    --colorPstvRgb: 61, 107, 245;
-    --colorAllwRgb: 0, 150, 0;
-    --colorProgRgb: 3, 154, 0;
-    --colorNtceRgb: 40, 101, 255;
-    --colorInfoRgb: 60, 67, 92;
-    --colorDtilRgb: 234, 240, 255;
-    --colorHoldRgb: 212, 173, 0;
-    --colorCnclRgb: 255, 116, 21;
-    --colorWarnRgb: 255, 116, 21;
-    --colorErrrRgb: 206, 39, 39;
-    --colorNgtvRgb: 120, 0, 0;
-    --colorSnowRgb: 255, 255, 255;
+    --colorMainRgb: #{rgb-values($colorMain)};
+    --colorDarkRgb: #{rgb-values($colorDark)};
+    --colorHeadRgb: #{rgb-values($colorHead)};
+    --colorSideRgb: #{rgb-values($colorSide)};
+    --colorBodyRgb: #{rgb-values($colorBody)};
+    --colorCmmtRgb: #{rgb-values($colorCmmt)};
+    --colorSeptRgb: #{rgb-values($colorSept)};
+    --colorLineRgb: #{rgb-values($colorLine)};
+    --colorPstvRgb: #{rgb-values($colorPstv)};
+    --colorAllwRgb: #{rgb-values($colorAllw)};
+    --colorProgRgb: #{rgb-values($colorProg)};
+    --colorNtceRgb: #{rgb-values($colorNtce)};
+    --colorInfoRgb: #{rgb-values($colorInfo)};
+    --colorDtilRgb: #{rgb-values($colorDtil)};
+    --colorHoldRgb: #{rgb-values($colorHold)};
+    --colorCnclRgb: #{rgb-values($colorCncl)};
+    --colorWarnRgb: #{rgb-values($colorWarn)};
+    --colorErrrRgb: #{rgb-values($colorErrr)};
+    --colorNgtvRgb: #{rgb-values($colorNgtv)};
+    --colorSnowRgb: #{rgb-values($colorSnow)};
 }
 
 .common-colorFont[font-color=main] { color:$colorMain;} .common-colorMain { color:$colorMain;} .common-card[card-color=main] { color:$colorMain; border: 2px solid $colorMain; background-color:rgba($colorMain, 0.2); }

@@ -122,9 +122,7 @@ class MCls
                         ${true         ? `<span class="common-inline">${model.getClsstatusCard()}</span>` : ""}
                         ${this.isEnd() ? `<span class="common-inline">${model.getClssettleflgCard()}</span>` : ""}
                     </div>
-                    <div class="common-div-cushionUD common-div-btnList common-fonts09">
-                        ${btnHtml}
-                    </div>
+                    ${btnHtml != "" ? `<div class="common-div-cushionUp common-fonts09">${btnHtml}</div>` : ""}
                 </div>
             </div>
         `;
