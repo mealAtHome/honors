@@ -31,7 +31,7 @@ div { display: block; }
 .common-div-headerTop
 {
     display: block;
-    padding: $padUDdef $padLRdef;
+    padding: $padBase $padMore;
     @include colorSnowBackSolid;
     border-bottom: 0.5px solid $colorLine;
 }
@@ -40,7 +40,7 @@ div { display: block; }
 {
     font-weight: normal;
     @include colorBodyFont;
-    margin-bottom: $marUDdef;
+    margin-bottom: $marBase;
 }
 
 /*=================================*/
@@ -203,7 +203,7 @@ div { display: block; }
     display: block;
     width: 15em;
     max-width: 80%;
-    margin-top: $marUDdef;
+    margin-top: $marBase;
     margin-left: auto;
     margin-right: auto;
     padding: $padBase;
@@ -238,7 +238,7 @@ div { display: block; }
 .common-div-card[card-type=notice]  { @include colorNtceFont; background: $colorNtceBack; }
 .common-div-card[card-type=hero]    { @include colorMainFont; background: $colorMainBack; }
 .common-div-card:first-child  { margin-top: 0em; }
-.common-div-card ~ .common-div-card { margin-top: $marUDdef; }
+.common-div-card ~ .common-div-card { margin-top: $marBase; }
 
 /* ============================== */
 /* 에러 메시지용 */
@@ -355,7 +355,7 @@ div { display: block; }
 .common-div-cushion   > .common-div-cushionUD:nth-child(1) { margin-bottom: $marBase; }
 
 /* 쿠션 아래의 첫번째, formField 는 marginTop: 0.4em; */
-.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $marUDdef; }
+.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $marBase; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter

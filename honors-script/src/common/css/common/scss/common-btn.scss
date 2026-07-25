@@ -110,7 +110,7 @@
     @include colorSnowFont;
     @include fonts11;
     @include fonth16;
-    padding: $padMore $padLRdef;
+    padding: $padMore;
     border: none;
 }
 .common-btn-footer:hover  { cursor: pointer; }
