@@ -1,11 +1,10 @@
 @use "../../_import/scss/__import" as *;
 
-.common-hr-card        { @include mar08;       border: 1px solid $colorLine; } /* card 사이의 hr */
-.common-hr-paddingAA   { @include mar06;       border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingLR   { @include marLR06;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingUD06 { @include marUD06;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingUD03 { @include marUD03;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
-.common-hr-paddingUp06 { @include marUp06;     border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingAA   { margin: $marBase;      border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingLR   { margin: 0em $marBase;  border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingUD06 { margin: $marBase 0em;  border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingUD03 { margin: $marHalf 0em;  border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
+.common-hr-paddingUp06 { margin-top: $marBase;  border: 1px solid $colorLine; } /* 일반 html 사이의 hr */
 
 .common-hr-card[type=strong]    { border: 1px solid $colorMain; } /* card 사이의 hr */
 .common-hr-padding[type=strong] { border: 1px solid $colorMain; } /* 일반 html 사이의 hr */

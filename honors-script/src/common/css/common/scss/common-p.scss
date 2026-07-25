@@ -5,7 +5,7 @@
 /* ------------------------------ */
 .common-p-thankyou
 {
-    @include marUD05;
+    margin: $marBase auto;
     text-align: center;
     @include fonts12;
     @include colorMainFont;
@@ -15,31 +15,31 @@
 .common-p-title
 {
     display: block;
-    @include marUD04;
+    margin: $marHalf auto;
     @include colorMainFont;
     font-weight: bold;
     @include fonth14;
     @include fonts11;
 }
-.common-div-card       > .common-p-title { @include marUpZZ; }
-.common-div-cushion    > .common-p-title { @include marUpZZ; }
+.common-div-card       > .common-p-title { margin-top: 0em; }
+.common-div-cushion    > .common-p-title { margin-top: 0em; }
 
 .common-p-entityTitle
 {
     display: block;
-    @include marUD04;
+    margin: $marHalf auto;
     color: gray;
     font-weight: bold;
     @include fonth14;
     @include fonts10;
 }
-.common-div-card       > .common-p-entityTitle { @include marUpZZ; }
-.common-div-cushion    > .common-p-entityTitle { @include marUpZZ; }
+.common-div-card       > .common-p-entityTitle { margin-top: 0em; }
+.common-div-cushion    > .common-p-entityTitle { margin-top: 0em; }
 
 /* ------------------------------ */
 /* insert 페이지의 타이틀 */
 /* ------------------------------ */
-.common-p-insertTitle > span { display: block; @include marUDZZ; @include marAuto; text-align: center; }
+.common-p-insertTitle > span { display: block; margin: 0em auto; text-align: center; }
 .common-p-insertTitle > span:nth-child(1) { @include fonts11; @include colorMainFont; }
 .common-p-insertTitle > span:nth-child(2) { @include fonts09; }
 .common-p-insertTitle > span:nth-child(3) { @include fonts09; }

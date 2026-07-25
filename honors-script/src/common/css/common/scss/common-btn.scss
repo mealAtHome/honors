@@ -19,14 +19,13 @@
 .common-btn-flat
 {
     display: inline-block;
-    @include padUD03;
-    @include padLR04;
+    padding: $padUDbtn $padLRbtn;
     text-decoration: none;
-    @include radiusCurv04;
+    border-radius: $borderRadiusDefault;
     @include colorSnowBackSolid;
     line-height: 1.5;
 }
-.common-btn-round { @include radiusFull; }
+.common-btn-round { border-radius: 100%; }
 .common-btn-flat  { background-color: transparent; color: $colorBody; border: 1px solid $colorMain; }
 
 .common-btn-light:hover,
@@ -68,9 +67,8 @@
 .common-btn-inner:disabled  { @include btnInnerDisabled($colorMain); }
 
 /* button size */
-.common-btn-outer[btn-size=large]    { display: block; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; }
-.common-btn-inner[btn-size=large]    { display: block; @include marUD03; @include marAuto; @include pad08; min-width: 12em; max-width: 90%; }
-/* .common-btn-outer[btn-size=search]   { display: inline-block; @include pad04; } */
+.common-btn-outer[btn-size=large]    { display: block; margin: $marHalf auto; padding: $padMore; min-width: 12em; max-width: 90%; }
+.common-btn-inner[btn-size=large]    { display: block; margin: $marHalf auto; padding: $padMore; min-width: 12em; max-width: 90%; }
 
 /* -------------------- */
 /* noline */
@@ -79,8 +77,8 @@
 .common-btn-nolineSave
 {
     display: inline-block;
-    @include pad05;
-    @include backgroundTrans;
+    padding: 0.3em 0.4em;
+    background-color: transparent;
     border: none;
     line-height: 1.5;
 }
@@ -111,9 +109,8 @@
     @include colorMainBackSolid;
     @include colorSnowFont;
     @include fonts11;
-    @include fonth16;;
-    @include padUD08;
-    @include padLR04;
+    @include fonth16;
+    padding: $padMore $padLRdef;
     border: none;
 }
 .common-btn-footer:hover  { cursor: pointer; }

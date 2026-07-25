@@ -85,12 +85,12 @@
 .common-indent04        { display: block; @include padLt04; }
 .common-indent08        { display: block; @include padLt08; }
 .common-indent12        { display: block; @include padLt12; }
-.common-marUD           { display: block; @include marUD04; }
-.common-marUp           { display: block; @include marUp04; }
-.common-padUD           {                     @include padUD02; }
-.common-cushionUp       { display: block; @include marUp06; }
-.common-cushionUD       { display: block; @include marUD06; }
-.common-cushionDw       { display: block; @include marDw04; }
+.common-marUD           { display: block; margin: $marHalf 0em; }
+.common-marUp           { display: block; margin-top: $marHalf; }
+.common-padTinyUD       { padding: $padTiny auto; }
+.common-cushionUp       { display: block; margin-top: $marBase; }
+.common-cushionUD       { display: block; margin: $marBase 0em; }
+.common-cushionDw       { display: block; margin-bottom: $marHalf; }
 
 /* --------------- */
 /* font style */

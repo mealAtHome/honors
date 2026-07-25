@@ -112,7 +112,7 @@ class MCls
                         </tr>
                     </tbody>
                 </table>
-                <div class="common-div-cushionUp">
+                <div class="common-div-cushionUD">
                     <div class="common-block">
                         <span class="common-fonts11 common-strong">일정</span>
                         <span class="common-fonts09"></span>
@@ -122,7 +122,7 @@ class MCls
                         ${true         ? `<span class="common-inline">${model.getClsstatusCard()}</span>` : ""}
                         ${this.isEnd() ? `<span class="common-inline">${model.getClssettleflgCard()}</span>` : ""}
                     </div>
-                    <div class="common-div-cushionUp common-div-btnList common-fonts09">
+                    <div class="common-div-cushionUD common-div-btnList common-fonts09">
                         ${btnHtml}
                     </div>
                 </div>

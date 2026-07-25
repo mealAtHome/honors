@@ -25,8 +25,8 @@
     @include colorSnowFont;
     border-radius: 1em 1em 0em 0em;
     @include colorMainShad;
-    @include padZZ;
-    @include marZZ;
+    padding: 0em;
+    margin: 0em;
     box-sizing: border-box;
     left: 0%;
     bottom: 0%;
@@ -56,8 +56,8 @@
     overflow-y: scroll;
     @include colorSnowFont;
 
-    @include padZZ;
-    @include marZZ;
+    padding: 0em;
+    margin: 0em;
     box-sizing: border-box;
     top: 50%;
     left: 50%;
@@ -98,8 +98,8 @@
     overflow-y: scroll;
     @include colorSnowFont;
 
-    @include padZZ;
-    @include marZZ;
+    padding: 0em;
+    margin: 0em;
     box-sizing: border-box;
     top: 50%;
     left: 50%;
@@ -119,8 +119,8 @@
     overflow-y: auto;
     @include colorSnowFont;
     border-radius: 1em 1em 0em 0em;
-    @include padZZ;
-    @include marZZ;
+    padding: 0em;
+    margin: 0em;
     box-sizing: border-box;
     bottom: 200%;
 }
@@ -160,8 +160,8 @@
     -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
 
-    @include padZZ;
-    @include marZZ;
+    padding: 0em;
+    margin: 0em;
     box-sizing: border-box;
 }
 

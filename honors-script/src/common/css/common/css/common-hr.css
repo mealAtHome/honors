@@ -38,262 +38,35 @@
 /* ========================= */
 /* margin / padding */
 /* ========================= */
-.common-mar03 {
-  margin: 0.3em;
-}
-
-.common-mar04 {
-  margin: 0.4em;
-}
-
-.common-mar05 {
-  margin: 0.5em;
-}
-
-.common-mar06 {
-  margin: 0.6em;
-}
-
-.common-mar08 {
-  margin: 0.8em;
-}
-
-.common-mar10 {
-  margin: 1em;
-}
-
-.common-marZZ {
-  margin: 0em;
-}
-
-.common-marAuto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.common-marUpZZ {
-  margin-top: 0em;
-}
-
-.common-marUp02 {
-  margin-top: 0.2em;
-}
-
-.common-marUp04 {
-  margin-top: 0.4em;
-}
-
-.common-marUp05 {
-  margin-top: 0.5em;
-}
-
-.common-marUp06 {
-  margin-top: 0.6em;
-}
-
-.common-marUp08 {
-  margin-top: 0.8em;
-}
-
-.common-marUp10 {
-  margin-top: 1em;
-}
-
-.common-marUp20 {
-  margin-top: 2em;
-}
-
-.common-marUp40 {
-  margin-top: 4em;
-}
-
-.common-marUDZZ {
-  margin-top: 0em;
-  margin-bottom: 0em;
-}
-
-.common-marUD01 {
-  margin-top: 0.1em;
-  margin-bottom: 0.1em;
-}
-
-.common-marUD02 {
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
-}
-
-.common-marUD03 {
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
-}
-
-.common-marUD04 {
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
-}
-
-.common-marUD05 {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-.common-marUD06 {
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
-}
-
-.common-marUD07 {
-  margin-top: 0.7em;
-  margin-bottom: 0.7em;
-}
-
-.common-marUD08 {
-  margin-top: 0.8em;
-  margin-bottom: 0.8em;
-}
-
-.common-marUD10 {
-  margin-top: 1em;
-  margin-bottom: 1em;
-}
-
-.common-marUD20 {
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-
-.common-marLRZZ {
-  margin-left: 0em;
-  margin-right: 0em;
-}
-
-.common-marLR03 {
-  margin-left: 0.3em;
-  margin-right: 0.3em;
-}
-
-.common-marLR04 {
-  margin-left: 0.4em;
-  margin-right: 0.4em;
-}
-
-.common-marLR06 {
-  margin-left: 0.6em;
-  margin-right: 0.6em;
-}
-
-.common-marLR08 {
-  margin-left: 0.8em;
-  margin-right: 0.8em;
-}
-
-.common-marLR10 {
-  margin-left: 1em;
-  margin-right: 1em;
-}
-
-.common-marLR20 {
-  margin-left: 2em;
-  margin-right: 2em;
-}
-
-.common-marDwZZ {
-  margin-bottom: 0em;
-}
-
-.common-marDw02 {
-  margin-bottom: 0.2em;
-}
-
-.common-marDw03 {
-  margin-bottom: 0.3em;
-}
-
-.common-marDw04 {
-  margin-bottom: 0.4em;
-}
-
-.common-marDw06 {
-  margin-bottom: 0.6em;
-}
-
-.common-marDw08 {
-  margin-bottom: 0.8em;
-}
-
-.common-marDw10 {
-  margin-bottom: 1em;
-}
-
-.common-marDw20 {
-  margin-bottom: 2em;
-}
-
-.common-marLtZZ {
-  margin-left: 0em;
-}
-
-.common-marLt02 {
-  margin-left: 0.2em;
-}
-
-.common-marLt03 {
-  margin-left: 0.3em;
-}
-
-.common-marLt04 {
-  margin-left: 0.4em;
-}
-
-.common-marLt05 {
-  margin-left: 0.5em;
-}
-
-.common-marLt08 {
-  margin-left: 0.8em;
-}
-
-.common-marLt10 {
-  margin-left: 1em;
-}
-
-.common-marLt12 {
-  margin-left: 1.2em;
-}
-
-.common-marLt20 {
-  margin-left: 2em;
-}
-
-.common-marRt03 {
-  margin-right: 0.3em;
-}
-
-.common-marRt10 {
-  margin-right: 1em;
-}
-
-.common-hr-card {
-  margin: 0.8em;
-  border: 1px solid #e4e7f0;
-} /* card 사이의 hr */
+/* 마진 - 기본 */
+/* 마진 - 꽉 */
+/* 마진 - 꽉 */
+/* 마진 - 많음 */
+/* 마진 - 기본 */
+/* 마진 - 반 */
+/* 마진 - 약간 */
+/* 마진 - 아주 약간 */
+/* 패딩 - 기본 */
+/* 패딩 - 버튼 */
+/* 패딩 - 기본 */
+/* 패딩 - 큰 */
+/* 패딩 - 반 */
+/* 패딩 - 약간 */
+/* 패딩 - 아주 약간 */
 .common-hr-paddingAA {
   margin: 0.6em;
   border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingLR {
-  margin-left: 0.6em;
-  margin-right: 0.6em;
+  margin: 0em 0.6em;
   border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingUD06 {
-  margin-top: 0.6em;
-  margin-bottom: 0.6em;
+  margin: 0.6em 0em;
   border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingUD03 {
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
+  margin: 0.3em 0em;
   border: 1px solid #e4e7f0;
 } /* 일반 html 사이의 hr */
 .common-hr-paddingUp06 {

@@ -118,7 +118,6 @@ var GGbase =
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-btn.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div.css?v=${scriptVersion}`);
-        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div-backBtn.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div-checkbox.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-div-dialog.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-hr.css?v=${scriptVersion}`);

@@ -21,7 +21,7 @@
     text-align: left;
     @include fonth16;
     list-style-type: disc;
-    @include marZZ;
+    margin: 0em;
 }
-.common-ul-announce > li {  @include marDw03; }
-.common-ul-announce > li:nth-last-child(1) { @include marDwZZ; }
+.common-ul-announce > li { margin-bottom: $marHalf; }
+.common-ul-announce > li:nth-last-child(1) { margin-bottom: 0em; }

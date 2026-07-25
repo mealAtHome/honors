@@ -22,7 +22,7 @@ class MClslineuptmpa
     make(btnHtml="")
     {
         if(btnHtml != "")
-            btnHtml = `<div class="common-div-cushionUp"><div class="common-div-btnList common-fonts09">${btnHtml}</div></div>`;
+            btnHtml = `<div class="common-div-cushionUD"><div class="common-div-btnList common-fonts09">${btnHtml}</div></div>`;
         let html =
         `
             <div class="MClslineuptmpa-make-div-modelTop common-div-card">

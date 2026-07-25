@@ -57,7 +57,7 @@ table { font-size: inherit; }
 pre, xmp
 {
     display: inline-block;
-    @include marZZ;
+    margin: 0em;
     @include fonth16;
     word-break: break-all;
     white-space: pre-wrap;

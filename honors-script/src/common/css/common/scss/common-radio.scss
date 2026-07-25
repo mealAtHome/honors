@@ -34,7 +34,7 @@
     height: 26px;
     width: 26px;
     @include colorInfoBackTrans;
-    @include radiusHalf;
+    border-radius: 50%;
 }
 
 /* On mouse-over, add a gray background color */
@@ -70,6 +70,6 @@
     left: 9px;
     width: 8px;
     height: 8px;
-    @include radiusHalf;
+    border-radius: 50%;
     @include colorSnowFont;
 }

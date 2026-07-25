@@ -1,7 +1,7 @@
 @use "../../_import/scss/__import" as *;
 
 .common-span-strong { @include fonts12; font-weight: bold; }
-.common-span-block  { display: block; @include marUD03; }
+.common-span-block  { display: block; margin: $marHalf 0em; }
 
 .common-span-content
 {
@@ -20,8 +20,7 @@
 .common-span-validationAnnounce
 {
     display: block;
-    @include marUD03;
-    @include marAuto;
+    margin: $marHalf auto;
     @include fonts09;
 }
 
@@ -36,11 +35,10 @@
 .common-span-label
 {
     display: inline-block;
-    @include marUD01;
-    @include marLRZZ;
-    @include pad05;
-    @include backgroundTrans;
-    @include radiusCurv04;
+    margin: $marNano 0em;
+    padding: $padBase;
+    background-color: transparent;
+    border-radius: $borderRadiusDefault;
     @include fonts09;
     @include fonth14;
     /* box-sizing: border-box; */
@@ -49,7 +47,7 @@
 .common-span-label
 {
     @include colorMainFont;
-    @include backgroundTrans;
+    background-color: transparent;
     border: 1px solid $colorMain;
 }
 .common-span-label[label_type=inline]

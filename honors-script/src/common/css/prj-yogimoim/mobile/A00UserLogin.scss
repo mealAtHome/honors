@@ -38,7 +38,7 @@
     display: block;
     width: 4em;
     height: 0.2em;
-    @include marUD02;
+    margin: $marTiny auto;
     @include colorSideBackSolid;
 }
 
@@ -49,14 +49,13 @@
 {
     display: block;
     width: 100%;
-    @include marUD05;
-    @include marAuto;
-    @include pad04;
+    margin: $marBase auto;
+    padding: $padHalf;
     border: 1px solid $colorBody;
     @include fonts12;
     text-align: left;
-    @include backgroundTrans;
-    @include radiusCurv04;
+    background-color: transparent;
+    border-radius: $borderRadiusDefault;
 }
 .ULGN-input-text:focus
 {
@@ -65,7 +64,7 @@
 }
 .ULGN-img-input
 {
-    @include marUp04;
+    margin-top: 0.4em;
     height: 1.2em;
     vertical-align: top;
 }
@@ -78,9 +77,8 @@
     display: block;
     width: 100%;
     height: 3em;
-    @include marUD08;
-    @include marAuto;
-    @include padUD07;
+    margin: 0.8em auto;
+    padding: 0.7em 0em;
 }
 
 #ULGN-tbl-bottomRight
@@ -100,9 +98,7 @@
     display: flex;
     align-items: center;
     gap: 0.5em;
-    @include marUp02;
-    @include marUp04;
-    @include marAuto;
+    margin: $marHalf auto;
     width: 15em;
 }
 .ULGN-div-divider > div:nth-child(1) { flex: 1; height: 0.05em; @include colorBodyBackSolid; }

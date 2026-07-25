@@ -38,6 +38,21 @@
 /* ========================= */
 /* margin / padding */
 /* ========================= */
+/* 마진 - 기본 */
+/* 마진 - 꽉 */
+/* 마진 - 꽉 */
+/* 마진 - 많음 */
+/* 마진 - 기본 */
+/* 마진 - 반 */
+/* 마진 - 약간 */
+/* 마진 - 아주 약간 */
+/* 패딩 - 기본 */
+/* 패딩 - 버튼 */
+/* 패딩 - 기본 */
+/* 패딩 - 큰 */
+/* 패딩 - 반 */
+/* 패딩 - 약간 */
+/* 패딩 - 아주 약간 */
 .common-mar03 {
   margin: 0.3em;
 }
@@ -636,16 +651,15 @@
 
 .common-marUD {
   display: block;
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
+  margin: 0.3em 0em;
 }
 
 .common-marUp {
   display: block;
-  margin-top: 0.4em;
+  margin-top: 0.3em;
 }
 
-.common-padUD {
+.common-padTinyUD {
   padding-top: 0.2em;
   padding-bottom: 0.2em;
 }

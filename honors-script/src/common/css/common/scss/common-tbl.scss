@@ -152,13 +152,12 @@
 .common-tbl-slideformFooterBtn
 {
     width: calc(100%);
-    @include marUD10;
-    @include marAuto;
+    margin: $marFull auto;
 }
 .common-tbl-slideformFooterBtn > thead > tr > th,
 .common-tbl-slideformFooterBtn > tbody > tr > th
 {
-    @include padZZ;
+    padding: 0em;
     background-color: $colorBodyBack;
     text-align: center;
 }
@@ -166,7 +165,7 @@
 .common-tbl-slideformFooterBtn > tfoot > tr > td,
 .common-tbl-slideformFooterBtn > tbody > tr > td
 {
-    @include padZZ;
+    padding: 0em;
 }
 .common-tbl-slideformFooterBtn                     { border: none; }
 .common-tbl-slideformFooterBtn  > thead > tr > th  { border: none; }

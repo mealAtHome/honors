@@ -38,6 +38,21 @@
 /* ========================= */
 /* margin / padding */
 /* ========================= */
+/* 마진 - 기본 */
+/* 마진 - 꽉 */
+/* 마진 - 꽉 */
+/* 마진 - 많음 */
+/* 마진 - 기본 */
+/* 마진 - 반 */
+/* 마진 - 약간 */
+/* 마진 - 아주 약간 */
+/* 패딩 - 기본 */
+/* 패딩 - 버튼 */
+/* 패딩 - 기본 */
+/* 패딩 - 큰 */
+/* 패딩 - 반 */
+/* 패딩 - 약간 */
+/* 패딩 - 아주 약간 */
 .common-mar03 {
   margin: 0.3em;
 }
@@ -521,10 +536,7 @@
 /* ============================== */
 .common-tbl-slideformFooterBtn {
   width: 100%;
-  margin-top: 1em;
-  margin-bottom: 1em;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1em auto;
 }
 
 .common-tbl-slideformFooterBtn > thead > tr > th,

@@ -63,13 +63,8 @@ $spaceDw08:0em 0em $space08 0em;
 /* styles */
 /* ========================= */
 
-$borderRadius:0.4em;
-@mixin radiusCurv04 { border-radius:0.4em; }
-@mixin radiusCurv08 { border-radius:0.8em; }
-@mixin radiusCurv10 { border-radius:1.0em; }
-@mixin radiusCurv30 { border-radius:3.0em; }
-@mixin radiusHalf   { border-radius:50%; }
-@mixin radiusFull   { border-radius:100%; }
+$borderRadiusDefault:0.4em;
+$borderRadiusDivCard:0.8em;
 
 @mixin fonts08      { font-size:0.8em;          }
 @mixin fonts09      { font-size:0.9em;          }
@@ -96,65 +91,21 @@ $borderRadius:0.4em;
 /* ========================= */
 /* margin / padding */
 /* ========================= */
+$marUDdef:0.6em; $marLRdef:0.8em; /* 마진 - 기본 */
+$marHuge:2em;   /* 마진 - 꽉 */
+$marFull:1em;   /* 마진 - 꽉 */
+$marMore:0.8em; /* 마진 - 많음 */
+$marBase:0.6em; /* 마진 - 기본 */
+$marHalf:0.3em; /* 마진 - 반 */
+$marLite:0.2em; /* 마진 - 약간 */
+$marNano:0.1em; /* 마진 - 아주 약간 */
 
-@mixin marLR  ($margin) { margin-left:$margin; margin-right:$margin;   } @mixin padLR ($margin) { padding-left:$margin; padding-right:$margin; }
-@mixin marUD  ($margin) { margin-top:$margin; margin-bottom:$margin;   } @mixin padUD ($margin) { padding-top:$margin; padding-bottom:$margin; }
-@mixin marUp  ($margin) { margin-top:$margin;                          } @mixin padUp ($margin) { padding-top:$margin; }
-@mixin marDw  ($margin) { margin-bottom:$margin;                       } @mixin padDw ($margin) { padding-bottom:$margin; }
-@mixin marLt  ($margin) { margin-left:$margin;                         } @mixin padLt ($margin) { padding-left:$margin; }
-@mixin marRt  ($margin) { margin-right:$margin;                        } @mixin padRt ($margin) { padding-right:$margin; }
+$padUDdef:0.6em; $padLRdef:0.8em; /* 패딩 - 기본 */
+$padUDbtn:0.3em; $padLRbtn:0.4em; /* 패딩 - 버튼 */
+$padBase:0.6em; /* 패딩 - 기본 */
+$padMore:0.8em; /* 패딩 - 큰 */
+$padHalf:0.4em; /* 패딩 - 반 */
+$padLite:0.2em; /* 패딩 - 약간 */
+$padNano:0.1em; /* 패딩 - 아주 약간 */
 
-@mixin mar03     { margin:$space03;           } @mixin pad03     { padding:$space03;         } .common-mar03    { @include mar03; }
-@mixin mar04     { margin:$space04;           } @mixin pad04     { padding:$space04;         } .common-mar04    { @include mar04; }
-@mixin mar05     { margin:$space05;           } @mixin pad05     { padding:$space05;         } .common-mar05    { @include mar05; }
-@mixin mar06     { margin:$space06;           } @mixin pad06     { padding:$space06;         } .common-mar06    { @include mar06; }
-@mixin mar08     { margin:$space08;           } @mixin pad08     { padding:$space08;         } .common-mar08    { @include mar08; }
-@mixin mar10     { margin:$space10;           } @mixin pad10     { padding:$space10;         } .common-mar10    { @include mar10; }
-@mixin marZZ     { margin:$spaceZZ;           } @mixin padZZ     { padding:$spaceZZ;         } .common-marZZ    { @include marZZ; }
-@mixin marAuto   { @include marLR(auto);      } @mixin padAuto   { @include padLR(auto);     } .common-marAuto  { @include marAuto; }
-@mixin marUpZZ   { @include marUp($spaceZZ);  } @mixin padUpZZ   { @include padUp($spaceZZ); } .common-marUpZZ  { @include marUpZZ; }
-@mixin marUp02   { @include marUp($space02);  } @mixin padUp02   { @include padUp($space02); } .common-marUp02  { @include marUp02; }
-@mixin marUp04   { @include marUp($space04);  } @mixin padUp04   { @include padUp($space04); } .common-marUp04  { @include marUp04; }
-@mixin marUp05   { @include marUp($space05);  } @mixin padUp05   { @include padUp($space05); } .common-marUp05  { @include marUp05; }
-@mixin marUp06   { @include marUp($space06);  } @mixin padUp06   { @include padUp($space06); } .common-marUp06  { @include marUp06; }
-@mixin marUp08   { @include marUp($space08);  } @mixin padUp08   { @include padUp($space08); } .common-marUp08  { @include marUp08; }
-@mixin marUp10   { @include marUp($space10);  } @mixin padUp10   { @include padUp($space10); } .common-marUp10  { @include marUp10; }
-@mixin marUp20   { @include marUp($space20);  } @mixin padUp20   { @include padUp($space20); } .common-marUp20  { @include marUp20; }
-@mixin marUp40   { @include marUp($space40);  } @mixin padUp40   { @include padUp($space40); } .common-marUp40  { @include marUp40; }
-@mixin marUDZZ   { @include marUD($spaceZZ);  } @mixin padUDZZ   { @include padUD($spaceZZ); } .common-marUDZZ  { @include marUDZZ; }
-@mixin marUD01   { @include marUD($space01);  } @mixin padUD01   { @include padUD($space01); } .common-marUD01  { @include marUD01; }
-@mixin marUD02   { @include marUD($space02);  } @mixin padUD02   { @include padUD($space02); } .common-marUD02  { @include marUD02; }
-@mixin marUD03   { @include marUD($space03);  } @mixin padUD03   { @include padUD($space03); } .common-marUD03  { @include marUD03; }
-@mixin marUD04   { @include marUD($space04);  } @mixin padUD04   { @include padUD($space04); } .common-marUD04  { @include marUD04; }
-@mixin marUD05   { @include marUD($space05);  } @mixin padUD05   { @include padUD($space05); } .common-marUD05  { @include marUD05; }
-@mixin marUD06   { @include marUD($space06);  } @mixin padUD06   { @include padUD($space06); } .common-marUD06  { @include marUD06; }
-@mixin marUD07   { @include marUD($space07);  } @mixin padUD07   { @include padUD($space07); } .common-marUD07  { @include marUD07; }
-@mixin marUD08   { @include marUD($space08);  } @mixin padUD08   { @include padUD($space08); } .common-marUD08  { @include marUD08; }
-@mixin marUD10   { @include marUD($space10);  } @mixin padUD10   { @include padUD($space10); } .common-marUD10  { @include marUD10; }
-@mixin marUD20   { @include marUD($space20);  } @mixin padUD20   { @include padUD($space20); } .common-marUD20  { @include marUD20; }
-@mixin marLRZZ   { @include marLR($spaceZZ);  } @mixin padLRZZ   { @include padLR($spaceZZ); } .common-marLRZZ  { @include marLRZZ; }
-@mixin marLR03   { @include marLR($space03);  } @mixin padLR03   { @include padLR($space03); } .common-marLR03  { @include marLR03; }
-@mixin marLR04   { @include marLR($space04);  } @mixin padLR04   { @include padLR($space04); } .common-marLR04  { @include marLR04; }
-@mixin marLR06   { @include marLR($space06);  } @mixin padLR06   { @include padLR($space06); } .common-marLR06  { @include marLR06; }
-@mixin marLR08   { @include marLR($space08);  } @mixin padLR08   { @include padLR($space08); } .common-marLR08  { @include marLR08; }
-@mixin marLR10   { @include marLR($space10);  } @mixin padLR10   { @include padLR($space10); } .common-marLR10  { @include marLR10; }
-@mixin marLR20   { @include marLR($space20);  } @mixin padLR20   { @include padLR($space20); } .common-marLR20  { @include marLR20; }
-@mixin marDwZZ   { @include marDw($spaceZZ);  } @mixin padDwZZ   { @include padDw($spaceZZ); } .common-marDwZZ  { @include marDwZZ; }
-@mixin marDw02   { @include marDw($space02);  } @mixin padDw02   { @include padDw($space02); } .common-marDw02  { @include marDw02; }
-@mixin marDw03   { @include marDw($space03);  } @mixin padDw03   { @include padDw($space03); } .common-marDw03  { @include marDw03; }
-@mixin marDw04   { @include marDw($space04);  } @mixin padDw04   { @include padDw($space04); } .common-marDw04  { @include marDw04; }
-@mixin marDw06   { @include marDw($space06);  } @mixin padDw06   { @include padDw($space06); } .common-marDw06  { @include marDw06; }
-@mixin marDw08   { @include marDw($space08);  } @mixin padDw08   { @include padDw($space08); } .common-marDw08  { @include marDw08; }
-@mixin marDw10   { @include marDw($space10);  } @mixin padDw10   { @include padDw($space10); } .common-marDw10  { @include marDw10; }
-@mixin marDw20   { @include marDw($space20);  } @mixin padDw20   { @include padDw($space20); } .common-marDw20  { @include marDw20; }
-@mixin marLtZZ   { @include marLt($spaceZZ);  } @mixin padLtZZ   { @include padLt($spaceZZ); } .common-marLtZZ  { @include marLtZZ; }
-@mixin marLt02   { @include marLt($space02);  } @mixin padLt02   { @include padLt($space02); } .common-marLt02  { @include marLt02; }
-@mixin marLt03   { @include marLt($space03);  } @mixin padLt03   { @include padLt($space03); } .common-marLt03  { @include marLt03; }
-@mixin marLt04   { @include marLt($space04);  } @mixin padLt04   { @include padLt($space04); } .common-marLt04  { @include marLt04; }
-@mixin marLt05   { @include marLt($space05);  } @mixin padLt05   { @include padLt($space05); } .common-marLt05  { @include marLt05; }
-@mixin marLt08   { @include marLt($space08);  } @mixin padLt08   { @include padLt($space08); } .common-marLt08  { @include marLt08; }
-@mixin marLt10   { @include marLt($space10);  } @mixin padLt10   { @include padLt($space10); } .common-marLt10  { @include marLt10; }
-@mixin marLt12   { @include marLt($space12);  } @mixin padLt12   { @include padLt($space12); } .common-marLt12  { @include marLt12; }
-@mixin marLt20   { @include marLt($space20);  } @mixin padLt20   { @include padLt($space20); } .common-marLt20  { @include marLt20; }
-@mixin marRt03   { @include marRt($space03);  } @mixin padRt03   { @include padRt($space03); } .common-marRt03  { @include marRt03; }
-@mixin marRt10   { @include marRt($space10);  } @mixin padRt10   { @include padRt($space10); } .common-marRt10  { @include marRt10; }
+@mixin paddingForm { padding: 1em 2em; }
