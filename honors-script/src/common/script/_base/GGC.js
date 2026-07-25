@@ -94,11 +94,11 @@ GGC.Common =
     optpriceWon(val=0)
     {
         let rslt = GGC.Common.comma(val) + "원";
-        if(val >= 0)
+        if(val > 0)
             rslt = "+" + rslt;
         return rslt;
     },
-    wonColor(val) { return `<span class="common-colorFont" font-color="${val >= 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */
+    wonColor(val) { return `<span class="common-colorFont" font-color="${val == 0 ? '' :val > 0 ? 'pstv' : 'ngtv'}">${GGC.Common.optpriceWon(val)}</span>`; }, /* Mark + Price + Won + Font */
 
 
     /* ============================== */

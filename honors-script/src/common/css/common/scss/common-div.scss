@@ -68,7 +68,7 @@ div { display: block; }
     border-bottom: 0.5px solid $colorLine;
 }
 .common-div-toolbar > div:nth-child(2) { padding-left: 0.5em; }
-.common-div-toolbar > div:nth-child(2) > span { font-size:1.2em; font-weight:bold; }
+.common-div-toolbar > div:nth-child(2) > span { @include fonts12; font-weight:bold; }
 .common-div-toolbar > div:nth-child(3) { margin-left: auto; }
 
 

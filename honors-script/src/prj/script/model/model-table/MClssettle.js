@@ -208,7 +208,7 @@ class MClssettles extends _MCommon
                     <span class="common-block ">${model.getGrpname()}</span>
                     <span class="common-block ">${model.getClstitle()}</span>
                     <span class="common-block common-colorBody common-fonts08">${model.getClsPeriod()}</span>
-                    <span class="common-block common-alignR common-fontwB">${model.getBillfinalWon()}</span>
+                    <span class="common-block common-alignR common-bold">${model.getBillfinalWon()}</span>
                     <span class="common-block common-alignR common-colorBody common-fonts08">기준금액:${model.getBillstandardWon()}</span>
                     <span class="common-block common-alignR common-colorBody common-fonts08">사전정산:${model.getBillprepaidWon()}</span>
                     <span class="common-block common-alignR common-colorBody common-fonts08">청구추가:${model.getBilladjustmentWon()}</span>

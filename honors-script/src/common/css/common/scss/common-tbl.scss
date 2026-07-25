@@ -71,14 +71,14 @@
 /* ============================== */
 .common-tbl-normal
 {
-    @include fonth16;
+    line-height: 1.6;
 }
 .common-tbl-normal > thead > tr > th,
 .common-tbl-normal > tbody > tr > th,
 .common-tbl-normal > tfoot > tr > th,
 .common-tbl-normal > tfoot > tr > td
 {
-    @include pad04;
+    padding: 0.4em;
     background-color: $colorBodyBack;
     text-align: center;
     font-weight: bold;
@@ -87,7 +87,20 @@
 .common-tbl-normal > tfoot > tr > td,
 .common-tbl-normal > tbody > tr > td
 {
-    @include pad04;
+    padding: 0.4em;
+}
+.common-tbl-normal[tbl-type=card]
+{
+    width:100%;
+    border-radius: 1em;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+.common-div-normalTop
+{
+    border-radius: 1em;
+    border: 1px solid $colorLine;
 }
 
 /*
@@ -119,6 +132,19 @@
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorSept; }
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 1px solid $colorSept; border-right: none; }
 .common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
+
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td             { background-color: $colorSnow; border-top: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td             { background-color: $colorSnow; border-top: none; }
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td:first-child { padding-left  : 0.8em; } /* 테이블의 양사이드가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td:last-child  { padding-right : 0.8em; } /* 테이블의 양사이드가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:before      { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr:last-child  > td:after       { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
+
+/* .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:first-child  { border-top-left-radius: 1em; } */ /* 1행 왼쪽 위 */
+/* .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:last-child   { border-top-right-radius: 1em; } */ /* 1행 오른쪽 위 */
+/* .common-tbl-normal[tbl-type=card] > tbody > tr:last-child  > td:first-child  { border-bottom-left-radius: 1em; } */ /* 마지막 행 왼쪽 아래 */
+/* .common-tbl-normal[tbl-type=card] > tbody > tr:last-child  > td:last-child   { border-bottom-right-radius: 1em; } */ /* 마지막 행 오른쪽 아래 */
+
 
 /* ============================== */
 /* 슬라이드 입력폼용 테이블 */
@@ -206,4 +232,4 @@
 /* ============================== */
 .common-tbl-type > tbody > tr > th           { text-align: left; }
 .common-tbl-type > tbody > tr > th > button  { min-width: 6.5em; }
-.common-tbl-type > tbody > tr > td           { @include fonts09; @include colorBodyFont; }
+.common-tbl-type > tbody > tr > td           { @include colorBodyFont; }

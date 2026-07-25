@@ -10,384 +10,31 @@
 /* ========================= */
 /* #1B4BB8 */
 /* rgb(2   , 6   , 84  ); #020654 */
-.common-colorFont[font-color=main] {
-  color: #020654;
-}
-
-.common-colorMain {
-  color: #020654;
-}
-
-.common-card[card-color=main] {
-  color: #020654;
-  border: 2px solid #020654;
-  background-color: rgba(2, 6, 84, 0.2);
-}
-
 /* rgb(2   , 6   , 84  ); #020654 */
-.common-colorFont[font-color=dark] {
-  color: #020421;
-}
-
-.common-colorDark {
-  color: #020421;
-}
-
-.common-card[card-color=dark] {
-  color: #020421;
-  border: 2px solid #020421;
-  background-color: rgba(2, 4, 33, 0.2);
-}
-
 /* rgb(27  , 42  , 107 ); #1B2A6B */
-.common-colorFont[font-color=head] {
-  color: #1b2a6b;
-}
-
-.common-colorHead {
-  color: #1b2a6b;
-}
-
-.common-card[card-color=head] {
-  color: #1b2a6b;
-  border: 2px solid #1b2a6b;
-  background-color: rgba(27, 42, 107, 0.2);
-}
-
 /* rgb(61  , 107 , 245 ); #3D6BF5 */
-.common-colorFont[font-color=side] {
-  color: #3d6bf5;
-}
-
-.common-colorSide {
-  color: #3d6bf5;
-}
-
-.common-card[card-color=side] {
-  color: #3d6bf5;
-  border: 2px solid #3d6bf5;
-  background-color: rgba(61, 107, 245, 0.2);
-}
-
 /* rgb(122 , 128 , 153 ); #7A8099 */
-.common-colorFont[font-color=body] {
-  color: #3c435c;
-}
-
-.common-colorBody {
-  color: #3c435c;
-}
-
-.common-card[card-color=body] {
-  color: #3c435c;
-  border: 2px solid #3c435c;
-  background-color: rgba(60, 67, 92, 0.2);
-}
-
+/* rgb(122 , 128 , 153 ); #7A8099 */
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
-.common-colorFont[font-color=edge] {
-  color: #c4c7ce;
-}
-
-.common-colorSept {
-  color: #c4c7ce;
-}
-
-.common-card[card-color=edge] {
-  color: #c4c7ce;
-  border: 2px solid #c4c7ce;
-  background-color: rgba(196, 199, 206, 0.2);
-}
-
 /* rgb(228 , 231 , 240 ); #E4E7F0 */
-.common-colorFont[font-color=line] {
-  color: #e4e7f0;
-}
-
-.common-colorLine {
-  color: #e4e7f0;
-}
-
-.common-card[card-color=line] {
-  color: #e4e7f0;
-  border: 2px solid #e4e7f0;
-  background-color: rgba(228, 231, 240, 0.2);
-}
-
 /* rgb(0   , 2   , 120 ); #000278 */
-.common-colorFont[font-color=pstv] {
-  color: #000278;
-}
-
-.common-colorPstv {
-  color: #000278;
-}
-
-.common-card[card-color=pstv] {
-  color: #000278;
-  border: 2px solid #000278;
-  background-color: rgba(0, 2, 120, 0.2);
-}
-
 /* rgb(0   , 150 , 0   ); #009600 */
-.common-colorFont[font-color=allw] {
-  color: #009600;
-}
-
-.common-colorAllw {
-  color: #009600;
-}
-
-.common-card[card-color=allw] {
-  color: #009600;
-  border: 2px solid #009600;
-  background-color: rgba(0, 150, 0, 0.2);
-}
-
 /* rgb(3   , 154 , 0   ); #039a00 */
-.common-colorFont[font-color=prog] {
-  color: #039a00;
-}
-
-.common-colorProg {
-  color: #039a00;
-}
-
-.common-card[card-color=prog] {
-  color: #039a00;
-  border: 2px solid #039a00;
-  background-color: rgba(3, 154, 0, 0.2);
-}
-
 /* rgb(40  , 101 , 255 ); #d9e4ff */
-.common-colorFont[font-color=ntce] {
-  color: #2865ff;
-}
-
-.common-colorNtce {
-  color: #2865ff;
-}
-
-.common-card[card-color=ntce] {
-  color: #2865ff;
-  border: 2px solid #2865ff;
-  background-color: rgba(40, 101, 255, 0.2);
-}
-
 /* rgb(40  , 101 , 255 ); #d9e4ff */
-.common-colorFont[font-color=info] {
-  color: #2865ff;
-}
-
-.common-colorInfo {
-  color: #2865ff;
-}
-
-.common-card[card-color=info] {
-  color: #2865ff;
-  border: 2px solid #2865ff;
-  background-color: rgba(40, 101, 255, 0.2);
-}
-
 /* rgb(234 , 240 , 255 ); #EAF0FF */
-.common-colorFont[font-color=dtil] {
-  color: #EAF0FF;
-}
-
-.common-colorDtil {
-  color: #EAF0FF;
-}
-
-.common-card[card-color=dtil] {
-  color: #EAF0FF;
-  border: 2px solid #EAF0FF;
-  background-color: rgba(234, 240, 255, 0.2);
-}
-
 /* rgb(212 , 173 , 0   ); #d4ad00 */
-.common-colorFont[font-color=hold] {
-  color: #d4ad00;
-}
-
-.common-colorHold {
-  color: #d4ad00;
-}
-
-.common-card[card-color=hold] {
-  color: #d4ad00;
-  border: 2px solid #d4ad00;
-  background-color: rgba(212, 173, 0, 0.2);
-}
-
 /* rgb(255 , 116 , 21  ); #FF7415 */
-.common-colorFont[font-color=cncl] {
-  color: #ff7415;
-}
-
-.common-colorCncl {
-  color: #ff7415;
-}
-
-.common-card[card-color=cncl] {
-  color: #ff7415;
-  border: 2px solid #ff7415;
-  background-color: rgba(255, 116, 21, 0.2);
-}
-
 /* rgb(255 , 116 , 21  ); #FF7415 */
-.common-colorFont[font-color=warn] {
-  color: #ff7415;
-}
-
-.common-colorWarn {
-  color: #ff7415;
-}
-
-.common-card[card-color=warn] {
-  color: #ff7415;
-  border: 2px solid #ff7415;
-  background-color: rgba(255, 116, 21, 0.2);
-}
-
 /* rgb(206 , 39  , 39  ); #ce2727 */
-.common-colorFont[font-color=errr] {
-  color: #ce2727;
-}
-
-.common-colorErrr {
-  color: #ce2727;
-}
-
-.common-card[card-color=errr] {
-  color: #ce2727;
-  border: 2px solid #ce2727;
-  background-color: rgba(206, 39, 39, 0.2);
-}
-
 /* rgb(120 , 0   , 0   ); #780000 */
-.common-colorFont[font-color=ngtv] {
-  color: #780000;
-}
-
-.common-colorNgtv {
-  color: #780000;
-}
-
-.common-card[card-color=ngtv] {
-  color: #780000;
-  border: 2px solid #780000;
-  background-color: rgba(120, 0, 0, 0.2);
-}
-
 /* rgb(100 , 100 , 100 ); #636363 */
-.common-colorFont[font-color=whit] {
-  color: #ffffff;
-}
-
-.common-colorSnow {
-  color: #ffffff;
-}
-
-.common-card[card-color=whit] {
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
 /* ========================= */
 /* spacing */
 /* ========================= */
 /* ========================= */
 /* styles */
 /* ========================= */
-.common-displayIn {
-  display: inline-block;
-}
-
-.common-displayBk {
-  display: block;
-}
-
-.common-heightFull {
-  height: 100%;
-}
-
-.common-fonts08 {
-  font-size: 0.8em;
-}
-
-.common-fonts09 {
-  font-size: 0.9em;
-}
-
-.common-fonts10 {
-  font-size: 1em;
-}
-
-.common-fonts11 {
-  font-size: 1.1em;
-}
-
-.common-fonts12 {
-  font-size: 1.2em;
-}
-
-.common-fonts14 {
-  font-size: 1.4em;
-}
-
-.common-fonts30 {
-  font-size: 3em;
-}
-
-.common-fontwN {
-  font-weight: normal;
-}
-
-.common-fontwB {
-  font-weight: bold;
-}
-
-.common-fonth12 {
-  line-height: 1.2;
-}
-
-.common-fonth14 {
-  line-height: 1.4;
-}
-
-.common-fonth16 {
-  line-height: 1.6;
-}
-
-.common-alignC {
-  text-align: center;
-}
-
-.common-alignR {
-  text-align: right;
-}
-
-.common-alignL {
-  text-align: left;
-}
-
-.common-verticalM {
-  vertical-align: middle;
-}
-
-.common-boxsizeB {
-  box-sizing: border-box;
-}
-
-.common-boxsizeC {
-  box-sizing: content-box;
-}
-
-.common-overflowX {
-  overflow-x: auto;
-}
-
 /* ========================= */
 /* margin / padding */
 /* ========================= */
@@ -668,7 +315,7 @@
   left: 0;
   height: 26px;
   width: 26px;
-  background: rgba(40, 101, 255, 0.2);
+  background: rgba(60, 67, 92, 0.2);
 }
 
 /* On mouse-over, add a gray background color */
