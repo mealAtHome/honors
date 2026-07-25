@@ -281,7 +281,7 @@
   max-width: 500px;
   box-sizing: border-box;
   outline: none;
-  background: transparent;
+  background-color: transparent;
 }
 
 .common-input-field {
@@ -291,7 +291,7 @@
   border: none;
   text-align: left;
   border-bottom: 2px solid #c4c7ce;
-  background: transparent;
+  background-color: transparent;
 }
 
 .common-input-field:focus {
@@ -304,14 +304,14 @@
   max-width: 500px;
   box-sizing: border-box;
   outline: none;
-  background: transparent;
+  background-color: #ffffff;
 }
 
 .common-textarea-field {
   padding: 0.3em;
   font-size: 1.1em;
   border: 2px solid #c4c7ce;
-  background: transparent;
+  background-color: #ffffff;
 }
 
 .common-textarea-field:focus {

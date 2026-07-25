@@ -78,7 +78,7 @@ class _MCommon
     mergePagenation(html)
     {
         /* pagenation */
-        if(this.getPagecnt() > 1)
+        if(this.getPagecnt() > 1 && this.getPageflg() === GGF.Y)
         {
             let pagenation = this.getPagenation();
             html = pagenation + html + pagenation;

@@ -3,7 +3,7 @@
 /* ========================= */
 /* 각 인풋박스 */
 /* ========================= */
-.common-div-formField > .common-input-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; @include backgroundTrans; }
+.common-div-formField > .common-input-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
 .common-input-field
 {
     @include padUD03;
@@ -11,17 +11,17 @@
     border: none;
     text-align: left;
     border-bottom: 2px solid $colorSept;
-    @include backgroundTrans;
+    background-color: transparent;
 }
 .common-input-field:focus { border: none; border-bottom: 3px solid $colorMain; }
 
-.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; @include backgroundTrans; }
+.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: $colorSnow; }
 .common-textarea-field
 {
   @include pad03;
   @include fonts11;
   border: 2px solid $colorSept;
-  @include backgroundTrans;
+  background-color: $colorSnow;
 }
 .common-textarea-field:focus { border: 2px solid $colorMain; border-bottom: 3px solid $colorMain; }
 

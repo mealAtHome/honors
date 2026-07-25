@@ -47,13 +47,13 @@ div { display: block; }
 /*=================================*/
 /* header - toolbar */
 /*=================================*/
-.page__content:has(.common-div-toolbar)
-{
-    padding-top: 3em;
-}
+// .page__content:has(.common-div-toolbar)
+// {
+//     padding-top: 3em;
+// }
 .common-div-toolbar
 {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
