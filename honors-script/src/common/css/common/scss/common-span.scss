@@ -64,15 +64,13 @@
 {
     display: inline-block;
     font-weight: normal;
-    @include padUD03;
-    @include padLR06;
+    padding: $padHalf $padBase;
 }
 .common-span-mini
 {
     display: inline-block;
     font-weight: normal;
-    @include padUD01;
-    @include padLR03;
+    padding: $padNano $padLite;
 }
 
 .common-span-mini[span-type=succeed]  , .common-span-card[span-type=succeed]  { color: blue;       border: 2px solid rgb(110,110,255); background: rgb(200,200,255); }

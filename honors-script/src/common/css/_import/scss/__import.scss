@@ -96,16 +96,20 @@ $marHuge:2em;   /* 마진 - 꽉 */
 $marFull:1em;   /* 마진 - 꽉 */
 $marMore:0.8em; /* 마진 - 많음 */
 $marBase:0.6em; /* 마진 - 기본 */
-$marHalf:0.3em; /* 마진 - 반 */
+$marHalf:0.4em; /* 마진 - 반 */
 $marLite:0.2em; /* 마진 - 약간 */
-$marNano:0.1em; /* 마진 - 아주 약간 */
+$marTiny:0.2em; /* 마진 - 아주 약간 */
+$marNano:0.1em; /* 마진 - 아주 더 약간 */
 
 $padUDdef:0.6em; $padLRdef:0.8em; /* 패딩 - 기본 */
 $padUDbtn:0.3em; $padLRbtn:0.4em; /* 패딩 - 버튼 */
+$padHuge:2em;   /* 패딩 - 꽉 */
+$padFull:1em;   /* 패딩 - 꽉 */
 $padBase:0.6em; /* 패딩 - 기본 */
 $padMore:0.8em; /* 패딩 - 큰 */
 $padHalf:0.4em; /* 패딩 - 반 */
 $padLite:0.2em; /* 패딩 - 약간 */
-$padNano:0.1em; /* 패딩 - 아주 약간 */
+$padTiny:0.2em; /* 패딩 - 아주 약간 */
+$padNano:0.1em; /* 패딩 - 아주 더 약간 */
 
 @mixin paddingForm { padding: 1em 2em; }

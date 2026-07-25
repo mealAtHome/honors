@@ -82,15 +82,15 @@
 /* --------------- */
 .common-block           { display: block; @include fonth16; }
 .common-inline          { display: inline-block; @include fonth16; }
-.common-indent04        { display: block; @include padLt04; }
-.common-indent08        { display: block; @include padLt08; }
-.common-indent12        { display: block; @include padLt12; }
-.common-marUD           { display: block; margin: $marHalf 0em; }
-.common-marUp           { display: block; margin-top: $marHalf; }
-.common-padTinyUD       { padding: $padTiny auto; }
-.common-cushionUp       { display: block; margin-top: $marBase; }
-.common-cushionUD       { display: block; margin: $marBase 0em; }
-.common-cushionDw       { display: block; margin-bottom: $marHalf; }
+.common-indent04        { display: block; padding-left: $padHalf; }
+.common-indent08        { display: block; padding-left: $padBase; }
+.common-indent12        { display: block; padding-left: $padFull; }
+.common-padTinyUD       {                 padding: $padTiny auto; }
+.common-marUD           { display: block; margin         : $marHalf 0em; }
+.common-marUp           { display: block; margin-top     : $marHalf; }
+.common-cushionUp       { display: block; margin-top     : $marBase; }
+.common-cushionUD       { display: block; margin         : $marBase 0em; }
+.common-cushionDw       { display: block; margin-bottom  : $marHalf; }
 
 /* --------------- */
 /* font style */
@@ -117,8 +117,7 @@
 {
     display: inline-block;
     font-weight: normal;
-    @include padUD03;
-    @include padLR06;
+    padding: $padHalf $padBase;
 }
 
 /* --------------- */

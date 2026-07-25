@@ -46,13 +46,17 @@
 /* 마진 - 반 */
 /* 마진 - 약간 */
 /* 마진 - 아주 약간 */
+/* 마진 - 아주 더 약간 */
 /* 패딩 - 기본 */
 /* 패딩 - 버튼 */
+/* 패딩 - 꽉 */
+/* 패딩 - 꽉 */
 /* 패딩 - 기본 */
 /* 패딩 - 큰 */
 /* 패딩 - 반 */
 /* 패딩 - 약간 */
 /* 패딩 - 아주 약간 */
+/* 패딩 - 아주 더 약간 */
 /* ============================== */
 /* main button */
 /* ============================== */
@@ -367,7 +371,7 @@
 /* button size */
 .common-btn-outer[btn-size=large] {
   display: block;
-  margin: 0.3em auto;
+  margin: 0.4em auto;
   padding: 0.8em;
   min-width: 12em;
   max-width: 90%;
@@ -375,7 +379,7 @@
 
 .common-btn-inner[btn-size=large] {
   display: block;
-  margin: 0.3em auto;
+  margin: 0.4em auto;
   padding: 0.8em;
   min-width: 12em;
   max-width: 90%;

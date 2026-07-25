@@ -13,6 +13,6 @@
 .common-search-div-top > button
 {
     @include fonth16;
-    @include padLR10;
+    padding: 0em $padFull;
     vertical-align: middle;
 }

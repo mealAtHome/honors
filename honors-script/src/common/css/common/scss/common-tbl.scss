@@ -33,8 +33,7 @@
 /* ============================== */
 .common-tbl-tab > tbody > tr > td
 {
-    @include padUD04;
-    @include padLR08;
+    padding: $padHalf $padMore;
     border-radius: 2em;
     @include colorMainFont;
     text-align: center;
@@ -43,8 +42,7 @@
 {
     width: 90%;
     border: none;
-    @include padUDZZ;
-    @include padLR03;
+    padding: 0em $padHalf;
     text-align: right;
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
@@ -173,15 +171,13 @@
 .common-tbl-slideformFooterBtn  > tbody > tr > td  { border: none; }
 
 .common-tbl-slideformFooterBtn[tbl-type=button1] > tbody > tr > td              { width: 100%; }
-.common-tbl-slideformFooterBtn[tbl-type=button1] > tbody > tr > td > button     { width: 100%; @include pad06; }
-
-.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(1) { width: 20%;         @include padRt03; }
-.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(2) { width: 100%; @include padLt03; }
-.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td > button     { width: 100%; @include pad06; }
-
-.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(1) { width: 50%;         @include padRt03; }
-.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(2) { width: 50%;         @include padLt03; }
-.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td > button     { width: 100%; @include pad06; }
+.common-tbl-slideformFooterBtn[tbl-type=button1] > tbody > tr > td > button     { width: 100%; padding       : $padBase; }
+.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(1) { width: 20%;  padding-right : $padHalf; }
+.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(2) { width: 100%; padding-left  : $padHalf; }
+.common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td > button     { width: 100%; padding       : $padBase; }
+.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(1) { width: 50%;  padding-right : $padHalf; }
+.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td:nth-child(2) { width: 50%;  padding-left  : $padHalf; }
+.common-tbl-slideformFooterBtn[tbl-type=liner2]  > tbody > tr > td > button     { width: 100%; padding       : $padBase; }
 
 /* ============================== */
 /* TABLE: 세로형 테이블 */
@@ -195,7 +191,7 @@
 .common-tbl-vertical > tbody > tr > th,
 .common-tbl-vertical > tbody > tr > td
 {
-    @include pad04;
+    padding: $padHalf;
 }
 .common-tbl-vertical[tbl-type=normal]    { border: 1px solid $colorSept; }
 .common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background-color: rgba($colorBody, 0.8); border: 1px solid $colorSept; }

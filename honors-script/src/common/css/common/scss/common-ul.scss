@@ -13,9 +13,7 @@
 .common-ul-announce
 {
     display: block;
-    @include padUD10;
-    @include padLt20;
-    @include padRt10;
+    padding: $padFull $padFull $padFull $padHuge;
     @include colorInfoBackTrans;
     @include fonts09;
     text-align: left;

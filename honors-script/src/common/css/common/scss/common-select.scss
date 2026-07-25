@@ -3,9 +3,7 @@
 .common-select-outer
 {
     max-width: 15em;
-    @include padUD02;
-    @include padRt10;
-    @include padLt02;
+    padding: $padTiny $padHuge $padTiny $padTiny;
     outline: none;
     text-align-last: center;
     vertical-align: middle;
