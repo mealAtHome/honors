@@ -8,7 +8,7 @@
 {
     padding: $padHalf auto;
     border: none;
-    border-bottom: 2px solid $colorSept;
+    border-bottom: 0.07em solid $colorSept;
     background-color: transparent;
     @include fonts11;
     text-align: left;
@@ -19,11 +19,11 @@
 .common-textarea-field
 {
     padding: $padHalf;
-    border: 2px solid $colorSept;
+    border: 0.07em solid $colorSept;
     background-color: $colorSnow;
     @include fonts11;
 }
-.common-textarea-field:focus { border: 2px solid $colorMain; border-bottom: 3px solid $colorMain; }
+.common-textarea-field:focus { border: 0.07em solid $colorMain; border-bottom: 3px solid $colorMain; }
 
 /* ========================= */
 /* 각 인풋박스 (기존) */
@@ -35,9 +35,9 @@
     /* -webkit-appearance: none; */
 
     /* box-sizing: content-box; */
-    padding: $padHalf;
+    padding: $padTiny;
     @include fonts11;
-    border: 2px solid $colorSept;
+    border: 0.07em solid $colorSept;
 }
 
 .common-input-text:focus
@@ -46,7 +46,7 @@
     /* -moz-appearance: none; */
     /* -webkit-appearance: none; */
 
-    border: 2px solid $colorMain;
+    border: 0.07em solid $colorMain;
 }
 
 .common-text
@@ -56,7 +56,7 @@
     /* -webkit-appearance: none; */
 
     box-sizing: initial;
-    padding: $padHalf;
+    padding: $padTiny;
     @include fonts11;
     border: none;
 }
@@ -70,7 +70,7 @@
     /* box-sizing: content-box; */
     padding: $padHalf;
     @include fonts11;
-    border: 2px solid $colorSept;
+    border: 0.07em solid $colorSept;
 }
 
 .common-textarea:focus
@@ -79,6 +79,6 @@
     /* -moz-appearance: none; */
     /* -webkit-appearance: none; */
 
-    border: 2px solid $colorMain;
+    border: 0.07em solid $colorMain;
 }
 

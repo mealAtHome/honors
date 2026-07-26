@@ -113,7 +113,7 @@ var GGdate =
     getHH               (d) { if(d == null) return ""; return String(d.getHours()     ).padStart(2, '0'); },
     getII               (d) { if(d == null) return ""; return String(d.getMinutes()   ).padStart(2, '0'); },
     getSS               (d) { if(d == null) return ""; return String(d.getSeconds()   ).padStart(2, '0'); },
-    getDDDD             (d) { if(d == null) return ""; return ["日","月","火","水","木","金","土"][d.getDay()]; },
+    getDDDD             (d) { if(d == null) return ""; return ["일","월","화","수","목","금","토"][d.getDay()]; },
     toYMDDHI            (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)} (${GGdate.getDDDD(d)}) ${GGdate.getHH(d)}:${GGdate.getII(d)}`; },
     toMMDDddot          (d) { if(d == null) return ""; return `${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)})`; },
     toYYMMDDddot        (d) { if(d == null) return ""; return `${GGdate.getYY(d)}.${GGdate.getMM(d)}.${GGdate.getDD(d)}(${GGdate.getDDDD(d)})`; },
@@ -121,6 +121,8 @@ var GGdate =
     toYYYYMMDD          (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)}`; },
     toYYYYMMDDHHIISS    (d) { if(d == null) return ""; return `${GGdate.getYYYY(d)}-${GGdate.getMM(d)}-${GGdate.getDD(d)} ${GGdate.getHH(d)}:${GGdate.getII(d)}:${GGdate.getSS(d)}`; },
     toMDdddd            (d) { if(d == null) return ""; return `${GGdate.getM(d)}/${GGdate.getD(d)}(${GGdate.getDDDD(d)})`; },
+
+    strToYYMMDDdHHIIdot (d) { return GGdate.toYYMMDDdHHIIdot(GGdate.fromStr(d)); },
 
     isHolidayToday()
     {
@@ -290,4 +292,81 @@ var GGdate =
         if(tg < to)
             return GGF.GGdate.PointOfDate.UPCOMING;
     },
+
+    /**
+     * 날짜 범위를 사용자 친화적인 문자열로 변환
+     *
+     * @param {Date|string|number} startDate
+     * @param {Date|string|number} endDate
+     * @returns {string}
+     */
+    getDateRangeText(targetDate, startDate, endDate)
+    {
+        const now = targetDate;
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+
+        /* 진행중인지, 종료되었는지 */
+        if (now >= startDate && now <= endDate) return "진행중";
+        if (now > endDate) return "종료됨";
+
+        /* 시간 제거 (날짜 기준 비교) */
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+        const end   = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+
+        const DAY = 24 * 60 * 60 * 1000;
+        const diffDays = Math.floor((start - today) / DAY);
+        if (diffDays === 0) return "오늘";
+        if (diffDays === 1) return "내일";
+        if (diffDays === 2) return "모레";
+
+        /* ---------- 이번주 / 다음주 / 다다음주 ---------- */
+        const getWeekStart = (date) =>
+        {
+            const d = new Date(date);
+            const day = d.getDay(); // 일요일=0
+            const diff = day === 0 ? -6 : 1 - day; // 월요일 시작
+            d.setDate(d.getDate() + diff);
+            d.setHours(0,0,0,0);
+            return d;
+        };
+
+        const thisWeekEnd = new Date(getWeekStart(today));
+        thisWeekEnd.setDate(thisWeekEnd.getDate() + 6);
+
+        const nextWeekEnd = new Date(thisWeekEnd);
+        nextWeekEnd.setDate(nextWeekEnd.getDate() + 7);
+
+        const nextNextWeekEnd = new Date(nextWeekEnd);
+        nextNextWeekEnd.setDate(nextNextWeekEnd.getDate() + 7);
+
+        const weekday = ["일", "월", "화", "수", "목", "금", "토"];
+        if (start <= thisWeekEnd) return `이번주 ${weekday[start.getDay()]}요일`;
+        if (start <= nextWeekEnd) return `다음주 ${weekday[start.getDay()]}요일`;
+        if (start <= nextNextWeekEnd) return `다다음주 ${weekday[start.getDay()]}요일`;
+
+        /* ---------- 1개월 미만 ---------- */
+
+        if (diffDays < 30)
+            return `${diffDays}일 남음`;
+
+        /* ---------- 1개월 이상 ---------- */
+
+        let months =
+            (start.getFullYear() - today.getFullYear()) * 12 +
+            (start.getMonth() - today.getMonth());
+
+        let monthAnchor = new Date(today);
+        monthAnchor.setMonth(monthAnchor.getMonth() + months);
+
+        if (monthAnchor > start) {
+            months--;
+            monthAnchor = new Date(today);
+            monthAnchor.setMonth(monthAnchor.getMonth() + months);
+        }
+
+        const remainDays = Math.floor((start - monthAnchor) / DAY);
+        return `${months}개월 뒤, ${remainDays}일 남음`;
+    }
 }

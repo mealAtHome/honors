@@ -70,7 +70,7 @@
 .common-input-field {
   padding: 0.4em auto;
   border: none;
-  border-bottom: 2px solid #c4c7ce;
+  border-bottom: 0.07em solid #c4c7ce;
   background-color: transparent;
   font-size: 1.1em;
   text-align: left;
@@ -91,13 +91,13 @@
 
 .common-textarea-field {
   padding: 0.4em;
-  border: 2px solid #c4c7ce;
+  border: 0.07em solid #c4c7ce;
   background-color: #ffffff;
   font-size: 1.1em;
 }
 
 .common-textarea-field:focus {
-  border: 2px solid #020654;
+  border: 0.07em solid #020654;
   border-bottom: 3px solid #020654;
 }
 
@@ -109,16 +109,16 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
   /* box-sizing: content-box; */
-  padding: 0.4em;
+  padding: 0.2em;
   font-size: 1.1em;
-  border: 2px solid #c4c7ce;
+  border: 0.07em solid #c4c7ce;
 }
 
 .common-input-text:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 2px solid #020654;
+  border: 0.07em solid #020654;
 }
 
 .common-text {
@@ -126,7 +126,7 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
   box-sizing: initial;
-  padding: 0.4em;
+  padding: 0.2em;
   font-size: 1.1em;
   border: none;
 }
@@ -138,12 +138,12 @@
   /* box-sizing: content-box; */
   padding: 0.4em;
   font-size: 1.1em;
-  border: 2px solid #c4c7ce;
+  border: 0.07em solid #c4c7ce;
 }
 
 .common-textarea:focus {
   /* cordova를 포팅하였을 때, 발생하는 특징을 무시하기 위함 */
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
-  border: 2px solid #020654;
+  border: 0.07em solid #020654;
 }

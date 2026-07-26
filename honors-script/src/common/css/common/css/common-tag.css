@@ -392,6 +392,13 @@
   line-height: 1.6;
 }
 
+.common-flex {
+  display: flex;
+  gap: 0.6em;
+  align-items: center;
+  line-height: 1.6;
+}
+
 .common-inline {
   display: inline-block;
   line-height: 1.6;

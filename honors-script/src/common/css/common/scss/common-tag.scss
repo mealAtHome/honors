@@ -86,6 +86,7 @@
 /* margin, padding */
 /* --------------- */
 .common-block           { display: block; @include fonth16; }
+.common-flex            { display: flex; gap: $padBase; align-items: center; @include fonth16; }
 .common-inline          { display: inline-block; @include fonth16; }
 .common-indent04        { display: block; padding-left: $padHalf; }
 .common-indent08        { display: block; padding-left: $padBase; }

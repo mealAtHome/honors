@@ -44,6 +44,31 @@ var GGF =
         }
     },
 
+    Color:
+    {
+        MAIN : "main", /* GGF.Color.MAIN */
+        DARK : "dark", /* GGF.Color.DARK */
+        HEAD : "head", /* GGF.Color.HEAD */
+        SIDE : "side", /* GGF.Color.SIDE */
+        BODY : "body", /* GGF.Color.BODY */
+        CMMT : "cmmt", /* GGF.Color.CMMT */
+        EDGE : "edge", /* GGF.Color.EDGE */
+        LINE : "line", /* GGF.Color.LINE */
+        PSTV : "pstv", /* GGF.Color.PSTV */
+        ALLW : "allw", /* GGF.Color.ALLW */
+        PROG : "prog", /* GGF.Color.PROG */
+        NTCE : "ntce", /* GGF.Color.NTCE */
+        INFO : "info", /* GGF.Color.INFO */
+        DTIL : "dtil", /* GGF.Color.DTIL */
+        HOLD : "hold", /* GGF.Color.HOLD */
+        CNCL : "cncl", /* GGF.Color.CNCL */
+        WARN : "warn", /* GGF.Color.WARN */
+        ERRR : "errr", /* GGF.Color.ERRR */
+        NGTV : "ngtv", /* GGF.Color.NGTV */
+        ENDD : "endd", /* GGF.Color.ENDD */
+        WHIT : "whit", /* GGF.Color.WHIT */
+    },
+
     /* ========================= */
     /* DB아님, 시스템에서 사용하는 값 */
     /* ========================= */

@@ -42,16 +42,35 @@
 
     <style>
         .CLSD-tbl-clsDetail { font-size: 0.9em; }
-        .CLSD-tbl-clsDetail > tbody > tr > td:nth-child(1) { width: 10%; color: var(--colorBody); font-size:0.9em; white-space: nowrap; vertical-align: middle; }
-        .CLSD-tbl-clsDetail > tbody > tr > td:nth-child(2) { width: 90%; color: var(--colorMain); font-size:1.0em; white-space: normal; vertical-align: top; word-break: break-word; }
+        .CLSD-tbl-clsDetail > tbody > tr > td:nth-child(1) { width: 10%; color: var(--colorBody); font-size:0.9em; white-space: nowrap; padding-right : 0.6em; vertical-align: middle; }
+        .CLSD-tbl-clsDetail > tbody > tr > td:nth-child(2) { width: 90%; color: var(--colorMain); font-size:1.0em; white-space: normal; padding-left  : 0.6em; vertical-align: top; word-break: break-word; }
 
         #CLSD-div-clsbill > table > tbody > tr > td:nth-child(2) { text-align: right; }
     </style>
     <div class="common-div-cushion common-div-normalTop">
         <table class="common-tbl-normal CLSD-tbl-clsDetail" tbl-type="card">
             <tbody>
-                <tr><td><span>모임시간</span></td><td><span id="CLSD-span-clsdt"></span></td></tr>
-                <tr><td><span>모집일정</span></td><td><span id="CLSD-span-clsapplydt"></span></td></tr>
+                <tr>
+                    <td><span>모임시간</span></td>
+                    <td>
+                        <div class="common-flex">
+                            <div class="common-block common-fonts08" ><span id="CLSD-span-clsdtPeriodText"></span></div>
+                            <div class="common-block "               ><span id="CLSD-span-clsdt"></span></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="common-block">모집일정</span></td>
+                    <td>
+                        <div class="common-flex">
+                            <div class="common-block common-fonts08" id="CLSD-span-clsapplyperiodText"></div>
+                            <div class="common-block ">
+                                <div class="common-block"><span id="CLSD-span-clsapplystartdt"></span><span>&nbsp;부터</span></div>
+                                <div class="common-block"><span id="CLSD-span-clsapplyclosedt"></span><span>&nbsp;까지</span></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 <tr><td><span>집합장소</span></td><td><span id="CLSD-span-clsgroundaddr"></span> (<span id="CLSD-span-clsground"></span>)</td></tr>
                 <tr><td><span>참가비</span></td><td><span id="CLSD-span-clsapplybill"></span></td></tr>
                 <tr><td><span>상세</span></td><td><span id="CLSD-span-clscontent"></span></td></tr>
@@ -215,11 +234,14 @@
                         /* 기본정보 */
                         let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
 
+                        $("#CLSD-span-clsdtPeriodText")       .html(GGC.Common.getCardByPeriod(mCls.getClsstartdt(), mCls.getClsclosedt()));
                         $("#CLSD-span-clsdt")                 .text(mCls.getClsPeriod());
                         $("#CLSD-span-clsground")             .text(mCls.getClsground());
                         $("#CLSD-span-clsgroundaddr")         .text(mCls.getClsgroundaddr());
                         $("#CLSD-span-clsapplybill")          .text(mCls.getClsapplybillpriceWon());
-                        $("#CLSD-span-clsapplydt")            .text(mCls.getClsapplyPeriod());
+                        $("#CLSD-span-clsapplyperiodText")    .html(GGC.Common.getCardByPeriod(mCls.getClsapplystartdt(), mCls.getClsapplyclosedt()));
+                        $("#CLSD-span-clsapplystartdt")       .text(GGdate.strToYYMMDDdHHIIdot(mCls.getClsapplystartdt()));
+                        $("#CLSD-span-clsapplyclosedt")       .text(GGdate.strToYYMMDDdHHIIdot(mCls.getClsapplyclosedt()));
                         $("#CLSD-span-clscontent")            .text(mCls.getClscontent());
                         $("#CLSD-span-clsusernoregname")      .text(mCls.getClsusernoregname());
                         $("#CLSD-span-clsusernoadmname")      .text(mCls.getClsusernoadmname());

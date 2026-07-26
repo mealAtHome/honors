@@ -371,4 +371,20 @@ GGC.Common =
         return `${Math.floor(betweenTimeDay / 365)}년 전`;
     },
 
+    getCardByPeriod(startDateStr, endDateStr)
+    {
+        let now = new Date();
+        let startDate = new Date(startDateStr);
+        let endDate = new Date(endDateStr);
+
+        let point = GGdate.getPointOfDate(now, startDate, endDate);
+        let color = "";
+        switch(point)
+        {
+            case GGF.GGdate.PointOfDate.UPCOMING : color = GGF.Color.NTCE; break; /* 두 기간 이전 */
+            case GGF.GGdate.PointOfDate.WITHIN   : color = GGF.Color.PROG; break; /* 두 기간 사이 */
+            case GGF.GGdate.PointOfDate.PASSED   : color = GGF.Color.ENDD; break; /* 두 기간 이후 */
+        }
+        return `<span class="common-card" card-color="${color}">${GGdate.getDateRangeText(now, startDate, endDate)}</span>`;
+    }
 };
