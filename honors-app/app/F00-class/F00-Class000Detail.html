@@ -71,15 +71,24 @@
                         </div>
                     </td>
                 </tr>
-                <tr><td><span>집합장소</span></td><td><span id="CLSD-span-clsgroundaddr"></span> (<span id="CLSD-span-clsground"></span>)</td></tr>
+                <tr>
+                    <td><span>집합주소</span></td>
+                    <td>
+                        <div class="common-block">
+                            <span id="CLSD-span-clsgroundaddr"></span>
+                            <button id="CLSD-btn-copyClsgroundaddr" class="common-btn-noline" btn-type="body"><i class="ti ti-copy"></i>&nbsp;복사</button>
+                        </div>
+                        <div class="common-block"><span id="CLSD-span-clsground"></span></div>
+                    </td>
+                </tr>
                 <tr><td><span>참가비</span></td><td><span id="CLSD-span-clsapplybill"></span></td></tr>
                 <tr><td><span>상세</span></td><td><span id="CLSD-span-clscontent"></span></td></tr>
-                <tr id="CLSD-tr-clsManagers">
+                <tr>
                     <td>담당자</td>
-                    <td id="CLSD-td-clsManagers">
-                        <div class="common-block">일정작성 : <span id="CLSD-span-clsusernoregname"></span></div>
-                        <div class="common-block">주관(정) : <span id="CLSD-span-clsusernoadmname"></span></div>
-                        <div class="common-block">주관(부) : <span id="CLSD-span-clsusernosubname"></span></div>
+                    <td>
+                        <div id="CLSD-div-clsusernoreg" class="common-block"><span>작성자 : </span><span id="CLSD-span-clsusernoregname"></span></div>
+                        <div id="CLSD-div-clsusernoadm" class="common-block"><span>담당자1 : </span><span id="CLSD-span-clsusernoadmname"></span></div>
+                        <div id="CLSD-div-clsusernosub" class="common-block"><span>담당자2 : </span><span id="CLSD-span-clsusernosubname"></span></div>
                     </td>
                 </tr>
                 <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
@@ -243,14 +252,18 @@
                         $("#CLSD-span-clsapplystartdt")       .text(GGdate.strToYYMMDDdHHIIdot(mCls.getClsapplystartdt()));
                         $("#CLSD-span-clsapplyclosedt")       .text(GGdate.strToYYMMDDdHHIIdot(mCls.getClsapplyclosedt()));
                         $("#CLSD-span-clscontent")            .text(mCls.getClscontent());
-                        $("#CLSD-span-clsusernoregname")      .text(mCls.getClsusernoregname());
-                        $("#CLSD-span-clsusernoadmname")      .text(mCls.getClsusernoadmname());
-                        $("#CLSD-span-clsusernosubname")      .text(mCls.getClsusernosubname());
+                        $("#CLSD-span-clsusernoregname")      .text(Common.ifEmpty(mCls.getClsusernoregname(), "-"));
+                        $("#CLSD-span-clsusernoadmname")      .text(Common.ifEmpty(mCls.getClsusernoadmname(), "-"));
+                        $("#CLSD-span-clsusernosubname")      .text(Common.ifEmpty(mCls.getClsusernosubname(), "-"));
                         $("#CLSD-span-clscancelreason")       .text(mCls.getClscancelreason());
                         $("#CLSD-span-clsbillsales")          .text(mCls.getClsbillsalesWon());
                         $("#CLSD-span-clsbillpurchase")       .text(mCls.getClsbillpurchaseWon());
                         $("#CLSD-span-clsbillfinal")          .text(mCls.getClsbillfinalWon());
                         $("#CLSD-div-grpfinancereflectflg")   .html(mCls.getGrpfinancereflectflgFont());
+
+                        if(Common.isEmpty(mCls.getClsusernoregname())) { $("#CLSD-div-clsusernoreg").addClass("common-colorBody"); }
+                        if(Common.isEmpty(mCls.getClsusernoadmname())) { $("#CLSD-div-clsusernoadm").addClass("common-colorBody"); }
+                        if(Common.isEmpty(mCls.getClsusernosubname())) { $("#CLSD-div-clsusernosub").addClass("common-colorBody"); }
 
                         $("#CLSD-div-clsCard").html(mCls.makeMain());
 

@@ -107,15 +107,13 @@ class MCls
                 <table class="common-tbl-imglabel common-fonts09" label-size="3rd">
                     <tbody>
                         <tr>
+                            <td><span class="common-fonts10 common-strong common-colorMain">일정</span></td>
                             <td><div class="common-img-label" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
-                            <td><span class="common-block">${model.getGrpname()}</span></td>
+                            <td>${model.getGrpname()}</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="common-cushionHalfUp">
-                    <div class="common-block">
-                        <span class="common-fonts10 common-strong common-colorMain">일정</span>
-                    </div>
                     <span class="common-block common-colorBody common-fonts09">${model.getClstitle()}</span>
                     <div class="common-cushionHalfUp">
                         ${true                                      ? `<span class="common-inline common-fonts08">${model.getClsstatusCard()}</span>` : ""}
@@ -134,27 +132,27 @@ class MCls
     makeMain(btnHtml="")
     {
         let html = "";
-        let model = this;
         html +=
         `
             <div class="MClss-make-div-modelTop common-div-card">
-                <table class="common-tbl-imglabel common-fonts09" label-size="3rd">
-                    <tbody>
-                        <tr>
-                            <td><div class="common-img-label" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
-                            <td><span class="common-block">${model.getGrpname()}</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="common-flex">
+                    <div>
+                        <div class="common-img-label" label-size="2em" style="background-image:url('${this.getGrpimgPath()}')"></div>
+                        <span>${this.getGrpname()}</span>
+                    </div>
+                </div>
                 <div class="common-cushionHalfUp">
-                    <div class="common-block">
-                        <span class="common-fonts10 common-strong common-colorMain">일정</span>
+                    <div class="common-flex">
+                        <div class="common-inline common-fonts10 common-strong common-colorMain">
+                            <span>일정</span>
+                        </div>
+                        <div class="common-inline common-colorBody common-fonts09">${this.getClstitle()}</div>
                     </div>
-                    <span class="common-block common-colorBody common-fonts09">${model.getClstitle()}</span>
                     <div class="common-cushionHalfUp">
-                        ${true                                      ? `<span class="common-inline common-fonts08">${model.getClsstatusCard()}</span>` : ""}
-                        ${this.isEnd() && this.isClssettleflgEdit() ? `<span class="common-inline common-fonts08">${model.getClssettleflgCard()}</span>` : ""}
+                        <span class="common-inline common-fonts08">${this.getClsstatusCard()}</span>
+                        ${this.isEnd() && this.isClssettleflgEdit() ? `<span class="common-inline common-fonts08">${this.getClssettleflgCard()}</span>` : ""}
                     </div>
+                    
                     ${btnHtml != "" ? `<div class="common-cushionHalfUp common-fonts09">${btnHtml}</div>` : ""}
                 </div>
             </div>
