@@ -28,6 +28,7 @@ var CommonEvent =
         $('body').on('click',  '.commonEvent-btn-plusMinus',                   $.proxy(CommonEvent.btnPlusMinus, this));           /* 유저의 탭으로 plus/minus 처리를 해줌. */
         $('body').on('click',  '.commonEvent-tag-userStorelove',               $.proxy(CommonEvent.userStorelove, this));          /* 유저의 탭으로 plus/minus 처리를 해줌. */
         $('body').on('click',  '.commonEvent-tag-phoneCall',                   $.proxy(CommonEvent.phoneCall, this));              /* 전화 걸기 */
+        $('body').on('click',  '.common-tab-top > .common-tab-item',           $.proxy(CommonEvent.tab2, this));                   /* 탭 */
 
         /* viberator, sound */
         // $('body').on('click', 'button', $.proxy(touch.btn, this));
@@ -560,6 +561,37 @@ var CommonEvent =
             $(tabShow).show();
 
     }, /* end tab */
+
+    /* ========================== */
+    /* common-tab-top */
+    /*
+        attributes
+          [*] tab
+            - tab : 현재 활성화된 탭
+    */
+    /* ========================== */
+    tab2(e)
+    {
+        /* 클래스 선택 */
+        let target = $(e.target);
+        try
+        {
+            if(!target.hasClass("common-tab-item"))
+                target = target.parent(".common-tab-item");
+        } catch(e)
+        {
+            Common.toast(e);
+            return;
+        }
+
+        /* set tab */
+        let tab = target.attr("tab");
+        if(tab == undefined || tab == "")
+        {
+            target.parent(".common-tab-top").find(".common-tab-item[tab=tab]").attr("tab", "");
+            target.attr("tab", "tab");
+        }
+    },
 
     /* ========================== */
     /* commonEvent-btn-radio 라는 클래스를 가진 엘리먼트에 라디오 효과를 부여함 */

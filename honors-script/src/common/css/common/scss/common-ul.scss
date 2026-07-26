@@ -13,7 +13,7 @@
 .common-ul-announce
 {
     display: block;
-    padding: $padFull $padFull $padFull $padHuge;
+    padding: $padBase $padBase $padBase 1.8em;
     @include colorInfoBackTrans;
     @include fonts09;
     text-align: left;
@@ -21,5 +21,6 @@
     list-style-type: disc;
     margin: 0em;
 }
-.common-ul-announce > li { margin-bottom: $marHalf; }
-.common-ul-announce > li:nth-last-child(1) { margin-bottom: 0em; }
+.common-ul-announce > li { line-height: 1.6; }
+/* .common-ul-announce > li { margin-bottom: $marTiny; } */
+/* .common-ul-announce > li:nth-last-child(1) { margin-bottom: 0em; } */

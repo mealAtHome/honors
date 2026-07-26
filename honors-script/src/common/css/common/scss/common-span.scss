@@ -27,7 +27,7 @@
 /* ============================== */
 /* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
 /* ============================== */
-.common-span-color { @include colorMainFont; }
+.common-span-color { color: $colorMain; }
 
 /* ============================== */
 /* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
@@ -46,13 +46,13 @@
 .common-span-label[label_type=outer],
 .common-span-label
 {
-    @include colorMainFont;
+    color: $colorMain;
     background-color: transparent;
     border: 1px solid $colorMain;
 }
 .common-span-label[label_type=inline]
 {
-    @include colorSnowFont;
+    color: $colorSnow;
     @include colorMainBackTrans;
     border: 1px solid $colorMain;
 }

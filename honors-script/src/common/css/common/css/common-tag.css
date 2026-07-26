@@ -28,6 +28,7 @@
 /* rgb(255 , 116 , 21  ); #FF7415 */
 /* rgb(206 , 39  , 39  ); #ce2727 */
 /* rgb(120 , 0   , 0   ); #780000 */
+/* rgb(120 , 0   , 0   ); #780000 */
 /* rgb(100 , 100 , 100 ); #636363 */
 /* ========================= */
 /* spacing */
@@ -78,6 +79,7 @@
   --colorWarn: #ff7415;
   --colorErrr: #ce2727;
   --colorNgtv: #780000;
+  --colorEndd: #717171;
   --colorSnow: #ffffff;
 }
 
@@ -101,6 +103,7 @@
   --colorWarnRgb: 255, 116, 21;
   --colorErrrRgb: 206, 39, 39;
   --colorNgtvRgb: 120, 0, 0;
+  --colorEnddRgb: 113, 113, 113;
   --colorSnowRgb: 255, 255, 255;
 }
 
@@ -114,7 +117,6 @@
 
 .common-card[card-color=main] {
   color: #020654;
-  border: 2px solid #020654;
   background-color: rgba(2, 6, 84, 0.2);
 }
 
@@ -128,7 +130,6 @@
 
 .common-card[card-color=dark] {
   color: #020421;
-  border: 2px solid #020421;
   background-color: rgba(2, 4, 33, 0.2);
 }
 
@@ -142,7 +143,6 @@
 
 .common-card[card-color=head] {
   color: #1b2a6b;
-  border: 2px solid #1b2a6b;
   background-color: rgba(27, 42, 107, 0.2);
 }
 
@@ -156,7 +156,6 @@
 
 .common-card[card-color=side] {
   color: #3d6bf5;
-  border: 2px solid #3d6bf5;
   background-color: rgba(61, 107, 245, 0.2);
 }
 
@@ -170,7 +169,6 @@
 
 .common-card[card-color=body] {
   color: #3c435c;
-  border: 2px solid #3c435c;
   background-color: rgba(60, 67, 92, 0.2);
 }
 
@@ -184,7 +182,6 @@
 
 .common-card[card-color=cmmt] {
   color: #7a7d84;
-  border: 2px solid #7a7d84;
   background-color: rgba(122, 125, 132, 0.2);
 }
 
@@ -198,7 +195,6 @@
 
 .common-card[card-color=edge] {
   color: #c4c7ce;
-  border: 2px solid #c4c7ce;
   background-color: rgba(196, 199, 206, 0.2);
 }
 
@@ -212,7 +208,6 @@
 
 .common-card[card-color=line] {
   color: #e4e7f0;
-  border: 2px solid #e4e7f0;
   background-color: rgba(228, 231, 240, 0.2);
 }
 
@@ -226,7 +221,6 @@
 
 .common-card[card-color=pstv] {
   color: #3d6bf5;
-  border: 2px solid #3d6bf5;
   background-color: rgba(61, 107, 245, 0.2);
 }
 
@@ -240,7 +234,6 @@
 
 .common-card[card-color=allw] {
   color: #009600;
-  border: 2px solid #009600;
   background-color: rgba(0, 150, 0, 0.2);
 }
 
@@ -254,7 +247,6 @@
 
 .common-card[card-color=prog] {
   color: #039a00;
-  border: 2px solid #039a00;
   background-color: rgba(3, 154, 0, 0.2);
 }
 
@@ -268,7 +260,6 @@
 
 .common-card[card-color=ntce] {
   color: #2865ff;
-  border: 2px solid #2865ff;
   background-color: rgba(40, 101, 255, 0.2);
 }
 
@@ -282,7 +273,6 @@
 
 .common-card[card-color=info] {
   color: #3c435c;
-  border: 2px solid #3c435c;
   background-color: rgba(60, 67, 92, 0.2);
 }
 
@@ -296,7 +286,6 @@
 
 .common-card[card-color=dtil] {
   color: #EAF0FF;
-  border: 2px solid #EAF0FF;
   background-color: rgba(234, 240, 255, 0.2);
 }
 
@@ -310,7 +299,6 @@
 
 .common-card[card-color=hold] {
   color: #ffb300;
-  border: 2px solid #ffb300;
   background-color: rgba(255, 179, 0, 0.2);
 }
 
@@ -324,7 +312,6 @@
 
 .common-card[card-color=cncl] {
   color: #ff7415;
-  border: 2px solid #ff7415;
   background-color: rgba(255, 116, 21, 0.2);
 }
 
@@ -338,7 +325,6 @@
 
 .common-card[card-color=warn] {
   color: #ff7415;
-  border: 2px solid #ff7415;
   background-color: rgba(255, 116, 21, 0.2);
 }
 
@@ -352,7 +338,6 @@
 
 .common-card[card-color=errr] {
   color: #ce2727;
-  border: 2px solid #ce2727;
   background-color: rgba(206, 39, 39, 0.2);
 }
 
@@ -366,8 +351,20 @@
 
 .common-card[card-color=ngtv] {
   color: #780000;
-  border: 2px solid #780000;
   background-color: rgba(120, 0, 0, 0.2);
+}
+
+.common-colorFont[font-color=endd] {
+  color: #717171;
+}
+
+.common-colorEndd {
+  color: #717171;
+}
+
+.common-card[card-color=endd] {
+  color: #717171;
+  background-color: rgba(113, 113, 113, 0.2);
 }
 
 .common-colorFont[font-color=whit] {
@@ -380,7 +377,6 @@
 
 .common-card[card-color=whit] {
   color: #ffffff;
-  border: 2px solid #ffffff;
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -416,38 +412,29 @@
   padding-left: 1em;
 }
 
-.common-padTinyUD {
-  padding: 0.2em auto;
-}
-
-.common-marUD {
-  display: block;
-  margin: 0.4em 0em;
-}
-
-.common-marUp {
+.common-cushionHalfUp {
   display: block;
   margin-top: 0.4em;
 }
 
-.common-cushionUp {
+.common-cushionBaseUp {
   display: block;
   margin-top: 0.6em;
 }
 
 .common-cushionUD {
   display: block;
-  margin: 0.6em 0em;
+  margin: 0.8em 0em;
 }
 
 .common-cushionDw {
   display: block;
-  margin-bottom: 0.4em;
+  margin-bottom: 0.8em;
 }
 
 .common-cushionTinyUD {
   display: block;
-  margin: 0.2em 0em;
+  margin: 0.4em 0em;
 }
 
 /* --------------- */
@@ -516,8 +503,9 @@
 /* --------------- */
 .common-card {
   display: inline-block;
-  font-weight: normal;
-  padding: 0.4em 0.6em;
+  font-weight: bold;
+  padding: 0.4em 0.8em;
+  border-radius: 0.4em;
 }
 
 /* --------------- */
@@ -607,4 +595,33 @@
   flex-shrink: 0;
   display: flex;
   align-items: center;
+}
+
+/* ========================= */
+/* 탭 */
+/* ========================= */
+.common-tab-top {
+  display: block;
+  overflow-x: auto;
+  /* padding: $padHalf $padMore; */
+}
+
+.common-tab-item {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  border-radius: 0.4em;
+  border: 0.07em solid #c4c7ce;
+  background-color: #ffffff;
+  color: #3c435c;
+  text-align: center;
+}
+
+.common-tab-item[tab=tab] {
+  color: #ffffff;
+  background-color: #020654;
+}
+
+.common-tab-item:active {
+  color: #020654;
+  background-color: rgba(var(--colorMain), 0.1);
 }

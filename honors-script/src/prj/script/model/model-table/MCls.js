@@ -104,7 +104,7 @@ class MCls
         html +=
         `
             <div class="MClss-make-div-modelTop common-div-card">
-                <table class="common-tbl-imglabel" label-size="3rd">
+                <table class="common-tbl-imglabel common-fonts09" label-size="3rd">
                     <tbody>
                         <tr>
                             <td><div class="common-img-label" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
@@ -112,17 +112,50 @@ class MCls
                         </tr>
                     </tbody>
                 </table>
-                <div class="common-div-cushionUD">
+                <div class="common-cushionHalfUp">
                     <div class="common-block">
-                        <span class="common-fonts11 common-strong">일정</span>
-                        <span class="common-fonts09"></span>
+                        <span class="common-fonts10 common-strong common-colorMain">일정</span>
                     </div>
-                    <span class="common-block">${model.getClstitle()}</span>
-                    <div class="common-div-cushionUD">
-                        ${true         ? `<span class="common-inline">${model.getClsstatusCard()}</span>` : ""}
-                        ${this.isEnd() ? `<span class="common-inline">${model.getClssettleflgCard()}</span>` : ""}
+                    <span class="common-block common-colorBody common-fonts09">${model.getClstitle()}</span>
+                    <div class="common-cushionHalfUp">
+                        ${true                                      ? `<span class="common-inline common-fonts08">${model.getClsstatusCard()}</span>` : ""}
+                        ${this.isEnd() && this.isClssettleflgEdit() ? `<span class="common-inline common-fonts08">${model.getClssettleflgCard()}</span>` : ""}
                     </div>
-                    ${btnHtml != "" ? `<div class="common-div-cushionUp common-fonts09">${btnHtml}</div>` : ""}
+                    ${btnHtml != "" ? `<div class="common-cushionHalfUp common-fonts09">${btnHtml}</div>` : ""}
+                </div>
+            </div>
+        `;
+        return html;
+    }
+
+    /* ========================= */
+    /* make with buttons */
+    /* ========================= */
+    makeMain(btnHtml="")
+    {
+        let html = "";
+        let model = this;
+        html +=
+        `
+            <div class="MClss-make-div-modelTop common-div-card">
+                <table class="common-tbl-imglabel common-fonts09" label-size="3rd">
+                    <tbody>
+                        <tr>
+                            <td><div class="common-img-label" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
+                            <td><span class="common-block">${model.getGrpname()}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="common-cushionHalfUp">
+                    <div class="common-block">
+                        <span class="common-fonts10 common-strong common-colorMain">일정</span>
+                    </div>
+                    <span class="common-block common-colorBody common-fonts09">${model.getClstitle()}</span>
+                    <div class="common-cushionHalfUp">
+                        ${true                                      ? `<span class="common-inline common-fonts08">${model.getClsstatusCard()}</span>` : ""}
+                        ${this.isEnd() && this.isClssettleflgEdit() ? `<span class="common-inline common-fonts08">${model.getClssettleflgCard()}</span>` : ""}
+                    </div>
+                    ${btnHtml != "" ? `<div class="common-cushionHalfUp common-fonts09">${btnHtml}</div>` : ""}
                 </div>
             </div>
         `;

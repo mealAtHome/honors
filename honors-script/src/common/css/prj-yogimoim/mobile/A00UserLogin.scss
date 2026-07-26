@@ -30,7 +30,7 @@
     display: block;
     font-size: 3em;
     font-weight: normal;
-    @include colorMainFont;
+    color: $colorMain;
     @include fonth16;
 }
 .ULGN-div-titleAccent

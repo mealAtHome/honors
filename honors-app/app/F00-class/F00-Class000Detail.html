@@ -32,73 +32,65 @@
         <button id="CLSD-btn-textSettle"   class="common-btn-outer" style="display:none;">정산요약</button>
         <button id="CLSD-btn-editSettle"   class="common-btn-outer" style="display:none;">정산</button>
         <button id="CLSD-btn-editPurchase" class="common-btn-outer" style="display:none;">구매</button>
-        <hr class="common-hr-paddingUp06"/>
     </div>
+    <hr class="common-hr-paddingLR"/>
 
     <!-- ========================= -->
     <!-- 일정상세 -->
     <!-- ========================= -->
-    <div class="common-div-cushion">
-        <p class="common-p-title">
-            <span id="CLSD-span-clstitle"></span>
-        </p>
-        <table class="common-tbl-vertical common-cushionUp common-fonts09" tbl-type="normal">
+    <div id="CLSD-div-clsCard" class="common-div-cushion"></div>
+
+    <style>
+        .CLSD-tbl-clsDetail { font-size: 0.9em; }
+        .CLSD-tbl-clsDetail > tbody > tr > td:nth-child(1) { width: 10%; color: var(--colorBody); font-size:0.9em; white-space: nowrap; vertical-align: middle; }
+        .CLSD-tbl-clsDetail > tbody > tr > td:nth-child(2) { width: 90%; color: var(--colorMain); font-size:1.0em; white-space: normal; vertical-align: top; word-break: break-word; }
+
+        #CLSD-div-clsbill > table > tbody > tr > td:nth-child(2) { text-align: right; }
+    </style>
+    <div class="common-div-cushion common-div-normalTop">
+        <table class="common-tbl-normal CLSD-tbl-clsDetail" tbl-type="card">
             <tbody>
-                <tr><th>모임시간</th><td><span id="CLSD-span-clsdt"></span></td></tr>
-                <tr><th>모집일정</th><td><span id="CLSD-span-clsapplydt"></span></td></tr>
-                <tr><th>집합장소</th><td><span id="CLSD-span-clsgroundaddr"></span> (<span id="CLSD-span-clsground"></span>)</td></tr>
-                <tr><th>참가비</th><td><span id="CLSD-span-clsapplybill"></span></td></tr>
-                <tr><th>상세</th><td><span id="CLSD-span-clscontent"></span></td></tr>
+                <tr><td><span>모임시간</span></td><td><span id="CLSD-span-clsdt"></span></td></tr>
+                <tr><td><span>모집일정</span></td><td><span id="CLSD-span-clsapplydt"></span></td></tr>
+                <tr><td><span>집합장소</span></td><td><span id="CLSD-span-clsgroundaddr"></span> (<span id="CLSD-span-clsground"></span>)</td></tr>
+                <tr><td><span>참가비</span></td><td><span id="CLSD-span-clsapplybill"></span></td></tr>
+                <tr><td><span>상세</span></td><td><span id="CLSD-span-clscontent"></span></td></tr>
                 <tr id="CLSD-tr-clsManagers">
-                    <th>담당자</th>
+                    <td>담당자</td>
                     <td id="CLSD-td-clsManagers">
+                        <div class="common-block">일정작성 : <span id="CLSD-span-clsusernoregname"></span></div>
                         <div class="common-block">주관(정) : <span id="CLSD-span-clsusernoadmname"></span></div>
                         <div class="common-block">주관(부) : <span id="CLSD-span-clsusernosubname"></span></div>
-                    </td>
-                </tr>
-                <tr id="CLSD-tr-clsbill" style="display:none;">
-                    <th>정산결과</th>
-                    <td>
-                        <table class="common-tbl-vertical" tbl-type="minimal">
-                            <tbody>
-                                <tr><th>청구합계</th><td><span id="CLSD-span-clsbillsales"></span></td></tr>
-                                <tr><th>구매합계</th><td><span id="CLSD-span-clsbillpurchase"></span></td></tr>
-                                <tr><th>집계결과</th><td><span id="CLSD-span-clsbillfinal"></span></td></tr>
-                                <tr><th>재무반영여부</th><td><span id="CLSD-div-grpfinancereflectflg"></span></td></tr>
-                                <!--
-                                    <tr>
-                                        <td colspan="2" style="text-align:left;">
-                                            <button id="CLSD-btn-grpfinancereflectflgToY" class="common-btn-outer" btn-type="normal">반영</button>
-                                            <button id="CLSD-btn-grpfinancereflectflgToN" class="common-btn-outer" btn-type="cancel">해제</button>
-                                        </td>
-                                    </tr>
-                                -->
-                            </tbody>
-                        </table>
                     </td>
                 </tr>
                 <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
             </tbody>
         </table>
-        <div class="common-block common-fonts09">일정작성자 : <span id="CLSD-span-clsusernoregname"></span></div>
     </div>
+    <div id="CLSD-div-clsbill" class="common-div-cushion common-div-normalTop" style="display:none;">
+        <table class="common-tbl-normal CLSD-tbl-clsDetail" tbl-type="card">
+            <tbody>
+                <tr><td colspan="2" td-type="th">정산결과</td></tr>
+                <tr><td>청구합계</td><td><span id="CLSD-span-clsbillsales"></span></td></tr>
+                <tr><td>구매합계</td><td><span id="CLSD-span-clsbillpurchase"></span></td></tr>
+                <tr><td>집계결과</td><td><span id="CLSD-span-clsbillfinal"></span></td></tr>
+                <tr><td>재무반영여부</td><td><span id="CLSD-div-grpfinancereflectflg"></span></td></tr>
+            </tbody>
+        </table>
+    </div>
+    <hr class="common-hr-paddingLR"/>
 
     <!-- ========================= -->
     <!-- 메인 탭 -->
     <!-- ========================= -->
     <div id="CLSD-div-tabmain" class="common-div-cushion" style="display:none;">
-        <hr class="common-hr-paddingUD03"/>
-        <table class="common-tbl-tab commonEvent-tbl-tab">
-            <tbody>
-                <tr>
-                    <td class="CLSD-td-tabmain" tabval="clslineup"    tab="tab" >참가자</td>
-                    <td class="CLSD-td-tabmain" tabval="clssettle"    tab=""    >정산</td>
-                    <td class="CLSD-td-tabmain" tabval="clspurchase"  tab=""    >구매</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr class="common-hr-paddingUD03"/>
+        <div class="common-tab-top common-fonts09">
+            <div class="common-tab-item CLSD-td-tabmain" tabval="clslineup"   tab="tab" >참가현황</div>
+            <div class="common-tab-item CLSD-td-tabmain" tabval="clssettle"   tab=""    >정산현황</div>
+            <div class="common-tab-item CLSD-td-tabmain" tabval="clspurchase" tab=""    >구매목록</div>
+        </div>
     </div>
+    <hr class="common-hr-paddingLR"/>
 
     <!-- ========================= -->
     <!-- 참가자목록 -->
@@ -190,7 +182,7 @@
                 $("#CLSD-btn-textSettle").hide();
                 $("#CLSD-btn-editSettle").hide();
                 $("#CLSD-btn-editPurchase").hide();
-                $("#CLSD-tr-clsbill").hide();
+                $("#CLSD-div-clsbill").hide();
                 $("#CLSD-tr-clscancelreason").hide();
                 $("#CLSD-div-clssettleTop").hide();
                 $("#CLSD-div-clspurchase").hide();
@@ -222,7 +214,7 @@
 
                         /* 기본정보 */
                         let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
-                        $("#CLSD-span-clstitle")              .text(mCls.getClstitle());
+
                         $("#CLSD-span-clsdt")                 .text(mCls.getClsPeriod());
                         $("#CLSD-span-clsground")             .text(mCls.getClsground());
                         $("#CLSD-span-clsgroundaddr")         .text(mCls.getClsgroundaddr());
@@ -237,6 +229,8 @@
                         $("#CLSD-span-clsbillpurchase")       .text(mCls.getClsbillpurchaseWon());
                         $("#CLSD-span-clsbillfinal")          .text(mCls.getClsbillfinalWon());
                         $("#CLSD-div-grpfinancereflectflg")   .html(mCls.getGrpfinancereflectflgFont());
+
+                        $("#CLSD-div-clsCard").html(mCls.makeMain());
 
                         /* ----- */
                         /* show / hide */
@@ -259,7 +253,7 @@
                             $("#CLSD-btn-textSettle").show();
                             $("#CLSD-btn-editSettle").show();
                             $("#CLSD-btn-editPurchase").show();
-                            $("#CLSD-tr-clsbill").show();
+                            $("#CLSD-div-clsbill").show();
                         }
 
                         /* =============== */
@@ -470,7 +464,7 @@
                     {
                         applyHtml =
                         `
-                            <input type="text" class="common-input-text CLSD-input-username" value="${username}" disabled/>
+                            <input type="text" class="common-input-text CLSD-input-username" value="${username}" disabled />
                             <button class="common-btn-outer CLSD-btn-cancelForLineup2" btn-type="cancel" ${pk}>취소</button>
                         `;
                     }
@@ -482,7 +476,7 @@
                     {
                         applyHtml =
                         `
-                            <input type="text" class="common-input-text CLSD-input-username" value="${username}" ${pk} disabled/>
+                            <input type="text" class="common-input-text CLSD-input-username" value="${username}" ${pk} disabled />
                             <button class="common-btn-outer CLSD-btn-applyForLineup2" ${pk} lineupname="${model.getLineupname()}" position="${position}" bill="${model.getBillWon()}">참가</button>
                         `;
                     }

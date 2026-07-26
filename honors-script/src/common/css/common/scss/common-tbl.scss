@@ -35,7 +35,10 @@
 {
     padding: $padHalf $padMore;
     border-radius: 2em;
-    @include colorMainFont;
+    /* border: 0.07em solid $colorSept; */
+    /* background-color: $colorSnow; */
+    /* color: $colorBody; */
+    color: $colorMain;
     text-align: center;
 }
 .common-tbl-tab > tbody > tr > td[tab=space]
@@ -47,13 +50,13 @@
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
-    @include colorSnowFont;
-    @include colorMainBackSolid;
+    color: $colorSnow;
+    background-color: $colorMain;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
 .common-tbl-tab > tbody > tr > td[tab=tab]:active
 {
-    @include colorMainBackSolid;
+    background-color: $colorMain;
 }
 
 /* ============================== */
@@ -76,7 +79,7 @@
 .common-tbl-normal > tfoot > tr > th,
 .common-tbl-normal > tfoot > tr > td
 {
-    padding: 0.4em;
+    padding: $padHalf;
     background-color: $colorBodyBack;
     text-align: center;
     font-weight: bold;
@@ -85,7 +88,7 @@
 .common-tbl-normal > tfoot > tr > td,
 .common-tbl-normal > tbody > tr > td
 {
-    padding: 0.4em;
+    padding: $padHalf;
 }
 .common-tbl-normal[tbl-type=card]
 {
@@ -98,7 +101,7 @@
 .common-div-normalTop
 {
     border-radius: 1em;
-    border: 1px solid $colorLine;
+    border: 0.06em solid $colorLine;
 }
 
 /*
@@ -131,12 +134,13 @@
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 1px solid $colorSept; border-right: none; }
 .common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
 
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td             { background-color: $colorSnow; border-top: 1px solid $colorLine; }
-.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td             { background-color: $colorSnow; border-top: none; }
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td:first-child { padding-left  : 0.8em; } /* 테이블의 양사이드가 둥글기 때문에 */
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td:last-child  { padding-right : 0.8em; } /* 테이블의 양사이드가 둥글기 때문에 */
-.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:before      { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
-.common-tbl-normal[tbl-type=card] > tbody > tr:last-child  > td:after       { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td                 { background-color: $colorSnow; border-top: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td                 { background-color: $colorSnow; border-top: none; padding-top: $padBase;}
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td:first-child     { padding-left  : 1.2em; } /* 테이블의 양사이드가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td:last-child      { padding-right : 1.2em; } /* 테이블의 양사이드가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:before          { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr:last-child  > td:after           { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td[td-type=th]     { font-weight: bold; background-color: rgba($colorBody, 0.1); }
 
 /* .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:first-child  { border-top-left-radius: 1em; } */ /* 1행 왼쪽 위 */
 /* .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:last-child   { border-top-right-radius: 1em; } */ /* 1행 오른쪽 위 */
@@ -193,19 +197,19 @@
 {
     padding: $padHalf;
 }
-.common-tbl-vertical[tbl-type=normal]    { border: 1px solid $colorSept; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { background-color: rgba($colorBody, 0.8); border: 1px solid $colorSept; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > th { width: 5%;  text-align: right; font-weight: bold; }
-.common-tbl-vertical[tbl-type=normal]    > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=normal] { border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=normal] > tbody > tr > th { background-color: rgba($colorBody, 0.1); border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=normal] > tbody > tr > th { width: 5%;  text-align: right; font-weight: bold; }
+.common-tbl-vertical[tbl-type=normal] > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorSept; }
 
-.common-tbl-vertical[tbl-type=minimal]   { border: 1px solid $colorSept; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { background-color: rgba($colorBody, 0.8); border: 1px solid $colorSept; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > th { width: 5%;  text-align: right; font-weight: normal; }
-.common-tbl-vertical[tbl-type=minimal]   > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=minimal] { border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=minimal] > tbody > tr > th { background-color: rgba($colorBody, 0.1); border: 1px solid $colorSept; }
+.common-tbl-vertical[tbl-type=minimal] > tbody > tr > th { width: 5%;  text-align: right; font-weight: normal; }
+.common-tbl-vertical[tbl-type=minimal] > tbody > tr > td { width: 95%; text-align: left; border: 1px solid $colorSept; }
 
-.common-tbl-vertical[tbl-type=noborder]  { border: none; }
-.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > th { width: 5%;  text-align: right; border: none; font-weight: bold; }
-.common-tbl-vertical[tbl-type=noborder]  > tbody > tr > td { width: 95%; text-align: left;  border: none;  }
+.common-tbl-vertical[tbl-type=noborder] { border: none; }
+.common-tbl-vertical[tbl-type=noborder] > tbody > tr > th { width: 5%;  text-align: right; border: none; font-weight: bold; }
+.common-tbl-vertical[tbl-type=noborder] > tbody > tr > td { width: 95%; text-align: left;  border: none;  }
 
 .common-tbl-vertical[tbl-type=rowborder] { border: none; }
 .common-tbl-vertical[tbl-type=rowborder] > thead > tr > th { border: none; }

@@ -28,6 +28,7 @@
 /* rgb(255 , 116 , 21  ); #FF7415 */
 /* rgb(206 , 39  , 39  ); #ce2727 */
 /* rgb(120 , 0   , 0   ); #780000 */
+/* rgb(120 , 0   , 0   ); #780000 */
 /* rgb(100 , 100 , 100 ); #636363 */
 /* ========================= */
 /* spacing */
@@ -455,7 +456,7 @@
   bottom: 0px;
   left: 0px;
   width: 100%;
-  background: #020654;
+  background-color: #020654;
   color: #ffffff;
   font-size: 1.1em;
   line-height: 1.6;

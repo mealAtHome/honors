@@ -89,7 +89,7 @@
     cursor: pointer;
 }
 
-/* noline */ .common-btn-noline                          { @include colorMainFont; } .common-btn-noline:active                   { @include colorMainBackTrans; }
+/* noline */ .common-btn-noline                          { color: $colorMain; } .common-btn-noline:active                   { @include colorMainBackTrans; }
 /* noline */ .common-btn-noline[btn-type=cancel]         { @include colorCnclFont; } .common-btn-noline:active[btn-type=cancel]  { @include colorCnclBackTrans; }
 /* noline */ .common-btn-noline[btn-type=warning]        { @include colorCnclFont; } .common-btn-noline:active[btn-type=warning] { @include colorCnclBackTrans; }
 /* noline */ .common-btn-noline[btn-type=error]          { @include colorErrrFont; } .common-btn-noline:active[btn-type=error]   { @include colorErrrBackTrans; }
@@ -106,8 +106,8 @@
     bottom: 0px;
     left: 0px;
     width: 100%;
-    @include colorMainBackSolid;
-    @include colorSnowFont;
+    background-color: $colorMain;
+    color: $colorSnow;
     @include fonts11;
     @include fonth16;
     padding: $padMore;

@@ -25,6 +25,7 @@
     --colorWarn: #{$colorWarn};
     --colorErrr: #{$colorErrr};
     --colorNgtv: #{$colorNgtv};
+    --colorEndd: #{$colorEndd};
     --colorSnow: #{$colorSnow};
 }
 
@@ -50,29 +51,31 @@
     --colorWarnRgb: #{rgb-values($colorWarn)};
     --colorErrrRgb: #{rgb-values($colorErrr)};
     --colorNgtvRgb: #{rgb-values($colorNgtv)};
+    --colorEnddRgb: #{rgb-values($colorEndd)};
     --colorSnowRgb: #{rgb-values($colorSnow)};
 }
 
-.common-colorFont[font-color=main] { color:$colorMain;} .common-colorMain { color:$colorMain;} .common-card[card-color=main] { color:$colorMain; border: 2px solid $colorMain; background-color:rgba($colorMain, 0.2); }
-.common-colorFont[font-color=dark] { color:$colorDark;} .common-colorDark { color:$colorDark;} .common-card[card-color=dark] { color:$colorDark; border: 2px solid $colorDark; background-color:rgba($colorDark, 0.2); }
-.common-colorFont[font-color=head] { color:$colorHead;} .common-colorHead { color:$colorHead;} .common-card[card-color=head] { color:$colorHead; border: 2px solid $colorHead; background-color:rgba($colorHead, 0.2); }
-.common-colorFont[font-color=side] { color:$colorSide;} .common-colorSide { color:$colorSide;} .common-card[card-color=side] { color:$colorSide; border: 2px solid $colorSide; background-color:rgba($colorSide, 0.2); }
-.common-colorFont[font-color=body] { color:$colorBody;} .common-colorBody { color:$colorBody;} .common-card[card-color=body] { color:$colorBody; border: 2px solid $colorBody; background-color:rgba($colorBody, 0.2); }
-.common-colorFont[font-color=cmmt] { color:$colorCmmt;} .common-colorCmmt { color:$colorCmmt;} .common-card[card-color=cmmt] { color:$colorCmmt; border: 2px solid $colorCmmt; background-color:rgba($colorCmmt, 0.2); }
-.common-colorFont[font-color=edge] { color:$colorSept;} .common-colorSept { color:$colorSept;} .common-card[card-color=edge] { color:$colorSept; border: 2px solid $colorSept; background-color:rgba($colorSept, 0.2); }
-.common-colorFont[font-color=line] { color:$colorLine;} .common-colorLine { color:$colorLine;} .common-card[card-color=line] { color:$colorLine; border: 2px solid $colorLine; background-color:rgba($colorLine, 0.2); }
-.common-colorFont[font-color=pstv] { color:$colorPstv;} .common-colorPstv { color:$colorPstv;} .common-card[card-color=pstv] { color:$colorPstv; border: 2px solid $colorPstv; background-color:rgba($colorPstv, 0.2); }
-.common-colorFont[font-color=allw] { color:$colorAllw;} .common-colorAllw { color:$colorAllw;} .common-card[card-color=allw] { color:$colorAllw; border: 2px solid $colorAllw; background-color:rgba($colorAllw, 0.2); }
-.common-colorFont[font-color=prog] { color:$colorProg;} .common-colorProg { color:$colorProg;} .common-card[card-color=prog] { color:$colorProg; border: 2px solid $colorProg; background-color:rgba($colorProg, 0.2); }
-.common-colorFont[font-color=ntce] { color:$colorNtce;} .common-colorNtce { color:$colorNtce;} .common-card[card-color=ntce] { color:$colorNtce; border: 2px solid $colorNtce; background-color:rgba($colorNtce, 0.2); }
-.common-colorFont[font-color=info] { color:$colorInfo;} .common-colorInfo { color:$colorInfo;} .common-card[card-color=info] { color:$colorInfo; border: 2px solid $colorInfo; background-color:rgba($colorInfo, 0.2); }
-.common-colorFont[font-color=dtil] { color:$colorDtil;} .common-colorDtil { color:$colorDtil;} .common-card[card-color=dtil] { color:$colorDtil; border: 2px solid $colorDtil; background-color:rgba($colorDtil, 0.2); }
-.common-colorFont[font-color=hold] { color:$colorHold;} .common-colorHold { color:$colorHold;} .common-card[card-color=hold] { color:$colorHold; border: 2px solid $colorHold; background-color:rgba($colorHold, 0.2); }
-.common-colorFont[font-color=cncl] { color:$colorCncl;} .common-colorCncl { color:$colorCncl;} .common-card[card-color=cncl] { color:$colorCncl; border: 2px solid $colorCncl; background-color:rgba($colorCncl, 0.2); }
-.common-colorFont[font-color=warn] { color:$colorWarn;} .common-colorWarn { color:$colorWarn;} .common-card[card-color=warn] { color:$colorWarn; border: 2px solid $colorWarn; background-color:rgba($colorWarn, 0.2); }
-.common-colorFont[font-color=errr] { color:$colorErrr;} .common-colorErrr { color:$colorErrr;} .common-card[card-color=errr] { color:$colorErrr; border: 2px solid $colorErrr; background-color:rgba($colorErrr, 0.2); }
-.common-colorFont[font-color=ngtv] { color:$colorNgtv;} .common-colorNgtv { color:$colorNgtv;} .common-card[card-color=ngtv] { color:$colorNgtv; border: 2px solid $colorNgtv; background-color:rgba($colorNgtv, 0.2); }
-.common-colorFont[font-color=whit] { color:$colorSnow;} .common-colorSnow { color:$colorSnow;} .common-card[card-color=whit] { color:$colorSnow; border: 2px solid $colorSnow; background-color:rgba($colorSnow, 0.2); }
+.common-colorFont[font-color=main] { color:$colorMain;} .common-colorMain { color:$colorMain;} .common-card[card-color=main] { color:$colorMain; background-color:rgba($colorMain, 0.2); }
+.common-colorFont[font-color=dark] { color:$colorDark;} .common-colorDark { color:$colorDark;} .common-card[card-color=dark] { color:$colorDark; background-color:rgba($colorDark, 0.2); }
+.common-colorFont[font-color=head] { color:$colorHead;} .common-colorHead { color:$colorHead;} .common-card[card-color=head] { color:$colorHead; background-color:rgba($colorHead, 0.2); }
+.common-colorFont[font-color=side] { color:$colorSide;} .common-colorSide { color:$colorSide;} .common-card[card-color=side] { color:$colorSide; background-color:rgba($colorSide, 0.2); }
+.common-colorFont[font-color=body] { color:$colorBody;} .common-colorBody { color:$colorBody;} .common-card[card-color=body] { color:$colorBody; background-color:rgba($colorBody, 0.2); }
+.common-colorFont[font-color=cmmt] { color:$colorCmmt;} .common-colorCmmt { color:$colorCmmt;} .common-card[card-color=cmmt] { color:$colorCmmt; background-color:rgba($colorCmmt, 0.2); }
+.common-colorFont[font-color=edge] { color:$colorSept;} .common-colorSept { color:$colorSept;} .common-card[card-color=edge] { color:$colorSept; background-color:rgba($colorSept, 0.2); }
+.common-colorFont[font-color=line] { color:$colorLine;} .common-colorLine { color:$colorLine;} .common-card[card-color=line] { color:$colorLine; background-color:rgba($colorLine, 0.2); }
+.common-colorFont[font-color=pstv] { color:$colorPstv;} .common-colorPstv { color:$colorPstv;} .common-card[card-color=pstv] { color:$colorPstv; background-color:rgba($colorPstv, 0.2); }
+.common-colorFont[font-color=allw] { color:$colorAllw;} .common-colorAllw { color:$colorAllw;} .common-card[card-color=allw] { color:$colorAllw; background-color:rgba($colorAllw, 0.2); }
+.common-colorFont[font-color=prog] { color:$colorProg;} .common-colorProg { color:$colorProg;} .common-card[card-color=prog] { color:$colorProg; background-color:rgba($colorProg, 0.2); }
+.common-colorFont[font-color=ntce] { color:$colorNtce;} .common-colorNtce { color:$colorNtce;} .common-card[card-color=ntce] { color:$colorNtce; background-color:rgba($colorNtce, 0.2); }
+.common-colorFont[font-color=info] { color:$colorInfo;} .common-colorInfo { color:$colorInfo;} .common-card[card-color=info] { color:$colorInfo; background-color:rgba($colorInfo, 0.2); }
+.common-colorFont[font-color=dtil] { color:$colorDtil;} .common-colorDtil { color:$colorDtil;} .common-card[card-color=dtil] { color:$colorDtil; background-color:rgba($colorDtil, 0.2); }
+.common-colorFont[font-color=hold] { color:$colorHold;} .common-colorHold { color:$colorHold;} .common-card[card-color=hold] { color:$colorHold; background-color:rgba($colorHold, 0.2); }
+.common-colorFont[font-color=cncl] { color:$colorCncl;} .common-colorCncl { color:$colorCncl;} .common-card[card-color=cncl] { color:$colorCncl; background-color:rgba($colorCncl, 0.2); }
+.common-colorFont[font-color=warn] { color:$colorWarn;} .common-colorWarn { color:$colorWarn;} .common-card[card-color=warn] { color:$colorWarn; background-color:rgba($colorWarn, 0.2); }
+.common-colorFont[font-color=errr] { color:$colorErrr;} .common-colorErrr { color:$colorErrr;} .common-card[card-color=errr] { color:$colorErrr; background-color:rgba($colorErrr, 0.2); }
+.common-colorFont[font-color=ngtv] { color:$colorNgtv;} .common-colorNgtv { color:$colorNgtv;} .common-card[card-color=ngtv] { color:$colorNgtv; background-color:rgba($colorNgtv, 0.2); }
+.common-colorFont[font-color=endd] { color:$colorEndd;} .common-colorEndd { color:$colorEndd;} .common-card[card-color=endd] { color:$colorEndd; background-color:rgba($colorEndd, 0.2); }
+.common-colorFont[font-color=whit] { color:$colorSnow;} .common-colorSnow { color:$colorSnow;} .common-card[card-color=whit] { color:$colorSnow; background-color:rgba($colorSnow, 0.2); }
 
 /* --------------- */
 /* icons */
@@ -87,13 +90,11 @@
 .common-indent04        { display: block; padding-left: $padHalf; }
 .common-indent08        { display: block; padding-left: $padBase; }
 .common-indent12        { display: block; padding-left: $padFull; }
-.common-padTinyUD       {                 padding: $padTiny auto; }
-.common-marUD           { display: block; margin: $marHalf 0em; }
-.common-marUp           { display: block; margin-top: $marHalf; }
-.common-cushionUp       { display: block; margin-top: $marBase; }
-.common-cushionUD       { display: block; margin: $marBase 0em; }
-.common-cushionDw       { display: block; margin-bottom: $marHalf; }
-.common-cushionTinyUD   { display: block; margin: $marTiny 0em; }
+.common-cushionHalfUp   { display: block; margin-top: $marHalf; }
+.common-cushionBaseUp   { display: block; margin-top: $marBase; }
+.common-cushionUD       { display: block; margin: $marMore 0em; }
+.common-cushionDw       { display: block; margin-bottom: $marMore; }
+.common-cushionTinyUD   { display: block; margin: $marHalf 0em; }
 
 /* --------------- */
 /* font style */
@@ -111,7 +112,7 @@
 .common-bold            { font-weight: bold; }
 .common-strong          { font-weight: bold; @include fonts11; }
 .common-mineHead[me=y]  { @include colorMainBackTrans; }
-.common-mineBody[me=y]  { font-weight: bold; @include colorMainFont; }
+.common-mineBody[me=y]  { font-weight: bold; color: $colorMain; }
 
 /* --------------- */
 /* common-card */
@@ -119,8 +120,9 @@
 .common-card
 {
     display: inline-block;
-    font-weight: normal;
-    padding: $padHalf $padBase;
+    font-weight: bold;
+    padding: $padHalf $padMore;
+    border-radius: $borderRadiusDefault;
 }
 
 /* --------------- */
@@ -186,3 +188,26 @@
     display: flex;
     align-items: center;
 }
+
+/* ========================= */
+/* 탭 */
+/* ========================= */
+.common-tab-top
+{
+    display: block;
+    overflow-x: auto;
+    /* padding: $padHalf $padMore; */
+}
+.common-tab-item
+{
+    display: inline-block;
+    padding: $padHalf $padMore;
+    border-radius: 0.4em;
+    border: 0.07em solid $colorSept;
+    background-color: $colorSnow;
+    color: $colorBody;
+    text-align: center;
+}
+.common-tab-item[tab=tab] { color: $colorSnow; background-color: $colorMain; }
+.common-tab-item:active   { color: $colorMain; background-color: rgba(var(--colorMain), 0.1); }
+

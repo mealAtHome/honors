@@ -108,7 +108,7 @@ div { display: block; }
 {
     width: 0%;
     height: 100%;
-    @include colorMainBackSolid;
+    background-color: $colorMain;
     border-radius: 1em 0 0 1em;
     transition: width 0.4s ease; /* 부드러운 애니메이션 */
 }
@@ -154,7 +154,7 @@ div { display: block; }
     margin-bottom: $marHuge;
     padding: 0em;
 }
-.common-div-formTitle > span:nth-child(1) { display: block; @include fonts14; font-weight: bold; @include colorMainFont; }
+.common-div-formTitle > span:nth-child(1) { display: block; @include fonts14; font-weight: bold; color: $colorMain; }
 .common-div-formTitle > span:nth-child(2) { display: block; }
 .common-div-formField
 {
@@ -230,13 +230,13 @@ div { display: block; }
     overflow-x: scroll;
     box-sizing: content-box;
     text-align: left;
-    /* @include colorSnowFont; */
+    /* color: $colorSnow; */
     background: $colorSnowBack;
     border: 0.04em solid $colorLine;
 }
 .common-div-card[card-type=warning] { @include colorWarnFont; background: $colorWarnBack; }
 .common-div-card[card-type=notice]  { @include colorNtceFont; background: $colorNtceBack; }
-.common-div-card[card-type=hero]    { @include colorMainFont; background: $colorMainBack; }
+.common-div-card[card-type=hero]    { color: $colorMain; background: $colorMainBack; }
 .common-div-card:first-child  { margin-top: 0em; }
 .common-div-card ~ .common-div-card { margin-top: $marBase; }
 
@@ -278,7 +278,7 @@ div { display: block; }
     position: absolute;
     left: 0;
     right: 0;
-    @include colorSnowFont;
+    color: $colorSnow;
     width: 100%;
     height: 52px;
 }
@@ -315,15 +315,14 @@ div { display: block; }
 }
 .common-btn-pagenationBtn[tab=tab]
 {
-    @include colorMainBackSolid;
-    @include colorSnowFont;
+    background-color: $colorMain;
+    color: $colorSnow;
     /* font-weight: bold; */
 }
 
 /* ============================== */
 /* block 상태가 되며, 다른 div에 간섭하지 않도록 쿠션이 생긴다.  */
 /* ============================== */
-/* common-div-cushion + text-align: center */
 .common-div-empty
 {
     height: 1em;
@@ -346,17 +345,16 @@ div { display: block; }
     box-sizing: border-box;
     padding-bottom: $padHalf;
 }
-.common-div-cushion     { display: block; margin: $marBase;         padding: 0em; overflow-x: scroll; box-sizing: border-box; text-align: left;    }
-.common-div-cushionUp   { display: block; margin-top: $marBase;     padding: 0em; overflow-x: scroll; box-sizing: border-box; }
-.common-div-cushionUD   { display: block; margin: $marBase 0em;     padding: 0em; overflow-x: scroll; box-sizing: border-box; }
-.common-div-cushionLR   { display: block; margin: 0em $marBase;     padding: 0em; overflow-x: scroll; box-sizing: border-box; }
-.common-div-cushionDw   { display: block; margin-bottom: $marBase;  padding: 0em; overflow-x: scroll; box-sizing: border-box; }
+.common-div-cushion     { display: block; margin: $marMore;         padding: 0em; overflow-x: scroll; box-sizing: border-box; text-align: left;    }
+.common-div-cushionUD   { display: block; margin: $marMore 0em;     padding: 0em; overflow-x: scroll; box-sizing: border-box; }
+.common-div-cushionLR   { display: block; margin: 0em $marMore;     padding: 0em; overflow-x: scroll; box-sizing: border-box; }
+.common-div-cushionDw   { display: block; margin-bottom: $marMore;  padding: 0em; overflow-x: scroll; box-sizing: border-box; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
-.common-div-cushion   > .common-div-cushionUD:nth-child(1) { margin-bottom: $marBase; }
+.common-div-cushion   > .common-div-cushionUD:nth-child(1) { margin-bottom: $marMore; }
 
 /* 쿠션 아래의 첫번째, formField 는 marginTop: 0.4em; */
-.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $marBase; }
+.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $marMore; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter
@@ -384,13 +382,13 @@ div { display: block; }
 {
     @include fonts12;
     font-weight: bold;
-    @include colorMainFont;
+    color: $colorMain;
 }
 
 .common-div-calendarSquare
 {
     background: linear-gradient(135deg, #020654 0%, #0a2472 100%);
-    @include colorSnowFont;
+    color: $colorSnow;
     width: 3.6em;
     height: 3.6em;
     padding: $padHalf;
@@ -400,7 +398,7 @@ div { display: block; }
 .common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; text-align: center; font-weight: bold; }
 
 /* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { @include colorInfoBackTrans; @include colorBodyFont; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { @include colorMainBackTrans; @include colorSnowFont; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { @include colorMainBackTrans; color: $colorSnow; }
 /* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { @include colorSnowBackTrans; @include colorBodyFont; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; padding: $padHalf; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; @include fonts10; text-align: center; font-weight: bold; }
@@ -408,7 +406,7 @@ div { display: block; }
 
 .common-div-calendarSquareWeekTop > button
 {
-    @include colorSnowFont;
+    color: $colorSnow;
     border: 2px solid $colorInfo;
     @include colorBodyFont;
     padding: $padHalf $padMore;
@@ -424,5 +422,5 @@ div { display: block; }
 }
 .common-div-calendarSquareWeekTop > button:nth-child(1) { margin-left: 0em; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { @include colorInfoBackTrans; @include colorBodyFont; border: 2px solid $colorSide; }
-/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                              @include colorMainFont; border: 2px solid $colorMain; }
+/* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                              color: $colorMain; border: 2px solid $colorMain; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                              @include colorBodyFont; border: 2px solid $colorInfo; }

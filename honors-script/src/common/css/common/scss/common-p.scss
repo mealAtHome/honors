@@ -8,7 +8,7 @@
     margin: $marBase auto;
     text-align: center;
     @include fonts12;
-    @include colorMainFont;
+    color: $colorMain;
     font-weight: bold;
 }
 
@@ -16,7 +16,7 @@
 {
     display: block;
     margin: $marHalf auto;
-    @include colorMainFont;
+    color: $colorMain;
     font-weight: bold;
     @include fonth14;
     @include fonts11;
@@ -40,6 +40,6 @@
 /* insert 페이지의 타이틀 */
 /* ------------------------------ */
 .common-p-insertTitle > span { display: block; margin: 0em auto; text-align: center; }
-.common-p-insertTitle > span:nth-child(1) { @include fonts11; @include colorMainFont; }
+.common-p-insertTitle > span:nth-child(1) { @include fonts11; color: $colorMain; }
 .common-p-insertTitle > span:nth-child(2) { @include fonts09; }
 .common-p-insertTitle > span:nth-child(3) { @include fonts09; }
