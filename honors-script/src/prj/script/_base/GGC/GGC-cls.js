@@ -23,7 +23,7 @@ GGC.Cls =
         {
             case GGF.Cls.Clsstatus.EDIT   : rslt = "hold"; break;
             case GGF.Cls.Clsstatus.ING    : rslt = "prog"; break;
-            case GGF.Cls.Clsstatus.END    : rslt = "endd"; break;
+            case GGF.Cls.Clsstatus.END    : rslt = "pstv"; break;
             case GGF.Cls.Clsstatus.CANCEL : rslt = "ngtv"; break;
         }
         return rslt;

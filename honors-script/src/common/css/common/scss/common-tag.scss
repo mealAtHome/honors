@@ -136,6 +136,7 @@
     padding: $padHalf $padMore;
     border-radius: $borderRadiusDefault;
 }
+.common-card[card-type=mini] { font-weight: normal; padding: $padTiny $padHalf; }
 
 /* --------------- */
 /* 고정 */

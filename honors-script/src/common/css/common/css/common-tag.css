@@ -537,6 +537,11 @@
   border-radius: 0.4em;
 }
 
+.common-card[card-type=mini] {
+  font-weight: normal;
+  padding: 0.2em 0.4em;
+}
+
 /* --------------- */
 /* 고정 */
 /* --------------- */

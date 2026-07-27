@@ -149,10 +149,15 @@ class MCls
                         <div class="common-inline common-colorBody common-fonts09">${this.getClstitle()}</div>
                     </div>
                     <div class="common-cushionHalfUp">
-                        <span class="common-inline common-fonts08">${this.getClsstatusCard()}</span>
+                        <span class="common-inline common-fonts09">${this.getClsstatusCard()}</span>
                         ${this.isEnd() && this.isClssettleflgEdit() ? `<span class="common-inline common-fonts08">${this.getClssettleflgCard()}</span>` : ""}
                     </div>
-                    
+                    <div class="common-cushionHalfUp">
+                        <div class="common-fonts08">
+                            <div class="common-card" card-type="mini" card-color="cmmt"><i class="ti ti-map-pin"></i>&nbsp;${this.getClsground()}</div>
+                        </div>
+                    </div>
+
                     ${btnHtml != "" ? `<div class="common-cushionHalfUp common-fonts09">${btnHtml}</div>` : ""}
                 </div>
             </div>
