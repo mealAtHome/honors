@@ -7,12 +7,12 @@ class _MCommon
         this.msg             = ajax.MSG;
         this.data            = ajax.DATA != undefined ? ajax.DATA : [];
         this.models          = [];
-        this.pageflg         = ajax.PAGEFLG != undefined ? ajax.PAGEFLG : GGF.N;                /* 현재 페이지 */
-        this.pagenum         = ajax.PAGENUM != undefined ? ajax.PAGENUM : Api.defaultPagenum;   /* 현재 페이지 */
-        this.pagecnt         = ajax.PAGECNT != undefined ? ajax.PAGECNT : 0;                    /* 페이지 수 */
-        this.perpage         = ajax.PERPAGE != undefined ? ajax.PERPAGE : Api.defaultPerpage;   /* 페이지 당 표시 수 */
-        this.allcnt          = ajax.ALLCNT  != undefined ? ajax.ALLCNT  : 0;                    /* 총 모델 수 */
-        this.cnt             = ajax.CNT     != undefined ? ajax.CNT     : 0;                    /* 현재 조회 수 */
+        this.pageflg         = ajax.PAGEFLG != undefined ? ajax.PAGEFLG : GGF.N;
+        this.pagenum         = ajax.PAGENUM != undefined ? ajax.PAGENUM : Api.defaultPagenum;
+        this.pagecnt         = ajax.PAGECNT != undefined ? ajax.PAGECNT : 0;
+        this.perpage         = ajax.PERPAGE != undefined ? ajax.PERPAGE : Api.defaultPerpage;
+        this.allcnt          = ajax.ALLCNT  != undefined ? ajax.ALLCNT  : 0;
+        this.cnt             = ajax.CNT     != undefined ? ajax.CNT     : 0;
     }
     isSuccess() { return this.isSucceed; }
     getSucceed() { return this.isSucceed; }
@@ -28,7 +28,6 @@ class _MCommon
 
     isPagenation() { return this.getPageflg() === GGF.Y; }
 
-    /* 변환 함수 */
     static getAjaxSucceed(arr=[])
     {
         let ajax =
@@ -55,7 +54,6 @@ class _MCommon
     static fromDat   (dat={} , clz=null) { return new clz(dat); }
     static fromModel (model  , clz=null) { return new clz(model); }
 
-    /* 모델 반환 및 체크 */
     getModels()
     {
         if(this.models == undefined || this.models == null)
@@ -71,10 +69,8 @@ class _MCommon
     }
 
     /* ================================ */
-    /* 페이지네이션 html을 반환한다 */
+    /* make pagenation */
     /* ================================ */
-    mergeCushionLR(html) { return `<div class="common-div-cushionLR">${html}</div>`; }
-
     mergePagenation(html)
     {
         /* pagenation */
