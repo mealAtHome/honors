@@ -336,7 +336,7 @@ div {
 /* ============================== */
 .common-div-card {
   position: relative;
-  border-radius: 0.8em;
+  border-radius: 0.6em;
   padding: 0.8em;
   overflow-x: scroll;
   box-sizing: content-box;
@@ -637,7 +637,7 @@ div {
   border: 2px solid #3c435c;
   color: #3c435c;
   padding: 0.4em 0.8em;
-  border-radius: 0.4em;
+  border-radius: 0.3em;
   font-weight: normal;
   cursor: pointer;
   /* transition: all 0.3s ease; */

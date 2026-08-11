@@ -209,56 +209,6 @@ GGC.Common =
     },
 
     /* ============================== */
-    /* 날짜형식 가공 */
-    /* ============================== */
-    // datetime(str)
-    // {
-    //     let rslt = new Array();
-
-    //     try
-    //     {
-    //         str = str.split(" ");
-    //         let time = str[1];
-    //         let dateObj = new Date(str[0]);
-    //         let year    = dateObj.getFullYear();
-    //         let month   = dateObj.getMonth()+1;
-    //             month   = month < 10 ? `0${month}` : month;
-    //         let date    = dateObj.getDate();
-    //             date    = date < 10 ? `0${date}` : date;
-    //         let day = dateObj.getDay();
-    //         let dddd = "";
-    //         switch(day)
-    //         {
-    //             case 0: dddd = $.i18n("(common)sun"); break;
-    //             case 1: dddd = $.i18n("(common)mon"); break;
-    //             case 2: dddd = $.i18n("(common)tue"); break;
-    //             case 3: dddd = $.i18n("(common)wed"); break;
-    //             case 4: dddd = $.i18n("(common)thu"); break;
-    //             case 5: dddd = $.i18n("(common)fri"); break;
-    //             case 6: dddd = $.i18n("(common)sat"); break;
-    //         }
-
-    //         /* 날짜에 오류가 있는지 체크 */
-    //         if(isNaN(year) || isNaN(month) || isNaN(date))
-    //         {
-    //             rslt.push("-");
-    //             rslt.push("-");
-    //         }
-    //         else
-    //         {
-    //             rslt.push(`${year}-${month}-${date} (${dddd})`);
-    //             rslt.push(time);
-    //         }
-    //     }
-    //     catch(e)
-    //     {
-    //         rslt.push("-");
-    //         rslt.push("-");
-    //     }
-    //     return rslt;
-    // },
-
-    /* ============================== */
     /* 요일 */
     /* ============================== */
     getWeekday(str)
@@ -283,21 +233,6 @@ GGC.Common =
         {
             console.error(e);
         }
-        return rslt;
-    },
-
-    /* ============================== */
-    /* 지역정보 표시 */
-    /* ============================== */
-    area(area1Name, area2Name)
-    {
-        let rslt = "";
-
-        if(area1Name == "-" || area1Name == null)
-            rslt = $.i18n('(GGC)area-null');
-        else
-            rslt = `${area1Name} ${area2Name}`;
-
         return rslt;
     },
 
@@ -342,49 +277,5 @@ GGC.Common =
         return src;
     },
 
-    dateDiff(value) { return GGC.Common.datePretty(value); },
-    datePretty(value)
-    {
-        if(value == null || value == "")
-            return "-";
 
-        const today = new Date();
-        const timeValue = new Date(value);
-
-        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-        if (betweenTime < 1) return '1분 이내';
-        if (betweenTime < 60)
-            return `${betweenTime}분 전`;
-
-        const betweenTimeHour = Math.floor(betweenTime / 60);
-        if (betweenTimeHour < 24)
-            return `${betweenTimeHour}시간 전`;
-
-        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
-        if (betweenTimeDay < 31)
-            return `${betweenTimeDay}일 전`;
-
-        const betweenTimeMonth = Math.floor(betweenTime / 60 / 24 / 30);
-        if (betweenTimeMonth < 12)
-            return `${betweenTimeMonth}개월 전`;
-
-        return `${Math.floor(betweenTimeDay / 365)}년 전`;
-    },
-
-    getCardByPeriod(startDateStr, endDateStr)
-    {
-        let now = new Date();
-        let startDate = new Date(startDateStr);
-        let endDate = new Date(endDateStr);
-
-        let point = GGdate.getPointOfDate(now, startDate, endDate);
-        let color = "";
-        switch(point)
-        {
-            case GGF.GGdate.PointOfDate.UPCOMING : color = GGF.Color.NTCE; break; /* 두 기간 이전 */
-            case GGF.GGdate.PointOfDate.WITHIN   : color = GGF.Color.PROG; break; /* 두 기간 사이 */
-            case GGF.GGdate.PointOfDate.PASSED   : color = GGF.Color.ENDD; break; /* 두 기간 이후 */
-        }
-        return `<span class="common-card" card-color="${color}">${GGdate.getDateRangeText(now, startDate, endDate)}</span>`;
-    }
 };

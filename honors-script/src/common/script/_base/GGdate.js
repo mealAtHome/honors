@@ -287,33 +287,31 @@ var GGdate =
 
         if(tg >= fr && tg <= to)
             return GGF.GGdate.PointOfDate.WITHIN;
-        if(tg > fr)
+        if(tg > to)
             return GGF.GGdate.PointOfDate.PASSED;
-        if(tg < to)
+        if(tg < fr)
             return GGF.GGdate.PointOfDate.UPCOMING;
     },
+    inWithinPeriod(fr, to) { return GGdate.getPointOfDate(new Date(), fr, to) === GGF.GGdate.PointOfDate.WITHIN; },
 
     /**
-     * 날짜 범위를 사용자 친화적인 문자열로 변환
+     * 날짜가 다가오기 전을 위한 텍스트를 반환합니다.
      *
+     * @param {Date|string|number} standDate
      * @param {Date|string|number} startDate
-     * @param {Date|string|number} endDate
      * @returns {string}
      */
-    getDateRangeText(targetDate, startDate, endDate)
+    getTextForUpcoming(standDate, startDate)
     {
-        const now = targetDate;
+        standDate = new Date(standDate);
         startDate = new Date(startDate);
-        endDate = new Date(endDate);
-
-        /* 진행중인지, 종료되었는지 */
-        if (now >= startDate && now <= endDate) return "진행중";
-        if (now > endDate) return "종료됨";
 
         /* 시간 제거 (날짜 기준 비교) */
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const today = new Date(standDate.getFullYear(), standDate.getMonth(), standDate.getDate());
         const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-        const end   = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+
+        console.log("today", today);
+        console.log("start", start);
 
         const DAY = 24 * 60 * 60 * 1000;
         const diffDays = Math.floor((start - today) / DAY);

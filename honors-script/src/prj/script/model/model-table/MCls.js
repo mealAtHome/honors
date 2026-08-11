@@ -69,6 +69,7 @@ class MCls
     /* ========================= */
     /* fields - additional */
     /* ========================= */
+    getClsstatusFeel()              { return GGC.Cls.clsstatusFeel(this.getClsstatus()); }
     getClsstatusCard()              { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
     getClsstatusFont()              { return GGC.Cls.clsstatusFont(this.getClsstatus()); }
     getClssettleflgCvrt()           { return GGC.Cls.clssettleflgCvrt(this.getClssettleflg()); }
@@ -76,13 +77,12 @@ class MCls
     getClssettleflgFont()           { return GGC.Cls.clssettleflgFont(this.getClssettleflg()); }
     getClsPeriod()                  { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getClsapplyPeriod()             { return GGdate.period(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
-    getClsapplybillpriceWon()       { return this.getClsbillapplyunit() + " 당, " + GGC.Common.priceWon(this.getClsbillapplyprice()); }
+    getClsapplybillpriceWon()       { return this.getClsbillapplyunit() + " 당 " + GGC.Common.priceWon(this.getClsbillapplyprice()); }
     getClsbillsalesWon()            { return GGC.Common.priceWon(this.getClsbillsales()); }
     getClsbillpurchaseWon()         { return GGC.Common.priceWon(this.getClsbillpurchase()); }
     getClsbillfinalWon()            { return GGC.Common.priceWon(this.getClsbillfinal()); }
     getGrpfinancereflectflgFont()   { return GGC.Cls.getGrpfinancereflectflgFont(this.getGrpfinancereflectflg()); }
-
-    getClsstartdtYMDdd() { return GGdate.format(this.getClsstartdt(), "YYYY-MM-DD(dd)"); }
+    getClsstartdtYMDdd()            { return GGdate.format(this.getClsstartdt(), "YYYY-MM-DD(dd)"); }
 
     /* ========================= */
     /* is */
@@ -93,56 +93,26 @@ class MCls
     isClsstatusIng()            { return this.getClsstatus()    === GGF.Cls.Clsstatus.ING; }
     isClsstatusEnd()            { return this.getClsstatus()    === GGF.Cls.Clsstatus.END; }
     isClssettleflgEdit()        { return this.getClssettleflg() === GGF.Cls.Clssettleflg.EDIT; }
+    isWithinClsapplyPeriod()    { return GGdate.inWithinPeriod(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
 
     /* ========================= */
     /* make with buttons */
     /* ========================= */
-    make(btnHtml="")
+    makeCls(btnHtml="")
     {
         let html = "";
-        let model = this;
+        let feel = this.getClsstatusFeel();
         html +=
         `
             <div class="MClss-make-div-modelTop common-div-card">
-                <table class="common-tbl-imglabel common-fonts09" label-size="3rd">
-                    <tbody>
-                        <tr>
-                            <td><span class="common-fonts10 common-strong common-colorMain">일정</span></td>
-                            <td><div class="common-img-label" style="background-image:url('${model.getGrpimgPath()}')"></div></td>
-                            <td>${model.getGrpname()}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="common-cushionHalfUp">
-                    <span class="common-block common-colorBody common-fonts09">${model.getClstitle()}</span>
-                    <div class="common-cushionHalfUp">
-                        ${true                                      ? `<span class="common-inline common-fonts08">${model.getClsstatusCard()}</span>` : ""}
-                        ${this.isEnd() && this.isClssettleflgEdit() ? `<span class="common-inline common-fonts08">${model.getClssettleflgCard()}</span>` : ""}
-                    </div>
-                    ${btnHtml != "" ? `<div class="common-cushionHalfUp common-fonts09">${btnHtml}</div>` : ""}
-                </div>
-            </div>
-        `;
-        return html;
-    }
-
-    /* ========================= */
-    /* make with buttons */
-    /* ========================= */
-    makeMain(btnHtml="")
-    {
-        let html = "";
-        html +=
-        `
-            <div class="MClss-make-div-modelTop common-div-card">
-                <div class="common-flex">
+                <div class="common-flexCenter">
                     <div>
                         <div class="common-img-label" label-size="2em" style="background-image:url('${this.getGrpimgPath()}')"></div>
                         <span>${this.getGrpname()}</span>
                     </div>
                 </div>
                 <div class="common-cushionHalfUp">
-                    <div class="common-flex">
+                    <div class="common-flexCenter">
                         <div class="common-inline common-fonts10 common-strong common-colorMain">
                             <span>일정</span>
                         </div>
@@ -154,10 +124,11 @@ class MCls
                     </div>
                     <div class="common-cushionHalfUp">
                         <div class="common-fonts08">
-                            <div class="common-card" card-type="mini" card-color="cmmt"><i class="ti ti-map-pin"></i>&nbsp;${this.getClsground()}</div>
+                            ${GGC.Cls.clsapplyPeriodCard(this.getClsapplystartdt(), this.getClsapplyclosedt())}
+                            <div class="common-card" card-type="mini" card-color="${feel}"><i class="ti ti-map-pin"></i><span>&nbsp;${this.getClsground()}</span></div>
+                            <div class="common-card" card-type="mini" card-color="${feel}"><i class="ti ti-credit-card"></i><span>&nbsp;${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
                         </div>
                     </div>
-
                     ${btnHtml != "" ? `<div class="common-cushionHalfUp common-fonts09">${btnHtml}</div>` : ""}
                 </div>
             </div>
@@ -230,7 +201,7 @@ class MClss extends _MCommon
             }
 
             /* make html */
-            html += model.make(btnHtml);
+            html += model.makeMain(btnHtml);
         }
         $(el).html(html);
 

@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap");
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -58,7 +58,7 @@
 /* 패딩 - 아주 약간 */
 /* 패딩 - 아주 더 약간 */
 * {
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   vertical-align: middle;
   /* font-size: inherit; */
 }
@@ -96,11 +96,11 @@ pre, xmp {
   line-height: 1.6;
   word-break: break-all;
   white-space: pre-wrap;
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 textarea {
-  font-family: "Nanum Gothic", sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 table {

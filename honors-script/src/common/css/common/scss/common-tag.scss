@@ -90,7 +90,8 @@
 /* margin, padding */
 /* --------------- */
 .common-block           { display: block; }
-.common-flex            { display: flex; gap: $padBase; align-items: center; }
+.common-flexTop         { display: flex; gap: $padBase; align-items: top; }
+.common-flexCenter      { display: flex; gap: $padBase; align-items: center; }
 .common-inline          { display: inline-block; }
 .common-indent04        { display: block; padding-left: $padHalf; }
 .common-indent08        { display: block; padding-left: $padBase; }

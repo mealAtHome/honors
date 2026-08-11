@@ -145,14 +145,14 @@
 
 .common-tbl-normal[tbl-type=card] {
   width: 100%;
-  border-radius: 1em;
+  border-radius: 0.6em;
   border-collapse: separate;
   border-spacing: 0;
   overflow: hidden;
 }
 
 .common-div-normalTop {
-  border-radius: 1em;
+  border-radius: 0.6em;
   border: 0.06em solid #e4e7f0;
 }
 
@@ -296,6 +296,8 @@
 .common-tbl-normal[tbl-type=card] > tbody > tr > td[td-type=th] {
   font-weight: bold;
   background-color: rgba(60, 67, 92, 0.1);
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
 }
 
 /* .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:first-child  { border-top-left-radius: 1em; } */ /* 1행 왼쪽 위 */

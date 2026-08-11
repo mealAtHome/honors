@@ -5,7 +5,7 @@
 /* ========================= */
 @mixin fontDefault
 {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 /* ========================= */
@@ -64,8 +64,8 @@ $spaceDw08:0em 0em $space08 0em;
 /* styles */
 /* ========================= */
 
-$borderRadiusDefault:0.4em;
-$borderRadiusDivCard:0.8em;
+$borderRadiusDefault:0.3em;
+$borderRadiusDivCard:0.6em;
 
 @mixin fonts08      { font-size:0.8em;          }
 @mixin fonts09      { font-size:0.9em;          }

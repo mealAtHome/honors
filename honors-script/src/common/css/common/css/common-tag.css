@@ -394,7 +394,13 @@
   display: block;
 }
 
-.common-flex {
+.common-flexTop {
+  display: flex;
+  gap: 0.6em;
+  align-items: top;
+}
+
+.common-flexCenter {
   display: flex;
   gap: 0.6em;
   align-items: center;
@@ -534,7 +540,7 @@
   display: inline-block;
   font-weight: bold;
   padding: 0.4em 0.8em;
-  border-radius: 0.4em;
+  border-radius: 0.3em;
 }
 
 .common-card[card-type=mini] {

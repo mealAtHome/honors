@@ -54,7 +54,7 @@ class MGrpfnca
     /* wonColor */ getGrpfncClssaleslosstotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClssaleslosstotal()); }
     /* wonColor */ getGrpfncClspurchasetotalWonColor() { return GGC.Common.wonColor(this.getGrpfncClspurchasetotal()); }
     /* wonColor */ getGrpfncMemberpointtotalWonColor() { return GGC.Common.wonColor(this.getGrpfncMemberpointtotal()); }
-    getModidtDiff() { return GGC.Common.dateDiff(this.getModidt()); }
+    getModidtDiff() { return GGC.Date.dateDiff(this.getModidt()); }
 
 }
 

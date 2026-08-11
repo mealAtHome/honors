@@ -53,18 +53,16 @@
                 <tr>
                     <td><span>모임시간</span></td>
                     <td>
-                        <div class="common-flex">
-                            <div class="common-block common-fonts08" ><span id="CLSD-span-clsdtPeriodText"></span></div>
-                            <div class="common-block "               ><span id="CLSD-span-clsdt"></span></div>
+                        <div class="common-flexTop">
+                            <div class="common-block"><span id="CLSD-span-clsdt"></span></div>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td><span class="common-block">모집일정</span></td>
                     <td>
-                        <div class="common-flex">
-                            <div class="common-block common-fonts08" id="CLSD-span-clsapplyperiodText"></div>
-                            <div class="common-block ">
+                        <div class="common-flexTop">
+                            <div class="common-block">
                                 <div class="common-block"><span id="CLSD-span-clsapplystartdt"></span><span>&nbsp;부터</span></div>
                                 <div class="common-block"><span id="CLSD-span-clsapplyclosedt"></span><span>&nbsp;까지</span></div>
                             </div>
@@ -243,12 +241,10 @@
                         /* 기본정보 */
                         let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
 
-                        $("#CLSD-span-clsdtPeriodText")       .html(GGC.Common.getCardByPeriod(mCls.getClsstartdt(), mCls.getClsclosedt()));
                         $("#CLSD-span-clsdt")                 .text(mCls.getClsPeriod());
                         $("#CLSD-span-clsground")             .text(mCls.getClsground());
                         $("#CLSD-span-clsgroundaddr")         .text(mCls.getClsgroundaddr());
                         $("#CLSD-span-clsapplybill")          .text(mCls.getClsapplybillpriceWon());
-                        $("#CLSD-span-clsapplyperiodText")    .html(GGC.Common.getCardByPeriod(mCls.getClsapplystartdt(), mCls.getClsapplyclosedt()));
                         $("#CLSD-span-clsapplystartdt")       .text(GGdate.strToYYMMDDdHHIIdot(mCls.getClsapplystartdt()));
                         $("#CLSD-span-clsapplyclosedt")       .text(GGdate.strToYYMMDDdHHIIdot(mCls.getClsapplyclosedt()));
                         $("#CLSD-span-clscontent")            .text(mCls.getClscontent());
@@ -265,7 +261,7 @@
                         if(Common.isEmpty(mCls.getClsusernoadmname())) { $("#CLSD-div-clsusernoadm").addClass("common-colorBody"); }
                         if(Common.isEmpty(mCls.getClsusernosubname())) { $("#CLSD-div-clsusernosub").addClass("common-colorBody"); }
 
-                        $("#CLSD-div-clsCard").html(mCls.makeMain());
+                        $("#CLSD-div-clsCard").html(mCls.makeCls());
 
                         /* ----- */
                         /* show / hide */
