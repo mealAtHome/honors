@@ -227,7 +227,6 @@ div { display: block; }
     position: relative;
     border-radius: $borderRadiusDivCard;
     padding: $padMore;
-    overflow-x: scroll;
     box-sizing: content-box;
     text-align: left;
     /* color: $colorSnow; */
@@ -247,7 +246,6 @@ div { display: block; }
 {
     margin: $marMore;
     padding: $padBase;
-    overflow-x: scroll;
     box-sizing: content-box;
     text-align: left;
     @include fonth16;
@@ -292,7 +290,6 @@ div { display: block; }
 {
     margin: $marBase auto;
     text-align: center;
-    overflow-x: scroll;
     box-sizing: content-box;
 }
 .common-div-pagenationBtnTop
@@ -332,7 +329,6 @@ div { display: block; }
 {
     margin: $marHalf;
     padding: $padHalf;
-    overflow-x: scroll;
     box-sizing: content-box;
     text-align: center;
 }
@@ -345,10 +341,10 @@ div { display: block; }
     box-sizing: border-box;
     padding-bottom: $padHalf;
 }
-.common-div-cushion     { display: block; margin: $marMore;         padding: 0em; overflow-x: scroll; box-sizing: border-box; text-align: left;    }
-.common-div-cushionUD   { display: block; margin: $marMore 0em;     padding: 0em; overflow-x: scroll; box-sizing: border-box; }
-.common-div-cushionLR   { display: block; margin: 0em $marMore;     padding: 0em; overflow-x: scroll; box-sizing: border-box; }
-.common-div-cushionDw   { display: block; margin-bottom: $marMore;  padding: 0em; overflow-x: scroll; box-sizing: border-box; }
+.common-div-cushion     { display: block; margin: $marMore;         padding: 0em; box-sizing: border-box; text-align: left;    }
+.common-div-cushionUD   { display: block; margin: $marMore 0em;     padding: 0em; box-sizing: border-box; }
+.common-div-cushionLR   { display: block; margin: 0em $marMore;     padding: 0em; box-sizing: border-box; }
+.common-div-cushionDw   { display: block; margin-bottom: $marMore;  padding: 0em; box-sizing: border-box; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
 .common-div-cushion   > .common-div-cushionUD:nth-child(1) { margin-bottom: $marMore; }

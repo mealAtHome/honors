@@ -201,7 +201,7 @@ class MClss extends _MCommon
             }
 
             /* make html */
-            html += model.makeMain(btnHtml);
+            html += model.makeCls(btnHtml);
         }
         $(el).html(html);
 

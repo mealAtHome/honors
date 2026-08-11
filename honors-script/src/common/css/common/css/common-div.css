@@ -338,7 +338,6 @@ div {
   position: relative;
   border-radius: 0.6em;
   padding: 0.8em;
-  overflow-x: scroll;
   box-sizing: content-box;
   text-align: left;
   /* color: $colorSnow; */
@@ -375,7 +374,6 @@ div {
 .common-div-msg {
   margin: 0.8em;
   padding: 0.6em;
-  overflow-x: scroll;
   box-sizing: content-box;
   text-align: left;
   line-height: 1.6;
@@ -446,7 +444,6 @@ div {
 .common-div-pagenationTop {
   margin: 0.6em auto;
   text-align: center;
-  overflow-x: scroll;
   box-sizing: content-box;
 }
 
@@ -485,7 +482,6 @@ div {
 .common-div-mass {
   margin: 0.4em;
   padding: 0.4em;
-  overflow-x: scroll;
   box-sizing: content-box;
   text-align: center;
 }
@@ -506,7 +502,6 @@ div {
   display: block;
   margin: 0.8em;
   padding: 0em;
-  overflow-x: scroll;
   box-sizing: border-box;
   text-align: left;
 }
@@ -515,7 +510,6 @@ div {
   display: block;
   margin: 0.8em 0em;
   padding: 0em;
-  overflow-x: scroll;
   box-sizing: border-box;
 }
 
@@ -523,7 +517,6 @@ div {
   display: block;
   margin: 0em 0.8em;
   padding: 0em;
-  overflow-x: scroll;
   box-sizing: border-box;
 }
 
@@ -531,7 +524,6 @@ div {
   display: block;
   margin-bottom: 0.8em;
   padding: 0em;
-  overflow-x: scroll;
   box-sizing: border-box;
 }
 
