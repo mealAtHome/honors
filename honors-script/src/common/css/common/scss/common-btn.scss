@@ -19,7 +19,7 @@
 .common-btn-flat
 {
     display: inline-block;
-    padding: $padUDbtn $padLRbtn;
+    padding: $padUDbtn $padLRbtn calc($padUDbtn + 0.1em);
     text-decoration: none;
     border-radius: $borderRadiusDefault;
     @include colorSnowBackSolid;
