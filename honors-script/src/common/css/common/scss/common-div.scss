@@ -226,7 +226,7 @@ div { display: block; }
 {
     position: relative;
     border-radius: $borderRadiusDivCard;
-    padding: $padMore;
+    padding: $padBase;
     box-sizing: content-box;
     text-align: left;
     /* color: $colorSnow; */
@@ -341,16 +341,16 @@ div { display: block; }
     box-sizing: border-box;
     padding-bottom: $padHalf;
 }
-.common-div-cushion     { display: block; margin: $marMore;         padding: 0em; box-sizing: border-box; text-align: left;    }
-.common-div-cushionUD   { display: block; margin: $marMore 0em;     padding: 0em; box-sizing: border-box; }
-.common-div-cushionLR   { display: block; margin: 0em $marMore;     padding: 0em; box-sizing: border-box; }
-.common-div-cushionDw   { display: block; margin-bottom: $marMore;  padding: 0em; box-sizing: border-box; }
+.common-div-cushion     { display: block; margin: $marBase;         padding: 0em; box-sizing: border-box; text-align: left;    }
+.common-div-cushionUD   { display: block; margin: $marBase 0em;     padding: 0em; box-sizing: border-box; }
+.common-div-cushionLR   { display: block; margin: 0em $marBase;     padding: 0em; box-sizing: border-box; }
+.common-div-cushionDw   { display: block; margin-bottom: $marBase;  padding: 0em; box-sizing: border-box; }
 
 /* 쿠션 아래의 첫번째 쿠션은 위에 공백을 두지 않는다. */
-.common-div-cushion   > .common-div-cushionUD:nth-child(1) { margin-bottom: $marMore; }
+.common-div-cushion   > .common-div-cushionUD:nth-child(1) { margin-bottom: $marBase; }
 
 /* 쿠션 아래의 첫번째, formField 는 marginTop: 0.4em; */
-.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $marMore; }
+.common-div-cushion > .common-div-formField:nth-child(1) { margin-top: $marBase; }
 
 /* 페이지 아래에 무조건 공백을 삽입 */
 .common-div-cushionFooter

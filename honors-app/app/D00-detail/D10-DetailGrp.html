@@ -29,9 +29,9 @@
     <!-- ========================= -->
     <div id="DGRP-div-search" class="common-div-cushion common-search-div-top" style="display:none;">
         <input type="text" id="DGRP-input-searchkey" class="common-input-text"/>
-        <button id="DGRP-btn-search" class="common-btn-outer"><i class="ti ti-search"></i>&nbsp;<span>검색</span></button>
+        <button id="DGRP-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
         <div class="common-block common-fonts09">
-            <span id="DGRP-span-searchedCnt"></span>건 검색되었습니다.
+            <span id="DGRP-span-searchedCnt"></span><span>건 검색되었습니다.</span>
         </div>
     </div>
 
@@ -79,6 +79,7 @@
                 if(DGRP.Data.searchtype == undefined) { DGRP.Data.searchtype = "detail"; } /* 기본값 */
                 if(DGRP.Data.searchkey  == undefined) { DGRP.Data.searchkey = ""; } /* 기본값 */
                 if(DGRP.Data.pagenoGrpm == undefined) { DGRP.Data.pagenoGrpm = 1; } /* 기본값 */
+                if(DGRP.Data.pagenoCls  == undefined) { DGRP.Data.pagenoCls  = 1; } /* 기본값 */
 
                 /* set searchkey */
                 $("#DGRP-input-searchkey").val(DGRP.Data.searchkey);
@@ -121,8 +122,18 @@
                                 $("#DGRP-div-search").hide();
 
                                 /* 일정검색 */
-                                let mClss = Api.Cls.selectFor1YearByGrpnoForAll(grpno, GGF.none, GGF.toast);
+                                let pagenumCls = DGRP.Data.pagenoCls;
+                                let mClss = Api.Cls.selectFor1YearByGrpnoForAll(grpno, pagenumCls, GGF.none, GGF.toast);
                                 mClss.make("#DGRP-div-clsList");
+
+                                /* pagenation event */
+                                $("#DGRP-div-clsList .common-btn-pagenationBtn").click(function()
+                                {
+                                    let toPage = $(this).attr("to_page");
+                                    DGRP.Data.pagenoCls = toPage;
+                                    DGRP.search();
+                                });
+
                                 break;
                             }
                             case "member":

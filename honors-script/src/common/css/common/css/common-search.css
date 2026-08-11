@@ -60,6 +60,7 @@
 /* 검색용 인풋박스 */
 /* =============== */
 .common-search-div-top > input[type=text] {
+  display: inline-block;
   width: 13em;
   font-size: 1em;
   line-height: 1.6;
@@ -67,6 +68,7 @@
 }
 
 .common-search-div-top > button {
+  display: inline-block;
   line-height: 1.6;
   padding: 0em 1em;
   vertical-align: middle;

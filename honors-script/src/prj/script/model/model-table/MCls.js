@@ -203,7 +203,7 @@ class MClss extends _MCommon
             /* make html */
             html += model.makeCls(btnHtml);
         }
-        $(el).html(html);
+        $(el).html(this.mergePagenation(html));
 
         /* 일정공개 */
         $(`${el} .MClss-make-btn-editToIng`).off("click").on("click", function()
