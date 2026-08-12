@@ -5,12 +5,11 @@
     <!-- --------------- -->
     <div class="common-div-toolbar">
         <div><gg-backbtn onclick="GMTB.close(true);"></gg-backbtn></div>
-        <div><span>태그 멤버지정</span></div>
+        <div><span>태그 멤버지정</span><div id="GMTB-div-tag" class="common-inline common-fonts09" style="margin-left:0.5em;"></div></div>
     </div>
 
     <!-- 태그 -->
     <div class="common-div-cushion">
-        <div id="GMTB-div-tag" class="common-cushionHalfUp"></div>
         <ul class="common-ul-announce">
             <li>체크된 멤버에게만 이 태그가 부여됩니다.</li>
             <li>체크를 해제하고 저장하면, 태그가 해제됩니다.</li>
@@ -23,7 +22,7 @@
         <input type="text" id="GMTB-input-searchkey" class="common-input-text"/>
         <button id="GMTB-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
         <div class="common-block common-fonts09">
-            <span id="GMTB-span-searchedCnt"></span>건 검색되었습니다.
+            <span id="GMTB-span-searchedCnt"></span><span>건 검색되었습니다.</span>
         </div>
     </div>
 
@@ -149,9 +148,12 @@
                         html +=
                         `
                             <div class="common-div-card">
-                                <label class="common-flexCenter">
+                                <label class="common-checkbox-top">
                                     <input type="checkbox" class="GMTB-input-checkbox" userno="${userno}" ${checked}/>
-                                    <span class="common-inline">${mUser.getName()}</span>
+                                    <span class="common-checkbox-spanBox"></span>
+                                    <div class="common-fonts08" style="margin-left:0.7em;">${mUser.getUsertypePill()}</div>
+                                    <div class="common-fonts09" style="margin-left:0.5em;">${mUser.getName()}</div>
+                                    <div class="common-fonts08" style="margin-left:0.2em;">${mUser.getBirthyearFont()}</div>
                                 </label>
                             </div>
                         `;

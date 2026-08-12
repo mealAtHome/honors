@@ -20,7 +20,6 @@ class MUser
         /* data */      this.priv_phone     = GGC.Common.enum(dat.priv_phone);
         /* custom */    this.hascarflgCvrt  = GGC.User.hascarflg(dat.hascarflg);
         /* custom */    this.img_           = GGC.User.img_(this.userno, this.img, false);
-        /* custom */    this.usertypeCvrt   = GGC.User.usertypeCvrt(this.usertype);
     }
 
     /* ========================= */
@@ -47,16 +46,8 @@ class MUser
     /* custom */
     getHascarflgCvrt() { return this.hascarflgCvrt; }
     getImg_() { return this.img_; }
-    getUsertypeCvrt() { return this.usertypeCvrt; }
-
-    /* birthyear short ver */
-    getBirthyearShort()
-    {
-        let rslt = "출생연도없음";
-        if(this.birthyear != "")
-            rslt = this.birthyear.substring(2, 4);
-        return rslt;
-    }
+    getUsertypePill() { return GGC.User.usertypePill(this.usertype); }
+    getBirthyearFont() { return GGC.User.birthyearFont(this.birthyear); }
 
     /* ========================= */
     /* is ? */
@@ -90,7 +81,7 @@ class MUsers extends _MCommon
             `
                 <div class="MUser-make-div-modelTop common-div-card">
                     <span class="common-block common-strong">유저</span>
-                    <span class="common-block">${model.getName()} ${model.getBirthyear() != "" ? `(${model.getBirthyearShort()})` : ""}</span>
+                    <span class="common-block">${model.getName()} ${model.getBirthyear() != "" ? `(${model.getBirthyearFont()})` : ""}</span>
                     <span class="common-block common-fonts09">
                         ${model.getPhone()         != "" ? `<span class="common-block common-colorBody commonEvent-tag-phoneCall" phone-call="${model.getPhone()}">${model.getPhone()}</span>` : ""}
                         ${model.getHascarflgCvrt() != "" ? `<span class="common-block common-colorBody">${model.getHascarflgCvrt()}</span>` : ""}

@@ -1,0 +1,76 @@
+@use "../../_import/scss/__import" as *;
+
+/*
+    Modern Checkbox
+
+    <label class="common-checkbox-top">
+        <input type="checkbox">
+        <span class="common-checkbox-spanBox"></span>
+        <span>알림 받기</span>
+    </label>
+*/
+.common-checkbox-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0em;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+}
+
+.common-checkbox-top input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.common-checkbox-spanBox {
+    width: 1.25em;
+    height: 1.25em;
+    border: 0.125em solid $colorMain;
+    border-radius: 0.375em;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.common-checkbox-spanBox::after {
+    content: "";
+    width: 0.3125em;
+    height: 0.5625em;
+
+    border-right: 0.125em solid #fff;
+    border-bottom: 0.125em solid #fff;
+
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.15s ease;
+}
+
+.common-checkbox-top input:checked + .common-checkbox-spanBox {
+    background-color: $colorMain;
+    border-color: $colorMain;
+}
+
+.common-checkbox-top input:checked + .common-checkbox-spanBox::after {
+    transform: rotate(45deg) scale(1);
+}
+
+.common-checkbox-top:hover .common-checkbox-spanBox {
+    background-color: rgba(var(--colorMainRgb), 0.08);
+}
+
+.common-checkbox-top:hover input:checked + .common-checkbox-spanBox {
+    background-color: $colorMain;
+}
+
+.common-checkbox-top input:focus-visible + .common-checkbox-spanBox {
+    outline: 0.1875em solid rgba(var(--colorMainRgb), 0.08);
+    outline-offset: 0.125em;
+}

@@ -108,7 +108,7 @@ echo -e "\n" >> $cssPath; cat ../common/css/common/common-div-dialog.css >> $css
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-hr.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-img.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-input.css >> $cssPath
-echo -e "\n" >> $cssPath; cat ../common/css/common/common-label-checkbox.css >> $cssPath
+echo -e "\n" >> $cssPath; cat ../common/css/common/common-checkbox.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-p.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-radio.css >> $cssPath
 echo -e "\n" >> $cssPath; cat ../common/css/common/common-search.css >> $cssPath

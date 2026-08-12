@@ -12,14 +12,42 @@ GGC.User =
             return "알수없음";
     },
 
-    usertypeCvrt(usertype)
+    /* ----- */
+    /* usertype */
+    /* ----- */
+    usertypeCvrt(val)
     {
         let rslt = "";
-        switch(usertype)
+        switch(val)
         {
-            case "normal" : rslt = "일반"; break;
-            case "temp"   : rslt = "임시"; break;
+            case GGF.User.Usertype.NORMAL : rslt = "일반"; break;
+            case GGF.User.Usertype.TEMP   : rslt = "임시"; break;
         }
         return rslt;
-    }
-}
+    },
+    usertypeFeel(val)
+    {
+        let rslt = "";
+        switch(val)
+        {
+            case GGF.User.Usertype.NORMAL : rslt = "pstv"; break;
+            case GGF.User.Usertype.TEMP   : rslt = "hold"; break;
+        }
+        return rslt;
+    },
+    usertypeCard(val) { return `<span class="common-card" card-type="norm" card-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
+    usertypePill(val) { return `<span class="common-card" card-type="mini" card-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
+    usertypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
+
+    /* ----- */
+    /* birthyear */
+    /* ----- */
+    birthyear(val)
+    {
+        let rslt = "";
+        if(val != "")
+            rslt = `(${val.substring(2, 4)})`;
+        return rslt;
+    },
+    birthyearFont(val) { return `<span class="common-colorFont" font-color="body">${GGC.User.birthyear(val)}</span>`; },
+};

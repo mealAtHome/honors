@@ -68,7 +68,8 @@
 .common-checkbox-top {
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 0em;
+  width: 100%;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -113,14 +114,14 @@
 }
 
 .common-checkbox-top:hover .common-checkbox-spanBox {
-  background-color: rgba(2, 6, 84, 0.08);
+  background-color: rgba(var(--colorMainRgb), 0.08);
 }
 
 .common-checkbox-top:hover input:checked + .common-checkbox-spanBox {
-  background-color: #030873;
+  background-color: #020654;
 }
 
 .common-checkbox-top input:focus-visible + .common-checkbox-spanBox {
-  outline: 0.1875em solid rgba(2, 6, 84, 0.2);
+  outline: 0.1875em solid rgba(var(--colorMainRgb), 0.08);
   outline-offset: 0.125em;
 }

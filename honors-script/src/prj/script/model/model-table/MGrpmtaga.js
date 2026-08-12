@@ -38,18 +38,18 @@ class MGrpmtaga
         return `<div class="MGrpmtaga-makePill-div common-card" card-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>`;
     }
 
-    make()
+    make(btnHtml="")
     {
         return `
             <div class="MGrpmtaga-make-div-modelTop common-div-card">
-                <div class="common-flexCenter">
-                    <div class="common-card" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>
-                    <div class="common-inline common-fonts09 common-colorBody">${this.getTagregcnt()}명</div>
-                </div>
-                <div class="common-cushionHalfUp">
-                    <button class="common-btn-outer MGrpmtaga-make-btn-bulk" ${this.getPk()}>멤버지정</button>
-                    <button class="common-btn-outer MGrpmtaga-make-btn-update" ${this.getPk()}>수정</button>
-                    <button class="common-btn-outer MGrpmtaga-make-btn-delete" btn-type="cancel" ${this.getPk()}>삭제</button>
+                <div class="common-flexParentLR">
+                    <div class="common-fonts09">
+                        <div class="common-card" card-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>
+                    </div>
+                    <div class="common-fonts09">
+                        <div class="common-alertBadge">${this.getTagregcnt()}명</div>
+                        ${btnHtml}
+                    </div>
                 </div>
             </div>
         `;
@@ -76,7 +76,16 @@ class MGrpmtagas extends _MCommon
     {
         let html = "";
         for(let i in this.getModels())
-            html += this.getModels()[i].make();
+        {
+            let model = this.getModels()[i];
+            let btnHtml =
+            `
+                <button class="common-btn-outer MGrpmtaga-make-btn-bulk" ${model.getPk()}>멤버</button>
+                <button class="common-btn-outer MGrpmtaga-make-btn-update" ${model.getPk()}>수정</button>
+                <button class="common-btn-outer MGrpmtaga-make-btn-delete" btn-type="cancel" ${model.getPk()}>삭제</button>
+            `;
+            html += model.make(btnHtml);
+        }
         $(el).html(html);
 
         /* 삭제 */

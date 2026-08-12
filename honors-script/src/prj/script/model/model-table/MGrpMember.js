@@ -84,7 +84,7 @@ class MGrpMember
                     ${model.getGrpmtypeCvrt()}
                     ${Common.isEmpty(model.getGrpmposition()) ? "" : ` - ${model.getGrpmposition()}`}
                     ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
-                <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearShort()})` : ""}</span>
+                <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearFont()})` : ""}</span>
                 <span class="common-block common-fonts09">
                     ${mUser.getPhone()         != "" ? `<span class="common-block common-colorBody commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
                     ${mUser.getAddress()       != "" ? `<span class="common-block common-colorBody">${mUser.getAddress()}</span>` : ""}

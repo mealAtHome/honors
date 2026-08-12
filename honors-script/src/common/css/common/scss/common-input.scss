@@ -6,7 +6,7 @@
 .common-div-formField > .common-input-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: transparent; }
 .common-input-field
 {
-    padding: $padHalf auto;
+    padding: $padHalf;
     border: none;
     border-bottom: 0.07em solid $colorSept;
     background-color: transparent;
@@ -35,7 +35,7 @@
     /* -webkit-appearance: none; */
 
     /* box-sizing: content-box; */
-    padding: $padTiny;
+    padding: $padHalf;
     @include fonts11;
     border: 0.07em solid $colorSept;
 }
@@ -56,7 +56,7 @@
     /* -webkit-appearance: none; */
 
     box-sizing: initial;
-    padding: $padTiny;
+    padding: $padHalf;
     @include fonts11;
     border: none;
 }

@@ -78,6 +78,33 @@
 .common-colorFont[font-color=whit] { color:$colorSnow;} .common-colorSnow { color:$colorSnow;} .common-card[card-color=whit] { color:$colorSnow; background-color:rgba($colorSnow, 0.2); }
 
 /* --------------- */
+/* common-card */
+/* --------------- */
+.common-card
+{
+    display: inline-block;
+    font-weight: bold;
+    padding: $padHalf $padMore;
+    border-radius: $borderRadiusDefault;
+}
+.common-card[card-type=mini] { font-weight: normal; padding: $padTiny $padHalf; }
+
+/* --------------- */
+/* alert */
+/* --------------- */
+.common-alertBadge
+{
+    display: inline-block;
+    font-size:0.9em;
+    font-weight: bold;
+    color: $colorSnow;
+    background-color: $colorMain;
+    padding: $padTiny $padBase calc($padTiny + 0.1em);
+    border-radius: 9999px;
+}
+/* .common-alert[card-type=mini] { font-weight: normal; padding: $padTiny $padHalf; } */
+
+/* --------------- */
 /* tags */
 /* --------------- */
 
@@ -92,6 +119,7 @@
 .common-block           { display: block; }
 .common-flexTop         { display: flex; gap: $padBase; align-items: top; }
 .common-flexCenter      { display: flex; gap: $padBase; align-items: center; }
+.common-flexParentLR    { display: flex; gap: $padBase; align-items: center; justify-content: space-between; }
 .common-inline          { display: inline-block; }
 .common-indent04        { display: block; padding-left: $padHalf; }
 .common-indent08        { display: block; padding-left: $padBase; }
@@ -126,18 +154,6 @@
 /* image */
 /* --------------- */
 .common-img-label[label-size="2em"] { display:inline-block; width: 2.0em; height: 2.0em; background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; }
-
-/* --------------- */
-/* common-card */
-/* --------------- */
-.common-card
-{
-    display: inline-block;
-    font-weight: bold;
-    padding: $padHalf $padMore;
-    border-radius: $borderRadiusDefault;
-}
-.common-card[card-type=mini] { font-weight: normal; padding: $padTiny $padHalf; }
 
 /* --------------- */
 /* 고정 */

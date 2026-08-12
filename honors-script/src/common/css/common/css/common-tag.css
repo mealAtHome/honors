@@ -381,6 +381,35 @@
 }
 
 /* --------------- */
+/* common-card */
+/* --------------- */
+.common-card {
+  display: inline-block;
+  font-weight: bold;
+  padding: 0.4em 0.8em;
+  border-radius: 0.3em;
+}
+
+.common-card[card-type=mini] {
+  font-weight: normal;
+  padding: 0.2em 0.4em;
+}
+
+/* --------------- */
+/* alert */
+/* --------------- */
+.common-alertBadge {
+  display: inline-block;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #020654;
+  padding: 0.2em 0.6em 0.3em;
+  border-radius: 9999px;
+}
+
+/* .common-alert[card-type=mini] { font-weight: normal; padding: $padTiny $padHalf; } */
+/* --------------- */
 /* tags */
 /* --------------- */
 /* --------------- */
@@ -404,6 +433,13 @@
   display: flex;
   gap: 0.6em;
   align-items: center;
+}
+
+.common-flexParentLR {
+  display: flex;
+  gap: 0.6em;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .common-inline {
@@ -531,21 +567,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
-}
-
-/* --------------- */
-/* common-card */
-/* --------------- */
-.common-card {
-  display: inline-block;
-  font-weight: bold;
-  padding: 0.4em 0.8em;
-  border-radius: 0.3em;
-}
-
-.common-card[card-type=mini] {
-  font-weight: normal;
-  padding: 0.2em 0.4em;
 }
 
 /* --------------- */

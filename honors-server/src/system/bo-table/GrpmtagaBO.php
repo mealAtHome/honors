@@ -27,7 +27,7 @@ class GrpmtagaBO extends _CommonBO
     /* ========================= */
     const FIELD__GRPNO           = "grpno";           /* (PK) char(30) */
     const FIELD__TAGIDX          = "tagidx";          /* (PK) int */
-    const FIELD__TAGNAME         = "tagname";         /* (  ) char(50) */
+    const FIELD__TAGNAME         = "tagname";         /* (  ) char(10) */
     const FIELD__TAGCOLORFONT    = "tagcolorfont";    /* (  ) char(6) */
     const FIELD__TAGCOLORBACK    = "tagcolorback";    /* (  ) char(6) */
     const FIELD__TAGREGCNT       = "tagregcnt";       /* (  ) int */

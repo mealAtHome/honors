@@ -165,7 +165,7 @@
                             {
                                 let mGrpMember = Api.GrpMember.selectByPkForMng(grpno, userno, GGF.none, GGF.toast);
                                 let mGrpMemberUser = mGrpMember.getMUser();
-                                $("#GMDT-span-usertype").text(mGrpMemberUser.getUsertypeCvrt());
+                                $("#GMDT-span-usertype").html(mGrpMemberUser.getUsertypePill());
                                 $("#GMDT-span-position").text(mGrpMember.getGrpmtypeCvrt() + (Common.isEmpty(mGrpMember.getGrpmposition()) ? "" : ` (${mGrpMember.getGrpmposition()})`));
                                 $("#GMDT-span-name").text(mGrpMemberUser.getName());
                                 $("#GMDT-span-birthyear").text(mGrpMemberUser.getBirthyear());
