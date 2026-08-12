@@ -41,6 +41,8 @@ class GGnavi
     static public function getGrpMemberBO()                                         { require_once ROOT."/src/system/bo-table/GrpMemberBO.php"; }
     static public function getGrpMemberPointhistBO()                                { require_once ROOT."/src/system/bo-table/GrpMemberPointhistBO.php"; }
     static public function getGrpmPrivacyBO()                                       { require_once ROOT."/src/system/bo-table/GrpmPrivacyBO.php"; }
+    static public function getGrpmtagaBO()                                          { require_once ROOT."/src/system/bo-table/GrpmtagaBO.php"; }
+    static public function getGrpmtagbBO()                                          { require_once ROOT."/src/system/bo-table/GrpmtagbBO.php"; }
     static public function getIdxBO()                                               { require_once ROOT."/src/system/bo-table/_IdxBO.php"; }
     static public function getScheduleallBO()                                       { require_once ROOT."/src/system/bo-table/ScheduleallBO.php"; }
     static public function getSchedulebytimeBO()                                    { require_once ROOT."/src/system/bo-table/SchedulebytimeBO.php"; }

@@ -1,0 +1,116 @@
+<ons-page id="GMTL">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="GMTL.close(true);"></gg-backbtn></div>
+        <div><span>태그관리</span></div>
+    </div>
+
+    <!-- 태그목록 -->
+    <div class="common-div-cushion">
+
+        <div class="common-div-formField">
+            <span>모임멤버 태그</span>
+            <span>
+                <ul class="common-ul-announce">
+                    <li>모임 멤버에게 부여할 태그를 관리합니다.</li>
+                    <li>태그는 모임당 최대 5개까지 만들 수 있습니다.</li>
+                </ul>
+            </span>
+            <div class="common-cushionHalfUp">
+                <button class="common-btn-inner" id="GMTL-btn-addTag">태그추가</button>
+            </div>
+            <hr class="common-hr-paddingUD06">
+            <div id="GMTL-div-list"></div>
+        </div>
+
+    </div> <!-- common-div-cushion -->
+
+    <script>
+        var GMTL =
+        {
+            code : "GMTL",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(GMTL.Data.grpno)) { Common.toast("잘못된 접근입니다."); GMTL.close(true); return; }
+
+                /* init */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        let grpno = GMTL.Data.grpno;
+
+                        /* get list */
+                        let mGrpmtagas = Api.Grpmtaga.selectByGrpno(grpno);
+                        mGrpmtagas.make("#GMTL-div-list");
+
+                        /* 5개 이상이면 추가버튼 숨김 */
+                        if(mGrpmtagas.getModels().length >= 5)
+                            $("#GMTL-btn-addTag").hide();
+                        else
+                            $("#GMTL-btn-addTag").show();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                        return;
+                    }
+                    finally
+                    {
+                        Common.hideProgress();
+                    }
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+            $("#GMTL-btn-addTag").click(function() { Navigation.moveFrontPage(Navigation.Page.B75GrpMemberTagUpdate, { option:"insert", grpno: GMTL.Data.grpno, }); });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GMTL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GMTL.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

@@ -42,6 +42,10 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* clssettlehist */             case "Api.Clssettlehist.select"                             : url = serverHost + "/src/data/clssettlehist/selectClssettlehist.php"; break;
         /* clssettletmp */              case "Api.Clssettletmp.select"                              : url = serverHost + "/src/data/clssettletmp/selectClssettletmp.php"; break;
         /* clssettletmp */              case "Api.Clssettletmp.update"                              : url = serverHost + "/src/data/clssettletmp/updateClssettletmp.php"; break;
+        /* Grpmtaga */                  case "Api.Grpmtaga.select"                                  : url = serverHost + "/src/data/grpmtaga/selectGrpmtaga.php"; break;
+        /* Grpmtaga */                  case "Api.Grpmtaga.update"                                  : url = serverHost + "/src/data/grpmtaga/updateGrpmtaga.php"; break;
+        /* Grpmtagb */                  case "Api.Grpmtagb.select"                                  : url = serverHost + "/src/data/grpmtagb/selectGrpmtagb.php"; break;
+        /* Grpmtagb */                  case "Api.Grpmtagb.update"                                  : url = serverHost + "/src/data/grpmtagb/updateGrpmtagb.php"; break;
         /* GrpMember */                 case "Api.GrpMember.select"                                 : url = serverHost + "/src/data/grpMember/selectGrpMember.php"; break;
         /* GrpMember */                 case "Api.GrpMember.update"                                 : url = serverHost + "/src/data/grpMember/updateGrpMember.php"; break;
         /* GrpMemberPointhist */        case "Api.GrpMemberPointhist.select"                        : url = serverHost + "/src/data/grpMemberPointhist/selectGrpMemberPointhist.php"; break;
@@ -79,6 +83,9 @@ Navigation.Page =
     B85ManagerMemberLayering : "MMLY",
     B71GrpMemberDetail : "GMDT",
     B72GrpMemberMergeTemp : "GMMT",
+    B72GrpMemberTagList : "GMTL",
+    B75GrpMemberTagUpdate : "GMTU",
+    B76GrpMemberTagBulk : "GMTB",
     B81ManagerBankacctList : "MBKL",
     B82ManagerBankacctUpdate : "MBKU",
     B1000GrpFinanceHome : "GFHM",
@@ -144,6 +151,9 @@ Navigation.getURL = function(str)
         case Navigation.Page.B85ManagerMemberLayering                      : url = `${host}/app/B00-manager/B85-ManagerMemberLayering.html?${scriptVersion}`; break;
         case Navigation.Page.B71GrpMemberDetail                            : url = `${host}/app/B00-manager/B71-GrpMemberDetail.html?${scriptVersion}`; break;
         case Navigation.Page.B72GrpMemberMergeTemp                         : url = `${host}/app/B00-manager/B72-GrpMemberMergeTemp.html?${scriptVersion}`; break;
+        case Navigation.Page.B72GrpMemberTagList                           : url = `${host}/app/B70-grpm/B72GrpMemberTagList.html?${scriptVersion}`; break;
+        case Navigation.Page.B75GrpMemberTagUpdate                         : url = `${host}/app/B70-grpm/B75GrpMemberTagUpdate.html?${scriptVersion}`; break;
+        case Navigation.Page.B76GrpMemberTagBulk                           : url = `${host}/app/B70-grpm/B76GrpMemberTagBulk.html?${scriptVersion}`; break;
         case Navigation.Page.B80GrpManageHome                              : url = `${host}/app/B00-manager/B80GrpManageHome.html?${scriptVersion}`; break;
         case Navigation.Page.B81ManagerBankacctList                        : url = `${host}/app/B00-manager/B81-ManagerBankacctList.html?${scriptVersion}`; break;
         case Navigation.Page.B82ManagerBankacctUpdate                      : url = `${host}/app/B00-manager/B82-ManagerBankacctUpdate.html?${scriptVersion}`; break;
@@ -210,6 +220,9 @@ Navigation.getData = function(code)
         case Navigation.Page.B85ManagerMemberLayering               : return data = MMLY.Data;
         case Navigation.Page.B71GrpMemberDetail                     : return data = GMDT.Data;
         case Navigation.Page.B72GrpMemberMergeTemp                  : return data = GMMT.Data;
+        case Navigation.Page.B72GrpMemberTagList                    : return data = GMTL.Data;
+        case Navigation.Page.B75GrpMemberTagUpdate                  : return data = GMTU.Data;
+        case Navigation.Page.B76GrpMemberTagBulk                    : return data = GMTB.Data;
         case Navigation.Page.B81ManagerBankacctList                 : return data = MBKL.Data;
         case Navigation.Page.B82ManagerBankacctUpdate               : return data = MBKU.Data;
         case Navigation.Page.B1000GrpFinanceHome                    : return data = GFHM.Data;
@@ -308,6 +321,9 @@ Navigation.executeShow = function()
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.show(); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.show(); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.show(); break;
+        case Navigation.Page.B72GrpMemberTagList                      : GMTL.show(); break;
+        case Navigation.Page.B75GrpMemberTagUpdate                    : GMTU.show(); break;
+        case Navigation.Page.B76GrpMemberTagBulk                      : GMTB.show(); break;
         case Navigation.Page.B81ManagerBankacctList                   : MBKL.show(); break;
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.show(); break;
         case Navigation.Page.B1000GrpFinanceHome                      : GFHM.show(); break;
@@ -386,6 +402,9 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.close(true); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.close(true); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.close(true); break;
+        case Navigation.Page.B72GrpMemberTagList                      : GMTL.close(true); break;
+        case Navigation.Page.B75GrpMemberTagUpdate                    : GMTU.close(true); break;
+        case Navigation.Page.B76GrpMemberTagBulk                      : GMTB.close(true); break;
         case Navigation.Page.B81ManagerBankacctList                   : MBKL.close(true); break;
         case Navigation.Page.B82ManagerBankacctUpdate                 : MBKU.close(true); break;
         case Navigation.Page.B1000GrpFinanceHome                      : GFHM.close(true); break;

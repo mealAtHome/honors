@@ -9,32 +9,61 @@
     </div>
 
     <!-- ======================== -->
-    <!-- choose -->
+    <!-- 상단탭 : 멤버 / 태그 -->
     <!-- ======================== -->
     <div class="common-div-cushion">
         <table class="common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="MMMB-td-searchtype" searchtype="all"       tab="tab" >전체</td>
-                    <td class="MMMB-td-searchtype" searchtype="manager"   tab=""    >관리자</td>
-                    <td class="MMMB-td-searchtype" searchtype="normem"    tab=""    >멤버</td>
-                    <td class="MMMB-td-searchtype" searchtype="tmpmem"    tab=""    >임시</td>
+                    <td class="MMMB-td-toptab" toptab="member" tab="tab" >멤버</td>
+                    <td class="MMMB-td-toptab" toptab="tag"    tab=""    >태그</td>
                 </tr>
             </tbody>
         </table>
     </div>
     <hr class="common-hr-paddingLR"/>
 
-    <!-- ========================= -->
-    <!-- 검색 -->
-    <!-- ========================= -->
-    <div id="MMMB-div-search" class="common-div-cushion common-search-div-top">
-        <input type="text" id="MMMB-input-searchkey" class="common-input-text"/>
-        <button id="MMMB-btn-search" class="common-btn-noline"><i class="ti ti-search"></i>&nbsp;<span>검색</span></button>
-        <div class="common-block common-fonts09">
-            <span id="MMMB-span-searchedCnt"></span>건 검색되었습니다.
+    <!-- ======================== -->
+    <!-- 멤버탭 : 선택 -->
+    <!-- ======================== -->
+    <div id="MMMB-div-toptabMember" class="MMMB-div-toptab" toptab="member">
+        <div class="common-div-cushion">
+            <table class="common-tbl-tab commonEvent-tbl-tab">
+                <tbody>
+                    <tr>
+                        <td class="MMMB-td-searchtype" searchtype="all"       tab="tab" >전체</td>
+                        <td class="MMMB-td-searchtype" searchtype="manager"   tab=""    >관리자</td>
+                        <td class="MMMB-td-searchtype" searchtype="normem"    tab=""    >멤버</td>
+                        <td class="MMMB-td-searchtype" searchtype="tmpmem"    tab=""    >임시</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ========================= -->
+        <!-- 검색 -->
+        <!-- ========================= -->
+        <div id="MMMB-div-search" class="common-div-cushion common-search-div-top">
+            <input type="text" id="MMMB-input-searchkey" class="common-input-text"/>
+            <button id="MMMB-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
+            <div class="common-block common-fonts09">
+                <span id="MMMB-span-searchedCnt"></span>건 검색되었습니다.
+            </div>
         </div>
     </div>
+
+    <!-- ======================== -->
+    <!-- 태그탭 : 태그 목록(pill) -->
+    <!-- ======================== -->
+    <div id="MMMB-div-toptabTag" class="MMMB-div-toptab" toptab="tag" style="display:none;">
+        <div class="common-div-cushion">
+            <div id="MMMB-div-tagList" class="common-cushionHalfUp"></div>
+            <div class="common-cushionHalfUp">
+                <button id="MMMB-btn-tagManage" class="common-btn-outer common-fonts09">태그관리</button>
+            </div>
+        </div>
+    </div>
+    <hr class="common-hr-paddingLR"/>
 
     <!-- ========================= -->
     <!-- list -->
@@ -99,6 +128,26 @@
                 }, ajaxDelayTime);
             },
 
+            /* ------------- */
+            /* 태그탭 : 태그목록(pill) 조회 */
+            /* ------------- */
+            searchTag()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrpmtagas = Api.Grpmtaga.selectByGrpno(MMMB.Data.grpno);
+                    mGrpmtagas.makePills("#MMMB-div-tagList");
+
+                    /* 태그 클릭 시, 태그관리로 이동 */
+                    $("#MMMB-div-tagList .MGrpmtaga-makePill-div").click(function()
+                    {
+                        Navigation.moveFrontPage(Navigation.Page.B72GrpMemberTagList, {grpno: MMMB.Data.grpno});
+                    });
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
 
             /* ========================= */
             /* close */
@@ -125,6 +174,23 @@
             {
                 MMMB.Data.pagenum = 1;
                 MMMB.search(MMMB.Data.searchtype);
+            });
+
+            /* 상단탭 : 멤버 / 태그 */
+            $(".MMMB-td-toptab").click(function()
+            {
+                let toptab = $(this).attr("toptab");
+                $(".MMMB-div-toptab").hide();
+                $(`.MMMB-div-toptab[toptab='${toptab}']`).show();
+
+                if(toptab == "tag")
+                    MMMB.searchTag();
+            });
+
+            /* 태그관리 이동 */
+            $("#MMMB-btn-tagManage").click(function()
+            {
+                Navigation.moveFrontPage(Navigation.Page.B72GrpMemberTagList, {grpno: MMMB.Data.grpno});
             });
 
             /* ========================= */

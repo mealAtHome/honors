@@ -113,6 +113,10 @@
     $options["SPONUSERNAME"]                                        = get("SPONUSERNAME");
     $options["SPONUSERNO"]                                          = get("SPONUSERNO");
     $options["TARGET"]                                              = get("TARGET"); /* abstract */
+    $options["TAGCOLORBACK"]                                        = get("TAGCOLORBACK");
+    $options["TAGCOLORFONT"]                                        = get("TAGCOLORFONT");
+    $options["TAGIDX"]                                              = get("TAGIDX");
+    $options["TAGNAME"]                                             = get("TAGNAME");
     $options["LINEUPIDX"]                                           = get("LINEUPIDX");
     $options["LINEUPNAME"]                                          = get("LINEUPNAME");
     $options["TOKEN"]                                               = get("TOKEN");

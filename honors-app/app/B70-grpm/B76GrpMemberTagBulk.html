@@ -1,0 +1,208 @@
+<ons-page id="GMTB">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="GMTB.close(true);"></gg-backbtn></div>
+        <div><span>태그 멤버지정</span></div>
+    </div>
+
+    <!-- 태그 -->
+    <div class="common-div-cushion">
+        <div id="GMTB-div-tag" class="common-cushionHalfUp"></div>
+        <ul class="common-ul-announce">
+            <li>체크된 멤버에게만 이 태그가 부여됩니다.</li>
+            <li>체크를 해제하고 저장하면, 태그가 해제됩니다.</li>
+        </ul>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <!-- 검색 -->
+    <div id="GMTB-div-search" class="common-div-cushion common-search-div-top">
+        <input type="text" id="GMTB-input-searchkey" class="common-input-text"/>
+        <button id="GMTB-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
+        <div class="common-block common-fonts09">
+            <span id="GMTB-span-searchedCnt"></span>건 검색되었습니다.
+        </div>
+    </div>
+
+    <!-- 멤버목록 -->
+    <div id="GMTB-div-list" class="common-div-cushion"></div>
+
+    <!-- 저장하기 -->
+    <button id="GMTB-btn-save" class="common-btn-footer">저장하기</button>
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+        var GMTB =
+        {
+            code : "GMTB",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(GMTB.Data.grpno))  { Common.toast("잘못된 접근입니다."); GMTB.close(true); return; }
+                if(Common.isEmpty(GMTB.Data.tagidx)) { Common.toast("잘못된 접근입니다."); GMTB.close(true); return; }
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    try
+                    {
+                        let grpno = GMTB.Data.grpno;
+                        let tagidx = GMTB.Data.tagidx;
+
+                        /* 태그정보 표시 */
+                        let mGrpmtaga = Api.Grpmtaga.selectByPk(grpno, tagidx, GGF.none, GGF.toast);
+                        if(mGrpmtaga == null)
+                        {
+                            Common.toast("잘못된 접근입니다.");
+                            GMTB.close(true);
+                            return;
+                        }
+                        $("#GMTB-div-tag").html(mGrpmtaga.makePill());
+
+                        /* 현재 이 태그에 등록된 멤버 목록 확보 */
+                        let mGrpmtagbs = Api.Grpmtagb.selectByGrpnoTagidx(grpno, tagidx);
+                        GMTB.currentUsernoArr = mGrpmtagbs.getUsernoArr();
+
+                        /* 멤버검색 */
+                        $("#GMTB-btn-search").click();
+                    }
+                    catch(e)
+                    {
+                        Common.catchProc(e);
+                        return;
+                    }
+                    finally
+                    {
+                        Common.hideProgress();
+                    }
+                }, ajaxDelayTime);
+            },
+
+            /* 최종적으로 태그가 부여될 userno 목록 (검색 여부와 무관하게 유지되는 단일 소스) */
+            currentUsernoArr : [],
+
+            /* ===================== */
+            /* 체크상태 변경 시, currentUsernoArr에 즉시 반영 */
+            /* ===================== */
+            toggleUserno(userno, checked)
+            {
+                GMTB.currentUsernoArr = GMTB.currentUsernoArr.filter(function(u) { return u != userno; });
+                if(checked)
+                    GMTB.currentUsernoArr.push(userno);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* 체크박스 : 매번 새로 렌더링되므로 위임(delegate) 방식으로 한 번만 바인딩 */
+            $("#GMTB-div-list").on("change", ".GMTB-input-checkbox", function()
+            {
+                GMTB.toggleUserno($(this).attr("userno"), $(this).is(":checked"));
+            });
+
+            /* 검색 */
+            $("#GMTB-btn-search").click(function()
+            {
+                let keyword = $("#GMTB-input-searchkey").val();
+                if(GGvalid.Common.hasSpecialChar(keyword))
+                    return Common.toast("검색어에 특수문자를 포함할 수 없습니다.", "warning");
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    /* 그룹 전체(페이지네이션 없음)에서 검색 */
+                    let mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll(0, GMTB.Data.grpno, keyword, "all");
+                    let models = mGrpMembers.getModels();
+
+                    let html = "";
+                    for(let i in models)
+                    {
+                        let model = models[i];
+                        let mUser = model.getMUser();
+                        let userno = model.getUserno();
+                        let checked = GMTB.currentUsernoArr.includes(userno) ? "checked" : "";
+
+                        html +=
+                        `
+                            <div class="common-div-card">
+                                <label class="common-flexCenter">
+                                    <input type="checkbox" class="GMTB-input-checkbox" userno="${userno}" ${checked}/>
+                                    <span class="common-inline">${mUser.getName()}</span>
+                                </label>
+                            </div>
+                        `;
+                    }
+                    $("#GMTB-div-list").html(html);
+                    $("#GMTB-span-searchedCnt").text(mGrpMembers.getAllcnt());
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* 저장 */
+            $("#GMTB-btn-save").click(function()
+            {
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.Grpmtagb.bulkSetForMng(GMTB.Data.grpno, GMTB.Data.tagidx, GMTB.currentUsernoArr, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("태그가 반영되었습니다.");
+                            GMTB.close(true);
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("체크된 멤버로 태그를 저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GMTB.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GMTB.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

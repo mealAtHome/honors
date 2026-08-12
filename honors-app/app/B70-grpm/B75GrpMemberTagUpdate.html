@@ -1,0 +1,192 @@
+<ons-page id="GMTU">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="GMTU.close(true);"></gg-backbtn></div>
+        <div><span id="GMTU-span-title">태그추가</span></div>
+    </div>
+
+    <div class="common-div-formChild">
+
+        <!-- 태그이름 -->
+        <div class="common-div-formField">
+            <span>*태그이름</span>
+            <span>50글자이내로 입력해주세요.</span>
+            <input id="GMTU-input-tagname" type="text" class="common-input-field" placeholder="태그이름" maxlength="50"/>
+        </div>
+
+        <!-- 태그색상 -->
+        <div class="common-div-formField">
+            <span>*태그색상</span>
+            <span>글자색과 배경색을 선택해주세요.</span>
+            <table class="common-tbl-normal" tbl-type="noborder">
+                <tbody>
+                    <tr>
+                        <td>글자색</td>
+                        <td><input id="GMTU-input-tagcolorfont" type="color" value="#020654"/></td>
+                        <td>배경색</td>
+                        <td><input id="GMTU-input-tagcolorback" type="color" value="#eaf0ff"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 미리보기 -->
+        <div class="common-div-formField">
+            <span>미리보기</span>
+            <span></span>
+            <div id="GMTU-div-preview" class="common-card" card-type="mini"></div>
+        </div>
+
+        <!-- 저장 -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="GMTU-btn-save" class="common-btn-inner">저장하기</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- formChild -->
+
+    <script>
+        var GMTU =
+        {
+            code : "GMTU",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(GMTU.Data.grpno)) { Common.toast("잘못된 접근입니다."); GMTU.close(true); return; }
+                if(Common.isEmpty(GMTU.Data.option)) { GMTU.Data.option = "insert"; }
+
+                switch(GMTU.Data.option)
+                {
+                    case "insert":
+                    {
+                        $("#GMTU-span-title").text("태그추가");
+                        break;
+                    }
+                    case "update":
+                    {
+                        $("#GMTU-span-title").text("태그수정");
+                        Common.showProgress();
+                        setTimeout(function()
+                        {
+                            let mGrpmtaga = Api.Grpmtaga.selectByPk(GMTU.Data.grpno, GMTU.Data.tagidx, GGF.none, GGF.toast);
+                            if(mGrpmtaga == null)
+                            {
+                                Common.toast("잘못된 접근입니다.");
+                                GMTU.close(true);
+                                return;
+                            }
+                            $("#GMTU-input-tagname").val(mGrpmtaga.getTagname());
+                            $("#GMTU-input-tagcolorfont").val(`#${mGrpmtaga.getTagcolorfont()}`);
+                            $("#GMTU-input-tagcolorback").val(`#${mGrpmtaga.getTagcolorback()}`);
+                            GMTU.updatePreview();
+                            Common.hideProgress();
+                        }, ajaxDelayTime);
+                        break;
+                    }
+                }
+
+                GMTU.updatePreview();
+            },
+
+            /* ===================== */
+            /* 미리보기 갱신 */
+            /* ===================== */
+            updatePreview()
+            {
+                let tagname      = $("#GMTU-input-tagname").val();
+                let tagcolorfont = $("#GMTU-input-tagcolorfont").val();
+                let tagcolorback = $("#GMTU-input-tagcolorback").val();
+                $("#GMTU-div-preview").text(Common.isEmpty(tagname) ? "태그이름" : tagname);
+                $("#GMTU-div-preview").attr("style", `color:${tagcolorfont};background-color:${tagcolorback};`);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                if(force == true)
+                {
+                    Navigation.moveBack();
+                    return;
+                }
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+            $("#GMTU-input-tagname").on("keyup change", function() { GMTU.updatePreview(); });
+            $("#GMTU-input-tagcolorfont").on("input change", function() { GMTU.updatePreview(); });
+            $("#GMTU-input-tagcolorback").on("input change", function() { GMTU.updatePreview(); });
+
+            /* 저장 */
+            $("#GMTU-btn-save").click(function()
+            {
+                let grpno        = GMTU.Data.grpno;
+                let option       = GMTU.Data.option;
+                let tagidx       = GMTU.Data.tagidx;
+                let tagname      = $("#GMTU-input-tagname").val().trim();
+                let tagcolorfont = $("#GMTU-input-tagcolorfont").val().replace("#", "");
+                let tagcolorback = $("#GMTU-input-tagcolorback").val().replace("#", "");
+
+                if(Common.isEmpty(tagname)) { Common.toastError("태그이름을 입력해주세요."); $("#GMTU-input-tagname").focus(); return; }
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = null;
+                        switch(option)
+                        {
+                            case "insert" : mApiResponse = Api.Grpmtaga.insertFromPage(grpno, tagname, tagcolorfont, tagcolorback, GGF.none, GGF.toast); break;
+                            case "update" : mApiResponse = Api.Grpmtaga.updateFromPage(grpno, tagidx, tagname, tagcolorfont, tagcolorback, GGF.none, GGF.toast); break;
+                        }
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess(option == "insert" ? "태그가 생성되었습니다." : "태그가 수정되었습니다.");
+                            GMTU.close(true);
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                GMTU.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GMTU.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>
