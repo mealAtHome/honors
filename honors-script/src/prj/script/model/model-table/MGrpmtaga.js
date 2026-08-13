@@ -129,14 +129,25 @@ class MGrpmtagas extends _MCommon
     }
 
     /* ========================= */
-    /* 멤버화면 상단, 태그 알약 목록 */
+    /* 멤버화면 상단, 태그 알약 목록 (멤버검색용) */
     /* ========================= */
-    makePills(el="")
+    makePillForSearchGrpm(el="")
     {
         let html = "";
         for(let i in this.getModels())
-            html += this.getModels()[i].makePill();
+        {
+            let model = this.getModels()[i];
+            html +=
+            `
+                <div class="MGrpmtaga-makePillForSearchGrpm-pill common-flexCenter common-pill" pill-type="mini" pill-color="main" ${model.getPk()} style="gap:0.3em;">
+                    <div class="common-inline" style="width:0.7em; height:0.7em; border: 0.28em solid #${model.getTagcolorback()}; background-color:#${model.getTagcolorfont()}; border-radius:100%;"></div>
+                    <span>${model.getTagname()}</span>
+                </div>
+            `;
+        }
         $(el).html(html);
     }
+
+
 
 }

@@ -94,6 +94,7 @@ class GrpMemberBO extends _CommonBO
     const selectByKeywordForAll = "selectByKeywordForAll";
     const selectByKeywordWithPageForAll = "selectByKeywordWithPageForAll";
     const selectByGrpnoUsernameSearchtypeForAll = "selectByGrpnoUsernameSearchtypeForAll"; /* [PAGENUM, GRPNO, USENAME, SEARCHTYPE] */
+    const selectByGrpnoUsernameTagidxForAll = "selectByGrpnoUsernameTagidxForAll"; /* [PAGENUM, GRPNO, USENAME, TAGIDX] */
     protected function select($options, $option="")
     {
         /* vars */
@@ -187,6 +188,26 @@ class GrpMemberBO extends _CommonBO
                     case "tmpmem"   : $from = "(select grpm.* from grp_member grpm left join user u on grpm.userno = u.userno where grpm.grpno = '$GRPNO' and u.name like '%$USERNAME%' and grpm.grpmtype in ('$grpmtypeMember') and u.usertype = 'temp') t"; break;
                     default: { throw new Exception("(server) selectByGrpnoUsernameSearchtypeForAll searchtype not defined"); }
                 }
+                break;
+            }
+            case self::selectByGrpnoUsernameTagidxForAll:
+            {
+                $from =
+                "
+                    (
+                        select
+                            grpm.*
+                        from
+                            grp_member grpm
+                            left join user u
+                                on
+                                    grpm.userno = u.userno
+                        where
+                            grpm.grpno = '$GRPNO' and
+                            grpm.userno in (select userno from grpmtagb where grpno = '$GRPNO' and tagidx = $TAGIDX) and
+                            u.name like '%$USERNAME%'
+                    ) t
+                ";
                 break;
             }
             default:

@@ -12,15 +12,15 @@
     <!-- 상단탭 : 멤버 / 태그 -->
     <!-- ======================== -->
     <div class="common-tabbar-top" style="top:3em;">
-        <div class="common-tabbar-item MMMB-td-toptab" toptab="member" tab="tab" >멤버</div>
-        <div class="common-tabbar-item MMMB-td-toptab" toptab="tag"    tab=""    >태그</div>
+        <div class="common-tabbar-item MMMB-searchtab-item" searchtab="member" tab="tab" >멤버</div>
+        <div class="common-tabbar-item MMMB-searchtab-item" searchtab="tag"    tab=""    >태그</div>
     </div>
     <!-- <hr class="common-hr-paddingLR"/> -->
 
     <!-- ======================== -->
     <!-- 멤버탭 : 선택 -->
     <!-- ======================== -->
-    <div id="MMMB-div-toptabMember" class="MMMB-div-toptab" toptab="member">
+    <div class="MMMB-div-searchtab" searchtab="member">
         <div class="common-div-cushion">
             <table class="common-tbl-tab commonEvent-tbl-tab">
                 <tbody>
@@ -33,35 +33,33 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- ========================= -->
-        <!-- 검색 -->
-        <!-- ========================= -->
-        <div id="MMMB-div-search" class="common-div-cushion common-search-div-top">
-            <input type="text" id="MMMB-input-searchkey" class="common-input-text"/>
-            <button id="MMMB-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
-            <div class="common-block common-fonts09">
-                <span id="MMMB-span-searchedCnt"></span><span>건 검색되었습니다.</span>
-            </div>
-        </div>
     </div>
 
     <!-- ======================== -->
     <!-- 태그탭 : 태그 목록(pill) -->
     <!-- ======================== -->
-    <div id="MMMB-div-toptabTag" class="MMMB-div-toptab" toptab="tag" style="display:none;">
+    <div class="MMMB-div-searchtab" searchtab="tag" style="display:none;">
         <div class="common-div-cushion">
-            <div id="MMMB-div-tagList" class="common-cushionHalfUp"></div>
-            <div class="common-cushionHalfUp">
-                <button id="MMMB-btn-tagManage" class="common-btn-outer common-fonts09">태그관리</button>
-            </div>
+            <div id="MMMB-div-tagList" class="common-inline common-fonts09"></div>
+            <button id="MMMB-btn-tagManage" class="common-btn-outer common-fonts09">태그관리</button>
         </div>
     </div>
-    <hr class="common-hr-paddingLR"/>
+
+    <!-- ========================= -->
+    <!-- 검색 -->
+    <!-- ========================= -->
+    <div class="common-div-cushion common-search-div-top">
+        <input type="text" id="MMMB-input-searchkey" class="common-input-text"/>
+        <button id="MMMB-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
+        <div class="common-block common-fonts09">
+            <span id="MMMB-span-searchedCnt"></span><span>건 검색되었습니다.</span>
+        </div>
+    </div>
 
     <!-- ========================= -->
     <!-- list -->
     <!-- ========================= -->
+     <hr class="common-hr-paddingLR"/>
     <div id="MMMB-div-list" class="common-div-cushion"></div>
 
     <div class="common-div-cushionFooter"></div>
@@ -72,36 +70,83 @@
 
             show()
             {
-                if(MMMB.Data.grpno      == undefined) { Common.toast("잘못된 접근입니다."); MMMB.close(); return; }
-                if(MMMB.Data.searchtype == undefined) { MMMB.Data.searchtype = "all"; }
-                if(MMMB.Data.searchkey  == undefined) { MMMB.Data.searchkey = ""; }
-                if(MMMB.Data.pagenum    == undefined) { MMMB.Data.pagenum = 1; }
+                if(MMMB.Data.grpno         == undefined) { Common.toast("잘못된 접근입니다."); MMMB.close(); return; }
+                if(MMMB.Data.searchtab     == undefined) { MMMB.Data.searchtab = "member"; }
+                if(MMMB.Data.searchtype    == undefined) { MMMB.Data.searchtype = "all"; }
+                if(MMMB.Data.searchkey     == undefined) { MMMB.Data.searchkey = ""; }
+                if(MMMB.Data.searchtagidx  == undefined) { MMMB.Data.searchtagidx = ""; }
+                if(MMMB.Data.pagenum       == undefined) { MMMB.Data.pagenum = 1; }
 
-                /* set searchkey */
+                /* restore input */
                 $("#MMMB-input-searchkey").val(MMMB.Data.searchkey);
 
-                /* 멤버 리스트 조회 */
-                $(`.MMMB-td-searchtype[searchtype='${MMMB.Data.searchtype}']`).click();
+                /* get tags */
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let searchtab = MMMB.Data.searchtab;
+                    let searchtype = MMMB.Data.searchtype;
+                    let searchtagidx = MMMB.Data.searchtagidx;
+                    let mGrpmtagas = Api.Grpmtaga.selectByGrpno(MMMB.Data.grpno);
+                    mGrpmtagas.makePillForSearchGrpm("#MMMB-div-tagList");
+
+                    /* 태그 클릭 시, 태그에 해당하는 멤버만 검색 */
+                    $("#MMMB-div-tagList > .MGrpmtaga-makePillForSearchGrpm-pill").click(function()
+                    {
+                        /* set tab */
+                        $(`#MMMB-div-tagList > .MGrpmtaga-makePillForSearchGrpm-pill`).attr("tab", "");
+                        $(this).attr("tab", "tab");
+
+                        /* search */
+                        let grpno = $(this).attr("grpno");
+                        let tagidx = $(this).attr("tagidx");
+                        MMMB.Data.searchtagidx = tagidx;
+                        MMMB.search();
+                    });
+
+                    /* search members */
+                    $(`.MMMB-searchtab-item[searchtab='${searchtab}']`).click();
+                    switch(searchtab)
+                    {
+                        case "member" : { $(`.MMMB-td-searchtype[searchtype='${searchtype}']`).click(); break; }
+                        case "tag"    : { $(`#MMMB-div-tagList > .MGrpmtaga-makePillForSearchGrpm-pill[tagidx='${searchtagidx}']`).click(); break; }
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
             },
 
-            search(searchtype)
+            search()
             {
                 Common.showProgress();
                 setTimeout(function()
                 {
                     let grpno = MMMB.Data.grpno;
                     let pagenum = MMMB.Data.pagenum;
+                    let searchtab = MMMB.Data.searchtab;
+                    let searchtype = MMMB.Data.searchtype;
+                    let searchtagidx = MMMB.Data.searchtagidx;
                     let searchkey = $("#MMMB-input-searchkey").val();
-                    if(MMMB.Data.searchtype != searchtype)
-                        pagenum = 1;
 
+                    /* search */
                     let mGrpMembers = null;
-                    switch(searchtype)
+                    switch(searchtab)
                     {
-                        case "all"      : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "all"); break; }
-                        case "manager"  : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "manager"); break; }
-                        case "normem"   : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "normem"); break; }
-                        case "tmpmem"   : { mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, "tmpmem"); break; }
+                        case "member":
+                        {
+                            mGrpMembers = Api.GrpMember.selectByGrpnoUsernameSearchtypeForAll (pagenum, MMMB.Data.grpno, searchkey, searchtype);
+                            break;
+                        }
+                        case "tag":
+                        {
+                            if(Common.isEmpty(searchtagidx))
+                            {
+                                Common.hideProgress();
+                                return;
+                            }
+                            mGrpMembers = Api.GrpMember.selectByGrpnoUsernameTagidxForAll     (pagenum, MMMB.Data.grpno, searchkey, searchtagidx);
+                            break;
+                        }
                     }
                     mGrpMembers.make("#MMMB-div-list");
                     $("#MMMB-span-searchedCnt").text(mGrpMembers.getAllcnt());
@@ -111,33 +156,11 @@
                     {
                         let toPage = $(this).attr("to_page");
                         MMMB.Data.pagenum = toPage;
-                        MMMB.search(MMMB.Data.searchtype);
+                        MMMB.search();
                     });
 
                     /* save selected */
                     MMMB.Data.searchkey = searchkey;
-                    MMMB.Data.searchtype = searchtype;
-
-                    Common.hideProgress();
-                }, ajaxDelayTime);
-            },
-
-            /* ------------- */
-            /* 태그탭 : 태그목록(pill) 조회 */
-            /* ------------- */
-            searchTag()
-            {
-                Common.showProgress();
-                setTimeout(function()
-                {
-                    let mGrpmtagas = Api.Grpmtaga.selectByGrpno(MMMB.Data.grpno);
-                    mGrpmtagas.makePills("#MMMB-div-tagList");
-
-                    /* 태그 클릭 시, 태그관리로 이동 */
-                    $("#MMMB-div-tagList .MGrpmtaga-makePill-div").click(function()
-                    {
-                        Navigation.moveFrontPage(Navigation.Page.B72GrpMemberTagList, {grpno: MMMB.Data.grpno});
-                    });
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
@@ -157,28 +180,32 @@
             /* ========================= */
             /* event */
             /* ========================= */
-            $(".MMMB-td-searchtype").click(function()
+
+            /* 상단탭 */
+            $(".MMMB-searchtab-item").click(function()
             {
-                let searchtype = $(this).attr("searchtype");
-                $("#MMMB-input-searchkey").val("");
-                MMMB.search(searchtype);
+                let searchtab = $(this).attr("searchtab");
+                $(".MMMB-div-searchtab").hide();
+                $(`.MMMB-div-searchtab[searchtab='${searchtab}']`).show();
+
+                /* set vars */
+                MMMB.Data.searchtab = searchtab;
+                MMMB.search();
             });
 
+            /* 멤버타입선택 */
+            $(".MMMB-td-searchtype").click(function()
+            {
+                MMMB.Data.pagenum = 1;
+                MMMB.Data.searchtype = $(this).attr("searchtype");
+                MMMB.search();
+            });
+
+            /* 멤버검색 */
             $("#MMMB-btn-search").click(function()
             {
                 MMMB.Data.pagenum = 1;
                 MMMB.search(MMMB.Data.searchtype);
-            });
-
-            /* 상단탭 : 멤버 / 태그 */
-            $(".MMMB-td-toptab").click(function()
-            {
-                let toptab = $(this).attr("toptab");
-                $(".MMMB-div-toptab").hide();
-                $(`.MMMB-div-toptab[toptab='${toptab}']`).show();
-
-                if(toptab == "tag")
-                    MMMB.searchTag();
             });
 
             /* 태그관리 이동 */

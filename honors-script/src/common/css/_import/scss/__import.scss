@@ -110,3 +110,15 @@ $padTiny:0.2em; /* 패딩 - 아주 약간 */
 $padNano:0.1em; /* 패딩 - 아주 더 약간 */
 
 @mixin paddingForm { padding: 1em 2em; }
+
+@mixin getFontColorByBgColor($bgColor)
+{
+    @if color.channel($bgColor, "lightness", $space: hsl) > 55%
+    {
+        color:color.scale($bgColor, $lightness: -75%);
+    }
+    @else
+    {
+        color:color.scale($bgColor, $lightness: 99%);
+    }
+}
