@@ -40,11 +40,13 @@ class GrpmtagbBO extends _CommonBO
     /* select > sub */
     /* ========================= */
     public function selectByGrpnoTagidxForInside ($GRPNO, $TAGIDX) { return $this->select(get_defined_vars(), self::selectByGrpnoTagidx); }
+    public function selectByGrpnoUsernoArrForInside ($GRPNO, $USERNO_ARR) { return $this->select(get_defined_vars(), self::selectByGrpnoUsernoArrForInside); }
 
     /* ========================= */
     /* select */
     /* ========================= */
     const selectByGrpnoTagidx = "selectByGrpnoTagidx";
+    const selectByGrpnoUsernoArrForInside = "selectByGrpnoUsernoArrForInside";
     protected function select($options, $option="")
     {
         /* vars */
@@ -69,6 +71,9 @@ class GrpmtagbBO extends _CommonBO
             , t.userno
             , t.regdt
             , u.name username
+            , ta.tagname
+            , ta.tagcolorfont
+            , ta.tagcolorback
         ";
 
         /* --------------- */
@@ -77,6 +82,14 @@ class GrpmtagbBO extends _CommonBO
         switch($OPTION)
         {
             case self::selectByGrpnoTagidx : { $from = "(select * from grpmtagb where grpno = '$GRPNO' and tagidx = $TAGIDX) t"; break; }
+            case self::selectByGrpnoUsernoArrForInside:
+            {
+                $usernoInStr = "''";
+                if(is_array($USERNO_ARR) && count($USERNO_ARR) > 0)
+                    $usernoInStr = "'".implode("','", $USERNO_ARR)."'";
+                $from = "(select * from grpmtagb where grpno = '$GRPNO' and userno in ($usernoInStr)) t";
+                break;
+            }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -95,6 +108,9 @@ class GrpmtagbBO extends _CommonBO
                 left join user u
                     on
                         u.userno = t.userno
+                left join grpmtaga ta
+                    on
+                        ta.grpno = t.grpno and ta.tagidx = t.tagidx
             order by
                 t.regdt asc
         ";

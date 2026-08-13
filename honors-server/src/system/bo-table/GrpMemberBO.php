@@ -227,7 +227,61 @@ class GrpMemberBO extends _CommonBO
                 u.name
         ";
         $rslt = GGsql::select($query, $from, $options, $OPTION);
+
+        /* 태그정보 첨부 (멤버목록을 화면에 표시하는 옵션에서만) */
+        switch($OPTION)
+        {
+            case self::selectByGrpnoUsernameSearchtypeForAll:
+            case self::selectByKeywordWithPageForAll:
+            {
+                $rslt[GGF::DATA] = $this->attachTagsForInside($GRPNO, $rslt[GGF::DATA]);
+                break;
+            }
+        }
+
         return $rslt;
+    }
+
+    /* ========================= */
+    /* 멤버목록 row들에 태그배열(tags)을 부착 */
+    /* ========================= */
+    public function attachTagsForInside($GRPNO, $rows)
+    {
+        /* userno 목록 획득 */
+        $usernoArr = array();
+        foreach($rows as $row)
+            $usernoArr[] = Common::get($row, self::FIELD__USERNO);
+        if(count($usernoArr) == 0)
+            return $rows;
+
+        /* 태그 일괄조회 */
+        GGnavi::getGrpmtagbBO();
+        $grpmtagbBO = GrpmtagbBO::getInstance();
+        $tagRslt = Common::getData($grpmtagbBO->selectByGrpnoUsernoArrForInside($GRPNO, $usernoArr));
+
+        /* userno별로 그룹핑 */
+        $tagsByUserno = array();
+        foreach($tagRslt as $tagRow)
+        {
+            $userno = Common::get($tagRow, GrpmtagbBO::FIELD__USERNO);
+            if(isset($tagsByUserno[$userno]) == false)
+                $tagsByUserno[$userno] = array();
+            $tagsByUserno[$userno][] =
+            array(
+                "tagidx"       => Common::get($tagRow, GrpmtagbBO::FIELD__TAGIDX),
+                "tagname"      => Common::get($tagRow, "tagname"),
+                "tagcolorfont" => Common::get($tagRow, "tagcolorfont"),
+                "tagcolorback" => Common::get($tagRow, "tagcolorback"),
+            );
+        }
+
+        /* row별로 부착 */
+        foreach($rows as $i => $row)
+        {
+            $userno = Common::get($row, self::FIELD__USERNO);
+            $rows[$i]["tags"] = isset($tagsByUserno[$userno]) ? $tagsByUserno[$userno] : array();
+        }
+        return $rows;
     }
 
     /* ========================= */

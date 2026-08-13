@@ -89,9 +89,6 @@
 .common-tbl-tab > tbody > tr > td {
   padding: 0.4em 0.8em;
   border-radius: 2em;
-  /* border: 0.07em solid $colorSept; */
-  /* background-color: $colorSnow; */
-  /* color: $colorBody; */
   color: #020654;
   text-align: center;
 }

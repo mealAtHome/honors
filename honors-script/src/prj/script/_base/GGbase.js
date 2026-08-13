@@ -138,6 +138,7 @@ var GGbase =
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-tag.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-tbl.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-ul.css?v=${scriptVersion}`);
+        /* common  */ cssArr.push(`${scriptHost}/src/common/css/common/css/common-tabbar.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/common-event/common-event.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity.css?v=${scriptVersion}`);
         /* common  */ cssArr.push(`${scriptHost}/src/common/css/entity/entity-common.css?v=${scriptVersion}`);

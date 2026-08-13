@@ -219,25 +219,3 @@
     align-items: center;
 }
 
-/* ========================= */
-/* 탭 */
-/* ========================= */
-.common-tab-top
-{
-    display: block;
-    /* overflow-x: auto; */
-    /* padding: $padHalf $padMore; */
-}
-.common-tab-item
-{
-    display: inline-block;
-    padding: $padHalf $padMore;
-    border-radius: 0.4em;
-    border: 0.07em solid $colorSept;
-    background-color: $colorSnow;
-    color: $colorBody;
-    text-align: center;
-}
-.common-tab-item[tab=tab] { color: $colorSnow; background-color: $colorMain; }
-.common-tab-item:active   { color: $colorMain; background-color: rgba(var(--colorMain), 0.1); }
-

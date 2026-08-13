@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/* ========================= */
+/* font main */
+/* ========================= */
+/* ========================= */
+/* colors main */
+/* ========================= */
+/* ========================= */
+/* colors */
+/* ========================= */
+/* #1B4BB8 */
+/* rgb(2   , 6   , 84  ); #020654 */
+/* rgb(2   , 6   , 84  ); #020654 */
+/* rgb(27  , 42  , 107 ); #1B2A6B */
+/* rgb(61  , 107 , 245 ); #3D6BF5 */
+/* rgb(122 , 128 , 153 ); #7A8099 */
+/* rgb(122 , 128 , 153 ); #7A8099 */
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
+/* rgb(0   , 2   , 120 ); #000278 */
+/* rgb(0   , 150 , 0   ); #009600 */
+/* rgb(3   , 154 , 0   ); #039a00 */
+/* rgb(40  , 101 , 255 ); #d9e4ff */
+/* rgb(40  , 101 , 255 ); #d9e4ff */
+/* rgb(234 , 240 , 255 ); #EAF0FF */
+/* rgb(212 , 173 , 0   ); #d4ad00 */
+/* rgb(255 , 116 , 21  ); #FF7415 */
+/* rgb(255 , 116 , 21  ); #FF7415 */
+/* rgb(206 , 39  , 39  ); #ce2727 */
+/* rgb(120 , 0   , 0   ); #780000 */
+/* rgb(120 , 0   , 0   ); #780000 */
+/* rgb(100 , 100 , 100 ); #636363 */
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+/* 마진 - 꽉 */
+/* 마진 - 꽉 */
+/* 마진 - 많음 */
+/* 마진 - 기본 */
+/* 마진 - 반 */
+/* 마진 - 약간 */
+/* 마진 - 아주 약간 */
+/* 마진 - 아주 더 약간 */
+/* 패딩 - 버튼 */
+/* 패딩 - 꽉 */
+/* 패딩 - 꽉 */
+/* 패딩 - 큰 */
+/* 패딩 - 기본 */
+/* 패딩 - 반 */
+/* 패딩 - 약간 */
+/* 패딩 - 아주 약간 */
+/* 패딩 - 아주 더 약간 */
+/* ============================== */
+/* common-tabbar */
+/*
+    <div class="common-tabbar-top common-fonts09">
+        <div class="common-tabbar-item CLSD-td-tabmain" tabval="clslineup"   tab="tab" >참가현황</div>
+        <div class="common-tabbar-item CLSD-td-tabmain" tabval="clssettle"   tab=""    >정산현황</div>
+        <div class="common-tabbar-item CLSD-td-tabmain" tabval="clspurchase" tab=""    >구매목록</div>
+    </div>
+*/
+/* ============================== */
+.common-tabbar-top {
+  display: flex;
+  position: sticky;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10000;
+  height: auto;
+  box-sizing: border-box;
+  /* padding: 0em $padBase; */
+  background-color: #ffffff;
+  gap: 0em;
+}
+
+.common-tabbar-item {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  border-bottom: 0.21em solid #c4c7ce;
+  color: #3c435c;
+  text-align: center;
+  font-weight: normal;
+}
+
+.common-tabbar-item[tab=tab] {
+  color: #020654;
+  border-bottom: 0.21em solid #020654;
+  font-weight: bold;
+}
+
+.common-tabbar-item:active {
+  color: #020654;
+  background-color: rgba(var(--colorMain), 0.1);
+}
+
+/* ========================= */
+/* common-tab */
+/* ========================= */
+.common-tab-top {
+  display: block;
+  /* overflow-x: auto; */
+  /* padding: $padHalf $padMore; */
+}
+
+.common-tab-item {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  border-radius: 0.4em;
+  border: 0.07em solid #c4c7ce;
+  background-color: #ffffff;
+  color: #3c435c;
+  text-align: center;
+}
+
+.common-tab-item[tab=tab] {
+  color: #ffffff;
+  background-color: #020654;
+}
+
+.common-tab-item:active {
+  color: #020654;
+  background-color: rgba(var(--colorMain), 0.1);
+}

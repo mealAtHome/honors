@@ -1,0 +1,61 @@
+@use "sass:color";
+@use "../../_import/scss/__import" as *;
+
+/* ============================== */
+/* common-tabbar */
+/*
+    <div class="common-tabbar-top common-fonts09">
+        <div class="common-tabbar-item CLSD-td-tabmain" tabval="clslineup"   tab="tab" >참가현황</div>
+        <div class="common-tabbar-item CLSD-td-tabmain" tabval="clssettle"   tab=""    >정산현황</div>
+        <div class="common-tabbar-item CLSD-td-tabmain" tabval="clspurchase" tab=""    >구매목록</div>
+    </div>
+*/
+/* ============================== */
+.common-tabbar-top
+{
+    display: flex;
+    position: sticky;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10000;
+    height:auto;
+    box-sizing: border-box;
+    /* padding: 0em $padBase; */
+    background-color: $colorSnow;
+    gap: 0em;
+}
+.common-tabbar-item
+{
+    display: inline-block;
+    padding: $padHalf $padMore;
+    border-bottom: 0.21em solid $colorSept;
+    color: $colorBody;
+    text-align: center;
+    font-weight: normal;
+}
+.common-tabbar-item[tab=tab] { color: $colorMain; border-bottom: 0.21em solid $colorMain; font-weight: bold; }
+.common-tabbar-item:active   { color: $colorMain; background-color: rgba(var(--colorMain), 0.1); }
+
+/* ========================= */
+/* common-tab */
+/* ========================= */
+.common-tab-top
+{
+    display: block;
+    /* overflow-x: auto; */
+    /* padding: $padHalf $padMore; */
+}
+.common-tab-item
+{
+    display: inline-block;
+    padding: $padHalf $padMore;
+    border-radius: 0.4em;
+    border: 0.07em solid $colorSept;
+    background-color: $colorSnow;
+    color: $colorBody;
+    text-align: center;
+}
+.common-tab-item[tab=tab] { color: $colorSnow; background-color: $colorMain; }
+.common-tab-item:active   { color: $colorMain; background-color: rgba(var(--colorMain), 0.1); }
+

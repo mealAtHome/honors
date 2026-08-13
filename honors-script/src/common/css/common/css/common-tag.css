@@ -657,32 +657,3 @@
   display: flex;
   align-items: center;
 }
-
-/* ========================= */
-/* 탭 */
-/* ========================= */
-.common-tab-top {
-  display: block;
-  /* overflow-x: auto; */
-  /* padding: $padHalf $padMore; */
-}
-
-.common-tab-item {
-  display: inline-block;
-  padding: 0.4em 0.8em;
-  border-radius: 0.4em;
-  border: 0.07em solid #c4c7ce;
-  background-color: #ffffff;
-  color: #3c435c;
-  text-align: center;
-}
-
-.common-tab-item[tab=tab] {
-  color: #ffffff;
-  background-color: #020654;
-}
-
-.common-tab-item:active {
-  color: #020654;
-  background-color: rgba(var(--colorMain), 0.1);
-}

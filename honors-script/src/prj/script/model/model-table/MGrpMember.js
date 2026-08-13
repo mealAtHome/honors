@@ -18,6 +18,7 @@ class MGrpMember
         /* custom */    this.pointWon           = GGC.Common.priceWon(dat.point);
         /* custom */    this.grpmtypeCvrt       = GGC.GrpMember.grpmtypeCvrt(this.grpmtype);
         /* custom */    this.pk                 = `grpno="${this.grpno}" userno="${this.userno}"`;
+        /* custom */    this.mGrpmtagas         = (dat.tags != undefined ? dat.tags : []).map(tag => new MGrpmtaga(tag));
     }
 
     /* ========================= */
@@ -41,6 +42,7 @@ class MGrpMember
     getPointWon() { return this.pointWon; }
     getGrpmtypeCvrt() { return this.grpmtypeCvrt; }
     getPk() { return this.pk; }
+    getMGrpmtagas() { return this.mGrpmtagas; }
 
     /* custom > custom */
     getRegidtDate() { return this.regidt.substring(0, 10); }
@@ -63,6 +65,16 @@ class MGrpMember
     {
         let model = this;
         let mUser = model.getMUser();
+
+        /* 태그 pill */
+        let tagsHtml = "";
+        if(model.getMGrpmtagas().length > 0)
+        {
+            let pillsHtml = "";
+            for(let i in model.getMGrpmtagas())
+                pillsHtml += model.getMGrpmtagas()[i].makePill();
+            tagsHtml = `<span class="common-block common-cushionHalfUp">${pillsHtml}</span>`;
+        }
 
         /* buttonHtml */
         let buttonHtmlFinal = "";
@@ -90,6 +102,7 @@ class MGrpMember
                     ${mUser.getAddress()       != "" ? `<span class="common-block common-colorBody">${mUser.getAddress()}</span>` : ""}
                     ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorBody">${mUser.getHascarflgCvrt()}</span>` : ""}
                 </span>
+                ${tagsHtml}
                 ${buttonHtmlFinal}
             </div>
         `;
