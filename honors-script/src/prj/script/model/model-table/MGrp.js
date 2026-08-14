@@ -6,6 +6,7 @@ class MGrp
         /* data */    this.grpmanager           = GGC.Common.char(dat.grpmanager);
         /* data */    this.grpimg               = GGC.Common.char(dat.grpimg);
         /* data */    this.grpname              = GGC.Common.char(dat.grpname);
+        /* data */    this.backnumberlength     = GGC.Common.int(dat.backnumberlength);
         /* data */    this.modidt               = GGC.Common.datetime(dat.modidt);
         /* data */    this.regidt               = GGC.Common.datetime(dat.regidt);
         /* data */    this.grpmanager_name      = GGC.Common.varchar(dat.grpmanager_name);
@@ -31,6 +32,7 @@ class MGrp
     getGrpmanager() { return this.grpmanager; }
     getGrpimg() { return this.grpimg; }
     getGrpname() { return this.grpname; }
+    getBacknumberlength() { return this.backnumberlength; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
     getGrpmanagerName() { return this.grpmanager_name; }

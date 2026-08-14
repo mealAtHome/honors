@@ -4,11 +4,13 @@ class MGrpMember
     {
         /* data */      this.grpno              = GGC.Common.char(dat.grpno);
         /* data */      this.userno             = GGC.Common.char(dat.userno);
+        /* data */      this.grpmbacknum        = GGC.Common.char(dat.grpmbacknum);
         /* data */      this.grpmtype           = GGC.Common.enum(dat.grpmtype);
         /* data */      this.grpmposition       = GGC.Common.char(dat.grpmposition);
         /* data */      this.grpmfinauth        = GGC.Common.enum(dat.grpmfinauth);
         /* data */      this.grpmstatus         = GGC.Common.enum(dat.grpmstatus);
         /* data */      this.point              = GGC.Common.int(dat.point);
+        /* data */      this.backnumupdatedt    = GGC.Common.datetime(dat.backnumupdatedt);
         /* data */      this.deletedt           = GGC.Common.datetime(dat.deletedt);
         /* data */      this.regidt             = GGC.Common.datetime(dat.regidt);
         /* data */      this.grpname            = GGC.Common.char(dat.grpname);
@@ -26,12 +28,14 @@ class MGrpMember
     /* ========================= */
     getGrpno() { return this.grpno; }
     getUserno() { return this.userno; }
+    getGrpmbacknum() { return this.grpmbacknum; }
     getGrpmtype() { return this.grpmtype; }
     getGrpmposition() { return this.grpmposition; }
     getGrpmfinauth() { return this.grpmfinauth; }
     getGrpmstatus() { return this.grpmstatus; }
     getDeletedt() { return this.deletedt; }
     getPoint() { return this.point; }
+    getBacknumupdatedt() { return this.backnumupdatedt; }
     getRegidt() { return this.regidt; }
     getGrpname() { return this.grpname; }
     getGrpmanagerid() { return this.grpmanagerid; }

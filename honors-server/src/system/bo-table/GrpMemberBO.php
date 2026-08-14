@@ -38,11 +38,13 @@ class GrpMemberBO extends _CommonBO
     /* ========================= */
     const FIELD__GRPNO          = "grpno";         /* (pk) char(30) */
     const FIELD__USERNO         = "userno";        /* (pk) char(30) */
+    const FIELD__GRPMBACKNUM    = "grpmbacknum";   /* (  ) char(5) */
     const FIELD__GRPMTYPE       = "grpmtype";      /* (  ) enum('mng','mngsub','member') */
     const FIELD__GRPMPOSITION   = "grpmposition";  /* (  ) char(20) */
     const FIELD__GRPMFINAUTH    = "grpmfinauth";   /* (  ) enum('y','n') */
     const FIELD__GRPMSTATUS     = "grpmstatus";    /* (  ) enum('active','delete') */
     const FIELD__POINT          = "point";         /* (  ) int */
+    const FIELD__BACKNUMUPDATEDT = "backnumupdatedt"; /* (  ) datetime */
     const FIELD__DELETEDT       = "deletedt";      /* (  ) datetime */
     const FIELD__MODIDT         = "modidt";        /* (  ) datetime */
     const FIELD__REGIDT         = "regidt";        /* (  ) datetime */
@@ -120,11 +122,13 @@ class GrpMemberBO extends _CommonBO
             null as head
             , t.grpno
             , t.userno
+            , t.grpmbacknum
             , t.grpmtype
             , t.grpmposition
             , t.grpmfinauth
             , t.grpmstatus
             , t.point
+            , t.backnumupdatedt
             , t.deletedt
             , t.regidt
             , u.usertype
@@ -324,6 +328,7 @@ class GrpMemberBO extends _CommonBO
     const makeTempUserForMng = "makeTempUserForMng";
     const mergeTempToMemberForMng = "mergeTempToMemberForMng";
     const deleteRecordByPkForInside = "deleteRecordByPkForInside";
+    const updateGrpmbacknumForMng = "updateGrpmbacknumForMng";
     protected function update($options, $option="")
     {
         /* vars */
@@ -488,6 +493,46 @@ class GrpMemberBO extends _CommonBO
             {
                 $query = "delete from grp_member where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateGrpmbacknumForMng:
+            {
+                /* 권한체크 : 모임 매니저(부매니저 포함)만 가능. 매니저 수정은 기간제약 없음. */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+
+                /* validation */
+                if(Common::isEmpty($GRPNO))  { throw new GGexception("시스템 오류입니다."); }
+                if(Common::isEmpty($USERNO)) { throw new GGexception("시스템 오류입니다."); }
+                $grpmbacknum = trim($GRPMBACKNUM);
+
+                if(Common::isNotEmpty($grpmbacknum))
+                {
+                    /* 허용문자 검증 : 영문, 숫자, -(하이픈), _(언더바), #(샾) */
+                    if(preg_match('/^[A-Za-z0-9\-_#]+$/', $grpmbacknum) !== 1)
+                        throw new GGexception("등번호는 영문, 숫자, -(하이픈), _(언더바), #(샾)만 사용할 수 있습니다.");
+
+                    /* 길이검증 : 모임에 설정된 등번호 문자수 이내 */
+                    GGnavi::getGrpBO();
+                    $grpBO = GrpBO::getInstance();
+                    $grpRow = $grpBO->getByPk($GRPNO);
+                    $backnumberlength = intval(Common::get($grpRow, GrpBO::FIELD__BACKNUMBERLENGTH, 2));
+                    if(strlen($grpmbacknum) > $backnumberlength)
+                        throw new GGexception("등번호는 최대 {$backnumberlength}자까지 입력할 수 있습니다.");
+
+                    /* 충돌해결 : 같은 그룹 내 동일 등번호를 가진 다른 멤버는 등번호를 초기화 */
+                    $query = "update grp_member set grpmbacknum = null, backnumupdatedt = now() where grpno = '$GRPNO' and userno != '$USERNO' and grpmbacknum = '$grpmbacknum'";
+                    GGsql::exeQuery($query);
+
+                    /* 적용 */
+                    $query = "update grp_member set grpmbacknum = '$grpmbacknum', backnumupdatedt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
+                    GGsql::exeQuery($query);
+                }
+                else
+                {
+                    /* 등번호 지우기 */
+                    $query = "update grp_member set grpmbacknum = null, backnumupdatedt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
+                    GGsql::exeQuery($query);
+                }
                 break;
             }
             default:

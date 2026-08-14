@@ -1,0 +1,236 @@
+<ons-page id="MUBL">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="MUBL.close(true);"></gg-backbtn></div>
+        <div><span>등번호설정</span></div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- 상단탭 : 멤버 / 설정 -->
+    <!-- ======================== -->
+    <div class="common-tabbar-top" style="top:3em;">
+        <div class="common-tabbar-item MUBL-searchtab-item" searchtab="member"  tab="tab" >멤버</div>
+        <div class="common-tabbar-item MUBL-searchtab-item" searchtab="setting" tab=""    >설정</div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- 멤버탭 : 등번호 목록/변경 -->
+    <!-- ======================== -->
+    <div class="MUBL-div-searchtab" searchtab="member">
+        <div class="common-div-cushion">
+            <table id="MUBL-tbl-memberList" class="common-tbl-normal common-fonts09" tbl-type="normal" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>등번호</th>
+                        <th>멤버</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ======================== -->
+    <!-- 설정탭 : 등번호 길이설정 -->
+    <!-- ======================== -->
+    <div class="MUBL-div-searchtab" searchtab="setting" style="display:none;">
+        <div class="common-div-cushion">
+            <div class="common-div-formField">
+                <span>*등번호 문자수 설정</span>
+                <span>최대 5글자까지 가능합니다.</span>
+                <input id="MUBL-input-backnumberlength" type="number" class="common-input-field" min="2" max="5" style="width:6em;"/>
+            </div>
+            <button id="MUBL-btn-saveLength" class="common-btn-inner">저장</button>
+        </div>
+    </div>
+
+    <div class="common-div-cushionFooter"></div>
+
+    <script>
+        var MUBL =
+        {
+            code : "MUBL",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(MUBL.Data.grpno))     { Common.toast("잘못된 접근입니다."); MUBL.close(true); return; }
+                if(MUBL.Data.searchtab == undefined)    { MUBL.Data.searchtab = "member"; }
+
+                /* 이전 탭 복원 */
+                $(`.MUBL-searchtab-item[searchtab='${MUBL.Data.searchtab}']`).click();
+            },
+
+            /* ------------- */
+            /* 멤버탭 : 등번호 목록조회 (페이지네이션 없음) */
+            /* ------------- */
+            searchMember()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrpMembers = Api.GrpMember.selectByGrpnoForMng(0, MUBL.Data.grpno);
+                    let models = mGrpMembers.getModels();
+                    let $tbody = $("#MUBL-tbl-memberList > tbody");
+                    $tbody.html("");
+                    for(let i in models)
+                    {
+                        let model = models[i];
+                        let mUser = model.getMUser();
+                        let backnum = Common.isEmpty(model.getGrpmbacknum()) ? "-" : model.getGrpmbacknum();
+                        let tr =
+                        `
+                            <tr ${model.getPk()}>
+                                <td class="MUBL-td-backnumView">${backnum}</td>
+                                <td>${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearFont()})` : ""}</td>
+                                <td class="MUBL-td-action"><button class="MUBL-btn-editRow common-btn-outer">변경</button></td>
+                            </tr>
+                        `;
+                        $tbody.append(tr);
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ------------- */
+            /* 설정탭 : 등번호 길이설정 조회 */
+            /* ------------- */
+            searchSetting()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrp = Api.Grp.selectByPk(MUBL.Data.grpno, GGF.none, GGF.toast);
+                    $("#MUBL-input-backnumberlength").val(mGrp.getBacknumberlength());
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ========================= */
+            /* event */
+            /* ========================= */
+
+            /* 상단탭 */
+            $(".MUBL-searchtab-item").click(function()
+            {
+                let searchtab = $(this).attr("searchtab");
+                $(".MUBL-div-searchtab").hide();
+                $(`.MUBL-div-searchtab[searchtab='${searchtab}']`).show();
+
+                MUBL.Data.searchtab = searchtab;
+                switch(searchtab)
+                {
+                    case "member"  : { MUBL.searchMember();  break; }
+                    case "setting" : { MUBL.searchSetting(); break; }
+                }
+            });
+
+            /* 등번호 변경 : 인라인 편집모드로 전환 */
+            $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-editRow", function()
+            {
+                let tr = $(this).closest("tr");
+                let currentVal = tr.find(".MUBL-td-backnumView").text().trim();
+                if(currentVal == "-") currentVal = "";
+                tr.find(".MUBL-td-backnumView").html(`<input type="text" class="MUBL-input-backnum common-input-text" maxlength="5" value="${currentVal}" style="width:5em;"/>`);
+                tr.find(".MUBL-td-action").html(
+                    `
+                        <button class="MUBL-btn-saveRow common-btn-inner">저장</button>
+                        <button class="MUBL-btn-cancelRow common-btn-outer">취소</button>
+                    `
+                );
+            });
+
+            /* 취소 : 다시 조회해서 원래대로 */
+            $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-cancelRow", function()
+            {
+                MUBL.searchMember();
+            });
+
+            /* 저장(개별 행) */
+            $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-saveRow", function()
+            {
+                let tr = $(this).closest("tr");
+                let grpno = tr.attr("grpno");
+                let userno = tr.attr("userno");
+                let grpmbacknum = tr.find(".MUBL-input-backnum").val().trim();
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.GrpMember.updateGrpmbacknumForMng(grpno, userno, grpmbacknum, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("등번호가 변경되었습니다.");
+                            MUBL.searchMember();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("등번호를 변경하시겠습니까? 동일한 등번호를 가진 멤버가 있다면, 그 멤버의 등번호는 초기화됩니다.", process);
+            });
+
+            /* 등번호 길이설정 저장 */
+            $("#MUBL-btn-saveLength").click(function()
+            {
+                let backnumberlength = $("#MUBL-input-backnumberlength").val();
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.Grp.updateBacknumberlengthForMng(MUBL.Data.grpno, backnumberlength, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("등번호 문자수가 저장되었습니다.");
+                            Common.hideProgress();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MUBL.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MUBL.close(true);
+            }
+
+        });
+
+    </script>
+
+</ons-page>

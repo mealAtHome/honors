@@ -35,6 +35,7 @@ class GrpBO extends _CommonBO
     const FIELD__GRPIMG        = "grpimg";        /* (  ) char(10) */
     const FIELD__GRPNAME       = "grpname";       /* (  ) char(50) */
     const FIELD__BACCNODEFAULT = "baccnodefault"; /* (  ) int */
+    const FIELD__BACKNUMBERLENGTH = "backnumberlength"; /* (  ) int */
     const FIELD__MODIDT        = "modidt";        /* (  ) datetime */
     const FIELD__REGIDT        = "regidt";        /* (  ) datetime */
 
@@ -94,6 +95,7 @@ class GrpBO extends _CommonBO
             , t.grpimg
             , t.grpname
             , t.baccnodefault
+            , t.backnumberlength
             , t.modidt
             , t.regidt
             , u.id                  grpmanager_id
@@ -162,6 +164,9 @@ class GrpBO extends _CommonBO
     /* ========================= */
     /* const insert = "insert"; */
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
+    const updateBacknumberlengthForMng = "updateBacknumberlengthForMng";
+    const BACKNUMBERLENGTH_MIN = 2; /* 등번호 문자수 최소 */
+    const BACKNUMBERLENGTH_MAX = 5; /* 등번호 문자수 최대 */
     protected function update($options, $option="")
     {
         /* vars */
@@ -180,6 +185,23 @@ class GrpBO extends _CommonBO
             case self::updateBaccnodefaultForInside:
             {
                 $query = "update grp set baccnodefault = $BACCNODEFAULT where grpno = '$GRPNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateBacknumberlengthForMng:
+            {
+                /* 권한체크 : 모임 매니저(부매니저 포함)만 가능 */
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+
+                /* validation */
+                if(Common::isEmpty($BACKNUMBERLENGTH))
+                    throw new GGexception("등번호 문자수를 입력해주세요.");
+                $backnumberlength = intval($BACKNUMBERLENGTH);
+                if($backnumberlength < self::BACKNUMBERLENGTH_MIN || $backnumberlength > self::BACKNUMBERLENGTH_MAX)
+                    throw new GGexception("등번호 문자수는 ".self::BACKNUMBERLENGTH_MIN."~".self::BACKNUMBERLENGTH_MAX."자 사이로 설정해주세요.");
+
+                /* process */
+                $query = "update grp set backnumberlength = $backnumberlength where grpno = '$GRPNO'";
                 GGsql::exeQuery($query);
                 break;
             }

@@ -5,12 +5,13 @@
     <!-- ======================== -->
     <div class="common-div-toolbar">
         <div><gg-backbtn onclick="MMMG.close(true);"></gg-backbtn></div>
-        <div><span>유저설정</span></div>
+        <div><span>관리</span></div>
     </div>
 
     <div class="common-div-cushion common-div-manages">
         <button id="MMMG-btn-manageUserAcctList" class="common-btn-outer">계좌정보관리</button>
         <button id="MMMG-btn-manageUserLayer"    class="common-btn-outer">권한/직위설정</button>
+        <button id="MMMG-btn-manageBacknumber"   class="common-btn-outer">등번호설정</button>
         <!-- <button id="MMMG-btn-manageUserAddr"           class="common-btn-outer">주소설정</button> -->
         <!-- <button id="MMMG-btn-manageUserAcctRefund"     class="common-btn-outer">환불계좌설정</button> -->
         <!-- <button id="MMMG-btn-paymentMissedreq"         class="common-btn-outer">오입금(오송금) 반환신청</button> -->
@@ -43,6 +44,7 @@
             /* ======================== */
             $("#MMMG-btn-manageUserAcctList") .click(function() {Navigation.moveFrontPage(Navigation.Page.B81ManagerBankacctList   , {grpno: MMMG.Data.grpno}); });
             $("#MMMG-btn-manageUserLayer")    .click(function() {Navigation.moveFrontPage(Navigation.Page.B85ManagerMemberLayering , {grpno: MMMG.Data.grpno}); });
+            $("#MMMG-btn-manageBacknumber")   .click(function() {Navigation.moveFrontPage(Navigation.Page.B86ManagerUpdateBacknumberlength , {grpno: MMMG.Data.grpno}); });
             // $("#MMMG-btn-manageUserAddr")         .click(function() {Navigation.moveFrontPage(Navigation.Page.B21UserAddrList, {}); });
             // $("#MMMG-btn-manageUserAcctRefund")   .click(function() {Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate, {}); });
             // $("#MMMG-btn-paymentMissedreq")       .click(function() {Navigation.moveFrontPage(Navigation.Page.B33UserPaymentMissedreq, {}); });

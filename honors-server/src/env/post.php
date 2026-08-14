@@ -30,6 +30,7 @@
     $options["BACCNICKNAME"]                                        = get("BACCNICKNAME");
     $options["BACCNO"]                                              = get("BACCNO");
     $options["BACCTYPE"]                                            = get("BACCTYPE");
+    $options["BACKNUMBERLENGTH"]                                    = get("BACKNUMBERLENGTH");
     $options["BATTINGFLG"]                                          = get("BATTINGFLG");
     $options["BILL"]                                                = get("BILL");
     $options["BIRTHYEAR"]                                           = get("BIRTHYEAR");
@@ -66,6 +67,7 @@
     $options["GRPFNC_SPONSORSHIPTOTAL"]                             = get("GRPFNC_SPONSORSHIPTOTAL");
     $options["GRPMANAGER"]                                          = get("GRPMANAGER");
     $options["GRPNAME"]                                             = get("GRPNAME");
+    $options["GRPMBACKNUM"]                                         = get("GRPMBACKNUM");
     $options["GRPNO"]                                               = get("GRPNO");
     $options["HASCARFLG"]                                           = get("HASCARFLG");
     $options["ID"]                                                  = get("ID");

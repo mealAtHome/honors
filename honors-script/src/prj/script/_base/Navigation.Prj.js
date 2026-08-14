@@ -14,6 +14,7 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* User */                      case "Api.User.update"                                      : url = serverHost + "/src/data/user/updateUser.php"; break;
         /* User */                      case "Api.User.deleteUserInfo"                              : url = serverHost + "/src/data/user/deleteUserInfo.php"; break;
         /* Grp */                       case "Api.Grp.select"                                       : url = serverHost + "/src/data/grp/selectGrp.php"; break;
+        /* Grp */                       case "Api.Grp.update"                                       : url = serverHost + "/src/data/grp/updateGrp.php"; break;
         /* GrpfncSponsorship */         case "Api.GrpfncSponsorship.select"                         : url = serverHost + "/src/data/grpfncSponsorship/selectGrpfncSponsorship.php"; break;
         /* GrpfncSponsorship */         case "Api.GrpfncSponsorship.update"                         : url = serverHost + "/src/data/grpfncSponsorship/updateGrpfncSponsorship.php"; break;
         /* GrpfncPurchase */            case "Api.GrpfncPurchase.select"                            : url = serverHost + "/src/data/grpfncPurchase/selectGrpfncPurchase.php"; break;
@@ -81,6 +82,7 @@ Navigation.Page =
     B14ManagerMainSettle : "MMST",
     B80GrpManageHome : "MMMG",
     B85ManagerMemberLayering : "MMLY",
+    B86ManagerUpdateBacknumberlength : "MUBL",
     B71GrpMemberDetail : "GMDT",
     B72GrpMemberMergeTemp : "GMMT",
     B72GrpMemberTagList : "GMTL",
@@ -149,6 +151,7 @@ Navigation.getURL = function(str)
         case Navigation.Page.B13ManagerMainMembers                         : url = `${host}/app/B00-manager/B13-ManagerMainMembers.html?${scriptVersion}`; break;
         case Navigation.Page.B14ManagerMainSettle                          : url = `${host}/app/B00-manager/B14-ManagerMainSettle.html?${scriptVersion}`; break;
         case Navigation.Page.B85ManagerMemberLayering                      : url = `${host}/app/B00-manager/B85-ManagerMemberLayering.html?${scriptVersion}`; break;
+        case Navigation.Page.B86ManagerUpdateBacknumberlength              : url = `${host}/app/B00-manager/B86ManagerUpdateBacknumberlength.html?${scriptVersion}`; break;
         case Navigation.Page.B71GrpMemberDetail                            : url = `${host}/app/B00-manager/B71-GrpMemberDetail.html?${scriptVersion}`; break;
         case Navigation.Page.B72GrpMemberMergeTemp                         : url = `${host}/app/B00-manager/B72-GrpMemberMergeTemp.html?${scriptVersion}`; break;
         case Navigation.Page.B72GrpMemberTagList                           : url = `${host}/app/B70-grpm/B72GrpMemberTagList.html?${scriptVersion}`; break;
@@ -218,6 +221,7 @@ Navigation.getData = function(code)
         case Navigation.Page.B14ManagerMainSettle                   : return data = MMST.Data;
         case Navigation.Page.B80GrpManageHome                       : return data = MMMG.Data;
         case Navigation.Page.B85ManagerMemberLayering               : return data = MMLY.Data;
+        case Navigation.Page.B86ManagerUpdateBacknumberlength       : return data = MUBL.Data;
         case Navigation.Page.B71GrpMemberDetail                     : return data = GMDT.Data;
         case Navigation.Page.B72GrpMemberMergeTemp                  : return data = GMMT.Data;
         case Navigation.Page.B72GrpMemberTagList                    : return data = GMTL.Data;
@@ -319,6 +323,7 @@ Navigation.executeShow = function()
         case Navigation.Page.B14ManagerMainSettle                     : MMST.show(); break;
         case Navigation.Page.B80GrpManageHome                         : MMMG.show(); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.show(); break;
+        case Navigation.Page.B86ManagerUpdateBacknumberlength         : MUBL.show(); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.show(); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.show(); break;
         case Navigation.Page.B72GrpMemberTagList                      : GMTL.show(); break;
@@ -400,6 +405,7 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B14ManagerMainSettle                     : MMST.close(true); break;
         case Navigation.Page.B80GrpManageHome                         : MMMG.close(true); break;
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.close(true); break;
+        case Navigation.Page.B86ManagerUpdateBacknumberlength         : MUBL.close(true); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.close(true); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.close(true); break;
         case Navigation.Page.B72GrpMemberTagList                      : GMTL.close(true); break;

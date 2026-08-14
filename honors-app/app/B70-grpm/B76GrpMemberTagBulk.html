@@ -151,9 +151,10 @@
                                 <label class="common-checkbox-top">
                                     <input type="checkbox" class="GMTB-input-checkbox" userno="${userno}" ${checked}/>
                                     <span class="common-checkbox-spanBox"></span>
-                                    <div class="common-fonts08" style="margin-left:0.7em;">${mUser.getUsertypePill()}</div>
+                                    <div class="common-fonts09 common-strong" style="margin-left:0.7em;">${Common.isEmpty(model.getGrpmbacknum()) ? "-" : model.getGrpmbacknum()}</div>
                                     <div class="common-fonts09" style="margin-left:0.5em;">${mUser.getName()}</div>
                                     <div class="common-fonts08" style="margin-left:0.2em;">${mUser.getBirthyearFont()}</div>
+                                    <div class="common-fonts08" style="margin-left:0.5em;">${mUser.getUsertypePill()}</div>
                                 </label>
                             </div>
                         `;
