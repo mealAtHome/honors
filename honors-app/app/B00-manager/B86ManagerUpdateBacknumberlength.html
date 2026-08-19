@@ -19,14 +19,17 @@
     <!-- ======================== -->
     <!-- 멤버탭 : 등번호 목록/변경 -->
     <!-- ======================== -->
+    <style>
+        #MUBL-tbl-memberList > tbody > tr > td:nth-child(1) { width:5%; }
+        #MUBL-tbl-memberList > tbody > tr > td:nth-child(2) { width:5%; padding-left:0.5em; padding-right:0.5em; }
+    </style>
     <div class="MUBL-div-searchtab" searchtab="member">
         <div class="common-div-cushion">
-            <table id="MUBL-tbl-memberList" class="common-tbl-normal common-fonts09" tbl-type="normal" style="width:100%;">
+            <table id="MUBL-tbl-memberList" class="common-tbl-normal common-fonts09" tbl-type="rowborder" style="width:100%;">
                 <thead>
                     <tr>
-                        <th>등번호</th>
+                        <th colspan="2">등번호</th>
                         <th>멤버</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -88,9 +91,9 @@
                         let tr =
                         `
                             <tr ${model.getPk()}>
-                                <td class="MUBL-td-backnumView">${backnum}</td>
-                                <td>${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearFont()})` : ""}</td>
                                 <td class="MUBL-td-action"><button class="MUBL-btn-editRow common-btn-outer">변경</button></td>
+                                <td class="MUBL-td-backnumView">${backnum}</td>
+                                <td><span>${mUser.getName()}</span>${mUser.getBirthyearFont()}</td>
                             </tr>
                         `;
                         $tbody.append(tr);
@@ -149,20 +152,15 @@
                 let tr = $(this).closest("tr");
                 let currentVal = tr.find(".MUBL-td-backnumView").text().trim();
                 if(currentVal == "-") currentVal = "";
-                tr.find(".MUBL-td-backnumView").html(`<input type="text" class="MUBL-input-backnum common-input-text" maxlength="5" value="${currentVal}" style="width:5em;"/>`);
-                tr.find(".MUBL-td-action").html(
-                    `
-                        <button class="MUBL-btn-saveRow common-btn-inner">저장</button>
-                        <button class="MUBL-btn-cancelRow common-btn-outer">취소</button>
-                    `
-                );
+                tr.find(".MUBL-td-backnumView").html(`<input type="text" class="MUBL-input-membacknum common-input-text common-fonts09" maxlength="5" value="${currentVal}" style="width:5em;"/>`);
+                tr.find(".MUBL-td-action").html(`<button class="MUBL-btn-saveRow common-btn-inner">저장</button>`);
             });
 
             /* 취소 : 다시 조회해서 원래대로 */
-            $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-cancelRow", function()
-            {
-                MUBL.searchMember();
-            });
+            // $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-cancelRow", function()
+            // {
+            //     MUBL.searchMember();
+            // });
 
             /* 저장(개별 행) */
             $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-saveRow", function()
@@ -170,7 +168,7 @@
                 let tr = $(this).closest("tr");
                 let grpno = tr.attr("grpno");
                 let userno = tr.attr("userno");
-                let grpmbacknum = tr.find(".MUBL-input-backnum").val().trim();
+                let grpmbacknum = tr.find(".MUBL-input-membacknum").val().trim();
 
                 let process = function()
                 {

@@ -81,7 +81,7 @@ class MUsers extends _MCommon
             `
                 <div class="MUser-make-div-modelTop common-div-card">
                     <span class="common-block common-strong">유저</span>
-                    <span class="common-block">${model.getName()} ${model.getBirthyear() != "" ? `(${model.getBirthyearFont()})` : ""}</span>
+                    <span class="common-block"><span>${model.getName()}</span>${model.getBirthyearFont()}</span>
                     <span class="common-block common-fonts09">
                         ${model.getPhone()         != "" ? `<span class="common-block common-colorBody commonEvent-tag-phoneCall" phone-call="${model.getPhone()}">${model.getPhone()}</span>` : ""}
                         ${model.getHascarflgCvrt() != "" ? `<span class="common-block common-colorBody">${model.getHascarflgCvrt()}</span>` : ""}

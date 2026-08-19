@@ -47,7 +47,6 @@
 /* 마진 - 약간 */
 /* 마진 - 아주 약간 */
 /* 마진 - 아주 더 약간 */
-/* 패딩 - 버튼 */
 /* 패딩 - 꽉 */
 /* 패딩 - 꽉 */
 /* 패딩 - 큰 */
@@ -66,7 +65,7 @@
 .common-btn-radio,
 .common-btn-flat {
   display: inline-block;
-  padding: 0.2em 0.5em 0.3em;
+  padding: 0.2em 0.4em 0.3em;
   text-decoration: none;
   border-radius: 0.3em;
   background: #ffffff;

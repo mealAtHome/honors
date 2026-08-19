@@ -54,7 +54,26 @@
     --colorEnddRgb: #{rgb-values($colorEndd)};
     --colorSnowRgb: #{rgb-values($colorSnow)};
 }
+:root
+{
+    --marHuge: 2em;   /* 마진 - 꽉 */
+    --marFull: 1em;   /* 마진 - 꽉 */
+    --marMore: 0.8em; /* 마진 - 많음 */
+    --marBase: 0.6em; /* 마진 - 기본 */
+    --marHalf: 0.4em; /* 마진 - 반 */
+    --marLite: 0.2em; /* 마진 - 약간 */
+    --marTiny: 0.2em; /* 마진 - 아주 약간 */
+    --marNano: 0.1em; /* 마진 - 아주 더 약간 */
+    --padHuge: 2em;   /* 패딩 - 꽉 */
+    --padFull: 1em;   /* 패딩 - 꽉 */
+    --padMore: 0.8em; /* 패딩 - 큰 */
+    --padBase: 0.6em; /* 패딩 - 기본 */
+    --padHalf: 0.4em; /* 패딩 - 반 */
+    --padLite: 0.2em; /* 패딩 - 약간 */
+    --padTiny: 0.2em; /* 패딩 - 아주 약간 */
+    --padNano: 0.1em; /* 패딩 - 아주 더 약간 */
 
+}
 .common-colorFont[font-color=main] { color:$colorMain;} .common-colorMain { color:$colorMain;} .common-card[card-color=main] { color:$colorMain; background-color:rgba($colorMain, 0.2); } .common-pill[pill-color=main] { color:$colorMain; background-color:$colorSnow; border: 0.07em solid $colorMain; } .common-pill[pill-color=main]:active { background-color:rgba(var(--colorMainRgb), 0.2); } .common-pill[pill-color=main][tab=tab] { background-color:$colorMain; @include getFontColorByBgColor($colorMain); }
 .common-colorFont[font-color=dark] { color:$colorDark;} .common-colorDark { color:$colorDark;} .common-card[card-color=dark] { color:$colorDark; background-color:rgba($colorDark, 0.2); } .common-pill[pill-color=dark] { color:$colorDark; background-color:$colorSnow; border: 0.07em solid $colorDark; } .common-pill[pill-color=dark]:active { background-color:rgba(var(--colorDarkRgb), 0.2); } .common-pill[pill-color=dark][tab=tab] { background-color:$colorDark; @include getFontColorByBgColor($colorDark); }
 .common-colorFont[font-color=head] { color:$colorHead;} .common-colorHead { color:$colorHead;} .common-card[card-color=head] { color:$colorHead; background-color:rgba($colorHead, 0.2); } .common-pill[pill-color=head] { color:$colorHead; background-color:$colorSnow; border: 0.07em solid $colorHead; } .common-pill[pill-color=head]:active { background-color:rgba(var(--colorHeadRgb), 0.2); } .common-pill[pill-color=head][tab=tab] { background-color:$colorHead; @include getFontColorByBgColor($colorHead); }
@@ -65,8 +84,8 @@
 .common-colorFont[font-color=line] { color:$colorLine;} .common-colorLine { color:$colorLine;} .common-card[card-color=line] { color:$colorLine; background-color:rgba($colorLine, 0.2); } .common-pill[pill-color=line] { color:$colorLine; background-color:$colorSnow; border: 0.07em solid $colorLine; } .common-pill[pill-color=line]:active { background-color:rgba(var(--colorLineRgb), 0.2); } .common-pill[pill-color=line][tab=tab] { background-color:$colorLine; @include getFontColorByBgColor($colorLine); }
 .common-colorFont[font-color=pstv] { color:$colorPstv;} .common-colorPstv { color:$colorPstv;} .common-card[card-color=pstv] { color:$colorPstv; background-color:rgba($colorPstv, 0.2); } .common-pill[pill-color=pstv] { color:$colorPstv; background-color:$colorSnow; border: 0.07em solid $colorPstv; } .common-pill[pill-color=pstv]:active { background-color:rgba(var(--colorPstvRgb), 0.2); } .common-pill[pill-color=pstv][tab=tab] { background-color:$colorPstv; @include getFontColorByBgColor($colorPstv); }
 .common-colorFont[font-color=allw] { color:$colorAllw;} .common-colorAllw { color:$colorAllw;} .common-card[card-color=allw] { color:$colorAllw; background-color:rgba($colorAllw, 0.2); } .common-pill[pill-color=allw] { color:$colorAllw; background-color:$colorSnow; border: 0.07em solid $colorAllw; } .common-pill[pill-color=allw]:active { background-color:rgba(var(--colorAllwRgb), 0.2); } .common-pill[pill-color=allw][tab=tab] { background-color:$colorAllw; @include getFontColorByBgColor($colorAllw); }
-.common-colorFont[font-color=prog] { color:$colorProg;} .common-colorProg { color:$colorProg;} .common-card[card-color=prog] { color:$colorProg; background-color:rgba($colorProg, 0.2); } .common-pill[pill-color=prog] { color:$colorProg; background-color:$colorSnow; border: 0.07em solid $colorProg; } .common-pill[pill-color=prog]:active { background-color:rgba(var(--colorProgRgb), 0.2); } .common-pill[pill-color=prog][tab=tab] { background-color:$colorProg; @include getFontColorByBgColor($colorProg); }
 .common-colorFont[font-color=ntce] { color:$colorNtce;} .common-colorNtce { color:$colorNtce;} .common-card[card-color=ntce] { color:$colorNtce; background-color:rgba($colorNtce, 0.2); } .common-pill[pill-color=ntce] { color:$colorNtce; background-color:$colorSnow; border: 0.07em solid $colorNtce; } .common-pill[pill-color=ntce]:active { background-color:rgba(var(--colorNtceRgb), 0.2); } .common-pill[pill-color=ntce][tab=tab] { background-color:$colorNtce; @include getFontColorByBgColor($colorNtce); }
+.common-colorFont[font-color=prog] { color:$colorProg;} .common-colorProg { color:$colorProg;} .common-card[card-color=prog] { color:$colorProg; background-color:rgba($colorProg, 0.2); } .common-pill[pill-color=prog] { color:$colorProg; background-color:$colorSnow; border: 0.07em solid $colorProg; } .common-pill[pill-color=prog]:active { background-color:rgba(var(--colorProgRgb), 0.2); } .common-pill[pill-color=prog][tab=tab] { background-color:$colorProg; @include getFontColorByBgColor($colorProg); }
 .common-colorFont[font-color=info] { color:$colorInfo;} .common-colorInfo { color:$colorInfo;} .common-card[card-color=info] { color:$colorInfo; background-color:rgba($colorInfo, 0.2); } .common-pill[pill-color=info] { color:$colorInfo; background-color:$colorSnow; border: 0.07em solid $colorInfo; } .common-pill[pill-color=info]:active { background-color:rgba(var(--colorInfoRgb), 0.2); } .common-pill[pill-color=info][tab=tab] { background-color:$colorInfo; @include getFontColorByBgColor($colorInfo); }
 .common-colorFont[font-color=dtil] { color:$colorDtil;} .common-colorDtil { color:$colorDtil;} .common-card[card-color=dtil] { color:$colorDtil; background-color:rgba($colorDtil, 0.2); } .common-pill[pill-color=dtil] { color:$colorDtil; background-color:$colorSnow; border: 0.07em solid $colorDtil; } .common-pill[pill-color=dtil]:active { background-color:rgba(var(--colorDtilRgb), 0.2); } .common-pill[pill-color=dtil][tab=tab] { background-color:$colorDtil; @include getFontColorByBgColor($colorDtil); }
 .common-colorFont[font-color=hold] { color:$colorHold;} .common-colorHold { color:$colorHold;} .common-card[card-color=hold] { color:$colorHold; background-color:rgba($colorHold, 0.2); } .common-pill[pill-color=hold] { color:$colorHold; background-color:$colorSnow; border: 0.07em solid $colorHold; } .common-pill[pill-color=hold]:active { background-color:rgba(var(--colorHoldRgb), 0.2); } .common-pill[pill-color=hold][tab=tab] { background-color:$colorHold; @include getFontColorByBgColor($colorHold); }
@@ -115,7 +134,9 @@
 .common-block           { display: block; }
 .common-flexTop         { display: flex; gap: $padBase; align-items: top; }
 .common-flexCenter      { display: flex; gap: $padBase; align-items: center; }
+.common-flexVertical    { display: flex; flex-direction: column; }
 .common-flexParentLR    { display: flex; gap: $padBase; align-items: center; justify-content: space-between; }
+.common-flexBetween     { display: flex; gap: $padBase; align-items: center; justify-content: space-between; }
 .common-inline          { display: inline-block; }
 .common-indent04        { display: block; padding-left: $padHalf; }
 .common-indent08        { display: block; padding-left: $padBase; }

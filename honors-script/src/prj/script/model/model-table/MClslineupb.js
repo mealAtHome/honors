@@ -88,7 +88,7 @@ class MClslineupbs extends _MCommon
             let grpno = model.getGrpno();
             let clsno = model.getClsno();
             let userno = model.getUserno();
-            let username = model.getUsername();
+            let username = model.getApplyername();
             let bill = model.getBill();
             let memberpoint = model.getMemberpoint();
             let prepaidflg = model.getPrepaidflg();

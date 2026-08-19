@@ -47,7 +47,6 @@
 /* 마진 - 약간 */
 /* 마진 - 아주 약간 */
 /* 마진 - 아주 더 약간 */
-/* 패딩 - 버튼 */
 /* 패딩 - 꽉 */
 /* 패딩 - 꽉 */
 /* 패딩 - 큰 */
@@ -105,6 +104,25 @@
   --colorNgtvRgb: 120, 0, 0;
   --colorEnddRgb: 113, 113, 113;
   --colorSnowRgb: 255, 255, 255;
+}
+
+:root {
+  --marHuge: 2em; /* 마진 - 꽉 */
+  --marFull: 1em; /* 마진 - 꽉 */
+  --marMore: 0.8em; /* 마진 - 많음 */
+  --marBase: 0.6em; /* 마진 - 기본 */
+  --marHalf: 0.4em; /* 마진 - 반 */
+  --marLite: 0.2em; /* 마진 - 약간 */
+  --marTiny: 0.2em; /* 마진 - 아주 약간 */
+  --marNano: 0.1em; /* 마진 - 아주 더 약간 */
+  --padHuge: 2em; /* 패딩 - 꽉 */
+  --padFull: 1em; /* 패딩 - 꽉 */
+  --padMore: 0.8em; /* 패딩 - 큰 */
+  --padBase: 0.6em; /* 패딩 - 기본 */
+  --padHalf: 0.4em; /* 패딩 - 반 */
+  --padLite: 0.2em; /* 패딩 - 약간 */
+  --padTiny: 0.2em; /* 패딩 - 아주 약간 */
+  --padNano: 0.1em; /* 패딩 - 아주 더 약간 */
 }
 
 .common-colorFont[font-color=main] {
@@ -387,34 +405,6 @@
   color: rgb(251.4, 255, 251.4);
 }
 
-.common-colorFont[font-color=prog] {
-  color: #039a00;
-}
-
-.common-colorProg {
-  color: #039a00;
-}
-
-.common-card[card-color=prog] {
-  color: #039a00;
-  background-color: rgba(3, 154, 0, 0.2);
-}
-
-.common-pill[pill-color=prog] {
-  color: #039a00;
-  background-color: #ffffff;
-  border: 0.07em solid #039a00;
-}
-
-.common-pill[pill-color=prog]:active {
-  background-color: rgba(var(--colorProgRgb), 0.2);
-}
-
-.common-pill[pill-color=prog][tab=tab] {
-  background-color: #039a00;
-  color: rgb(251.5093506494, 255, 251.44);
-}
-
 .common-colorFont[font-color=ntce] {
   color: #2865ff;
 }
@@ -441,6 +431,34 @@
 .common-pill[pill-color=ntce][tab=tab] {
   background-color: #2865ff;
   color: rgb(0, 20.9244186047, 73.75);
+}
+
+.common-colorFont[font-color=prog] {
+  color: #039a00;
+}
+
+.common-colorProg {
+  color: #039a00;
+}
+
+.common-card[card-color=prog] {
+  color: #039a00;
+  background-color: rgba(3, 154, 0, 0.2);
+}
+
+.common-pill[pill-color=prog] {
+  color: #039a00;
+  background-color: #ffffff;
+  border: 0.07em solid #039a00;
+}
+
+.common-pill[pill-color=prog]:active {
+  background-color: rgba(var(--colorProgRgb), 0.2);
+}
+
+.common-pill[pill-color=prog][tab=tab] {
+  background-color: #039a00;
+  color: rgb(251.5093506494, 255, 251.44);
 }
 
 .common-colorFont[font-color=info] {
@@ -747,7 +765,19 @@
   align-items: center;
 }
 
+.common-flexVertical {
+  display: flex;
+  flex-direction: column;
+}
+
 .common-flexParentLR {
+  display: flex;
+  gap: 0.6em;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.common-flexBetween {
   display: flex;
   gap: 0.6em;
   align-items: center;

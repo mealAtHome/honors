@@ -41,6 +41,9 @@
                 <tr><th>잔여금</th><td><span id="GMDT-span-point"></span></td></tr>
             </tbody>
         </table>
+        <div id="GMDT-div-mergeTemp" class="common-cushionHalfUp" style="display:none;">
+            <button id="GMDT-btn-mergeTemp" class="common-btn-outer">멤버병합</button>
+        </div>
     </div>
 
     <!-- ========================= -->
@@ -174,6 +177,12 @@
                                 $("#GMDT-span-hascarflg").text(mGrpMemberUser.getHascarflgCvrt());
                                 $("#GMDT-span-point").text(mGrpMember.getPointWon());
 
+                                /* 임시멤버일 때만 멤버병합 노출 */
+                                if(mGrpMemberUser.isUsertypeTemp())
+                                    $("#GMDT-div-mergeTemp").show();
+                                else
+                                    $("#GMDT-div-mergeTemp").hide();
+
                                 break;
                             }
                             case "point":
@@ -205,6 +214,14 @@
                     }
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            });
+
+            /* =============== */
+            /* 멤버병합 (임시멤버 전용) */
+            /* =============== */
+            $("#GMDT-btn-mergeTemp").click(function()
+            {
+                Navigation.moveFrontPage(Navigation.Page.B72GrpMemberMergeTemp, {grpno: GMDT.Data.grpno, userno: GMDT.Data.userno});
             });
 
             /* =============== */

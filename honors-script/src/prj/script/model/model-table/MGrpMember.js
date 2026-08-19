@@ -69,6 +69,23 @@ class MGrpMember
     {
         let model = this;
         let mUser = model.getMUser();
+        let isTemp = mUser.isUsertypeTemp();
+
+        /* 아바타 (등번호 / 미배정) */
+        let avatarHtml =
+            Common.isEmpty(model.getGrpmbacknum())
+            ? `<div style="width:44px;height:44px;border-radius:999px;flex:none;box-sizing:border-box;border:1.5px dashed #C4C7CE;color:#B4B2A9;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">-</div>`
+            : `<div style="width:44px;height:44px;border-radius:999px;flex:none;background:#020654;color:#FFFFFF;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;">${model.getGrpmbacknum()}</div>`;
+        if(isTemp)
+        {
+            avatarHtml =
+            `
+                <div style="position:relative;flex:none;">
+                    ${avatarHtml}
+                    <span style="position:absolute;bottom:-3px;right:-3px;background:#FFB300;color:#FFFFFF;font-size:9px;font-weight:700;padding:1px 5px;border-radius:999px;border:2px solid #FFFFFF;">임시</span>
+                </div>
+            `;
+        }
 
         /* 태그 pill */
         let tagsHtml = "";
@@ -77,37 +94,36 @@ class MGrpMember
             let pillsHtml = "";
             for(let i in model.getMGrpmtagas())
                 pillsHtml += model.getMGrpmtagas()[i].makePill();
-            tagsHtml = `<span class="common-block common-cushionHalfUp">${pillsHtml}</span>`;
+            if(pillsHtml != "")
+                tagsHtml = `<div class="common-div-cushionUD common-fonts08">${pillsHtml}</div>`;
         }
 
-        /* buttonHtml */
-        let buttonHtmlFinal = "";
-        if(buttonHtml != "")
-        {
-            buttonHtmlFinal =
-            `
-                <span class="common-div-cushionUD common-fonts09">
-                    ${buttonHtml}
-                </span>
-            `;
-        }
+        /* 푸터 : 아이콘(전화/자차) + 상세보기(또는 전달받은 buttonHtml) */
+        let iconsHtml = "";
+        if(mUser.getPhone()     != ""    ) iconsHtml += `<i class="ti ti-phone commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}"></i>`;
+        if(mUser.getHascarflg() == GGF.Y ) iconsHtml += `<i class="ti ti-car"></i>`;
+
+        let actionHtml =
+            buttonHtml != ""
+            ? buttonHtml
+            : `<span class="commonEvent-tag-hyperlink common-colorSide common-fonts08" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}>상세보기 &gt;</span>`;
 
         /* final html */
         let html =
         `
             <div class="MGrpMembers-make-div-modelTop common-div-card">
-                <span class="common-block common-strong">
-                    ${model.getGrpmtypeCvrt()}
-                    ${Common.isEmpty(model.getGrpmposition()) ? "" : ` - ${model.getGrpmposition()}`}
-                    ${mUser.isUsertypeTemp() ? "[임시]" : ""}</span>
-                <span class="common-block">${mUser.getName()} ${mUser.getBirthyear() != "" ? `(${mUser.getBirthyearFont()})` : ""}</span>
-                <span class="common-block common-fonts09">
-                    ${mUser.getPhone()         != "" ? `<span class="common-block common-colorBody commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}">${mUser.getPhone()}</span>` : ""}
-                    ${mUser.getAddress()       != "" ? `<span class="common-block common-colorBody">${mUser.getAddress()}</span>` : ""}
-                    ${mUser.getHascarflgCvrt() != "" ? `<span class="common-block common-colorBody">${mUser.getHascarflgCvrt()}</span>` : ""}
-                </span>
+                <div class="common-flexCenter">
+                    ${avatarHtml}
+                    <div class="common-flexVertical">
+                        <div class="common-strong"><span>${mUser.getName()}</span>${mUser.getBirthyearFont()}</div>
+                        <div class="common-fonts08 common-colorBody">${model.getGrpmtypeCvrt()}${Common.isEmpty(model.getGrpmposition()) ? "" : ` · ${model.getGrpmposition()}`}</div>
+                    </div>
+                </div>
                 ${tagsHtml}
-                ${buttonHtmlFinal}
+                <div class="common-flexBetween" style="margin-top:var(--marBase);padding-top:var(--padBase); border-top:1px solid var(--colorLine);">
+                    <div class="common-flexCenter common-colorCmmt">${iconsHtml}</div>
+                    ${actionHtml}
+                </div>
             </div>
         `;
         return html;
@@ -178,27 +194,13 @@ class MGrpMembers extends _MCommon
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            let isManager = GGstorage.Prj.isManagerOfGrp(model.getGrpno());
 
             /* --------------- */
-            /* button */
+            /* button (기본 상태는 카드 자체의 "상세보기"를 사용하므로 비워둠) */
             /* --------------- */
             let buttonHtml = "";
             switch(option)
             {
-                case "":
-                {
-                    if(isManager)
-                    {
-                        buttonHtml += `<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}>멤버상세</button>&nbsp;`;
-
-                        if(model.isUsertypeTemp())
-                        {
-                            buttonHtml += `<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.B72GrpMemberMergeTemp}" hyperlink-viewmode="page" ${model.getPk()}>멤버병합</button>&nbsp;`;
-                        }
-                    }
-                    break;
-                }
                 case "makeForChoose":
                 {
                     buttonHtml += `<button class="common-btn-inner  MGrpMember-make-btn-choose" ${model.getPk()}>선택하기</button>&nbsp;`;
