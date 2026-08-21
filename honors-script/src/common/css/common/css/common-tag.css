@@ -841,6 +841,10 @@
 /* --------------- */
 /* font style */
 /* --------------- */
+.common-fonts07 {
+  font-size: 0.7em;
+}
+
 .common-fonts08 {
   font-size: 0.8em;
 }

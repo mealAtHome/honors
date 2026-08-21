@@ -69,23 +69,9 @@ class MGrpMember
     {
         let model = this;
         let mUser = model.getMUser();
-        let isTemp = mUser.isUsertypeTemp();
 
-        /* 아바타 (등번호 / 미배정) */
-        let avatarHtml =
-            Common.isEmpty(model.getGrpmbacknum())
-            ? `<div style="width:44px;height:44px;border-radius:999px;flex:none;box-sizing:border-box;border:1.5px dashed #C4C7CE;color:#B4B2A9;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;">-</div>`
-            : `<div style="width:44px;height:44px;border-radius:999px;flex:none;background:#020654;color:#FFFFFF;font-weight:900;font-size:16px;display:flex;align-items:center;justify-content:center;">${model.getGrpmbacknum()}</div>`;
-        if(isTemp)
-        {
-            avatarHtml =
-            `
-                <div style="position:relative;flex:none;">
-                    ${avatarHtml}
-                    <span style="position:absolute;bottom:-3px;right:-3px;background:#FFB300;color:#FFFFFF;font-size:9px;font-weight:700;padding:1px 5px;border-radius:999px;border:2px solid #FFFFFF;">임시</span>
-                </div>
-            `;
-        }
+        /* backnumber */
+        let backnumberHtml = GGC.GrpMember.backnumberSpan(model.getGrpmbacknum());
 
         /* 태그 pill */
         let tagsHtml = "";
@@ -113,9 +99,9 @@ class MGrpMember
         `
             <div class="MGrpMembers-make-div-modelTop common-div-card">
                 <div class="common-flexCenter">
-                    ${avatarHtml}
+                    ${mUser.makeProfile()}
                     <div class="common-flexVertical">
-                        <div class="common-strong"><span>${mUser.getName()}</span>${mUser.getBirthyearFont()}</div>
+                        <div class="common-strong">${backnumberHtml}<span>${mUser.getName()}</span>${mUser.getBirthyearFont()}</div>
                         <div class="common-fonts08 common-colorBody">${model.getGrpmtypeCvrt()}${Common.isEmpty(model.getGrpmposition()) ? "" : ` · ${model.getGrpmposition()}`}</div>
                     </div>
                 </div>
@@ -157,7 +143,6 @@ class MGrpMember
             usertype: GGF.User.Usertype.NORMAL,
         };
         let model = new MGrpMember(dat);
-        let mUser = model.getMUser();
         return model.make();
     }
 

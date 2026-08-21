@@ -49,5 +49,5 @@ GGC.User =
             rslt = `(${val.substring(2, 4)})`;
         return rslt;
     },
-    birthyearFont(val) { return `<span class="common-colorFont" font-color="body">${GGC.User.birthyear(val)}</span>`; },
+    birthyearFont(val) { return `<span class="common-colorFont common-fonts07" font-color="body">&nbsp;${GGC.User.birthyear(val)}</span>`; },
 };

@@ -1,0 +1,37 @@
+@use "sass:color";
+@use "../../_import/scss/__import" as *;
+
+.MUser-profile-main[profile=none]
+{
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 999px;
+    flex: none;
+    box-sizing: border-box;
+    border: 0.1em dashed $colorLine;
+    color: $colorCmmt;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 임시유저의 경우 */
+.MUser-profile-tempPrnt
+{
+    position: relative;
+    flex: none;
+}
+.MUser-profile-tempSpan
+{
+    position: absolute;
+    bottom: -0.2em;
+    right: -0.2em;
+    background: $colorHold;
+    color: $colorSnow;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 0.1em 0.2em;
+    border-radius: 999px;
+    border: 0.04em solid $colorSnow;
+}

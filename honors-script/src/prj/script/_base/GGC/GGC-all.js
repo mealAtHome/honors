@@ -20,21 +20,6 @@ GGC.Bankaccount =
 
 };
 
-GGC.GrpMember =
-{
-    grpmtypeCvrt(val)
-    {
-        let rslt = "";
-        switch(val)
-        {
-            case GGF.GrpMember.Grpmtype.MNG    : rslt = "매니저"; break;
-            case GGF.GrpMember.Grpmtype.MNGSUB : rslt = "부매니저"; break;
-            case GGF.GrpMember.Grpmtype.MEMBER : rslt = "멤버"; break;
-        }
-        return rslt;
-    },
-};
-
 GGC.GrpMemberPointhist =
 {
     pointtype(point)

@@ -55,6 +55,17 @@ class MUser
     isUsertypeTemp() { return this.getUsertype() === GGF.User.Usertype.TEMP; }
     isAdmin() { return this.getAdminflg() === GGF.Y; }
 
+    /* ========================= */
+    /* make */
+    /* ========================= */
+    makeProfile()
+    {
+        let html = `<div class="MUser-profile-main" profile="none"></div>`;
+        if(this.isUsertypeTemp())
+            html = `<div class="MUser-profile-tempPrnt">${html}<span class="MUser-profile-tempSpan">임시</span></div>`;
+        return html;
+    }
+
 }
 
 class MUsers extends _MCommon
