@@ -110,3 +110,7 @@ table {
   white-space: nowrap;
   border-collapse: collapse;
 }
+
+i {
+  padding-top: 0.2em;
+}

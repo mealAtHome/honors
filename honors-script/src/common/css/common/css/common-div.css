@@ -409,7 +409,7 @@ div {
 /* -------------------- */
 .common-div-headerPadding {
   width: 100%;
-  height: 52px;
+  height: 3em;
 }
 
 .common-div-header {
@@ -419,19 +419,19 @@ div {
   right: 0;
   color: #ffffff;
   width: 100%;
-  height: 52px;
+  height: 3em;
 }
 
 .common-div-header > div[header=back] {
   display: inline-block;
   width: auto;
-  line-height: 52px;
+  line-height: 3em;
 }
 
 .common-div-header > div[header=title] {
   display: inline-block;
   width: auto;
-  line-height: 52px;
+  line-height: 3em;
   padding-left: 0.6em;
   font-size: 1.2em;
   font-weight: bold;
@@ -448,18 +448,18 @@ div {
 
 .common-div-pagenationBtnTop {
   display: inline-block;
-  border-radius: 38px;
+  border-radius: 2.4em;
   background-color: #e4e7f0;
 }
 
 .common-btn-pagenationBtn {
   display: inline-block;
-  width: 38px;
-  height: 38px;
+  width: 2.4em;
+  height: 2.4em;
   background-color: #e4e7f0;
   border-radius: 100%;
   border: none;
-  line-height: 37px;
+  line-height: 2.4em;
   text-align: center;
   vertical-align: middle;
 }

@@ -134,6 +134,7 @@
 .common-block           { display: block; }
 .common-flexTop         { display: flex; gap: $padBase; align-items: top; }
 .common-flexCenter      { display: flex; gap: $padBase; align-items: center; }
+.common-flexCenterSm    { display: flex; gap: 0.2em; align-items: center; }
 .common-flexVertical    { display: flex; flex-direction: column; }
 .common-flexParentLR    { display: flex; gap: $padBase; align-items: center; justify-content: space-between; }
 .common-flexBetween     { display: flex; gap: $padBase; align-items: center; justify-content: space-between; }
@@ -223,7 +224,7 @@
     flex: 1;
 }
 .common-menuItemText > div:nth-child(1) { font-size: 1.0em; font-weight: 600; color: var(--navy); }
-.common-menuItemText > div:nth-child(2) { font-size: 0.9em;                   color: var(--gray-text); line-height: 1.4; }
+.common-menuItemText > div:nth-child(2) { font-size: 0.9em;                   color: var(--gray-text); }
 
 /* ── 뱃지 (선택 요소) ── */
 .common-menuItemBadge { font-size: 0.8em; font-weight: 700; padding: 0.3em 0.5em; border-radius: 1.2em; flex-shrink: 0; }

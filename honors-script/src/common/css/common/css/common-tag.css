@@ -765,6 +765,12 @@
   align-items: center;
 }
 
+.common-flexCenterSm {
+  display: flex;
+  gap: 0.2em;
+  align-items: center;
+}
+
 .common-flexVertical {
   display: flex;
   flex-direction: column;
@@ -984,7 +990,6 @@
 .common-menuItemText > div:nth-child(2) {
   font-size: 0.9em;
   color: var(--gray-text);
-  line-height: 1.4;
 }
 
 /* ── 뱃지 (선택 요소) ── */

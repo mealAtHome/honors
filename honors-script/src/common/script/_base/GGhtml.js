@@ -42,7 +42,7 @@ class GGbackbtnSimpleHtml extends HTMLElement
         `
             <span style="fill:rgb(2,6,84); padding:0px; height:100%;">
                 <svg
-                    style="display:inline-flex; line-height:56px;"
+                    style="display:inline-flex; line-height:3em;"
                     width="16px"
                     height="16px"
                     viewBox="0 0 16 16"

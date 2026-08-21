@@ -92,7 +92,7 @@ class MGrpMember
         let actionHtml =
             buttonHtml != ""
             ? buttonHtml
-            : `<span class="commonEvent-tag-hyperlink common-colorSide common-fonts08" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}>상세보기 &gt;</span>`;
+            : `<div class="commonEvent-tag-hyperlink common-flexCenterSm common-colorSide common-fonts08" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}><span>상세보기</span><i class="ti ti-chevron-right"></i></div>`;
 
         /* final html */
         let html =
