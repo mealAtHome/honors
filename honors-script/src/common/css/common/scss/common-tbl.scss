@@ -131,12 +131,12 @@
 .common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 0.06em solid $colorSept; border-right: 0.06em solid $colorSept; }
 
 .common-tbl-normal[tbl-type=card] > tbody > tr             > td                 { background-color: $colorSnow; border-top: 0.06em solid $colorLine; }
-.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td                 { background-color: $colorSnow; border-top: none; padding-top: $padBase;}
+.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td                 { background-color: $colorSnow; border-top: none; }
 .common-tbl-normal[tbl-type=card] > tbody > tr             > td:first-child     { padding-left  : $padBase; } /* 테이블의 양사이드가 둥글기 때문에 */
 .common-tbl-normal[tbl-type=card] > tbody > tr             > td:last-child      { padding-right : $padBase; } /* 테이블의 양사이드가 둥글기 때문에 */
 .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:before          { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
 .common-tbl-normal[tbl-type=card] > tbody > tr:last-child  > td:after           { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td[td-type=th]     { font-weight: bold; background-color: rgba($colorBody, 0.1); padding-top: $padBase; padding-bottom: $padBase; }
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td[td-type=th]     { font-weight: bold; background-color: rgba($colorBody, 0.1); }
 
 .common-tbl-normal[tbl-textAlign=between] > tbody > tr > td:first-child { text-align: left;  padding-right : $padMore; }
 .common-tbl-normal[tbl-textAlign=between] > tbody > tr > td:last-child  { text-align: right; padding-left  : $padMore; }

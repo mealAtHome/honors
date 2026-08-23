@@ -267,7 +267,6 @@
 .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td {
   background-color: #ffffff;
   border-top: none;
-  padding-top: 0.6em;
 }
 
 .common-tbl-normal[tbl-type=card] > tbody > tr > td:first-child {
@@ -291,8 +290,6 @@
 .common-tbl-normal[tbl-type=card] > tbody > tr > td[td-type=th] {
   font-weight: bold;
   background-color: rgba(60, 67, 92, 0.1);
-  padding-top: 0.6em;
-  padding-bottom: 0.6em;
 }
 
 .common-tbl-normal[tbl-textAlign=between] > tbody > tr > td:first-child {
