@@ -29,21 +29,13 @@
     <!-- 멤버상세 -->
     <!-- ========================= -->
     <div class="GMDT-div-tab common-div-cushion" tab="detail">
-        <p class="common-p-title">멤버정보</p>
-        <table class="common-tbl-normal common-fonts09" tbl-type="normal">
-            <tbody>
-                <tr><th>유저타입</th><td><span id="GMDT-span-usertype"></span></td></tr>
-                <tr><th>직위</th><td><span id="GMDT-span-position"></span></td></tr>
-                <tr><th>이름</th><td><span id="GMDT-span-name"></span></td></tr>
-                <tr><th>출생년도</th><td><span id="GMDT-span-birthyear"></span></td></tr>
-                <tr><th>전화번호</th><td><span id="GMDT-span-phone" class="commonEvent-tag-phoneCall" phone-call=""></span></td></tr>
-                <tr><th>자차여부</th><td><span id="GMDT-span-hascarflg"></span></td></tr>
-                <tr><th>잔여금</th><td><span id="GMDT-span-point"></span></td></tr>
-            </tbody>
-        </table>
+        <div id="GMDT-div-profileCard"></div>
+
         <div id="GMDT-div-mergeTemp" class="common-cushionHalfUp" style="display:none;">
-            <button id="GMDT-btn-mergeTemp" class="common-btn-outer">멤버병합</button>
+            <button id="GMDT-btn-mergeTemp" class="common-btn-outer" btn-size="large">임시멤버 병합하기</button>
         </div>
+
+        <div id="GMDT-div-infoList" class="common-cushionBaseUp common-div-normalTop"></div>
     </div>
 
     <!-- ========================= -->
@@ -168,14 +160,48 @@
                             {
                                 let mGrpMember = Api.GrpMember.selectByPkForMng(grpno, userno, GGF.none, GGF.toast);
                                 let mGrpMemberUser = mGrpMember.getMUser();
-                                $("#GMDT-span-usertype").html(mGrpMemberUser.getUsertypePill());
-                                $("#GMDT-span-position").text(mGrpMember.getGrpmtypeCvrt() + (Common.isEmpty(mGrpMember.getGrpmposition()) ? "" : ` (${mGrpMember.getGrpmposition()})`));
-                                $("#GMDT-span-name").text(mGrpMemberUser.getName());
-                                $("#GMDT-span-birthyear").text(mGrpMemberUser.getBirthyear());
-                                $("#GMDT-span-phone").text(mGrpMemberUser.getPhone());
-                                $("#GMDT-span-phone").attr("phone-call", mGrpMemberUser.getPhone());
-                                $("#GMDT-span-hascarflg").text(mGrpMemberUser.getHascarflgCvrt());
-                                $("#GMDT-span-point").text(mGrpMember.getPointWon());
+
+                                /* 프로필 카드 */
+                                let cardIconsHtml = "";
+                                if(mGrpMemberUser.getPhone() != "")       cardIconsHtml += `<span class="commonEvent-tag-phoneCall" phone-call="${mGrpMemberUser.getPhone()}"><i class="ti ti-phone"></i></span>`;
+                                if(mGrpMemberUser.getHascarflg() == GGF.Y) cardIconsHtml += `<i class="ti ti-car"></i>`;
+
+                                let profileHtml =
+                                `
+                                    <div class="common-div-card">
+                                        <div class="common-flexCenter">
+                                            ${mGrpMemberUser.makeProfile()}
+                                            <div class="common-flexVertical">
+                                                <div class="common-strong"><span>${mGrpMemberUser.getName()}</span>${mGrpMemberUser.getBirthyearFont()}</div>
+                                                <div class="common-fonts08 common-colorBody">${mGrpMemberUser.getUsertypePill()}&nbsp;${mGrpMember.getGrpmtypeCvrt()}${Common.isEmpty(mGrpMember.getGrpmposition()) ? "" : ` · ${mGrpMember.getGrpmposition()}`}</div>
+                                            </div>
+                                        </div>
+                                        ${cardIconsHtml == "" ? "" : `<div class="common-flexCenter common-colorCmmt" style="margin-top:var(--marBase);padding-top:var(--padBase);border-top:1px solid var(--colorLine);">${cardIconsHtml}</div>`}
+                                    </div>
+                                `;
+                                $("#GMDT-div-profileCard").html(profileHtml);
+
+                                /* 정보 리스트 */
+                                let infoHtml =
+                                `
+                                    <div class="common-infoRow common-flexBetween">
+                                        <div class="common-flexCenterSm common-colorBody"><i class="ti ti-calendar common-colorCmmt"></i><span>출생년도</span></div>
+                                        <span class="common-strong">${mGrpMemberUser.getBirthyear()}</span>
+                                    </div>
+                                    <div class="common-infoRow common-flexBetween">
+                                        <div class="common-flexCenterSm common-colorBody"><i class="ti ti-phone common-colorCmmt"></i><span>전화번호</span></div>
+                                        <span class="common-strong commonEvent-tag-phoneCall common-colorSide" phone-call="${mGrpMemberUser.getPhone()}">${mGrpMemberUser.getPhone()}</span>
+                                    </div>
+                                    <div class="common-infoRow common-flexBetween">
+                                        <div class="common-flexCenterSm common-colorBody"><i class="ti ti-car common-colorCmmt"></i><span>자차여부</span></div>
+                                        <span class="common-strong">${mGrpMemberUser.getHascarflgCvrt()}</span>
+                                    </div>
+                                    <div class="common-infoRow common-flexBetween">
+                                        <div class="common-flexCenterSm common-colorMain"><i class="ti ti-wallet"></i><span>잔여금</span></div>
+                                        <span class="common-strong common-colorSide">${mGrpMember.getPointWon()}</span>
+                                    </div>
+                                `;
+                                $("#GMDT-div-infoList").html(infoHtml);
 
                                 /* 임시멤버일 때만 멤버병합 노출 */
                                 if(mGrpMemberUser.isUsertypeTemp())

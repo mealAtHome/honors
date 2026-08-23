@@ -129,7 +129,7 @@ class MCls
                             <div class="common-card" card-type="mini" card-color="${feel}"><i class="ti ti-credit-card"></i><span>&nbsp;${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
                         </div>
                     </div>
-                    ${btnHtml != "" ? `<div class="common-cushionHalfUp common-fonts09">${btnHtml}</div>` : ""}
+                    ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}
                 </div>
             </div>
         `;
@@ -164,7 +164,7 @@ class MClss extends _MCommon
             /* ----- */
             /* clsstatus 에 따른 버튼표시 */
             /* ----- */
-            let btnHtml = `<button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`;
+            let btnHtml = "";
             if(isManager)
             {
                 switch(model.getClsstatus())
@@ -200,8 +200,17 @@ class MClss extends _MCommon
                 }
             }
 
+            /* 선두의 &nbsp; 제거 */
+            btnHtml = btnHtml.replace(/^&nbsp;/, '');
+
+            let btnHtmlFinal =
+            `
+                <div class="common-fonts09">${btnHtml}</div>
+                <div class="commonEvent-tag-hyperlink common-flexCenterSm common-colorSide common-fonts08" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${model.getPk()}><span>상세보기</span><i class="ti ti-chevron-right"></i></div>
+            `;
+
             /* make html */
-            html += model.makeCls(btnHtml);
+            html += model.makeCls(btnHtmlFinal);
         }
         $(el).html(this.mergePagenation(html));
 
@@ -286,7 +295,7 @@ class MClss extends _MCommon
         {
             let model = this.getModels()[i];
             let btnHtml = `<button class="common-btn-inner MClss-make-btn-choose" ${model.getPk()}>선택하기</button>`;
-            html += model.make(btnHtml);
+            html += model.makeCls(btnHtml);
         }
         $(el).html(this.mergePagenation(html));
     }

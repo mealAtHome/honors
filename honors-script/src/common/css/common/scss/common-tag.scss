@@ -179,6 +179,25 @@
 /* --------------- */
 .common-absoluteUR { position: absolute; top: 0.5em; right: 0.5em; }
 
+
+/* 카드형태의 모델 하부에 붙는 상세보기 등 여러 버튼 대응 */
+.common-buttonsForCardTop
+{
+    display: flex;
+    gap: $padBase;
+    align-items: center;
+    justify-content: space-between;
+    margin-top:var(--marBase);
+    padding-top:var(--padBase);
+    border-top:1px solid var(--colorLine);
+}
+
+/* ═══════════════════════════════════════
+    INFO LIST (라벨-값 행 목록)
+═══════════════════════════════════════ */
+.common-infoRow             { padding: $padBase $padMore; border-bottom: 0.5px solid $colorLine; }
+.common-infoRow:last-child  { border-bottom: none; }
+
 /* ═══════════════════════════════════════
     MENU CARD
 ═══════════════════════════════════════ */

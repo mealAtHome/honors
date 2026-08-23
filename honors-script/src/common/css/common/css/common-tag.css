@@ -930,6 +930,29 @@
   right: 0.5em;
 }
 
+/* 카드형태의 모델 하부에 붙는 상세보기 등 여러 버튼 대응 */
+.common-buttonsForCardTop {
+  display: flex;
+  gap: 0.6em;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--marBase);
+  padding-top: var(--padBase);
+  border-top: 1px solid var(--colorLine);
+}
+
+/* ═══════════════════════════════════════
+    INFO LIST (라벨-값 행 목록)
+═══════════════════════════════════════ */
+.common-infoRow {
+  padding: 0.6em 0.8em;
+  border-bottom: 0.5px solid #e4e7f0;
+}
+
+.common-infoRow:last-child {
+  border-bottom: none;
+}
+
 /* ═══════════════════════════════════════
     MENU CARD
 ═══════════════════════════════════════ */

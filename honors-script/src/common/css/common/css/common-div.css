@@ -417,7 +417,7 @@ div {
   position: absolute;
   left: 0;
   right: 0;
-  color: #ffffff;
+  /* color: $colorSnow; */
   width: 100%;
   height: 3em;
 }

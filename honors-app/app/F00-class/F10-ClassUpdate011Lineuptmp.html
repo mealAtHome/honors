@@ -314,7 +314,7 @@
                     {
                         let model = mClsModels[i];
                         let btnHtml = `<button class="CULT-btn-clslineuptmpaDetail common-btn-outer" grpno="${grpno}" clsno="${model.getClsno()}">상세보기</button>`;
-                        html += model.make(btnHtml);
+                        html += model.makeCls(btnHtml);
                     }
                     if(mClss.getPagecnt() > 1)
                     {
@@ -357,7 +357,7 @@
                         $(".CULT-div-lineupDetails[div-type=tmp]").empty();
 
                         /* set title */
-                        $(".CULT-div-detailHeader").html(mCls.make());
+                        $(".CULT-div-detailHeader").html(mCls.makeCls());
 
                         /* set lineup */
                         for(let i in mClslineupaModels)

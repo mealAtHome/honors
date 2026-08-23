@@ -106,7 +106,7 @@ class MGrpMember
                     </div>
                 </div>
                 ${tagsHtml}
-                <div class="common-flexBetween" style="margin-top:var(--marBase);padding-top:var(--padBase); border-top:1px solid var(--colorLine);">
+                <div class="common-buttonsForCardTop">
                     <div class="common-flexCenter common-colorCmmt">${iconsHtml}</div>
                     ${actionHtml}
                 </div>
