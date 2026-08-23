@@ -146,7 +146,7 @@
                                 /* 멤버검색 */
                                 let pagenum = DGRP.Data.pagenoGrpm;
                                 let mGrpMembers = Api.GrpMember.selectByKeywordWithPageForAll(pagenum, grpno, searchkey);
-                                mGrpMembers.make("#DGRP-div-memberList");
+                                mGrpMembers.makeGrpMembers("#DGRP-div-memberList");
 
                                 /* 검색건수 표시 */
                                 $("#DGRP-span-searchedCnt").text(mGrpMembers.getAllcnt());

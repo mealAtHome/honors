@@ -65,7 +65,7 @@ class MGrpMember
     /* ========================= */
     // getClsstatusCard() { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
 
-    make(buttonHtml="")
+    makeGrpMember(detailFlg=false, buttonHtml="")
     {
         let model = this;
         let mUser = model.getMUser();
@@ -89,12 +89,10 @@ class MGrpMember
         if(mUser.getPhone()     != ""    ) iconsHtml += `<i class="ti ti-phone commonEvent-tag-phoneCall" phone-call="${mUser.getPhone()}"></i>`;
         if(mUser.getHascarflg() == GGF.Y ) iconsHtml += `<i class="ti ti-car"></i>`;
 
-        let actionHtml =
-            buttonHtml != ""
-            ? buttonHtml
-            : `<div class="commonEvent-tag-hyperlink common-flexCenterSm common-colorSide common-fonts08" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}><span>상세보기</span><i class="ti ti-chevron-right"></i></div>`;
+        let detailHtml = `<div class="commonEvent-tag-hyperlink common-flexCenterSm common-colorSide common-fonts08" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}><span>상세보기</span><i class="ti ti-chevron-right"></i></div>`;
 
         /* final html */
+        console.log(detailFlg);
         let html =
         `
             <div class="MGrpMembers-make-div-modelTop common-div-card">
@@ -108,7 +106,8 @@ class MGrpMember
                 ${tagsHtml}
                 <div class="common-buttonsForCardTop">
                     <div class="common-flexCenter common-colorCmmt">${iconsHtml}</div>
-                    ${actionHtml}
+                    ${buttonHtml}
+                    ${detailFlg ? detailHtml : ""}
                 </div>
             </div>
         `;
@@ -143,7 +142,7 @@ class MGrpMember
             usertype: GGF.User.Usertype.NORMAL,
         };
         let model = new MGrpMember(dat);
-        return model.make();
+        return model.makeGrpMember();
     }
 
 }
@@ -162,8 +161,8 @@ class MGrpMembers extends _MCommon
 
     /* ========================= */
     /* ========================= */
-    makeForChoose(el) { this.make("makeForChoose", el); }
-    make(option="", el="")
+    makeForChoose(el) { this.makeGrpMembers("makeForChoose", el); }
+    makeGrpMembers(option="", el="")
     {
         /* overloading */
         if(option != "" && el == "")
@@ -189,10 +188,15 @@ class MGrpMembers extends _MCommon
                 case "makeForChoose":
                 {
                     buttonHtml += `<button class="common-btn-inner  MGrpMember-make-btn-choose" ${model.getPk()}>선택하기</button>&nbsp;`;
+                    html += model.makeGrpMember(false, buttonHtml);
+                    break;
+                }
+                default:
+                {
+                    html += model.makeGrpMember(true, buttonHtml);
                     break;
                 }
             }
-            html += model.make(buttonHtml);
         }
         /* html = this.mergeCushionLR(html); */
         $(el).html(this.mergePagenation(html));

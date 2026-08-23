@@ -48,6 +48,7 @@ class MUser
     getImg_() { return this.img_; }
     getUsertypePill() { return GGC.User.usertypePill(this.usertype); }
     getBirthyearFont() { return GGC.User.birthyearFont(this.birthyear); }
+    getAgeByBirthYear() { return GGC.User.getAgeByBirthYear(this.birthyear); }
 
     /* ========================= */
     /* is ? */

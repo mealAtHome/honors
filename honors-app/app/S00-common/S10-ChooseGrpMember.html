@@ -138,7 +138,7 @@
                             return Common.toast("해당 모임의 멤버가 아닙니다.");
 
                         let mUser = mGrpMember.getMUser();
-                        $(CHGM.Data.el).html(mGrpMember.make());
+                        $(CHGM.Data.el).html(mGrpMember.makeGrpMember());
                         $(CHGM.Data.el).attr("grpno", grpno);
                         $(CHGM.Data.el).attr("userno", userno);
                         $(CHGM.Data.el).attr("name", mUser.getName());

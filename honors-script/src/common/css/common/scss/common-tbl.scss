@@ -67,6 +67,11 @@
 /* ============================== */
 /* common-tbl-normal */
 /* ============================== */
+.common-div-normalTop
+{
+    border-radius: 0.6em;
+    border: 0.06em solid $colorLine;
+}
 .common-tbl-normal
 {
     line-height: 1.4;
@@ -77,7 +82,7 @@
 .common-tbl-normal > tfoot > tr > td
 {
     padding: $padHalf;
-    background-color: $colorBodyBack;
+    background-color: $colorSnow;
     text-align: center;
     font-weight: bold;
 }
@@ -89,26 +94,20 @@
 }
 .common-tbl-normal[tbl-type=card]
 {
-    width:100%;
     border-radius: 0.6em;
     border-collapse: separate;
     border-spacing: 0;
     overflow: hidden;
 }
-.common-div-normalTop
-{
-    border-radius: 0.6em;
-    border: 0.06em solid $colorLine;
-}
 
 /*
     class="common-tbl-normal" tbl-type=noborder
 */
-.common-tbl-normal[tbl-type=normal]                       { border: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=normal]    > thead > tr > th  { border: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=normal]    > tbody > tr > th  { border: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=normal]    > tbody > tr > td  { border: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=normal]    > tfoot > tr > td  { border: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]                       { border: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > thead > tr > th  { border: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > tbody > tr > th  { border: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > tbody > tr > td  { border: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=normal]    > tfoot > tr > td  { border: 0.06em solid $colorSept; }
 
 .common-tbl-normal[tbl-type=noborder]                     { border: none; }
 .common-tbl-normal[tbl-type=noborder]  > thead > tr > th  { border: none; }
@@ -116,28 +115,32 @@
 .common-tbl-normal[tbl-type=noborder]  > tbody > tr > td  { border: none; }
 .common-tbl-normal[tbl-type=noborder]  > tfoot > tr > td  { border: none; }
 
-.common-tbl-normal[tbl-type=rowborder]                    { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=rowborder] > thead > tr > th  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=rowborder] > tbody > tr > th  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=rowborder] > tbody > tr > td  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=rowborder] > tfoot > tr > td  { border-top: 1px solid $colorSept; border-bottom: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder]                    { border-top: 0.06em solid $colorSept; border-bottom: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > thead > tr > th  { border-top: 0.06em solid $colorSept; border-bottom: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > tbody > tr > th  { border-top: 0.06em solid $colorSept; border-bottom: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > tbody > tr > td  { border-top: 0.06em solid $colorSept; border-bottom: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=rowborder] > tfoot > tr > td  { border-top: 0.06em solid $colorSept; border-bottom: 0.06em solid $colorSept; }
 
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-last-child(1)    { border-left: 1px solid $colorSept; border-right: none; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > th                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1)         { border-left: none;                 border-right: 1px solid $colorSept; }
-.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 1px solid $colorSept; border-right: none; }
-.common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 1px solid $colorSept; border-right: 1px solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th                      { border-left: 0.06em solid $colorSept; border-right: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-child(1)         { border-left: none;                    border-right: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > thead > tr > th:nth-last-child(1)    { border-left: 0.06em solid $colorSept; border-right: none; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > th                      { border-left: 0.06em solid $colorSept; border-right: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td                      { border-left: 0.06em solid $colorSept; border-right: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-child(1)         { border-left: none;                    border-right: 0.06em solid $colorSept; }
+.common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 0.06em solid $colorSept; border-right: none; }
+.common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 0.06em solid $colorSept; border-right: 0.06em solid $colorSept; }
 
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td                 { background-color: $colorSnow; border-top: 1px solid $colorLine; }
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td                 { background-color: $colorSnow; border-top: 0.06em solid $colorLine; }
 .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td                 { background-color: $colorSnow; border-top: none; padding-top: $padBase;}
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td:first-child     { padding-left  : 1.2em; } /* 테이블의 양사이드가 둥글기 때문에 */
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td:last-child      { padding-right : 1.2em; } /* 테이블의 양사이드가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td:first-child     { padding-left  : $padBase; } /* 테이블의 양사이드가 둥글기 때문에 */
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td:last-child      { padding-right : $padBase; } /* 테이블의 양사이드가 둥글기 때문에 */
 .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:before          { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
 .common-tbl-normal[tbl-type=card] > tbody > tr:last-child  > td:after           { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td[td-type=th]     { font-weight: bold; background-color: rgba($colorBody, 0.1); padding-top: $padMore; padding-bottom: $padMore; }
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td[td-type=th]     { font-weight: bold; background-color: rgba($colorBody, 0.1); padding-top: $padBase; padding-bottom: $padBase; }
+
+.common-tbl-normal[tbl-textAlign=between] > tbody > tr > td:first-child { text-align: left;  padding-right : $padMore; }
+.common-tbl-normal[tbl-textAlign=between] > tbody > tr > td:last-child  { text-align: right; padding-left  : $padMore; }
+
 
 /* .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:first-child  { border-top-left-radius: 1em; } */ /* 1행 왼쪽 위 */
 /* .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:last-child   { border-top-right-radius: 1em; } */ /* 1행 오른쪽 위 */

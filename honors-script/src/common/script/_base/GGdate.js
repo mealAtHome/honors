@@ -366,5 +366,13 @@ var GGdate =
 
         const remainDays = Math.floor((start - monthAnchor) / DAY);
         return `${months}개월 뒤, ${remainDays}일 남음`;
+    },
+
+    getAgeByYear(birthYear)
+    {
+        if(Common.isEmpty(birthYear))
+            return "";
+        let nowYear = new Date().getFullYear();
+        return nowYear - birthYear + 1;
     }
 }

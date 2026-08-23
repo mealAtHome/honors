@@ -50,4 +50,14 @@ GGC.User =
         return rslt;
     },
     birthyearFont(val) { return `<span class="common-colorFont common-fonts07" font-color="body">&nbsp;${GGC.User.birthyear(val)}</span>`; },
+
+    /* 나이 */
+    getAgeByBirthYear(birthYear)
+    {
+        if(Common.isEmpty(birthYear))
+            return "";
+        let nowYear = new Date().getFullYear();
+        let age = nowYear - birthYear + 1 + "세";
+        return age;
+    }
 };

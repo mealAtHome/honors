@@ -195,7 +195,13 @@
 /* ═══════════════════════════════════════
     INFO LIST (라벨-값 행 목록)
 ═══════════════════════════════════════ */
-.common-infoRow             { padding: $padBase $padMore; border-bottom: 0.5px solid $colorLine; }
+.common-infoTop
+{
+    border-radius: 0.6em;
+    border: 0.06em solid $colorLine;
+    background: $colorSnow;
+}
+.common-infoRow             { padding: $padBase $padMore; border-bottom: 0.06em solid $colorLine; }
 .common-infoRow:last-child  { border-bottom: none; }
 
 /* ═══════════════════════════════════════
@@ -216,7 +222,7 @@
     align-items: center;
     gap: 0.6em;
     padding: 0.6em 0.8em;
-    border-bottom: 0.5px solid $colorLine;
+    border-bottom: 0.06em solid $colorLine;
     cursor: pointer;
     text-decoration: none;
     color: inherit;

@@ -608,7 +608,7 @@
                     return Common.toast("해당 모임의 멤버가 아닙니다.");
 
                 let mUser = mGrpMember.getMUser();
-                $("#CUDE-div-usernoadm").html(mGrpMember.make());
+                $("#CUDE-div-usernoadm").html(mGrpMember.makeGrpMember());
                 $("#CUDE-div-usernoadm").attr("grpno", grpno);
                 $("#CUDE-div-usernoadm").attr("userno", mGrpMember.getUserno());
                 $("#CUDE-div-usernoadm").attr("name", mUser.getName());
@@ -625,7 +625,7 @@
                     return Common.toast("해당 모임의 멤버가 아닙니다.");
 
                 let mUser = mGrpMember.getMUser();
-                $("#CUDE-div-usernosub").html(mGrpMember.make());
+                $("#CUDE-div-usernosub").html(mGrpMember.makeGrpMember());
                 $("#CUDE-div-usernosub").attr("grpno", grpno);
                 $("#CUDE-div-usernosub").attr("userno", mGrpMember.getUserno());
                 $("#CUDE-div-usernosub").attr("name", mUser.getName());
