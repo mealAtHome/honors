@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/* ============================== */
+/* 라벨 */
+/* ============================== */
+/* ============================== */
+/* 최상위 TBL */
+/* ============================== */
+.entity-common-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+
+.entity-common-tbl > tbody > tr > td {
+  padding: 0.1em;
+}
+
+/* ============================== */
+/* 선택용 테이블 */
+/* ============================== */
+.entity-tbl-forChoose {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.entity-tbl-forChoose > tbody > tr > td[col=index] {
+  width: 5%;
+}
+
+.entity-tbl-forChoose > tbody > tr > td[col=button] {
+  width: 5%;
+}
+
+.entity-tbl-forChoose > tbody > tr > td[col=main] {
+  width: 90%;
+}

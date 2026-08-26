@@ -168,6 +168,7 @@
 .common-strong          { font-weight: bold; @include fonts11; }
 .common-mineHead[me=y]  { @include colorMainBackTrans; }
 .common-mineBody[me=y]  { font-weight: bold; color: $colorMain; }
+.common-breakall        { word-break: break-all; }
 
 /* --------------- */
 /* image */

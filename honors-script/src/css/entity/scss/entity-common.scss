@@ -22,6 +22,6 @@
     width:100%;
     border-collapse: collapse;
 }
-.entity-tbl-forChoose > tbody > tr > td[col="index"]  { width:5%; }
-.entity-tbl-forChoose > tbody > tr > td[col="button"] { width:5%; }
-.entity-tbl-forChoose > tbody > tr > td[col="main"]   { width:90%; }
+.entity-tbl-forChoose > tbody > tr > td[col=index]  { width:5%; }
+.entity-tbl-forChoose > tbody > tr > td[col=button] { width:5%; }
+.entity-tbl-forChoose > tbody > tr > td[col=main]   { width:90%; }

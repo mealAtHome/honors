@@ -14,9 +14,12 @@
         <div class="common-div-formField">
             <span>*지역설정</span>
             <span>너무 넓게 설정하면, 멤버간의 거리감으로 팀워크가 떨어질 수 있습니다.</span>
-            <div id="MUBC-div-addrSelected" class="common-strong common-cushionHalfUp">지역을 선택해주세요.</div>
+            <div class="common-cushionHalfUp">
+                <span                          class="common-colorSide ">현재지역 : </span>
+                <span id="MUBC-div-addrstrNow" class="common-colorSide common-strong common-breakall">지역을 선택해주세요.</span>
+            </div>
             <input id="MUBC-input-addrKeyword" type="text" class="common-input-field" placeholder="동/읍/면 이름으로 검색" style="margin-top:var(--marHalf);"/>
-            <div id="MUBC-div-addrResultList" class="common-div-normalTop common-cushionHalfUp" style="display:none;"></div>
+            <div id="MUBC-div-addrResultList" class="common-cushionHalfUp" style="display:none;"></div>
         </div>
 
         <!-- 주요거점 -->
@@ -68,7 +71,7 @@
                     if(!Common.isEmpty(mGrp.getGrpbaseaddrcode()))
                     {
                         MUBC.Data.selectedAddrcode = mGrp.getGrpbaseaddrcode();
-                        $("#MUBC-div-addrSelected").text(mGrp.getGrpbaseaddrstr());
+                        $("#MUBC-div-addrstrNow").text(mGrp.getGrpbaseaddrstr());
                     }
 
                     /* 위치 */
@@ -107,14 +110,12 @@
             /* ===================== */
             searchAddr(keyword)
             {
-                Common.showProgress();
-                setTimeout(function()
+                ApiPr.Addrcode.searchByKeyword(keyword, GGF.none, GGF.toast)
+                .done(function(mAddrcodes)
                 {
-                    let mAddrcodes = Api.Addrcode.searchByKeyword(keyword, GGF.none, GGF.toast);
-                    mAddrcodes.make("#MUBC-div-addrResultList");
+                    mAddrcodes.makeAddrcodeForChoose("#MUBC-div-addrResultList");
                     $("#MUBC-div-addrResultList").show();
-                    Common.hideProgress();
-                }, ajaxDelayTime);
+                });
             },
 
             /* ========================= */
@@ -143,14 +144,13 @@
             });
 
             /* 지역검색 결과 선택 */
-            $("#MUBC-div-addrResultList").on("click", ".MAddrcode-make-div-row", function()
+            $("#MUBC-div-addrResultList").on("click", ".MAddrcode-makeForChoose-row", function()
             {
                 let addrcode = $(this).attr("addrcode");
                 let addrstrfull = $(this).attr("addrstrfull");
 
                 MUBC.Data.selectedAddrcode = addrcode;
-                $("#MUBC-div-addrSelected").text(addrstrfull);
-                $("#MUBC-input-addrKeyword").val("");
+                $("#MUBC-input-addrKeyword").val(addrstrfull);
                 $("#MUBC-div-addrResultList").hide().html("");
             });
 

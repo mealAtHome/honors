@@ -1,0 +1,5 @@
+@use "sass:color";
+@use "../../_import/scss/__import" as *;
+
+.MAddrcode-makeForChoose-row:hover  { color: $colorMain; }
+.MAddrcode-makeForChoose-row:active { color: $colorMain; background-color: $colorMainBackground; }

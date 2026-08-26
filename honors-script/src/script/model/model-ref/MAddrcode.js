@@ -28,13 +28,13 @@ class MAddrcodes extends _MCommon
     /* ========================= */
     /* 지역검색 결과 목록 */
     /* ========================= */
-    make(el="")
+    makeAddrcodeForChoose(el="")
     {
         let html = "";
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            html += `<div class="MAddrcode-make-div-row" addrcode="${model.getAddrcode()}" addrstrfull="${model.getAddrstrfull()}">${model.getAddrstrfull()}</div>`;
+            html += `<div class="MAddrcode-makeForChoose-row" addrcode="${model.getAddrcode()}" addrstrfull="${model.getAddrstrfull()}" style="cursor:pointer; padding:0.1em;">${model.getAddrstrfull()}</div>`;
         }
         $(el).html(html);
     }
