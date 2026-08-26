@@ -7,6 +7,10 @@ class MGrp
         /* data */    this.grpimg               = GGC.Common.char(dat.grpimg);
         /* data */    this.grpname              = GGC.Common.char(dat.grpname);
         /* data */    this.backnumberlength     = GGC.Common.int(dat.backnumberlength);
+        /* data */    this.grpbaseaddrcode      = GGC.Common.bigint(dat.grpbaseaddrcode);
+        /* data */    this.grpbaselat           = GGC.Common.double(dat.grpbaselat);
+        /* data */    this.grpbaselng           = GGC.Common.double(dat.grpbaselng);
+        /* data */    this.grpbaseaddrstr       = GGC.Common.varchar(dat.grpbaseaddrstr);
         /* data */    this.modidt               = GGC.Common.datetime(dat.modidt);
         /* data */    this.regidt               = GGC.Common.datetime(dat.regidt);
         /* data */    this.grpmanager_name      = GGC.Common.varchar(dat.grpmanager_name);
@@ -33,6 +37,10 @@ class MGrp
     getGrpimg() { return this.grpimg; }
     getGrpname() { return this.grpname; }
     getBacknumberlength() { return this.backnumberlength; }
+    getGrpbaseaddrcode() { return this.grpbaseaddrcode; }
+    getGrpbaselat() { return this.grpbaselat; }
+    getGrpbaselng() { return this.grpbaselng; }
+    getGrpbaseaddrstr() { return this.grpbaseaddrstr; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
     getGrpmanagerName() { return this.grpmanager_name; }

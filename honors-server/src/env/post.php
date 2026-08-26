@@ -65,6 +65,9 @@
     $options["GRPFNC_LOSSTOTAL"]                                    = get("GRPFNC_LOSSTOTAL");
     $options["GRPFNC_PURCHASETOTAL"]                                = get("GRPFNC_PURCHASETOTAL");
     $options["GRPFNC_SPONSORSHIPTOTAL"]                             = get("GRPFNC_SPONSORSHIPTOTAL");
+    $options["GRPBASEADDRCODE"]                                     = get("GRPBASEADDRCODE");
+    $options["GRPBASELAT"]                                          = get("GRPBASELAT");
+    $options["GRPBASELNG"]                                          = get("GRPBASELNG");
     $options["GRPMANAGER"]                                          = get("GRPMANAGER");
     $options["GRPNAME"]                                             = get("GRPNAME");
     $options["GRPMBACKNUM"]                                         = get("GRPMBACKNUM");

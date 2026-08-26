@@ -1,0 +1,202 @@
+<ons-page id="MUBC">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="MUBC.close(true);"></gg-backbtn></div>
+        <div><span>아지트설정</span></div>
+    </div>
+
+    <div class="common-div-formChild">
+
+        <!-- 지역설정 -->
+        <div class="common-div-formField">
+            <span>*지역설정</span>
+            <span>너무 넓게 설정하면, 멤버간의 거리감으로 팀워크가 떨어질 수 있습니다.</span>
+            <div id="MUBC-div-addrSelected" class="common-strong common-cushionHalfUp">지역을 선택해주세요.</div>
+            <input id="MUBC-input-addrKeyword" type="text" class="common-input-field" placeholder="동/읍/면 이름으로 검색" style="margin-top:var(--marHalf);"/>
+            <div id="MUBC-div-addrResultList" class="common-div-normalTop common-cushionHalfUp" style="display:none;"></div>
+        </div>
+
+        <!-- 주요거점 -->
+        <div class="common-div-formField">
+            <span>*주요거점</span>
+            <span>주로 모이는 거점 혹은 모임의 중심이 되는 장소를 지도에서 선택해주세요.</span>
+            <div id="MUBC-div-mapContainer" style="position:relative; width:100%; height:16em; margin-top:var(--marHalf); border-radius:var(--padHalf); overflow:hidden; background:var(--colorLine);">
+                <div id="MUBC-div-map" style="width:100%; height:100%;"></div>
+                <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-100%); pointer-events:none; z-index:1000;">
+                    <i class="ti ti-map-pin" style="font-size:2em; color:var(--colorMain); text-shadow:0 1px 3px rgba(250,0,0,0.4);"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- 저장 -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="MUBC-btn-save" class="common-btn-inner">저장하기</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- formChild -->
+
+    <script>
+        var MUBC =
+        {
+            code : "MUBC",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(MUBC.Data.grpno)) { Common.toast("잘못된 접근입니다."); MUBC.close(true); return; }
+
+                MUBC.Data.selectedAddrcode = null;
+                MUBC.Data.selectedLat = null;
+                MUBC.Data.selectedLng = null;
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrp = Api.Grp.selectByPk(MUBC.Data.grpno, GGF.none, GGF.toast);
+
+                    /* 지역 */
+                    if(!Common.isEmpty(mGrp.getGrpbaseaddrcode()))
+                    {
+                        MUBC.Data.selectedAddrcode = mGrp.getGrpbaseaddrcode();
+                        $("#MUBC-div-addrSelected").text(mGrp.getGrpbaseaddrstr());
+                    }
+
+                    /* 위치 */
+                    let hasPoint = !Common.isEmpty(mGrp.getGrpbaselat()) && mGrp.getGrpbaselat() != 0;
+                    MUBC.Data.selectedLat = hasPoint ? mGrp.getGrpbaselat() : 37.5665;
+                    MUBC.Data.selectedLng = hasPoint ? mGrp.getGrpbaselng() : 126.9780;
+
+                    MUBC.initMap();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ===================== */
+            /* 지도 초기화 (네이버 지도 Web JS API v3) */
+            /* ===================== */
+            initMap()
+            {
+                MUBC.Data.map = new naver.maps.Map("MUBC-div-map",
+                {
+                    center: new naver.maps.LatLng(MUBC.Data.selectedLat, MUBC.Data.selectedLng),
+                    zoom: 16,
+                });
+
+                /* 지도 중앙 = 고정핀 위치. 지도가 움직임을 멈추면(idle) 중앙 좌표를 저장 */
+                naver.maps.Event.addListener(MUBC.Data.map, "idle", function()
+                {
+                    let center = MUBC.Data.map.getCenter();
+                    MUBC.Data.selectedLat = center.lat();
+                    MUBC.Data.selectedLng = center.lng();
+                });
+            },
+
+            /* ===================== */
+            /* 지역검색 */
+            /* ===================== */
+            searchAddr(keyword)
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mAddrcodes = Api.Addrcode.searchByKeyword(keyword, GGF.none, GGF.toast);
+                    mAddrcodes.make("#MUBC-div-addrResultList");
+                    $("#MUBC-div-addrResultList").show();
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 지역검색 : 타이핑 중 검색 */
+            let searchTimer = null;
+            $("#MUBC-input-addrKeyword").on("keyup", function()
+            {
+                let keyword = $(this).val().trim();
+                clearTimeout(searchTimer);
+                if(keyword == "") { $("#MUBC-div-addrResultList").hide().html(""); return; }
+                searchTimer = setTimeout(function() { MUBC.searchAddr(keyword); }, 300);
+            });
+
+            /* 지역검색 결과 선택 */
+            $("#MUBC-div-addrResultList").on("click", ".MAddrcode-make-div-row", function()
+            {
+                let addrcode = $(this).attr("addrcode");
+                let addrstrfull = $(this).attr("addrstrfull");
+
+                MUBC.Data.selectedAddrcode = addrcode;
+                $("#MUBC-div-addrSelected").text(addrstrfull);
+                $("#MUBC-input-addrKeyword").val("");
+                $("#MUBC-div-addrResultList").hide().html("");
+            });
+
+            /* 저장 */
+            $("#MUBC-btn-save").click(function()
+            {
+                if(Common.isEmpty(MUBC.Data.selectedAddrcode)) { Common.toastError("지역을 선택해주세요."); return; }
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let grpno = MUBC.Data.grpno;
+                        let mApiResponse = Api.Grp.updateBasecampForMng(grpno, MUBC.Data.selectedAddrcode, MUBC.Data.selectedLat, MUBC.Data.selectedLng, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("아지트가 저장되었습니다.");
+                            MUBC.close(true);
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("아지트를 저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MUBC.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MUBC.close(true);
+            }
+
+        });
+
+    </script>
+
+
+</ons-page>

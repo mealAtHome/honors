@@ -11,6 +11,7 @@ class GGnavi
 
     /* BO : ref, system */
     static public function getAddressSidoBO()                                       { require_once ROOT."/src/system/bo-ref/AddressSidoBO.php"; }
+    static public function getAddrcodeBO()                                          { require_once ROOT."/src/system/bo-ref/AddrcodeBO.php"; }
     static public function getAddressSigunguBO()                                    { require_once ROOT."/src/system/bo-ref/AddressSigunguBO.php"; }
     static public function getBankBO()                                              { require_once ROOT."/src/system/bo-ref/BankBO.php"; }
     static public function getSystemBoardBO()                                       { require_once ROOT."/src/system/bo-ref/SystemBoardBO.php"; }

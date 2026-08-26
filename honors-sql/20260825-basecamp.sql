@@ -1,0 +1,13 @@
+--
+-- 모임 아지트(위치기반) 기능 (2026-08-25)
+-- 참고용 기록 파일 - 실제 필드는 아래와 같이 반영됨 (사용자가 직접 적용):
+--   alter table grp add column grpbaseaddrcode int null after backnumberlength;
+--   alter table grp add column grpbasepoint point null srid 4326 after grpbaseaddrcode;
+--
+-- !! grpbaseaddrcode 타입 수정 필요 !!
+-- _addrcode 테이블(법정동코드 마스터, 20560건)의 addrcode는 bigint이고,
+-- 그 중 82%(16863건)가 int 범위(2,147,483,647)를 초과함 (예: 경기/강원/충북 등 대부분 지역).
+-- int로 두면 서울/부산 일부를 제외한 대부분 지역에서 저장 시 값이 잘리거나 오류가 남.
+-- 아래로 타입을 bigint로 변경 필요 (로컬 dev DB에는 이미 반영함).
+--
+alter table grp modify column grpbaseaddrcode bigint null;

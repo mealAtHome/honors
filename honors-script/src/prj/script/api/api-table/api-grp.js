@@ -12,6 +12,7 @@ Api.Grp =
     /* update */
     /* ========================= */
     updateBacknumberlengthForMng(grpno, backnumberlength, noticeOK, noticeFail) { return Api.Grp.update({ OPTION:"updateBacknumberlengthForMng", GRPNO:grpno, BACKNUMBERLENGTH:backnumberlength, }, noticeOK, noticeFail); },
+    updateBasecampForMng(grpno, grpbaseaddrcode, grpbaselat, grpbaselng, noticeOK, noticeFail) { return Api.Grp.update({ OPTION:"updateBasecampForMng", GRPNO:grpno, GRPBASEADDRCODE:grpbaseaddrcode, GRPBASELAT:grpbaselat, GRPBASELNG:grpbaselng, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* detail */
