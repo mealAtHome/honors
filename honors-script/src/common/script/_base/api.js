@@ -173,9 +173,10 @@ var Api =
                     return null;
                 }
             },
-            error: function(err)
+            error: function(rslt)
             {
-                rslt = Api.getResultError();
+                if(rslt.CODE == undefined)
+                    rslt = Api.getResultError();
             }
         });
 

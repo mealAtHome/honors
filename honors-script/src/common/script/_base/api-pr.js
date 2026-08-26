@@ -13,22 +13,18 @@ $.ajax.promise = function(
     let rslt = {};
     let ajaxURL = Navigation.getApiUrlByFuncName(funcName);
 
-    /* validation */
     if(ajaxURL == "")
     {
-        Common.toast("url 이 무효입니다.");
-        rslt =
-        {
-            CODE  : "AX-0001",
-            MSG : $.i18n('(ajax)failed to connect'),
-            DATA  : null,
-        };
-        deferred.reject(rslt);
+        rslt = Api.getResultError();
+        rslt = Api.setMsgForRslt(rslt, noticeOK, noticeFail);
+        return deferred.reject(rslt);
     }
 
     /* -------- */
     /* 필수 파라메터 추가 */
     /* -------- */
+    ajaxData.MODE           = LOCALMODE;
+    ajaxData.VERSION        = VERSION;
     ajaxData.LANG           = GGstorage.getLang();
     ajaxData.APIKEY         = GGstorage.getApikey();
     ajaxData.SERVICE_LAYER  = GGstorage.getAppmode();
@@ -36,22 +32,22 @@ $.ajax.promise = function(
     /* --------------- */
     /* execute ajax */
     /* --------------- */
-    $.ajax({
-        method      : "POST",
-        // contentType : false,
-        // processData : false,
-        url         : ajaxURL,
-        data        : ajaxData,
-        dataType    : "json",
+    $.ajax
+    ({
+        method : "POST",
+        url : ajaxURL,
+        data : ajaxData,
+        dataType : "json",
     })
     .done(function (rslt, status, responseObj)
     {
         rslt = Api.setMsgForRslt(rslt, noticeOK, noticeFail);
         deferred.resolve(rslt);
     })
-    .fail(function (result, status, responseObj)
+    .fail(function (rslt, status, responseObj)
     {
-        let rslt = Api.getResultError();
+        if(rslt.CODE == undefined)
+            rslt = Api.getResultError();
         rslt = Api.setMsgForRslt(rslt, noticeOK, noticeFail);
         deferred.reject(rslt);
     });
