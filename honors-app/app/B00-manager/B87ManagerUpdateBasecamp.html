@@ -96,12 +96,42 @@
                     zoom: 16,
                 });
 
+                /* 지도가 완전히 로드된 후, 저장된 위치로 이동 (페이지 전환 애니메이션 도중 컨테이너 크기가 불안정해 최초 center가 어긋나는 것을 보정) */
+                naver.maps.Event.once(MUBC.Data.map, "init", function()
+                {
+                    MUBC.Data.map.setCenter(new naver.maps.LatLng(MUBC.Data.selectedLat, MUBC.Data.selectedLng));
+                });
+
                 /* 지도 중앙 = 고정핀 위치. 지도가 움직임을 멈추면(idle) 중앙 좌표를 저장 */
                 naver.maps.Event.addListener(MUBC.Data.map, "idle", function()
                 {
                     let center = MUBC.Data.map.getCenter();
                     MUBC.Data.selectedLat = center.lat();
                     MUBC.Data.selectedLng = center.lng();
+                });
+            },
+
+            /* ===================== */
+            /* 지역 선택 시, 지도를 그 지역으로 이동 (지오코딩) */
+            /* ===================== */
+            moveMapToAddr(addrstrfull)
+            {
+                if(window.naver == undefined || naver.maps.Service == undefined)
+                {
+                    console.error("naver.maps.Service(geocoder submodule)가 로드되지 않았습니다.");
+                    return;
+                }
+                naver.maps.Service.geocode({query: addrstrfull}, function(status, response)
+                {
+                    if(status !== naver.maps.Service.Status.OK) { return; }
+                    if(response.v2.meta.totalCount === 0) { return; }
+
+                    let item = response.v2.addresses[0];
+                    let point = new naver.maps.LatLng(item.y, item.x);
+
+                    MUBC.Data.map.setCenter(point);
+                    MUBC.Data.selectedLat = point.lat();
+                    MUBC.Data.selectedLng = point.lng();
                 });
             },
 
@@ -148,10 +178,15 @@
             {
                 let addrcode = $(this).attr("addrcode");
                 let addrstrfull = $(this).attr("addrstrfull");
+                let isChanged = MUBC.Data.selectedAddrcode != addrcode;
 
                 MUBC.Data.selectedAddrcode = addrcode;
                 $("#MUBC-input-addrKeyword").val(addrstrfull);
                 $("#MUBC-div-addrResultList").hide().html("");
+
+                /* 기존 선택 지역과 다르면, 지도를 그 지역으로 자동 이동 */
+                if(isChanged)
+                    MUBC.moveMapToAddr(addrstrfull);
             });
 
             /* 저장 */
