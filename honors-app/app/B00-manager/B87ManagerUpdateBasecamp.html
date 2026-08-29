@@ -202,11 +202,7 @@
                         let grpno = MUBC.Data.grpno;
                         let mApiResponse = Api.Grp.updateBasecampForMng(grpno, MUBC.Data.selectedAddrcode, MUBC.Data.selectedLat, MUBC.Data.selectedLng, GGF.none, GGF.toast);
                         if(mApiResponse.isSuccess())
-                        {
                             Common.toastSuccess("아지트가 저장되었습니다.");
-                            MUBC.close(true);
-                            return;
-                        }
                         Common.hideProgress();
                     }, ajaxDelayTime);
                 };
