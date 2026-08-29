@@ -17,6 +17,35 @@ class MGrpIntro
     getGrprules() { return this.grprules; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
+
+    /* ========================= */
+    /* make */
+    /* ========================= */
+    make(grpintro="")
+    {
+        let heroHtml = "";
+        if(grpintro != "")
+        {
+            heroHtml =
+            `
+                <div class="common-div-card" card-type="hero">
+                    <div class="common-strong common-fonts11">${GGC.Common.escapeHtml(grpintro)}</div>
+                </div>
+            `;
+        }
+
+        return `
+            ${heroHtml}
+            <div class="common-div-card">
+                <div class="common-flexCenterSm common-strong common-colorMain"><i class="ti ti-info-circle"></i><span>모임소개</span></div>
+                <div class="common-cushionHalfUp common-colorBody common-fonts09" style="white-space:pre-wrap; line-height:1.6;">${GGC.Common.escapeHtml(this.getGrpintrodetail())}</div>
+            </div>
+            <div class="common-div-card">
+                <div class="common-flexCenterSm common-strong common-colorMain"><i class="ti ti-gavel"></i><span>운영원칙 및 규칙</span></div>
+                <div class="common-cushionHalfUp common-colorBody common-fonts09" style="white-space:pre-wrap; line-height:1.6;">${GGC.Common.escapeHtml(this.getGrprules())}</div>
+            </div>
+        `;
+    }
 }
 
 

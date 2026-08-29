@@ -66,6 +66,21 @@ GGC.Common =
     },
 
     /* ============================== */
+    /* 자유입력 텍스트를 화면에 그대로 표시할 때, HTML로 해석되지 않도록 escape */
+    /* ============================== */
+    escapeHtml(str)
+    {
+        if(str == null)
+            return "";
+        return String(str)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    },
+
+    /* ============================== */
     /* get short from str */
     /* ============================== */
     getShort(str, len=14)

@@ -113,7 +113,14 @@
 
                                 /* 모임정보 */
                                 let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
-                                $("#DGRP-div-info").html(mGrp.make());
+                                let infoHtml = mGrp.make();
+
+                                /* 모임소개글 (API를 별도로 한 번 더 호출) */
+                                let mGrpIntro = Api.GrpIntro.selectByPk(grpno, GGF.none, GGF.toast);
+                                if(mGrpIntro != null)
+                                    infoHtml += mGrpIntro.make(mGrp.getGrpintro());
+
+                                $("#DGRP-div-info").html(infoHtml);
                                 break;
                             }
                             case "cls":

@@ -15,6 +15,7 @@
             <span>*한 줄 소개</span>
             <span>30글자 이내로 입력해주세요.</span>
             <input id="MUGI-input-grpintro" type="text" class="common-input-field" maxlength="30" placeholder="한 줄로 모임을 소개해주세요."/>
+            <div id="MUGI-div-grpintroCount" class="common-fonts08 common-colorCmmt" style="text-align:right;">(0/30)</div>
         </div>
 
         <!-- 모임소개글 -->
@@ -60,6 +61,7 @@
                 {
                     let mGrp = Api.Grp.selectByPk(MUGI.Data.grpno, GGF.none, GGF.toast);
                     $("#MUGI-input-grpintro").val(mGrp.getGrpintro());
+                    MUGI.updateGrpintroCount();
 
                     let mGrpIntro = Api.GrpIntro.selectByPk(MUGI.Data.grpno, GGF.none, GGF.toast);
                     if(mGrpIntro != null)
@@ -70,6 +72,15 @@
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            },
+
+            /* ===================== */
+            /* 한 줄 소개 글자수 표시 */
+            /* ===================== */
+            updateGrpintroCount()
+            {
+                let len = $("#MUGI-input-grpintro").val().length;
+                $("#MUGI-div-grpintroCount").text(`(${len}/30)`);
             },
 
             /* ========================= */
@@ -86,6 +97,9 @@
             /* ======================== */
             /* event */
             /* ======================== */
+
+            /* 한 줄 소개 : 글자수 표시 */
+            $("#MUGI-input-grpintro").on("keyup", function() { MUGI.updateGrpintroCount(); });
 
             /* 저장 */
             $("#MUGI-btn-save").click(function()
@@ -106,11 +120,7 @@
                         let grpno = MUGI.Data.grpno;
                         let mApiResponse = Api.GrpIntro.upsertForMng(grpno, grpintro, grpintrodetail, grprules, GGF.none, GGF.toast);
                         if(mApiResponse.isSuccess())
-                        {
                             Common.toastSuccess("모임소개글이 저장되었습니다.");
-                            MUGI.close(true);
-                            return;
-                        }
                         Common.hideProgress();
                     }, ajaxDelayTime);
                 };
