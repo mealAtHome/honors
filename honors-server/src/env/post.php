@@ -68,6 +68,9 @@
     $options["GRPBASEADDRCODE"]                                     = get("GRPBASEADDRCODE");
     $options["GRPBASELAT"]                                          = get("GRPBASELAT");
     $options["GRPBASELNG"]                                          = get("GRPBASELNG");
+    $options["GRPINTRO"]                                            = get("GRPINTRO");
+    $options["GRPINTRODETAIL"]                                      = get("GRPINTRODETAIL");
+    $options["GRPRULES"]                                            = get("GRPRULES");
     $options["GRPMANAGER"]                                          = get("GRPMANAGER");
     $options["GRPNAME"]                                             = get("GRPNAME");
     $options["GRPMBACKNUM"]                                         = get("GRPMBACKNUM");

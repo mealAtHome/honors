@@ -36,6 +36,7 @@ class GrpBO extends _CommonBO
     const FIELD__GRPMANAGER    = "grpmanager";    /* (  ) char(30) */
     const FIELD__GRPIMG        = "grpimg";        /* (  ) char(10) */
     const FIELD__GRPNAME       = "grpname";       /* (  ) char(50) */
+    const FIELD__GRPINTRO      = "grpintro";      /* (  ) char(30) */
     const FIELD__BACCNODEFAULT = "baccnodefault"; /* (  ) int */
     const FIELD__BACKNUMBERLENGTH = "backnumberlength"; /* (  ) int */
     const FIELD__GRPBASEADDRCODE = "grpbaseaddrcode"; /* (  ) bigint */
@@ -98,6 +99,7 @@ class GrpBO extends _CommonBO
             , t.grpmanager
             , t.grpimg
             , t.grpname
+            , t.grpintro
             , t.baccnodefault
             , t.backnumberlength
             , t.grpbaseaddrcode
@@ -169,12 +171,15 @@ class GrpBO extends _CommonBO
     /* ========================= */
     /* public function changeStoreStatus($STORENO, $STORE_STATUS)     { return $this->update(get_defined_vars(), __FUNCTION__); } */
     public function updateBaccnodefaultForInside($GRPNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updateGrpintroForInside($GRPNO, $GRPINTRO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
     /* ========================= */
     /* const insert = "insert"; */
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
+    const updateGrpintroForInside = "updateGrpintroForInside";
+    const GRPINTRO_MAX = 30; /* 한줄소개 최대 글자수 */
     const updateBacknumberlengthForMng = "updateBacknumberlengthForMng";
     const updateBasecampForMng = "updateBasecampForMng";
     const BACKNUMBERLENGTH_MIN = 2; /* 등번호 문자수 최소 */
@@ -197,6 +202,16 @@ class GrpBO extends _CommonBO
             case self::updateBaccnodefaultForInside:
             {
                 $query = "update grp set baccnodefault = $BACCNODEFAULT where grpno = '$GRPNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateGrpintroForInside:
+            {
+                $grpintro = trim($GRPINTRO);
+                if(mb_strlen($grpintro) > self::GRPINTRO_MAX)
+                    throw new GGexception("한 줄 소개는 ".self::GRPINTRO_MAX."자 이내로 입력해주세요.");
+                $grpintro = GGsql::realEscapeString($grpintro);
+                $query = "update grp set grpintro = '$grpintro' where grpno = '$GRPNO'";
                 GGsql::exeQuery($query);
                 break;
             }

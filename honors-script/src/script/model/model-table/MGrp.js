@@ -6,6 +6,7 @@ class MGrp
         /* data */    this.grpmanager           = GGC.Common.char(dat.grpmanager);
         /* data */    this.grpimg               = GGC.Common.char(dat.grpimg);
         /* data */    this.grpname              = GGC.Common.char(dat.grpname);
+        /* data */    this.grpintro             = GGC.Common.char(dat.grpintro);
         /* data */    this.backnumberlength     = GGC.Common.int(dat.backnumberlength);
         /* data */    this.grpbaseaddrcode      = GGC.Common.bigint(dat.grpbaseaddrcode);
         /* data */    this.grpbaselat           = GGC.Common.double(dat.grpbaselat);
@@ -36,6 +37,7 @@ class MGrp
     getGrpmanager() { return this.grpmanager; }
     getGrpimg() { return this.grpimg; }
     getGrpname() { return this.grpname; }
+    getGrpintro() { return this.grpintro; }
     getBacknumberlength() { return this.backnumberlength; }
     getGrpbaseaddrcode() { return this.grpbaseaddrcode; }
     getGrpbaselat() { return this.grpbaselat; }

@@ -1,0 +1,140 @@
+<ons-page id="MUGI">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="MUGI.close(true);"></gg-backbtn></div>
+        <div><span>모임소개글</span></div>
+    </div>
+
+    <div class="common-div-formChild">
+
+        <!-- 한 줄 소개 -->
+        <div class="common-div-formField">
+            <span>*한 줄 소개</span>
+            <span>30글자 이내로 입력해주세요.</span>
+            <input id="MUGI-input-grpintro" type="text" class="common-input-field" maxlength="30" placeholder="한 줄로 모임을 소개해주세요."/>
+        </div>
+
+        <!-- 모임소개글 -->
+        <div class="common-div-formField">
+            <span>*모임소개글</span>
+            <span>모임의 특징, 활동 내용 등을 자유롭게 소개해주세요.</span>
+            <textarea id="MUGI-textarea-grpintrodetail" class="common-textarea-field" rows="6" placeholder="모임소개글을 입력해주세요."></textarea>
+        </div>
+
+        <!-- 운영원칙 및 규칙 -->
+        <div class="common-div-formField">
+            <span>*운영원칙 및 규칙</span>
+            <span>회비, 참석 규정 등 모임 운영에 필요한 원칙을 입력해주세요.</span>
+            <textarea id="MUGI-textarea-grprules" class="common-textarea-field" rows="6" placeholder="운영원칙 및 규칙을 입력해주세요."></textarea>
+        </div>
+
+        <!-- 저장 -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="MUGI-btn-save" class="common-btn-inner">저장하기</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- formChild -->
+
+    <script>
+        var MUGI =
+        {
+            code : "MUGI",
+            Data: {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(MUGI.Data.grpno)) { Common.toast("잘못된 접근입니다."); MUGI.close(true); return; }
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrp = Api.Grp.selectByPk(MUGI.Data.grpno, GGF.none, GGF.toast);
+                    $("#MUGI-input-grpintro").val(mGrp.getGrpintro());
+
+                    let mGrpIntro = Api.GrpIntro.selectByPk(MUGI.Data.grpno, GGF.none, GGF.toast);
+                    if(mGrpIntro != null)
+                    {
+                        $("#MUGI-textarea-grpintrodetail").val(mGrpIntro.getGrpintrodetail());
+                        $("#MUGI-textarea-grprules").val(mGrpIntro.getGrprules());
+                    }
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 저장 */
+            $("#MUGI-btn-save").click(function()
+            {
+                let grpintro       = $("#MUGI-input-grpintro").val().trim();
+                let grpintrodetail = $("#MUGI-textarea-grpintrodetail").val().trim();
+                let grprules       = $("#MUGI-textarea-grprules").val().trim();
+
+                if(grpintro       == "") { Common.toastError("한 줄 소개를 입력해주세요.");       return; }
+                if(grpintrodetail == "") { Common.toastError("모임소개글을 입력해주세요.");        return; }
+                if(grprules       == "") { Common.toastError("운영원칙 및 규칙을 입력해주세요.");   return; }
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let grpno = MUGI.Data.grpno;
+                        let mApiResponse = Api.GrpIntro.upsertForMng(grpno, grpintro, grpintrodetail, grprules, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("모임소개글이 저장되었습니다.");
+                            MUGI.close(true);
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("모임소개글을 저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                MUGI.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MUGI.close(true);
+            }
+
+        });
+
+    </script>
+
+</ons-page>

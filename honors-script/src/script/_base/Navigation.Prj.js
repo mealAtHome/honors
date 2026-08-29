@@ -44,6 +44,8 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* clssettletmp */              case "Api.Clssettletmp.select"                              : url = serverHost + "/src/data/clssettletmp/selectClssettletmp.php"; break;
         /* clssettletmp */              case "Api.Clssettletmp.update"                              : url = serverHost + "/src/data/clssettletmp/updateClssettletmp.php"; break;
         /* Addrcode */                  case "Api.Addrcode.select"                                  : url = serverHost + "/src/data/address/selectAddrcode.php"; break;
+        /* GrpIntro */                  case "Api.GrpIntro.select"                                  : url = serverHost + "/src/data/grpIntro/selectGrpIntro.php"; break;
+        /* GrpIntro */                  case "Api.GrpIntro.update"                                  : url = serverHost + "/src/data/grpIntro/updateGrpIntro.php"; break;
         /* Grpmtaga */                  case "Api.Grpmtaga.select"                                  : url = serverHost + "/src/data/grpmtaga/selectGrpmtaga.php"; break;
         /* Grpmtaga */                  case "Api.Grpmtaga.update"                                  : url = serverHost + "/src/data/grpmtaga/updateGrpmtaga.php"; break;
         /* Grpmtagb */                  case "Api.Grpmtagb.select"                                  : url = serverHost + "/src/data/grpmtagb/selectGrpmtagb.php"; break;
@@ -85,6 +87,7 @@ Navigation.Page =
     B85ManagerMemberLayering : "MMLY",
     B86ManagerUpdateBacknumberlength : "MUBL",
     B87ManagerUpdateBasecamp : "MUBC",
+    B88ManagerUpdateGrpIntro : "MUGI",
     B71GrpMemberDetail : "GMDT",
     B72GrpMemberMergeTemp : "GMMT",
     B72GrpMemberTagList : "GMTL",
@@ -155,6 +158,7 @@ Navigation.getURL = function(str)
         case Navigation.Page.B85ManagerMemberLayering                      : url = `${host}/app/B00-manager/B85-ManagerMemberLayering.html?${scriptVersion}`; break;
         case Navigation.Page.B86ManagerUpdateBacknumberlength              : url = `${host}/app/B00-manager/B86ManagerUpdateBacknumberlength.html?${scriptVersion}`; break;
         case Navigation.Page.B87ManagerUpdateBasecamp                      : url = `${host}/app/B00-manager/B87ManagerUpdateBasecamp.html?${scriptVersion}`; break;
+        case Navigation.Page.B88ManagerUpdateGrpIntro                      : url = `${host}/app/B00-manager/B88ManagerUpdateGrpIntro.html?${scriptVersion}`; break;
         case Navigation.Page.B71GrpMemberDetail                            : url = `${host}/app/B00-manager/B71-GrpMemberDetail.html?${scriptVersion}`; break;
         case Navigation.Page.B72GrpMemberMergeTemp                         : url = `${host}/app/B00-manager/B72-GrpMemberMergeTemp.html?${scriptVersion}`; break;
         case Navigation.Page.B72GrpMemberTagList                           : url = `${host}/app/B70-grpm/B72GrpMemberTagList.html?${scriptVersion}`; break;
@@ -226,6 +230,7 @@ Navigation.getData = function(code)
         case Navigation.Page.B85ManagerMemberLayering               : return data = MMLY.Data;
         case Navigation.Page.B86ManagerUpdateBacknumberlength       : return data = MUBL.Data;
         case Navigation.Page.B87ManagerUpdateBasecamp                : return data = MUBC.Data;
+        case Navigation.Page.B88ManagerUpdateGrpIntro                : return data = MUGI.Data;
         case Navigation.Page.B71GrpMemberDetail                     : return data = GMDT.Data;
         case Navigation.Page.B72GrpMemberMergeTemp                  : return data = GMMT.Data;
         case Navigation.Page.B72GrpMemberTagList                    : return data = GMTL.Data;
@@ -329,6 +334,7 @@ Navigation.executeShow = function()
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.show(); break;
         case Navigation.Page.B86ManagerUpdateBacknumberlength         : MUBL.show(); break;
         case Navigation.Page.B87ManagerUpdateBasecamp                  : MUBC.show(); break;
+        case Navigation.Page.B88ManagerUpdateGrpIntro                  : MUGI.show(); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.show(); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.show(); break;
         case Navigation.Page.B72GrpMemberTagList                      : GMTL.show(); break;
@@ -412,6 +418,7 @@ Navigation.executeMoveBack = function()
         case Navigation.Page.B85ManagerMemberLayering                 : MMLY.close(true); break;
         case Navigation.Page.B86ManagerUpdateBacknumberlength         : MUBL.close(true); break;
         case Navigation.Page.B87ManagerUpdateBasecamp                  : MUBC.close(true); break;
+        case Navigation.Page.B88ManagerUpdateGrpIntro                  : MUGI.close(true); break;
         case Navigation.Page.B71GrpMemberDetail                       : GMDT.close(true); break;
         case Navigation.Page.B72GrpMemberMergeTemp                    : GMMT.close(true); break;
         case Navigation.Page.B72GrpMemberTagList                      : GMTL.close(true); break;
