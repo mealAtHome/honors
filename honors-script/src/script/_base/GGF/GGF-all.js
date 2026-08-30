@@ -7,6 +7,17 @@ GGF.User =
     },
 };
 
+GGF.Grp =
+{
+    Clstermunit :
+    {
+        DAY   : "d", /* GGF.Grp.Clstermunit.DAY : 일 */
+        WEEK  : "w", /* GGF.Grp.Clstermunit.WEEK : 주 */
+        MONTH : "m", /* GGF.Grp.Clstermunit.MONTH : 월 */
+        YEAR  : "y", /* GGF.Grp.Clstermunit.YEAR : 연 */
+    },
+};
+
 GGF.Bankaccount =
 {
     Bacctype :

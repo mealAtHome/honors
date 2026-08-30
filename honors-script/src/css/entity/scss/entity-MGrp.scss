@@ -1,3 +1,5 @@
+@use "../../_import/scss/__import" as *;
+
 /* ============================== */
 /* 매장 일반형 */
 /* ============================== */
@@ -20,3 +22,92 @@
     background-size: cover;
     background-position: 50% 50%;
 }
+
+/* ============================== */
+/* 모임 카드 - Norm(지표 스트립형) */
+/* ============================== */
+.Mgrp-cardNorm-div-statStrip
+{
+    display: flex;
+    align-items: center;
+    gap: $padMore;
+    margin-top: $marBase;
+    padding-top: $padBase;
+    border-top: 0.04em solid $colorLine;
+    overflow-x: auto;
+}
+.Mgrp-cardNorm-div-statItem
+{
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    flex: none;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: $colorMain;
+    white-space: nowrap;
+}
+.Mgrp-cardNorm-div-statItem > i { color: $colorCmmt; }
+
+/* ============================== */
+/* 모임 카드 - Main(배지 히어로형) */
+/* ============================== */
+.Mgrp-cardMain-div-top { padding: 0; overflow: hidden; }
+.Mgrp-cardMain-div-band
+{
+    background: $colorMain;
+    padding: $padBase $padMore calc($padMore + 0.6em) $padMore;
+}
+.Mgrp-cardMain-span-bandLabel
+{
+    color: rgba(255,255,255,0.55);
+    font-weight: 900;
+    font-size: 0.7em;
+    letter-spacing: 0.12em;
+}
+.Mgrp-cardMain-div-body
+{
+    padding: 0 $padMore $padMore $padMore;
+    margin-top: -1.6em;
+}
+.Mgrp-cardMain-div-logoWrap
+{
+    position: relative;
+    flex: none;
+}
+.Mgrp-cardMain-div-logo
+{
+    border: 0.2em solid $colorSnow;
+    box-shadow: 0 0.1em 0.4em rgba(0,0,0,0.15);
+}
+.Mgrp-cardMain-span-memberBadge
+{
+    position: absolute;
+    bottom: -0.4em;
+    right: -0.4em;
+    background: $colorHold;
+    color: $colorSnow;
+    font-size: 0.65em;
+    font-weight: 900;
+    padding: 0.15em 0.4em;
+    border-radius: 999px;
+    border: 0.15em solid $colorSnow;
+    white-space: nowrap;
+}
+.Mgrp-cardMain-div-statRow
+{
+    display: flex;
+    align-items: center;
+    margin-top: $padBase;
+    border-top: 0.04em solid $colorLine;
+    padding-top: $padHalf;
+}
+.Mgrp-cardMain-div-statCol
+{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15em;
+}
+.Mgrp-cardMain-div-statCol + .Mgrp-cardMain-div-statCol { border-left: 0.04em solid $colorLine; }

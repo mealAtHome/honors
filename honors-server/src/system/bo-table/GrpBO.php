@@ -41,6 +41,11 @@ class GrpBO extends _CommonBO
     const FIELD__BACKNUMBERLENGTH = "backnumberlength"; /* (  ) int */
     const FIELD__GRPBASEADDRCODE = "grpbaseaddrcode"; /* (  ) bigint */
     const FIELD__GRPBASEPOINT = "grpbasepoint"; /* (  ) point */
+    const FIELD__GRPMCNT = "grpmcnt"; /* (  ) int */
+    const FIELD__GRPCLSTERMUNIT = "grpclstermunit"; /* (  ) enum('y','m','w','d') */
+    const FIELD__GRPCLSTERMVALUE = "grpclstermvalue"; /* (  ) int */
+    const FIELD__GRPLASTCLSREGISTED = "grplastclsregisted"; /* (  ) datetime */
+    const FIELD__GRPCLSAPPLYBILLAVG = "grpclsapplybillavg"; /* (  ) int */
     const FIELD__MODIDT        = "modidt";        /* (  ) datetime */
     const FIELD__REGIDT        = "regidt";        /* (  ) datetime */
 
@@ -105,6 +110,11 @@ class GrpBO extends _CommonBO
             , t.grpbaseaddrcode
             , ST_X(t.grpbasepoint) grpbaselat
             , ST_Y(t.grpbasepoint) grpbaselng
+            , t.grpmcnt
+            , t.grpclstermunit
+            , t.grpclstermvalue
+            , t.grplastclsregisted
+            , t.grpclsapplybillavg
             , t.modidt
             , t.regidt
             , u.id                  grpmanager_id
@@ -172,6 +182,8 @@ class GrpBO extends _CommonBO
     /* public function changeStoreStatus($STORENO, $STORE_STATUS)     { return $this->update(get_defined_vars(), __FUNCTION__); } */
     public function updateBaccnodefaultForInside($GRPNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateGrpintroForInside($GRPNO, $GRPINTRO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function recalcGrpmcntForInside($GRPNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function recalcClsStatsForInside($GRPNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
@@ -180,6 +192,10 @@ class GrpBO extends _CommonBO
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
     const updateGrpintroForInside = "updateGrpintroForInside";
     const GRPINTRO_MAX = 30; /* 한줄소개 최대 글자수 */
+    const recalcGrpmcntForInside = "recalcGrpmcntForInside";
+    const recalcClsStatsForInside = "recalcClsStatsForInside";
+    const CLSTERM_LOOKBACK_DAYS = 90; /* 활동주기 계산에 사용하는 최근 기간(일) */
+    const CLSBILLAVG_LOOKBACK_CNT = 10; /* 일정평균비용 계산에 사용하는 최근 일정 개수 */
     const updateBacknumberlengthForMng = "updateBacknumberlengthForMng";
     const updateBasecampForMng = "updateBasecampForMng";
     const BACKNUMBERLENGTH_MIN = 2; /* 등번호 문자수 최소 */
@@ -258,6 +274,89 @@ class GrpBO extends _CommonBO
                     update grp set
                         grpbaseaddrcode = $grpbaseaddrcode,
                         grpbasepoint = ST_PointFromText('POINT($grpbaselat $grpbaselng)', 4326)
+                    where grpno = '$GRPNO'
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::recalcGrpmcntForInside:
+            {
+                /* 활성상태이면서 일반(임시아님) 멤버만 카운트 */
+                $cnt = intval(GGsql::selectCnt(
+                    "
+                        select count(*) cnt
+                        from grp_member gm
+                            inner join user u on u.userno = gm.userno
+                        where
+                            gm.grpno = '$GRPNO' and
+                            gm.grpmstatus = 'active' and
+                            u.usertype = 'normal'
+                    "
+                ));
+                $query = "update grp set grpmcnt = $cnt where grpno = '$GRPNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::recalcClsStatsForInside:
+            {
+                /* --------------- */
+                /* 활동주기 : 최근 90일간 일정건수를 바탕으로 "주 1회" 식의 러프한 주기를 산출 */
+                /* --------------- */
+                $lookbackDays = self::CLSTERM_LOOKBACK_DAYS;
+                $cnt = intval(GGsql::selectCnt(
+                    "
+                        select count(*) cnt
+                        from cls
+                        where grpno = '$GRPNO' and clsapplystartdt >= date_sub(now(), interval $lookbackDays day)
+                    "
+                ));
+
+                $termunit = null;
+                $termvalue = null;
+                if($cnt > 0)
+                {
+                    $eventsPerDay = $cnt / $lookbackDays;
+                    $perWeek  = (int) round($eventsPerDay * 7);
+                    $perMonth = (int) round($eventsPerDay * 30);
+                    $perYear  = (int) round($eventsPerDay * 365);
+
+                    if($perWeek > 6)        { $termunit = 'd'; $termvalue = max(1, (int) round($eventsPerDay)); }
+                    elseif($perWeek >= 1)   { $termunit = 'w'; $termvalue = max(1, $perWeek); }
+                    elseif($perMonth >= 1)  { $termunit = 'm'; $termvalue = max(1, $perMonth); }
+                    else                    { $termunit = 'y'; $termvalue = max(1, $perYear); }
+                }
+                $termunitSql = $termunit == null ? "null" : "'$termunit'";
+                $termvalueSql = $termvalue == null ? "null" : $termvalue;
+
+                /* --------------- */
+                /* 마지막활동 : 가장 최근에 "등록"된(clsregdt 기준) 일정의 신청시작일(clsapplystartdt) */
+                /* --------------- */
+                $lastRow = GGsql::selectOne("select clsapplystartdt from cls where grpno = '$GRPNO' order by clsregdt desc limit 1");
+                $lastclsregisted = Common::get($lastRow, "clsapplystartdt");
+                $lastclsregistedSql = Common::isEmpty($lastclsregisted) ? "null" : "'$lastclsregisted'";
+
+                /* --------------- */
+                /* 일정평균비용 : 가장 최근에 등록된 N개 일정의 신청가격 평균 */
+                /* --------------- */
+                $billLookbackCnt = self::CLSBILLAVG_LOOKBACK_CNT;
+                $avgRow = GGsql::selectOne(
+                    "
+                        select avg(t.clsbillapplyprice) avgbill
+                        from (select clsbillapplyprice from cls where grpno = '$GRPNO' order by clsregdt desc limit $billLookbackCnt) t
+                    "
+                );
+                $avgbill = intval(Common::get($avgRow, "avgbill"));
+
+                /* --------------- */
+                /* process */
+                /* --------------- */
+                $query =
+                "
+                    update grp set
+                        grpclstermunit = $termunitSql,
+                        grpclstermvalue = $termvalueSql,
+                        grplastclsregisted = $lastclsregistedSql,
+                        grpclsapplybillavg = $avgbill
                     where grpno = '$GRPNO'
                 ";
                 GGsql::exeQuery($query);

@@ -12,6 +12,11 @@ class MGrp
         /* data */    this.grpbaselat           = GGC.Common.double(dat.grpbaselat);
         /* data */    this.grpbaselng           = GGC.Common.double(dat.grpbaselng);
         /* data */    this.grpbaseaddrstr       = GGC.Common.varchar(dat.grpbaseaddrstr);
+        /* data */    this.grpmcnt              = GGC.Common.int(dat.grpmcnt);
+        /* data */    this.grpclstermunit       = GGC.Common.enum(dat.grpclstermunit);
+        /* data */    this.grpclstermvalue      = GGC.Common.int(dat.grpclstermvalue);
+        /* data */    this.grplastclsregisted   = GGC.Common.datetime(dat.grplastclsregisted);
+        /* data */    this.grpclsapplybillavg   = GGC.Common.int(dat.grpclsapplybillavg);
         /* data */    this.modidt               = GGC.Common.datetime(dat.modidt);
         /* data */    this.regidt               = GGC.Common.datetime(dat.regidt);
         /* data */    this.grpmanager_name      = GGC.Common.varchar(dat.grpmanager_name);
@@ -43,6 +48,11 @@ class MGrp
     getGrpbaselat() { return this.grpbaselat; }
     getGrpbaselng() { return this.grpbaselng; }
     getGrpbaseaddrstr() { return this.grpbaseaddrstr; }
+    getGrpmcnt() { return this.grpmcnt; }
+    getGrpclstermunit() { return this.grpclstermunit; }
+    getGrpclstermvalue() { return this.grpclstermvalue; }
+    getGrplastclsregisted() { return this.grplastclsregisted; }
+    getGrpclsapplybillavg() { return this.grpclsapplybillavg; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
     getGrpmanagerName() { return this.grpmanager_name; }
@@ -61,6 +71,28 @@ class MGrp
 
     /* custom */
     getPk() { return this.pk; }
+
+    /* custom : 활동주기 텍스트 (예: "주 1회") */
+    getGrpclstermText()
+    {
+        if(Common.isEmpty(this.getGrpclstermunit()) || Common.isEmpty(this.getGrpclstermvalue()))
+            return "정보없음";
+        let unitText = "";
+        switch(this.getGrpclstermunit())
+        {
+            case GGF.Grp.Clstermunit.DAY   : unitText = "일"; break;
+            case GGF.Grp.Clstermunit.WEEK  : unitText = "주"; break;
+            case GGF.Grp.Clstermunit.MONTH : unitText = "월"; break;
+            case GGF.Grp.Clstermunit.YEAR  : unitText = "연"; break;
+        }
+        return `${unitText} ${this.getGrpclstermvalue()}회`;
+    }
+
+    /* custom : 마지막활동 텍스트 (예: "3일 전") */
+    getGrplastclsregistedText() { return GGC.Date.datePretty(this.getGrplastclsregisted()); }
+
+    /* custom : 일정평균비용 텍스트 (예: "15,000원") */
+    getGrpclsapplybillavgWon() { return GGC.Common.priceWon(this.getGrpclsapplybillavg()); }
 
     /* ========================= */
     /* make */
@@ -102,6 +134,73 @@ class MGrp
             </div>
         `;
         return html;
+    }
+
+    /* ========================= */
+    /* make (모임 카드 - Norm : 지표 스트립형, 목록 스캔용) */
+    /* ========================= */
+    makeGrpCardNorm(btnHtml="")
+    {
+        if(btnHtml == "")
+            btnHtml = `<span class="commonEvent-tag-hyperlink common-colorSide common-strong common-fonts09" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${this.getPk()}>상세보기 &gt;</span>`;
+
+        return `
+            <div class="Mgrp-cardNorm-div-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
+                <div class="common-flexCenter">
+                    <div class="Mgrp-make-div-image" style="background-image:url('${this.getGrpimgPath()}')"></div>
+                    <div class="common-flexVertical" style="flex:1; min-width:0;">
+                        <span class="common-strong common-fonts11">${this.getGrpname()}</span>
+                        <span class="common-fonts08 common-colorCmmt">모임장 ${this.getGrpmanagerName()}</span>
+                    </div>
+                    ${btnHtml}
+                </div>
+                <div class="Mgrp-cardNorm-div-statStrip">
+                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-users"></i><span>${this.getGrpmcnt()}명</span></div>
+                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-map-pin"></i><span>0km</span></div>
+                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-repeat"></i><span>${this.getGrpclstermText()}</span></div>
+                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-cash"></i><span>${this.getGrpclsapplybillavgWon()}</span></div>
+                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-clock"></i><span>${this.getGrplastclsregistedText()}</span></div>
+                </div>
+            </div>
+        `;
+    }
+
+    /* ========================= */
+    /* make (모임 카드 - Main : 배지 히어로형, 단독 강조용) */
+    /* ========================= */
+    makeGrpCardMain(btnHtml="")
+    {
+        if(btnHtml == "")
+            btnHtml = `<span class="commonEvent-tag-hyperlink common-colorSide common-strong common-fonts09" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${this.getPk()}>상세보기 &gt;</span>`;
+
+        return `
+            <div class="Mgrp-cardMain-div-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
+                <div class="Mgrp-cardMain-div-band">
+                    <span class="Mgrp-cardMain-span-bandLabel">GROUP</span>
+                </div>
+                <div class="Mgrp-cardMain-div-body">
+                    <div class="common-flexCenter" style="align-items:flex-end;">
+                        <div class="Mgrp-cardMain-div-logoWrap">
+                            <div class="Mgrp-make-div-image Mgrp-cardMain-div-logo" style="background-image:url('${this.getGrpimgPath()}')"></div>
+                            <span class="Mgrp-cardMain-span-memberBadge">${this.getGrpmcnt()}명</span>
+                        </div>
+                        <div class="common-flexVertical">
+                            <span class="common-strong common-fonts11">${this.getGrpname()}</span>
+                            <span class="common-fonts08 common-colorCmmt">모임장 ${this.getGrpmanagerName()}</span>
+                        </div>
+                    </div>
+                    <div class="Mgrp-cardMain-div-statRow">
+                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">거리</span><span class="common-strong common-fonts09">0km</span></div>
+                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">활동주기</span><span class="common-strong common-fonts09">${this.getGrpclstermText()}</span></div>
+                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">평균비용</span><span class="common-strong common-fonts09">${this.getGrpclsapplybillavgWon()}</span></div>
+                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">마지막활동</span><span class="common-strong common-fonts09">${this.getGrplastclsregistedText()}</span></div>
+                    </div>
+                    <div style="text-align:right; margin-top:var(--marHalf);">
+                        ${btnHtml}
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
 }

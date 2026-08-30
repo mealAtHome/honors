@@ -20,6 +20,7 @@ class GrpMemberBO extends _CommonBO
         GGnavi::getClssettleBO();
         GGnavi::getGrpmPrivacyBO();
         GGnavi::getGrpfncaBO();
+        GGnavi::getGrpBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
@@ -28,6 +29,7 @@ class GrpMemberBO extends _CommonBO
         $arr['clssettleBO'] = ClssettleBO::getInstance();
         $arr['grpmPrivacyBO'] = GrpmPrivacyBO::getInstance();
         $arr['grpfncaBO'] = GrpfncaBO::getInstance();
+        $arr['grpBO'] = GrpBO::getInstance();
         return $arr;
     }
 
@@ -352,6 +354,9 @@ class GrpMemberBO extends _CommonBO
                 /* execute */
                 $query = "update grp_member set grpmstatus = 'delete', deletedt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
                 GGsql::exeQuery($query);
+
+                /* 모임 카드용 활성 멤버수 재집계 */
+                $grpBO->recalcGrpmcntForInside($GRPNO);
                 break;
             }
             case self::updatePointForInside:

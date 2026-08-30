@@ -413,6 +413,9 @@ class ClsBO extends _CommonBO
                 ";
                 GGsql::exeQuery($query);
                 $rslt[GGF::DATA] = $clsno;
+
+                /* 모임 카드용 활동주기/마지막활동/평균비용 재집계 */
+                $grpBO->recalcClsStatsForInside($GRPNO);
                 break;
             }
             case self::update:
@@ -563,6 +566,9 @@ class ClsBO extends _CommonBO
 
                 /* copy lineup */
                 $clslineupaBO->copyFromClsnoWithSubForInside($GRPNO, $CLSNO, $clsno);
+
+                /* 모임 카드용 활동주기/마지막활동/평균비용 재집계 */
+                $grpBO->recalcClsStatsForInside($GRPNO);
                 break;
             }
             case self::deleteByPkWithSubForMng:
