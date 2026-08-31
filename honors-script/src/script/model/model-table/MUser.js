@@ -13,6 +13,8 @@ class MUser
         /* data */      this.email          = GGC.Common.char(dat.email);
         /* data */      this.hascarflg      = GGC.Common.enum(dat.hascarflg);
         /* data */      this.address        = GGC.Common.char(dat.address);
+        /* data */      this.userloginedlat = GGC.Common.double(dat.userloginedlat);
+        /* data */      this.userloginedlng = GGC.Common.double(dat.userloginedlng);
         /* data */      this.point          = GGC.Common.int(dat.point);
         /* data */      this.adminflg       = GGC.Common.enum(dat.adminflg);
         /* data */      this.modidt         = GGC.Common.datetime(dat.modidt);
@@ -37,6 +39,8 @@ class MUser
     getEmail() { return this.email; }
     getHascarflg() { return this.hascarflg; }
     getAddress() { return this.address; }
+    getUserloginedlat() { return this.userloginedlat; }
+    getUserloginedlng() { return this.userloginedlng; }
     getPoint() { return this.point; }
     getAdminflg() { return this.adminflg; }
     getModidt() { return this.modidt; }

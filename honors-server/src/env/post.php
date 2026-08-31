@@ -80,6 +80,8 @@
     $options["IMG"]                                                 = get("IMG");
     $options["IS_ADMIN"]                                            = get("IS_ADMIN");
     $options["KEYWORD"]                                             = get("KEYWORD");
+    $options["LAT"]                                                 = get("LAT");
+    $options["LNG"]                                                 = get("LNG");
     $options["LOSSCOMMENT"]                                         = get("LOSSCOMMENT");
     $options["LOSSCOST"]                                            = get("LOSSCOST");
     $options["LOSSIDX"]                                             = get("LOSSIDX");
@@ -129,6 +131,11 @@
     $options["LINEUPNAME"]                                          = get("LINEUPNAME");
     $options["TOKEN"]                                               = get("TOKEN");
     $options["USABLE"]                                              = get("USABLE");
+    $options["USERADDRCODE"]                                        = get("USERADDRCODE");
+    $options["USERADDRIDX"]                                         = get("USERADDRIDX");
+    $options["USERADDRTITLE"]                                       = get("USERADDRTITLE");
+    $options["USERBASELAT"]                                         = get("USERBASELAT");
+    $options["USERBASELNG"]                                         = get("USERBASELNG");
     $options["USERNAME"]                                            = get("USERNAME"); /* abstract */
     $options["USERNO"]                                              = get("USERNO");
     $options["USERREGDT"]                                           = get("USERREGDT");

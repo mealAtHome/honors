@@ -5,71 +5,34 @@
     <!-- ======================== -->
     <div class="common-div-toolbar">
         <div><gg-backbtn onclick="UALI.close(true);"></gg-backbtn></div>
-        <div><span>주소록</span></div>
+        <div><span>주소관리</span></div>
     </div>
 
-    <!-- ======================== -->
-    <!-- 새로운 주소 -->
-    <!-- ======================== -->
-    <style>
-        #UALI-btn-addAddr
-        {
-            display:block;
-            margin:1em auto;
-            min-width:15em;
-            font-size:1.1em;
-            padding:0.6em;
-        }
-    </style>
-    <button id="UALI-btn-addAddr" class="common-btn-outer">＋ 새로운 주소</button>
+    <div class="common-div-cushion">
+        <button id="UALI-btn-addAddr" class="common-btn-inner" style="width:100%; box-sizing:border-box;">＋ 새로운 주소</button>
+    </div>
 
     <!-- ======================== -->
     <!-- 주소리스트 -->
     <!-- ======================== -->
-    <div id="UALI-div-userAddrList" class="common-div-scrollX"></div>
+    <div id="UALI-div-userAddrList" class="common-div-cushion"></div>
 
     <script>
         var UALI =
         {
             code : "UALI",
-
-            /*
-                ■ 유저가 주소에 대한 변경을 해야할 때,
-                option : "manage"
-
-                ■ 주문 시, 주소를 선택해야 할 때,
-                option : "order"
-             */
-            Data :
-            {
-                option : "",
-            },
+            Data : {},
 
             show()
             {
-                if(UALI.Data.option == undefined || UALI.Data.option == "") UALI.Data.option = GGF.Page.A1010UserAddrList.Option.MANAGE;
-
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    let mUserAddrs = Api.UserAddr.selectByExecutor();
-                    mUserAddrs.makeUserAddrs("#UALI-div-userAddrList", UALI.Data.option);
+                    let mUser = Api.User.selectMe().getModel();
+                    UALI.Data.userno = mUser.getUserno();
 
-                    // var position = new naver.maps.LatLng(37.3595704, 127.105399);
-
-                    // var map = new naver.maps.Map('map', {
-                    //     center: position,
-                    //     zoom: 15
-                    // });
-
-                    // var marker = new naver.maps.Marker({
-                    //     position: position,
-                    //     map: map
-                    // });
-
-                    // naver.maps.Event.addListener(map, 'click', function(e) {
-                    //     marker.setPosition(e.coord);
-                    // });
+                    let mUserAddrs = Api.UserAddr.selectByUsernoForMng(UALI.Data.userno, GGF.none, GGF.toast);
+                    mUserAddrs.make("#UALI-div-userAddrList");
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
@@ -80,11 +43,6 @@
             /* ========================= */
             close(force=false)
             {
-                if(force == true)
-                {
-                    Navigation.moveBack();
-                    return;
-                }
                 Navigation.moveBack();
             },
         }
@@ -96,11 +54,49 @@
             /* ========================= */
             $("#UALI-btn-addAddr").click(function()
             {
-                let data =
+                Navigation.moveFrontPage(Navigation.Page.B20UserAddrUpdate, {option: "insert"});
+            });
+
+            $("#UALI-div-userAddrList").on("click", ".MUserAddr-make-btn-edit", function()
+            {
+                let useraddridx = $(this).attr("useraddridx");
+                Navigation.moveFrontPage(Navigation.Page.B20UserAddrUpdate, {option: "update", useraddridx: useraddridx});
+            });
+
+            $("#UALI-div-userAddrList").on("click", ".MUserAddr-make-btn-setDefault", function()
+            {
+                let useraddridx = $(this).attr("useraddridx");
+                Common.showProgress();
+                setTimeout(function()
                 {
-                    option: GGF.Page.UserAddrUpdate.Option.INSERT
-                }
-                Navigation.moveFrontPage(Navigation.Page.B20UserAddrUpdate, data);
+                    let mApiResponse = Api.UserAddr.updateDefaultForMng(UALI.Data.userno, useraddridx, GGF.none, GGF.toast);
+                    if(mApiResponse.isSuccess())
+                    {
+                        Navigation.executeShow();
+                        return;
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            $("#UALI-div-userAddrList").on("click", ".MUserAddr-make-btn-delete", function()
+            {
+                let useraddridx = $(this).attr("useraddridx");
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.UserAddr.deleteForMng(UALI.Data.userno, useraddridx, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Navigation.executeShow();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("이 주소를 삭제하시겠습니까? 이 주소를 사용중인 모임이 있다면, 해당 모임의 표시주소가 초기화됩니다.", process);
             });
 
             /* ========================= */
@@ -118,9 +114,6 @@
                 console.error(e);
                 UALI.close(true);
             }
-
-            /* localizing */
-            /* $("#UALI").i18n(); */
 
         }); /* end function */
 

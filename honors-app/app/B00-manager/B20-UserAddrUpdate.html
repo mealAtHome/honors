@@ -5,115 +5,158 @@
     <!-- ======================== -->
     <div class="common-div-toolbar">
         <div><gg-backbtn onclick="UAUP.close(true);"></gg-backbtn></div>
-        <div><span>주소입력</span></div>
+        <div><span id="UAUP-span-title">주소입력</span></div>
     </div>
 
-    <style>
-        .UAUP-btn-quickname
-        {
-            padding-left:0.6em;
-            padding-right:0.6em;
-            margin-right:0.3em;
-        }
-    </style>
+    <div class="common-div-formChild">
 
-    <!-- ================ -->
-    <!-- 주소명칭 -->
-    <!-- ================ -->
-    <div class="common-div-mass" style="text-align:center;">
-        <p class="common-p-insertTitle">
-            <span data-i18n="">주소명칭</span>
-        </p>
-        <input
-            id="UAUP-inputText-addrName"
-            type="text"
-            class="common-text-insertPage common-input-text"
-            style="width:80%; max-width:22em;"
-            placeholder="집"
-            value=""
-        >
-        <div class="common-div-cushionUD" style="text-align:center;">
-            <button class="UAUP-btn-quickname common-btn-outer">집</button>
-            <button class="UAUP-btn-quickname common-btn-outer">회사</button>
-            <button class="UAUP-btn-quickname common-btn-outer">사무실</button>
+        <!-- 주소별칭 -->
+        <div class="common-div-formField">
+            <span>*주소 별칭</span>
+            <span>10글자 이내로 입력해주세요. (예: 집, 회사)</span>
+            <input id="UAUP-input-title" type="text" class="common-input-field" maxlength="10" placeholder="예: 집"/>
         </div>
-    </div>
 
-    <!-- ================ -->
-    <!-- 주소입력 -->
-    <!-- ================ -->
-    <div class="common-div-mass">
-        <p class="common-p-insertTitle">
-            <span data-i18n="">주소입력</span>
-        </p>
+        <!-- 지역 -->
+        <div class="common-div-formField">
+            <span>*지역 (동/읍/면)</span>
+            <div id="UAUP-div-addrSelected" class="common-strong common-cushionHalfUp">지역을 선택해주세요.</div>
+            <input id="UAUP-input-addrKeyword" type="text" class="common-input-field" placeholder="동/읍/면 이름으로 검색" style="margin-top:var(--marHalf);"/>
+            <div id="UAUP-div-addrResultList" class="common-cushionHalfUp" style="display:none;"></div>
+        </div>
 
-        <button id="UAUP-btn-chooseAddr" class="common-btn-outer" data-i18n="(common)choose area">주소선택</button>
-        <div
-            id="UAUP-div-address"
-            class="common-div-mass"
-            zipcode=""
-            road_addr=""
-            jibun_addr=""
-        ></div>
+        <!-- 위치 -->
+        <div class="common-div-formField">
+            <span>*정확한 위치</span>
+            <span>지도를 움직여 정확한 위치를 지정해주세요.</span>
+            <div id="UAUP-div-mapContainer" style="position:relative; width:100%; height:14em; margin-top:var(--marHalf); border-radius:var(--padHalf); overflow:hidden; background:var(--colorLine);">
+                <div id="UAUP-div-map" style="width:100%; height:100%;"></div>
+                <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-100%); pointer-events:none; z-index:1000;">
+                    <i class="ti ti-map-pin" style="font-size:2em; color:var(--colorErrr); text-shadow:0 1px 3px rgba(250,0,0,0.4);"></i>
+                </div>
+            </div>
+        </div>
 
-        <p>상세주소</p>
-        <input
-            id="UAUP-inputText-addrDetail"
-            type="text"
-            class="common-text-insertPage common-input-text"
-            style="width:80%; max-width:22em;"
-            value="휴엔하임퍼스트 101동 106호"
-        >
-    </div>
+        <!-- 저장 -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="UAUP-btn-save" class="common-btn-inner">저장하기</button></td>
+                </tr>
+            </tbody>
+        </table>
 
-    <!-- ================ -->
-    <!-- 저장 -->
-    <!-- ================ -->
-    <div class="common-div-mass">
-        <button id="UAUP-btn-save" class="common-btn-gradientBig">주소 저장하기</button>
-    </div>
+    </div> <!-- formChild -->
 
     <script>
         var UAUP =
         {
             code : "UAUP",
-
-            /* 페이지 데이터 */
-            /*
-                option :
-                    - update  : 업데이트
-                    - insert  : 새로운 주소
-                    - newuser : 새로운 유저를 위한 모드
-             */
             Data : {},
 
             show()
             {
-                if(UAUP.Data.option    == undefined) UAUP.Data.option    = "";
-                if(UAUP.Data.addrIndex == undefined) UAUP.Data.addrIndex = "";
+                if(UAUP.Data.option == undefined) UAUP.Data.option = "insert";
+
+                UAUP.Data.selectedAddrcode = null;
+                UAUP.Data.selectedLat = 37.5665;
+                UAUP.Data.selectedLng = 126.9780;
 
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    switch(UAUP.Data.option)
+                    let mUser = Api.User.selectMe().getModel();
+                    UAUP.Data.userno = mUser.getUserno();
+
+                    if(UAUP.Data.option == "update")
                     {
-                        case "update" :
+                        $("#UAUP-span-title").text("주소수정");
+                        let mUserAddrs = Api.UserAddr.selectByUsernoForMng(UAUP.Data.userno, GGF.none, GGF.toast);
+                        let mUserAddr = mUserAddrs.getModels().find(m => m.getUseraddridx() == UAUP.Data.useraddridx);
+                        if(mUserAddr == undefined)
                         {
-                            let mUserAddrs = Api.UserAddr.selectByAddrIndex(UAUP.Data.addrIndex);
-                            if(mUserAddrs.getModels().length == 1)
-                            {
-                                let mUserAddr = mUserAddrs.getModel();
-                                $("#UAUP-inputText-addrName").val(mUserAddr.getAddrName());
-                                $("#UAUP-inputText-addrDetail").val(mUserAddr.getAddrDetail());
-                            }
-                            break;
+                            Common.toast("잘못된 접근입니다.");
+                            UAUP.close(true);
+                            return;
                         }
+                        $("#UAUP-input-title").val(mUserAddr.getUseraddrtitle());
+                        $("#UAUP-div-addrSelected").text(mUserAddr.getUseraddrstr());
+                        UAUP.Data.selectedAddrcode = mUserAddr.getUseraddrcode();
+                        UAUP.Data.selectedLat = mUserAddr.getUseraddrlat();
+                        UAUP.Data.selectedLng = mUserAddr.getUseraddrlng();
+                    }
+                    else
+                    {
+                        $("#UAUP-span-title").text("주소입력");
                     }
 
+                    UAUP.initMap();
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            },
 
+            /* ===================== */
+            /* 지도 초기화 */
+            /* ===================== */
+            initMap()
+            {
+                if(window.naver == undefined || naver.maps == undefined)
+                {
+                    $("#UAUP-div-map").html(`<div style="display:flex; align-items:center; justify-content:center; height:100%; color:var(--colorCmmt); font-size:0.85em; text-align:center; padding:0 1em;">지도 API를 불러올 수 없습니다.</div>`);
+                    return;
+                }
+
+                UAUP.Data.map = new naver.maps.Map("UAUP-div-map",
+                {
+                    center: new naver.maps.LatLng(UAUP.Data.selectedLat, UAUP.Data.selectedLng),
+                    zoom: 16,
+                });
+
+                naver.maps.Event.once(UAUP.Data.map, "init", function()
+                {
+                    UAUP.Data.map.setCenter(new naver.maps.LatLng(UAUP.Data.selectedLat, UAUP.Data.selectedLng));
+                });
+
+                naver.maps.Event.addListener(UAUP.Data.map, "idle", function()
+                {
+                    let center = UAUP.Data.map.getCenter();
+                    UAUP.Data.selectedLat = center.lat();
+                    UAUP.Data.selectedLng = center.lng();
+                });
+            },
+
+            /* ===================== */
+            /* 지역 선택 시, 지도를 그 지역으로 이동 (지오코딩) */
+            /* ===================== */
+            moveMapToAddr(addrstrfull)
+            {
+                if(window.naver == undefined || naver.maps.Service == undefined) return;
+                naver.maps.Service.geocode({query: addrstrfull}, function(status, response)
+                {
+                    if(status !== naver.maps.Service.Status.OK) { return; }
+                    if(response.v2.meta.totalCount === 0) { return; }
+
+                    let item = response.v2.addresses[0];
+                    let point = new naver.maps.LatLng(item.y, item.x);
+
+                    UAUP.Data.map.setCenter(point);
+                    UAUP.Data.selectedLat = point.lat();
+                    UAUP.Data.selectedLng = point.lng();
+                });
+            },
+
+            /* ===================== */
+            /* 지역검색 */
+            /* ===================== */
+            searchAddr(keyword)
+            {
+                ApiPr.Addrcode.searchByKeyword(keyword, GGF.none, GGF.toast)
+                .done(function(mAddrcodes)
+                {
+                    mAddrcodes.makeAddrcodeForChoose("#UAUP-div-addrResultList");
+                    $("#UAUP-div-addrResultList").show();
+                });
             },
 
             /* ========================= */
@@ -121,104 +164,71 @@
             /* ========================= */
             close(force=false)
             {
-                if(force == true)
-                {
-                    Navigation.moveBack();
-                    return;
-                }
-                Common.confirmClose();
+                Navigation.moveBack();
             },
         }
 
         $(document).ready(function()
         {
-            /* ========================= */
+            /* ======================== */
             /* event */
-            /* ========================= */
+            /* ======================== */
 
-            /* --------------- */
-            /*  */
-            /* --------------- */
-            $("#UAUP-btn-chooseAddr").click(function()
+            /* 지역검색 : 타이핑 중 검색 */
+            let searchTimer = null;
+            $("#UAUP-input-addrKeyword").on("keyup", function()
             {
-                let data =
-                {
-                    fromPageCode         : UAUP.code,
-                    fromPageElement      : "UAUP-div-address",
-                    executeShowWhenClose : false,
-                }
-                Navigation.moveFrontDialog(Navigation.Page.S31CommonChooseAddr, data);
+                let keyword = $(this).val().trim();
+                clearTimeout(searchTimer);
+                if(keyword == "") { $("#UAUP-div-addrResultList").hide().html(""); return; }
+                searchTimer = setTimeout(function() { UAUP.searchAddr(keyword); }, 300);
             });
 
-            $(".UAUP-btn-quickname").click(function()
+            /* 지역검색 결과 선택 */
+            $("#UAUP-div-addrResultList").on("click", ".MAddrcode-makeForChoose-row", function()
             {
-                let name = $(this).html();
-                $("#UAUP-inputText-addrName").val(name);
+                let addrcode = $(this).attr("addrcode");
+                let addrstrfull = $(this).attr("addrstrfull");
+                let isChanged = UAUP.Data.selectedAddrcode != addrcode;
+
+                UAUP.Data.selectedAddrcode = addrcode;
+                $("#UAUP-div-addrSelected").text(addrstrfull);
+                $("#UAUP-input-addrKeyword").val("");
+                $("#UAUP-div-addrResultList").hide().html("");
+
+                if(isChanged)
+                    UAUP.moveMapToAddr(addrstrfull);
             });
 
-            /* --------------- */
-            /*  */
-            /* --------------- */
+            /* 저장 */
             $("#UAUP-btn-save").click(function()
             {
-                let dataEl = $("#UAUP-div-address > .entity-MGovAddr-tbl-label");
-                if(dataEl.length == 0)
-                {
-                    Common.toast("주소를 입력해주세요.");
-                    return;
-                }
+                let title = $("#UAUP-input-title").val().trim();
+                if(title == "") { Common.toastError("주소 별칭을 입력해주세요."); return; }
+                if(Common.isEmpty(UAUP.Data.selectedAddrcode)) { Common.toastError("지역을 선택해주세요."); return; }
 
-                /* --------------- */
-                /* make main data */
-                /* --------------- */
-                let ajaxData =
+                let process = function()
                 {
-                    OPTION              : UAUP.Data.option,
-                    ADDR_INDEX          : UAUP.Data.addrIndex,
-                    ADDR_NAME           : $("#UAUP-inputText-addrName").val(),
-                    ADDR_ZIPCODE        : dataEl.attr("zip_no"),
-                    ADDR_SIDO           : dataEl.attr("si_nm"),
-                    ADDR_SIGUNGU        : dataEl.attr("sgg_nm"),
-                    ADDR_EMD            : dataEl.attr("emd_nm"),
-                    ADDR_ROAD           : dataEl.attr("road_addr"),
-                    ADDR_JIBUN          : dataEl.attr("jibun_addr"),
-                    ADDR_ROADENG        : dataEl.attr("eng_addr"),
-                    ADDR_ADMCD          : dataEl.attr("adm_cd"),
-                    ADDR_RNMGTSN        : dataEl.attr("rn_mgt_sn"),
-                    ADDR_UDRTYN         : dataEl.attr("udrt_yn"),
-                    ADDR_BULDMNNM       : dataEl.attr("buld_mnnm"),
-                    ADDR_BULDSLNO       : dataEl.attr("buld_slno"),
-                    ADDR_DETAIL         : $("#UAUP-inputText-addrDetail").val(),
-                };
-
-                /* --------------- */
-                /* validation */
-                /* --------------- */
-                /* execute api */
-                Common.showProgress();
-                setTimeout(function()
-                {
-                    let rslt = Api.UserAddr.updateUserAddrByOption(ajaxData, "none", "none");
-                    if(rslt)
+                    Common.showProgress();
+                    setTimeout(function()
                     {
-                        switch(UAUP.Data.option)
-                        {
-                            case GGF.Page.UserAddrUpdate.Option.NEWUSER:
-                            {
-                                Navigation.moveAfterLogin();
-                                break;
-                            }
-                        }
-                    }
-                    // if(rslt)
-                    // {
-                    //     Common.hideProgress();
-                    //     UAUP.close();
-                    //     return;
-                    // }
+                        let userno = UAUP.Data.userno;
+                        let mApiResponse = null;
+                        if(UAUP.Data.option == "update")
+                            mApiResponse = Api.UserAddr.updateForMng(userno, UAUP.Data.useraddridx, title, UAUP.Data.selectedAddrcode, UAUP.Data.selectedLat, UAUP.Data.selectedLng, GGF.none, GGF.toast);
+                        else
+                            mApiResponse = Api.UserAddr.insertForMng(userno, title, UAUP.Data.selectedAddrcode, UAUP.Data.selectedLat, UAUP.Data.selectedLng, GGF.none, GGF.toast);
 
-                    Common.hideProgress();
-                }, ajaxDelayTime);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("저장되었습니다.");
+                            UAUP.close(true);
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("저장하시겠습니까?", process);
             });
 
             /* ========================= */
@@ -236,9 +246,6 @@
                 console.error(e);
                 UAUP.close(true);
             }
-
-            /* localizing */
-            /* $("#UAUP").i18n(); */
 
         }); /* end function */
 

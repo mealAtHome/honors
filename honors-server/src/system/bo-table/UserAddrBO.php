@@ -1,9 +1,8 @@
 <?php
 
-/* au */
+/* user_addr, uadr : 유저 주소관리 */
 class UserAddrBO extends _CommonBO
 {
-
     /* ----- */
     /* singleton */
     /* ----- */
@@ -14,87 +13,51 @@ class UserAddrBO extends _CommonBO
             self::$bo = new static();
         return self::$bo;
     }
+    function readBO()
+    {
+        GGnavi::getAddrcodeBO();
+    }
     function setBO()
     {
+        self::readBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
+        $arr['addrcodeBO'] = AddrcodeBO::getInstance();
         return $arr;
     }
 
     /* ========================= */
     /* fields */
-    /*
-    */
     /* ========================= */
-    const FIELD__USERNO               = "userno";
-    const FIELD__ADDR_INDEX           = "addr_index";
-    const FIELD__ADDR_NAME            = "addr_name";
-    const FIELD__ADDR_ZIPCODE         = "addr_zipcode";
-    const FIELD__ADDR_SIDO            = "addr_sido";
-    const FIELD__ADDR_SIGUNGU         = "addr_sigungu";
-    const FIELD__ADDR_EMD             = "addr_emd";
-    const FIELD__ADDR_ROAD            = "addr_road";
-    const FIELD__ADDR_JIBUN           = "addr_jibun";
-    const FIELD__ADDR_ROADENG         = "addr_roadeng";
-    const FIELD__ADDR_ADMCD           = "addr_admcd";
-    const FIELD__ADDR_RNMGTSN         = "addr_rnmgtsn";
-    const FIELD__ADDR_UDRTYN          = "addr_udrtyn";
-    const FIELD__ADDR_BULDMNNM        = "addr_buldmnnm";
-    const FIELD__ADDR_BULDSLNO        = "addr_buldslno";
-    const FIELD__ADDR_GRS80Y          = "addr_grs80y";
-    const FIELD__ADDR_GRS80X          = "addr_grs80x";
-    const FIELD__ADDR_LATIY           = "addr_latiy";
-    const FIELD__ADDR_LONGX           = "addr_longx";
-    const FIELD__ADDR_DETAIL          = "addr_detail";
-    const FIELD__IS_DEFAULT           = "is_default";
-    const FIELD__AT_LASTORDERCOMPLETE = "at_lastordercomplete";
-    const FIELD__CNT_ORDERCOMPLETE    = "cnt_ordercomplete";
-    const FIELD__IS_DELETED           = "is_deleted";
+    const FIELD__USERNO        = "userno";        /* (pk) char(30) */
+    const FIELD__USERADDRIDX   = "useraddridx";   /* (pk) int */
+    const FIELD__USERADDRTITLE = "useraddrtitle"; /* (  ) char(10) */
+    const FIELD__USERADDRCODE  = "useraddrcode";  /* (  ) bigint */
+    const FIELD__USERBASEPOINT = "userbasepoint"; /* (  ) point */
+    const FIELD__USERADDRDEFFLG = "useraddrdefflg"; /* (  ) enum('y','n') */
+    const FIELD__MODIDT        = "modidt";        /* (  ) datetime */
+    const FIELD__REGDT         = "regdt";         /* (  ) datetime */
 
-    /* ========================= */
-    /* enum */
-    /*
-    */
-    /* ========================= */
+    const USERADDRTITLE_MAX = 10; /* 주소 별칭 최대 글자수 */
+
     static public function getConsts()
     {
         $arr = array();
-        // $arr['key'] = "value";
         return $arr;
     }
 
     /* ========================= */
-    /* 유저의 주변 반경 위/경도 쿼리문 반환 */
-    /*
-        반환형태는 다음과 같음
-        return "(위도,경도),(위도,경도),(위도,경도),(위도,경도)";
-     */
+    /* select > sub */
     /* ========================= */
-    public function getLatiyLongxQueryByExecutor($executor)
-    {
-        $userAddr = Common::getDataOne($this->selectByDefaultYForInside($executor));
-        $query = GGsql::makeInQueryByGPS($userAddr[UserAddrBO::FIELD__ADDR_LATIY], $userAddr[UserAddrBO::FIELD__ADDR_LONGX], 0.02);
-        return $query;
-    }
+    public function selectDefaultForInside($USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside($USERNO, $USERADDRIDX) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
-    /* 조회 */
+    /* select */
     /* ========================= */
-    public function selectByDefaultYForInside   ($EXECUTOR)                 { return $this->select(get_defined_vars(), __FUNCTION__); }
-    public function selectByAddrIndexForInside  ($EXECUTOR, $ADDR_INDEX)    { return $this->select(get_defined_vars(), __FUNCTION__); }
-
-    /* ========================= */
-    /*  */
-    /*
-        ■ option
-            - executor
-    */
-    /* ========================= */
-    const selectByDefaultY              = "selectByDefaultY";
-    const selectByDefaultYForInside     = "selectByDefaultYForInside";
-    const selectByExecutor              = "selectByExecutor";
-    const selectByAddrIndex             = "selectByAddrIndex";
-    const selectByAddrIndexForInside    = "selectByAddrIndexForInside";
+    const selectByUsernoForMng = "selectByUsernoForMng";
+    const selectDefaultForInside = "selectDefaultForInside";
+    const selectByPkForInside = "selectByPkForInside";
     protected function select($options, $option="")
     {
         /* vars */
@@ -107,11 +70,6 @@ class UserAddrBO extends _CommonBO
             $OPTION = $option;
 
         /* --------------- */
-        /* init vars */
-        /* --------------- */
-        extract($options);
-
-        /* --------------- */
         /* sql body */
         /* --------------- */
         $query  = "";
@@ -119,28 +77,17 @@ class UserAddrBO extends _CommonBO
         $from   = "";
         $select =
         "
-            au.userno
-            ,au.addr_index
-            ,au.addr_name
-            ,au.addr_zipcode
-            ,au.addr_sido
-            ,au.addr_sigungu
-            ,au.addr_emd
-            ,au.addr_road
-            ,au.addr_jibun
-            ,au.addr_roadeng
-            ,au.addr_admcd
-            ,au.addr_rnmgtsn
-            ,au.addr_udrtyn
-            ,au.addr_buldmnnm
-            ,au.addr_buldslno
-            ,au.addr_grs80y
-            ,au.addr_grs80x
-            ,au.addr_latiy
-            ,au.addr_longx
-            ,au.addr_detail
-            ,au.is_default
-            ,au.is_deleted
+              t.userno
+            , t.useraddridx
+            , t.useraddrtitle
+            , t.useraddrcode
+            , ST_X(t.userbasepoint) useraddrlat
+            , ST_Y(t.userbasepoint) useraddrlng
+            , t.useraddrdefflg
+            , t.modidt
+            , t.regdt
+            , ac.addrstrfull    useraddrstr
+            , (select count(*) from grp_member gm where gm.userno = t.userno and gm.useraddridx = t.useraddridx) usinggrpcnt
         ";
 
         /* --------------- */
@@ -148,11 +95,9 @@ class UserAddrBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByDefaultY             : { $from = "(select * from user_addr where userno = '$EXECUTOR' and is_default = 'y' ) au"; break; }
-            case self::selectByDefaultYForInside    : { $from = "(select * from user_addr where userno = '$EXECUTOR' and is_default = 'y' ) au"; break; }
-            case self::selectByExecutor             : { $from = "(select * from user_addr where userno = '$EXECUTOR' and is_deleted = 'n' ) au"; break; }
-            case self::selectByAddrIndex            : { $from = "(select * from user_addr where userno = '$EXECUTOR' and addr_index = $ADDR_INDEX ) au"; break; }
-            case self::selectByAddrIndexForInside   : { $from = "(select * from user_addr where userno = '$EXECUTOR' and addr_index = $ADDR_INDEX ) au"; break; }
+            case self::selectByUsernoForMng   : { $from = "(select * from user_addr where userno = '$USERNO') t"; break; }
+            case self::selectDefaultForInside : { $from = "(select * from user_addr where userno = '$USERNO' and useraddrdefflg = 'y' limit 1) t"; break; }
+            case self::selectByPkForInside    : { $from = "(select * from user_addr where userno = '$USERNO' and useraddridx = $USERADDRIDX) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
@@ -168,235 +113,212 @@ class UserAddrBO extends _CommonBO
                 $select
             from
                 $from
+                left join _addrcode ac
+                    on
+                        ac.addrcode = t.useraddrcode
             order by
-                au.userno,
-                au.addr_index
+                t.useraddridx asc
         ";
-        return GGsql::select($query, $from, $options, $OPTION);
+        $rslt = GGsql::select($query, $from, $options, $OPTION);
+        return $rslt;
     }
 
     /* ========================= */
-    /* UPDATE / DELETE */
+    /* update (sub) */
     /* ========================= */
-    public function updateByCompletedOrderForInside($USERNO, $ADDR_INDEX) { return $this->updateUserAddr(get_defined_vars(), __FUNCTION__); }
+    public function deleteAllReferenceForInside($USERNO, $USERADDRIDX)
+    {
+        $query = "update grp_member set useraddridx = null where userno = '$USERNO' and useraddridx = $USERADDRIDX";
+        GGsql::exeQuery($query);
+    }
 
-    const updateByCompletedOrderForInside = "updateByCompletedOrderForInside"; /* [USERNO, ADDR_INDEX] */
-    const newuser = "newuser"; /* 새로운 유저의 주소등록 */
-    function updateUserAddr($options, $option="")
+    /*
+        회원가입 시, 첫 기본주소를 등록 (인증 없이 호출되는 내부용 - 아직 로그인 전이라 EXECUTOR가 없음)
+    */
+    public function insertDefaultForInside($USERNO, $USERADDRCODE, $LAT, $LNG)
+    {
+        $useraddrcode = intval($USERADDRCODE);
+        $lat = floatval($LAT);
+        $lng = floatval($LNG);
+        $query =
+        "
+            insert into user_addr (userno, useraddridx, useraddrtitle, useraddrcode, userbasepoint, useraddrdefflg, regdt, modidt)
+            values
+            (
+                  '$USERNO'
+                ,  1
+                , '기본주소'
+                ,  $useraddrcode
+                ,  ST_PointFromText('POINT($lat $lng)', 4326)
+                , 'y'
+                ,  now()
+                ,  now()
+            )
+        ";
+        GGsql::exeQuery($query);
+    }
+
+    /* ========================= */
+    /* update */
+    /* ========================= */
+    const insertForMng = "insertForMng";
+    const updateForMng = "updateForMng";
+    const deleteForMng = "deleteForMng";
+    const updateDefaultForMng = "updateDefaultForMng";
+    protected function update($options, $option="")
     {
         /* vars */
         $rslt = Common::getReturn();
-        try
+        extract($this->setBO());
+        extract(self::getConsts());
+        extract($options);
+
+        /* override option */
+        if($option != "")
+            $OPTION = $option;
+
+        /* process */
+        switch($OPTION)
         {
-            /* ==================== */
-            /* common validation */
-            /* ==================== */
-            extract($options);
-
-            /* override option */
-            if($option != "")
-                $OPTION = $option;
-
-            /* ==================== */
-            /* 사전처리 */
-            /* ==================== */
-            switch($OPTION)
+            case self::insertForMng:
             {
-                case self::newuser:
-                case _CommonBO::INSERT:
-                case _CommonBO::UPDATE:
-                {
-                    if(!is_numeric($ADDR_BULDMNNM)) $ADDR_BULDMNNM = "null";
-                    if(!is_numeric($ADDR_BULDSLNO)) $ADDR_BULDSLNO = "null";
-                    if(!is_numeric($ADDR_GRS80Y))   $ADDR_GRS80Y   = "null";
-                    if(!is_numeric($ADDR_GRS80X))   $ADDR_GRS80X   = "null";
-                    if(!is_numeric($ADDR_LATIY))    $ADDR_LATIY    = "null";
-                    if(!is_numeric($ADDR_LONGX))    $ADDR_LONGX    = "null";
-                    break;
-                }
-            }
+                /* 본인만 가능 */
+                $ggAuth->checkMe($EXECUTOR, $USERNO, true);
 
-            /* ==================== */
-            /* process */
-            /* ==================== */
-            switch($OPTION)
+                /* validation */
+                $useraddrtitle = trim($USERADDRTITLE);
+                if(Common::isEmpty($useraddrtitle))
+                    throw new GGexception("주소 별칭을 입력해주세요.");
+                if(mb_strlen($useraddrtitle) > self::USERADDRTITLE_MAX)
+                    throw new GGexception("주소 별칭은 ".self::USERADDRTITLE_MAX."자 이내로 입력해주세요.");
+                if(Common::isEmpty($USERADDRCODE))
+                    throw new GGexception("지역을 선택해주세요.");
+                $useraddrcode = intval($USERADDRCODE);
+                if(Common::getDataOneField($addrcodeBO->selectByPkForInside($useraddrcode), AddrcodeBO::FIELD__ADDRCODE) == null)
+                    throw new GGexception("존재하지 않는 지역입니다.");
+                if(Common::isEmpty($LAT) || Common::isEmpty($LNG))
+                    throw new GGexception("위치를 선택해주세요.");
+                $lat = floatval($LAT);
+                $lng = floatval($LNG);
+                if($lat < -90 || $lat > 90)   { throw new GGexception("위도 값이 올바르지 않습니다."); }
+                if($lng < -180 || $lng > 180) { throw new GGexception("경도 값이 올바르지 않습니다."); }
+                $useraddrtitle = GGsql::realEscapeString($useraddrtitle);
+
+                /* 첫 주소면 자동으로 기본주소 */
+                $cnt = GGsql::selectCnt("select count(*) cnt from user_addr where userno = '$USERNO'");
+                $defflg = $cnt == 0 ? 'y' : 'n';
+
+                /* process */
+                $query =
+                "
+                    insert into user_addr (userno, useraddridx, useraddrtitle, useraddrcode, userbasepoint, useraddrdefflg, regdt, modidt)
+                    select
+                          '$USERNO'
+                        , (select ifnull(max(useraddridx), 0) + 1 from user_addr where userno = '$USERNO')
+                        , '$useraddrtitle'
+                        ,  $useraddrcode
+                        ,  ST_PointFromText('POINT($lat $lng)', 4326)
+                        , '$defflg'
+                        ,  now()
+                        ,  now()
+                    from dual
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateForMng:
             {
-                case self::newuser:
-                case _CommonBO::INSERT:
-                {
-                    /* get new index */
-                    $addrIndex = $this->getNewIndex($EXECUTOR);
+                /* 본인만 가능 */
+                $ggAuth->checkMe($EXECUTOR, $USERNO, true);
 
-                    /* if newuser, set addr to default */
-                    $isDefault = GGF::N;
-                    if($OPTION == self::newuser)
-                        $isDefault = GGF::Y;
+                /* validation */
+                if(Common::getDataOneField($this->selectByPkForInside($USERNO, intval($USERADDRIDX)), self::FIELD__USERADDRIDX) == null)
+                    throw new GGexception("존재하지 않는 주소입니다.");
+                $useraddrtitle = trim($USERADDRTITLE);
+                if(Common::isEmpty($useraddrtitle))
+                    throw new GGexception("주소 별칭을 입력해주세요.");
+                if(mb_strlen($useraddrtitle) > self::USERADDRTITLE_MAX)
+                    throw new GGexception("주소 별칭은 ".self::USERADDRTITLE_MAX."자 이내로 입력해주세요.");
+                if(Common::isEmpty($USERADDRCODE))
+                    throw new GGexception("지역을 선택해주세요.");
+                $useraddrcode = intval($USERADDRCODE);
+                if(Common::getDataOneField($addrcodeBO->selectByPkForInside($useraddrcode), AddrcodeBO::FIELD__ADDRCODE) == null)
+                    throw new GGexception("존재하지 않는 지역입니다.");
+                if(Common::isEmpty($LAT) || Common::isEmpty($LNG))
+                    throw new GGexception("위치를 선택해주세요.");
+                $lat = floatval($LAT);
+                $lng = floatval($LNG);
+                if($lat < -90 || $lat > 90)   { throw new GGexception("위도 값이 올바르지 않습니다."); }
+                if($lng < -180 || $lng > 180) { throw new GGexception("경도 값이 올바르지 않습니다."); }
+                $useraddrtitle = GGsql::realEscapeString($useraddrtitle);
+                $useraddridx = intval($USERADDRIDX);
 
-                    /* process */
-                    $query =
-                    "
-                        insert into user_addr
-                        (
-                            userno
-                            ,addr_index
-                            ,addr_name
-                            ,addr_zipcode
-                            ,addr_sido
-                            ,addr_sigungu
-                            ,addr_emd
-                            ,addr_road
-                            ,addr_jibun
-                            ,addr_roadeng
-                            ,addr_admcd
-                            ,addr_rnmgtsn
-                            ,addr_udrtyn
-                            ,addr_buldmnnm
-                            ,addr_buldslno
-                            ,addr_grs80y
-                            ,addr_grs80x
-                            ,addr_latiy
-                            ,addr_longx
-                            ,addr_detail
-                            ,is_default
-                        )
-                        values
-                        (
-                             '$EXECUTOR'
-                            , $addrIndex
-                            ,'$ADDR_NAME'
-                            ,'$ADDR_ZIPCODE'
-                            ,'$ADDR_SIDO'
-                            ,'$ADDR_SIGUNGU'
-                            ,'$ADDR_EMD'
-                            ,'$ADDR_ROAD'
-                            ,'$ADDR_JIBUN'
-                            ,'$ADDR_ROADENG'
-                            ,'$ADDR_ADMCD'
-                            ,'$ADDR_RNMGTSN'
-                            ,'$ADDR_UDRTYN'
-                            , $ADDR_BULDMNNM
-                            , $ADDR_BULDSLNO
-                            , $ADDR_GRS80Y
-                            , $ADDR_GRS80X
-                            , $ADDR_LATIY
-                            , $ADDR_LONGX
-                            ,'$ADDR_DETAIL'
-                            ,'$isDefault'
-                        )
-                    ";
-                    GGsql::exeQuery($query);
-                    break;
-                }
-                case "updateDefaultUserAddr":
-                {
-                    /* 현재주소지 해제 */
-                    $query =
-                    "
-                        update
-                            user_addr
-                        set
-                            is_default = 'n'
-                        where
-                            userno = '$EXECUTOR' and
-                            is_default = 'y'
-                    ";
-                    GGsql::exeQuery($query);
-
-                    /* 현재주소지 설정 */
-                    $query =
-                    "
-                        update
-                            user_addr
-                        set
-                            is_default = 'y'
-                        where
-                            userno = '$EXECUTOR' and
-                            addr_index = $ADDR_INDEX
-                    ";
-                    GGsql::exeQuery($query);
-                    break;
-                }
-                case _CommonBO::UPDATE:
-                {
-                    /* process */
-                    $query =
-                    "
-                        update
-                            user_addr
-                        set
-                            addr_name      = '$ADDR_NAME',
-                            addr_zipcode   = '$ADDR_ZIPCODE',
-                            addr_sido      = '$ADDR_SIDO',
-                            addr_sigungu   = '$ADDR_SIGUNGU',
-                            addr_emd       = '$ADDR_EMD',
-                            addr_road      = '$ADDR_ROAD',
-                            addr_jibun     = '$ADDR_JIBUN',
-                            addr_roadeng   = '$ADDR_ROADENG',
-                            addr_admcd     = '$ADDR_ADMCD',
-                            addr_rnmgtsn   = '$ADDR_RNMGTSN',
-                            addr_udrtyn    = '$ADDR_UDRTYN',
-                            addr_buldmnnm  =  $ADDR_BULDMNNM,
-                            addr_buldslno  =  $ADDR_BULDSLNO,
-                            addr_grs80y    =  $ADDR_GRS80Y,
-                            addr_grs80x    =  $ADDR_GRS80X,
-                            addr_latiy     =  $ADDR_LATIY,
-                            addr_longx     =  $ADDR_LONGX,
-                            addr_detail    = '$ADDR_DETAIL'
-                        where
-                            userno = '$EXECUTOR' and
-                            addr_index = $ADDR_INDEX
-                    ";
-                    GGsql::exeQuery($query);
-                    break;
-                }
-                case _CommonBO::DELETE:
-                {
-                    $query =
-                    "
-                        update
-                            user_addr
-                        set
-                            is_deleted = 'y'
-                        where
-                            userno = '$EXECUTOR' and
-                            addr_index = $ADDR_INDEX
-                    ";
-                    GGsql::exeQuery($query);
-                    break;
-                }
-                case self::updateByCompletedOrderForInside:
-                {
-                    // at_lastordercomplete : 최근 주문이 완료된 일자
-                    // cnt_ordercomplete : 주문 누적건수
-                    $query =
-                    "
-                        update
-                            user_addr
-                        set
-                            at_lastordercomplete = now(),
-                            cnt_ordercomplete = cnt_ordercomplete + 1
-                        where
-                            userno = '$USERNO' and
-                            addr_index = $ADDR_INDEX
-                    ";
-                    GGsql::exeQuery($query);
-                    break;
-                }
+                /* process */
+                $query =
+                "
+                    update user_addr set
+                        useraddrtitle = '$useraddrtitle',
+                        useraddrcode = $useraddrcode,
+                        userbasepoint = ST_PointFromText('POINT($lat $lng)', 4326),
+                        modidt = now()
+                    where userno = '$USERNO' and useraddridx = $useraddridx
+                ";
+                GGsql::exeQuery($query);
+                break;
             }
-        }
-        catch(Error $e)
-        {
-            throw $e;
+            case self::deleteForMng:
+            {
+                /* 본인만 가능 */
+                $ggAuth->checkMe($EXECUTOR, $USERNO, true);
+                $useraddridx = intval($USERADDRIDX);
+
+                $row = $this->selectByPkForInside($USERNO, $useraddridx);
+                if(Common::getDataOneField($row, self::FIELD__USERADDRIDX) == null)
+                    throw new GGexception("존재하지 않는 주소입니다.");
+                $wasDefault = Common::getDataOneField($row, self::FIELD__USERADDRDEFFLG) == 'y';
+
+                /* 이 주소를 지정해둔 모임의 지정을 해제 */
+                $this->deleteAllReferenceForInside($USERNO, $useraddridx);
+
+                /* 삭제 */
+                $query = "delete from user_addr where userno = '$USERNO' and useraddridx = $useraddridx";
+                GGsql::exeQuery($query);
+
+                /* 기본주소를 지웠다면, 남은 주소 중 가장 먼저 등록된 것을 기본주소로 승격 */
+                if($wasDefault)
+                {
+                    $nextRow = GGsql::selectOne("select useraddridx from user_addr where userno = '$USERNO' order by useraddridx asc limit 1");
+                    $nextIdx = Common::get($nextRow, self::FIELD__USERADDRIDX);
+                    if(Common::isNotEmpty($nextIdx))
+                    {
+                        $query = "update user_addr set useraddrdefflg = 'y' where userno = '$USERNO' and useraddridx = $nextIdx";
+                        GGsql::exeQuery($query);
+                    }
+                }
+                break;
+            }
+            case self::updateDefaultForMng:
+            {
+                /* 본인만 가능 */
+                $ggAuth->checkMe($EXECUTOR, $USERNO, true);
+                $useraddridx = intval($USERADDRIDX);
+
+                if(Common::getDataOneField($this->selectByPkForInside($USERNO, $useraddridx), self::FIELD__USERADDRIDX) == null)
+                    throw new GGexception("존재하지 않는 주소입니다.");
+
+                $query = "update user_addr set useraddrdefflg = 'n' where userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                $query = "update user_addr set useraddrdefflg = 'y' where userno = '$USERNO' and useraddridx = $useraddridx";
+                GGsql::exeQuery($query);
+                break;
+            }
+            default:
+            {
+                throw new GGexception("(server) no option defined");
+            }
         }
         return $rslt;
     }
 
-    public function getNewIndex($EXECUTOR)
-    {
-        $query = "select coalesce(max(addr_index),0)+1 max from user_addr where userno = '$EXECUTOR'";
-        $maxIndex = intval(GGsql::selectCnt($query));
-        return $maxIndex;
-    }
-
-} /* end class */
+}
 ?>

@@ -25,11 +25,12 @@
     </div>
 
     <div class="common-div-cushion common-div-manages">
+        <button id="UMMG-btn-manageUserAddr" class="common-btn-outer">주소관리</button>
+        <button id="UMMG-btn-manageGrpAddr"  class="common-btn-outer">모임관리</button>
         <button id="UMMG-btn-privacyDelete" class="common-btn-outer">회원탈퇴</button>
         <button id="UMMG-btn-phonePrivacy"  class="common-btn-outer">전화번호공개설정</button>
         <button id="UMMG-btn-logout"        class="common-btn-outer">로그아웃</button>
         <!-- <button id="UMMG-btn-manageUserAcctList" class="common-btn-outer">은행계좌관리</button> -->
-        <!-- <button id="UMMG-btn-manageUserAddr"           class="common-btn-outer">주소설정</button> -->
         <!-- <button id="UMMG-btn-manageUserAcctRefund"     class="common-btn-outer">환불계좌설정</button> -->
         <!-- <button id="UMMG-btn-paymentMissedreq"         class="common-btn-outer">오입금(오송금) 반환신청</button> -->
     </div>
@@ -85,7 +86,8 @@
             /* ======================== */
             $("#UMMG-btn-privacyDelete") .click(function() { Navigation.moveFrontPage(Navigation.Page.A02UserPrivacyDelete, {}); });
             $("#UMMG-btn-phonePrivacy")  .click(function() { Navigation.moveFrontPage(Navigation.Page.A1011ManagePhonePrivacy, {}); });
-            // $("#UMMG-btn-manageUserAddr")         .click(function() {Navigation.moveFrontPage(Navigation.Page.B21UserAddrList, {}); });
+            $("#UMMG-btn-manageUserAddr").click(function() { Navigation.moveFrontPage(Navigation.Page.B21UserAddrList, {}); });
+            $("#UMMG-btn-manageGrpAddr") .click(function() { Navigation.moveFrontPage(Navigation.Page.B22UserGrpAddrManage, {}); });
             // $("#UMMG-btn-manageUserAcctRefund")   .click(function() {Navigation.moveFrontPage(Navigation.Page.B32UserBaccnoRefundUpdate, {}); });
             // $("#UMMG-btn-paymentMissedreq")       .click(function() {Navigation.moveFrontPage(Navigation.Page.B33UserPaymentMissedreq, {}); });
 

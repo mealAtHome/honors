@@ -12,24 +12,28 @@ Api.User =
     /* ========================= */
     updateBaccnoRefund(baccnoRefund, noticeOK, noticeFail) { return Api.User.update({OPTION:"updateBaccnoRefund", BACCNO_REFUND:baccnoRefund }, noticeOK, noticeFail); },
     updatePhonePrivacyByPk(privPhone, privPhoneGrpm, noticeOK, noticeFail) { return Api.User.update({OPTION:"updatePhonePrivacyByPk", PRIV_PHONE:privPhone, PRIV_PHONE_GRPM:privPhoneGrpm }, noticeOK, noticeFail); },
+    updateUserloginedpointForUsr(lat, lng, noticeOK, noticeFail) { return Api.User.update({OPTION:"updateUserloginedpointForUsr", LAT:lat, LNG:lng }, noticeOK, noticeFail); },
+    updateUserloginedpointFromAddrForUsr(useraddridx, noticeOK, noticeFail) { return Api.User.update({OPTION:"updateUserloginedpointFromAddrForUsr", USERADDRIDX:useraddridx }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* 등록 */
     /* ========================= */
-    insert(id, pw, name, birthYear, phone, email, adrcvflg, hascarflg, address, lineupidx, noticeOK, noticeFail)
+    insert(id, pw, name, birthYear, phone, email, adrcvflg, hascarflg, useraddrcode, userbaselat, userbaselng, lineupidx, noticeOK, noticeFail)
     {
         let ajaxData =
         {
-            ID          : id,
-            PW          : pw,
-            NAME        : name,
-            BIRTHYEAR   : birthYear,
-            PHONE       : phone,
-            EMAIL       : email,
-            ADRCVFLG    : adrcvflg,
-            HASCARFLG   : hascarflg,
-            ADDRESS     : address,
-            LINEUPIDX    : lineupidx,
+            ID            : id,
+            PW            : pw,
+            NAME          : name,
+            BIRTHYEAR     : birthYear,
+            PHONE         : phone,
+            EMAIL         : email,
+            ADRCVFLG      : adrcvflg,
+            HASCARFLG     : hascarflg,
+            USERADDRCODE  : useraddrcode,
+            USERBASELAT   : userbaselat,
+            USERBASELNG   : userbaselng,
+            LINEUPIDX     : lineupidx,
         };
         let ajax = Api.execute(ajaxData, "Api.User.insert", noticeOK, noticeFail);
         if(GGvalid.Api.isSucceed(ajax))

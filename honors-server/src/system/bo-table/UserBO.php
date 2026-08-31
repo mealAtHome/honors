@@ -20,12 +20,16 @@ class UserBO extends _CommonBO
         GGnavi::getGrpMemberBO();
         GGnavi::getGrpmPrivacyBO();
         GGnavi::getUserPrivacyBO();
+        GGnavi::getUserAddrBO();
+        GGnavi::getAddrcodeBO();
         $arr = array();
         $arr['idxBO'] = IdxBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['grpmPrivacyBO'] = GrpmPrivacyBO::getInstance();
         $arr['userPrivacyBO'] = UserPrivacyBO::getInstance();
+        $arr['userAddrBO'] = UserAddrBO::getInstance();
+        $arr['addrcodeBO'] = AddrcodeBO::getInstance();
         return $arr;
     }
 
@@ -48,6 +52,7 @@ class UserBO extends _CommonBO
     const FIELD__ADRCVFLG             = "adrcvflg";           /* (  ) enum('y','n') default 'n' */
     const FIELD__HASCARFLG            = "hascarflg";          /* (  ) enum('y','n') default 'n' */
     const FIELD__ADDRESS              = "address";            /* (  ) char(50) */
+    const FIELD__USERLOGINEDPOINT     = "userloginedpoint";   /* (  ) point */
     const FIELD__ADMINFLG             = "adminflg";           /* (  ) enum('y','n') default 'n' */
     const FIELD__PLATFORM             = "platform";           /* (  ) char(3) */
     const FIELD__APIKEY               = "apikey";             /* (  ) char(50) */
@@ -131,6 +136,8 @@ class UserBO extends _CommonBO
             , t.address
             , t.adminflg
             , t.baccnodefault
+            , ST_X(t.userloginedpoint) userloginedlat
+            , ST_Y(t.userloginedpoint) userloginedlng
             , t.modidt
             , t.regidt
             , up.priv_phone
@@ -183,7 +190,8 @@ class UserBO extends _CommonBO
     /*
      */
     /* ==================== */
-    public function insertForInside                 ($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG, $ADDRESS) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertForInside                 ($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG, $USERADDRCODE, $USERBASELAT, $USERBASELNG) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function syncLoginedpointFromDefaultAddrForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertTempForInside             ($NAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateDeviceInfoByInside        ($USERNO, $PLATFORM, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updatePhoneByUsernoForInside    ($USERNO, $PHONE) { return $this->update(get_defined_vars(), __FUNCTION__); }
@@ -201,6 +209,9 @@ class UserBO extends _CommonBO
     const deleteUserInfo = "deleteUserInfo";
     const deleteRecordByPkForInside = "deleteRecordByPkForInside";
     const updatePhonePrivacyByPk = "updatePhonePrivacyByPk"; /* EXECUTOR, PRIV_PHONE, PRIV_PHONE_GRPM */
+    const syncLoginedpointFromDefaultAddrForInside = "syncLoginedpointFromDefaultAddrForInside";
+    const updateUserloginedpointForUsr = "updateUserloginedpointForUsr"; /* 실시간 GPS로 직접 갱신 */
+    const updateUserloginedpointFromAddrForUsr = "updateUserloginedpointFromAddrForUsr"; /* 등록된 주소로 교체 */
     protected function update($options, $option="")
     {
         /* vars */
@@ -253,6 +264,19 @@ class UserBO extends _CommonBO
                 /* for int */
                 $BIRTHYEAR = $BIRTHYEAR == "" ? "null" : $BIRTHYEAR;
 
+                /* validation : 동/읍/면 지역 + 지도위치 (아지트 설정과 동일한 방식) */
+                if(Common::isEmpty($USERADDRCODE))
+                    throw new GGexception("지역을 선택해주세요.");
+                $useraddrcode = intval($USERADDRCODE);
+                if(Common::getDataOneField($addrcodeBO->selectByPkForInside($useraddrcode), AddrcodeBO::FIELD__ADDRCODE) == null)
+                    throw new GGexception("존재하지 않는 지역입니다.");
+                if(Common::isEmpty($USERBASELAT) || Common::isEmpty($USERBASELNG))
+                    throw new GGexception("위치를 선택해주세요.");
+                $userbaselat = floatval($USERBASELAT);
+                $userbaselng = floatval($USERBASELNG);
+                if($userbaselat < -90 || $userbaselat > 90)   { throw new GGexception("위도 값이 올바르지 않습니다."); }
+                if($userbaselng < -180 || $userbaselng > 180) { throw new GGexception("경도 값이 올바르지 않습니다."); }
+
                 /* insert */
                 $query =
                 "
@@ -268,7 +292,7 @@ class UserBO extends _CommonBO
                         , email
                         , adrcvflg
                         , hascarflg
-                        , address
+                        , userloginedpoint
                         , adminflg
                         , apikey
                         , pushtoken
@@ -287,7 +311,7 @@ class UserBO extends _CommonBO
                         , '$EMAIL'
                         , '$ADRCVFLG'
                         , '$HASCARFLG'
-                        , '$ADDRESS'
+                        ,  ST_PointFromText('POINT($userbaselat $userbaselng)', 4326)
                         , 'n'
                         ,  null
                         ,  null
@@ -296,6 +320,9 @@ class UserBO extends _CommonBO
                     )
                 ";
                 GGsql::exeQuery($query);
+
+                /* 기본주소 등록 */
+                $userAddrBO->insertDefaultForInside($userno, $useraddrcode, $userbaselat, $userbaselng);
 
                 /* insert sub tables */
                 $userPrivacyBO->insertDefaultForInside($userno);
@@ -311,6 +338,48 @@ class UserBO extends _CommonBO
                 $rslt[GGF::ID] = $ID;
                 $rslt[GGF::USERNO] = $userno;
                 $rslt[GGF::APIKEY] = $this->generateApikey($userno);
+                break;
+            }
+            case self::syncLoginedpointFromDefaultAddrForInside:
+            {
+                $defaultRow = $userAddrBO->selectDefaultForInside($USERNO);
+                $defaultAddr = Common::getDataOneField($defaultRow, UserAddrBO::FIELD__USERADDRIDX);
+                if($defaultAddr == null)
+                    break; /* 등록된 기본주소가 없으면 아무것도 하지 않음 */
+
+                $lat = Common::getDataOneField($defaultRow, "useraddrlat");
+                $lng = Common::getDataOneField($defaultRow, "useraddrlng");
+                $query = "update user set userloginedpoint = ST_PointFromText('POINT($lat $lng)', 4326) where userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateUserloginedpointForUsr:
+            {
+                if(Common::isEmpty($LAT) || Common::isEmpty($LNG))
+                    throw new GGexception("위치 값이 올바르지 않습니다.");
+                $lat = floatval($LAT);
+                $lng = floatval($LNG);
+                if($lat < -90 || $lat > 90)   { throw new GGexception("위도 값이 올바르지 않습니다."); }
+                if($lng < -180 || $lng > 180) { throw new GGexception("경도 값이 올바르지 않습니다."); }
+
+                $query = "update user set userloginedpoint = ST_PointFromText('POINT($lat $lng)', 4326) where userno = '$EXECUTOR'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateUserloginedpointFromAddrForUsr:
+            {
+                if(Common::isEmpty($USERADDRIDX))
+                    throw new GGexception("주소를 선택해주세요.");
+                $useraddridx = intval($USERADDRIDX);
+
+                $addrRow = $userAddrBO->selectByPkForInside($EXECUTOR, $useraddridx);
+                if(Common::getDataOneField($addrRow, UserAddrBO::FIELD__USERADDRIDX) == null)
+                    throw new GGexception("존재하지 않는 주소입니다.");
+
+                $lat = Common::getDataOneField($addrRow, "useraddrlat");
+                $lng = Common::getDataOneField($addrRow, "useraddrlng");
+                $query = "update user set userloginedpoint = ST_PointFromText('POINT($lat $lng)', 4326) where userno = '$EXECUTOR'";
+                GGsql::exeQuery($query);
                 break;
             }
             case self::insertTempForInside:

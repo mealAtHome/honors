@@ -23,7 +23,7 @@
         if(($LINEUPIDX == "당근" || $LINEUPIDX == "아너스") == false)
             throw new GGexception("죄송합니다. 현재 필드테스트 중으로, 특정 팀만 사용이 가능합니다.");
 
-        $rslt = $userBO->insertForInside($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG, $ADDRESS);
+        $rslt = $userBO->insertForInside($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG, $USERADDRCODE, $USERBASELAT, $USERBASELNG);
         GGsql::commit();
     }
     catch(GGexception $e)

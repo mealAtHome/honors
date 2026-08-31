@@ -4,6 +4,8 @@ class MGrpMember
     {
         /* data */      this.grpno              = GGC.Common.char(dat.grpno);
         /* data */      this.userno             = GGC.Common.char(dat.userno);
+        /* data */      this.useraddridx        = GGC.Common.int(dat.useraddridx);
+        /* data */      this.useraddrstr        = GGC.Common.varchar(dat.useraddrstr);
         /* data */      this.grpmbacknum        = GGC.Common.char(dat.grpmbacknum);
         /* data */      this.grpmtype           = GGC.Common.enum(dat.grpmtype);
         /* data */      this.grpmposition       = GGC.Common.char(dat.grpmposition);
@@ -28,6 +30,8 @@ class MGrpMember
     /* ========================= */
     getGrpno() { return this.grpno; }
     getUserno() { return this.userno; }
+    getUseraddridx() { return this.useraddridx; }
+    getUseraddrstr() { return this.useraddrstr; }
     getGrpmbacknum() { return this.grpmbacknum; }
     getGrpmtype() { return this.grpmtype; }
     getGrpmposition() { return this.grpmposition; }

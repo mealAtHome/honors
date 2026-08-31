@@ -1,6 +1,18 @@
 <ons-page id="UMGP">
 
     <!-- =============== -->
+    <!-- 현재주소 (모바일 전용) -->
+    <!-- =============== -->
+    <div id="UMGP-div-addrHeader" class="common-div-cushion common-flexBetween" style="display:none;">
+        <div class="common-flexCenterSm">
+            <i class="ti ti-map-pin common-colorSide"></i>
+            <span id="UMGP-span-currentAddr" class="common-strong common-fonts09"></span>
+        </div>
+        <button id="UMGP-btn-changeAddr" class="common-btn-outer common-fonts08">주소변경</button>
+    </div>
+    <div id="UMGP-div-addrPicker" class="common-div-cushion" style="display:none;"></div>
+
+    <!-- =============== -->
     <!-- grp list -->
     <!-- =============== -->
     <div id="UMGP-div-list" class="common-div-cushion"></div>
@@ -23,11 +35,34 @@
                 setTimeout(function()
                 {
                     /* 활동상태인 모임 조회 */
-                    let mGrps = Api.Grp.selectActiveForUsr();
-                    mGrps.makeForView("#UMGP-div-list");
+                    UMGP.refreshList();
+
+                    /* 현재주소 (모바일에서만 제공) - 최초 진입 시에는 기본주소를 기준으로 표시 */
+                    if(GGstorage.isMobile())
+                    {
+                        $("#UMGP-div-addrHeader").show();
+
+                        let mUser = Api.User.selectMe().getModel();
+                        UMGP.Data.userno = mUser.getUserno();
+
+                        let mUserAddrs = Api.UserAddr.selectByUsernoForMng(UMGP.Data.userno, GGF.none, GGF.none);
+                        UMGP.Data.mUserAddrs = mUserAddrs;
+
+                        let mDefaultAddr = mUserAddrs.getModels().find(m => m.isDefault());
+                        $("#UMGP-span-currentAddr").text(mDefaultAddr ? `${mDefaultAddr.getUseraddrtitle()} (${mDefaultAddr.getUseraddrstr()})` : "주소를 등록해주세요");
+                    }
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            },
+
+            /* ===================== */
+            /* 모임 목록만 새로고침 (주소 헤더는 건드리지 않음 - 헤더는 직접 선택한 값을 유지) */
+            /* ===================== */
+            refreshList()
+            {
+                let mGrps = Api.Grp.selectActiveForUsr();
+                mGrps.makeForView("#UMGP-div-list");
             },
 
             close()
@@ -41,6 +76,76 @@
             /* ========================= */
             /* events */
             /* ========================= */
+
+            /* 주소변경 버튼 : 등록된 주소 + 현재위치(GPS) 선택지 표시 */
+            $("#UMGP-btn-changeAddr").click(function()
+            {
+                if($("#UMGP-div-addrPicker").is(":visible"))
+                {
+                    $("#UMGP-div-addrPicker").hide();
+                    return;
+                }
+
+                let html = "";
+                for(let i in UMGP.Data.mUserAddrs.getModels())
+                {
+                    let model = UMGP.Data.mUserAddrs.getModels()[i];
+                    html += `<div class="UMGP-div-addrPickItem common-div-card" useraddridx="${model.getUseraddridx()}" style="cursor:pointer;">${model.getUseraddrtitle()} (${model.getUseraddrstr()})</div>`;
+                }
+                html += `<div class="UMGP-div-addrPickGps common-div-card common-colorSide common-strong" style="cursor:pointer;"><i class="ti ti-current-location"></i>&nbsp;현재 위치 사용</div>`;
+                $("#UMGP-div-addrPicker").html(html).show();
+            });
+
+            /* 등록된 주소로 교체 */
+            $("#UMGP-div-addrPicker").on("click", ".UMGP-div-addrPickItem", function()
+            {
+                let useraddridx = $(this).attr("useraddridx");
+                let addrLabel = $(this).text();
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mApiResponse = Api.User.updateUserloginedpointFromAddrForUsr(useraddridx, GGF.none, GGF.toast);
+                    if(mApiResponse.isSuccess())
+                    {
+                        $("#UMGP-span-currentAddr").text(addrLabel);
+                        $("#UMGP-div-addrPicker").hide();
+                        UMGP.refreshList();
+                        Common.hideProgress();
+                        return;
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            });
+
+            /* 실시간 GPS 위치 사용 */
+            $("#UMGP-div-addrPicker").on("click", ".UMGP-div-addrPickGps", function()
+            {
+                if(navigator.geolocation == undefined) { Common.toastError("이 기기에서는 위치 정보를 사용할 수 없습니다."); return; }
+
+                Common.showProgress();
+                navigator.geolocation.getCurrentPosition(function(position)
+                {
+                    let lat = position.coords.latitude;
+                    let lng = position.coords.longitude;
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.User.updateUserloginedpointForUsr(lat, lng, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            $("#UMGP-span-currentAddr").text("현재 위치");
+                            $("#UMGP-div-addrPicker").hide();
+                            UMGP.refreshList();
+                            Common.hideProgress();
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                }, function()
+                {
+                    Common.hideProgress();
+                    Common.toastError("위치 정보를 가져올 수 없습니다.");
+                });
+            });
 
             /* ========================= */
             /* page process */

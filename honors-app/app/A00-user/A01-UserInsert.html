@@ -112,9 +112,23 @@
 
             <!-- 지역 -->
             <div class="common-div-formField">
-                <span>주소</span>
-                <span>(선택입력, 예:북구 복현동)</span>
-                <input id="UINT-input-address" class="common-input-field" placeholder="북구 복현동">
+                <span>*지역 (동/읍/면)</span>
+                <span>내 주변 모임을 찾는 데 사용됩니다.</span>
+                <div id="UINT-div-addrSelected" class="common-strong common-cushionHalfUp">지역을 선택해주세요.</div>
+                <input id="UINT-input-addrKeyword" type="text" class="common-input-field" placeholder="동/읍/면 이름으로 검색" style="margin-top:var(--marHalf);"/>
+                <div id="UINT-div-addrResultList" class="common-cushionHalfUp" style="display:none;"></div>
+            </div>
+
+            <!-- 주요활동지점 -->
+            <div class="common-div-formField">
+                <span>*주요활동지점</span>
+                <span>지도를 움직여 자주 활동하는 위치를 지정해주세요.</span>
+                <div id="UINT-div-mapContainer" style="position:relative; width:100%; height:12em; margin-top:var(--marHalf); border-radius:var(--padHalf); overflow:hidden; background:var(--colorLine);">
+                    <div id="UINT-div-map" style="width:100%; height:100%;"></div>
+                    <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-100%); pointer-events:none; z-index:1000;">
+                        <i class="ti ti-map-pin" style="font-size:2em; color:var(--colorErrr); text-shadow:0 1px 3px rgba(250,0,0,0.4);"></i>
+                    </div>
+                </div>
             </div>
 
             <!-- 자차여부 -->
@@ -186,12 +200,78 @@
         {
             code : "UINT",
             userImgUri: null,
-            Data: {},
+            Data: { selectedAddrcode: null, selectedLat: 37.5665, selectedLng: 126.9780, mapInited: false },
 
             show()
             {
 
 
+            },
+
+            /* ===================== */
+            /* 지도 초기화 (개인정보2 슬라이드로 진입할 때 1회) */
+            /* ===================== */
+            initMap()
+            {
+                if(UINT.Data.mapInited) return;
+                UINT.Data.mapInited = true;
+
+                if(window.naver == undefined || naver.maps == undefined)
+                {
+                    $("#UINT-div-map").html(`<div style="display:flex; align-items:center; justify-content:center; height:100%; color:var(--colorCmmt); font-size:0.85em; text-align:center; padding:0 1em;">지도 API를 불러올 수 없습니다.</div>`);
+                    return;
+                }
+
+                UINT.Data.map = new naver.maps.Map("UINT-div-map",
+                {
+                    center: new naver.maps.LatLng(UINT.Data.selectedLat, UINT.Data.selectedLng),
+                    zoom: 15,
+                });
+
+                naver.maps.Event.once(UINT.Data.map, "init", function()
+                {
+                    UINT.Data.map.setCenter(new naver.maps.LatLng(UINT.Data.selectedLat, UINT.Data.selectedLng));
+                });
+
+                naver.maps.Event.addListener(UINT.Data.map, "idle", function()
+                {
+                    let center = UINT.Data.map.getCenter();
+                    UINT.Data.selectedLat = center.lat();
+                    UINT.Data.selectedLng = center.lng();
+                });
+            },
+
+            /* ===================== */
+            /* 지역 선택 시, 지도를 그 지역으로 이동 (지오코딩) */
+            /* ===================== */
+            moveMapToAddr(addrstrfull)
+            {
+                if(window.naver == undefined || naver.maps.Service == undefined) return;
+                naver.maps.Service.geocode({query: addrstrfull}, function(status, response)
+                {
+                    if(status !== naver.maps.Service.Status.OK) { return; }
+                    if(response.v2.meta.totalCount === 0) { return; }
+
+                    let item = response.v2.addresses[0];
+                    let point = new naver.maps.LatLng(item.y, item.x);
+
+                    UINT.Data.map.setCenter(point);
+                    UINT.Data.selectedLat = point.lat();
+                    UINT.Data.selectedLng = point.lng();
+                });
+            },
+
+            /* ===================== */
+            /* 지역검색 */
+            /* ===================== */
+            searchAddr(keyword)
+            {
+                ApiPr.Addrcode.searchByKeyword(keyword, GGF.none, GGF.toast)
+                .done(function(mAddrcodes)
+                {
+                    mAddrcodes.makeAddrcodeForChoose("#UINT-div-addrResultList");
+                    $("#UINT-div-addrResultList").show();
+                });
             },
 
             close()
@@ -248,14 +328,45 @@
                 if(!GGvalid.User.name("#UINT-input-name", GGF.toast))
                     return;
                 GGslideform.next("#UINT-div-slideformParent");
+                setTimeout(function() { UINT.initMap(); }, 300);
             });
             $("#UINT-btn-prevFromPersonal1").click(function() { GGslideform.prev("#UINT-div-slideformParent"); });
+
+            /* --------------- */
+            /* 지역검색 : 타이핑 중 검색 */
+            /* --------------- */
+            let addrSearchTimer = null;
+            $("#UINT-input-addrKeyword").on("keyup", function()
+            {
+                let keyword = $(this).val().trim();
+                clearTimeout(addrSearchTimer);
+                if(keyword == "") { $("#UINT-div-addrResultList").hide().html(""); return; }
+                addrSearchTimer = setTimeout(function() { UINT.searchAddr(keyword); }, 300);
+            });
+
+            /* 지역검색 결과 선택 */
+            $("#UINT-div-addrResultList").on("click", ".MAddrcode-makeForChoose-row", function()
+            {
+                let addrcode = $(this).attr("addrcode");
+                let addrstrfull = $(this).attr("addrstrfull");
+                let isChanged = UINT.Data.selectedAddrcode != addrcode;
+
+                UINT.Data.selectedAddrcode = addrcode;
+                $("#UINT-div-addrSelected").text(addrstrfull);
+                $("#UINT-input-addrKeyword").val("");
+                $("#UINT-div-addrResultList").hide().html("");
+
+                if(isChanged)
+                    UINT.moveMapToAddr(addrstrfull);
+            });
 
             /* --------------- */
             /* 개인정보2 */
             /* --------------- */
             $("#UINT-btn-nextFromPersonal2").click(function()
             {
+                if(Common.isEmpty(UINT.Data.selectedAddrcode)) { Common.toastError("지역을 선택해주세요."); return; }
+
                 Common.showProgress();
                 setTimeout(function()
                 {
@@ -267,9 +378,8 @@
                     let email       = ""; /* $("#UINT-input-email").val(); */
                     let adrcvflg    = "n"; /* $(".UINT-radio-adrcvflg:checked").val(); */
                     let hascar      = $(".UINT-radio-hascarflg:checked").val();
-                    let address     = $("#UINT-input-address").val();
                     let teamname    = $("#UINT-input-teamname").val();
-                    let rslt = Api.User.insert(id, pw, name, birthYear, phone, email, adrcvflg, hascar, address, teamname, GGF.toast, GGF.alert);
+                    let rslt = Api.User.insert(id, pw, name, birthYear, phone, email, adrcvflg, hascar, UINT.Data.selectedAddrcode, UINT.Data.selectedLat, UINT.Data.selectedLng, teamname, GGF.toast, GGF.alert);
                     if(rslt == false) {
                         Common.hideProgress();
                         return;

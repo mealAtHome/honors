@@ -55,6 +55,10 @@
         /* update user device info / autologin key */
         $userBO->updateDeviceInfoByInside($userno, $PLATFORM, $TOKEN);
 
+        /* 모바일 환경이면, 로그인 시점에 기본주소 위치로 거리계산용 위치값을 동기화 (PC/웹은 건드리지 않음) */
+        if($PLATFORM == 'ios' || $PLATFORM == 'and')
+            $userBO->syncLoginedpointFromDefaultAddrForInside($userno);
+
         /* update user device info / autologin key */
         $apikey = $userBO->generateApikey($userno);
     }

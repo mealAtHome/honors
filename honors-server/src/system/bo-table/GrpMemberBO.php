@@ -21,6 +21,7 @@ class GrpMemberBO extends _CommonBO
         GGnavi::getGrpmPrivacyBO();
         GGnavi::getGrpfncaBO();
         GGnavi::getGrpBO();
+        GGnavi::getUserAddrBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
@@ -30,6 +31,7 @@ class GrpMemberBO extends _CommonBO
         $arr['grpmPrivacyBO'] = GrpmPrivacyBO::getInstance();
         $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
+        $arr['userAddrBO'] = UserAddrBO::getInstance();
         return $arr;
     }
 
@@ -40,6 +42,7 @@ class GrpMemberBO extends _CommonBO
     /* ========================= */
     const FIELD__GRPNO          = "grpno";         /* (pk) char(30) */
     const FIELD__USERNO         = "userno";        /* (pk) char(30) */
+    const FIELD__USERADDRIDX    = "useraddridx";   /* (  ) int */
     const FIELD__GRPMBACKNUM    = "grpmbacknum";   /* (  ) char(5) */
     const FIELD__GRPMTYPE       = "grpmtype";      /* (  ) enum('mng','mngsub','member') */
     const FIELD__GRPMPOSITION   = "grpmposition";  /* (  ) char(20) */
@@ -124,6 +127,8 @@ class GrpMemberBO extends _CommonBO
             null as head
             , t.grpno
             , t.userno
+            , t.useraddridx
+            , uac.addrstrfull as useraddrstr
             , t.grpmbacknum
             , t.grpmtype
             , t.grpmposition
@@ -249,6 +254,13 @@ class GrpMemberBO extends _CommonBO
                     on
                         execgrpm.grpno = t.grpno and
                         execgrpm.userno = '$EXECUTOR'
+                left join user_addr uadr
+                    on
+                        uadr.userno = t.userno and
+                        uadr.useraddridx = t.useraddridx
+                left join _addrcode uac
+                    on
+                        uac.addrcode = uadr.useraddrcode
             $where
             order by
                 u.name
@@ -331,6 +343,7 @@ class GrpMemberBO extends _CommonBO
     const mergeTempToMemberForMng = "mergeTempToMemberForMng";
     const deleteRecordByPkForInside = "deleteRecordByPkForInside";
     const updateGrpmbacknumForMng = "updateGrpmbacknumForMng";
+    const updateUseraddridxForUsr = "updateUseraddridxForUsr";
     protected function update($options, $option="")
     {
         /* vars */
@@ -536,6 +549,29 @@ class GrpMemberBO extends _CommonBO
                 {
                     /* 등번호 지우기 */
                     $query = "update grp_member set grpmbacknum = null, backnumupdatedt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
+                    GGsql::exeQuery($query);
+                }
+                break;
+            }
+            case self::updateUseraddridxForUsr:
+            {
+                /* 본인 소속 멤버십만 수정 가능 (매니저 권한 불필요 - 각자 자기 표시주소를 고르는 것) */
+                if(Common::isEmpty($GRPNO)) { throw new GGexception("시스템 오류입니다."); }
+
+                if(Common::isEmpty($USERADDRIDX))
+                {
+                    /* 선택 해제 */
+                    $query = "update grp_member set useraddridx = null where grpno = '$GRPNO' and userno = '$EXECUTOR'";
+                    GGsql::exeQuery($query);
+                }
+                else
+                {
+                    /* 본인 소유의 주소인지 검증 */
+                    $useraddridx = intval($USERADDRIDX);
+                    if(Common::getDataOneField($userAddrBO->selectByPkForInside($EXECUTOR, $useraddridx), UserAddrBO::FIELD__USERADDRIDX) == null)
+                        throw new GGexception("존재하지 않는 주소입니다.");
+
+                    $query = "update grp_member set useraddridx = $useraddridx where grpno = '$GRPNO' and userno = '$EXECUTOR'";
                     GGsql::exeQuery($query);
                 }
                 break;
