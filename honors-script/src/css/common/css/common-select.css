@@ -59,13 +59,13 @@
   max-width: 15em;
   padding: 0.2em 2em 0.2em 0.2em;
   outline: none;
-  -moz-text-align-last: center;
-       text-align-last: center;
+  -moz-text-align-last: left;
+       text-align-last: left;
   vertical-align: middle;
   font-family: "Noto Sans KR", sans-serif;
   border-radius: 0.5em;
   line-height: 1.6;
-  text-align: center;
+  text-align: left;
   height: 2.2em;
   /* color: $colorSnow; */
 }

@@ -11,6 +11,14 @@
 @mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorSnow; color:$color; }
 @mixin btnInnerDisabled ($color)  { border:1px solid color.grayscale($color); background:color.grayscale($color); color:$color; }
 
+/* ============================== */
+/* button common */
+/* ============================== */
+button > i { padding-top: 0.2em; }
+
+/* ============================== */
+/* buttons */
+/* ============================== */
 .common-btn-light,
 .common-btn-outer,
 .common-btn-inner,

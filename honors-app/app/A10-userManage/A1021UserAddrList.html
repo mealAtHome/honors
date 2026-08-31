@@ -31,7 +31,7 @@
                     let mUser = Api.User.selectMe().getModel();
                     UALI.Data.userno = mUser.getUserno();
 
-                    let mUserAddrs = Api.UserAddr.selectByUsernoForMng(UALI.Data.userno, GGF.none, GGF.toast);
+                    let mUserAddrs = Api.UserAddr.selectByUsernoForUsr(UALI.Data.userno, GGF.none, GGF.toast);
                     mUserAddrs.make("#UALI-div-userAddrList");
 
                     Common.hideProgress();
@@ -54,13 +54,13 @@
             /* ========================= */
             $("#UALI-btn-addAddr").click(function()
             {
-                Navigation.moveFrontPage(Navigation.Page.B20UserAddrUpdate, {option: "insert"});
+                Navigation.moveFrontPage(Navigation.Page.A1022UserAddrUpdate, {option: "insert"});
             });
 
             $("#UALI-div-userAddrList").on("click", ".MUserAddr-make-btn-edit", function()
             {
                 let useraddridx = $(this).attr("useraddridx");
-                Navigation.moveFrontPage(Navigation.Page.B20UserAddrUpdate, {option: "update", useraddridx: useraddridx});
+                Navigation.moveFrontPage(Navigation.Page.A1022UserAddrUpdate, {option: "update", useraddridx: useraddridx});
             });
 
             $("#UALI-div-userAddrList").on("click", ".MUserAddr-make-btn-setDefault", function()

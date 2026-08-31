@@ -3,7 +3,7 @@ Api.UserAddr =
     /* ========================= */
     /* select */
     /* ========================= */
-    selectByUsernoForMng(userno, noticeOK, noticeFail) { return Api.UserAddr.select({OPTION:"selectByUsernoForMng", USERNO:userno,}, noticeOK, noticeFail); },
+    selectByUsernoForUsr(userno, noticeOK, noticeFail) { return Api.UserAddr.select({OPTION:"selectByUsernoForUsr", USERNO:userno,}, noticeOK, noticeFail); },
 
     /* ========================= */
     /* update */

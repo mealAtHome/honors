@@ -135,6 +135,7 @@
 .common-flexTop         { display: flex; gap: $padBase; align-items: top; }
 .common-flexCenter      { display: flex; gap: $padBase; align-items: center; }
 .common-flexCenterSm    { display: flex; gap: 0.2em; align-items: center; }
+.common-flexRight       { display: flex; gap: 0.2em; align-items: center; justify-content: flex-end; }
 .common-flexVertical    { display: flex; flex-direction: column; }
 .common-flexParentLR    { display: flex; gap: $padBase; align-items: center; justify-content: space-between; }
 .common-flexBetween     { display: flex; gap: $padBase; align-items: center; justify-content: space-between; }
@@ -149,6 +150,9 @@
 .common-cushionUD       { display: block; margin: $marMore 0em; }
 .common-cushionDw       { display: block; margin-bottom: $marMore; }
 .common-cushionTinyUD   { display: block; margin: $marHalf 0em; }
+
+.common-content         { @include colorHeadFont; }
+.common-subcontent      { @include fonts09; @include colorBodyFont; }
 
 /* --------------- */
 /* font style */

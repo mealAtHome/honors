@@ -44,7 +44,7 @@
                     let mUser = Api.User.selectMe().getModel();
                     UGAM.Data.userno = mUser.getUserno();
 
-                    let mUserAddrs = Api.UserAddr.selectByUsernoForMng(UGAM.Data.userno, GGF.none, GGF.toast);
+                    let mUserAddrs = Api.UserAddr.selectByUsernoForUsr(UGAM.Data.userno, GGF.none, GGF.toast);
                     let mGrpMembers = Api.GrpMember.selectByExecutorForAll(GGF.none, GGF.toast);
 
                     let $tbody = $("#UGAM-tbl-grpAddr > tbody");
@@ -56,7 +56,7 @@
                         `
                             <tr grpno="${model.getGrpno()}">
                                 <td>${model.getGrpname()}</td>
-                                <td><select class="UGAM-select-useraddridx common-input-field" grpno="${model.getGrpno()}"></select></td>
+                                <td><select class="UGAM-select-useraddridx common-select-outer" grpno="${model.getGrpno()}"></select></td>
                             </tr>
                         `;
                         $tbody.append(tr);

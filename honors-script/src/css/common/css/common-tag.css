@@ -771,6 +771,13 @@
   align-items: center;
 }
 
+.common-flexRight {
+  display: flex;
+  gap: 0.2em;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .common-flexVertical {
   display: flex;
   flex-direction: column;
@@ -842,6 +849,15 @@
 .common-cushionTinyUD {
   display: block;
   margin: 0.4em 0em;
+}
+
+.common-content {
+  color: #1b2a6b;
+}
+
+.common-subcontent {
+  font-size: 0.9em;
+  color: #3c435c;
 }
 
 /* --------------- */

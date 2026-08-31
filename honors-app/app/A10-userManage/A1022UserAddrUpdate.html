@@ -20,15 +20,15 @@
         <!-- 지역 -->
         <div class="common-div-formField">
             <span>*지역 (동/읍/면)</span>
-            <div id="UAUP-div-addrSelected" class="common-strong common-cushionHalfUp">지역을 선택해주세요.</div>
+            <div id="UAUP-div-addrSelected" class="common-bold common-colorSide common-cushionHalfUp">지역을 선택해주세요.</div>
             <input id="UAUP-input-addrKeyword" type="text" class="common-input-field" placeholder="동/읍/면 이름으로 검색" style="margin-top:var(--marHalf);"/>
             <div id="UAUP-div-addrResultList" class="common-cushionHalfUp" style="display:none;"></div>
         </div>
 
         <!-- 위치 -->
         <div class="common-div-formField">
-            <span>*정확한 위치</span>
-            <span>지도를 움직여 정확한 위치를 지정해주세요.</span>
+            <span>*거리계산 기준점</span>
+            <span>모임과의 거리계산에 사용됩니다.</span>
             <div id="UAUP-div-mapContainer" style="position:relative; width:100%; height:14em; margin-top:var(--marHalf); border-radius:var(--padHalf); overflow:hidden; background:var(--colorLine);">
                 <div id="UAUP-div-map" style="width:100%; height:100%;"></div>
                 <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-100%); pointer-events:none; z-index:1000;">
@@ -57,10 +57,9 @@
             show()
             {
                 if(UAUP.Data.option == undefined) UAUP.Data.option = "insert";
-
-                UAUP.Data.selectedAddrcode = null;
-                UAUP.Data.selectedLat = 37.5665;
-                UAUP.Data.selectedLng = 126.9780;
+                if(UAUP.Data.selectedAddrcode == undefined) UAUP.Data.selectedAddrcode = null;
+                if(UAUP.Data.selectedLat == undefined) UAUP.Data.selectedLat = 37.5665;
+                if(UAUP.Data.selectedLng == undefined) UAUP.Data.selectedLng = 126.9780;
 
                 Common.showProgress();
                 setTimeout(function()
@@ -71,7 +70,7 @@
                     if(UAUP.Data.option == "update")
                     {
                         $("#UAUP-span-title").text("주소수정");
-                        let mUserAddrs = Api.UserAddr.selectByUsernoForMng(UAUP.Data.userno, GGF.none, GGF.toast);
+                        let mUserAddrs = Api.UserAddr.selectByUsernoForUsr(UAUP.Data.userno, GGF.none, GGF.toast);
                         let mUserAddr = mUserAddrs.getModels().find(m => m.getUseraddridx() == UAUP.Data.useraddridx);
                         if(mUserAddr == undefined)
                         {
@@ -193,7 +192,7 @@
 
                 UAUP.Data.selectedAddrcode = addrcode;
                 $("#UAUP-div-addrSelected").text(addrstrfull);
-                $("#UAUP-input-addrKeyword").val("");
+                /* $("#UAUP-input-addrKeyword").val(""); */
                 $("#UAUP-div-addrResultList").hide().html("");
 
                 if(isChanged)

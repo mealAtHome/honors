@@ -38,8 +38,10 @@ class UserAddrBO extends _CommonBO
     const FIELD__MODIDT        = "modidt";        /* (  ) datetime */
     const FIELD__REGDT         = "regdt";         /* (  ) datetime */
 
+    /* ========================= */
+    /* consts */
+    /* ========================= */
     const USERADDRTITLE_MAX = 10; /* 주소 별칭 최대 글자수 */
-
     static public function getConsts()
     {
         $arr = array();
@@ -55,7 +57,7 @@ class UserAddrBO extends _CommonBO
     /* ========================= */
     /* select */
     /* ========================= */
-    const selectByUsernoForMng = "selectByUsernoForMng";
+    const selectByUsernoForUsr = "selectByUsernoForUsr"; /* EXECUTOR */
     const selectDefaultForInside = "selectDefaultForInside";
     const selectByPkForInside = "selectByPkForInside";
     protected function select($options, $option="")
@@ -95,7 +97,7 @@ class UserAddrBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByUsernoForMng   : { $from = "(select * from user_addr where userno = '$USERNO') t"; break; }
+            case self::selectByUsernoForUsr   : { $from = "(select * from user_addr where userno = '$EXECUTOR') t"; break; }
             case self::selectDefaultForInside : { $from = "(select * from user_addr where userno = '$USERNO' and useraddrdefflg = 'y' limit 1) t"; break; }
             case self::selectByPkForInside    : { $from = "(select * from user_addr where userno = '$USERNO' and useraddridx = $USERADDRIDX) t"; break; }
             default:

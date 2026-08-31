@@ -130,13 +130,13 @@ class GGscoreHtml extends HTMLElement
                     <svg class="commonEvent-svg-GGscoreSub" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 14 30" fill="rgb(220,220,220)"  style=""                score="9" score-type="gray"><rect width="14" height="30"/></svg>
                     <svg class="commonEvent-svg-GGscoreSub" xmlns="http://www.w3.org/2000/svg" width="14" height="30" viewBox="0 0 14 30" fill="#ffd700"           style="display:none;"   score="9" score-type="gold"><rect width="14" height="30"/></svg>
                 </div>
-                <span class="GGscore-span-score common-span-strong common-span-block"></span>
+                <span class="GGscore-span-score common-strong common-block"></span>
                 <div>
-                    <span class="GGscore-div-announce common-span-block" score="1" style="display:none;">도저히 견딜 수 없습니다.</span>
-                    <span class="GGscore-div-announce common-span-block" score="2" style="display:none;">만족스럽지 못합니다.</span>
-                    <span class="GGscore-div-announce common-span-block" score="3" style="display:none;">괜찮았습니다.</span>
-                    <span class="GGscore-div-announce common-span-block" score="4" style="display:none;">만족스럽습니다.</span>
-                    <span class="GGscore-div-announce common-span-block" score="5" style="display:none;">아주 만족스럽습니다.</span>
+                    <span class="GGscore-div-announce common-block" score="1" style="display:none;">도저히 견딜 수 없습니다.</span>
+                    <span class="GGscore-div-announce common-block" score="2" style="display:none;">만족스럽지 못합니다.</span>
+                    <span class="GGscore-div-announce common-block" score="3" style="display:none;">괜찮았습니다.</span>
+                    <span class="GGscore-div-announce common-block" score="4" style="display:none;">만족스럽습니다.</span>
+                    <span class="GGscore-div-announce common-block" score="5" style="display:none;">아주 만족스럽습니다.</span>
                 </div>
             </div>
         `;

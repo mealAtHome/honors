@@ -55,26 +55,10 @@
 /* 패딩 - 약간 */
 /* 패딩 - 아주 약간 */
 /* 패딩 - 아주 더 약간 */
-.common-span-strong {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-.common-span-block {
-  display: block;
-  margin: 0.4em 0em;
-}
-
-.common-span-content {
-  color: #1b2a6b;
-}
-
-.common-span-subcontent {
-  font-size: 0.9em;
-  color: #3c435c;
-  line-height: 1.4;
-}
-
+/* ============================== */
+/* span common */
+/* ============================== */
+/* i ~ span { padding-left: 0.2em; } */
 /* ============================== */
 /* 유효성검사 안내문 span */
 /* ============================== */
@@ -82,40 +66,6 @@
   display: block;
   margin: 0.4em auto;
   font-size: 0.9em;
-}
-
-/* ============================== */
-/* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
-/* ============================== */
-.common-span-color {
-  color: #020654;
-}
-
-/* ============================== */
-/* 시합기록에 사용되는 각 다이어로그의 서브타이틀 */
-/* ============================== */
-.common-span-label {
-  display: inline-block;
-  margin: 0.1em 0em;
-  padding: 0.6em;
-  background-color: transparent;
-  border-radius: 0.3em;
-  font-size: 0.9em;
-  line-height: 1.4;
-  /* box-sizing: border-box; */
-}
-
-.common-span-label[label_type=outer],
-.common-span-label {
-  color: #020654;
-  background-color: transparent;
-  border: 1px solid #020654;
-}
-
-.common-span-label[label_type=inline] {
-  color: #ffffff;
-  background: rgba(2, 6, 84, 0.2);
-  border: 1px solid #020654;
 }
 
 /* ============================== */

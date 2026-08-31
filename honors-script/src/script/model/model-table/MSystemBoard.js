@@ -39,8 +39,8 @@ class MSystemBoard
             >
                 <div class="common-div-dot"></div>
                 <div>
-                    <div class="common-span-content">${this.getSbtitle()}</div>
-                    <div class="common-span-subcontent">${this.getRegidtPretty()}</div>
+                    <div class="common-content">${this.getSbtitle()}</div>
+                    <div class="common-subcontent">${this.getRegidtPretty()}</div>
                 </div>
             </div>
         `;
@@ -65,8 +65,8 @@ class MSystemBoard
                                 <div class="MSystemBoard-makeHorizon-div-image" style="background-image:url('${this.getFullUrl()}/thumbnail.png')"></div>
                             </td>
                             <td>
-                                <div class="common-span-content">${this.getSbtitle()}</div>
-                                <div class="common-span-subcontent">${this.getRegidtPretty()}</div>
+                                <div class="common-content">${this.getSbtitle()}</div>
+                                <div class="common-subcontent">${this.getRegidtPretty()}</div>
                             </td>
                         </tr>
                     </tbody>

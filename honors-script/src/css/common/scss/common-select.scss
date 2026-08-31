@@ -5,12 +5,12 @@
     max-width: 15em;
     padding: $padTiny $padHuge $padTiny $padTiny;
     outline: none;
-    text-align-last: center;
+    text-align-last: left;
     vertical-align: middle;
     @include fontDefault;
     border-radius: 0.5em;
     @include fonth16;
-    text-align: center;
+    text-align: left;
     height: 2.2em;
     /* color: $colorSnow; */
 }
