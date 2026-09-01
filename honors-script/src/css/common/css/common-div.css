@@ -251,8 +251,8 @@ div {
 .common-div-formField > span:nth-child(1) {
   display: block;
   font-size: 1.1em;
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
   font-weight: bold;
   line-height: 1.6;
 }
@@ -261,7 +261,7 @@ div {
   display: block;
   font-size: 0.9em;
   margin-top: 0em;
-  margin-bottom: 0.4em;
+  margin-bottom: 0.3em;
   font-weight: normal;
   line-height: 1.6;
 }
@@ -291,7 +291,7 @@ div {
 /* ============================== */
 .common-div-indent {
   display: block;
-  margin: 0.4em;
+  margin: 0.3em;
   padding: 0em;
 }
 
@@ -326,7 +326,7 @@ div {
 /* ============================== */
 .common-div-svgTop {
   display: inline-block;
-  margin: 0.4em;
+  margin: 0.3em;
   vertical-align: middle;
 }
 
@@ -489,8 +489,8 @@ div {
 }
 
 .common-div-mass {
-  margin: 0.4em;
-  padding: 0.4em;
+  margin: 0.3em;
+  padding: 0.3em;
   box-sizing: content-box;
   text-align: center;
 }
@@ -504,7 +504,7 @@ div {
   width: 100%;
   overflow-x: scroll;
   box-sizing: border-box;
-  padding-bottom: 0.4em;
+  padding-bottom: 0.3em;
 }
 
 .common-div-cushion {
@@ -557,7 +557,7 @@ div {
 /* ============================== */
 .common-div-announce {
   margin: 0.6em;
-  padding: 0.4em;
+  padding: 0.3em;
   text-align: left;
   line-height: 1.6;
   background: rgba(60, 67, 92, 0.2);
@@ -577,7 +577,7 @@ div {
   color: #ffffff;
   width: 3.6em;
   height: 3.6em;
-  padding: 0.4em;
+  padding: 0.3em;
   border-radius: 1em;
 }
 
@@ -617,7 +617,7 @@ div {
 .common-div-calendarSquare[common-type=alone] {
   width: 2.6em;
   height: 2.6em;
-  padding: 0.4em;
+  padding: 0.3em;
 }
 
 /* ByType */
@@ -637,7 +637,7 @@ div {
   color: #ffffff;
   border: 2px solid #3c435c;
   color: #3c435c;
-  padding: 0.4em 0.8em;
+  padding: 0.3em 0.8em;
   border-radius: 0.3em;
   font-weight: normal;
   cursor: pointer;
@@ -646,7 +646,7 @@ div {
   display: inline-block;
   position: relative;
   overflow: hidden;
-  margin-left: 0.4em;
+  margin-left: 0.3em;
 }
 
 .common-div-calendarSquareWeekTop > button:nth-child(1) {

@@ -86,7 +86,7 @@
  */
 /* ============================== */
 .common-tbl-tab > tbody > tr > td {
-  padding: 0.4em 0.8em;
+  padding: 0.3em 0.8em;
   border-radius: 2em;
   color: #020654;
   text-align: center;
@@ -95,7 +95,7 @@
 .common-tbl-tab > tbody > tr > td[tab=space] {
   width: 90%;
   border: none;
-  padding: 0em 0.4em;
+  padding: 0em 0.3em;
   text-align: right;
 }
 
@@ -132,7 +132,7 @@
 .common-tbl-normal > tbody > tr > th,
 .common-tbl-normal > tfoot > tr > th,
 .common-tbl-normal > tfoot > tr > td {
-  padding: 0.4em;
+  padding: 0.3em;
   background-color: #ffffff;
   text-align: center;
   font-weight: bold;
@@ -141,7 +141,7 @@
 .common-tbl-normal > thead > tr > td,
 .common-tbl-normal > tfoot > tr > td,
 .common-tbl-normal > tbody > tr > td {
-  padding: 0.4em;
+  padding: 0.3em;
 }
 
 .common-tbl-normal[tbl-type=card] {
@@ -354,12 +354,12 @@
 
 .common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(1) {
   width: 20%;
-  padding-right: 0.4em;
+  padding-right: 0.3em;
 }
 
 .common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td:nth-child(2) {
   width: 100%;
-  padding-left: 0.4em;
+  padding-left: 0.3em;
 }
 
 .common-tbl-slideformFooterBtn[tbl-type=button2] > tbody > tr > td > button {
@@ -369,12 +369,12 @@
 
 .common-tbl-slideformFooterBtn[tbl-type=liner2] > tbody > tr > td:nth-child(1) {
   width: 50%;
-  padding-right: 0.4em;
+  padding-right: 0.3em;
 }
 
 .common-tbl-slideformFooterBtn[tbl-type=liner2] > tbody > tr > td:nth-child(2) {
   width: 50%;
-  padding-left: 0.4em;
+  padding-left: 0.3em;
 }
 
 .common-tbl-slideformFooterBtn[tbl-type=liner2] > tbody > tr > td > button {
@@ -393,7 +393,7 @@
 .common-tbl-vertical > thead > tr > th,
 .common-tbl-vertical > tbody > tr > th,
 .common-tbl-vertical > tbody > tr > td {
-  padding: 0.4em;
+  padding: 0.3em;
 }
 
 .common-tbl-vertical[tbl-type=normal] {

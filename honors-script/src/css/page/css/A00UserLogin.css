@@ -102,7 +102,7 @@
   display: block;
   width: 100%;
   margin: 0.6em auto;
-  padding: 0.4em;
+  padding: 0.3em;
   border: 1px solid #3c435c;
   font-size: 1.2em;
   text-align: left;
@@ -147,7 +147,7 @@
   display: flex;
   align-items: center;
   gap: 0.5em;
-  margin: 0.4em auto;
+  margin: 0.3em auto;
   width: 15em;
 }
 

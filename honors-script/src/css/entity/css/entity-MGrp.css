@@ -75,7 +75,7 @@
   width: 3.4em;
 }
 
-.Mgrp-make-div-image {
+.MakeGrpCardNorm-profileImg {
   width: 3.4em;
   height: 3.4em;
   background-repeat: no-repeat;
@@ -86,28 +86,22 @@
 /* ============================== */
 /* 모임 카드 - Norm(지표 스트립형) */
 /* ============================== */
-.Mgrp-cardNorm-div-statStrip {
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-  margin-top: 0.6em;
-  padding-top: 0.6em;
-  border-top: 0.04em solid #e4e7f0;
-  overflow-x: auto;
+.Mgrp-cardNorm-statStrip {
+  justify-content: flex-start;
 }
 
-.Mgrp-cardNorm-div-statItem {
+.Mgrp-cardNorm-statItem {
   display: flex;
   align-items: center;
   gap: 0.3em;
   flex: none;
-  font-size: 0.85em;
+  font-size: 0.8em;
   font-weight: bold;
-  color: #020654;
+  color: #7a7d84;
   white-space: nowrap;
 }
 
-.Mgrp-cardNorm-div-statItem > i {
+.Mgrp-cardNorm-statItem > i {
   color: #7a7d84;
 }
 
@@ -165,7 +159,7 @@
   align-items: center;
   margin-top: 0.6em;
   border-top: 0.04em solid #e4e7f0;
-  padding-top: 0.4em;
+  padding-top: 0.3em;
 }
 
 .Mgrp-cardMain-div-statCol {

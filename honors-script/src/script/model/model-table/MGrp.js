@@ -119,7 +119,7 @@ class MGrp
                 <table class="Mgrp-make-tbl-top">
                     <tbody>
                         <tr>
-                            <td><div class="Mgrp-make-div-image" style="background-image:url('${this.getGrpimgPath()}')"></div></td>
+                            <td><div class="MakeGrpCardNorm-profileImg" style="background-image:url('${this.getGrpimgPath()}')"></div></td>
                             <td>
                                 <span class="common-block common-fonts11">${this.getGrpname()}</span>
                                 <span class="common-block">
@@ -145,22 +145,22 @@ class MGrp
             btnHtml = `<span class="commonEvent-tag-hyperlink common-colorSide common-strong common-fonts09" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${this.getPk()}>상세보기 &gt;</span>`;
 
         return `
-            <div class="Mgrp-cardNorm-div-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
+            <div class="Mgrp-cardNorm-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
                 <div class="common-flexCenter">
-                    <div class="Mgrp-make-div-image" style="background-image:url('${this.getGrpimgPath()}')"></div>
+                    <div class="MakeGrpCardNorm-profileImg" style="background-image:url('${this.getGrpimgPath()}')"></div>
                     <div class="common-flexVertical" style="flex:1; min-width:0;">
                         <span class="common-strong common-fonts11">${this.getGrpname()}</span>
                         <span class="common-fonts08 common-colorCmmt">모임장 ${this.getGrpmanagerName()}</span>
                     </div>
-                    ${btnHtml}
                 </div>
-                <div class="Mgrp-cardNorm-div-statStrip">
-                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-users"></i><span>${this.getGrpmcnt()}명</span></div>
-                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-map-pin"></i><span>0km</span></div>
-                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-repeat"></i><span>${this.getGrpclstermText()}</span></div>
-                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-cash"></i><span>${this.getGrpclsapplybillavgWon()}</span></div>
-                    <div class="Mgrp-cardNorm-div-statItem"><i class="ti ti-clock"></i><span>${this.getGrplastclsregistedText()}</span></div>
+                <div class="Mgrp-cardNorm-statStrip common-buttonsForCardTop">
+                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-users"></i><span>${this.getGrpmcnt()}명</span></div>
+                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-map-pin"></i><span>0km</span></div>
+                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-repeat"></i><span>${this.getGrpclstermText()}</span></div>
+                    <!-- <div class="Mgrp-cardNorm-statItem"><i class="ti ti-cash"></i><span>${this.getGrpclsapplybillavgWon()}</span></div> -->
+                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-clock"></i><span>${this.getGrplastclsregistedText()}</span></div>
                 </div>
+                ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}
             </div>
         `;
     }
@@ -181,7 +181,7 @@ class MGrp
                 <div class="Mgrp-cardMain-div-body">
                     <div class="common-flexCenter" style="align-items:flex-end;">
                         <div class="Mgrp-cardMain-div-logoWrap">
-                            <div class="Mgrp-make-div-image Mgrp-cardMain-div-logo" style="background-image:url('${this.getGrpimgPath()}')"></div>
+                            <div class="MakeGrpCardNorm-profileImg Mgrp-cardMain-div-logo" style="background-image:url('${this.getGrpimgPath()}')"></div>
                             <span class="Mgrp-cardMain-span-memberBadge">${this.getGrpmcnt()}명</span>
                         </div>
                         <div class="common-flexVertical">
@@ -219,13 +219,12 @@ class MGrps extends _MCommon
     } /* constructor */
 
 
-
     /* ========================= */
     /* make */
     /* ========================= */
-    makeForView(el)       { this.make("makeForView", el); }
-    makeForChooseGrp(el)  { this.make("makeForChooseGrp", el); }
-    makeForChooseGrp2(el) { this.make("makeForChooseGrp2", el); }
+    makeGrpForView(el)      { this.make("makeGrpForView", el); }
+    makeGrpForChoose(el)    { this.make("makeGrpForChoose", el); }
+    makeGrpForChoose2(el)   { this.make("makeGrpForChoose2", el); }
     make(option, el)
     {
         let html = "";
@@ -235,11 +234,11 @@ class MGrps extends _MCommon
             let buttonHtml = "";
             switch(option)
             {
-                case "makeForView"        : { buttonHtml = `<button class="common-btn-inner commonEvent-tag-hyperlink" btn-type="detail" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${model.getPk()}>상세보기</button>`; break; }
-                case "makeForChooseGrp"   : { buttonHtml = `<button class="common-btn-inner Mgrp-make-btn-login" grpno="${model.getGrpno()}">선택하기</button>`; break; }
-                case "makeForChooseGrp2"  : { buttonHtml = `<button class="CUDE-btn-chooseGrp commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-chooseGrp" tab="" grpno="${model.getGrpno()}">선택</button>`; break; }
+                case "makeGrpForView"     : { buttonHtml = `<div></div><div class="commonEvent-tag-hyperlink common-flexCenterSm common-colorSide common-fonts08" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${model.getPk()}><span>상세보기</span><i class="ti ti-chevron-right"></i></div>`; break; }
+                case "makeGrpForChoose"   : { buttonHtml = `<button class="common-btn-inner Mgrp-make-btn-login" grpno="${model.getGrpno()}">선택하기</button>`; break; }
+                case "makeGrpForChoose2"  : { buttonHtml = `<button class="CUDE-btn-chooseGrp commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-chooseGrp" tab="" grpno="${model.getGrpno()}">선택</button>`; break; }
             }
-            html += model.make(buttonHtml);
+            html += model.makeGrpCardNorm(buttonHtml);
         }
         $(el).html(html);
 

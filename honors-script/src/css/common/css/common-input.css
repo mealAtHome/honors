@@ -67,7 +67,7 @@
 }
 
 .common-input-field {
-  padding: 0.4em;
+  padding: 0.3em;
   border: none;
   border-bottom: 0.07em solid #c4c7ce;
   background-color: transparent;
@@ -89,7 +89,7 @@
 }
 
 .common-textarea-field {
-  padding: 0.4em;
+  padding: 0.3em;
   border: 0.07em solid #c4c7ce;
   background-color: #ffffff;
   font-size: 1.1em;
@@ -108,7 +108,7 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
   /* box-sizing: content-box; */
-  padding: 0.4em;
+  padding: 0.3em;
   font-size: 1.1em;
   border: 0.07em solid #c4c7ce;
 }
@@ -125,7 +125,7 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
   box-sizing: initial;
-  padding: 0.4em;
+  padding: 0.3em;
   font-size: 1.1em;
   border: none;
 }
@@ -135,7 +135,7 @@
   /* -moz-appearance: none; */
   /* -webkit-appearance: none; */
   /* box-sizing: content-box; */
-  padding: 0.4em;
+  padding: 0.3em;
   font-size: 1.1em;
   border: 0.07em solid #c4c7ce;
 }

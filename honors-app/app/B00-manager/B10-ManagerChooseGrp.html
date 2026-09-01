@@ -36,7 +36,7 @@
                 {
                     /* 모임리스트 조회 */
                     let mGrps = Api.Grp.selectManaging();
-                    mGrps.makeForChooseGrp("#MGCG-div-list");
+                    mGrps.makeGrpForChoose("#MGCG-div-list");
 
                     /* 모임이 하나밖에 존재하지 않으면 첫번째 엘리먼트 자동선택 */
                     if(mGrps.getModels().length == 1)

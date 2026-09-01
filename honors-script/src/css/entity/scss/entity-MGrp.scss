@@ -14,7 +14,7 @@
 .Mgrp-make-tbl-top > tbody > tr > td { padding:0.4em; vertical-align:middle; }
 .Mgrp-make-tbl-top > tbody > tr:nth-child(1) > td:nth-child(1) { width:3.4em; }
 
-.Mgrp-make-div-image
+.MakeGrpCardNorm-profileImg
 {
     width:3.4em;
     height:3.4em;
@@ -26,28 +26,22 @@
 /* ============================== */
 /* 모임 카드 - Norm(지표 스트립형) */
 /* ============================== */
-.Mgrp-cardNorm-div-statStrip
+.Mgrp-cardNorm-statStrip
 {
-    display: flex;
-    align-items: center;
-    gap: $padMore;
-    margin-top: $marBase;
-    padding-top: $padBase;
-    border-top: 0.04em solid $colorLine;
-    overflow-x: auto;
+    justify-content: flex-start;
 }
-.Mgrp-cardNorm-div-statItem
+.Mgrp-cardNorm-statItem
 {
     display: flex;
     align-items: center;
     gap: 0.3em;
     flex: none;
-    font-size: 0.85em;
+    font-size: 0.8em;
     font-weight: bold;
-    color: $colorMain;
+    color: $colorCmmt;
     white-space: nowrap;
 }
-.Mgrp-cardNorm-div-statItem > i { color: $colorCmmt; }
+.Mgrp-cardNorm-statItem > i { color: $colorCmmt; }
 
 /* ============================== */
 /* 모임 카드 - Main(배지 히어로형) */

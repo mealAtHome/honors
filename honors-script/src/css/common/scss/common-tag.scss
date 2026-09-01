@@ -195,7 +195,9 @@
     margin-top:var(--marBase);
     padding-top:var(--padBase);
     border-top:1px solid var(--colorLine);
+    overflow-x: auto; /* 가로 스크롤 허용 */
 }
+.common-buttonsForCardTop ~ .common-buttonsForCardTop { border-top: none; margin-top: 0px; }
 
 /* ═══════════════════════════════════════
     INFO LIST (라벨-값 행 목록)

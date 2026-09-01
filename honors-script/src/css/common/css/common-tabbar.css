@@ -81,7 +81,7 @@
 
 .common-tabbar-item {
   display: inline-block;
-  padding: 0.4em 0.8em;
+  padding: 0.3em 0.8em;
   border-bottom: 0.21em solid #c4c7ce;
   color: #3c435c;
   text-align: center;
@@ -110,7 +110,7 @@
 
 .common-tab-item {
   display: inline-block;
-  padding: 0.4em 0.8em;
+  padding: 0.3em 0.8em;
   border-radius: 0.4em;
   border: 0.07em solid #c4c7ce;
   background-color: #ffffff;

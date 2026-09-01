@@ -704,25 +704,25 @@
 .common-pill {
   display: inline-block;
   font-weight: bold;
-  padding: 0.4em 0.8em 0.5em;
+  padding: 0.3em 0.8em 0.4em;
   border-radius: 0.3em;
 }
 
 .common-card {
   display: inline-block;
   font-weight: bold;
-  padding: 0.4em 0.8em 0.5em;
+  padding: 0.3em 0.8em 0.4em;
   border-radius: 0.3em;
 }
 
 .common-card[card-type=mini] {
   font-weight: normal;
-  padding: 0.2em 0.4em 0.3em;
+  padding: 0.2em 0.3em 0.3em;
 }
 
 .common-pill[pill-type=mini] {
   font-weight: normal;
-  padding: 0.2em 0.4em 0.3em;
+  padding: 0.2em 0.3em 0.3em;
 }
 
 /* --------------- */
@@ -803,7 +803,7 @@
 
 .common-indent04 {
   display: block;
-  padding-left: 0.4em;
+  padding-left: 0.3em;
 }
 
 .common-indent08 {
@@ -818,12 +818,12 @@
 
 .common-cushionHalfAA {
   display: block;
-  margin: 0.4em;
+  margin: 0.3em;
 }
 
 .common-cushionHalfUp {
   display: block;
-  margin-top: 0.4em;
+  margin-top: 0.3em;
 }
 
 .common-cushionBaseAA {
@@ -848,7 +848,7 @@
 
 .common-cushionTinyUD {
   display: block;
-  margin: 0.4em 0em;
+  margin: 0.3em 0em;
 }
 
 .common-content {
@@ -959,6 +959,12 @@
   margin-top: var(--marBase);
   padding-top: var(--padBase);
   border-top: 1px solid var(--colorLine);
+  overflow-x: auto; /* 가로 스크롤 허용 */
+}
+
+.common-buttonsForCardTop ~ .common-buttonsForCardTop {
+  border-top: none;
+  margin-top: 0px;
 }
 
 /* ═══════════════════════════════════════

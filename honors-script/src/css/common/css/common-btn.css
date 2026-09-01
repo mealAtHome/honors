@@ -75,7 +75,7 @@ button > i {
 .common-btn-radio,
 .common-btn-flat {
   display: inline-block;
-  padding: 0.2em 0.4em 0.3em;
+  padding: 0.2em 0.3em 0.3em;
   text-decoration: none;
   border-radius: 0.3em;
   background: #ffffff;
@@ -379,7 +379,7 @@ button > i {
 /* button size */
 .common-btn-outer[btn-size=large] {
   display: block;
-  margin: 0.4em auto;
+  margin: 0.3em auto;
   padding: 0.8em;
   min-width: 12em;
   max-width: 90%;
@@ -387,7 +387,7 @@ button > i {
 
 .common-btn-inner[btn-size=large] {
   display: block;
-  margin: 0.4em auto;
+  margin: 0.3em auto;
   padding: 0.8em;
   min-width: 12em;
   max-width: 90%;
