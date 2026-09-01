@@ -220,6 +220,7 @@ div { display: block; }
 /* ============================== */
 .common-div-card
 {
+    display: block;
     position: relative;
     border-radius: $borderRadiusDivCard;
     padding: $padBase;
@@ -229,11 +230,15 @@ div { display: block; }
     background: $colorSnowBack;
     border: 0.04em solid $colorLine;
 }
-.common-div-card[card-type=warning] { @include colorWarnFont; background: $colorWarnBack; }
-.common-div-card[card-type=notice]  { @include colorNtceFont; background: $colorNtceBack; }
-.common-div-card[card-type=hero]    { color: $colorMain; background: $colorMainBack; }
+.common-div-card[card-type=warning]         { @include colorWarnFont; background: $colorWarnBack; }
+.common-div-card[card-type=notice]          { @include colorNtceFont; background: $colorNtceBack; }
+.common-div-card[card-type=hero]            { color: $colorMain; background: $colorMainBack; }
+.common-div-card[card-type=choose]:active   { background: rgba(var(--colorMainRgb), 0.1); }
+
+/* margin of card */
 .common-div-card:first-child  { margin-top: 0em; }
 .common-div-card ~ .common-div-card { margin-top: $marBase; }
+.common-div-card[card-type=choose] ~ .common-div-card[card-type=choose] { margin-top: $marTiny; }
 
 /* ============================== */
 /* 에러 메시지용 */

@@ -67,7 +67,7 @@ class MUserAddrs extends _MCommon
                             ${model.isDefault() ? `<span class="common-card common-fonts08" card-type="mini" card-color="pstv" style="margin-left: 0.4em;">기본주소</span>` : ""}
                         </div>
                         <div class="common-flexCenterSm">
-                            ${model.isDefault() ? "" : `<button class="MUserAddr-make-btn-setDefault common-btn-noline common-fonts08" ${model.getPk()}>기본</button>`}
+                            ${model.isDefault() ? "" : `<button class="MUserAddr-make-btn-setDefault common-btn-noline common-fonts08" ${model.getPk()}>기본으로설정</button>`}
                             <button class="MUserAddr-make-btn-edit common-btn-noline common-fonts08" ${model.getPk()}>수정</button>
                             <button class="MUserAddr-make-btn-delete common-btn-noline common-fonts08" btn-type="cancel" ${model.getPk()}>삭제</button>
                         </div>
@@ -106,18 +106,18 @@ class MUserAddrs extends _MCommon
             let model = models[i];
             html +=
             `
-                <div class="${code}-addrPickItem common-div-card " useraddridx="${model.getUseraddridx()}" style="cursor:pointer;">
+                <div class="${code}-addrPickItem common-div-card" card-type="choose" useraddridx="${model.getUseraddridx()}" style="cursor:pointer;">
                     ${model.getUseraddrtitle()} (${model.getUseraddrstr()})
                 </div>
             `;
         }
-        html +=
+        html =
         `
-            <div class="${code}-addrPickGps common-div-card common-colorSide common-flexCenterSm" style="cursor:pointer;">
+            <div class="${code}-addrPickGps common-div-card common-colorSide common-flexCenterSm" card-type="choose" style="cursor:pointer;">
                 <i class="ti ti-current-location"></i>
                 <span class="common-bold">현재 위치 사용</span>
             </div>
-        `;
+        ` + html;
         $(el).html(html);
     }
 

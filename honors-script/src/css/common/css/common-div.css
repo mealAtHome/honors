@@ -334,6 +334,7 @@ div {
 /* 그림자진 DIV */
 /* ============================== */
 .common-div-card {
+  display: block;
   position: relative;
   border-radius: 0.6em;
   padding: 0.6em;
@@ -359,12 +360,21 @@ div {
   background: rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }
 
+.common-div-card[card-type=choose]:active {
+  background: rgba(var(--colorMainRgb), 0.1);
+}
+
+/* margin of card */
 .common-div-card:first-child {
   margin-top: 0em;
 }
 
 .common-div-card ~ .common-div-card {
   margin-top: 0.6em;
+}
+
+.common-div-card[card-type=choose] ~ .common-div-card[card-type=choose] {
+  margin-top: 0.2em;
 }
 
 /* ============================== */
