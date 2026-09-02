@@ -97,7 +97,6 @@ class MGrp
     /* ========================= */
     /* make */
     /* ========================= */
-
     make(btnHtml="")
     {
         if(btnHtml != "")
@@ -141,9 +140,6 @@ class MGrp
     /* ========================= */
     makeGrpCardNorm(btnHtml="")
     {
-        if(btnHtml == "")
-            btnHtml = `<span class="commonEvent-tag-hyperlink common-colorSide common-strong common-fonts09" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${this.getPk()}>상세보기 &gt;</span>`;
-
         return `
             <div class="Mgrp-cardNorm-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
                 <div class="common-flexCenter">
@@ -153,12 +149,12 @@ class MGrp
                         <span class="common-fonts08 common-colorCmmt">모임장 ${this.getGrpmanagerName()}</span>
                     </div>
                 </div>
-                <div class="Mgrp-cardNorm-statStrip common-buttonsForCardTop">
-                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-users"></i><span>${this.getGrpmcnt()}명</span></div>
-                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-map-pin"></i><span>0km</span></div>
-                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-repeat"></i><span>${this.getGrpclstermText()}</span></div>
-                    <!-- <div class="Mgrp-cardNorm-statItem"><i class="ti ti-cash"></i><span>${this.getGrpclsapplybillavgWon()}</span></div> -->
-                    <div class="Mgrp-cardNorm-statItem"><i class="ti ti-clock"></i><span>${this.getGrplastclsregistedText()}</span></div>
+                <div class="MakeGrpCardNorm-statStrip common-buttonsForCardTop">
+                    <div class="MakeGrpCardNorm-statItem"><i class="ti ti-users"></i><span>${this.getGrpmcnt()}명</span></div>
+                    <div class="MakeGrpCardNorm-statItem"><i class="ti ti-map-pin"></i><span>0km</span></div>
+                    <div class="MakeGrpCardNorm-statItem"><i class="ti ti-repeat"></i><span>${this.getGrpclstermText()}</span></div>
+                    <!-- <div class="MakeGrpCardNorm-statItem"><i class="ti ti-cash"></i><span>${this.getGrpclsapplybillavgWon()}</span></div> -->
+                    <div class="MakeGrpCardNorm-statItem"><i class="ti ti-clock"></i><span>${this.getGrplastclsregistedText()}</span></div>
                 </div>
                 ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}
             </div>
@@ -170,34 +166,33 @@ class MGrp
     /* ========================= */
     makeGrpCardMain(btnHtml="")
     {
-        if(btnHtml == "")
-            btnHtml = `<span class="commonEvent-tag-hyperlink common-colorSide common-strong common-fonts09" hyperlink="${Navigation.Page.D10DetailGrp}" hyperlink-viewmode="page" ${this.getPk()}>상세보기 &gt;</span>`;
-
         return `
-            <div class="Mgrp-cardMain-div-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
-                <div class="Mgrp-cardMain-div-band">
-                    <span class="Mgrp-cardMain-span-bandLabel">GROUP</span>
+            <div class="MakeGrpCardMain-top common-div-card" grpno="${this.getGrpno()}" grpmanager="${this.getGrpmanager()}">
+                <div class="MakeGrpCardMain-bandTop">
+                    <span class="MakeGrpCardMain-bandLabel">GROUP</span>
                 </div>
-                <div class="Mgrp-cardMain-div-body">
-                    <div class="common-flexCenter" style="align-items:flex-end;">
-                        <div class="Mgrp-cardMain-div-logoWrap">
-                            <div class="MakeGrpCardNorm-profileImg Mgrp-cardMain-div-logo" style="background-image:url('${this.getGrpimgPath()}')"></div>
-                            <span class="Mgrp-cardMain-span-memberBadge">${this.getGrpmcnt()}명</span>
+                <div class="MakeGrpCardMain-bodyTop">
+                    <div class="common-flexCenter">
+                        <div class="MakeGrpCardMain-logoWrap">
+                            <div class="MakeGrpCardNorm-profileImg MakeGrpCardMain-logoMain" style="background-image:url('${this.getGrpimgPath()}')"></div>
                         </div>
                         <div class="common-flexVertical">
                             <span class="common-strong common-fonts11">${this.getGrpname()}</span>
                             <span class="common-fonts08 common-colorCmmt">모임장 ${this.getGrpmanagerName()}</span>
                         </div>
                     </div>
-                    <div class="Mgrp-cardMain-div-statRow">
-                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">거리</span><span class="common-strong common-fonts09">0km</span></div>
-                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">활동주기</span><span class="common-strong common-fonts09">${this.getGrpclstermText()}</span></div>
-                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">평균비용</span><span class="common-strong common-fonts09">${this.getGrpclsapplybillavgWon()}</span></div>
-                        <div class="Mgrp-cardMain-div-statCol"><span class="common-fonts07 common-colorCmmt">마지막활동</span><span class="common-strong common-fonts09">${this.getGrplastclsregistedText()}</span></div>
+                    <div class="MakeGrpCardMain-statRow common-buttonsForCardTop">
+                        <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">인원</span><span class="common-bold common-fonts09">${this.getGrpmcnt()}명</span></div>
+                        <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">거리</span><span class="common-bold common-fonts09">0km</span></div>
+                        <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">활동주기</span><span class="common-bold common-fonts09">${this.getGrpclstermText()}</span></div>
+                        <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">마지막활동</span><span class="common-bold common-fonts09">${this.getGrplastclsregistedText()}</span></div>
                     </div>
-                    <div style="text-align:right; margin-top:var(--marHalf);">
-                        ${btnHtml}
-                    </div>
+                    <!--
+                        <div class="common-buttonsForCardTop">
+                            <span class="common-block common-fonts09 common-colorBody">연락처 : ${this.getGrpmanagerPhone()}</span>
+                        </div>
+                    -->
+                    ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}
                 </div>
             </div>
         `;

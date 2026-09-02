@@ -60,18 +60,10 @@ div {
 }
 
 /*=================================*/
-/* flex */
-/*=================================*/
-.common-div-flex {
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-}
-
-/*=================================*/
 /* dot */
 /*=================================*/
 .common-div-dot {
+  display: inline-block;
   width: 0.6em;
   height: 0.6em;
   background: #2865ff;
@@ -670,4 +662,13 @@ div {
 .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {
   color: #3c435c;
   border: 2px solid #3c435c;
+}
+
+/*=================================*/
+/* flex */
+/*=================================*/
+.common-div-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
 }

@@ -15,7 +15,7 @@
         <table class="DGRP-tbl-common common-tbl-tab commonEvent-tbl-tab">
             <tbody>
                 <tr>
-                    <td class="DGRP-td-searchtype" val="detail" tab="tab" >기본정보</td>
+                    <td class="DGRP-td-searchtype" val="detail" tab="tab" ><i class="ti ti-home"></i><span>홈</span></td>
                     <td class="DGRP-td-searchtype" val="cls"    tab=""    >일정</td>
                     <td class="DGRP-td-searchtype" val="member" tab=""    >멤버</td>
                 </tr>
@@ -23,17 +23,6 @@
         </table>
     </div>
     <hr class="common-hr-paddingLR"/>
-
-    <!-- ========================= -->
-    <!-- 검색 -->
-    <!-- ========================= -->
-    <div id="DGRP-div-search" class="common-div-cushion common-search-div-top" style="display:none;">
-        <input type="text" id="DGRP-input-searchkey" class="common-input-text"/>
-        <button id="DGRP-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
-        <div class="common-block common-fonts09">
-            <span id="DGRP-span-searchedCnt"></span><span>건 검색되었습니다.</span>
-        </div>
-    </div>
 
     <!-- ========================= -->
     <!-- 탭 -->
@@ -45,18 +34,25 @@
     </div>
 
     <!-- 일정 -->
-    <div class="DGRP-div-tab" tab="cls" style="display:none;">
-        <div class="common-div-cushion">
+    <div class="DGRP-div-tab common-div-cushion" tab="cls" style="display:none;">
+        <div class="common-div-cushionUD">
             <ul class="common-ul-announce">
                 <li>최근 1년간의 일정이 표시됩니다.</li>
             </ul>
         </div>
-        <div id="DGRP-div-clsList" class="common-div-cushion"></div>
+        <div id="DGRP-div-clsList"></div>
     </div>
 
     <!-- 멤버 -->
-    <div class="DGRP-div-tab" tab="member" style="display:none;">
-        <div id="DGRP-div-memberList" class="common-div-cushion"></div>
+    <div class="DGRP-div-tab common-div-cushion" tab="member" style="display:none;">
+        <div id="DGRP-div-search" class="common-search-top common-div-cushionUD">
+            <input type="text" id="DGRP-input-searchkey" class="common-input-text"/>
+            <button id="DGRP-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>검색</span></button>
+            <div class="common-block common-fonts09">
+                <span id="DGRP-span-searchedCnt"></span><span>건 검색되었습니다.</span>
+            </div>
+        </div>
+        <div id="DGRP-div-memberList"></div>
     </div>
 
 
@@ -108,12 +104,9 @@
                         {
                             case "detail":
                             {
-                                /* 검색 탭 숨김 */
-                                $("#DGRP-div-search").hide();
-
                                 /* 모임정보 */
                                 let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
-                                let infoHtml = mGrp.make();
+                                let infoHtml = mGrp.makeGrpCardMain();
 
                                 /* 모임소개글 (API를 별도로 한 번 더 호출) */
                                 let mGrpIntro = Api.GrpIntro.selectByPk(grpno, GGF.none, GGF.toast);
@@ -125,9 +118,6 @@
                             }
                             case "cls":
                             {
-                                /* 검색 탭 숨김 */
-                                $("#DGRP-div-search").hide();
-
                                 /* 일정검색 */
                                 let pagenumCls = DGRP.Data.pagenoCls;
                                 let mClss = Api.Cls.selectFor1YearByGrpnoForAll(grpno, pagenumCls, GGF.none, GGF.toast);
@@ -145,8 +135,6 @@
                             }
                             case "member":
                             {
-                                /* 검색 탭 표시 */
-                                $("#DGRP-div-search").show();
                                 let searchkey = $("#DGRP-input-searchkey").val();
                                 DGRP.Data.searchkey = searchkey;
 

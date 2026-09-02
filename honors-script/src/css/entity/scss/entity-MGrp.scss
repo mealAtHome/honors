@@ -26,11 +26,11 @@
 /* ============================== */
 /* 모임 카드 - Norm(지표 스트립형) */
 /* ============================== */
-.Mgrp-cardNorm-statStrip
+.MakeGrpCardNorm-statStrip
 {
     justify-content: flex-start;
 }
-.Mgrp-cardNorm-statItem
+.MakeGrpCardNorm-statItem
 {
     display: flex;
     align-items: center;
@@ -41,40 +41,41 @@
     color: $colorCmmt;
     white-space: nowrap;
 }
-.Mgrp-cardNorm-statItem > i { color: $colorCmmt; }
+.MakeGrpCardNorm-statItem > i { color: $colorCmmt; }
 
 /* ============================== */
 /* 모임 카드 - Main(배지 히어로형) */
 /* ============================== */
-.Mgrp-cardMain-div-top { padding: 0; overflow: hidden; }
-.Mgrp-cardMain-div-band
+.MakeGrpCardMain-top { padding: 0; overflow: hidden; }
+.MakeGrpCardMain-bandTop
 {
     background: $colorMain;
-    padding: $padBase $padMore calc($padMore + 0.6em) $padMore;
+    padding: $padBase;
 }
-.Mgrp-cardMain-span-bandLabel
+.MakeGrpCardMain-bandLabel
 {
-    color: rgba(255,255,255,0.55);
+    color: rgba(var(--colorSnowRgb), 0.75);
     font-weight: 900;
     font-size: 0.7em;
     letter-spacing: 0.12em;
 }
-.Mgrp-cardMain-div-body
+.MakeGrpCardMain-bodyTop
 {
-    padding: 0 $padMore $padMore $padMore;
-    margin-top: -1.6em;
+    /* padding: 0 $padMore $padMore $padMore; */
+    /* margin-top: -1.6em; */
+    padding: $padBase;
 }
-.Mgrp-cardMain-div-logoWrap
+.MakeGrpCardMain-logoWrap
 {
     position: relative;
     flex: none;
 }
-.Mgrp-cardMain-div-logo
+.MakeGrpCardMain-logoMain
 {
     border: 0.2em solid $colorSnow;
     box-shadow: 0 0.1em 0.4em rgba(0,0,0,0.15);
 }
-.Mgrp-cardMain-span-memberBadge
+.MakeGrpCardMain-memberBadge
 {
     position: absolute;
     bottom: -0.4em;
@@ -88,7 +89,7 @@
     border: 0.15em solid $colorSnow;
     white-space: nowrap;
 }
-.Mgrp-cardMain-div-statRow
+.MakeGrpCardMain-statRow
 {
     display: flex;
     align-items: center;
@@ -96,7 +97,7 @@
     border-top: 0.04em solid $colorLine;
     padding-top: $padHalf;
 }
-.Mgrp-cardMain-div-statCol
+.MakeGrpCardMain-statCol
 {
     flex: 1;
     display: flex;
@@ -104,4 +105,4 @@
     align-items: center;
     gap: 0.15em;
 }
-.Mgrp-cardMain-div-statCol + .Mgrp-cardMain-div-statCol { border-left: 0.04em solid $colorLine; }
+.MakeGrpCardMain-statCol + .MakeGrpCardMain-statCol { border-left: 0.04em solid $colorLine; }

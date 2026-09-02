@@ -36,6 +36,7 @@
 
     /* box-sizing: content-box; */
     padding: $padHalf;
+    padding-bottom: calc(#{$padHalf} + 0.1em);
     @include fonts11;
     border: 0.07em solid $colorSept;
 }

@@ -31,7 +31,7 @@ class MSystemBoard
     {
         let html =
         `
-            <div class="common-div-card common-div-flex commonEvent-tag-hyperlink common-tap"
+            <div class="common-div-flex common-div-card commonEvent-tag-hyperlink common-tap"
                 card-type="notice"
                 hyperlink="${Navigation.Page.Z22SystemBoardDetail}"
                 hyperlink-viewmode="page"

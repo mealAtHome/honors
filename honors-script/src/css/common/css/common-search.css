@@ -58,7 +58,7 @@
 /* =============== */
 /* 검색용 인풋박스 */
 /* =============== */
-.common-search-div-top > input[type=text] {
+.common-search-top > input[type=text] {
   display: inline-block;
   box-sizing: border-box;
   height: 2.2em;
@@ -68,7 +68,7 @@
   vertical-align: middle;
 }
 
-.common-search-div-top > button {
+.common-search-top > button {
   display: inline-block;
   box-sizing: border-box;
   height: 2.2em;

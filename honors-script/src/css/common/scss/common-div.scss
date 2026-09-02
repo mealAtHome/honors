@@ -3,27 +3,17 @@
 div { display: block; }
 
 /*=================================*/
-/* flex */
-/*=================================*/
-.common-div-flex
-{
-    display: flex;
-    align-items: center;
-    gap: 0.8em;
-}
-
-/*=================================*/
 /* dot */
 /*=================================*/
 .common-div-dot
 {
+    display: inline-block;
     width: 0.6em;
     height: 0.6em;
     @include colorNtceBackSolid;
     border-radius: 50%;
     flex-shrink: 0;
 }
-
 
 /*=================================*/
 /* header */
@@ -421,3 +411,13 @@ div { display: block; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=passed]   { @include colorInfoBackTrans; @include colorBodyFont; border: 2px solid $colorSide; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=within]   {                              color: $colorMain; border: 2px solid $colorMain; }
 /* ByPoint */   .common-div-calendarSquareWeekTop > button[point-of-date=upcoming] {                              @include colorBodyFont; border: 2px solid $colorInfo; }
+
+/*=================================*/
+/* flex */
+/*=================================*/
+.common-div-flex
+{
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
+}
