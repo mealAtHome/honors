@@ -108,6 +108,9 @@
                                 let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
                                 let infoHtml = mGrp.makeGrpCardMain();
 
+                                /* 모임장 연락처 */
+                                infoHtml += mGrp.makeManagerContactCard();
+
                                 /* 모임소개글 (API를 별도로 한 번 더 호출) */
                                 let mGrpIntro = Api.GrpIntro.selectByPk(grpno, GGF.none, GGF.toast);
                                 if(mGrpIntro != null)

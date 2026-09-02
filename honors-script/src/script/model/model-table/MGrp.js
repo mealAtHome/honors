@@ -162,6 +162,24 @@ class MGrp
     }
 
     /* ========================= */
+    /* make (모임장 연락처 카드) */
+    /* ========================= */
+    makeManagerContactCard()
+    {
+        return `
+            <div class="common-div-card">
+                <div class="common-header"><i class="ti ti-phone"></i><span>모임장 연락처</span></div>
+                <div class="common-cushionHalfUp common-flexCenterSm">
+                    <div class="common-inline common-fonts09 common-colorBody">${this.getGrpmanagerName()}</div>
+                    <div class="common-inline common-fonts09 common-colorSide commonEvent-tag-phoneCall" phone-call="${this.getGrpmanagerPhone()}" style="cursor:pointer;">
+                        <span>${this.getGrpmanagerPhone()}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /* ========================= */
     /* make (모임 카드 - Main : 배지 히어로형, 단독 강조용) */
     /* ========================= */
     makeGrpCardMain(btnHtml="")
@@ -187,11 +205,6 @@ class MGrp
                         <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">활동주기</span><span class="common-bold common-fonts09">${this.getGrpclstermText()}</span></div>
                         <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">마지막활동</span><span class="common-bold common-fonts09">${this.getGrplastclsregistedText()}</span></div>
                     </div>
-                    <!--
-                        <div class="common-buttonsForCardTop">
-                            <span class="common-block common-fonts09 common-colorBody">연락처 : ${this.getGrpmanagerPhone()}</span>
-                        </div>
-                    -->
                     ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}
                 </div>
             </div>

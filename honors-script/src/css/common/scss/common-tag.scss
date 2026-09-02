@@ -105,6 +105,18 @@
 .common-pill[pill-type=mini] { font-weight: normal; padding: $padTiny $padHalf calc($padTiny + 0.1em); }
 
 /* --------------- */
+/* common-header */
+/* --------------- */
+.common-header
+{
+    display: flex;
+    gap: 0.2em;
+    align-items: center;
+    font-weight: bold;
+    color: $colorMain;
+}
+
+/* --------------- */
 /* alert */
 /* --------------- */
 .common-alertBadge
@@ -143,13 +155,13 @@
 .common-indent04        { display: block; padding-left: $padHalf; }
 .common-indent08        { display: block; padding-left: $padBase; }
 .common-indent12        { display: block; padding-left: $padFull; }
-.common-cushionHalfAA   { display: block; margin: $marHalf; }
-.common-cushionHalfUp   { display: block; margin-top: $marHalf; }
-.common-cushionBaseAA   { display: block; margin: $marBase; }
-.common-cushionBaseUp   { display: block; margin-top: $marBase; }
-.common-cushionUD       { display: block; margin: $marMore 0em; }
-.common-cushionDw       { display: block; margin-bottom: $marMore; }
-.common-cushionTinyUD   { display: block; margin: $marHalf 0em; }
+.common-cushionHalfAA   { margin: $marHalf; }
+.common-cushionHalfUp   { margin-top: $marHalf; }
+.common-cushionBaseAA   { margin: $marBase; }
+.common-cushionBaseUp   { margin-top: $marBase; }
+.common-cushionUD       { margin: $marMore 0em; }
+.common-cushionDw       { margin-bottom: $marMore; }
+.common-cushionTinyUD   { margin: $marHalf 0em; }
 
 .common-content         { @include colorHeadFont; }
 .common-subcontent      { @include fonts09; @include colorBodyFont; }

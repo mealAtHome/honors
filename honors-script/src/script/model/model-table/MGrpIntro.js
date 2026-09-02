@@ -29,7 +29,8 @@ class MGrpIntro
             heroHtml =
             `
                 <div class="common-div-card">
-                    <div class="common-bold common-fonts10">${GGC.Common.escapeHtml(grpintro)}</div>
+                    <div class="common-header"><i class="ti ti-speakerphone"></i><span>한 줄 소개</span></div>
+                    <div class="common-cushionHalfUp common-fonts10">${GGC.Common.escapeHtml(grpintro)}</div>
                 </div>
             `;
         }
@@ -37,11 +38,11 @@ class MGrpIntro
         return `
             ${heroHtml}
             <div class="common-div-card">
-                <div class="common-flexCenterSm common-bold common-colorMain"><i class="ti ti-info-circle"></i><span>모임소개</span></div>
+                <div class="common-header"><i class="ti ti-info-circle"></i><span>모임소개</span></div>
                 <div class="common-cushionHalfUp common-colorBody common-fonts09" style="white-space:pre-wrap; line-height:1.6;">${GGC.Common.escapeHtml(this.getGrpintrodetail())}</div>
             </div>
             <div class="common-div-card">
-                <div class="common-flexCenterSm common-bold common-colorMain"><i class="ti ti-gavel"></i><span>운영원칙 및 규칙</span></div>
+                <div class="common-header"><i class="ti ti-gavel"></i><span>운영원칙 및 규칙</span></div>
                 <div class="common-cushionHalfUp common-colorBody common-fonts09" style="white-space:pre-wrap; line-height:1.6;">${GGC.Common.escapeHtml(this.getGrprules())}</div>
             </div>
         `;

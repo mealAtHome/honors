@@ -726,6 +726,17 @@
 }
 
 /* --------------- */
+/* common-header */
+/* --------------- */
+.common-header {
+  display: flex;
+  gap: 0.2em;
+  align-items: center;
+  font-weight: bold;
+  color: #020654;
+}
+
+/* --------------- */
 /* alert */
 /* --------------- */
 .common-alertBadge {
@@ -817,37 +828,30 @@
 }
 
 .common-cushionHalfAA {
-  display: block;
   margin: 0.3em;
 }
 
 .common-cushionHalfUp {
-  display: block;
   margin-top: 0.3em;
 }
 
 .common-cushionBaseAA {
-  display: block;
   margin: 0.6em;
 }
 
 .common-cushionBaseUp {
-  display: block;
   margin-top: 0.6em;
 }
 
 .common-cushionUD {
-  display: block;
   margin: 0.8em 0em;
 }
 
 .common-cushionDw {
-  display: block;
   margin-bottom: 0.8em;
 }
 
 .common-cushionTinyUD {
-  display: block;
   margin: 0.3em 0em;
 }
 
