@@ -53,24 +53,16 @@ class MSystemBoard
         let html =
         `
             <div
-                class="MSystemBoard-makeHorizon-div-top commonEvent-tag-hyperlink common-tap"
+                class="MSystemBoard-makeHorizon-div-top common-div-card common-tap commonEvent-tag-hyperlink common-flexBetween"
                 hyperlink="${Navigation.Page.Z22SystemBoardDetail}"
                 hyperlink-viewmode="page"
                 ${this.getPk()}
             >
-                <table class="entity-common-tbl MSystemBoard-makeHorizon-table-info">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="MSystemBoard-makeHorizon-div-image" style="background-image:url('${this.getFullUrl()}/thumbnail.png')"></div>
-                            </td>
-                            <td>
-                                <div class="common-content">${this.getSbtitle()}</div>
-                                <div class="common-subcontent">${this.getRegidtPretty()}</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="common-flexVertical">
+                    <span class="common-content">${this.getSbtitle()}</span>
+                    <span class="common-subcontent">${this.getRegidtPretty()}</span>
+                </div>
+                <i class="ti ti-chevron-right common-colorCmmt"></i>
             </div>
         `;
         return html;
@@ -100,22 +92,9 @@ class MSystemBoards extends _MCommon
 
     makeHorizon(el="")
     {
-        /* =============== */
-        /* get each model's html */
-        /* =============== */
         let html = "";
         for(let i in this.getModels())
             html += this.getModels()[i].makeHorizon();
-
-        /* =============== */
-        /* set html */
-        /* =============== */
-        html =
-        `
-            <div class="MSystemBoards-makeHorizon-div-top">
-                ${html}
-            </div>
-        `;
         $(el).html(html);
     }
 }
