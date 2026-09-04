@@ -93,7 +93,7 @@
 .MakeGrpCardNorm-statItem {
   display: flex;
   align-items: center;
-  gap: 0.3em;
+  gap: 0.1em;
   flex: none;
   font-size: 0.8em;
   font-weight: bold;

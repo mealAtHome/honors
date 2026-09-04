@@ -129,6 +129,14 @@ class GrpBO extends _CommonBO
             , bacc.baccname         baccname
             , bank.bankname         bankname
             , ac.addrstrfull        grpbaseaddrstr
+            , ROUND(
+                6371 * ACOS(
+                    LEAST(1.0, GREATEST(-1.0,
+                        COS(RADIANS(ST_X(t.grpbasepoint))) * COS(RADIANS(ST_X(eu.userloginedpoint))) * COS(RADIANS(ST_Y(eu.userloginedpoint)) - RADIANS(ST_Y(t.grpbasepoint)))
+                        + SIN(RADIANS(ST_X(t.grpbasepoint))) * SIN(RADIANS(ST_X(eu.userloginedpoint)))
+                    ))
+                )
+              , 1) grpdistancekm
         ";
 
         /* --------------- */
@@ -169,6 +177,9 @@ class GrpBO extends _CommonBO
                 left join _addrcode ac
                     on
                         ac.addrcode = t.grpbaseaddrcode
+                left join user eu
+                    on
+                        eu.userno = '$EXECUTOR'
             order by
                 t.grpname asc
         ";

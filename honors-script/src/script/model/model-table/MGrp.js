@@ -17,6 +17,7 @@ class MGrp
         /* data */    this.grpclstermvalue      = GGC.Common.int(dat.grpclstermvalue);
         /* data */    this.grplastclsregisted   = GGC.Common.datetime(dat.grplastclsregisted);
         /* data */    this.grpclsapplybillavg   = GGC.Common.int(dat.grpclsapplybillavg);
+        /* data */    this.grpdistancekm        = Common.isEmpty(dat.grpdistancekm) ? null : Number(dat.grpdistancekm);
         /* data */    this.modidt               = GGC.Common.datetime(dat.modidt);
         /* data */    this.regidt               = GGC.Common.datetime(dat.regidt);
         /* data */    this.grpmanager_name      = GGC.Common.varchar(dat.grpmanager_name);
@@ -53,6 +54,7 @@ class MGrp
     getGrpclstermvalue() { return this.grpclstermvalue; }
     getGrplastclsregisted() { return this.grplastclsregisted; }
     getGrpclsapplybillavg() { return this.grpclsapplybillavg; }
+    getGrpdistancekm() { return this.grpdistancekm; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
     getGrpmanagerName() { return this.grpmanager_name; }
@@ -93,6 +95,14 @@ class MGrp
 
     /* custom : 일정평균비용 텍스트 (예: "15,000원") */
     getGrpclsapplybillavgWon() { return GGC.Common.priceWon(this.getGrpclsapplybillavg()); }
+
+    /* custom : 거리 텍스트 (예: "3.4km", 위치정보가 없으면 "-") */
+    getGrpdistancekmText()
+    {
+        if(Common.isEmpty(this.getGrpdistancekm()))
+            return "-";
+        return `${this.getGrpdistancekm().toFixed(1)}km`;
+    }
 
     /* ========================= */
     /* make */
@@ -151,7 +161,7 @@ class MGrp
                 </div>
                 <div class="MakeGrpCardNorm-statStrip common-buttonsForCardTop">
                     <div class="MakeGrpCardNorm-statItem"><i class="ti ti-users"></i><span>${this.getGrpmcnt()}명</span></div>
-                    <div class="MakeGrpCardNorm-statItem"><i class="ti ti-map-pin"></i><span>0km</span></div>
+                    <div class="MakeGrpCardNorm-statItem"><i class="ti ti-map-pin"></i><span>${this.getGrpdistancekmText()}</span></div>
                     <div class="MakeGrpCardNorm-statItem"><i class="ti ti-repeat"></i><span>${this.getGrpclstermText()}</span></div>
                     <!-- <div class="MakeGrpCardNorm-statItem"><i class="ti ti-cash"></i><span>${this.getGrpclsapplybillavgWon()}</span></div> -->
                     <div class="MakeGrpCardNorm-statItem"><i class="ti ti-clock"></i><span>${this.getGrplastclsregistedText()}</span></div>
@@ -201,7 +211,7 @@ class MGrp
                     </div>
                     <div class="MakeGrpCardMain-statRow common-buttonsForCardTop">
                         <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">인원</span><span class="common-bold common-fonts09">${this.getGrpmcnt()}명</span></div>
-                        <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">거리</span><span class="common-bold common-fonts09">0km</span></div>
+                        <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">거리</span><span class="common-bold common-fonts09">${this.getGrpdistancekmText()}</span></div>
                         <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">활동주기</span><span class="common-bold common-fonts09">${this.getGrpclstermText()}</span></div>
                         <div class="MakeGrpCardMain-statCol"><span class="common-fonts08 common-colorCmmt">마지막활동</span><span class="common-bold common-fonts09">${this.getGrplastclsregistedText()}</span></div>
                     </div>
