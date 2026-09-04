@@ -83,15 +83,15 @@ class MUserAddrs extends _MCommon
     /* ========================= */
     /* 주소 select 옵션 (모임관리 화면용) */
     /* ========================= */
-    makeOption(el="")
+    makeUserAddrOptionHtmlForSelect(useraddridx)
     {
-        let html = `<option value="">선택안함</option>`;
+        let html = `<option value="" ${Common.isEmpty(useraddridx) ? "selected" : ""}>선택안함</option>`;
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
-            html += `<option value="${model.getUseraddridx()}">${model.getUseraddrtitle()} (${model.getUseraddrstr()})</option>`;
+            html += `<option value="${model.getUseraddridx()}" ${useraddridx == model.getUseraddridx() ? "selected" : ""}>${model.getUseraddrtitle()} (${model.getUseraddrstr()})</option>`;
         }
-        $(el).html(html);
+        return html;
     }
 
     /* ========================= */

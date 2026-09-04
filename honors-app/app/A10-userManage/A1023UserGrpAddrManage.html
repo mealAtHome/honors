@@ -46,26 +46,23 @@
 
                     let mUserAddrs = Api.UserAddr.selectByUsernoForUsr(UGAM.Data.userno, GGF.none, GGF.toast);
                     let mGrpMembers = Api.GrpMember.selectByExecutorForAll(GGF.none, GGF.toast);
+                    let mGrpMembersModels = mGrpMembers.getModels();
 
                     let $tbody = $("#UGAM-tbl-grpAddr > tbody");
                     $tbody.html("");
-                    for(let i in mGrpMembers.getModels())
+                    for(let i in mGrpMembersModels)
                     {
-                        let model = mGrpMembers.getModels()[i];
+                        let model = mGrpMembersModels[i];
+                        let optionHtml = mUserAddrs.makeUserAddrOptionHtmlForSelect(model.getUseraddridx());
                         let tr =
                         `
                             <tr grpno="${model.getGrpno()}">
                                 <td>${model.getGrpname()}</td>
-                                <td><select class="UGAM-select-useraddridx common-select-outer" grpno="${model.getGrpno()}"></select></td>
+                                <td><select class="UGAM-select-useraddridx common-select-outer" grpno="${model.getGrpno()}">${optionHtml}</select></td>
                             </tr>
                         `;
                         $tbody.append(tr);
-
-                        let $select = $tbody.find(`select[grpno="${model.getGrpno()}"]`);
-                        mUserAddrs.makeOption($select);
-                        $select.val(model.getUseraddridx());
                     }
-
                     Common.hideProgress();
                 }, ajaxDelayTime);
             },
