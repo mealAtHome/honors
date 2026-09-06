@@ -543,12 +543,19 @@
 
                 /* ----- */
                 /* etc (비고) : 비고내용이 있거나, 내가 기명한 행이면 버튼 표시 */
+                /* 내가 기명한 행 : "비고" 고정 표시 / 그 외 : 비고내용 앞 5글자 + "..." 미리보기 */
                 /* ----- */
                 let etc = model.getEtc();
                 let etcHtml = "-";
-                if(etc != "" || isMyUserno == "y")
+                let etcBtnAttrs = `${pk} orderno-view="${ordernoHtml}" position="${positionHtml}" username="${GGC.Common.escapeHtml(username)}" applyername="${GGC.Common.escapeHtml(model.getApplyername())}" etc="${GGC.Common.escapeHtml(etc)}" editable="${isMyUserno}"`;
+                if(isMyUserno == "y")
                 {
-                    etcHtml = `<button class="common-btn-outer CLSD-btn-etc" ${pk} position="${positionHtml}" etc="${GGC.Common.escapeHtml(etc)}" editable="${isMyUserno}">비고</button>`;
+                    etcHtml = `<button class="common-btn-outer CLSD-btn-etc" ${etcBtnAttrs}>비고</button>`;
+                }
+                else if(etc != "")
+                {
+                    let etcPreview = GGC.Common.escapeHtml(etc.length > 5 ? etc.substring(0, 5) + "..." : etc);
+                    etcHtml = `<span class="CLSD-btn-etc" ${etcBtnAttrs}>${etcPreview}</span>`;
                 }
 
                 let html =
@@ -595,13 +602,15 @@
                 {
                     let pageData =
                     {
-                        grpno     : $(this).attr("grpno"),
-                        clsno     : $(this).attr("clsno"),
-                        lineupidx : $(this).attr("lineupidx"),
-                        orderno   : $(this).attr("orderno"),
-                        position  : $(this).attr("position"),
-                        etc       : $(this).attr("etc"),
-                        editable  : $(this).attr("editable") == "y" ? GGF.Y : GGF.N,
+                        grpno       : $(this).attr("grpno"),
+                        clsno       : $(this).attr("clsno"),
+                        lineupidx   : $(this).attr("lineupidx"),
+                        orderno     : $(this).attr("orderno"),
+                        position    : $(this).attr("position"),
+                        username    : $(this).attr("username"),
+                        applyername : $(this).attr("applyername"),
+                        etc         : $(this).attr("etc"),
+                        editable    : $(this).attr("editable") == "y" ? GGF.Y : GGF.N,
                     };
                     Navigation.moveFrontDialog(Navigation.Page.F00Class002DetailEtcDialog, pageData);
                 });

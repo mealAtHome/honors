@@ -215,32 +215,32 @@ div {
 }
 
 /* 폼 내 */
-.common-div-formTitle {
+.common-div-formChild > .common-div-formTitle {
   text-align: left;
   margin-top: 1em;
   margin-bottom: 2em;
   padding: 0em;
 }
 
-.common-div-formTitle > span:nth-child(1) {
+.common-div-formChild > .common-div-formTitle > span:nth-child(1) {
   display: block;
   font-size: 1.4em;
   font-weight: bold;
   color: #020654;
 }
 
-.common-div-formTitle > span:nth-child(2) {
+.common-div-formChild > .common-div-formTitle > span:nth-child(2) {
   display: block;
 }
 
-.common-div-formField {
+.common-div-formChild > .common-div-formField {
   text-align: left;
   margin: 2em 0em;
   padding: 0em;
   box-sizing: content-box;
 }
 
-.common-div-formField > span:nth-child(1) {
+.common-div-formChild > .common-div-formField > span:nth-child(1) {
   display: block;
   font-size: 1.1em;
   margin-top: 0.3em;
@@ -249,7 +249,67 @@ div {
   line-height: 1.6;
 }
 
-.common-div-formField > span:nth-child(2) {
+.common-div-formChild > .common-div-formField > span:nth-child(2) {
+  display: block;
+  font-size: 0.9em;
+  margin-top: 0em;
+  margin-bottom: 0.3em;
+  font-weight: normal;
+  line-height: 1.6;
+}
+
+/* 일반 폼 */
+.common-div-formChild[form-type=mini] {
+  display: block;
+  width: calc(100% - 2em);
+  height: auto;
+  padding: 0.6em 1em;
+}
+
+.common-div-formChild[form-type=mini] > .common-div-formTitle:nth-child(1) {
+  margin-top: 0.6em;
+}
+
+.common-div-formChild[form-type=mini] > .common-div-formField:nth-child(1) {
+  margin-top: 0.6em;
+}
+
+/* 폼 내 */
+.common-div-formChild[form-type=mini] > .common-div-formTitle {
+  text-align: left;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  padding: 0em;
+}
+
+.common-div-formChild[form-type=mini] > .common-div-formTitle > span:nth-child(1) {
+  display: block;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #020654;
+}
+
+.common-div-formChild[form-type=mini] > .common-div-formTitle > span:nth-child(2) {
+  display: block;
+}
+
+.common-div-formChild[form-type=mini] > .common-div-formField {
+  text-align: left;
+  margin: 0.6em 0em;
+  padding: 0em;
+  box-sizing: content-box;
+}
+
+.common-div-formChild[form-type=mini] > .common-div-formField > span:nth-child(1) {
+  display: block;
+  font-size: 1em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.common-div-formChild[form-type=mini] > .common-div-formField > span:nth-child(2) {
   display: block;
   font-size: 0.9em;
   margin-top: 0em;

@@ -116,7 +116,7 @@ div { display: block; }
     left: 0;
     width: calc(100% - 4em);
     height: auto;
-    @include paddingForm;
+    padding: $padFull $padHuge;
 }
 .common-div-slideformChild[slideform-status=exit] { transform: translateX(-100%); transition: transform 0.3s ease; /* display: none; */ }
 .common-div-slideformChild[slideform-status=open] { transform: translateX(0);     transition: transform 0.3s ease; }
@@ -128,29 +128,60 @@ div { display: block; }
     display: block;
     width: calc(100% - 4em);
     height: auto;
-    @include paddingForm;
+    padding: $padFull $padHuge;
 }
 .common-div-formChild > .common-div-formField:nth-child(1) { margin-top: $marFull; }
 
 /* 폼 내 */
-.common-div-formTitle
+.common-div-formChild > .common-div-formTitle
 {
     text-align: left;
     margin-top: $marFull;
     margin-bottom: $marHuge;
     padding: 0em;
 }
-.common-div-formTitle > span:nth-child(1) { display: block; @include fonts14; font-weight: bold; color: $colorMain; }
-.common-div-formTitle > span:nth-child(2) { display: block; }
-.common-div-formField
+.common-div-formChild > .common-div-formTitle > span:nth-child(1) { display: block; @include fonts14; font-weight: bold; color: $colorMain; }
+.common-div-formChild > .common-div-formTitle > span:nth-child(2) { display: block; }
+.common-div-formChild > .common-div-formField
 {
     text-align: left;
     margin: $marHuge 0em;
     padding: 0em;
     box-sizing: content-box;
 }
-.common-div-formField > span:nth-child(1) { display: block; @include fonts11; margin-top: $marHalf; margin-bottom: $marHalf; font-weight: bold;   @include fonth16; }
-.common-div-formField > span:nth-child(2) { display: block; @include fonts09; margin-top: 0em;      margin-bottom: $marHalf; font-weight: normal; @include fonth16; }
+.common-div-formChild > .common-div-formField > span:nth-child(1) { display: block; @include fonts11; margin-top: $marHalf; margin-bottom: $marHalf; font-weight: bold;   @include fonth16; }
+.common-div-formChild > .common-div-formField > span:nth-child(2) { display: block; @include fonts09; margin-top: 0em;      margin-bottom: $marHalf; font-weight: normal; @include fonth16; }
+
+/* 일반 폼 */
+.common-div-formChild[form-type=mini]
+{
+    display: block;
+    width: calc(100% - 2em);
+    height: auto;
+    padding: $padBase $padFull;
+}
+.common-div-formChild[form-type=mini] > .common-div-formTitle:nth-child(1) { margin-top: $marBase; }
+.common-div-formChild[form-type=mini] > .common-div-formField:nth-child(1) { margin-top: $marBase; }
+
+/* 폼 내 */
+.common-div-formChild[form-type=mini] > .common-div-formTitle
+{
+    text-align: left;
+    margin-top: $marHuge;
+    margin-bottom: $marFull;
+    padding: 0em;
+}
+.common-div-formChild[form-type=mini] > .common-div-formTitle > span:nth-child(1) { display: block; @include fonts11; font-weight: bold; color: $colorMain; }
+.common-div-formChild[form-type=mini] > .common-div-formTitle > span:nth-child(2) { display: block; }
+.common-div-formChild[form-type=mini] > .common-div-formField
+{
+    text-align: left;
+    margin: $marBase 0em;
+    padding: 0em;
+    box-sizing: content-box;
+}
+.common-div-formChild[form-type=mini] > .common-div-formField > span:nth-child(1) { display: block; @include fonts10; margin-top: $marHalf; margin-bottom: $marHalf; font-weight: bold;   @include fonth16; }
+.common-div-formChild[form-type=mini] > .common-div-formField > span:nth-child(2) { display: block; @include fonts09; margin-top: 0em;      margin-bottom: $marHalf; font-weight: normal; @include fonth16; }
 
 /* ============================== */
 /* 입력 폼 전용 */

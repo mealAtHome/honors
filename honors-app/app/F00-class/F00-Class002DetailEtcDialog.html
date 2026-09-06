@@ -8,14 +8,37 @@
         <div><span>비고</span></div>
     </div>
 
-    <div class="common-div-formChild">
+    <div class="common-div-formChild" form-type="mini">
 
         <!-- 포지션 정보 -->
         <div class="common-div-formTitle">
-            <span id="CLSE-span-position"></span>
+            <span>포지션 정보</span>
+        </div>
+        <div class="common-div-formField">
+            <table class="common-tbl-normal CLSE-tbl-position" tbl-type="rowborder" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>타순</th>
+                        <th>포지션</th>
+                        <th>참가자</th>
+                        <th>접수자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="CLSE-span-orderno" style="text-align:center;"></td>
+                        <td id="CLSE-span-position" style="text-align:center;"></td>
+                        <td id="CLSE-span-username" style="text-align:center;"></td>
+                        <td id="CLSE-span-applyername" style="text-align:center;"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <!-- 비고내용 -->
+        <div class="common-div-formTitle">
+            <span>비고내용</span>
+        </div>
         <div class="common-div-formField">
             <textarea id="CLSE-textarea-etc" class="common-textarea-field" rows="6" disabled></textarea>
         </div>
@@ -46,13 +69,18 @@
                 if(Common.isEmpty(CLSE.Data.clsno))     { Common.toast("잘못된 접근입니다."); CLSE.close(true); return; }
                 if(Common.isEmpty(CLSE.Data.lineupidx)) { Common.toast("잘못된 접근입니다."); CLSE.close(true); return; }
                 if(Common.isEmpty(CLSE.Data.orderno))   { Common.toast("잘못된 접근입니다."); CLSE.close(true); return; }
-                if(Common.isEmpty(CLSE.Data.position))  { CLSE.Data.position = "-"; }
-                if(Common.isEmpty(CLSE.Data.etc))       { CLSE.Data.etc = ""; }
-                if(Common.isEmpty(CLSE.Data.editable))  { CLSE.Data.editable = GGF.N; }
+                if(Common.isEmpty(CLSE.Data.position))     { CLSE.Data.position = "-"; }
+                if(Common.isEmpty(CLSE.Data.username))     { CLSE.Data.username = "-"; }
+                if(Common.isEmpty(CLSE.Data.applyername))  { CLSE.Data.applyername = "-"; }
+                if(Common.isEmpty(CLSE.Data.etc))          { CLSE.Data.etc = ""; }
+                if(Common.isEmpty(CLSE.Data.editable))     { CLSE.Data.editable = GGF.N; }
 
                 let isEditable = CLSE.Data.editable == GGF.Y;
 
-                $("#CLSE-span-position").text(CLSE.Data.position);
+                $("#CLSE-span-orderno")    .text(CLSE.Data.orderno);
+                $("#CLSE-span-position")   .text(CLSE.Data.position);
+                $("#CLSE-span-username")   .text(CLSE.Data.username);
+                $("#CLSE-span-applyername").text(CLSE.Data.applyername);
                 $("#CLSE-textarea-etc").val(CLSE.Data.etc);
                 $("#CLSE-textarea-etc").prop("disabled", !isEditable);
                 $("#CLSE-tbl-save").css("display", isEditable ? "" : "none");
