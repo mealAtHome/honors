@@ -14,6 +14,7 @@ Api.Clslineupb =
     updateApplyCancel             (grpno, clsno, lineupidx, orderno,                noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateApplyCancel"            , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno,                                }, noticeOK, noticeFail); },
     updatePrepaidflgToYForFin     (grpno, clsno, lineupidx, orderno,                noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updatePrepaidflgToYForFin"    , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno,                                }, noticeOK, noticeFail); },
     updatePrepaidflgToNForFin     (grpno, clsno, lineupidx, orderno,                noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updatePrepaidflgToNForFin"    , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno,                                }, noticeOK, noticeFail); },
+    updateEtcForUsr               (grpno, clsno, lineupidx, orderno, etc,          noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateEtcForUsr"              , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno, ETC:etc,                        }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main */

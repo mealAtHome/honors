@@ -69,7 +69,7 @@ class MGrpMember
     /* ========================= */
     // getClsstatusCard() { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
 
-    makeGrpMember(detailFlg=false, buttonHtml="")
+    makeGrpMember(buttonHtml="")
     {
         let model = this;
         let mUser = model.getMUser();
@@ -96,7 +96,6 @@ class MGrpMember
         let detailHtml = `<div class="commonEvent-tag-hyperlink common-flexCenterSm common-colorSide common-fonts08" hyperlink="${Navigation.Page.B71GrpMemberDetail}" hyperlink-viewmode="page" ${model.getPk()}><span>상세보기</span><i class="ti ti-chevron-right"></i></div>`;
 
         /* final html */
-        console.log(detailFlg);
         let html =
         `
             <div class="MGrpMembers-make-div-modelTop common-div-card">
@@ -110,8 +109,7 @@ class MGrpMember
                 ${tagsHtml}
                 <div class="common-buttonsForCardTop">
                     <div class="common-flexCenter common-colorCmmt">${iconsHtml}</div>
-                    ${buttonHtml}
-                    ${detailFlg ? detailHtml : ""}
+                    ${buttonHtml == "" ? detailHtml : `<div>${buttonHtml}</div>`}
                 </div>
             </div>
         `;
@@ -189,18 +187,9 @@ class MGrpMembers extends _MCommon
             let buttonHtml = "";
             switch(option)
             {
-                case "makeForChoose":
-                {
-                    buttonHtml += `<button class="common-btn-inner  MGrpMember-make-btn-choose" ${model.getPk()}>선택하기</button>&nbsp;`;
-                    html += model.makeGrpMember(false, buttonHtml);
-                    break;
-                }
-                default:
-                {
-                    html += model.makeGrpMember(true, buttonHtml);
-                    break;
-                }
+                case "makeForChoose": { buttonHtml += `<button class="common-btn-inner  MGrpMember-make-btn-choose" ${model.getPk()}>선택하기</button>&nbsp;`; break; }
             }
+            html += model.makeGrpMember(buttonHtml);
         }
         /* html = this.mergeCushionLR(html); */
         $(el).html(this.mergePagenation(html));

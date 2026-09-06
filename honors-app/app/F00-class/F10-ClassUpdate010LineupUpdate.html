@@ -289,10 +289,13 @@
                         <td col="delt"><button class="common-btn-outer CUTF-btn-delete" btn-type="cancel" orderno="">삭제</button></td>
                         ${CUTF.isClsstatusIng() == false ? `<td col="numb"><select class="common-select-outer CUTF-select-orderno" orderno=""></select></td>` : ""}
                         ${CUTF.isClsstatusIng() == true  ? `<td col="numb"><span class="CUTF-span-orderno"></span></td>` : ""}
-                        <td col="batf"><label class="common-label-switch"><input type="checkbox" class="CUTF-input-battingflg" checked                                  orderno=""/><span></span></label></td>
-                        <td col="pstn"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-position"   value=""                                 orderno=""/></td>
-                        <td col="user"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-user"       value=""                                 orderno="" disabled/></td>
-                        <td col="bill"><input type="number"  class="common-input-text CUTF-input-common CUTF-input-bill"       value="${CUTF.getClsbillapplyprice()}"   orderno=""/></td>
+                        <td col="batf"><label class="common-label-switch"><input type="checkbox" class="CUTF-input-battingflg" checked  orderno=""/><span></span></label></td>
+                        <td col="pstn"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-position"   value="" orderno=""/></td>
+                        <td col="user"><input type="text"    class="common-input-text CUTF-input-common CUTF-input-user"       value="" orderno="" disabled/></td>
+                        <td col="bill">
+                            <input type="number" class="common-input-text CUTF-input-common CUTF-input-bill" value="${CUTF.getClsbillapplyprice()}" orderno=""/>
+                            <button class="common-btn-outer CUTF-btn-billToggle" orderno=""><i class="ti ti-switch-vertical"></i></button>
+                        </td>
                     </tr>
                 `;
                 $(`${CUTF.El.getTbl()} > tbody`).append(html);
@@ -310,6 +313,7 @@
                     let positionEl      = $(this).find('.CUTF-input-position');
                     let userEl          = $(this).find('.CUTF-input-user');
                     let billEl          = $(this).find('.CUTF-input-bill');
+                    let billToggleEl    = $(this).find('.CUTF-btn-billToggle');
 
                     /* if clsstatus is ING, ordernoEl is "CUTF-span-orderno" */
                     if(CUTF.isClsstatusIng())
@@ -332,6 +336,7 @@
                     positionEl.attr("orderno", orderno);
                     userEl.attr("orderno", orderno);
                     billEl.attr("orderno", orderno);
+                    billToggleEl.attr("orderno", orderno);
                 });
                 CUTF.setRowEvent();
             },
@@ -355,6 +360,17 @@
                     else if(orderno < val) /* move down */
                         $(`${CUTF.El.getTr()}[orderno="${orderno}"]`).insertAfter($(`${CUTF.El.getTr()}[orderno="${val}"]`));
                     CUTF.updateRowNum();
+                });
+
+                /* bill toggle */
+                $(".CUTF-btn-billToggle").off("click").on("click", function()
+                {
+                    let orderno = $(this).attr('orderno');
+                    let billEl = $(`${CUTF.El.getTr()}[orderno="${orderno}"]`).find('.CUTF-input-bill');
+                    if(billEl.val() == 0)
+                        billEl.val(CUTF.Temp.mCls.getClsbillapplyprice());
+                    else
+                        billEl.val(0);
                 });
             },
 

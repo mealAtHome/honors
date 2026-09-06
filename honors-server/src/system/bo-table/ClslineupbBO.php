@@ -211,6 +211,7 @@ class ClslineupbBO extends _CommonBO
     const updateApplyRegist = "updateApplyRegist";
     const updateApplyRegistStead = "updateApplyRegistStead";
     const updateApplyCancel = "updateApplyCancel";
+    const updateEtcForUsr = "updateEtcForUsr";
     const updatePrepaidflgToYForFin = "updatePrepaidflgToYForFin";                      /* [fin]  */
     const updatePrepaidflgToNForFin = "updatePrepaidflgToNForFin";                      /* [fin]  */
     const copyFromClsnoWithSubForInside = "copyFromClsnoWithSubForInside";
@@ -440,6 +441,35 @@ class ClslineupbBO extends _CommonBO
                         , userregdt = null
                         , etc = null
                         , prepaidflg = 'n'
+                    where
+                        grpno = '$GRPNO' and
+                        clsno = '$CLSNO' and
+                        lineupidx = $LINEUPIDX and
+                        orderno = $ORDERNO
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateEtcForUsr:
+            {
+                /* 본인이 기명한 행만 비고 수정 가능 */
+                $clslineupb = $this->getByPk($GRPNO, $CLSNO, $LINEUPIDX, $ORDERNO);
+                $userno = Common::getField($clslineupb, self::FIELD__USERNO);
+                if($userno != $EXECUTOR)
+                    throw new GGexception("본인이 기명한 포지션만 비고를 수정할 수 있습니다.");
+
+                /* validation */
+                $ETC = GGsql::realEscapeString(trim($ETC));
+                if(mb_strlen($ETC) > 100)
+                    throw new GGexception("비고는 100자 이내로 입력해주세요.");
+
+                /* update */
+                $query =
+                "
+                    update
+                        clslineupb
+                    set
+                        etc = '$ETC'
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO' and

@@ -1,0 +1,122 @@
+<ons-page id="CLSE">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="CLSE.close(true);"></gg-backbtn></div>
+        <div><span>비고</span></div>
+    </div>
+
+    <div class="common-div-formChild">
+
+        <!-- 포지션 정보 -->
+        <div class="common-div-formTitle">
+            <span id="CLSE-span-position"></span>
+        </div>
+
+        <!-- 비고내용 -->
+        <div class="common-div-formField">
+            <textarea id="CLSE-textarea-etc" class="common-textarea-field" rows="6" disabled></textarea>
+        </div>
+
+        <!-- 저장 (본인이 기명한 포지션일 때만 표시) -->
+        <table id="CLSE-tbl-save" class="common-tbl-slideformFooterBtn" tbl-type="button1" style="display:none;">
+            <tbody>
+                <tr>
+                    <td><button id="CLSE-btn-save" class="common-btn-inner">저장하기</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- formChild -->
+
+    <script>
+        var CLSE =
+        {
+            code : "CLSE",
+            Data : {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(CLSE.Data.grpno))     { Common.toast("잘못된 접근입니다."); CLSE.close(true); return; }
+                if(Common.isEmpty(CLSE.Data.clsno))     { Common.toast("잘못된 접근입니다."); CLSE.close(true); return; }
+                if(Common.isEmpty(CLSE.Data.lineupidx)) { Common.toast("잘못된 접근입니다."); CLSE.close(true); return; }
+                if(Common.isEmpty(CLSE.Data.orderno))   { Common.toast("잘못된 접근입니다."); CLSE.close(true); return; }
+                if(Common.isEmpty(CLSE.Data.position))  { CLSE.Data.position = "-"; }
+                if(Common.isEmpty(CLSE.Data.etc))       { CLSE.Data.etc = ""; }
+                if(Common.isEmpty(CLSE.Data.editable))  { CLSE.Data.editable = GGF.N; }
+
+                let isEditable = CLSE.Data.editable == GGF.Y;
+
+                $("#CLSE-span-position").text(CLSE.Data.position);
+                $("#CLSE-textarea-etc").val(CLSE.Data.etc);
+                $("#CLSE-textarea-etc").prop("disabled", !isEditable);
+                $("#CLSE-tbl-save").css("display", isEditable ? "" : "none");
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 저장 */
+            $("#CLSE-btn-save").click(function()
+            {
+                let grpno = CLSE.Data.grpno;
+                let clsno = CLSE.Data.clsno;
+                let lineupidx = CLSE.Data.lineupidx;
+                let orderno = CLSE.Data.orderno;
+                let etc = $("#CLSE-textarea-etc").val().trim();
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.Clslineupb.updateEtcForUsr(grpno, clsno, lineupidx, orderno, etc, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            CLSE.Data.etc = etc;
+                            Common.toastSuccess("저장되었습니다.");
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CLSE.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CLSE.close(true);
+            }
+
+        }); /* end function */
+
+    </script>
+
+</ons-page>

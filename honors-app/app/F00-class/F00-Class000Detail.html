@@ -540,6 +540,17 @@
                 /* ----- */
                 let isMyUserno = userno   == CLSD.Storage.myUserno   ? "y" : "n";
                 let isMyName   = username == CLSD.Storage.myUsername ? "y" : "n";
+
+                /* ----- */
+                /* etc (비고) : 비고내용이 있거나, 내가 기명한 행이면 버튼 표시 */
+                /* ----- */
+                let etc = model.getEtc();
+                let etcHtml = "-";
+                if(etc != "" || isMyUserno == "y")
+                {
+                    etcHtml = `<button class="common-btn-outer CLSD-btn-etc" ${pk} position="${positionHtml}" etc="${GGC.Common.escapeHtml(etc)}" editable="${isMyUserno}">비고</button>`;
+                }
+
                 let html =
                 `
                     <tr class="common-mineHead" me="${isMyUserno}">
@@ -548,7 +559,7 @@
                         <td><span class="common-mineBody" me="${isMyName}">${applyHtml}</span></td>
                         <td><span class="common-mineBody" me="${isMyName}">${applyerHtml}</span></td>
                         <td><span class="common-mineBody" me="${isMyName}">${prepaidflgHtml}</span></td>
-                        <td col="etc">${model.getEtc()}</td>
+                        <td col="etc">${etcHtml}</td>
                     </tr>
                 `;
                 $(`.CLSD-tbl-clslineupb[lineupidx="${model.getLineupidx()}"] > tbody`).append(html);
@@ -577,6 +588,22 @@
                         bill : bill,
                     };
                     Navigation.moveFrontDialog(Navigation.Page.F00Class001DetailApplyDialog, pageData);
+                });
+
+                /* 비고 */
+                $(".CLSD-btn-etc").off("click").on("click", function()
+                {
+                    let pageData =
+                    {
+                        grpno     : $(this).attr("grpno"),
+                        clsno     : $(this).attr("clsno"),
+                        lineupidx : $(this).attr("lineupidx"),
+                        orderno   : $(this).attr("orderno"),
+                        position  : $(this).attr("position"),
+                        etc       : $(this).attr("etc"),
+                        editable  : $(this).attr("editable") == "y" ? GGF.Y : GGF.N,
+                    };
+                    Navigation.moveFrontDialog(Navigation.Page.F00Class002DetailEtcDialog, pageData);
                 });
 
                 /* 참가취소 : clslineupb */
