@@ -933,6 +933,10 @@
   word-break: break-all;
 }
 
+.common-tr-selected {
+  background: rgba(2, 6, 84, 0.2);
+}
+
 /* --------------- */
 /* image */
 /* --------------- */

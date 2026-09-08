@@ -1,0 +1,271 @@
+<ons-page id="CLSW">
+
+    <!-- --------------- -->
+    <!-- 페이지용 타이틀 -->
+    <!-- --------------- -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="CLSW.close(true);"></gg-backbtn></div>
+        <div><span>포지션 이동</span></div>
+    </div>
+
+    <style>
+        #CLSW-tbl-dstList > tbody > tr > td { text-align: center; }
+        #CLSW-tbl-dstList > tbody > tr.CLSW-tr-dst { cursor: pointer; }
+    </style>
+
+    <div class="common-div-formChild" form-type="mini">
+
+        <!-- 이동할 포지션 정보 (위) -->
+        <div class="common-div-formTitle">
+            <span>이동할 포지션</span>
+        </div>
+        <div class="common-div-formField">
+            <table class="common-tbl-normal" tbl-type="rowborder" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>타순</th>
+                        <th>포지션</th>
+                        <th>참가자</th>
+                        <th>접수자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="CLSW-span-orderno" style="text-align:center;"></td>
+                        <td id="CLSW-span-position" style="text-align:center;"></td>
+                        <td id="CLSW-span-username" style="text-align:center;"></td>
+                        <td id="CLSW-span-applyername" style="text-align:center;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 이동처 선택 (중간) -->
+        <div class="common-div-formTitle">
+            <span>이동처 선택</span>
+        </div>
+        <div class="common-div-formField">
+            <ul id="CLSW-ul-announce" class="common-ul-announce" style="display:none;">
+                <li>비어있는 자리로만 이동할 수 있습니다.</li>
+            </ul>
+            <div id="CLSW-div-teamBtns" class="common-flexCenterSm common-fonts09"></div>
+            <div class="common-div-scrollX" style="margin-top:var(--marHalf);">
+                <table id="CLSW-tbl-dstList" class="common-tbl-normal common-fonts09" tbl-type="rowborder">
+                    <thead>
+                        <tr>
+                            <th>선택</th>
+                            <th>타순</th>
+                            <th>포지션</th>
+                            <th>참가자</th>
+                            <th>접수자</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 이동 (아래) -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="CLSW-btn-swap" class="common-btn-inner">이동</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- formChild -->
+
+    <script>
+        var CLSW =
+        {
+            code : "CLSW",
+            Data : {},
+
+            /* ===================== */
+            /* show */
+            /* ===================== */
+            show()
+            {
+                if(Common.isEmpty(CLSW.Data.grpno))         { Common.toast("잘못된 접근입니다."); CLSW.close(true); return; }
+                if(Common.isEmpty(CLSW.Data.clsno))         { Common.toast("잘못된 접근입니다."); CLSW.close(true); return; }
+                if(Common.isEmpty(CLSW.Data.srcLineupidx))  { Common.toast("잘못된 접근입니다."); CLSW.close(true); return; }
+                if(Common.isEmpty(CLSW.Data.srcOrderno))    { Common.toast("잘못된 접근입니다."); CLSW.close(true); return; }
+                if(Common.isEmpty(CLSW.Data.position))      { CLSW.Data.position = "-"; }
+                if(Common.isEmpty(CLSW.Data.username))      { CLSW.Data.username = "-"; }
+                if(Common.isEmpty(CLSW.Data.applyername))   { CLSW.Data.applyername = "-"; }
+                if(Common.isEmpty(CLSW.Data.allowOccupiedDst)) { CLSW.Data.allowOccupiedDst = GGF.N; }
+                CLSW.Data.dstLineupidx = null;
+                CLSW.Data.dstOrderno = null;
+
+                $("#CLSW-span-orderno")    .text(CLSW.Data.srcOrderno);
+                $("#CLSW-span-position")   .text(CLSW.Data.position);
+                $("#CLSW-span-username")   .text(CLSW.Data.username);
+                $("#CLSW-span-applyername").text(CLSW.Data.applyername);
+                $("#CLSW-ul-announce").css("display", CLSW.Data.allowOccupiedDst == GGF.Y ? "none" : "");
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let grpno = CLSW.Data.grpno;
+                    let clsno = CLSW.Data.clsno;
+
+                    /* team(clslineupa) 목록 */
+                    let mClslineupas = Api.Clslineupa.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                    CLSW.Data.mClslineupas = mClslineupas;
+
+                    /* 전체 포지션(clslineupb) 목록 (팀 선택 시 클라이언트에서 필터링) */
+                    let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                    CLSW.Data.mClslineupbs = mClslineupbs;
+
+                    /* team 버튼 렌더 */
+                    let teamModels = mClslineupas.getModels();
+                    let teamBtnHtml = "";
+                    for(let i in teamModels)
+                    {
+                        let model = teamModels[i];
+                        teamBtnHtml += `<button class="CLSW-btn-team commonEvent-btn-radio common-btn-radio" radio_name="CLSW-btn-team" val="${model.getLineupidx()}" style="padding-left:0.8em; padding-right:0.8em;">${model.getLineupname()}</button>`;
+                    }
+                    $("#CLSW-div-teamBtns").html(teamBtnHtml);
+
+                    $(".CLSW-btn-team").off("click").on("click", function()
+                    {
+                        CLSW.renderDstList($(this).attr("val"));
+                    });
+
+                    /* 최초 팀 선택 : 소스와 같은 팀을 우선 표시 */
+                    let defaultLineupidx = teamModels.some(m => m.getLineupidx() == CLSW.Data.srcLineupidx)
+                        ? CLSW.Data.srcLineupidx
+                        : (teamModels.length > 0 ? teamModels[0].getLineupidx() : null);
+                    if(defaultLineupidx != null)
+                        $(`.CLSW-btn-team[val="${defaultLineupidx}"]`).click();
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* ===================== */
+            /* 이동처 목록 렌더 (선택된 팀의 포지션들, 이동할 포지션 자신은 제외) */
+            /* ===================== */
+            renderDstList(lineupidx)
+            {
+                let models = CLSW.Data.mClslineupbs.getModels().filter(m => m.getLineupidx() == lineupidx);
+                let html = "";
+                for(let i in models)
+                {
+                    let model = models[i];
+                    let isMyPosition = (model.getLineupidx() == CLSW.Data.srcLineupidx && model.getOrderno() == CLSW.Data.srcOrderno);
+                    if(CLSW.Data.allowOccupiedDst != GGF.Y && model.hasApplyer())
+                        continue; /* 일반멤버는 비어있는 자리로만 이동 가능 */
+
+                    let ordernoHtml = model.isBattingflgY() ? model.getOrderno() : "-";
+                    let positionHtml = Common.ifEmpty(model.getPosition(), "-");
+                    let usernameHtml = Common.ifEmpty(model.getUsername(), "-");
+                    let applyernameHtml = Common.ifEmpty(model.getApplyername(), "-");
+
+                    html +=
+                    `
+                        <tr class="CLSW-tr-dst" lineupidx="${model.getLineupidx()}" orderno="${model.getOrderno()}">
+                            <td>
+                                <label class="common-label-radio" ${isMyPosition ? "disabled" : ""}>
+                                    <input type="radio" name="CLSW-radio-dst" class="CLSW-radio-dst"/>
+                                    <span></span>
+                                </label>
+                            </td>
+                            <td>${ordernoHtml}</td>
+                            <td>${positionHtml}</td>
+                            <td>${usernameHtml}</td>
+                            <td>${applyernameHtml}</td>
+                        </tr>
+                    `;
+                }
+                $("#CLSW-tbl-dstList > tbody").html(html);
+                CLSW.Data.dstLineupidx = null;
+                CLSW.Data.dstOrderno = null;
+            },
+
+            /* ========================= */
+            /* close */
+            /* ========================= */
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* ======================== */
+            /* event */
+            /* ======================== */
+
+            /* 이동처 행 선택 */
+            $("#CLSW-tbl-dstList").on("click", ".CLSW-tr-dst", function()
+            {
+                $(".CLSW-tr-dst").removeClass("common-tr-selected");
+                $(this).find(".CLSW-radio-dst").prop("checked", true);
+                $(this).addClass("common-tr-selected");
+
+                CLSW.Data.dstLineupidx = $(this).attr("lineupidx");
+                CLSW.Data.dstOrderno   = $(this).attr("orderno");
+            });
+
+            /* 이동 */
+            $("#CLSW-btn-swap").click(function()
+            {
+                if(Common.isEmpty(CLSW.Data.dstLineupidx) || Common.isEmpty(CLSW.Data.dstOrderno))
+                {
+                    Common.toastError("이동처를 선택해주세요.");
+                    return;
+                }
+
+                let grpno = CLSW.Data.grpno;
+                let clsno = CLSW.Data.clsno;
+                let srcLineupidx = CLSW.Data.srcLineupidx;
+                let srcOrderno = CLSW.Data.srcOrderno;
+                let dstLineupidx = CLSW.Data.dstLineupidx;
+                let dstOrderno = CLSW.Data.dstOrderno;
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = CLSW.Data.allowOccupiedDst == GGF.Y
+                            ? Api.Clslineupb.updateSwapForClsAdmin(grpno, clsno, srcLineupidx, srcOrderno, dstLineupidx, dstOrderno, GGF.none, GGF.toast)
+                            : Api.Clslineupb.updateMoveToEmptyForUsr(grpno, clsno, srcLineupidx, srcOrderno, dstLineupidx, dstOrderno, GGF.none, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.toastSuccess("이동되었습니다.");
+                            Common.hideProgress();
+                            CLSW.close(true);
+                            return;
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("이동하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+
+            /* get data from Config */
+            try
+            {
+                CLSW.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                CLSW.close(true);
+            }
+
+        }); /* end function */
+
+    </script>
+
+</ons-page>

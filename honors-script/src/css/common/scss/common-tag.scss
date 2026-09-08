@@ -185,6 +185,7 @@
 .common-mineHead[me=y]  { @include colorMainBackTrans; }
 .common-mineBody[me=y]  { font-weight: bold; color: $colorMain; }
 .common-breakall        { word-break: break-all; }
+.common-tr-selected     { @include colorMainBackTrans; }
 
 /* --------------- */
 /* image */

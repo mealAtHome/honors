@@ -270,6 +270,9 @@
                         CLSD.isManager = GGstorage.Prj.isManagerOfGrp(grpno);
                         CLSD.mCls = mCls;
 
+                        /* 포지션이동 : 일정담당자(담당자1/담당자2) 여부 (실제 열 표시여부는 clslineupb 조회 후 결정) */
+                        CLSD.isClsAdmin = mCls.isClsAdmin(CLSD.Storage.myUserno);
+
                         /* is manager and end */
                         let isManagerAndEnd = (CLSD.isManager && mCls.isEnd());
 
@@ -372,6 +375,14 @@
                         let mClslineupas = Api.Clslineupa.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
                         let mClslineupaModels = mClslineupas.getModels();
 
+                        /* clslineupb 미리 조회 (이동 열 표시여부 계산에 필요) */
+                        let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
+                        let mClslineupbModels = mClslineupbs.getModels();
+
+                        /* 포지션이동 : 일정담당자이거나, 내가 기명한 포지션이 하나라도 있으면 "이동" 열 표시 (일정종료 시엔 항상 숨김) */
+                        CLSD.hasAnyMyRow = mClslineupbModels.some(m => m.getUserno() == CLSD.Storage.myUserno);
+                        CLSD.showSwapColumn = (mCls.isEnd() == false) && (CLSD.isClsAdmin || CLSD.hasAnyMyRow);
+
                         /* 1개 초과 시 탭 표시 */
                         if(mClslineupaModels.length > 1)
                             $("#CLSD-div-lineupTabBtns").show();
@@ -384,8 +395,6 @@
                         }
 
                         /* clslineupb 행 채우기 */
-                        let mClslineupbs = Api.Clslineupb.selectByClsno(grpno, clsno, GGF.none, GGF.toast);
-                        let mClslineupbModels = mClslineupbs.getModels();
                         for(let i in mClslineupbModels)
                             CLSD.addRowForLineup2(mClslineupbModels[i]);
 
@@ -442,6 +451,7 @@
                             <table class="CLSD-tbl-clslineupb common-tbl-normal common-fonts09" tbl-type="rowborder" lineupidx="${lineupidx}">
                                 <thead>
                                     <tr>
+                                        ${CLSD.showSwapColumn ? "<th>이동</th>" : ""}
                                         <th>타순</th>
                                         <th>포지션</th>
                                         <th>참가자</th>
@@ -558,9 +568,35 @@
                     etcHtml = `<span class="CLSD-btn-etc" ${etcBtnAttrs}>${etcPreview}</span>`;
                 }
 
+                /* ----- */
+                /* 포지션이동 : "이동" 버튼 (일정담당자는 전행, 일반멤버는 본인이 기명한 행) */
+                /* ----- */
+                let swapTdHtml = "";
+                if(CLSD.showSwapColumn)
+                {
+                    /* 일정담당자는 모든 행에서, 일반멤버는 본인이 기명한 행에서만 버튼 표시 (열 자체는 유지, 자리만 비움) */
+                    let showSwapBtn = CLSD.isClsAdmin || isMyUserno == "y";
+                    swapTdHtml = showSwapBtn
+                        ?
+                        `
+                            <td>
+                                <button
+                                    class="common-btn-outer CLSD-btn-swap"
+                                    ${pk}
+                                    position="${positionHtml}"
+                                    username="${GGC.Common.escapeHtml(username)}"
+                                    applyername="${GGC.Common.escapeHtml(model.getApplyername())}"
+                                    allow-occupied-dst="${CLSD.isClsAdmin ? GGF.Y : GGF.N}"
+                                >이동</button>
+                            </td>
+                        `
+                        : `<td></td>`;
+                }
+
                 let html =
                 `
                     <tr class="common-mineHead" me="${isMyUserno}">
+                        ${swapTdHtml}
                         <td>${ordernoHtml}</td>
                         <td>${positionHtml}</td>
                         <td><span class="common-mineBody" me="${isMyName}">${applyHtml}</span></td>
@@ -613,6 +649,23 @@
                         editable    : $(this).attr("editable") == "y" ? GGF.Y : GGF.N,
                     };
                     Navigation.moveFrontDialog(Navigation.Page.F00Class002DetailEtcDialog, pageData);
+                });
+
+                /* 포지션이동 */
+                $(".CLSD-btn-swap").off("click").on("click", function()
+                {
+                    let pageData =
+                    {
+                        grpno            : $(this).attr("grpno"),
+                        clsno            : $(this).attr("clsno"),
+                        srcLineupidx     : $(this).attr("lineupidx"),
+                        srcOrderno       : $(this).attr("orderno"),
+                        position         : $(this).attr("position"),
+                        username         : $(this).attr("username"),
+                        applyername      : $(this).attr("applyername"),
+                        allowOccupiedDst : $(this).attr("allow-occupied-dst") == "y" ? GGF.Y : GGF.N,
+                    };
+                    Navigation.moveFrontDialog(Navigation.Page.F00Class003DetailSwapDialog, pageData);
                 });
 
                 /* 참가취소 : clslineupb */

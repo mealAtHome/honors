@@ -92,6 +92,10 @@
     $options["NICK"]                                                = get("NICK");
     $options["OPTION"]                                              = get("OPTION"); /* abstract */
     $options["ORDERNO"]                                             = get("ORDERNO");
+    $options["SRCLINEUPIDX"]                                        = get("SRCLINEUPIDX");
+    $options["SRCORDERNO"]                                          = get("SRCORDERNO");
+    $options["DSTLINEUPIDX"]                                        = get("DSTLINEUPIDX");
+    $options["DSTORDERNO"]                                          = get("DSTORDERNO");
     $options["PHONE"]                                               = get("PHONE");
     $options["PLATFORM"]                                            = get("PLATFORM");
     $options["POINT"]                                               = get("POINT");

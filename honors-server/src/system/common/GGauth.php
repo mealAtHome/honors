@@ -67,6 +67,24 @@ class GGauth
             throw new GGexception("모임 소유자만 접근가능합니다.");
         return false;
     }
+    public function isClsAdmin($GRPNO, $CLSNO, $USERNO, $errorflg=false)
+    {
+        /* vars */
+        $cls = $this->getCls($GRPNO, $CLSNO);
+        $clsusernoadm = Common::getField($cls, ClsBO::FIELD__CLSUSERNOADM);
+        $clsusernosub = Common::getField($cls, ClsBO::FIELD__CLSUSERNOSUB);
+        $adminflg = Common::getField($this->getUser($USERNO), UserBO::FIELD__ADMINFLG);
+
+        /* check */
+        if($USERNO == $clsusernoadm) return true;
+        if($USERNO == $clsusernosub) return true;
+        if($adminflg == GGF::Y) return true;
+
+        /* return */
+        if($errorflg)
+            throw new GGexception("일정담당자만 접근가능합니다.");
+        return false;
+    }
     public function hasGrpmfinauth($GRPNO, $USERNO, $errorflg=false)
     {
         /* bo */
@@ -97,6 +115,7 @@ class GGauth
     public function isClsEnd                    ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__END     , ($errorflg == false ? null : "일정종료 상태에서만 가능합니다.")); }
     public function isClsCancel                 ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__CANCEL  , ($errorflg == false ? null : "아직 취소되지 않은 일정입니다.")); }
     public function checkClsNotCanceled         ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkNotIqual ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__CANCEL  , ($errorflg == false ? null : "이미 취소된 일정입니다.")); }
+    public function checkClsNotEnd              ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkNotIqual ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSTATUS              , ClsBO::CLSSTATUS__END     , ($errorflg == false ? null : "일정종료 상태에서는 사용할 수 없습니다.")); }
     public function isClssetleflgEdit           ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__CLSSETTLEFLG           , ClsBO::CLSSETTLEFLG__EDIT , ($errorflg == false ? null : "정산 대기 상태에서만 가능합니다.")); }
     public function isGrpfinancereflectflgY     ($GRPNO, $CLSNO, $errorflg=false) { return $this->checkIqual    ($this->getCls($GRPNO, $CLSNO), ClsBO::FIELD__GRPFINANCEREFLECTFLG   , GGF::Y                    , ($errorflg == false ? null : "모임 재정 반영이 설정되어 있지 않습니다.")); }
 

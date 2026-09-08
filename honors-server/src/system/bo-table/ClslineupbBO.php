@@ -200,6 +200,7 @@ class ClslineupbBO extends _CommonBO
     public function deleteByLineupidxWithSubForInside($GRPNO, $CLSNO, $LINEUPIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function copyFromClsnoWithSubForInside($GRPNO, $CLSNO, $CLSNONEW) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function swapSlotsForInside($GRPNO, $CLSNO, $SRCLINEUPIDX, $SRCORDERNO, $DSTLINEUPIDX, $DSTORDERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
@@ -212,6 +213,9 @@ class ClslineupbBO extends _CommonBO
     const updateApplyRegistStead = "updateApplyRegistStead";
     const updateApplyCancel = "updateApplyCancel";
     const updateEtcForUsr = "updateEtcForUsr";
+    const updateSwapForClsAdmin = "updateSwapForClsAdmin";
+    const updateMoveToEmptyForUsr = "updateMoveToEmptyForUsr";
+    const swapSlotsForInside = "swapSlotsForInside";
     const updatePrepaidflgToYForFin = "updatePrepaidflgToYForFin";                      /* [fin]  */
     const updatePrepaidflgToNForFin = "updatePrepaidflgToNForFin";                      /* [fin]  */
     const copyFromClsnoWithSubForInside = "copyFromClsnoWithSubForInside";
@@ -477,6 +481,102 @@ class ClslineupbBO extends _CommonBO
                         orderno = $ORDERNO
                 ";
                 GGsql::exeQuery($query);
+                break;
+            }
+            case self::swapSlotsForInside:
+            {
+                /* 인증 없음 : 호출하는 쪽에서 이미 권한을 확인했음을 전제로 함 */
+
+                /* validation */
+                if($SRCLINEUPIDX == $DSTLINEUPIDX && $SRCORDERNO == $DSTORDERNO)
+                    throw new GGexception("동일한 포지션으로는 이동할 수 없습니다.");
+
+                /* 양쪽 행 조회 */
+                $src = $this->getByPk($GRPNO, $CLSNO, $SRCLINEUPIDX, $SRCORDERNO);
+                $dst = $this->getByPk($GRPNO, $CLSNO, $DSTLINEUPIDX, $DSTORDERNO);
+                if($src == null || $dst == null)
+                    throw new GGexception("존재하지 않는 포지션입니다.");
+
+                /* 기명자 정보 추출 (position/bill 등 슬롯 고유값은 그대로 두고, 기명자 정보만 이동) */
+                $srcUserno    = Common::getField($src, self::FIELD__USERNO);
+                $srcUsername  = Common::getField($src, self::FIELD__USERNAME);
+                $srcUserregdt = Common::getField($src, self::FIELD__USERREGDT);
+                $srcEtc       = Common::getField($src, self::FIELD__ETC);
+                $srcPrepaid   = Common::getField($src, self::FIELD__PREPAIDFLG);
+
+                $dstUserno    = Common::getField($dst, self::FIELD__USERNO);
+                $dstUsername  = Common::getField($dst, self::FIELD__USERNAME);
+                $dstUserregdt = Common::getField($dst, self::FIELD__USERREGDT);
+                $dstEtc       = Common::getField($dst, self::FIELD__ETC);
+                $dstPrepaid   = Common::getField($dst, self::FIELD__PREPAIDFLG);
+
+                /* src <- dst */
+                $query =
+                "
+                    update
+                        clslineupb
+                    set
+                          userno    = " . (Common::isEmpty($dstUserno)    ? "null" : "'$dstUserno'") . "
+                        , username  = " . (Common::isEmpty($dstUsername)  ? "null" : "'" . GGsql::realEscapeString($dstUsername) . "'") . "
+                        , userregdt = " . (Common::isEmpty($dstUserregdt) ? "null" : "'$dstUserregdt'") . "
+                        , etc       = " . (Common::isEmpty($dstEtc)       ? "null" : "'" . GGsql::realEscapeString($dstEtc) . "'") . "
+                        , prepaidflg = '" . (Common::isEmpty($dstPrepaid) ? GGF::N : $dstPrepaid) . "'
+                    where
+                        grpno = '$GRPNO' and
+                        clsno = '$CLSNO' and
+                        lineupidx = $SRCLINEUPIDX and
+                        orderno = $SRCORDERNO
+                ";
+                GGsql::exeQuery($query);
+
+                /* dst <- src */
+                $query =
+                "
+                    update
+                        clslineupb
+                    set
+                          userno    = " . (Common::isEmpty($srcUserno)    ? "null" : "'$srcUserno'") . "
+                        , username  = " . (Common::isEmpty($srcUsername)  ? "null" : "'" . GGsql::realEscapeString($srcUsername) . "'") . "
+                        , userregdt = " . (Common::isEmpty($srcUserregdt) ? "null" : "'$srcUserregdt'") . "
+                        , etc       = " . (Common::isEmpty($srcEtc)       ? "null" : "'" . GGsql::realEscapeString($srcEtc) . "'") . "
+                        , prepaidflg = '" . (Common::isEmpty($srcPrepaid) ? GGF::N : $srcPrepaid) . "'
+                    where
+                        grpno = '$GRPNO' and
+                        clsno = '$CLSNO' and
+                        lineupidx = $DSTLINEUPIDX and
+                        orderno = $DSTORDERNO
+                ";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateSwapForClsAdmin:
+            {
+                /* 일정담당자만 사용가능, 일정종료 상태에서는 불가 */
+                $isClsAdmin = $ggAuth->isClsAdmin($GRPNO, $CLSNO, $EXECUTOR, true);
+
+                /* 도착지에 이미 기명자가 있어도 상관없이 통째로 이동 */
+                $this->swapSlotsForInside($GRPNO, $CLSNO, $SRCLINEUPIDX, $SRCORDERNO, $DSTLINEUPIDX, $DSTORDERNO);
+                break;
+            }
+            case self::updateMoveToEmptyForUsr:
+            {
+                /* 일정종료 상태에서는 불가 */
+                $ggAuth->checkClsNotEnd($GRPNO, $CLSNO, true);
+                $ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
+
+                /* 본인이 기명한 포지션만 이동 가능 */
+                $src = $this->getByPk($GRPNO, $CLSNO, $SRCLINEUPIDX, $SRCORDERNO);
+                if($src == null || Common::getField($src, self::FIELD__USERNO) != $EXECUTOR)
+                    throw new GGexception("본인이 기명한 포지션만 이동할 수 있습니다.");
+
+                /* 도착지가 비어있는 경우에만 이동 가능 */
+                $dst = $this->getByPk($GRPNO, $CLSNO, $DSTLINEUPIDX, $DSTORDERNO);
+                if($dst == null)
+                    throw new GGexception("존재하지 않는 포지션입니다.");
+                if(Common::isNotEmpty(Common::getField($dst, self::FIELD__USERNO)))
+                    throw new GGexception("이미 기명된 자리로는 이동할 수 없습니다.");
+
+                $this->swapSlotsForInside($GRPNO, $CLSNO, $SRCLINEUPIDX, $SRCORDERNO, $DSTLINEUPIDX, $DSTORDERNO);
                 break;
             }
             case self::updatePrepaidflgToYForFin:

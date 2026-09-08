@@ -116,6 +116,7 @@ Navigation.Page =
     /* F00-class */         F00Class000Detail : "CLSD",
     /* F00-class */         F00Class001DetailApplyDialog : "CLSA",
     /* F00-class */         F00Class002DetailEtcDialog : "CLSE",
+    /* F00-class */         F00Class003DetailSwapDialog : "CLSW",
     /* F00-class */         F00Class080TextCls : "CLDC",
     /* F00-class */         F00Class081TextApply : "CLDA",
     /* F00-class */         F00Class082TextSettle : "CLDS",
@@ -192,6 +193,7 @@ Navigation.getURL = function(str)
         /* F00-class */         case Navigation.Page.F00Class000Detail                             : url = `${host}/app/F00-class/F00-Class000Detail.html?${scriptVersion}`; break;
         /* F00-class */         case Navigation.Page.F00Class001DetailApplyDialog                  : url = `${host}/app/F00-class/F00-Class001DetailApplyDialog.html?${scriptVersion}`; break;
         /* F00-class */         case Navigation.Page.F00Class002DetailEtcDialog                    : url = `${host}/app/F00-class/F00-Class002DetailEtcDialog.html?${scriptVersion}`; break;
+        /* F00-class */         case Navigation.Page.F00Class003DetailSwapDialog                   : url = `${host}/app/F00-class/F00-Class003DetailSwapDialog.html?${scriptVersion}`; break;
         /* F00-class */         case Navigation.Page.F00Class080TextCls                            : url = `${host}/app/F00-class/F00-Class080TextCls.html?${scriptVersion}`; break;
         /* F00-class */         case Navigation.Page.F00Class081TextApply                          : url = `${host}/app/F00-class/F00-Class081TextApply.html?${scriptVersion}`; break;
         /* F00-class */         case Navigation.Page.F00Class082TextSettle                         : url = `${host}/app/F00-class/F00-Class082TextSettle.html?${scriptVersion}`; break;
@@ -267,6 +269,7 @@ Navigation.getData = function(code)
         /* F00-class */         case Navigation.Page.F00Class000Detail : return data = CLSD.Data;
         /* F00-class */         case Navigation.Page.F00Class001DetailApplyDialog : return data = CLSA.Data;
         /* F00-class */         case Navigation.Page.F00Class002DetailEtcDialog : return data = CLSE.Data;
+        /* F00-class */         case Navigation.Page.F00Class003DetailSwapDialog : return data = CLSW.Data;
         /* F00-class */         case Navigation.Page.F00Class080TextCls : return data = CLDC.Data;
         /* F00-class */         case Navigation.Page.F00Class081TextApply : return data = CLDA.Data;
         /* F00-class */         case Navigation.Page.F00Class082TextSettle : return data = CLDS.Data;
@@ -375,6 +378,7 @@ Navigation.executeShow = function()
         /* F00-class */         case Navigation.Page.F00Class000Detail : CLSD.show(); break;
         /* F00-class */         case Navigation.Page.F00Class001DetailApplyDialog : CLSA.show(); break;
         /* F00-class */         case Navigation.Page.F00Class002DetailEtcDialog : CLSE.show(); break;
+        /* F00-class */         case Navigation.Page.F00Class003DetailSwapDialog : CLSW.show(); break;
         /* F00-class */         case Navigation.Page.F00Class080TextCls : CLDC.show(); break;
         /* F00-class */         case Navigation.Page.F00Class081TextApply : CLDA.show(); break;
         /* F00-class */         case Navigation.Page.F00Class082TextSettle : CLDS.show(); break;
@@ -463,6 +467,7 @@ Navigation.executeMoveBack = function()
         /* F00-class */         case Navigation.Page.F00Class000Detail : CLSD.close(true); break;
         /* F00-class */         case Navigation.Page.F00Class001DetailApplyDialog : CLSA.close(true); break;
         /* F00-class */         case Navigation.Page.F00Class002DetailEtcDialog : CLSE.close(true); break;
+        /* F00-class */         case Navigation.Page.F00Class003DetailSwapDialog : CLSW.close(true); break;
         /* F00-class */         case Navigation.Page.F00Class080TextCls : CLDC.close(true); break;
         /* F00-class */         case Navigation.Page.F00Class081TextApply : CLDA.close(true); break;
         /* F00-class */         case Navigation.Page.F00Class082TextSettle : CLDS.close(true); break;

@@ -24,6 +24,8 @@ class MCls
         /* data */      this.clsusernoregname       = GGC.Common.char(dat.clsusernoregname);
         /* data */      this.clsusernoadmname       = GGC.Common.char(dat.clsusernoadmname);
         /* data */      this.clsusernosubname       = GGC.Common.char(dat.clsusernosubname);
+        /* data */      this.clsusernoadm           = GGC.Common.char(dat.clsusernoadm);
+        /* data */      this.clsusernosub           = GGC.Common.char(dat.clsusernosub);
         /* data */      this.clsbillsales           = GGC.Common.int(dat.clsbillsales);
         /* data */      this.clsbillpurchase        = GGC.Common.int(dat.clsbillpurchase);
         /* data */      this.clsbillfinal           = GGC.Common.int(dat.clsbillfinal);
@@ -58,6 +60,8 @@ class MCls
     /* data */      getClsusernoregname() { return this.clsusernoregname; }
     /* data */      getClsusernoadmname() { return this.clsusernoadmname; }
     /* data */      getClsusernosubname() { return this.clsusernosubname; }
+    /* data */      getClsusernoadm() { return this.clsusernoadm; }
+    /* data */      getClsusernosub() { return this.clsusernosub; }
     /* data */      getClsbillsales() { return this.clsbillsales; }
     /* data */      getClsbillpurchase() { return this.clsbillpurchase; }
     /* data */      getClsbillfinal() { return this.clsbillfinal; }
@@ -93,6 +97,9 @@ class MCls
     isClsstatusIng()            { return this.getClsstatus()    === GGF.Cls.Clsstatus.ING; }
     isClsstatusEnd()            { return this.getClsstatus()    === GGF.Cls.Clsstatus.END; }
     isClssettleflgEdit()        { return this.getClssettleflg() === GGF.Cls.Clssettleflg.EDIT; }
+
+    /* custom : 일정담당자(담당자1/담당자2) 여부 */
+    isClsAdmin(myUserno)        { return myUserno == this.getClsusernoadm() || myUserno == this.getClsusernosub(); }
     isWithinClsapplyPeriod()    { return GGdate.inWithinPeriod(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
 
     /* ========================= */

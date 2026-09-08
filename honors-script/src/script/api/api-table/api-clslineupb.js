@@ -15,6 +15,8 @@ Api.Clslineupb =
     updatePrepaidflgToYForFin     (grpno, clsno, lineupidx, orderno,                noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updatePrepaidflgToYForFin"    , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno,                                }, noticeOK, noticeFail); },
     updatePrepaidflgToNForFin     (grpno, clsno, lineupidx, orderno,                noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updatePrepaidflgToNForFin"    , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno,                                }, noticeOK, noticeFail); },
     updateEtcForUsr               (grpno, clsno, lineupidx, orderno, etc,          noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateEtcForUsr"              , GRPNO:grpno, CLSNO:clsno, LINEUPIDX:lineupidx, ORDERNO:orderno, ETC:etc,                        }, noticeOK, noticeFail); },
+    updateSwapForClsAdmin         (grpno, clsno, srcLineupidx, srcOrderno, dstLineupidx, dstOrderno, noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateSwapForClsAdmin"        , GRPNO:grpno, CLSNO:clsno, SRCLINEUPIDX:srcLineupidx, SRCORDERNO:srcOrderno, DSTLINEUPIDX:dstLineupidx, DSTORDERNO:dstOrderno, }, noticeOK, noticeFail); },
+    updateMoveToEmptyForUsr       (grpno, clsno, srcLineupidx, srcOrderno, dstLineupidx, dstOrderno, noticeOK, noticeFail) { return Api.Clslineupb.update({OPTION:"updateMoveToEmptyForUsr"      , GRPNO:grpno, CLSNO:clsno, SRCLINEUPIDX:srcLineupidx, SRCORDERNO:srcOrderno, DSTLINEUPIDX:dstLineupidx, DSTORDERNO:dstOrderno, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main */
