@@ -99,6 +99,40 @@
                     $("#index-div-imageViewer").hide();
                 });
 
+                /* ------------ */
+                /* 개발용 페이지경로 표시 : 0.5초 이상 누르고 있으면, 다음 페이지 이동 전까지 숨김 */
+                /* ------------ */
+                if(LOCALMODE)
+                {
+                    let pageUrlPressTimer = null;
+                    let pageUrlLongPressed = false;
+
+                    $("#index-div-pageUrlForDevelop").on("mousedown touchstart", function()
+                    {
+                        pageUrlLongPressed = false;
+                        pageUrlPressTimer = setTimeout(function()
+                        {
+                            pageUrlLongPressed = true;
+                            $("#index-div-pageUrlForDevelop").hide();
+                        }, 500);
+                    });
+
+                    $("#index-div-pageUrlForDevelop").on("mouseup mouseleave touchend touchcancel", function()
+                    {
+                        clearTimeout(pageUrlPressTimer);
+                    });
+
+                    /* 롱프레스 직후 발생하는 click은 commonEvent-copy(복사) 동작으로 이어지지 않도록 차단 */
+                    $("#index-div-pageUrlForDevelop").on("click", function(e)
+                    {
+                        if(pageUrlLongPressed)
+                        {
+                            e.stopImmediatePropagation();
+                            pageUrlLongPressed = false;
+                        }
+                    });
+                }
+
                 /* ==================== */
                 /* start application */
                 /* ==================== */

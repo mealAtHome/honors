@@ -266,7 +266,7 @@ var Navigation =
         if(LOCALMODE)
         {
             let movePageFile = movePageUrl.split('/').pop().split('?')[0];
-            $("#index-div-pageUrlForDevelop").html(movePageFile);
+            $("#index-div-pageUrlForDevelop").html(movePageFile).show();
         }
     },
 
@@ -382,7 +382,7 @@ var Navigation =
         if(LOCALMODE)
         {
             let movePageFile = movePageUrl.split('/').pop().split('?')[0];
-            $("#index-div-pageUrlForDevelop").html(movePageFile);
+            $("#index-div-pageUrlForDevelop").html(movePageFile).show();
         }
     },
 }
