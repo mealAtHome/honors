@@ -237,6 +237,8 @@ var Navigation =
         /* 실제적인 페이지 이동 */
         /* 페이지 이동에 대한 도큐먼트 : https://docs.google.com/spreadsheets/d/1aWIXsFjJcQ5Jqz1M6YfEBXO1itWStmLfkLnK6FO0IYg/edit#gid=2037633440 */
         /* --------------- */
+        let movePageUrl = Navigation.getURL(movePage);
+        let movePageFile = movePageUrl.split('/').pop();
         switch(viewMode)
         {
             case "page":
@@ -245,7 +247,7 @@ var Navigation =
                 if(lastViewMode == "dialog")
                     GGdialog.hide();
 
-                $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
+                $('#index-dom')[0].pushPage(movePageUrl, {"animation": "slide"}).then(function()
                 {
                     $("#index-dom > ons-page[load=y]").remove();
                     $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
@@ -254,11 +256,18 @@ var Navigation =
             }
             case "dialog":
             {
-                GGdialog.show(Navigation.getURL(movePage));
+                GGdialog.show(movePageUrl);
                 break;
             }
         } /* end case (viewMode) */
         console.log(pageStack);
+
+        /* 개발 모드일 경우, 현재 이동할 페이지의 파일명을 표시 */
+        if(LOCALMODE)
+        {
+            let movePageFile = movePageUrl.split('/').pop().split('?')[0];
+            $("#index-div-pageUrlForDevelop").html(movePageFile);
+        }
     },
 
     /* ================== */
@@ -319,6 +328,7 @@ var Navigation =
         /* 실제적인 페이지 이동 */
         /* 현재 페이지의 viewMode에 따라, 뒤로가기의 액션은 달라진다. */
         /* ---------- */
+        let movePageUrl = Navigation.getURL(movePage);
         switch(lastPageViewMode)
         {
             case "page":
@@ -328,7 +338,7 @@ var Navigation =
                     /* 이미 페이지가 엘리먼트로 존재하면, bringPageTop 함수를 사용 */
                     if($("#"+movePage).length > 0)
                     {
-                        $('#index-dom')[0].bringPageTop(Navigation.getURL(movePage), {"animation": "lift"}).then(function()
+                        $('#index-dom')[0].bringPageTop(movePageUrl, {"animation": "lift"}).then(function()
                         {
                             $("#index-dom > ons-page[id!="+movePage+"]").remove();
                             $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
@@ -337,7 +347,7 @@ var Navigation =
                     }
                     else
                     {
-                        $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "lift"}).then(function()
+                        $('#index-dom')[0].pushPage(movePageUrl, {"animation": "lift"}).then(function()
                         {
                             $("#index-dom > ons-page[id!="+movePage+"]").remove();
                             $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
@@ -346,7 +356,7 @@ var Navigation =
                 }
                 else if(viewMode == "dialog")
                 {
-                    GGdialog.show(Navigation.getURL(movePage));
+                    GGdialog.show(movePageUrl);
                 }
                 break;
             } /* 뒤로가기를 하기 전, 현재 페이지의 viewMode이 "page" 인경우. */
@@ -361,11 +371,18 @@ var Navigation =
                 }
                 else if(viewMode == "dialog")
                 {
-                    GGdialog.moveBack(Navigation.getURL(movePage));
+                    GGdialog.moveBack(movePageUrl);
                 }
                 break;
             } /* 뒤로가기를 하기 전, 현재 페이지의 viewMode이 "dialog" 인경우. */
         } /* 현재 페이지의 viewMode에 따라, 뒤로가기의 액션은 달라진다. */
         console.log(pageStack);
+
+        /* 개발 모드일 경우, 현재 이동할 페이지의 파일명을 표시 */
+        if(LOCALMODE)
+        {
+            let movePageFile = movePageUrl.split('/').pop().split('?')[0];
+            $("#index-div-pageUrlForDevelop").html(movePageFile);
+        }
     },
 }

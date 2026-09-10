@@ -283,3 +283,13 @@
     align-items: center;
 }
 
+.common-pageUrlForDevelop
+{
+    position: fixed;
+    top: 0.2em;
+    right: 0.4em;
+    width: auto;
+    z-index: 1000;
+    color: var(--colorCmmt);
+    font-size:0.8em;
+}

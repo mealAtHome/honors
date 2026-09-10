@@ -30,6 +30,7 @@ var CommonEvent =
         $('body').on('click',  '.commonEvent-tag-phoneCall',                   $.proxy(CommonEvent.phoneCall, this));              /* 전화 걸기 */
         $('body').on('click',  '.common-tab-top > .common-tab-item',           $.proxy(CommonEvent.tab2, this));                   /* 탭 */
         $('body').on('click',  '.common-tabbar-top > .common-tabbar-item',     $.proxy(CommonEvent.tabbar, this));                   /* 탭 */
+        $('body').on('click',  '.commonEvent-copy',                            $.proxy(CommonEvent.copy, this));                   /* 탭 */
 
         /* viberator, sound */
         // $('body').on('click', 'button', $.proxy(touch.btn, this));
@@ -1058,6 +1059,30 @@ var CommonEvent =
             Common.confirm2("전화로 연결하시겠습니까?", function()
             {
                 window.open(telUrl, '_system');
+            });
+        }
+    },
+
+    copy(e)
+    {
+        e.stopPropagation();
+
+        /* class name */
+        let className = "commonEvent-copy";
+
+        /* 클래스 선택 */
+        let target = $(e.target);
+        if(!target.hasClass(className))
+            target = target.parents("."+className);
+
+        /* copy text */
+        let text = target.html().trim();
+        if(text != undefined)
+        {
+            navigator.clipboard.writeText(text).then(function() {
+                Common.toastInfo("복사되었습니다.");
+            }, function() {
+                Common.toastInfo("복사에 실패했습니다.");
             });
         }
     }
