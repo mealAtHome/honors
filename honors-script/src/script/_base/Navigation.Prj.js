@@ -488,6 +488,22 @@ Navigation.executeMoveBack = function()
     }
 };
 
+Navigation.getPageType = function(code)
+{
+    let type = "normal";
+
+    /* 페이지에 대한 show 실행 */
+    switch(code)
+    {
+        /* A00-user */          case Navigation.Page.A11UserMainHome : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A12UserMainGrp : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A13UserMainCls : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A14UserMainSettle : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A15UserMainManage : type = "userhome"; break;
+    }
+    return type;
+};
+
 /* ================== */
 /* goto home */
 /* ================== */

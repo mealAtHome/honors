@@ -21,6 +21,10 @@ Api.Cls =
     selectForMngrByClssettleflgN        (grpno,             noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForMngrByClssettleflgN"    , GRPNO: grpno, }, noticeOK, noticeFail); },
     selectForMngrByClsstatusEnd         (grpno,             noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForMngrByClsstatusEnd"     , GRPNO: grpno, }, noticeOK, noticeFail); },
     selectForMngrByClsstatusCancel      (grpno,             noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForMngrByClsstatusCancel"  , GRPNO: grpno, }, noticeOK, noticeFail); },
+    selectForAllByClsstatusIng          (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusIng"       , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
+    selectForAllByClssettleflgN         (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClssettleflgN"      , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
+    selectForAllByClsstatusEnd          (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusEnd"       , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
+    selectForAllByClsstatusCancel       (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusCancel"    , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* insert */

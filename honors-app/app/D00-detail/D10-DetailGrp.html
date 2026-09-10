@@ -34,13 +34,14 @@
     </div>
 
     <!-- 일정 -->
-    <div class="DGRP-div-tab common-div-cushion" tab="cls" style="display:none;">
-        <div class="common-div-cushionUD">
-            <ul class="common-ul-announce">
-                <li>최근 1년간의 일정이 표시됩니다.</li>
-            </ul>
+    <div class="DGRP-div-tab" tab="cls" style="display:none;">
+        <div class="common-undertab-top common-fonts09">
+            <div class="DGRP-td-clsSubtype common-undertab-item" val="ing"    tab="tab">진행중</div>
+            <div class="DGRP-td-clsSubtype common-undertab-item" val="settle" tab=""   >정산중</div>
+            <div class="DGRP-td-clsSubtype common-undertab-item" val="end"    tab=""   >완료</div>
+            <div class="DGRP-td-clsSubtype common-undertab-item" val="cancel" tab=""   >취소</div>
         </div>
-        <div id="DGRP-div-clsList"></div>
+        <div id="DGRP-div-clsList" class="common-div-cushion"></div>
     </div>
 
     <!-- 멤버 -->
@@ -76,6 +77,7 @@
                 if(DGRP.Data.searchkey  == undefined) { DGRP.Data.searchkey = ""; } /* 기본값 */
                 if(DGRP.Data.pagenoGrpm == undefined) { DGRP.Data.pagenoGrpm = 1; } /* 기본값 */
                 if(DGRP.Data.pagenoCls  == undefined) { DGRP.Data.pagenoCls  = 1; } /* 기본값 */
+                if(DGRP.Data.clsSubtype == undefined) { DGRP.Data.clsSubtype = "ing"; } /* 기본값 */
 
                 /* set searchkey */
                 $("#DGRP-input-searchkey").val(DGRP.Data.searchkey);
@@ -121,9 +123,20 @@
                             }
                             case "cls":
                             {
-                                /* 일정검색 */
+                                /* 서브탭 활성화 표시 */
+                                $(".DGRP-td-clsSubtype").attr("tab", "");
+                                $(`.DGRP-td-clsSubtype[val='${DGRP.Data.clsSubtype}']`).attr("tab", "tab");
+
+                                /* 일정검색 (서브탭 구분별) */
                                 let pagenumCls = DGRP.Data.pagenoCls;
-                                let mClss = Api.Cls.selectFor1YearByGrpnoForAll(grpno, pagenumCls, GGF.none, GGF.toast);
+                                let mClss = null;
+                                switch(DGRP.Data.clsSubtype)
+                                {
+                                    case "ing"    : mClss = Api.Cls.selectForAllByClsstatusIng(grpno, pagenumCls, GGF.none, GGF.toast); break;
+                                    case "settle" : mClss = Api.Cls.selectForAllByClssettleflgN(grpno, pagenumCls, GGF.none, GGF.toast); break;
+                                    case "end"    : mClss = Api.Cls.selectForAllByClsstatusEnd(grpno, pagenumCls, GGF.none, GGF.toast); break;
+                                    case "cancel" : mClss = Api.Cls.selectForAllByClsstatusCancel(grpno, pagenumCls, GGF.none, GGF.toast); break;
+                                }
                                 mClss.make("#DGRP-div-clsList");
 
                                 /* pagenation event */
@@ -196,6 +209,17 @@
             {
                 let searchtype = $(this).attr("val");
                 DGRP.Data.searchtype = searchtype; /* save selected */
+                DGRP.search(); /* search */
+            });
+
+            /* =============== */
+            /* 일정 서브탭 (진행중/정산중/완료/취소) */
+            /* =============== */
+            $(".DGRP-td-clsSubtype").click(function()
+            {
+                let clsSubtype = $(this).attr("val");
+                DGRP.Data.clsSubtype = clsSubtype; /* 선택값 저장 */
+                DGRP.Data.pagenoCls = 1; /* 서브탭 전환 시 페이지 초기화 */
                 DGRP.search(); /* search */
             });
 

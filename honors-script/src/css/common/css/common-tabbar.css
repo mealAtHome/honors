@@ -99,6 +99,49 @@
   background-color: rgba(var(--colorMain), 0.1);
 }
 
+/* ============================== */
+/* common-undertab (탭 아래의 탭 : 상위 toolbar 바로 아래에 고정) */
+/*
+    <div class="common-undertab-top common-fonts09">
+        <div class="DGRP-td-clsSubtype common-undertab-item" val="ing"    tab="tab">진행중</div>
+        <div class="DGRP-td-clsSubtype common-undertab-item" val="settle" tab=""   >정산중</div>
+    </div>
+*/
+/* ============================== */
+.common-undertab-top {
+  display: flex;
+  position: sticky;
+  top: 3em; /* .common-div-toolbar 높이(3em) 바로 아래에 고정 */
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999; /* toolbar(10000)보다는 아래 */
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-bottom: 0.5px solid #e4e7f0;
+  gap: 0em;
+}
+
+.common-undertab-item {
+  flex: 1;
+  display: inline-block;
+  padding: 0.6em 0.6em;
+  border-bottom: 0.18em solid transparent;
+  color: #3c435c;
+  text-align: center;
+  font-weight: normal;
+}
+
+.common-undertab-item[tab=tab] {
+  color: #020654;
+  border-bottom: 0.18em solid #020654;
+  font-weight: bold;
+}
+
+.common-undertab-item:active {
+  background-color: rgba(var(--colorMainRgb), 0.2);
+}
+
 /* ========================= */
 /* common-tab */
 /* ========================= */

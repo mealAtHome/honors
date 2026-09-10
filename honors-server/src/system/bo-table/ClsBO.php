@@ -124,6 +124,10 @@ class ClsBO extends _CommonBO
     const selectForMngrByClssettleflgN      = "selectForMngrByClssettleflgN";       /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
     const selectForMngrByClsstatusEnd       = "selectForMngrByClsstatusEnd";        /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
     const selectForMngrByClsstatusCancel    = "selectForMngrByClsstatusCancel";     /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
+    const selectForAllByClsstatusIng        = "selectForAllByClsstatusIng";        /* [all]  [GRPNO, PAGENUM]  : 모임상세 > 일정 탭 서브탭 (진행중) */
+    const selectForAllByClssettleflgN       = "selectForAllByClssettleflgN";       /* [all]  [GRPNO, PAGENUM]  : 모임상세 > 일정 탭 서브탭 (정산중) */
+    const selectForAllByClsstatusEnd        = "selectForAllByClsstatusEnd";        /* [all]  [GRPNO, PAGENUM]  : 모임상세 > 일정 탭 서브탭 (완료) */
+    const selectForAllByClsstatusCancel     = "selectForAllByClsstatusCancel";     /* [all]  [GRPNO, PAGENUM]  : 모임상세 > 일정 탭 서브탭 (취소) */
     protected function select($options, $option="")
     {
         /* get */
@@ -234,6 +238,10 @@ class ClsBO extends _CommonBO
             case self::selectForMngrByClssettleflgN     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
             case self::selectForMngrByClsstatusEnd      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
             case self::selectForMngrByClsstatusCancel   : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
+            case self::selectForAllByClsstatusIng       : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
+            case self::selectForAllByClssettleflgN      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
+            case self::selectForAllByClsstatusEnd       : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
+            case self::selectForAllByClsstatusCancel    : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
             case self::selectAppliedFor1YearByUserno    :
             {
                 $from =

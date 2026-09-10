@@ -221,6 +221,20 @@ var Navigation =
         }
 
         /* --------------- */
+        /* 홈에서 페이지를 좌우로 이동하면 발생하는 문제 */
+        /* 현재 페이지의 타입을 가져와서, normal을 제외한 페이지 스택 중 같은 타입을 가진 스택은 삭제한다. (자기자신은 제외)  */
+        /* --------------- */
+        let currentPageType = Navigation.getPageType(movePage);
+        if(currentPageType != "normal")
+        {
+            pageStack = pageStack.filter(stack =>
+            {
+                let stackPageType = Navigation.getPageType(stack.page);
+                return stackPageType != currentPageType || stack.page == movePage;
+            });
+        }
+
+        /* --------------- */
         /* 다음페이지에 전달할 파라미터를 저장 */
         /* --------------- */
         nextPageParam.viewMode = viewMode;
@@ -232,6 +246,7 @@ var Navigation =
         };
         pageStack.push(stack);
         GGstorage.setPageStack(pageStack);
+
 
         /* --------------- */
         /* 실제적인 페이지 이동 */

@@ -2938,9 +2938,6 @@ var GGdate =
         const today = new Date(standDate.getFullYear(), standDate.getMonth(), standDate.getDate());
         const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
 
-        console.log("today", today);
-        console.log("start", start);
-
         const DAY = 24 * 60 * 60 * 1000;
         const diffDays = Math.floor((start - today) / DAY);
         if (diffDays === 0) return "오늘";
@@ -3867,7 +3864,7 @@ GGC.Common =
         return src;
     },
 
-    
+
 
 
 };
