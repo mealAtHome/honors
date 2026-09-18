@@ -30,6 +30,7 @@ var CommonEvent =
         $('body').on('click',  '.commonEvent-tag-phoneCall',                   $.proxy(CommonEvent.phoneCall, this));              /* 전화 걸기 */
         $('body').on('click',  '.common-tab-top > .common-tab-item',           $.proxy(CommonEvent.tab2, this));                   /* 탭 */
         $('body').on('click',  '.common-tabbar-top > .common-tabbar-item',     $.proxy(CommonEvent.tabbar, this));                   /* 탭 */
+        $('body').on('click',  '.common-maintab-top > .common-maintab-item',   $.proxy(CommonEvent.maintab, this));                 /* div */
         $('body').on('click',  '.commonEvent-copy',                            $.proxy(CommonEvent.copy, this));                   /* 탭 */
 
         /* viberator, sound */
@@ -613,6 +614,28 @@ var CommonEvent =
         if(tab == undefined || tab == "")
         {
             target.parent(".common-tabbar-top").find(".common-tabbar-item[tab=tab]").attr("tab", "");
+            target.attr("tab", "tab");
+        }
+    },
+    maintab(e)
+    {
+        /* 클래스 선택 */
+        let target = $(e.target);
+        try
+        {
+            if(!target.hasClass("common-maintab-item"))
+                target = target.parent(".common-maintab-item");
+        } catch(e)
+        {
+            Common.toast(e);
+            return;
+        }
+
+        /* set tab */
+        let tab = target.attr("tab");
+        if(tab == undefined || tab == "")
+        {
+            target.parent(".common-maintab-top").find(".common-maintab-item[tab=tab]").attr("tab", "");
             target.attr("tab", "tab");
         }
     },

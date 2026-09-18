@@ -102,6 +102,8 @@ class MCls
     isClsAdmin(myUserno)        { return myUserno == this.getClsusernoadm() || myUserno == this.getClsusernosub(); }
     isWithinClsapplyPeriod()    { return GGdate.inWithinPeriod(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
 
+    isAppliable()               { return this.isWithinClsapplyPeriod() && this.isClsstatusIng(); }
+
     /* ========================= */
     /* make with buttons */
     /* ========================= */

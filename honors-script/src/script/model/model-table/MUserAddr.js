@@ -85,7 +85,7 @@ class MUserAddrs extends _MCommon
     /* ========================= */
     makeUserAddrOptionHtmlForSelect(useraddridx)
     {
-        let html = `<option value="" ${Common.isEmpty(useraddridx) ? "selected" : ""}>선택안함</option>`;
+        let html = `<option value="" ${Common.isEmpty(useraddridx) ? "selected" : ""}>기본주소</option>`;
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];

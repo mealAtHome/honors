@@ -11,18 +11,12 @@
     <!-- ========================= -->
     <!-- 선택 -->
     <!-- ========================= -->
-    <div class="common-div-cushion">
-        <table class="DGRP-tbl-common common-tbl-tab commonEvent-tbl-tab">
-            <tbody>
-                <tr>
-                    <td class="DGRP-td-searchtype" val="detail" tab="tab" ><i class="ti ti-home"></i><span>홈</span></td>
-                    <td class="DGRP-td-searchtype" val="cls"    tab=""    >일정</td>
-                    <td class="DGRP-td-searchtype" val="member" tab=""    >멤버</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="common-maintab-top common-fonts09">
+        <div class="DGRP-div-searchtype common-maintab-item" val="detail" tab="tab"><i class="ti ti-home"></i><span>홈</span></div>
+        <div class="DGRP-div-searchtype common-maintab-item" val="cls"    tab=""   >일정</div>
+        <div class="DGRP-div-searchtype common-maintab-item" val="member" tab=""   >멤버</div>
     </div>
-    <hr class="common-hr-paddingLR"/>
+    <!-- <hr class="common-hr-paddingLR"/> -->
 
     <!-- ========================= -->
     <!-- 탭 -->
@@ -35,12 +29,19 @@
 
     <!-- 일정 -->
     <div class="DGRP-div-tab" tab="cls" style="display:none;">
-        <div class="common-undertab-top common-fonts09">
-            <div class="DGRP-td-clsSubtype common-undertab-item" val="ing"    tab="tab">진행중</div>
-            <div class="DGRP-td-clsSubtype common-undertab-item" val="settle" tab=""   >정산중</div>
-            <div class="DGRP-td-clsSubtype common-undertab-item" val="end"    tab=""   >완료</div>
-            <div class="DGRP-td-clsSubtype common-undertab-item" val="cancel" tab=""   >취소</div>
+        <div class="common-div-cushion">
+            <table class="common-tbl-tab commonEvent-tbl-tab">
+                <tbody>
+                    <tr>
+                        <td class="DGRP-td-clsSubtype" val="ing"    tab="tab" >진행중</td>
+                        <td class="DGRP-td-clsSubtype" val="settle" tab=""    >정산중</td>
+                        <td class="DGRP-td-clsSubtype" val="end"    tab=""    >완료</td>
+                        <td class="DGRP-td-clsSubtype" val="cancel" tab=""    >취소</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        <hr class="common-hr-paddingLR"/>
         <div id="DGRP-div-clsList" class="common-div-cushion"></div>
     </div>
 
@@ -83,7 +84,7 @@
                 $("#DGRP-input-searchkey").val(DGRP.Data.searchkey);
 
                 /* init */
-                $(`.DGRP-td-searchtype[val='${DGRP.Data.searchtype}']`).click();
+                $(`.DGRP-div-searchtype[val='${DGRP.Data.searchtype}']`).click();
             },
 
             /* ========================= */
@@ -169,7 +170,6 @@
                                     DGRP.Data.pagenoGrpm = toPage;
                                     $("#DGRP-btn-search").click();
                                 });
-
                                 break;
                             }
                         }
@@ -205,7 +205,7 @@
             /* event */
             /* ========================= */
 
-            $(".DGRP-td-searchtype").click(function()
+            $(".DGRP-div-searchtype").click(function()
             {
                 let searchtype = $(this).attr("val");
                 DGRP.Data.searchtype = searchtype; /* save selected */

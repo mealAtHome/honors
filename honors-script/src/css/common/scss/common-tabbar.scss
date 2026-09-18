@@ -38,15 +38,15 @@
 .common-tabbar-item:active   { color: $colorMain; background-color: rgba(var(--colorMain), 0.1); }
 
 /* ============================== */
-/* common-undertab (탭 아래의 탭 : 상위 toolbar 바로 아래에 고정) */
+/* common-maintab (메인 탭 : 상위 toolbar 바로 아래에 고정) */
 /*
-    <div class="common-undertab-top common-fonts09">
-        <div class="DGRP-td-clsSubtype common-undertab-item" val="ing"    tab="tab">진행중</div>
-        <div class="DGRP-td-clsSubtype common-undertab-item" val="settle" tab=""   >정산중</div>
+    <div class="common-maintab-top common-fonts09">
+        <div class="DGRP-td-clsSubtype common-maintab-item" val="ing"    tab="tab">진행중</div>
+        <div class="DGRP-td-clsSubtype common-maintab-item" val="settle" tab=""   >정산중</div>
     </div>
 */
 /* ============================== */
-.common-undertab-top
+.common-maintab-top
 {
     display: flex;
     position: sticky;
@@ -60,7 +60,7 @@
     border-bottom: 0.5px solid $colorLine;
     gap: 0em;
 }
-.common-undertab-item
+.common-maintab-item
 {
     flex: 1;
     display: inline-block;
@@ -70,8 +70,8 @@
     text-align: center;
     font-weight: normal;
 }
-.common-undertab-item[tab=tab] { color: $colorMain; border-bottom: 0.18em solid $colorMain; font-weight: bold; }
-.common-undertab-item:active   { background-color: rgba(var(--colorMainRgb), 0.2); }
+.common-maintab-item[tab=tab] { color: $colorMain; border-bottom: 0.18em solid $colorMain; font-weight: bold; }
+.common-maintab-item:active   { background-color: rgba(var(--colorMainRgb), 0.2); }
 
 /* ========================= */
 /* common-tab */

@@ -54,6 +54,11 @@ class GrpBO extends _CommonBO
     /*
     */
     /* ========================= */
+    const GRPINTRO_MAX = 30; /* 한줄소개 최대 글자수 */
+    const CLSTERM_LOOKBACK_DAYS = 90; /* 활동주기 계산에 사용하는 최근 기간(일) */
+    const CLSBILLAVG_LOOKBACK_CNT = 10; /* 일정평균비용 계산에 사용하는 최근 일정 개수 */
+    const BACKNUMBERLENGTH_MIN = 2; /* 등번호 문자수 최소 */
+    const BACKNUMBERLENGTH_MAX = 5; /* 등번호 문자수 최대 */
     static public function getConsts()
     {
         $arr = array();
@@ -202,15 +207,10 @@ class GrpBO extends _CommonBO
     /* const insert = "insert"; */
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
     const updateGrpintroForInside = "updateGrpintroForInside";
-    const GRPINTRO_MAX = 30; /* 한줄소개 최대 글자수 */
     const recalcGrpmcntForInside = "recalcGrpmcntForInside";
     const recalcClsStatsForInside = "recalcClsStatsForInside";
-    const CLSTERM_LOOKBACK_DAYS = 90; /* 활동주기 계산에 사용하는 최근 기간(일) */
-    const CLSBILLAVG_LOOKBACK_CNT = 10; /* 일정평균비용 계산에 사용하는 최근 일정 개수 */
     const updateBacknumberlengthForMng = "updateBacknumberlengthForMng";
     const updateBasecampForMng = "updateBasecampForMng";
-    const BACKNUMBERLENGTH_MIN = 2; /* 등번호 문자수 최소 */
-    const BACKNUMBERLENGTH_MAX = 5; /* 등번호 문자수 최대 */
     protected function update($options, $option="")
     {
         /* vars */
