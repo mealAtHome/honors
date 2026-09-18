@@ -280,6 +280,10 @@ var GGdate =
      */
     getPointOfDate(tg, fr, to)
     {
+        if (tg instanceof Date == false) { if (!isNaN(Date.parse(tg))) tg = new Date(tg); else throw new Error("Invalid target date"); }
+        if (fr instanceof Date == false) { if (!isNaN(Date.parse(fr))) fr = new Date(fr); else throw new Error("Invalid from date"); }
+        if (to instanceof Date == false) { if (!isNaN(Date.parse(to))) to = new Date(to); else throw new Error("Invalid to date"); }
+
         /* get date only */
         tg = new Date(tg.getFullYear(), tg.getMonth(), tg.getDate()).getTime();
         fr = new Date(fr.getFullYear(), fr.getMonth(), fr.getDate()).getTime();
