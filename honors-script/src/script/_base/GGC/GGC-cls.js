@@ -27,7 +27,7 @@ GGC.Cls =
         }
         return rslt;
     },
-    clsstatusCard(val) { return `<span class="common-card" card-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
+    clsstatusCard(val) { return `<span class="common-pill" pill-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
     clsstatusFont(val) { return `<span class="common-colorFont" font-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
 
     /* ----- */
@@ -53,7 +53,7 @@ GGC.Cls =
         }
         return rslt;
     },
-    clssettleflgCard(val) { return `<span class="common-card" card-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
+    clssettleflgCard(val) { return `<span class="common-pill" pill-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
     clssettleflgFont(val) { return `<span class="common-colorFont" font-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
 
 
@@ -82,7 +82,7 @@ GGC.Cls =
         }
         return rslt;
     },
-    getGrpfinancereflectflgCard(val) { return `<span class="common-card" card-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
+    getGrpfinancereflectflgCard(val) { return `<span class="common-pill" pill-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
     getGrpfinancereflectflgFont(val) { return `<span class="common-colorFont" font-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
 
     /* ----- */
@@ -103,6 +103,6 @@ GGC.Cls =
             case GGF.GGdate.PointOfDate.WITHIN   : color = GGF.Color.PROG; str = `모집중 (${GGdate.getTextForUpcoming(now, endDate)}까지)`; break; /* 두 기간 사이 */
             case GGF.GGdate.PointOfDate.PASSED   : color = GGF.Color.ENDD; str = "모집종료"; break; /* 두 기간 이후 */
         }
-        return `<div class="common-card" card-type="mini" card-color="${color}"><i class="ti ti-calendar-code"></i><span>&nbsp;${str}</span></div>`;
+        return `<div class="common-pill" pill-type="mini" pill-color="${color}"><i class="ti ti-calendar-code"></i><span>${str}</span></div>`;
     }
 }

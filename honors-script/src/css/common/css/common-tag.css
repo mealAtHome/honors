@@ -79,7 +79,7 @@
   --colorErrr: #ce2727;
   --colorNgtv: #780000;
   --colorEndd: #717171;
-  --colorSnow: #ffffff;
+  --colorWwww: #ffffff;
 }
 
 :root {
@@ -103,7 +103,7 @@
   --colorErrrRgb: 206, 39, 39;
   --colorNgtvRgb: 120, 0, 0;
   --colorEnddRgb: 113, 113, 113;
-  --colorSnowRgb: 255, 255, 255;
+  --colorWwwwRgb: 255, 255, 255;
 }
 
 :root {
@@ -133,15 +133,10 @@
   color: #020654;
 }
 
-.common-card[card-color=main] {
-  color: #020654;
-  background-color: rgba(2, 6, 84, 0.2);
-}
-
 .common-pill[pill-color=main] {
   color: #020654;
-  background-color: #ffffff;
-  border: 0.07em solid #020654;
+  background-color: rgba(var(--colorMainRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorMainRgb), 0.2);
 }
 
 .common-pill[pill-color=main]:active {
@@ -161,15 +156,10 @@
   color: #020421;
 }
 
-.common-card[card-color=dark] {
-  color: #020421;
-  background-color: rgba(2, 4, 33, 0.2);
-}
-
 .common-pill[pill-color=dark] {
   color: #020421;
-  background-color: #ffffff;
-  border: 0.07em solid #020421;
+  background-color: rgba(var(--colorDarkRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorDarkRgb), 0.2);
 }
 
 .common-pill[pill-color=dark]:active {
@@ -189,15 +179,10 @@
   color: #1b2a6b;
 }
 
-.common-card[card-color=head] {
-  color: #1b2a6b;
-  background-color: rgba(27, 42, 107, 0.2);
-}
-
 .common-pill[pill-color=head] {
   color: #1b2a6b;
-  background-color: #ffffff;
-  border: 0.07em solid #1b2a6b;
+  background-color: rgba(var(--colorHeadRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorHeadRgb), 0.2);
 }
 
 .common-pill[pill-color=head]:active {
@@ -217,15 +202,10 @@
   color: #3d6bf5;
 }
 
-.common-card[card-color=side] {
-  color: #3d6bf5;
-  background-color: rgba(61, 107, 245, 0.2);
-}
-
 .common-pill[pill-color=side] {
   color: #3d6bf5;
-  background-color: #ffffff;
-  border: 0.07em solid #3d6bf5;
+  background-color: rgba(var(--colorSideRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorSideRgb), 0.2);
 }
 
 .common-pill[pill-color=side]:active {
@@ -245,15 +225,10 @@
   color: #3c435c;
 }
 
-.common-card[card-color=body] {
-  color: #3c435c;
-  background-color: rgba(60, 67, 92, 0.2);
-}
-
 .common-pill[pill-color=body] {
   color: #3c435c;
-  background-color: #ffffff;
-  border: 0.07em solid #3c435c;
+  background-color: rgba(var(--colorBodyRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorBodyRgb), 0.2);
 }
 
 .common-pill[pill-color=body]:active {
@@ -273,15 +248,10 @@
   color: #7a7d84;
 }
 
-.common-card[card-color=cmmt] {
-  color: #7a7d84;
-  background-color: rgba(122, 125, 132, 0.2);
-}
-
 .common-pill[pill-color=cmmt] {
   color: #7a7d84;
-  background-color: #ffffff;
-  border: 0.07em solid #7a7d84;
+  background-color: rgba(var(--colorCmmtRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorCmmtRgb), 0.2);
 }
 
 .common-pill[pill-color=cmmt]:active {
@@ -301,15 +271,10 @@
   color: #c4c7ce;
 }
 
-.common-card[card-color=edge] {
-  color: #c4c7ce;
-  background-color: rgba(196, 199, 206, 0.2);
-}
-
 .common-pill[pill-color=edge] {
   color: #c4c7ce;
-  background-color: #ffffff;
-  border: 0.07em solid #c4c7ce;
+  background-color: rgba(var(--colorSeptRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorSeptRgb), 0.2);
 }
 
 .common-pill[pill-color=edge]:active {
@@ -329,15 +294,10 @@
   color: #e4e7f0;
 }
 
-.common-card[card-color=line] {
-  color: #e4e7f0;
-  background-color: rgba(228, 231, 240, 0.2);
-}
-
 .common-pill[pill-color=line] {
   color: #e4e7f0;
-  background-color: #ffffff;
-  border: 0.07em solid #e4e7f0;
+  background-color: rgba(var(--colorLineRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorLineRgb), 0.2);
 }
 
 .common-pill[pill-color=line]:active {
@@ -357,15 +317,10 @@
   color: #3d6bf5;
 }
 
-.common-card[card-color=pstv] {
-  color: #3d6bf5;
-  background-color: rgba(61, 107, 245, 0.2);
-}
-
 .common-pill[pill-color=pstv] {
   color: #3d6bf5;
-  background-color: #ffffff;
-  border: 0.07em solid #3d6bf5;
+  background-color: rgba(var(--colorPstvRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorPstvRgb), 0.2);
 }
 
 .common-pill[pill-color=pstv]:active {
@@ -385,15 +340,10 @@
   color: #009600;
 }
 
-.common-card[card-color=allw] {
-  color: #009600;
-  background-color: rgba(0, 150, 0, 0.2);
-}
-
 .common-pill[pill-color=allw] {
   color: #009600;
-  background-color: #ffffff;
-  border: 0.07em solid #009600;
+  background-color: rgba(var(--colorAllwRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorAllwRgb), 0.2);
 }
 
 .common-pill[pill-color=allw]:active {
@@ -413,15 +363,10 @@
   color: #2865ff;
 }
 
-.common-card[card-color=ntce] {
-  color: #2865ff;
-  background-color: rgba(40, 101, 255, 0.2);
-}
-
 .common-pill[pill-color=ntce] {
   color: #2865ff;
-  background-color: #ffffff;
-  border: 0.07em solid #2865ff;
+  background-color: rgba(var(--colorNtceRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorNtceRgb), 0.2);
 }
 
 .common-pill[pill-color=ntce]:active {
@@ -441,15 +386,10 @@
   color: #039a00;
 }
 
-.common-card[card-color=prog] {
-  color: #039a00;
-  background-color: rgba(3, 154, 0, 0.2);
-}
-
 .common-pill[pill-color=prog] {
   color: #039a00;
-  background-color: #ffffff;
-  border: 0.07em solid #039a00;
+  background-color: rgba(var(--colorProgRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorProgRgb), 0.2);
 }
 
 .common-pill[pill-color=prog]:active {
@@ -469,15 +409,10 @@
   color: #3c435c;
 }
 
-.common-card[card-color=info] {
-  color: #3c435c;
-  background-color: rgba(60, 67, 92, 0.2);
-}
-
 .common-pill[pill-color=info] {
   color: #3c435c;
-  background-color: #ffffff;
-  border: 0.07em solid #3c435c;
+  background-color: rgba(var(--colorInfoRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorInfoRgb), 0.2);
 }
 
 .common-pill[pill-color=info]:active {
@@ -497,15 +432,10 @@
   color: #EAF0FF;
 }
 
-.common-card[card-color=dtil] {
-  color: #EAF0FF;
-  background-color: rgba(234, 240, 255, 0.2);
-}
-
 .common-pill[pill-color=dtil] {
   color: #EAF0FF;
-  background-color: #ffffff;
-  border: 0.07em solid #EAF0FF;
+  background-color: rgba(var(--colorDtilRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorDtilRgb), 0.2);
 }
 
 .common-pill[pill-color=dtil]:active {
@@ -525,15 +455,10 @@
   color: #ffb300;
 }
 
-.common-card[card-color=hold] {
-  color: #ffb300;
-  background-color: rgba(255, 179, 0, 0.2);
-}
-
 .common-pill[pill-color=hold] {
   color: #ffb300;
-  background-color: #ffffff;
-  border: 0.07em solid #ffb300;
+  background-color: rgba(var(--colorHoldRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorHoldRgb), 0.2);
 }
 
 .common-pill[pill-color=hold]:active {
@@ -553,15 +478,10 @@
   color: #ff7415;
 }
 
-.common-card[card-color=cncl] {
-  color: #ff7415;
-  background-color: rgba(255, 116, 21, 0.2);
-}
-
 .common-pill[pill-color=cncl] {
   color: #ff7415;
-  background-color: #ffffff;
-  border: 0.07em solid #ff7415;
+  background-color: rgba(var(--colorCnclRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorCnclRgb), 0.2);
 }
 
 .common-pill[pill-color=cncl]:active {
@@ -581,15 +501,10 @@
   color: #ff7415;
 }
 
-.common-card[card-color=warn] {
-  color: #ff7415;
-  background-color: rgba(255, 116, 21, 0.2);
-}
-
 .common-pill[pill-color=warn] {
   color: #ff7415;
-  background-color: #ffffff;
-  border: 0.07em solid #ff7415;
+  background-color: rgba(var(--colorWarnRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorWarnRgb), 0.2);
 }
 
 .common-pill[pill-color=warn]:active {
@@ -609,15 +524,10 @@
   color: #ce2727;
 }
 
-.common-card[card-color=errr] {
-  color: #ce2727;
-  background-color: rgba(206, 39, 39, 0.2);
-}
-
 .common-pill[pill-color=errr] {
   color: #ce2727;
-  background-color: #ffffff;
-  border: 0.07em solid #ce2727;
+  background-color: rgba(var(--colorErrrRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorErrrRgb), 0.2);
 }
 
 .common-pill[pill-color=errr]:active {
@@ -637,15 +547,10 @@
   color: #780000;
 }
 
-.common-card[card-color=ngtv] {
-  color: #780000;
-  background-color: rgba(120, 0, 0, 0.2);
-}
-
 .common-pill[pill-color=ngtv] {
   color: #780000;
-  background-color: #ffffff;
-  border: 0.07em solid #780000;
+  background-color: rgba(var(--colorNgtvRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorNgtvRgb), 0.2);
 }
 
 .common-pill[pill-color=ngtv]:active {
@@ -665,15 +570,10 @@
   color: #717171;
 }
 
-.common-card[card-color=endd] {
-  color: #717171;
-  background-color: rgba(113, 113, 113, 0.2);
-}
-
 .common-pill[pill-color=endd] {
   color: #717171;
-  background-color: #ffffff;
-  border: 0.07em solid #717171;
+  background-color: rgba(var(--colorEnddRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorEnddRgb), 0.2);
 }
 
 .common-pill[pill-color=endd]:active {
@@ -685,39 +585,45 @@
   color: rgb(253.58, 253.58, 253.58);
 }
 
-.common-colorFont[font-color=snow] {
+.common-colorFont[font-color=wwww] {
   color: #ffffff;
 }
 
-.common-colorSnow {
+.common-colorWwww {
   color: #ffffff;
 }
 
-.common-card[card-color=snow] {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.2);
+.common-pill[pill-color=wwww] {
+  color: #3c435c;
+  background-color: rgba(var(--colorBodyRgb), 0);
+  border: 0.07em solid rgba(var(--colorBodyRgb), 1);
+}
+
+.common-pill[pill-color=wwww]:active {
+  background-color: rgba(var(--colorWwwwRgb), 0.2);
+}
+
+.common-pill[pill-color=wwww][tab=tab] {
+  background-color: #ffffff;
+  color: rgb(63.75, 63.75, 63.75);
+}
+
+/* .common-colorFont[font-color=trns] { color:$colorTrns;} .common-colorTrns { color:$colorTrns;} */
+.common-pill[pill-color=trns] {
+  color: #3c435c;
+  background-color: rgba(var(--colorBodyRgb), 0);
+  border: 0.07em solid rgba(var(--colorBodyRgb), 0);
 }
 
 /* --------------- */
-/* common-card */
+/* common-pill */
 /* --------------- */
 .common-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-weight: bold;
   padding: 0.3em 0.8em 0.4em;
   border-radius: 0.3em;
-}
-
-.common-card {
-  display: inline-block;
-  font-weight: bold;
-  padding: 0.3em 0.8em 0.4em;
-  border-radius: 0.3em;
-}
-
-.common-card[card-type=mini] {
-  font-weight: normal;
-  padding: 0.2em 0.3em 0.3em;
 }
 
 .common-pill[pill-type=mini] {
@@ -749,7 +655,6 @@
   border-radius: 9999px;
 }
 
-/* .common-alert[card-type=mini] { font-weight: normal; padding: $padTiny $padHalf; } */
 /* --------------- */
 /* tags */
 /* --------------- */

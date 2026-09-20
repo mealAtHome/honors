@@ -110,22 +110,27 @@ class MCls
     makeCls(btnHtml="")
     {
         let html = "";
-        let feel = this.getClsstatusFeel();
         html +=
         `
-            <div class="MClss-make-div-modelTop common-div-card">
+            <div class="MCls-make-top common-div-card">
+                <!-- <div class="MCls-make-clsno common-fonts08 common-colorCmmt">${this.getClsno()}</div> -->
                 <div class="common-flexCenter">
                     <div>
                         <div class="common-img-label" label-size="2em" style="background-image:url('${this.getGrpimgPath()}')"></div>
                         <span>${this.getGrpname()}</span>
                     </div>
                 </div>
-                <div class="common-cushionHalfUp">
-                    <div class="common-flexCenter">
-                        <div class="common-inline common-fonts10 common-strong common-colorMain">
-                            <span>일정</span>
+                <!--
+                    <div class="common-cushionHalfUp">
+                        <div class="common-fonts09">
+                            ${GGdate.period(this.getClsstartdt(), this.getClsclosedt())}
                         </div>
-                        <div class="common-inline common-colorBody common-fonts09">${this.getClstitle()}</div>
+                    </div>
+                -->
+                <div class="common-cushionHalfUp">
+                    <div class="common-block">
+                        <div class="common-inline common-colorMain common-fonts10 common-strong">일정</div>
+                        <div class="common-inline common-colorBody common-fonts09" style="margin-left:0.2em;">${this.getClstitle()}</div>
                     </div>
                     <div class="common-cushionHalfUp">
                         <span class="common-inline common-fonts09">${this.getClsstatusCard()}</span>
@@ -134,8 +139,8 @@ class MCls
                     <div class="common-cushionHalfUp">
                         <div class="common-fonts08">
                             ${GGC.Cls.clsapplyPeriodCard(this.getClsapplystartdt(), this.getClsapplyclosedt())}
-                            <div class="common-card" card-type="mini" card-color="${feel}"><i class="ti ti-map-pin"></i><span>&nbsp;${this.getClsground()}</span></div>
-                            <div class="common-card" card-type="mini" card-color="${feel}"><i class="ti ti-credit-card"></i><span>&nbsp;${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
+                            <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-map-pin"></i><span>${this.getClsground()}</span></div>
+                            <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-credit-card"></i><span>${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
                         </div>
                     </div>
                     ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}

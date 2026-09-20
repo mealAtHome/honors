@@ -15,12 +15,12 @@
 }
 .common-input-field:focus { border: none; border-bottom: 3px solid $colorMain; }
 
-.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: $colorSnow; }
+.common-div-formField > .common-textarea-field { width: 100%; max-width: 500px; box-sizing: border-box; outline: none; background-color: $colorWwww; }
 .common-textarea-field
 {
     padding: $padHalf;
     border: 0.07em solid $colorSept;
-    background-color: $colorSnow;
+    background-color: $colorWwww;
     @include fonts11;
 }
 .common-textarea-field:focus { border: 0.07em solid $colorMain; border-bottom: 3px solid $colorMain; }

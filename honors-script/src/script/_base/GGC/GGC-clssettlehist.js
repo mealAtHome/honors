@@ -17,6 +17,6 @@ GGC.Clssettlehist =
         if(val == GGF.Clssettlehist.Histtype.AFTER) return "pstv";
         return "";
     },
-    histtypeCard(val) { return `<span class="common-card" card-color="${GGC.Clssettlehist.histtypeFeel(val)}">${GGC.Clssettlehist.histtypeCvrt(val)}</span>`; },
+    histtypeCard(val) { return `<span class="common-pill" pill-color="${GGC.Clssettlehist.histtypeFeel(val)}">${GGC.Clssettlehist.histtypeCvrt(val)}</span>`; },
     histtypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clssettlehist.histtypeFeel(val)}">${GGC.Clssettlehist.histtypeCvrt(val)}</span>`; },
 }

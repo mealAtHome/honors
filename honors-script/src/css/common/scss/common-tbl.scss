@@ -47,7 +47,7 @@
 }
 .common-tbl-tab > tbody > tr > td[tab=tab]
 {
-    color: $colorSnow;
+    color: $colorWwww;
     background-color: $colorMain;
 }
 .common-tbl-tab > tbody > tr > td[tab=""]:active,
@@ -82,7 +82,7 @@
 .common-tbl-normal > tfoot > tr > td
 {
     padding: $padHalf;
-    background-color: $colorSnow;
+    background-color: $colorWwww;
     text-align: center;
     font-weight: bold;
 }
@@ -130,8 +130,8 @@
 .common-tbl-normal[tbl-type=colborder] > tbody > tr > td:nth-last-child(1)    { border-left: 0.06em solid $colorSept; border-right: none; }
 .common-tbl-normal[tbl-type=colborder] > tfoot > tr > td                      { border-left: 0.06em solid $colorSept; border-right: 0.06em solid $colorSept; }
 
-.common-tbl-normal[tbl-type=card] > tbody > tr             > td                 { background-color: $colorSnow; border-top: 0.06em solid $colorLine; }
-.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td                 { background-color: $colorSnow; border-top: none; }
+.common-tbl-normal[tbl-type=card] > tbody > tr             > td                 { background-color: $colorWwww; border-top: 0.06em solid $colorLine; }
+.common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td                 { background-color: $colorWwww; border-top: none; }
 .common-tbl-normal[tbl-type=card] > tbody > tr             > td:first-child     { padding-left  : $padBase; } /* 테이블의 양사이드가 둥글기 때문에 */
 .common-tbl-normal[tbl-type=card] > tbody > tr             > td:last-child      { padding-right : $padBase; } /* 테이블의 양사이드가 둥글기 때문에 */
 .common-tbl-normal[tbl-type=card] > tbody > tr:first-child > td:before          { content: ""; display: block; height: 0em; width:100%; } /* 테이블의 아래위가 둥글기 때문에 */

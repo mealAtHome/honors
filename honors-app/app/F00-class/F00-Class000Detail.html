@@ -51,6 +51,10 @@
         <table class="common-tbl-normal CLSD-tbl-clsDetail" tbl-type="card">
             <tbody>
                 <tr>
+                    <td><span>일정번호</span></td>
+                    <td><span id="CLSD-span-clsno" class="commonEvent-copy" style="cursor:pointer;"></span></td>
+                </tr>
+                <tr>
                     <td><span>모임시간</span></td>
                     <td>
                         <div class="common-flexTop">
@@ -96,7 +100,7 @@
     <div id="CLSD-div-clsbill" class="common-div-cushion common-div-normalTop" style="display:none;">
         <table class="common-tbl-normal CLSD-tbl-clsDetail" tbl-type="card">
             <tbody>
-                <tr><td colspan="2" td-type="th">정산결과</td></tr>
+                <tr><td colspan="2" td-type="th" style="padding:0.4em 0.6em;"><span class="common-fonts11">정산결과</span></td></tr>
                 <tr><td>청구합계</td><td><span id="CLSD-span-clsbillsales"></span></td></tr>
                 <tr><td>구매합계</td><td><span id="CLSD-span-clsbillpurchase"></span></td></tr>
                 <tr><td>집계결과</td><td><span id="CLSD-span-clsbillfinal"></span></td></tr>
@@ -241,6 +245,7 @@
                         /* 기본정보 */
                         let mCls = Api.Cls.selectByPkForAll(grpno, clsno, GGF.none, GGF.toast);
 
+                        $("#CLSD-span-clsno")                 .text(mCls.getClsno());
                         $("#CLSD-span-clsdt")                 .text(mCls.getClsPeriod());
                         $("#CLSD-span-clsground")             .text(mCls.getClsground());
                         $("#CLSD-span-clsgroundaddr")         .text(mCls.getClsgroundaddr());

@@ -23,5 +23,5 @@ GGC.GrpMember =
         return rslt;
     },
     backnumberSpan(val) { return Common.isEmpty(val) ? "" : `<span class="common-colorFont common-fonts10">${GGC.GrpMember.backnumber(val)}&nbsp;</span>`; },
-    backnumberPill(val) { return Common.isEmpty(val) ? "" : `<span class="common-card      common-fonts08" card-color="main" style="padding:var(--padTiny) var(--padBase);">${GGC.GrpMember.backnumber(val)}</span>`; },
+    backnumberPill(val) { return Common.isEmpty(val) ? "" : `<span class="common-pill      common-fonts08" pill-color="main" style="padding:var(--padTiny) var(--padBase);">${GGC.GrpMember.backnumber(val)}</span>`; },
 };

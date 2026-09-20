@@ -64,7 +64,7 @@ class MUserAddrs extends _MCommon
                     <div class="common-flexBetween">
                         <div class="common-flexCenterSm">
                             <span class="common-bold">${model.getUseraddrtitle()}</span>
-                            ${model.isDefault() ? `<span class="common-card common-fonts08" card-type="mini" card-color="pstv" style="margin-left: 0.4em;">기본주소</span>` : ""}
+                            ${model.isDefault() ? `<span class="common-pill common-fonts08" pill-type="mini" pill-color="pstv" style="margin-left: 0.4em;">기본주소</span>` : ""}
                         </div>
                         <div class="common-flexCenterSm">
                             ${model.isDefault() ? "" : `<button class="MUserAddr-make-btn-setDefault common-btn-noline common-fonts08" ${model.getPk()}>기본으로설정</button>`}

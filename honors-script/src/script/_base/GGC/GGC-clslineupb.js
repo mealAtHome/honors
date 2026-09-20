@@ -23,7 +23,7 @@ GGC.Clslineupb =
         }
         return rslt;
     },
-    prepaidflgCard(val) { return `<span class="common-card" card-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
+    prepaidflgCard(val) { return `<span class="common-pill" pill-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
     prepaidflgFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
 
 }

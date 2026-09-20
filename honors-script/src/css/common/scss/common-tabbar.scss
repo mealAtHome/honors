@@ -22,7 +22,7 @@
     height:auto;
     box-sizing: border-box;
     /* padding: 0em $padBase; */
-    background-color: $colorSnow;
+    background-color: $colorWwww;
     gap: 0em;
 }
 .common-tabbar-item
@@ -56,7 +56,7 @@
     width: 100%;
     z-index: 9999; /* toolbar(10000)보다는 아래 */
     box-sizing: border-box;
-    background-color: $colorSnow;
+    background-color: $colorWwww;
     border-bottom: 0.5px solid $colorLine;
     gap: 0em;
 }
@@ -85,13 +85,13 @@
 .common-tab-item
 {
     display: inline-block;
-    padding: $padBase $padMore;
+    padding: $padHalf $padMore;
     border-radius: 0.4em;
     border: 0.07em solid $colorSept;
-    background-color: $colorSnow;
+    background-color: $colorWwww;
     color: $colorBody;
     text-align: center;
 }
-.common-tab-item[tab=tab] { color: $colorSnow; background-color: $colorMain; }
+.common-tab-item[tab=tab] { color: $colorWwww; background-color: $colorMain; }
 .common-tab-item:active   { color: $colorMain; background-color: rgba(var(--colorMain), 0.1); }
 

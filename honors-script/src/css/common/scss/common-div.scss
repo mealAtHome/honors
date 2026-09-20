@@ -22,7 +22,7 @@ div { display: block; }
 {
     display: block;
     padding: $padBase $padMore;
-    @include colorSnowBackSolid;
+    @include colorWwwwBackSolid;
     border-bottom: 0.5px solid $colorLine;
 }
 
@@ -49,7 +49,7 @@ div { display: block; }
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    background-color: $colorSnow;
+    background-color: $colorWwww;
     border-bottom: 0.5px solid $colorLine;
 }
 .common-div-toolbar > div:nth-child(2) { padding-left: 0.5em; }
@@ -247,8 +247,8 @@ div { display: block; }
     padding: $padBase;
     box-sizing: content-box;
     text-align: left;
-    /* color: $colorSnow; */
-    background: $colorSnowBack;
+    /* color: $colorWwww; */
+    background: $colorWwwwBack;
     border: 0.04em solid $colorLine;
 }
 .common-div-card[card-type=warning]         { @include colorWarnFont; background: $colorWarnBack; }
@@ -298,7 +298,7 @@ div { display: block; }
     position: absolute;
     left: 0;
     right: 0;
-    /* color: $colorSnow; */
+    /* color: $colorWwww; */
     width: 100%;
     height: 3em;
 }
@@ -335,7 +335,7 @@ div { display: block; }
 .common-btn-pagenationBtn[tab=tab]
 {
     background-color: $colorMain;
-    color: $colorSnow;
+    color: $colorWwww;
     /* font-weight: bold; */
 }
 
@@ -406,7 +406,7 @@ div { display: block; }
 .common-div-calendarSquare
 {
     background: linear-gradient(135deg, #020654 0%, #0a2472 100%);
-    color: $colorSnow;
+    color: $colorWwww;
     width: 3.6em;
     height: 3.6em;
     padding: $padHalf;
@@ -416,15 +416,15 @@ div { display: block; }
 .common-div-calendarSquare > div:nth-child(2) { @include fonts14; @include fonth14; text-align: center; font-weight: bold; }
 
 /* ByPoint */   .common-div-calendarSquare[point-of-date=passed]    { @include colorInfoBackTrans; @include colorBodyFont; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { @include colorMainBackTrans; color: $colorSnow; }
-/* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { @include colorSnowBackTrans; @include colorBodyFont; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=within]    { @include colorMainBackTrans; color: $colorWwww; }
+/* ByPoint */   .common-div-calendarSquare[point-of-date=upcoming]  { @include colorWwwwBackTrans; @include colorBodyFont; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] { width: 2.6em; height: 2.6em; padding: $padHalf; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) { line-height: 2.6em; @include fonts10; text-align: center; font-weight: bold; }
 /* ByType */    .common-div-calendarSquare[common-type=alone] > div:nth-child(1) > span { @include fonts12; }
 
 .common-div-calendarSquareWeekTop > button
 {
-    color: $colorSnow;
+    color: $colorWwww;
     border: 2px solid $colorInfo;
     @include colorBodyFont;
     padding: $padHalf $padMore;

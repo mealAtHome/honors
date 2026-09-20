@@ -35,8 +35,8 @@ GGC.User =
         }
         return rslt;
     },
-    usertypeCard(val) { return `<span class="common-card" card-type="norm" card-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
-    usertypePill(val) { return `<span class="common-card" card-type="mini" card-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
+    usertypeCard(val) { return `<span class="common-pill" pill-type="norm" pill-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
+    usertypePill(val) { return `<span class="common-pill" pill-type="mini" pill-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
     usertypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
 
     /* ----- */

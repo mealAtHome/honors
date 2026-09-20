@@ -43,6 +43,6 @@ GGC.Date =
             case GGF.GGdate.PointOfDate.WITHIN   : color = GGF.Color.PROG; break; /* 두 기간 사이 */
             case GGF.GGdate.PointOfDate.PASSED   : color = GGF.Color.ENDD; break; /* 두 기간 이후 */
         }
-        return `<span class="common-card" card-color="${color}">${GGdate.getTextForUpcoming(now, startDate, endDate)}</span>`;
+        return `<span class="common-pill" pill-color="${color}">${GGdate.getTextForUpcoming(now, startDate, endDate)}</span>`;
     }
 }

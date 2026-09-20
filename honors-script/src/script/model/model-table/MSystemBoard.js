@@ -31,12 +31,7 @@ class MSystemBoard
     {
         let html =
         `
-            <div class="common-div-flex common-div-card commonEvent-tag-hyperlink common-tap"
-                card-type="notice"
-                hyperlink="${Navigation.Page.Z22SystemBoardDetail}"
-                hyperlink-viewmode="page"
-                ${this.getPk()}
-            >
+            <div class="common-div-flex common-div-card commonEvent-tag-hyperlink common-tap" card-type="notice" hyperlink="${Navigation.Page.Z22SystemBoardDetail}" hyperlink-viewmode="page"${this.getPk()}>
                 <div class="common-div-dot"></div>
                 <div>
                     <div class="common-content">${this.getSbtitle()}</div>

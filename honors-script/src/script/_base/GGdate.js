@@ -149,8 +149,63 @@ var GGdate =
         return `${hh}:${mm}`;
     },
 
+    // /**
+    //  * period format
+    //  * @param {*} startdt
+    //  * @param {*} closedt
+    //  */
+    // period(startdt, closedt)
+    // {
+    //     if(Common.isEmpty(startdt) || Common.isEmpty(closedt))
+    //         return "-";
+
+    //     /* to date class */
+    //     startdt = GGdate.fromStr(startdt);
+    //     closedt = GGdate.fromStr(closedt);
+
+    //     /* is same date startdt, closedt? */
+    //     let skipDate = false;
+    //     if(
+    //         startdt.getFullYear() === closedt.getFullYear() &&
+    //         startdt.getMonth()    === closedt.getMonth() &&
+    //         startdt.getDate()     === closedt.getDate()
+    //     )
+    //     {
+    //         skipDate = true;
+    //     }
+
+    //     /* is 00 minutes both date? */
+    //     let skipMinute = false;
+    //     if(
+    //         startdt.getMinutes() === 0 &&
+    //         closedt.getMinutes() === 0
+    //     )
+    //     {
+    //         skipMinute = true;
+    //     }
+
+    //     /* format */
+    //     let rslt = GGdate.toYYMMDDddot(startdt);
+    //     if      ( skipMinute) rslt += ` ${GGdate.getHH(startdt)}`;
+    //     else if (!skipMinute) rslt += ` ${GGdate.getHH(startdt)}:${GGdate.getII(startdt)}`;
+
+    //     if      ( skipDate &&  skipMinute) rslt += `-${GGdate.getHH(closedt)}시`;
+    //     else if ( skipDate && !skipMinute) rslt += `-${GGdate.getHH(closedt)}:${GGdate.getII(closedt)}`;
+    //     else if (!skipDate &&  skipMinute) rslt += ` ~ ${GGdate.toYYMMDDddot(closedt)} ${GGdate.getHH(closedt)}시`;
+    //     else if (!skipDate && !skipMinute) rslt += ` ~ ${GGdate.toYYMMDDdHHIIdot(closedt)}`;
+
+    //     /* return */
+    //     return rslt;
+    // },
+
     /**
-     * period format
+     * 일정(cls) 시작~종료 기간을 표시용 문자열로 변환
+     *
+     * 예) 9월 12일 (토) 10-13시 (3시간)               - 시작/종료가 같은 날
+     * 예) 9월 12일 (토) 23-25시 (2시간)               - 자정을 넘기지만 24시간 이내라, 시작일 기준으로 24시를 넘겨 표기
+     * 예) 9월 12일 (토) 10시~ (3일간)                 - 24시간을 초과하면 종료일시 대신 기간(일수)으로 표기
+     * 예) 2027년 1월 1일 (토) 10-13시 (3시간)         - 올해가 아니면 연도를 표기 (미래/과거 모두)
+     *
      * @param {*} startdt
      * @param {*} closedt
      */
@@ -160,42 +215,55 @@ var GGdate =
             return "-";
 
         /* to date class */
-        startdt = GGdate.fromStr(startdt);
-        closedt = GGdate.fromStr(closedt);
+        let start = GGdate.fromStr(startdt);
+        let close = GGdate.fromStr(closedt);
+        if(start == null || close == null || isNaN(start) || isNaN(close))
+            return "-";
 
-        /* is same date startdt, closedt? */
-        let skipDate = false;
-        if(
-            startdt.getFullYear() === closedt.getFullYear() &&
-            startdt.getMonth()    === closedt.getMonth() &&
-            startdt.getDate()     === closedt.getDate()
-        )
+        /* 연도 (올해가 아닐 때만 표기) */
+        let yearPrefix = start.getFullYear() !== new Date().getFullYear() ? `${start.getFullYear()}년 ` : "";
+
+        /* 날짜 + 요일 */
+        let dateStr = `${yearPrefix}${start.getMonth()+1}월 ${start.getDate()}일(${GGdate.getDDDD(start)})`;
+
+        /* 소요시간 */
+        let diffMs = close - start;
+        let diffHours = diffMs / (60*60*1000);
+
+        /* 24시간 초과 : 종료일시 대신 기간(일수)으로 표기 */
+        if(diffHours > 24)
         {
-            skipDate = true;
+            let dayCount = Math.ceil(diffHours / 24);
+            let startTimeStr = start.getMinutes() === 0 ? `${start.getHours()}시` : `${start.getHours()}:${GGdate.getII(start)}`;
+            return `${dateStr} ${startTimeStr}~ (${dayCount}일간)`;
         }
 
-        /* is 00 minutes both date? */
-        let skipMinute = false;
-        if(
-            startdt.getMinutes() === 0 &&
-            closedt.getMinutes() === 0
-        )
+        /* 24시간 이내 : 시작일 기준으로 자정을 넘긴 시각까지 이어서 표기 (예 : 23-25시) */
+        let startDateOnly = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+        let closeDateOnly = new Date(close.getFullYear(), close.getMonth(), close.getDate());
+        let dayDiff = GGdate.getDaysBetweenDates(startDateOnly, closeDateOnly);
+        let endHour = close.getHours() + (dayDiff * 24);
+
+        let timeStr = "";
+        if(start.getMinutes() === 0 && close.getMinutes() === 0)
+            timeStr = `${start.getHours()}-${endHour}시`;
+        else
+            timeStr = `${start.getHours()}:${GGdate.getII(start)}-${String(endHour).padStart(2,'0')}:${GGdate.getII(close)}`;
+
+        /* 소요시간 표기 */
+        let durationStr = "";
+        if(diffMs % (60*60*1000) === 0)
         {
-            skipMinute = true;
+            durationStr = `(${diffHours}시간)`;
+        }
+        else
+        {
+            let durationH = Math.floor(diffHours);
+            let durationM = Math.round((diffMs % (60*60*1000)) / (60*1000));
+            durationStr = durationH > 0 ? `(${durationH}시간 ${durationM}분)` : `(${durationM}분)`;
         }
 
-        /* format */
-        let rslt = GGdate.toYYMMDDddot(startdt);
-        if      ( skipMinute) rslt += ` ${GGdate.getHH(startdt)}`;
-        else if (!skipMinute) rslt += ` ${GGdate.getHH(startdt)}:${GGdate.getII(startdt)}`;
-
-        if      ( skipDate &&  skipMinute) rslt += `-${GGdate.getHH(closedt)}시`;
-        else if ( skipDate && !skipMinute) rslt += `-${GGdate.getHH(closedt)}:${GGdate.getII(closedt)}`;
-        else if (!skipDate &&  skipMinute) rslt += ` ~ ${GGdate.toYYMMDDddot(closedt)} ${GGdate.getHH(closedt)}시`;
-        else if (!skipDate && !skipMinute) rslt += ` ~ ${GGdate.toYYMMDDdHHIIdot(closedt)}`;
-
-        /* return */
-        return rslt;
+        return `${dateStr} ${timeStr} ${durationStr}`;
     },
 
     /* e.g. getDaysBetweenDates( 22-Jul-2011, 29-jul-2011) => 7. */

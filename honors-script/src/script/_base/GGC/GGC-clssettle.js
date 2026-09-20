@@ -19,6 +19,6 @@ GGC.Clssettle =
         if(val == GGF.Clssettle.Settlestatus.LOSS) return "ngtv";
         return "";
     },
-    settlestatusCard(val) { return `<span class="common-card" card-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
+    settlestatusCard(val) { return `<span class="common-pill" pill-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
     settlestatusFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
 }

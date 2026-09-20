@@ -35,7 +35,7 @@ class MGrpmtaga
     /* ========================= */
     makePill()
     {
-        return `<div class="MGrpmtaga-makePill-div common-card" card-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>`;
+        return `<div class="MGrpmtaga-makePill-div common-pill" pill-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>`;
     }
 
     make(btnHtml="")
@@ -44,7 +44,7 @@ class MGrpmtaga
             <div class="MGrpmtaga-make-div-modelTop common-div-card">
                 <div class="common-flexParentLR">
                     <div class="common-fonts09">
-                        <div class="common-card" card-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>
+                        <div class="common-pill" pill-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>
                     </div>
                     <div class="common-fonts09">
                         <div class="common-alertBadge">${this.getTagregcnt()}명</div>

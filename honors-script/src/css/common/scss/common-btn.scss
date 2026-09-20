@@ -8,7 +8,7 @@
 @mixin btnInnerNormal   ($color)  { border:1px solid color.scale($color, $lightness: -25%); background:$color; @if color.channel($color, "lightness", $space: hsl) > 55% { color:color.scale($color, $lightness: -75%); } @else { color:color.scale($color, $lightness: 99%); } }
 @mixin btnOuterActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
 @mixin btnInnerActive   ($color)  { border-color: rgba($color, 0.3); background:rgba($color, 0.3); }
-@mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorSnow; color:$color; }
+@mixin btnOuterDisabled ($color)  { border:1px solid color.grayscale($color); background:$colorWwww; color:$color; }
 @mixin btnInnerDisabled ($color)  { border:1px solid color.grayscale($color); background:color.grayscale($color); color:$color; }
 
 /* ============================== */
@@ -30,7 +30,7 @@ button > i { padding-top: 0.2em; }
     padding: $padTiny $padHalf calc($padTiny + 0.1em);
     text-decoration: none;
     border-radius: $borderRadiusDefault;
-    @include colorSnowBackSolid;
+    @include colorWwwwBackSolid;
     line-height: 1.5;
 }
 .common-btn-round { border-radius: 100%; }
@@ -115,7 +115,7 @@ button > i { padding-top: 0.2em; }
     left: 0px;
     width: 100%;
     background-color: $colorMain;
-    color: $colorSnow;
+    color: $colorWwww;
     @include fonts11;
     @include fonth16;
     padding: $padMore;

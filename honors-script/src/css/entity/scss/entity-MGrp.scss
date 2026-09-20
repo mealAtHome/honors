@@ -54,7 +54,7 @@
 }
 .MakeGrpCardMain-bandLabel
 {
-    color: rgba(var(--colorSnowRgb), 0.75);
+    color: rgba(var(--colorWwwwRgb), 0.75);
     font-weight: 900;
     font-size: 0.7em;
     letter-spacing: 0.12em;
@@ -72,7 +72,7 @@
 }
 .MakeGrpCardMain-logoMain
 {
-    border: 0.2em solid $colorSnow;
+    border: 0.2em solid $colorWwww;
     box-shadow: 0 0.1em 0.4em rgba(0,0,0,0.15);
 }
 .MakeGrpCardMain-memberBadge
@@ -81,12 +81,12 @@
     bottom: -0.4em;
     right: -0.4em;
     background: $colorHold;
-    color: $colorSnow;
+    color: $colorWwww;
     font-size: 0.65em;
     font-weight: 900;
     padding: 0.15em 0.4em;
     border-radius: 999px;
-    border: 0.15em solid $colorSnow;
+    border: 0.15em solid $colorWwww;
     white-space: nowrap;
 }
 .MakeGrpCardMain-statRow

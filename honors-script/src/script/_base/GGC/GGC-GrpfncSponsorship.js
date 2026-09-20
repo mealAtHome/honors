@@ -15,6 +15,6 @@ GGC.GrpfncSponsorship =
         if(val == GGF.GrpfncSponsorship.Spontype.MONEY) return "pstv";
         return "";
     },
-    spontypeCard(val) { return `<span class="common-card" card-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
+    spontypeCard(val) { return `<span class="common-pill" pill-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
     spontypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
 }
