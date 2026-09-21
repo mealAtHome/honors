@@ -2,7 +2,7 @@ var GGslideform =
 {
     next: function(el)
     {
-        let elOpen = $(el).find(".common-div-slideformChild[slideform-status='open']");
+        let elOpen = $(el).find(".common-div-formChild[form-type='slide'][slideform-status='open']");
         let elNext = $(elOpen.attr("slideform-next"));
         let elProg = $(elNext.attr("slideform-progress"));
         let elProgVal = elNext.attr("slideform-progressval");
@@ -13,7 +13,7 @@ var GGslideform =
 
     prev: function(el)
     {
-        let elOpen = $(el).find(".common-div-slideformChild[slideform-status='open']");
+        let elOpen = $(el).find(".common-div-formChild[form-type='slide'][slideform-status='open']");
         let elPrev = $(elOpen.attr("slideform-prev"));
         let elProg = $(elPrev.attr("slideform-progress"));
         let elProgVal = elPrev.attr("slideform-progressval");

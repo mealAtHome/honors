@@ -22,7 +22,7 @@
                 padding-right: 0.6em;
             }
         </style>
-        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formChooseGrp" slideform-next="#CUDE-div-formIntro" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="CUDE-div-formChooseGrp" slideform-next="#CUDE-div-formIntro" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
             <div class="common-div-headerPadding"></div>
 
             <!-- 모임선택 -->
@@ -44,7 +44,7 @@
         <!-- ======================== -->
         <!-- 일정소개 -->
         <!-- ======================== -->
-        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formIntro" slideform-next="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="CUDE-div-formIntro" slideform-next="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="16">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -97,7 +97,7 @@
         <!-- ======================== -->
         <!-- 일정장소 -->
         <!-- ======================== -->
-        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formPlace" slideform-next="#CUDE-div-formDate" slideform-prev="#CUDE-div-formIntro" slideform-progress="#CUDE-div-progress" slideform-progressval="32">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="CUDE-div-formPlace" slideform-next="#CUDE-div-formDate" slideform-prev="#CUDE-div-formIntro" slideform-progress="#CUDE-div-progress" slideform-progressval="32">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -133,7 +133,7 @@
         <!-- ======================== -->
         <!-- 일정일시 -->
         <!-- ======================== -->
-        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formDate" slideform-next="#CUDE-div-formApply" slideform-prev="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="49">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="CUDE-div-formDate" slideform-next="#CUDE-div-formApply" slideform-prev="#CUDE-div-formPlace" slideform-progress="#CUDE-div-progress" slideform-progressval="49">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -186,7 +186,7 @@
         <!-- ======================== -->
         <!-- 참가모집일시 -->
         <!-- ======================== -->
-        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formApply" slideform-next="#CUDE-div-formMng" slideform-prev="#CUDE-div-formDate" slideform-progress="#CUDE-div-progress" slideform-progressval="65">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="CUDE-div-formApply" slideform-next="#CUDE-div-formMng" slideform-prev="#CUDE-div-formDate" slideform-progress="#CUDE-div-progress" slideform-progressval="65">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -238,7 +238,7 @@
         <!-- ======================== -->
         <!-- 일정주관 -->
         <!-- ======================== -->
-        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formMng" slideform-next="#CUDE-div-formComplete" slideform-prev="#CUDE-div-formApply" slideform-progress="#CUDE-div-progress" slideform-progressval="83">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="CUDE-div-formMng" slideform-next="#CUDE-div-formComplete" slideform-prev="#CUDE-div-formApply" slideform-progress="#CUDE-div-progress" slideform-progressval="83">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -283,7 +283,7 @@
         <!-- ======================== -->
         <!-- 일정생성 -->
         <!-- ======================== -->
-        <div class="common-div-slideformChild" slideform-status="wait" id="CUDE-div-formComplete" slideform-prev="#CUDE-div-formMng" slideform-progress="#CUDE-div-progress" slideform-progressval="100">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="CUDE-div-formComplete" slideform-prev="#CUDE-div-formMng" slideform-progress="#CUDE-div-progress" slideform-progressval="100">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -488,7 +488,7 @@
             $(".CUDE-btn-formNext").click(function()
             {
                 /* get slideformChild's id */
-                let id = $(this).closest(".common-div-slideformChild").attr("id");
+                let id = $(this).closest(".common-div-formChild[form-type='slide']").attr("id");
 
                 /* validation by id */
                 switch(id)

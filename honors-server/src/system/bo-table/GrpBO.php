@@ -136,10 +136,16 @@ class GrpBO extends _CommonBO
             , ac.addrstrfull        grpbaseaddrstr
             , ROUND(
                 6371 * ACOS(
-                    LEAST(1.0, GREATEST(-1.0,
-                        COS(RADIANS(ST_X(t.grpbasepoint))) * COS(RADIANS(ST_X(eu.userloginedpoint))) * COS(RADIANS(ST_Y(eu.userloginedpoint)) - RADIANS(ST_Y(t.grpbasepoint)))
-                        + SIN(RADIANS(ST_X(t.grpbasepoint))) * SIN(RADIANS(ST_X(eu.userloginedpoint)))
-                    ))
+                    LEAST(
+                        1.0,
+                        GREATEST(
+                            -1.0,
+                            COS(RADIANS(ST_X(t.grpbasepoint))) *
+                            COS(RADIANS(ST_X(eu.userloginedpoint))) *
+                            COS(RADIANS(ST_Y(eu.userloginedpoint)) - RADIANS(ST_Y(t.grpbasepoint))) +
+                            SIN(RADIANS(ST_X(t.grpbasepoint))) * SIN(RADIANS(ST_X(eu.userloginedpoint)))
+                        )
+                    )
                 )
               , 1) grpdistancekm
         ";

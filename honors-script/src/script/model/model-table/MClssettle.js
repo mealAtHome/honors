@@ -76,7 +76,7 @@ class MClssettle
     getBillpointedWon() { return GGC.Common.priceWon(this.billpointed); }
     getBillfinalWon() { return GGC.Common.priceWon(this.billfinal); }
     getGrpmPointWon() { return GGC.Common.priceWon(this.grpm_point); }
-    getClsPeriod() { return GGdate.clsPeriod(this.getClsstartdt(), this.getClsclosedt()); }
+    getClsPeriod() { return GGdate.period(this.getClsstartdt(), this.getClsclosedt()); }
     getGrpmPointAfterSettle() { return this.getGrpmPoint() + this.getBillpointed();}
     getGrpmPointAfterSettleWon() { return GGC.Common.priceWon(this.getGrpmPointAfterSettle()); }
 
