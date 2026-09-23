@@ -13,8 +13,8 @@ define("MAINTENANCE"  , false);
 define("LANG"         , "kr");
 define("SUCCEED"      , "S-0001"); /* API RESULT */
 define("API_KEY"      , "racoonable"); /* 배치실행 키 */
-define("VERSIONSV"    , "10011"); /* 버전정보 */
-define("VERSIONDB"    , "10011"); /* 버전정보 */
+define("VERSIONSV"    , "10012"); /* 버전정보 */
+define("VERSIONDB"    , "10012"); /* 버전정보 */
 
 /* DB info */
 $documentRoot = $_SERVER['DOCUMENT_ROOT'];
