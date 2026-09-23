@@ -1,7 +1,6 @@
 
 
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -118,7 +117,6 @@ i {
   padding-top: 0.1em;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -601,7 +599,6 @@ button > i {
   background: rgba(2, 6, 84, 0.2);
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -781,7 +778,7 @@ div {
   overflow-x: hidden;
 }
 
-.common-div-slideformChild {
+.common-div-formChild[form-type=slide] {
   position: absolute;
   top: 0;
   left: 0;
@@ -790,17 +787,17 @@ div {
   padding: 1em 2em;
 }
 
-.common-div-slideformChild[slideform-status=exit] {
+.common-div-formChild[form-type=slide][slideform-status=exit] {
   transform: translateX(-100%);
   transition: transform 0.3s ease; /* display: none; */
 }
 
-.common-div-slideformChild[slideform-status=open] {
+.common-div-formChild[form-type=slide][slideform-status=open] {
   transform: translateX(0);
   transition: transform 0.3s ease;
 }
 
-.common-div-slideformChild[slideform-status=wait] {
+.common-div-formChild[form-type=slide][slideform-status=wait] {
   transform: translateX(100%);
   transition: transform 0.3s ease; /* display: none; */
 }
@@ -995,7 +992,7 @@ div {
   padding: 0.6em;
   box-sizing: content-box;
   text-align: left;
-  /* color: $colorSnow; */
+  /* color: $colorWwww; */
   background: white;
   border: 0.04em solid #e4e7f0;
 }
@@ -1078,25 +1075,26 @@ div {
 }
 
 .common-div-header {
+  display: flex;
   z-index: 10000;
   position: absolute;
   left: 0;
   right: 0;
-  /* color: $colorSnow; */
+  /* color: $colorWwww; */
   width: 100%;
   height: 3em;
 }
 
 .common-div-header > div[header=back] {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   width: auto;
-  line-height: 3em;
 }
 
 .common-div-header > div[header=title] {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   width: auto;
-  line-height: 3em;
   padding-left: 0.6em;
   font-size: 1.2em;
   font-weight: bold;
@@ -1336,7 +1334,6 @@ div {
   gap: 0.8em;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -1397,7 +1394,6 @@ div {
 /* customized checkbox */
 /* ============================= */
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -1713,7 +1709,6 @@ div {
 /* 스마트폰 이상 (최소 600px 초과일경우) */
 /* ============================ */
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -1803,7 +1798,6 @@ div {
   border: 1px solid #020654;
 } /* 일반 html 사이의 hr */
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -1861,7 +1855,6 @@ div {
 /* 패딩 - 아주 약간 */
 /* 패딩 - 아주 더 약간 */
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2011,7 +2004,6 @@ div {
   border: 0.07em solid #020654;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2138,7 +2130,6 @@ div {
   outline-offset: 0.125em;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2262,7 +2253,6 @@ div {
   font-size: 0.9em;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2384,7 +2374,6 @@ div {
   background-color: #020654;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2463,7 +2452,6 @@ div {
   vertical-align: middle;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2532,10 +2520,9 @@ div {
   line-height: 1.6;
   text-align: left;
   height: 2.2em;
-  /* color: $colorSnow; */
+  /* color: $colorWwww; */
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2727,7 +2714,6 @@ i ~ span {
 /* rgb( 34  , 139 , 34  ) Forest Green */
 /* rgb( 210 , 43  , 43  ) Cadmium Red */
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2844,7 +2830,6 @@ i ~ span {
   transform: translateX(26px);
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -2925,7 +2910,7 @@ i ~ span {
   --colorErrr: #ce2727;
   --colorNgtv: #780000;
   --colorEndd: #717171;
-  --colorSnow: #ffffff;
+  --colorWwww: #ffffff;
 }
 
 :root {
@@ -2949,7 +2934,7 @@ i ~ span {
   --colorErrrRgb: 206, 39, 39;
   --colorNgtvRgb: 120, 0, 0;
   --colorEnddRgb: 113, 113, 113;
-  --colorSnowRgb: 255, 255, 255;
+  --colorWwwwRgb: 255, 255, 255;
 }
 
 :root {
@@ -2979,15 +2964,10 @@ i ~ span {
   color: #020654;
 }
 
-.common-card[card-color=main] {
-  color: #020654;
-  background-color: rgba(2, 6, 84, 0.2);
-}
-
 .common-pill[pill-color=main] {
   color: #020654;
-  background-color: #ffffff;
-  border: 0.07em solid #020654;
+  background-color: rgba(var(--colorMainRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorMainRgb), 0.2);
 }
 
 .common-pill[pill-color=main]:active {
@@ -3007,15 +2987,10 @@ i ~ span {
   color: #020421;
 }
 
-.common-card[card-color=dark] {
-  color: #020421;
-  background-color: rgba(2, 4, 33, 0.2);
-}
-
 .common-pill[pill-color=dark] {
   color: #020421;
-  background-color: #ffffff;
-  border: 0.07em solid #020421;
+  background-color: rgba(var(--colorDarkRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorDarkRgb), 0.2);
 }
 
 .common-pill[pill-color=dark]:active {
@@ -3035,15 +3010,10 @@ i ~ span {
   color: #1b2a6b;
 }
 
-.common-card[card-color=head] {
-  color: #1b2a6b;
-  background-color: rgba(27, 42, 107, 0.2);
-}
-
 .common-pill[pill-color=head] {
   color: #1b2a6b;
-  background-color: #ffffff;
-  border: 0.07em solid #1b2a6b;
+  background-color: rgba(var(--colorHeadRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorHeadRgb), 0.2);
 }
 
 .common-pill[pill-color=head]:active {
@@ -3063,15 +3033,10 @@ i ~ span {
   color: #3d6bf5;
 }
 
-.common-card[card-color=side] {
-  color: #3d6bf5;
-  background-color: rgba(61, 107, 245, 0.2);
-}
-
 .common-pill[pill-color=side] {
   color: #3d6bf5;
-  background-color: #ffffff;
-  border: 0.07em solid #3d6bf5;
+  background-color: rgba(var(--colorSideRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorSideRgb), 0.2);
 }
 
 .common-pill[pill-color=side]:active {
@@ -3091,15 +3056,10 @@ i ~ span {
   color: #3c435c;
 }
 
-.common-card[card-color=body] {
-  color: #3c435c;
-  background-color: rgba(60, 67, 92, 0.2);
-}
-
 .common-pill[pill-color=body] {
   color: #3c435c;
-  background-color: #ffffff;
-  border: 0.07em solid #3c435c;
+  background-color: rgba(var(--colorBodyRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorBodyRgb), 0.2);
 }
 
 .common-pill[pill-color=body]:active {
@@ -3119,15 +3079,10 @@ i ~ span {
   color: #7a7d84;
 }
 
-.common-card[card-color=cmmt] {
-  color: #7a7d84;
-  background-color: rgba(122, 125, 132, 0.2);
-}
-
 .common-pill[pill-color=cmmt] {
   color: #7a7d84;
-  background-color: #ffffff;
-  border: 0.07em solid #7a7d84;
+  background-color: rgba(var(--colorCmmtRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorCmmtRgb), 0.2);
 }
 
 .common-pill[pill-color=cmmt]:active {
@@ -3147,15 +3102,10 @@ i ~ span {
   color: #c4c7ce;
 }
 
-.common-card[card-color=edge] {
-  color: #c4c7ce;
-  background-color: rgba(196, 199, 206, 0.2);
-}
-
 .common-pill[pill-color=edge] {
   color: #c4c7ce;
-  background-color: #ffffff;
-  border: 0.07em solid #c4c7ce;
+  background-color: rgba(var(--colorSeptRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorSeptRgb), 0.2);
 }
 
 .common-pill[pill-color=edge]:active {
@@ -3175,15 +3125,10 @@ i ~ span {
   color: #e4e7f0;
 }
 
-.common-card[card-color=line] {
-  color: #e4e7f0;
-  background-color: rgba(228, 231, 240, 0.2);
-}
-
 .common-pill[pill-color=line] {
   color: #e4e7f0;
-  background-color: #ffffff;
-  border: 0.07em solid #e4e7f0;
+  background-color: rgba(var(--colorLineRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorLineRgb), 0.2);
 }
 
 .common-pill[pill-color=line]:active {
@@ -3203,15 +3148,10 @@ i ~ span {
   color: #3d6bf5;
 }
 
-.common-card[card-color=pstv] {
-  color: #3d6bf5;
-  background-color: rgba(61, 107, 245, 0.2);
-}
-
 .common-pill[pill-color=pstv] {
   color: #3d6bf5;
-  background-color: #ffffff;
-  border: 0.07em solid #3d6bf5;
+  background-color: rgba(var(--colorPstvRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorPstvRgb), 0.2);
 }
 
 .common-pill[pill-color=pstv]:active {
@@ -3231,15 +3171,10 @@ i ~ span {
   color: #009600;
 }
 
-.common-card[card-color=allw] {
-  color: #009600;
-  background-color: rgba(0, 150, 0, 0.2);
-}
-
 .common-pill[pill-color=allw] {
   color: #009600;
-  background-color: #ffffff;
-  border: 0.07em solid #009600;
+  background-color: rgba(var(--colorAllwRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorAllwRgb), 0.2);
 }
 
 .common-pill[pill-color=allw]:active {
@@ -3259,15 +3194,10 @@ i ~ span {
   color: #2865ff;
 }
 
-.common-card[card-color=ntce] {
-  color: #2865ff;
-  background-color: rgba(40, 101, 255, 0.2);
-}
-
 .common-pill[pill-color=ntce] {
   color: #2865ff;
-  background-color: #ffffff;
-  border: 0.07em solid #2865ff;
+  background-color: rgba(var(--colorNtceRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorNtceRgb), 0.2);
 }
 
 .common-pill[pill-color=ntce]:active {
@@ -3287,15 +3217,10 @@ i ~ span {
   color: #039a00;
 }
 
-.common-card[card-color=prog] {
-  color: #039a00;
-  background-color: rgba(3, 154, 0, 0.2);
-}
-
 .common-pill[pill-color=prog] {
   color: #039a00;
-  background-color: #ffffff;
-  border: 0.07em solid #039a00;
+  background-color: rgba(var(--colorProgRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorProgRgb), 0.2);
 }
 
 .common-pill[pill-color=prog]:active {
@@ -3315,15 +3240,10 @@ i ~ span {
   color: #3c435c;
 }
 
-.common-card[card-color=info] {
-  color: #3c435c;
-  background-color: rgba(60, 67, 92, 0.2);
-}
-
 .common-pill[pill-color=info] {
   color: #3c435c;
-  background-color: #ffffff;
-  border: 0.07em solid #3c435c;
+  background-color: rgba(var(--colorInfoRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorInfoRgb), 0.2);
 }
 
 .common-pill[pill-color=info]:active {
@@ -3343,15 +3263,10 @@ i ~ span {
   color: #EAF0FF;
 }
 
-.common-card[card-color=dtil] {
-  color: #EAF0FF;
-  background-color: rgba(234, 240, 255, 0.2);
-}
-
 .common-pill[pill-color=dtil] {
   color: #EAF0FF;
-  background-color: #ffffff;
-  border: 0.07em solid #EAF0FF;
+  background-color: rgba(var(--colorDtilRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorDtilRgb), 0.2);
 }
 
 .common-pill[pill-color=dtil]:active {
@@ -3371,15 +3286,10 @@ i ~ span {
   color: #ffb300;
 }
 
-.common-card[card-color=hold] {
-  color: #ffb300;
-  background-color: rgba(255, 179, 0, 0.2);
-}
-
 .common-pill[pill-color=hold] {
   color: #ffb300;
-  background-color: #ffffff;
-  border: 0.07em solid #ffb300;
+  background-color: rgba(var(--colorHoldRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorHoldRgb), 0.2);
 }
 
 .common-pill[pill-color=hold]:active {
@@ -3399,15 +3309,10 @@ i ~ span {
   color: #ff7415;
 }
 
-.common-card[card-color=cncl] {
-  color: #ff7415;
-  background-color: rgba(255, 116, 21, 0.2);
-}
-
 .common-pill[pill-color=cncl] {
   color: #ff7415;
-  background-color: #ffffff;
-  border: 0.07em solid #ff7415;
+  background-color: rgba(var(--colorCnclRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorCnclRgb), 0.2);
 }
 
 .common-pill[pill-color=cncl]:active {
@@ -3427,15 +3332,10 @@ i ~ span {
   color: #ff7415;
 }
 
-.common-card[card-color=warn] {
-  color: #ff7415;
-  background-color: rgba(255, 116, 21, 0.2);
-}
-
 .common-pill[pill-color=warn] {
   color: #ff7415;
-  background-color: #ffffff;
-  border: 0.07em solid #ff7415;
+  background-color: rgba(var(--colorWarnRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorWarnRgb), 0.2);
 }
 
 .common-pill[pill-color=warn]:active {
@@ -3455,15 +3355,10 @@ i ~ span {
   color: #ce2727;
 }
 
-.common-card[card-color=errr] {
-  color: #ce2727;
-  background-color: rgba(206, 39, 39, 0.2);
-}
-
 .common-pill[pill-color=errr] {
   color: #ce2727;
-  background-color: #ffffff;
-  border: 0.07em solid #ce2727;
+  background-color: rgba(var(--colorErrrRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorErrrRgb), 0.2);
 }
 
 .common-pill[pill-color=errr]:active {
@@ -3483,15 +3378,10 @@ i ~ span {
   color: #780000;
 }
 
-.common-card[card-color=ngtv] {
-  color: #780000;
-  background-color: rgba(120, 0, 0, 0.2);
-}
-
 .common-pill[pill-color=ngtv] {
   color: #780000;
-  background-color: #ffffff;
-  border: 0.07em solid #780000;
+  background-color: rgba(var(--colorNgtvRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorNgtvRgb), 0.2);
 }
 
 .common-pill[pill-color=ngtv]:active {
@@ -3511,15 +3401,10 @@ i ~ span {
   color: #717171;
 }
 
-.common-card[card-color=endd] {
-  color: #717171;
-  background-color: rgba(113, 113, 113, 0.2);
-}
-
 .common-pill[pill-color=endd] {
   color: #717171;
-  background-color: #ffffff;
-  border: 0.07em solid #717171;
+  background-color: rgba(var(--colorEnddRgb), 0.2);
+  border: 0.07em solid rgba(var(--colorEnddRgb), 0.2);
 }
 
 .common-pill[pill-color=endd]:active {
@@ -3531,39 +3416,45 @@ i ~ span {
   color: rgb(253.58, 253.58, 253.58);
 }
 
-.common-colorFont[font-color=snow] {
+.common-colorFont[font-color=wwww] {
   color: #ffffff;
 }
 
-.common-colorSnow {
+.common-colorWwww {
   color: #ffffff;
 }
 
-.common-card[card-color=snow] {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.2);
+.common-pill[pill-color=wwww] {
+  color: #3c435c;
+  background-color: rgba(var(--colorBodyRgb), 0);
+  border: 0.07em solid rgba(var(--colorBodyRgb), 1);
+}
+
+.common-pill[pill-color=wwww]:active {
+  background-color: rgba(var(--colorWwwwRgb), 0.2);
+}
+
+.common-pill[pill-color=wwww][tab=tab] {
+  background-color: #ffffff;
+  color: rgb(63.75, 63.75, 63.75);
+}
+
+/* .common-colorFont[font-color=trns] { color:$colorTrns;} .common-colorTrns { color:$colorTrns;} */
+.common-pill[pill-color=trns] {
+  color: #3c435c;
+  background-color: rgba(var(--colorBodyRgb), 0);
+  border: 0.07em solid rgba(var(--colorBodyRgb), 0);
 }
 
 /* --------------- */
-/* common-card */
+/* common-pill */
 /* --------------- */
 .common-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-weight: bold;
   padding: 0.3em 0.8em 0.4em;
   border-radius: 0.3em;
-}
-
-.common-card {
-  display: inline-block;
-  font-weight: bold;
-  padding: 0.3em 0.8em 0.4em;
-  border-radius: 0.3em;
-}
-
-.common-card[card-type=mini] {
-  font-weight: normal;
-  padding: 0.2em 0.3em 0.3em;
 }
 
 .common-pill[pill-type=mini] {
@@ -3595,7 +3486,6 @@ i ~ span {
   border-radius: 9999px;
 }
 
-/* .common-alert[card-type=mini] { font-weight: normal; padding: $padTiny $padHalf; } */
 /* --------------- */
 /* tags */
 /* --------------- */
@@ -3918,7 +3808,16 @@ i ~ span {
   align-items: center;
 }
 
-@charset "UTF-8";
+.common-pageUrlForDevelop {
+  position: fixed;
+  top: 0.2em;
+  right: 0.4em;
+  width: auto;
+  z-index: 1000;
+  color: var(--colorCmmt);
+  font-size: 0.8em;
+}
+
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -4443,7 +4342,6 @@ i ~ span {
   color: #3c435c;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -4528,7 +4426,6 @@ i ~ span {
 /* .common-ul-announce > li { margin-bottom: $marTiny; } */
 /* .common-ul-announce > li:nth-last-child(1) { margin-bottom: 0em; } */
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -4611,7 +4508,7 @@ i ~ span {
 
 .common-tabbar-item {
   display: inline-block;
-  padding: 0.3em 0.8em;
+  padding: 0.5em 0.8em;
   border-bottom: 0.21em solid #c4c7ce;
   color: #3c435c;
   text-align: center;
@@ -4627,6 +4524,49 @@ i ~ span {
 .common-tabbar-item:active {
   color: #020654;
   background-color: rgba(var(--colorMain), 0.1);
+}
+
+/* ============================== */
+/* common-maintab (메인 탭 : 상위 toolbar 바로 아래에 고정) */
+/*
+    <div class="common-maintab-top common-fonts09">
+        <div class="DGRP-td-clsSubtype common-maintab-item" val="ing"    tab="tab">진행중</div>
+        <div class="DGRP-td-clsSubtype common-maintab-item" val="settle" tab=""   >정산중</div>
+    </div>
+*/
+/* ============================== */
+.common-maintab-top {
+  display: flex;
+  position: sticky;
+  top: 3em; /* .common-div-toolbar 높이(3em) 바로 아래에 고정 */
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 9999; /* toolbar(10000)보다는 아래 */
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border-bottom: 0.5px solid #e4e7f0;
+  gap: 0em;
+}
+
+.common-maintab-item {
+  flex: 1;
+  display: inline-block;
+  padding: 0.6em 0.6em;
+  border-bottom: 0.18em solid transparent;
+  color: #3c435c;
+  text-align: center;
+  font-weight: normal;
+}
+
+.common-maintab-item[tab=tab] {
+  color: #020654;
+  border-bottom: 0.18em solid #020654;
+  font-weight: bold;
+}
+
+.common-maintab-item:active {
+  background-color: rgba(var(--colorMainRgb), 0.2);
 }
 
 /* ========================= */
@@ -4878,7 +4818,6 @@ input { line-height: 1.5; }
 /* .index-div-footer > table > tbody > tr > td:active { background-color:rgba(0,0,0,0.1); } */
 .index-div-footer > table > tbody > tr > td[tab=tab]  { color: rgb(2, 6, 84); font-weight: bold; }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -5047,7 +4986,6 @@ input { line-height: 1.5; }
   background: #3c435c;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -5168,7 +5106,6 @@ input { line-height: 1.5; }
   margin: 0.2em 0.1em;
 }
 
-@charset "UTF-8";
 /* ============================== */
 /* 라벨 */
 /* ============================== */
@@ -5205,7 +5142,6 @@ input { line-height: 1.5; }
   width: 90%;
 }
 
-@charset "UTF-8";
 /* ==================== */
 /* 카테고리 선택 테이블 */
 /*
@@ -5229,7 +5165,6 @@ input { line-height: 1.5; }
   background-color: rgb(220, 220, 220);
 }
 
-@charset "UTF-8";
 /* ======================= */
 /* 주소검색 리스트 */
 /* ======================= */
@@ -5266,7 +5201,6 @@ input { line-height: 1.5; }
   white-space: normal;
 }
 
-@charset "UTF-8";
 /* ============================== */
 /* 공지사항 배너형 */
 /* ============================== */
@@ -5299,139 +5233,73 @@ input { line-height: 1.5; }
   white-space: normal;
 }
 
-@charset "UTF-8";
-/* 현재 진행중인 주문 리스트 > 엔티티 */
-.MClss-makeOrderingList-div-model {
-  display: inline-block;
-  margin-right: 0.5em;
-  margin-bottom: 0.5em;
-  width: 12em;
-  background-color: white;
-  box-shadow: 2px 2px 4px 1px #aaa;
-  vertical-align: top;
-}
-
-.MClss-makeOrderingList-div-model > table {
-  white-space: nowrap;
-  width: 100%;
-}
-
-.MClss-makeOrderingList-div-model > table > tbody > tr > td {
-  padding: 0.2em;
-}
-
-.MClss-makeOrderingList-div-model > table > tbody > tr > td[col=store_img] {
-  width: 1%;
-}
-
-.MClss-makeOrderingList-div-model > table > tbody > tr > td[col=store_name] {
-  width: 99%;
-  white-space: normal;
-  word-break: break-all;
-}
-
 /* ========================= */
-/* 주문 상세정보 */
+/* font main */
 /* ========================= */
-.MCls-makeOrderDetail-div-top {
-  margin: 0.5em;
-}
-
-.MCls-makeOrderDetail-tbl-common,
-.MCls-makeOrderDetail-div-top > table {
-  margin-left: 0.5em;
-  margin-bottom: 0.3em;
-  line-height: 1.6;
-}
-
 /* ========================= */
-/* 주문진행상태 */
+/* colors main */
 /* ========================= */
-.MCls-makeClsstatus-tbl-top {
-  border-collapse: collapse;
-  margin: 0.5em 0em;
-}
-
-.MCls-makeClsstatus-tbl-top > tbody > tr > td {
-  text-align: center;
-  padding: 0.3em 0.5em;
-  line-height: 1.2;
-}
-
-.MCls-makeClsstatus-tbl-top > tbody > tr:nth-child(1) > td {
-  border-top: 2px solid rgb(2, 6, 84);
-}
-
-.MCls-makeClsstatus-tbl-top > tbody > tr:nth-last-child(1) > td {
-  border-bottom: 2px solid rgb(2, 6, 84);
-  font-size: 0.9em;
-}
-
-.MCls-makeClsstatus-tbl-top > tbody > tr > td[status=wait] {
-  background-color: rgba(0, 0, 0, 0);
-}
-
-.MCls-makeClsstatus-tbl-top > tbody > tr > td[status=ing] {
-  background-color: rgba(0, 100, 0, 0.2);
-}
-
-.MCls-makeClsstatus-tbl-top > tbody > tr > td[status=failed] {
-  background-color: rgba(100, 0, 0, 0.2);
-}
-
-.MCls-makeClsstatus-tbl-top > tbody > tr > td[status=complete] {
-  background-color: rgba(2, 6, 84, 0.2);
-}
-
 /* ========================= */
-/* 주문정보 (simple + horizon) */
+/* colors */
 /* ========================= */
-.MClss-makeOrderSimpleHorizon-div-top > div:nth-child(1) {
-  border-top: 1px solid #ccc;
-}
-
-.MClss-makeOrderSimpleHorizon-div-top > div {
-  border-bottom: 1px solid #ccc;
-}
-
-.MCls-makeOrderSimpleHorizon-div-top {
+/* #1B4BB8 */
+/* rgb(2   , 6   , 84  ); #020654 */
+/* rgb(2   , 6   , 84  ); #020654 */
+/* rgb(27  , 42  , 107 ); #1B2A6B */
+/* rgb(61  , 107 , 245 ); #3D6BF5 */
+/* rgb(122 , 128 , 153 ); #7A8099 */
+/* rgb(122 , 128 , 153 ); #7A8099 */
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
+/* rgb(228 , 231 , 240 ); #E4E7F0 */
+/* rgb(0   , 2   , 120 ); #000278 */
+/* rgb(0   , 150 , 0   ); #009600 */
+/* rgb(3   , 154 , 0   ); #039a00 */
+/* rgb(40  , 101 , 255 ); #d9e4ff */
+/* rgb(40  , 101 , 255 ); #d9e4ff */
+/* rgb(234 , 240 , 255 ); #EAF0FF */
+/* rgb(212 , 173 , 0   ); #d4ad00 */
+/* rgb(255 , 116 , 21  ); #FF7415 */
+/* rgb(255 , 116 , 21  ); #FF7415 */
+/* rgb(206 , 39  , 39  ); #ce2727 */
+/* rgb(120 , 0   , 0   ); #780000 */
+/* rgb(120 , 0   , 0   ); #780000 */
+/* rgb(100 , 100 , 100 ); #636363 */
+/* ========================= */
+/* spacing */
+/* ========================= */
+/* ========================= */
+/* styles */
+/* ========================= */
+/* ========================= */
+/* margin / padding */
+/* ========================= */
+/* 마진 - 꽉 */
+/* 마진 - 꽉 */
+/* 마진 - 많음 */
+/* 마진 - 기본 */
+/* 마진 - 반 */
+/* 마진 - 약간 */
+/* 마진 - 아주 약간 */
+/* 마진 - 아주 더 약간 */
+/* 패딩 - 꽉 */
+/* 패딩 - 꽉 */
+/* 패딩 - 큰 */
+/* 패딩 - 기본 */
+/* 패딩 - 반 */
+/* 패딩 - 약간 */
+/* 패딩 - 아주 약간 */
+/* 패딩 - 아주 더 약간 */
+/* ========================= */
+/* MCls-make */
+/* ========================= */
+.MCls-make-top {
   position: relative;
-  display: block;
-  width: 100%;
 }
 
-.MCls-makeOrderSimpleHorizon-div-image {
-  /* width:100%; */
-  width: 3.4em;
-  height: 3.4em;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
-  margin-right: 0.4em;
-}
-
-.MCls-makeOrderSimpleHorizon-table-info {
-  width: 100%;
-  /* table-layout: fixed; */
-}
-
-.MCls-makeOrderSimpleHorizon-table-info > tbody > tr > td:nth-child(1) {
-  width: 10%;
-}
-
-.MCls-makeOrderSimpleHorizon-table-info > tbody > tr > td:nth-child(2) {
-  width: 90%;
-}
-
-.MCls-makeOrderSimpleHorizon-div-storeLike {
+.MCls-make-clsno {
   position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
-  width: 2em;
-  height: 2em;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: 0%;
+  top: 0.4em;
+  right: 0.6em;
 }
 
 .MClssettlehist-makeTable-mainTable > tbody > tr > td {
@@ -5572,7 +5440,6 @@ input { line-height: 1.5; }
   font-weight: normal;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -5693,7 +5560,7 @@ input { line-height: 1.5; }
 }
 
 .MakeGrpCardMain-bandLabel {
-  color: rgba(var(--colorSnowRgb), 0.75);
+  color: rgba(var(--colorWwwwRgb), 0.75);
   font-weight: 900;
   font-size: 0.7em;
   letter-spacing: 0.12em;
@@ -5900,7 +5767,6 @@ input { line-height: 1.5; }
   color: #222;
 }
 
-@charset "UTF-8";
 /* ========================= */
 /* font main */
 /* ========================= */
@@ -5963,4 +5829,5 @@ input { line-height: 1.5; }
 
 .MAddrcode-makeForChoose-row:active {
   color: #020654;
+  background-color: rgb(172.1720930233, 176.1162790698, 253.0279069767);
 }

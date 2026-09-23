@@ -224,6 +224,20 @@ var Navigation =
         }
 
         /* --------------- */
+        /* 홈에서 페이지를 좌우로 이동하면 발생하는 문제 */
+        /* 현재 페이지의 타입을 가져와서, normal을 제외한 페이지 스택 중 같은 타입을 가진 스택은 삭제한다. (자기자신은 제외)  */
+        /* --------------- */
+        let currentPageType = Navigation.getPageType(movePage);
+        if(currentPageType != "normal")
+        {
+            pageStack = pageStack.filter(stack =>
+            {
+                let stackPageType = Navigation.getPageType(stack.page);
+                return stackPageType != currentPageType || stack.page == movePage;
+            });
+        }
+
+        /* --------------- */
         /* 다음페이지에 전달할 파라미터를 저장 */
         /* --------------- */
         nextPageParam.viewMode = viewMode;
@@ -236,10 +250,13 @@ var Navigation =
         pageStack.push(stack);
         GGstorage.setPageStack(pageStack);
 
+
         /* --------------- */
         /* 실제적인 페이지 이동 */
         /* 페이지 이동에 대한 도큐먼트 : https://docs.google.com/spreadsheets/d/1aWIXsFjJcQ5Jqz1M6YfEBXO1itWStmLfkLnK6FO0IYg/edit#gid=2037633440 */
         /* --------------- */
+        let movePageUrl = Navigation.getURL(movePage);
+        let movePageFile = movePageUrl.split('/').pop();
         switch(viewMode)
         {
             case "page":
@@ -248,7 +265,7 @@ var Navigation =
                 if(lastViewMode == "dialog")
                     GGdialog.hide();
 
-                $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "slide"}).then(function()
+                $('#index-dom')[0].pushPage(movePageUrl, {"animation": "slide"}).then(function()
                 {
                     $("#index-dom > ons-page[load=y]").remove();
                     $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
@@ -257,11 +274,18 @@ var Navigation =
             }
             case "dialog":
             {
-                GGdialog.show(Navigation.getURL(movePage));
+                GGdialog.show(movePageUrl);
                 break;
             }
         } /* end case (viewMode) */
         console.log(pageStack);
+
+        /* 개발 모드일 경우, 현재 이동할 페이지의 파일명을 표시 */
+        if(LOCALMODE)
+        {
+            let movePageFile = movePageUrl.split('/').pop().split('?')[0];
+            $("#index-div-pageUrlForDevelop").html(movePageFile).show();
+        }
     },
 
     /* ================== */
@@ -322,6 +346,7 @@ var Navigation =
         /* 실제적인 페이지 이동 */
         /* 현재 페이지의 viewMode에 따라, 뒤로가기의 액션은 달라진다. */
         /* ---------- */
+        let movePageUrl = Navigation.getURL(movePage);
         switch(lastPageViewMode)
         {
             case "page":
@@ -331,7 +356,7 @@ var Navigation =
                     /* 이미 페이지가 엘리먼트로 존재하면, bringPageTop 함수를 사용 */
                     if($("#"+movePage).length > 0)
                     {
-                        $('#index-dom')[0].bringPageTop(Navigation.getURL(movePage), {"animation": "lift"}).then(function()
+                        $('#index-dom')[0].bringPageTop(movePageUrl, {"animation": "lift"}).then(function()
                         {
                             $("#index-dom > ons-page[id!="+movePage+"]").remove();
                             $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
@@ -340,7 +365,7 @@ var Navigation =
                     }
                     else
                     {
-                        $('#index-dom')[0].pushPage(Navigation.getURL(movePage), {"animation": "lift"}).then(function()
+                        $('#index-dom')[0].pushPage(movePageUrl, {"animation": "lift"}).then(function()
                         {
                             $("#index-dom > ons-page[id!="+movePage+"]").remove();
                             $("#index-dom > ons-page[id="+movePage+"]").attr("load", "y");
@@ -349,7 +374,7 @@ var Navigation =
                 }
                 else if(viewMode == "dialog")
                 {
-                    GGdialog.show(Navigation.getURL(movePage));
+                    GGdialog.show(movePageUrl);
                 }
                 break;
             } /* 뒤로가기를 하기 전, 현재 페이지의 viewMode이 "page" 인경우. */
@@ -364,12 +389,19 @@ var Navigation =
                 }
                 else if(viewMode == "dialog")
                 {
-                    GGdialog.moveBack(Navigation.getURL(movePage));
+                    GGdialog.moveBack(movePageUrl);
                 }
                 break;
             } /* 뒤로가기를 하기 전, 현재 페이지의 viewMode이 "dialog" 인경우. */
         } /* 현재 페이지의 viewMode에 따라, 뒤로가기의 액션은 달라진다. */
         console.log(pageStack);
+
+        /* 개발 모드일 경우, 현재 이동할 페이지의 파일명을 표시 */
+        if(LOCALMODE)
+        {
+            let movePageFile = movePageUrl.split('/').pop().split('?')[0];
+            $("#index-div-pageUrlForDevelop").html(movePageFile).show();
+        }
     },
 }
 
@@ -861,6 +893,22 @@ Navigation.executeMoveBack = function()
         /* Z00-system */        case Navigation.Page.Z21SystemBoardList : SBLI.close(true); break;
         /* Z00-system */        case Navigation.Page.Z22SystemBoardDetail : SBDL.close(true); break;
     }
+};
+
+Navigation.getPageType = function(code)
+{
+    let type = "normal";
+
+    /* 페이지에 대한 show 실행 */
+    switch(code)
+    {
+        /* A00-user */          case Navigation.Page.A11UserMainHome : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A12UserMainGrp : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A13UserMainCls : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A14UserMainSettle : type = "userhome"; break;
+        /* A00-user */          case Navigation.Page.A15UserMainManage : type = "userhome"; break;
+    }
+    return type;
 };
 
 /* ================== */
@@ -1554,6 +1602,8 @@ var CommonEvent =
         $('body').on('click',  '.commonEvent-tag-phoneCall',                   $.proxy(CommonEvent.phoneCall, this));              /* 전화 걸기 */
         $('body').on('click',  '.common-tab-top > .common-tab-item',           $.proxy(CommonEvent.tab2, this));                   /* 탭 */
         $('body').on('click',  '.common-tabbar-top > .common-tabbar-item',     $.proxy(CommonEvent.tabbar, this));                   /* 탭 */
+        $('body').on('click',  '.common-maintab-top > .common-maintab-item',   $.proxy(CommonEvent.maintab, this));                 /* div */
+        $('body').on('click',  '.commonEvent-copy',                            $.proxy(CommonEvent.copy, this));                   /* 탭 */
 
         /* viberator, sound */
         // $('body').on('click', 'button', $.proxy(touch.btn, this));
@@ -2139,6 +2189,28 @@ var CommonEvent =
             target.attr("tab", "tab");
         }
     },
+    maintab(e)
+    {
+        /* 클래스 선택 */
+        let target = $(e.target);
+        try
+        {
+            if(!target.hasClass("common-maintab-item"))
+                target = target.parent(".common-maintab-item");
+        } catch(e)
+        {
+            Common.toast(e);
+            return;
+        }
+
+        /* set tab */
+        let tab = target.attr("tab");
+        if(tab == undefined || tab == "")
+        {
+            target.parent(".common-maintab-top").find(".common-maintab-item[tab=tab]").attr("tab", "");
+            target.attr("tab", "tab");
+        }
+    },
 
     /* ========================== */
     /* commonEvent-btn-radio 라는 클래스를 가진 엘리먼트에 라디오 효과를 부여함 */
@@ -2584,6 +2656,30 @@ var CommonEvent =
                 window.open(telUrl, '_system');
             });
         }
+    },
+
+    copy(e)
+    {
+        e.stopPropagation();
+
+        /* class name */
+        let className = "commonEvent-copy";
+
+        /* 클래스 선택 */
+        let target = $(e.target);
+        if(!target.hasClass(className))
+            target = target.parents("."+className);
+
+        /* copy text */
+        let text = target.html().trim();
+        if(text != undefined)
+        {
+            navigator.clipboard.writeText(text).then(function() {
+                Common.toastInfo("복사되었습니다.");
+            }, function() {
+                Common.toastInfo("복사에 실패했습니다.");
+            });
+        }
     }
 }
 
@@ -2777,8 +2873,63 @@ var GGdate =
         return `${hh}:${mm}`;
     },
 
+    // /**
+    //  * period format
+    //  * @param {*} startdt
+    //  * @param {*} closedt
+    //  */
+    // period(startdt, closedt)
+    // {
+    //     if(Common.isEmpty(startdt) || Common.isEmpty(closedt))
+    //         return "-";
+
+    //     /* to date class */
+    //     startdt = GGdate.fromStr(startdt);
+    //     closedt = GGdate.fromStr(closedt);
+
+    //     /* is same date startdt, closedt? */
+    //     let skipDate = false;
+    //     if(
+    //         startdt.getFullYear() === closedt.getFullYear() &&
+    //         startdt.getMonth()    === closedt.getMonth() &&
+    //         startdt.getDate()     === closedt.getDate()
+    //     )
+    //     {
+    //         skipDate = true;
+    //     }
+
+    //     /* is 00 minutes both date? */
+    //     let skipMinute = false;
+    //     if(
+    //         startdt.getMinutes() === 0 &&
+    //         closedt.getMinutes() === 0
+    //     )
+    //     {
+    //         skipMinute = true;
+    //     }
+
+    //     /* format */
+    //     let rslt = GGdate.toYYMMDDddot(startdt);
+    //     if      ( skipMinute) rslt += ` ${GGdate.getHH(startdt)}`;
+    //     else if (!skipMinute) rslt += ` ${GGdate.getHH(startdt)}:${GGdate.getII(startdt)}`;
+
+    //     if      ( skipDate &&  skipMinute) rslt += `-${GGdate.getHH(closedt)}시`;
+    //     else if ( skipDate && !skipMinute) rslt += `-${GGdate.getHH(closedt)}:${GGdate.getII(closedt)}`;
+    //     else if (!skipDate &&  skipMinute) rslt += ` ~ ${GGdate.toYYMMDDddot(closedt)} ${GGdate.getHH(closedt)}시`;
+    //     else if (!skipDate && !skipMinute) rslt += ` ~ ${GGdate.toYYMMDDdHHIIdot(closedt)}`;
+
+    //     /* return */
+    //     return rslt;
+    // },
+
     /**
-     * period format
+     * 일정(cls) 시작~종료 기간을 표시용 문자열로 변환
+     *
+     * 예) 9월 12일 (토) 10-13시 (3시간)               - 시작/종료가 같은 날
+     * 예) 9월 12일 (토) 23-25시 (2시간)               - 자정을 넘기지만 24시간 이내라, 시작일 기준으로 24시를 넘겨 표기
+     * 예) 9월 12일 (토) 10시~ (3일간)                 - 24시간을 초과하면 종료일시 대신 기간(일수)으로 표기
+     * 예) 2027년 1월 1일 (토) 10-13시 (3시간)         - 올해가 아니면 연도를 표기 (미래/과거 모두)
+     *
      * @param {*} startdt
      * @param {*} closedt
      */
@@ -2788,42 +2939,55 @@ var GGdate =
             return "-";
 
         /* to date class */
-        startdt = GGdate.fromStr(startdt);
-        closedt = GGdate.fromStr(closedt);
+        let start = GGdate.fromStr(startdt);
+        let close = GGdate.fromStr(closedt);
+        if(start == null || close == null || isNaN(start) || isNaN(close))
+            return "-";
 
-        /* is same date startdt, closedt? */
-        let skipDate = false;
-        if(
-            startdt.getFullYear() === closedt.getFullYear() &&
-            startdt.getMonth()    === closedt.getMonth() &&
-            startdt.getDate()     === closedt.getDate()
-        )
+        /* 연도 (올해가 아닐 때만 표기) */
+        let yearPrefix = start.getFullYear() !== new Date().getFullYear() ? `${start.getFullYear()}년 ` : "";
+
+        /* 날짜 + 요일 */
+        let dateStr = `${yearPrefix}${start.getMonth()+1}월 ${start.getDate()}일(${GGdate.getDDDD(start)})`;
+
+        /* 소요시간 */
+        let diffMs = close - start;
+        let diffHours = diffMs / (60*60*1000);
+
+        /* 24시간 초과 : 종료일시 대신 기간(일수)으로 표기 */
+        if(diffHours > 24)
         {
-            skipDate = true;
+            let dayCount = Math.ceil(diffHours / 24);
+            let startTimeStr = start.getMinutes() === 0 ? `${start.getHours()}시` : `${start.getHours()}:${GGdate.getII(start)}`;
+            return `${dateStr} ${startTimeStr}~ (${dayCount}일간)`;
         }
 
-        /* is 00 minutes both date? */
-        let skipMinute = false;
-        if(
-            startdt.getMinutes() === 0 &&
-            closedt.getMinutes() === 0
-        )
+        /* 24시간 이내 : 시작일 기준으로 자정을 넘긴 시각까지 이어서 표기 (예 : 23-25시) */
+        let startDateOnly = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+        let closeDateOnly = new Date(close.getFullYear(), close.getMonth(), close.getDate());
+        let dayDiff = GGdate.getDaysBetweenDates(startDateOnly, closeDateOnly);
+        let endHour = close.getHours() + (dayDiff * 24);
+
+        let timeStr = "";
+        if(start.getMinutes() === 0 && close.getMinutes() === 0)
+            timeStr = `${start.getHours()}-${endHour}시`;
+        else
+            timeStr = `${start.getHours()}:${GGdate.getII(start)}-${String(endHour).padStart(2,'0')}:${GGdate.getII(close)}`;
+
+        /* 소요시간 표기 */
+        let durationStr = "";
+        if(diffMs % (60*60*1000) === 0)
         {
-            skipMinute = true;
+            durationStr = `(${diffHours}시간)`;
+        }
+        else
+        {
+            let durationH = Math.floor(diffHours);
+            let durationM = Math.round((diffMs % (60*60*1000)) / (60*1000));
+            durationStr = durationH > 0 ? `(${durationH}시간 ${durationM}분)` : `(${durationM}분)`;
         }
 
-        /* format */
-        let rslt = GGdate.toYYMMDDddot(startdt);
-        if      ( skipMinute) rslt += ` ${GGdate.getHH(startdt)}`;
-        else if (!skipMinute) rslt += ` ${GGdate.getHH(startdt)}:${GGdate.getII(startdt)}`;
-
-        if      ( skipDate &&  skipMinute) rslt += `-${GGdate.getHH(closedt)}시`;
-        else if ( skipDate && !skipMinute) rslt += `-${GGdate.getHH(closedt)}:${GGdate.getII(closedt)}`;
-        else if (!skipDate &&  skipMinute) rslt += ` ~ ${GGdate.toYYMMDDddot(closedt)} ${GGdate.getHH(closedt)}시`;
-        else if (!skipDate && !skipMinute) rslt += ` ~ ${GGdate.toYYMMDDdHHIIdot(closedt)}`;
-
-        /* return */
-        return rslt;
+        return `${dateStr} ${timeStr} ${durationStr}`;
     },
 
     /* e.g. getDaysBetweenDates( 22-Jul-2011, 29-jul-2011) => 7. */
@@ -2908,6 +3072,10 @@ var GGdate =
      */
     getPointOfDate(tg, fr, to)
     {
+        if (tg instanceof Date == false) { if (!isNaN(Date.parse(tg))) tg = new Date(tg); else throw new Error("Invalid target date"); }
+        if (fr instanceof Date == false) { if (!isNaN(Date.parse(fr))) fr = new Date(fr); else throw new Error("Invalid from date"); }
+        if (to instanceof Date == false) { if (!isNaN(Date.parse(to))) to = new Date(to); else throw new Error("Invalid to date"); }
+
         /* get date only */
         tg = new Date(tg.getFullYear(), tg.getMonth(), tg.getDate()).getTime();
         fr = new Date(fr.getFullYear(), fr.getMonth(), fr.getDate()).getTime();
@@ -3286,7 +3454,7 @@ var GGslideform =
 {
     next: function(el)
     {
-        let elOpen = $(el).find(".common-div-slideformChild[slideform-status='open']");
+        let elOpen = $(el).find(".common-div-formChild[form-type='slide'][slideform-status='open']");
         let elNext = $(elOpen.attr("slideform-next"));
         let elProg = $(elNext.attr("slideform-progress"));
         let elProgVal = elNext.attr("slideform-progressval");
@@ -3297,7 +3465,7 @@ var GGslideform =
 
     prev: function(el)
     {
-        let elOpen = $(el).find(".common-div-slideformChild[slideform-status='open']");
+        let elOpen = $(el).find(".common-div-formChild[form-type='slide'][slideform-status='open']");
         let elPrev = $(elOpen.attr("slideform-prev"));
         let elProg = $(elPrev.attr("slideform-progress"));
         let elProgVal = elPrev.attr("slideform-progressval");
@@ -3864,7 +4032,7 @@ GGC.Common =
         return src;
     },
 
-
+    
 
 
 };
@@ -3887,7 +4055,7 @@ GGC.Bankaccount =
         if(val == GGF.N) return "prog";
         return "";
     },
-    defaultflgCard(val) { return `<span class="common-card" card-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
+    defaultflgCard(val) { return `<span class="common-pill" pill-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
     defaultflgFont(val) { return `<span class="common-colorFont" font-color="${GGC.Bankaccount.defaultflgFeel(val)}">${GGC.Bankaccount.defaultflgCvrt(val)}</span>`; },
 
 };
@@ -3950,7 +4118,7 @@ GGC.Cls =
         }
         return rslt;
     },
-    clsstatusCard(val) { return `<span class="common-card" card-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
+    clsstatusCard(val) { return `<span class="common-pill" pill-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
     clsstatusFont(val) { return `<span class="common-colorFont" font-color="${GGC.Cls.clsstatusFeel(val)}">${GGC.Cls.clsstatusCvrt(val)}</span>`; },
 
     /* ----- */
@@ -3976,7 +4144,7 @@ GGC.Cls =
         }
         return rslt;
     },
-    clssettleflgCard(val) { return `<span class="common-card" card-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
+    clssettleflgCard(val) { return `<span class="common-pill" pill-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
     clssettleflgFont(val) { return `<span class="common-colorFont" font-color="${GGC.Cls.clssettleflgFeel(val)}">${GGC.Cls.clssettleflgCvrt(val)}</span>`; },
 
 
@@ -4005,7 +4173,7 @@ GGC.Cls =
         }
         return rslt;
     },
-    getGrpfinancereflectflgCard(val) { return `<span class="common-card" card-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
+    getGrpfinancereflectflgCard(val) { return `<span class="common-pill" pill-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
     getGrpfinancereflectflgFont(val) { return `<span class="common-colorFont" font-color="${GGC.Cls.getGrpfinancereflectflgFeel(val)}">${GGC.Cls.getGrpfinancereflectflgCvrt(val)}</span>`; },
 
     /* ----- */
@@ -4026,7 +4194,7 @@ GGC.Cls =
             case GGF.GGdate.PointOfDate.WITHIN   : color = GGF.Color.PROG; str = `모집중 (${GGdate.getTextForUpcoming(now, endDate)}까지)`; break; /* 두 기간 사이 */
             case GGF.GGdate.PointOfDate.PASSED   : color = GGF.Color.ENDD; str = "모집종료"; break; /* 두 기간 이후 */
         }
-        return `<div class="common-card" card-type="mini" card-color="${color}"><i class="ti ti-calendar-code"></i><span>&nbsp;${str}</span></div>`;
+        return `<div class="common-pill" pill-type="mini" pill-color="${color}"><i class="ti ti-calendar-code"></i><span>${str}</span></div>`;
     }
 }
 
@@ -4055,7 +4223,7 @@ GGC.Clslineupb =
         }
         return rslt;
     },
-    prepaidflgCard(val) { return `<span class="common-card" card-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
+    prepaidflgCard(val) { return `<span class="common-pill" pill-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
     prepaidflgFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clslineupb.prepaidflgFeel(val)}">${GGC.Clslineupb.prepaidflgCvrt(val)}</span>`; },
 
 }
@@ -4079,7 +4247,7 @@ GGC.Clspurchasehist =
         if(val == GGF.Clspurchasehist.Histtype.DELETE) return "ngtv";
         return "";
     },
-    histtypeCard(val) { return `<span class="common-card" card-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
+    histtypeCard(val) { return `<span class="common-pill" pill-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
     histtypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clspurchasehist.histtypeFeel(val)}">${GGC.Clspurchasehist.histtypeCvrt(val)}</span>`; },
 }
 
@@ -4104,7 +4272,7 @@ GGC.Clssettle =
         if(val == GGF.Clssettle.Settlestatus.LOSS) return "ngtv";
         return "";
     },
-    settlestatusCard(val) { return `<span class="common-card" card-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
+    settlestatusCard(val) { return `<span class="common-pill" pill-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
     settlestatusFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clssettle.settlestatusFeel(val)}">${GGC.Clssettle.settlestatusCvrt(val)}</span>`; },
 }
 
@@ -4127,7 +4295,7 @@ GGC.Clssettlehist =
         if(val == GGF.Clssettlehist.Histtype.AFTER) return "pstv";
         return "";
     },
-    histtypeCard(val) { return `<span class="common-card" card-color="${GGC.Clssettlehist.histtypeFeel(val)}">${GGC.Clssettlehist.histtypeCvrt(val)}</span>`; },
+    histtypeCard(val) { return `<span class="common-pill" pill-color="${GGC.Clssettlehist.histtypeFeel(val)}">${GGC.Clssettlehist.histtypeCvrt(val)}</span>`; },
     histtypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.Clssettlehist.histtypeFeel(val)}">${GGC.Clssettlehist.histtypeCvrt(val)}</span>`; },
 }
 
@@ -4176,7 +4344,7 @@ GGC.Date =
             case GGF.GGdate.PointOfDate.WITHIN   : color = GGF.Color.PROG; break; /* 두 기간 사이 */
             case GGF.GGdate.PointOfDate.PASSED   : color = GGF.Color.ENDD; break; /* 두 기간 이후 */
         }
-        return `<span class="common-card" card-color="${color}">${GGdate.getTextForUpcoming(now, startDate, endDate)}</span>`;
+        return `<span class="common-pill" pill-color="${color}">${GGdate.getTextForUpcoming(now, startDate, endDate)}</span>`;
     }
 }
 
@@ -4214,7 +4382,7 @@ GGC.GrpMember =
         return rslt;
     },
     backnumberSpan(val) { return Common.isEmpty(val) ? "" : `<span class="common-colorFont common-fonts10">${GGC.GrpMember.backnumber(val)}&nbsp;</span>`; },
-    backnumberPill(val) { return Common.isEmpty(val) ? "" : `<span class="common-card      common-fonts08" card-color="main" style="padding:var(--padTiny) var(--padBase);">${GGC.GrpMember.backnumber(val)}</span>`; },
+    backnumberPill(val) { return Common.isEmpty(val) ? "" : `<span class="common-pill      common-fonts08" pill-color="main" style="padding:var(--padTiny) var(--padBase);">${GGC.GrpMember.backnumber(val)}</span>`; },
 };
 
 GGC.GrpfncSponsorship =
@@ -4234,7 +4402,7 @@ GGC.GrpfncSponsorship =
         if(val == GGF.GrpfncSponsorship.Spontype.MONEY) return "pstv";
         return "";
     },
-    spontypeCard(val) { return `<span class="common-card" card-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
+    spontypeCard(val) { return `<span class="common-pill" pill-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
     spontypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.GrpfncSponsorship.spontypeFeel(val)}">${GGC.GrpfncSponsorship.spontypeCvrt(val)}</span>`; },
 }
 
@@ -4275,8 +4443,8 @@ GGC.User =
         }
         return rslt;
     },
-    usertypeCard(val) { return `<span class="common-card" card-type="norm" card-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
-    usertypePill(val) { return `<span class="common-card" card-type="mini" card-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
+    usertypeCard(val) { return `<span class="common-pill" pill-type="norm" pill-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
+    usertypePill(val) { return `<span class="common-pill" pill-type="mini" pill-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
     usertypeFont(val) { return `<span class="common-colorFont" font-color="${GGC.User.usertypeFeel(val)}">${GGC.User.usertypeCvrt(val)}</span>`; },
 
     /* ----- */
@@ -4840,6 +5008,10 @@ Api.Cls =
     selectForMngrByClssettleflgN        (grpno,             noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForMngrByClssettleflgN"    , GRPNO: grpno, }, noticeOK, noticeFail); },
     selectForMngrByClsstatusEnd         (grpno,             noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForMngrByClsstatusEnd"     , GRPNO: grpno, }, noticeOK, noticeFail); },
     selectForMngrByClsstatusCancel      (grpno,             noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForMngrByClsstatusCancel"  , GRPNO: grpno, }, noticeOK, noticeFail); },
+    selectForAllByClsstatusIng          (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusIng"       , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
+    selectForAllByClssettleflgN         (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClssettleflgN"      , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
+    selectForAllByClsstatusEnd          (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusEnd"       , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
+    selectForAllByClsstatusCancel       (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusCancel"    , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* insert */
@@ -5846,7 +6018,7 @@ Api.User =
     /* ========================= */
     /* 등록 */
     /* ========================= */
-    insert(id, pw, name, birthYear, phone, email, adrcvflg, hascarflg, useraddrcode, userbaselat, userbaselng, lineupidx, noticeOK, noticeFail)
+    insert(id, pw, name, birthYear, phone, email, adrcvflg, hascarflg, lineupidx, noticeOK, noticeFail)
     {
         let ajaxData =
         {
@@ -5858,9 +6030,6 @@ Api.User =
             EMAIL         : email,
             ADRCVFLG      : adrcvflg,
             HASCARFLG     : hascarflg,
-            USERADDRCODE  : useraddrcode,
-            USERBASELAT   : userbaselat,
-            USERBASELNG   : userbaselng,
             LINEUPIDX     : lineupidx,
         };
         let ajax = Api.execute(ajaxData, "Api.User.insert", noticeOK, noticeFail);
@@ -6963,28 +7132,35 @@ class MCls
     isClsAdmin(myUserno)        { return myUserno == this.getClsusernoadm() || myUserno == this.getClsusernosub(); }
     isWithinClsapplyPeriod()    { return GGdate.inWithinPeriod(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
 
+    isAppliable()               { return this.isWithinClsapplyPeriod() && this.isClsstatusIng(); }
+
     /* ========================= */
     /* make with buttons */
     /* ========================= */
     makeCls(btnHtml="")
     {
         let html = "";
-        let feel = this.getClsstatusFeel();
         html +=
         `
-            <div class="MClss-make-div-modelTop common-div-card">
+            <div class="MCls-make-top common-div-card">
+                <!-- <div class="MCls-make-clsno common-fonts08 common-colorCmmt">${this.getClsno()}</div> -->
                 <div class="common-flexCenter">
                     <div>
                         <div class="common-img-label" label-size="2em" style="background-image:url('${this.getGrpimgPath()}')"></div>
                         <span>${this.getGrpname()}</span>
                     </div>
                 </div>
-                <div class="common-cushionHalfUp">
-                    <div class="common-flexCenter">
-                        <div class="common-inline common-fonts10 common-strong common-colorMain">
-                            <span>일정</span>
+                <!--
+                    <div class="common-cushionHalfUp">
+                        <div class="common-fonts09">
+                            ${GGdate.period(this.getClsstartdt(), this.getClsclosedt())}
                         </div>
-                        <div class="common-inline common-colorBody common-fonts09">${this.getClstitle()}</div>
+                    </div>
+                -->
+                <div class="common-cushionHalfUp">
+                    <div class="common-block">
+                        <div class="common-inline common-colorMain common-fonts10 common-strong">일정</div>
+                        <div class="common-inline common-colorBody common-fonts09" style="margin-left:0.2em;">${this.getClstitle()}</div>
                     </div>
                     <div class="common-cushionHalfUp">
                         <span class="common-inline common-fonts09">${this.getClsstatusCard()}</span>
@@ -6993,8 +7169,8 @@ class MCls
                     <div class="common-cushionHalfUp">
                         <div class="common-fonts08">
                             ${GGC.Cls.clsapplyPeriodCard(this.getClsapplystartdt(), this.getClsapplyclosedt())}
-                            <div class="common-card" card-type="mini" card-color="${feel}"><i class="ti ti-map-pin"></i><span>&nbsp;${this.getClsground()}</span></div>
-                            <div class="common-card" card-type="mini" card-color="${feel}"><i class="ti ti-credit-card"></i><span>&nbsp;${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
+                            <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-map-pin"></i><span>${this.getClsground()}</span></div>
+                            <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-credit-card"></i><span>${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
                         </div>
                     </div>
                     ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}
@@ -8613,7 +8789,7 @@ class MUserAddrs extends _MCommon
                     <div class="common-flexBetween">
                         <div class="common-flexCenterSm">
                             <span class="common-bold">${model.getUseraddrtitle()}</span>
-                            ${model.isDefault() ? `<span class="common-card common-fonts08" card-type="mini" card-color="pstv" style="margin-left: 0.4em;">기본주소</span>` : ""}
+                            ${model.isDefault() ? `<span class="common-pill common-fonts08" pill-type="mini" pill-color="pstv" style="margin-left: 0.4em;">기본주소</span>` : ""}
                         </div>
                         <div class="common-flexCenterSm">
                             ${model.isDefault() ? "" : `<button class="MUserAddr-make-btn-setDefault common-btn-noline common-fonts08" ${model.getPk()}>기본으로설정</button>`}
@@ -8634,7 +8810,7 @@ class MUserAddrs extends _MCommon
     /* ========================= */
     makeUserAddrOptionHtmlForSelect(useraddridx)
     {
-        let html = `<option value="" ${Common.isEmpty(useraddridx) ? "selected" : ""}>선택안함</option>`;
+        let html = `<option value="" ${Common.isEmpty(useraddridx) ? "selected" : ""}>기본주소</option>`;
         for(let i in this.getModels())
         {
             let model = this.getModels()[i];
@@ -9263,7 +9439,7 @@ class MGrpmtaga
     /* ========================= */
     makePill()
     {
-        return `<div class="MGrpmtaga-makePill-div common-card" card-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>`;
+        return `<div class="MGrpmtaga-makePill-div common-pill" pill-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>`;
     }
 
     make(btnHtml="")
@@ -9272,7 +9448,7 @@ class MGrpmtaga
             <div class="MGrpmtaga-make-div-modelTop common-div-card">
                 <div class="common-flexParentLR">
                     <div class="common-fonts09">
-                        <div class="common-card" card-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>
+                        <div class="common-pill" pill-type="mini" style="${this.getTagStyle()}" ${this.getPk()}>${this.getTagname()}</div>
                     </div>
                     <div class="common-fonts09">
                         <div class="common-alertBadge">${this.getTagregcnt()}명</div>
@@ -9762,12 +9938,7 @@ class MSystemBoard
     {
         let html =
         `
-            <div class="common-div-flex common-div-card commonEvent-tag-hyperlink common-tap"
-                card-type="notice"
-                hyperlink="${Navigation.Page.Z22SystemBoardDetail}"
-                hyperlink-viewmode="page"
-                ${this.getPk()}
-            >
+            <div class="common-div-flex common-div-card commonEvent-tag-hyperlink common-tap" card-type="notice" hyperlink="${Navigation.Page.Z22SystemBoardDetail}" hyperlink-viewmode="page"${this.getPk()}>
                 <div class="common-div-dot"></div>
                 <div>
                     <div class="common-content">${this.getSbtitle()}</div>
