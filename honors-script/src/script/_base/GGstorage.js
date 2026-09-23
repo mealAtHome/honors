@@ -188,6 +188,7 @@ var GGstorage =
     },
     setPageStack(pageStack)
     {
+        console.log(pageStack);
         return GGstorage.setVal("pageStack", JSON.stringify(pageStack));
     },
     clearPageStack()

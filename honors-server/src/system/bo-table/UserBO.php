@@ -190,7 +190,7 @@ class UserBO extends _CommonBO
     /*
      */
     /* ==================== */
-    public function insertForInside                 ($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG, $USERADDRCODE, $USERBASELAT, $USERBASELNG) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertForInside                 ($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function syncLoginedpointFromDefaultAddrForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertTempForInside             ($NAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateDeviceInfoByInside        ($USERNO, $PLATFORM, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
@@ -264,19 +264,6 @@ class UserBO extends _CommonBO
                 /* for int */
                 $BIRTHYEAR = $BIRTHYEAR == "" ? "null" : $BIRTHYEAR;
 
-                /* validation : 동/읍/면 지역 + 지도위치 (아지트 설정과 동일한 방식) */
-                if(Common::isEmpty($USERADDRCODE))
-                    throw new GGexception("지역을 선택해주세요.");
-                $useraddrcode = intval($USERADDRCODE);
-                if(Common::getDataOneField($addrcodeBO->selectByPkForInside($useraddrcode), AddrcodeBO::FIELD__ADDRCODE) == null)
-                    throw new GGexception("존재하지 않는 지역입니다.");
-                if(Common::isEmpty($USERBASELAT) || Common::isEmpty($USERBASELNG))
-                    throw new GGexception("위치를 선택해주세요.");
-                $userbaselat = floatval($USERBASELAT);
-                $userbaselng = floatval($USERBASELNG);
-                if($userbaselat < -90 || $userbaselat > 90)   { throw new GGexception("위도 값이 올바르지 않습니다."); }
-                if($userbaselng < -180 || $userbaselng > 180) { throw new GGexception("경도 값이 올바르지 않습니다."); }
-
                 /* insert */
                 $query =
                 "
@@ -292,7 +279,6 @@ class UserBO extends _CommonBO
                         , email
                         , adrcvflg
                         , hascarflg
-                        , userloginedpoint
                         , adminflg
                         , apikey
                         , pushtoken
@@ -311,7 +297,6 @@ class UserBO extends _CommonBO
                         , '$EMAIL'
                         , '$ADRCVFLG'
                         , '$HASCARFLG'
-                        ,  ST_PointFromText('POINT($userbaselat $userbaselng)', 4326)
                         , 'n'
                         ,  null
                         ,  null
@@ -320,9 +305,6 @@ class UserBO extends _CommonBO
                     )
                 ";
                 GGsql::exeQuery($query);
-
-                /* 기본주소 등록 */
-                $userAddrBO->insertDefaultForInside($userno, $useraddrcode, $userbaselat, $userbaselng);
 
                 /* insert sub tables */
                 $userPrivacyBO->insertDefaultForInside($userno);
