@@ -55,7 +55,7 @@ Api.User =
             "ID"        : id,
             "PW"        : pw,
             "USERTYPE"  : usertype,
-            "TOKEN"     : GGstorage.getPushToken(),
+            "TOKEN"     : indexPushToken,
             "PLATFORM"  : GGstorage.getDeviceKindSmall(),
         };
         let ajax = Api.execute(ajaxData, "Api.User.login", noticeOK, noticeFail);

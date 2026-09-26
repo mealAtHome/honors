@@ -61,6 +61,7 @@
 
         /* update user device info / autologin key */
         $apikey = $userBO->generateApikey($userno);
+
     }
     catch(GGexception $e)
     {

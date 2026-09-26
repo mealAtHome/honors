@@ -440,13 +440,9 @@ class UserBO extends _CommonBO
             case self::updateDeviceInfoByInside:
             {
                 /* update pushToken */
-                if(Common::isEmpty($PUSHTOKEN) == false)
-                {
-                    $query = "update user set pushtoken = '$PUSHTOKEN', modidt = now() where userno = '$USERNO'";
-                    GGsql::exeQuery($query);
-                }
+                $this->updatePushtokenForInside($USERNO, $PUSHTOKEN);
 
-                /* is pushToken null? */
+                /* update platform */
                 if(Common::isEmpty($PLATFORM) == false)
                 {
                     $query = "update user set platform = '$PLATFORM', modidt = now() where userno = '$USERNO'";
