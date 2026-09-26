@@ -58,6 +58,7 @@
                 getResourceHost() { return LOCALMODE ? 'https://m-res.yogimoim.com'          : 'https://a-res.yogimoim.com'; }, /* http://localhost:8081 */
                 getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'https://a-src.yogimoim.com'; },
             };
+            var indexFcmToken = "";
             var initApp = function()
             {
                 /* ==================== */
@@ -165,10 +166,11 @@
                 /* get FCM token */
                 FirebasexMessaging.getToken(
                     function (fcmToken) {
-                        console.log(fcmToken);
+                        indexFcmToken = fcmToken;
                     },
                     function (error) {
                         console.error(error);
+                        indexFcmToken = "";
                     }
                 );
 

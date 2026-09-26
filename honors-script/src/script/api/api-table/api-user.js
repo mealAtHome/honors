@@ -4,7 +4,7 @@ Api.User =
     /* select */
     /* ========================= */
     selectMe() { return Api.User.select({"OPTION":"selectMe"}); },
-    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin"}); },
+    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin", "PUSHTOKEN":indexPushToken }); },
     selectCntById(id, noticeOK, noticeFail) { return Api.User.select({"OPTION":"selectCntById", "ID":id}, noticeOK, noticeFail); },
 
     /* ========================= */

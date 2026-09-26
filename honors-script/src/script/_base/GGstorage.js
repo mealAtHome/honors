@@ -205,7 +205,6 @@ var GGstorage =
     setUserno(val)              { return GGstorage.setVal("userno", val); },
     setUsername(val)            { return GGstorage.setVal("username", val); },
     setUserid(val)              { return GGstorage.setVal("userId", val); },
-    setPushToken(val)           { return GGstorage.setVal("pushToken", val); },
     setApikey(val)              { return GGstorage.setVal("apikey", val); },
     setDeviceKind(val="")       { return GGstorage.setVal("deviceKind", val); },
     setDeviceKindSmall(val="")  { return GGstorage.setVal("deviceKindSmall", val); },
@@ -215,7 +214,6 @@ var GGstorage =
     getUserno()                 { return GGstorage.getVal("userno"); },                /*  */
     getUsername()               { return GGstorage.getVal("username"); },              /* */
     getUserid()                 { return GGstorage.getVal("userId"); },                /* username */
-    getPushToken()              { return GGstorage.getVal("pushToken"); },             /* push token */
     getApikey()                 { return GGstorage.getVal("apikey"); },                /* API key */
     getDeviceKind()             { return GGstorage.getVal("deviceKind"); },            /* 접속한 디바이스의 디바이스 종류 */
     getDeviceKindSmall()        { return GGstorage.getVal("deviceKindSmall"); },       /* 접속한 디바이스의 디바이스 종류 */
@@ -226,7 +224,6 @@ var GGstorage =
     removeUserno()              { return GGstorage.removeItem("userno"); },
     removeUsername()            { return GGstorage.removeItem("username"); },
     removeUserid()              { return GGstorage.removeItem("userId"); },
-    removePushToken()           { return GGstorage.removeItem("pushToken"); },
     removeApikey()              { return GGstorage.removeItem("apikey"); },
     removeDeviceKind()          { return GGstorage.removeItem("deviceKind"); },
     removeDeviceKindSmall()     { return GGstorage.removeItem("deviceKindSmall"); },
