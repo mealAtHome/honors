@@ -14,7 +14,6 @@ class UserBO extends _CommonBO
     }
     public function setBO()
     {
-
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
         GGnavi::getGrpMemberBO();
