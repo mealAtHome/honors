@@ -4,7 +4,7 @@ Api.User =
     /* select */
     /* ========================= */
     selectMe() { return Api.User.select({"OPTION":"selectMe"}); },
-    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin", "PUSHTOKEN":indexPushToken }); },
+    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin", "PUSHTOKEN":indexFcmToken }); },
     selectCntById(id, noticeOK, noticeFail) { return Api.User.select({"OPTION":"selectCntById", "ID":id}, noticeOK, noticeFail); },
 
     /* ========================= */
@@ -55,7 +55,7 @@ Api.User =
             "ID"        : id,
             "PW"        : pw,
             "USERTYPE"  : usertype,
-            "TOKEN"     : indexPushToken,
+            "TOKEN"     : indexFcmToken,
             "PLATFORM"  : GGstorage.getDeviceKindSmall(),
         };
         let ajax = Api.execute(ajaxData, "Api.User.login", noticeOK, noticeFail);
