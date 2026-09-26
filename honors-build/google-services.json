@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "291101235527",
+    "project_id": "circle-is-baseball",
+    "storage_bucket": "circle-is-baseball.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291101235527:android:2b4a44a9a9d5db35821462",
+        "android_client_info": {
+          "package_name": "com.yogimoim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJXJCHO-0YlNpJ3zBUpzTAvdLUBeUBoNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

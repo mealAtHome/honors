@@ -70,22 +70,6 @@
                 CommonEvent.init();
 
                 /* ------------ */
-                /* template 페이지 이동 시, 탭 위치를 설정하기 위한 이벤트 */
-                /* ------------ */
-                // $('ons-navigator').on('postpush', function(e)
-                // {
-                //     let toPage = e.originalEvent.enterPage.id;
-                //     let pageParam = Navigation.getPageParam();
-                //     if(pageParam == null || pageParam.lastTabIndex == undefined || pageParam.lastTabIndex == null)
-                //         return;
-
-                //     switch(toPage)
-                //     {
-                //         case Navigation.Page.AA00UserMain : document.querySelector("#UMAN-tabbar").setActiveTab(pageParam.lastTabIndex); break;
-                //     }
-                // });
-
-                /* ------------ */
                 /* 원본이미지 뷰어 닫기 */
                 /* ------------ */
                 $("#index-div-imageViewerMask").click(function()
@@ -178,7 +162,17 @@
                     }, false);
                 }
 
-                // app start
+                /* get FCM token */
+                FirebasexMessaging.getToken(
+                    function (fcmToken) {
+                        console.log(fcmToken);
+                    },
+                    function (error) {
+                        console.error(error);
+                    }
+                );
+
+                /* app start */
                 let interval = setInterval(() =>
                 {
                     if(scriptloaded)
