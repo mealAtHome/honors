@@ -14,7 +14,6 @@ class UserBO extends _CommonBO
     }
     public function setBO()
     {
-
         GGnavi::getIdxBO();
         GGnavi::getGrpBO();
         GGnavi::getGrpMemberBO();
@@ -180,6 +179,7 @@ class UserBO extends _CommonBO
         switch($OPTION)
         {
             case UserBO::selectCntById: { $rslt[GGF::DATA] = []; break; }
+            case UserBO::selectMeForLogin: { $this->updatePushtokenForInside($EXECUTOR, $PUSHTOKEN); break; }
         }
         return $rslt;
     }
@@ -190,7 +190,7 @@ class UserBO extends _CommonBO
     /*
      */
     /* ==================== */
-    public function insertForInside                 ($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertForInside                 ($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function syncLoginedpointFromDefaultAddrForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertTempForInside             ($NAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateDeviceInfoByInside        ($USERNO, $PLATFORM, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
@@ -198,6 +198,7 @@ class UserBO extends _CommonBO
     public function addPointForInside               ($USERNO, $POINT) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateBaccnodefaultForInside    ($USERNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteRecordByPkForInside       ($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updatePushtokenForInside        ($USERNO, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     const insertForInside = "insertForInside";
     const insertTempForInside = "insertTempForInside"; /* temp 유저 작성 */
@@ -208,6 +209,7 @@ class UserBO extends _CommonBO
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
     const deleteUserInfo = "deleteUserInfo";
     const deleteRecordByPkForInside = "deleteRecordByPkForInside";
+    const updatePushtokenForInside = "updatePushtokenForInside";
     const updatePhonePrivacyByPk = "updatePhonePrivacyByPk"; /* EXECUTOR, PRIV_PHONE, PRIV_PHONE_GRPM */
     const syncLoginedpointFromDefaultAddrForInside = "syncLoginedpointFromDefaultAddrForInside";
     const updateUserloginedpointForUsr = "updateUserloginedpointForUsr"; /* 실시간 GPS로 직접 갱신 */
@@ -261,7 +263,7 @@ class UserBO extends _CommonBO
                         $PHONE = substr($PHONE, 0, 3)."-".substr($PHONE, 3, 3)."-".substr($PHONE, 6);
                 }
 
-                /* for int */
+                /* null 처리 */
                 $BIRTHYEAR = $BIRTHYEAR == "" ? "null" : $BIRTHYEAR;
 
                 /* insert */
@@ -437,13 +439,9 @@ class UserBO extends _CommonBO
             case self::updateDeviceInfoByInside:
             {
                 /* update pushToken */
-                if(Common::isEmpty($PUSHTOKEN) == false)
-                {
-                    $query = "update user set pushtoken = '$PUSHTOKEN', modidt = now() where userno = '$USERNO'";
-                    GGsql::exeQuery($query);
-                }
+                $this->updatePushtokenForInside($USERNO, $PUSHTOKEN);
 
-                /* is pushToken null? */
+                /* update platform */
                 if(Common::isEmpty($PLATFORM) == false)
                 {
                     $query = "update user set platform = '$PLATFORM', modidt = now() where userno = '$USERNO'";
@@ -509,6 +507,13 @@ class UserBO extends _CommonBO
             {
                 $userPrivacyBO->upsertByPkForInside($EXECUTOR, $PRIV_PHONE);
                 $grpmPrivacyBO->upsertByGrpmArrForInside($EXECUTOR, $PRIV_PHONE_GRPM);
+                break;
+            }
+            case self::updatePushtokenForInside:
+            {
+                $PUSHTOKEN = $PUSHTOKEN == "" ? "null" : "'$PUSHTOKEN'";
+                $query = "update user set pushtoken = $PUSHTOKEN where userno = '$USERNO'";
+                GGsql::exeQuery($query);
                 break;
             }
             default:

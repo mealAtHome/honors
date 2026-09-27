@@ -19,3 +19,10 @@
 # honors-res
 # ---------------
 /honors-res/
+
+# ---------------
+# honors-server
+# ---------------
+/honors-server/composer.json
+/honors-server/composer.lock
+/honors-server/vendor/

@@ -64,6 +64,8 @@
                 Common.showProgress();
                 setTimeout(function()
                 {
+                    alert(window.location.href);
+
                     let mUser = Api.User.selectMe().getModel();
                     UAUP.Data.userno = mUser.getUserno();
 

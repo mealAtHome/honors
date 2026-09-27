@@ -46,18 +46,19 @@
 
         <script>
             const ajaxDelayTime = 300; /* ajax 지연시간 */
-            const VERSION = "10011";
+            const VERSION = "10012";
             const SCRIPT_MERGE = false; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
-            const LOCALMODE = true;
+            const LOCALMODE = false;
             var scriptloaded = false;
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
             var ServerInfo =
             {
-                getAppHost()      { return LOCALMODE ? 'http://localhost:8085'               : 'https://m-app.yogimoim.com'; },
-                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'https://m-api.yogimoim.com'; },
-                getResourceHost() { return LOCALMODE ? 'https://m-res.yogimoim.com'          : 'https://m-res.yogimoim.com'; }, /* http://localhost:8081 */
-                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'https://m-src.yogimoim.com'; },
+                getAppHost()      { return LOCALMODE ? 'http://localhost:8085'               : 'https://a-app.yogimoim.com'; },
+                getServerHost()   { return LOCALMODE ? 'http://localhost:8080/honors-server' : 'https://a-api.yogimoim.com'; },
+                getResourceHost() { return LOCALMODE ? 'https://m-res.yogimoim.com'          : 'https://a-res.yogimoim.com'; }, /* http://localhost:8081 */
+                getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'https://a-src.yogimoim.com'; },
             };
+            var indexFcmToken = "";
             var initApp = function()
             {
                 /* ==================== */
@@ -68,22 +69,6 @@
                 /* 각 페이지에서 사용되는 공통된 이벤트를 바인딩 해줌. */
                 /* ------------ */
                 CommonEvent.init();
-
-                /* ------------ */
-                /* template 페이지 이동 시, 탭 위치를 설정하기 위한 이벤트 */
-                /* ------------ */
-                // $('ons-navigator').on('postpush', function(e)
-                // {
-                //     let toPage = e.originalEvent.enterPage.id;
-                //     let pageParam = Navigation.getPageParam();
-                //     if(pageParam == null || pageParam.lastTabIndex == undefined || pageParam.lastTabIndex == null)
-                //         return;
-
-                //     switch(toPage)
-                //     {
-                //         case Navigation.Page.AA00UserMain : document.querySelector("#UMAN-tabbar").setActiveTab(pageParam.lastTabIndex); break;
-                //     }
-                // });
 
                 /* ------------ */
                 /* 원본이미지 뷰어 닫기 */
@@ -178,7 +163,23 @@
                     }, false);
                 }
 
-                // app start
+                alert(window.location.href);
+
+                /* get push grant & FCM token */
+                FirebasexMessaging.grantPermission(function (hasPermission) {
+                    console.log("Notifications permission was " + (hasPermission ? "granted" : "denied"));
+                });
+                FirebasexMessaging.getToken(
+                    function (fcmToken) {
+                        indexFcmToken = fcmToken;
+                    },
+                    function (error) {
+                        console.error(error);
+                        indexFcmToken = "";
+                    }
+                );
+
+                /* app start */
                 let interval = setInterval(() =>
                 {
                     if(scriptloaded)

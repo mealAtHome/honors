@@ -13,8 +13,8 @@ define("MAINTENANCE"  , false);
 define("LANG"         , "kr");
 define("SUCCEED"      , "S-0001"); /* API RESULT */
 define("API_KEY"      , "racoonable"); /* 배치실행 키 */
-define("VERSIONSV"    , "10011"); /* 버전정보 */
-define("VERSIONDB"    , "10011"); /* 버전정보 */
+define("VERSIONSV"    , "10012"); /* 버전정보 */
+define("VERSIONDB"    , "10012"); /* 버전정보 */
 
 /* DB info */
 $documentRoot = $_SERVER['DOCUMENT_ROOT'];
@@ -30,6 +30,7 @@ if($mode == "true")
     define("ROOT_RES"  , "$documentRoot/honors-res");
     define("ROOT"      , "$documentRoot/honors-server");
     define("LOG_ROOT"  , "$documentRoot/honors-server/src/.log");
+    define("FCM_KEY"   , "$documentRoot/honors-key/circle-is-baseball.json");
 
     /* docker + server */
     // define("DB_IP"     , "host.docker.internal");
@@ -53,6 +54,7 @@ else
     define("ROOT_RES"  , "/opt/honors-res");
     define("ROOT"      , "$documentRoot");
     define("LOG_ROOT"  , "/var/log/joon");
+    define("FCM_KEY"   , "$documentRoot/../honors-key/circle-is-baseball.json");
 }
 
 /* ===================== */
@@ -103,7 +105,7 @@ $EXECUTOR   = null;
 $uriArr     = explode("/",$_SERVER['REQUEST_URI']);
 $uri        = $uriArr[count($uriArr)-1];
 $uriHypen   = explode("-",$uri);
-$isBatch    = isset($uriHypen[0]) && $uriHypen[0] == "per" ? true : false;
+$isBatch    = isset($uriHypen[0]) && $uriHypen[0] == "batch" ? true : false;
 
 /* check key if batch */
 if($isBatch)

@@ -41,6 +41,7 @@ services:
             - ./api/conf/apache2:/etc/apache2
             - ../honors-server:/var/www/html/honors-server
             - ../honors-res:/var/www/html/honors-res
+            - ../honors-key:/var/www/html/honors-key
         ports:
             - 8080:80
             - 3307:3307

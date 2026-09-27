@@ -24,3 +24,6 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-enable mysqli
 
 RUN apt-get install -y vim
+
+# install Composer
+COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
