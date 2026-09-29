@@ -85,6 +85,7 @@ class GrpMemberBO extends _CommonBO
     /* select > sub */
     /* ========================= */
     public function selectByPkForInside($GRPNO, $USERNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectActiveUsersForInside($GRPNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
@@ -102,6 +103,7 @@ class GrpMemberBO extends _CommonBO
     const selectByKeywordWithPageForAll = "selectByKeywordWithPageForAll";
     const selectByGrpnoUsernameSearchtypeForAll = "selectByGrpnoUsernameSearchtypeForAll"; /* [PAGENUM, GRPNO, USENAME, SEARCHTYPE] */
     const selectByGrpnoUsernameTagidxForAll = "selectByGrpnoUsernameTagidxForAll"; /* [PAGENUM, GRPNO, USENAME, TAGIDX] */
+    const selectActiveUsersForInside = "selectActiveUsersForInside"; /* [GRPNO] */
     protected function select($options, $option="")
     {
         /* vars */
@@ -221,6 +223,7 @@ class GrpMemberBO extends _CommonBO
                 ";
                 break;
             }
+            case self::selectActiveUsersForInside: { $from = "(select * from grp_member where grpno = '$GRPNO' and grpmstatus = '$grpmstatusActive') t"; break; }
             default:
                 throw new GGexception("(server) no option defined");
         }

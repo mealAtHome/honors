@@ -30,7 +30,8 @@ if($mode == "true")
     define("ROOT_RES"  , "$documentRoot/honors-res");
     define("ROOT"      , "$documentRoot/honors-server");
     define("LOG_ROOT"  , "$documentRoot/honors-server/src/.log");
-    define("FCM_KEY"   , "$documentRoot/honors-key/circle-is-baseball.json");
+    define("FCM_KEY"   , "$documentRoot/honors-key/circle-is-baseball-firebase-adminsdk-fbsvc-f2394f51ec.json");
+    define("FCM_PRJID" , "circle-is-baseball");
 
     /* docker + server */
     // define("DB_IP"     , "host.docker.internal");
@@ -54,8 +55,11 @@ else
     define("ROOT_RES"  , "/opt/honors-res");
     define("ROOT"      , "$documentRoot");
     define("LOG_ROOT"  , "/var/log/joon");
-    define("FCM_KEY"   , "$documentRoot/../honors-key/circle-is-baseball.json");
+    define("FCM_KEY"   , "/opt/yogimoim/honors-key/circle-is-baseball-firebase-adminsdk-fbsvc-f2394f51ec.json");
+    define("FCM_PRJID" , "circle-is-baseball");
 }
+
+
 
 /* ===================== */
 /* requries */

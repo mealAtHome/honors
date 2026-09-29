@@ -43,6 +43,7 @@ class Common
     /* ========================= */
     /* 리턴 */
     /* ========================= */
+    static function returnLockFailed() { Common::returnCode("LOCK_FAILED", "Failed to acquire lock."); }
     static function returnCode($code="error", $msg="")
     {
         $rslt = array();

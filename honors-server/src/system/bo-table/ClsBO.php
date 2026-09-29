@@ -15,6 +15,7 @@ class ClsBO extends _CommonBO
     function setBO()
     {
         GGnavi::getIdxBO();
+        GGnavi::getSystemPushBO();
         GGnavi::getGrpBO();
         GGnavi::getClslineupaBO();
         GGnavi::getClslineupbBO();
@@ -26,6 +27,7 @@ class ClsBO extends _CommonBO
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['idxBO'] = IdxBO::getInstance();
+        $arr['systemPushBO'] = SystemPushBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
         $arr['clslineupaBO'] = ClslineupaBO::getInstance();
         $arr['clslineupbBO'] = ClslineupbBO::getInstance();
@@ -465,6 +467,9 @@ class ClsBO extends _CommonBO
                 /* update clsstatus */
                 $query = "update cls set clsstatus = '$clsstatusIng', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
+
+                /* push to users */
+                $systemPushBO->insertPushtypeClsOpenForInside($GRPNO, $CLSNO);
                 break;
             }
             case self::updateClsstatusIngToEnd:

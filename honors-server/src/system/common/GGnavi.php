@@ -16,9 +16,10 @@ class GGnavi
     static public function getBankBO()                                              { require_once ROOT."/src/system/bo-ref/BankBO.php"; }
     static public function getSystemBoardBO()                                       { require_once ROOT."/src/system/bo-ref/SystemBoardBO.php"; }
     static public function getRefHolidayBO()                                        { require_once ROOT.'/src/system/bo-ref/RefHolidayBO.php'; }
-    static public function getSystemBatchBO()                                       { require_once ROOT."/src/system/bo-ref/SystemBatchBO.php"; }
 
     /* BO : for users */
+    static public function getSystemBatchBO()                                       { require_once ROOT."/src/system/bo-table/_SystemBatchBO.php"; }
+    static public function getSystemPushBO()                                        { require_once ROOT."/src/system/bo-table/_SystemPushBO.php"; }
     static public function getAddrBO()                                              { require_once ROOT."/src/system/bo-table/AddrBO.php"; }
     static public function getBankaccountBO()                                       { require_once ROOT."/src/system/bo-table/BankaccountBO.php"; }
     static public function getClsBO()                                               { require_once ROOT."/src/system/bo-table/ClsBO.php"; }
@@ -67,19 +68,19 @@ class GGnavi
     static public function getYearVO()                                              { require_once ROOT."/src/system/bo-vo/YearVO.php"; }
 
     /* Batch */
-    static public function getPer00BatchBase()                                      { require_once ROOT."/src/system/bo-batch/Per00BatchBase.php"; }
-    static public function getPer10ApiInsertPaymentDepositedByList()                { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per10ApiInsertPaymentDepositedByList.php"; }
-    static public function getPer20SecRiderDeliverymatch()                          { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per20SecRiderDeliverymatch.php"; }
-    static public function getPer30MinOrderCancelNotConfirmed()                     { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinOrderCancelNotConfirmed.php"; }
-    static public function getPer30MinOrderCancelNotPaid()                          { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinOrderCancelNotPaid.php"; }
-    static public function getPer30MinOrderingToOrdera()                            { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinOrderingToOrdera.php"; }
-    static public function getPer30MinStoreSalestatusAutoProcess()                  { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinStoreSalestatusAutoProcess.php"; }
-    static public function getPer40HouPartitions()                                  { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per40HouPartitions.php"; }
-    static public function getPer40HouStoreOrderproctimeSummaryToday()              { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per40HouStoreOrderproctimeSummaryToday.php"; }
-    static public function getPer50DaySalesSummary()                                { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DaySalesSummary.php"; }
-    static public function getPer50DayStoreOrderproctimeSummaryMonth()              { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DayStoreOrderproctimeSummaryMonth.php"; }
-    static public function getPer50DaySummaryStoreorderRecent()                     { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DaySummaryStoreorderRecent.php"; }
-    static public function getPer50DayUpdateReorderpct()                            { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DayUpdateReorderpct.php"; }
+    // static public function getPer00BatchBase()                                      { require_once ROOT."/src/system/bo-batch/Per00BatchBase.php"; }
+    // static public function getPer10ApiInsertPaymentDepositedByList()                { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per10ApiInsertPaymentDepositedByList.php"; }
+    // static public function getPer20SecRiderDeliverymatch()                          { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per20SecRiderDeliverymatch.php"; }
+    // static public function getPer30MinOrderCancelNotConfirmed()                     { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinOrderCancelNotConfirmed.php"; }
+    // static public function getPer30MinOrderCancelNotPaid()                          { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinOrderCancelNotPaid.php"; }
+    // static public function getPer30MinOrderingToOrdera()                            { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinOrderingToOrdera.php"; }
+    // static public function getPer30MinStoreSalestatusAutoProcess()                  { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per30MinStoreSalestatusAutoProcess.php"; }
+    // static public function getPer40HouPartitions()                                  { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per40HouPartitions.php"; }
+    // static public function getPer40HouStoreOrderproctimeSummaryToday()              { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per40HouStoreOrderproctimeSummaryToday.php"; }
+    // static public function getPer50DaySalesSummary()                                { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DaySalesSummary.php"; }
+    // static public function getPer50DayStoreOrderproctimeSummaryMonth()              { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DayStoreOrderproctimeSummaryMonth.php"; }
+    // static public function getPer50DaySummaryStoreorderRecent()                     { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DaySummaryStoreorderRecent.php"; }
+    // static public function getPer50DayUpdateReorderpct()                            { self::getPer00BatchBase(); require_once ROOT."/src/system/bo-batch/Per50DayUpdateReorderpct.php"; }
 
     /* Model */
     static public function getMOrder()                                              { require_once ROOT."/src/system/model/MOrder.php"; }

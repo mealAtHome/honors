@@ -623,6 +623,10 @@ class UserBO extends _CommonBO
         return $name;
     }
 
+    /* ========================= */
+    /* model function */
+    /* ========================= */
+    public static function isActive($user) { return Common::isEmpty(Common::getField($user, self::FIELD__DELETEDATA_RQSTDT)); }
 
 } /* end class */
 ?>
