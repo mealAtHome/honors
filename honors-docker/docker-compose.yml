@@ -1,4 +1,3 @@
-version: '3.8'
 services:
 
     # for develop
@@ -38,7 +37,6 @@ services:
         build: "./api"
         container_name: "honors-api"
         volumes:
-            - ./api/conf/apache2:/etc/apache2
             - ../honors-server:/var/www/html/honors-server
             - ../honors-res:/var/www/html/honors-res
             - ../honors-key:/var/www/html/honors-key

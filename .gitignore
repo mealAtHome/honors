@@ -27,3 +27,8 @@
 /honors-server/composer.lock
 /honors-server/vendor/
 /honors-server/key/
+
+# ---------------
+# honors-server
+# ---------------
+/honors-key/

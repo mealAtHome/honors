@@ -102,6 +102,8 @@ class ClsBO extends _CommonBO
     /* select > sub */
     /* ========================= */
     public function selectByPkForInside($GRPNO, $CLSNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectApplyStartBetweenByGrpnoForInside($GRPNO, $LASTPROCTIMEFORMATTED, $THISPROCTIMEFORMATTED) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectApplyCloseBetweenByGrpnoForInside($GRPNO, $LASTPROCTIMEFORMATTED, $THISPROCTIMEFORMATTED) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
@@ -115,6 +117,8 @@ class ClsBO extends _CommonBO
     const selectByClsstatusForMng = "selectByClsstatusForMng";
     const selectAppliedFor1YearByUserno = "selectAppliedFor1YearByUserno";
     const selectFor1YearByGrpnoForAll = "selectFor1YearByGrpnoForAll";
+    const selectApplyStartBetweenByGrpnoForInside = "selectApplyStartBetweenByGrpnoForInside";
+    const selectApplyCloseBetweenByGrpnoForInside = "selectApplyCloseBetweenByGrpnoForInside";
 
     const selectClsstatusEditInImMng        = "selectClsstatusEditInImMng";         /* [mngr] [EXECUTOR]        : 일정상태가 작성중인 일정 검색 */
     const selectForUserByClsstatusIng       = "selectForUserByClsstatusIng";        /* [user] [EXECUTOR]        : 탭검색 */
@@ -224,27 +228,29 @@ class ClsBO extends _CommonBO
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPkForInside              : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectByPkForAll                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectByPkForMng                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectByGrpnoForMng              : { $from = "(select * from cls where grpno = '$GRPNO') t"; break; }
-            case self::selectByClsstatusForMng          : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$CLSSTATUS') t"; break; }
-            case self::selectFor1YearByGrpnoForAll      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstartdt >= date_sub(now(), interval 1 year)) t"; break; }
-            case self::selectClsstatusEditInImMng       : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype in ('mng', 'mngsub')) and clsstatus = '$clsstatusEdit') t"; break; }
-            case self::selectForUserByClsstatusIng      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusIng') t"; break; }
-            case self::selectForUserByClssettleflgN     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
-            case self::selectForUserByClsstatusEnd      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
-            case self::selectForUserByClsstatusCancel   : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusCancel') t"; break; }
-            case self::selectForMngrByClsstatusEdit     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEdit') t"; break; }
-            case self::selectForMngrByClsstatusIng      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
-            case self::selectForMngrByClssettleflgN     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
-            case self::selectForMngrByClsstatusEnd      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
-            case self::selectForMngrByClsstatusCancel   : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
-            case self::selectForAllByClsstatusIng       : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
-            case self::selectForAllByClssettleflgN      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
-            case self::selectForAllByClsstatusEnd       : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
-            case self::selectForAllByClsstatusCancel    : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
-            case self::selectAppliedFor1YearByUserno    :
+            case self::selectByPkForInside                              : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByPkForAll                                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByPkForMng                                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByGrpnoForMng                              : { $from = "(select * from cls where grpno = '$GRPNO') t"; break; }
+            case self::selectByClsstatusForMng                          : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$CLSSTATUS') t"; break; }
+            case self::selectFor1YearByGrpnoForAll                      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstartdt >= date_sub(now(), interval 1 year)) t"; break; }
+            case self::selectApplyStartBetweenByGrpnoForInside          : { $from = "(select * from cls where grpno = '$GRPNO' and clsapplystartdt between '$LASTPROCTIMEFORMATTED' and '$THISPROCTIMEFORMATTED') t"; break; }
+            case self::selectApplyCloseBetweenByGrpnoForInside          : { $from = "(select * from cls where grpno = '$GRPNO' and clsapplyclosedt between '$LASTPROCTIMEFORMATTED' and '$THISPROCTIMEFORMATTED') t"; break; }
+            case self::selectClsstatusEditInImMng                       : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype in ('mng', 'mngsub')) and clsstatus = '$clsstatusEdit') t"; break; }
+            case self::selectForUserByClsstatusIng                      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusIng') t"; break; }
+            case self::selectForUserByClssettleflgN                     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
+            case self::selectForUserByClsstatusEnd                      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
+            case self::selectForUserByClsstatusCancel                   : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusCancel') t"; break; }
+            case self::selectForMngrByClsstatusEdit                     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEdit') t"; break; }
+            case self::selectForMngrByClsstatusIng                      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
+            case self::selectForMngrByClssettleflgN                     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
+            case self::selectForMngrByClsstatusEnd                      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
+            case self::selectForMngrByClsstatusCancel                   : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
+            case self::selectForAllByClsstatusIng                       : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
+            case self::selectForAllByClssettleflgN                      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
+            case self::selectForAllByClsstatusEnd                       : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
+            case self::selectForAllByClsstatusCancel                    : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
+            case self::selectAppliedFor1YearByUserno                    :
             {
                 $from =
                 "
@@ -523,6 +529,9 @@ class ClsBO extends _CommonBO
                         $grpMemberBO->updatePointForInside($GRPNO, $targetUserno, $bill, "일정취소로 인한 지급", $CLSNO);
                     }
                 }
+
+                /* push to users */
+                $systemPushBO->insertPushtypeClsCancelForInside($GRPNO, $CLSNO);
                 break;
             }
             case self::copyClsForMng:

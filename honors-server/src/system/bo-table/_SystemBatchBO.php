@@ -28,6 +28,7 @@ class SystemBatchBO extends _CommonBO
     const FIELD__PROCESSFLG  = "processflg";    /* (  ) enum('y','n') */
     const FIELD__STARTDT     = "startdt";       /* (  ) datetime */
     const FIELD__PROCEEDCNT  = "proceedcnt";    /* (  ) int(11) */
+    const FIELD__FREEFIELD   = "freefield";     /* (  ) char(255) */
     const FIELD__MODIDT      = "modidt";        /* (  ) datetime */
     const FIELD__REGDT       = "regdt";         /* (  ) datetime */
 
@@ -113,6 +114,7 @@ class SystemBatchBO extends _CommonBO
             , sb.processflg
             , sb.startdt
             , sb.proceedcnt
+            , sb.freefield
             , sb.modidt
             , sb.regdt
         ";
@@ -157,6 +159,7 @@ class SystemBatchBO extends _CommonBO
     public function upsertToLockForInside($BATCHNAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateProceedcntForInside($BATCHNAME, $PROCEEDCNT) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateToUnlockForInside($BATCHNAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updateFreefieldForInside($BATCHNAME, $FREEFIELD) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     /* ========================= */
     /* update */
@@ -164,6 +167,7 @@ class SystemBatchBO extends _CommonBO
     const upsertToLockForInside = "upsertToLockForInside"; /* BATCHNAME */
     const updateProceedcntForInside = "updateProceedcntForInside"; /* BATCHNAME, PROCEEDCNT */
     const updateToUnlockForInside = "updateToUnlockForInside"; /* BATCHNAME */
+    const updateFreefieldForInside = "updateFreefieldForInside"; /* BATCHNAME, FREEFIELD */
     protected function update($options, $option="")
     {
         /* vars */
@@ -219,29 +223,19 @@ class SystemBatchBO extends _CommonBO
             }
             case self::updateProceedcntForInside:
             {
-                $query =
-                "
-                    update _system_batch
-                    set
-                          proceedcnt = $PROCEEDCNT
-                        , modidt = now()
-                    where
-                        batchname = '$BATCHNAME'
-                ";
+                $query = "update _system_batch set proceedcnt = $PROCEEDCNT, modidt = now() where batchname = '$BATCHNAME'";
                 GGsql::exeQuery($query);
                 break;
             }
             case self::updateToUnlockForInside:
             {
-                $query =
-                "
-                    update _system_batch
-                    set
-                          processflg = 'n'
-                        , modidt = now()
-                    where
-                        batchname = '$BATCHNAME'
-                ";
+                $query = "update _system_batch set processflg = 'n', modidt = now() where batchname = '$BATCHNAME'";
+                GGsql::exeQuery($query);
+                break;
+            }
+            case self::updateFreefieldForInside:
+            {
+                $query = "update _system_batch set freefield = '$FREEFIELD', modidt = now() where batchname = '$BATCHNAME'";
                 GGsql::exeQuery($query);
                 break;
             }

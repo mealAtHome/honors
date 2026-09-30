@@ -43,8 +43,8 @@ class SystemPushBO extends _CommonBO
     /* ========================= */
     const PUSHTYPE__CLS_OPEN = "clsOpen"; /* 일정이 공개됨 */
     const PUSHTYPE__CLS_CANCEL = "clsCancel"; /* 일정이 취소됨 */
-    const PUSHTYPE__CLS_APPLY_START_BEFORE_10MIN = "clsApplyStartBefore10min"; /* 모집시작 10분 전 */
-    const PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1HOUR = "clsApplyCloseBefore1hour"; /* 모집마감 1시간 전 */
+    const PUSHTYPE__CLS_APPLY_START_BEFORE_10_MIN = "clsApplyStartBefore10Min"; /* 모집시작 10분 전 */
+    const PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1_HOUR = "clsApplyCloseBefore1Hour"; /* 모집마감 1시간 전 */
 
     const PUSHSTATUS__WAIT = "wait";
     const PUSHSTATUS__ING = "ing";
@@ -56,8 +56,8 @@ class SystemPushBO extends _CommonBO
         $arr = array();
         $arr['pushtypeClsOpen'] = self::PUSHTYPE__CLS_OPEN; /* 푸시타입 : 일정이 공개됨 */
         $arr['pushtypeClsCancel'] = self::PUSHTYPE__CLS_CANCEL; /* 푸시타입 : 일정이 취소됨 */
-        $arr['pushtypeClsApplyStartBefore10min'] = self::PUSHTYPE__CLS_APPLY_START_BEFORE_10MIN; /* 푸시타입 : 모집시작 10분 전 */
-        $arr['pushtypeClsApplyCloseBefore1hour'] = self::PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1HOUR; /* 푸시타입 : 모집마감 1시간 전 */
+        $arr['pushtypeClsApplyStartBefore10Min'] = self::PUSHTYPE__CLS_APPLY_START_BEFORE_10_MIN; /* 푸시타입 : 모집시작 10분 전 */
+        $arr['pushtypeClsApplyCloseBefore1Hour'] = self::PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1_HOUR; /* 푸시타입 : 모집마감 1시간 전 */
         $arr['pushstatusWait'] = self::PUSHSTATUS__WAIT; /* 푸시상태 : 대기중 */
         $arr['pushstatusIng'] = self::PUSHSTATUS__ING;   /* 푸시상태 : 진행중 */
         $arr['pushstatusEnd'] = self::PUSHSTATUS__END;   /* 푸시상태 : 완료 */
@@ -163,6 +163,9 @@ class SystemPushBO extends _CommonBO
     /* ========================= */
     public function insertWaitForInside($PUSHTYPE, $PUSHDATAJSON) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertPushtypeClsOpenForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertPushtypeClsCancelForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertPushtypeClsApplyStartBefore10MinForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertPushtypeClsApplyCloseBefore1HourForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updatePushstatusWaitToIngForInside($PUSHIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updatePushstatusIngToEndForInside($PUSHIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
@@ -172,6 +175,9 @@ class SystemPushBO extends _CommonBO
     /* ========================= */
     const insertWaitForInside = "insertWaitForInside"; /* PUSHTYPE, PUSHDATAJSON */
     const insertPushtypeClsOpenForInside = "insertPushtypeClsOpenForInside"; /* GRPNO, CLSNO */
+    const insertPushtypeClsCancelForInside = "insertPushtypeClsCancelForInside"; /* GRPNO, CLSNO */
+    const insertPushtypeClsApplyStartBefore10MinForInside = "insertPushtypeClsApplyStartBefore10MinForInside"; /* GRPNO, CLSNO */
+    const insertPushtypeClsApplyCloseBefore1HourForInside = "insertPushtypeClsApplyCloseBefore1HourForInside"; /* GRPNO, CLSNO */
     const updatePushstatusWaitToIngForInside = "updatePushstatusWaitToIngForInside"; /* PUSHIDX */
     const updatePushstatusIngToEndForInside = "updatePushstatusIngToEndForInside"; /* PUSHIDX */
     protected function update($options, $option="")
@@ -231,11 +237,26 @@ class SystemPushBO extends _CommonBO
             }
             case self::insertPushtypeClsOpenForInside:
             {
-                $pushdatajson = array(
-                    "grpno" => $GRPNO,
-                    "clsno" => $CLSNO,
-                );
+                $pushdatajson = array("grpno" => $GRPNO,"clsno" => $CLSNO,);
                 $this->insertWaitForInside($pushtypeClsOpen, json_encode($pushdatajson));
+                break;
+            }
+            case self::insertPushtypeClsCancelForInside:
+            {
+                $pushdatajson = array("grpno" => $GRPNO,"clsno" => $CLSNO,);
+                $this->insertWaitForInside($pushtypeClsCancel, json_encode($pushdatajson));
+                break;
+            }
+            case self::insertPushtypeClsApplyStartBefore10MinForInside:
+            {
+                $pushdatajson = array("grpno" => $GRPNO,"clsno" => $CLSNO,);
+                $this->insertWaitForInside($pushtypeClsApplyStartBefore10Min, json_encode($pushdatajson));
+                break;
+            }
+            case self::insertPushtypeClsApplyCloseBefore1HourForInside:
+            {
+                $pushdatajson = array("grpno" => $GRPNO,"clsno" => $CLSNO,);
+                $this->insertWaitForInside($pushtypeClsApplyCloseBefore1Hour, json_encode($pushdatajson));
                 break;
             }
             case self::updatePushstatusWaitToIngForInside:

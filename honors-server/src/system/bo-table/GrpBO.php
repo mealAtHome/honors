@@ -16,6 +16,7 @@ class GrpBO extends _CommonBO
     {
         GGnavi::getGrpMemberBO();
         GGnavi::getAddrcodeBO();
+        GGnavi::getUserBO();
     }
     function setBO()
     {
@@ -23,6 +24,7 @@ class GrpBO extends _CommonBO
         $arr = array();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['addrcodeBO'] = AddrcodeBO::getInstance();
+        $arr['userBO'] = UserBO::getInstance();
         $arr['ggAuth'] = GGauth::getInstance();
         return $arr;
     }
@@ -32,22 +34,22 @@ class GrpBO extends _CommonBO
     /*
     */
     /* ========================= */
-    const FIELD__GRPNO         = "grpno";         /* (pk) char(30) */
-    const FIELD__GRPMANAGER    = "grpmanager";    /* (  ) char(30) */
-    const FIELD__GRPIMG        = "grpimg";        /* (  ) char(10) */
-    const FIELD__GRPNAME       = "grpname";       /* (  ) char(50) */
-    const FIELD__GRPINTRO      = "grpintro";      /* (  ) char(30) */
-    const FIELD__BACCNODEFAULT = "baccnodefault"; /* (  ) int */
-    const FIELD__BACKNUMBERLENGTH = "backnumberlength"; /* (  ) int */
-    const FIELD__GRPBASEADDRCODE = "grpbaseaddrcode"; /* (  ) bigint */
-    const FIELD__GRPBASEPOINT = "grpbasepoint"; /* (  ) point */
-    const FIELD__GRPMCNT = "grpmcnt"; /* (  ) int */
-    const FIELD__GRPCLSTERMUNIT = "grpclstermunit"; /* (  ) enum('y','m','w','d') */
-    const FIELD__GRPCLSTERMVALUE = "grpclstermvalue"; /* (  ) int */
-    const FIELD__GRPLASTCLSREGISTED = "grplastclsregisted"; /* (  ) datetime */
-    const FIELD__GRPCLSAPPLYBILLAVG = "grpclsapplybillavg"; /* (  ) int */
-    const FIELD__MODIDT        = "modidt";        /* (  ) datetime */
-    const FIELD__REGIDT        = "regidt";        /* (  ) datetime */
+    const FIELD__GRPNO                  = "grpno";                  /* (pk) char(30) */
+    const FIELD__GRPMANAGER             = "grpmanager";             /* (  ) char(30) */
+    const FIELD__GRPIMG                 = "grpimg";                 /* (  ) char(10) */
+    const FIELD__GRPNAME                = "grpname";                /* (  ) char(50) */
+    const FIELD__GRPINTRO               = "grpintro";               /* (  ) char(30) */
+    const FIELD__BACCNODEFAULT          = "baccnodefault";          /* (  ) int */
+    const FIELD__BACKNUMBERLENGTH       = "backnumberlength";       /* (  ) int */
+    const FIELD__GRPBASEADDRCODE        = "grpbaseaddrcode";        /* (  ) bigint */
+    const FIELD__GRPBASEPOINT           = "grpbasepoint";           /* (  ) point */
+    const FIELD__GRPMCNT                = "grpmcnt";                /* (  ) int */
+    const FIELD__GRPCLSTERMUNIT         = "grpclstermunit";         /* (  ) enum('y','m','w','d') */
+    const FIELD__GRPCLSTERMVALUE        = "grpclstermvalue";        /* (  ) int */
+    const FIELD__GRPLASTCLSREGISTED     = "grplastclsregisted";     /* (  ) datetime */
+    const FIELD__GRPCLSAPPLYBILLAVG     = "grpclsapplybillavg";     /* (  ) int */
+    const FIELD__MODIDT                 = "modidt";                 /* (  ) datetime */
+    const FIELD__REGIDT                 = "regidt";                 /* (  ) datetime */
 
     /* ========================= */
     /* enum */
@@ -74,7 +76,8 @@ class GrpBO extends _CommonBO
     /* ========================= */
     /* select > sub */
     /* ========================= */
-    public function selectByPkForInside ($GRPNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectByPkForInside($GRPNO) { return $this->select(get_defined_vars(), __FUNCTION__); }
+    public function selectActiveAllForInside() { return $this->select(array(), __FUNCTION__); }
 
     /* ========================= */
     /* select */
@@ -85,6 +88,7 @@ class GrpBO extends _CommonBO
     const selectByPkForInside = "selectByPkForInside";
     const selectManaging = "selectManaging"; /* 모임 : 내 모임리스트를 가져옴 */
     const selectActiveForUsr = "selectActiveForUsr";
+    const selectActiveAllForInside = "selectActiveAllForInside";
     protected function select($options, $option="")
     {
         /* vars */
@@ -102,7 +106,9 @@ class GrpBO extends _CommonBO
         /* --------------- */
         $query  = "";
         $select = "";
+        $additionalSelect = "";
         $from   = "";
+        $additionalJoin = "";
         $select =
         "
               t.grpno
@@ -134,34 +140,67 @@ class GrpBO extends _CommonBO
             , bacc.baccname         baccname
             , bank.bankname         bankname
             , ac.addrstrfull        grpbaseaddrstr
-            , ROUND(
-                6371 * ACOS(
-                    LEAST(
-                        1.0,
-                        GREATEST(
-                            -1.0,
-                            COS(RADIANS(ST_X(t.grpbasepoint))) *
-                            COS(RADIANS(ST_X(eu.userloginedpoint))) *
-                            COS(RADIANS(ST_Y(eu.userloginedpoint)) - RADIANS(ST_Y(t.grpbasepoint))) +
-                            SIN(RADIANS(ST_X(t.grpbasepoint))) * SIN(RADIANS(ST_X(eu.userloginedpoint)))
-                        )
-                    )
-                )
-              , 1) grpdistancekm
         ";
+
+        switch($OPTION)
+        {
+            case self::selectByPk:
+            case self::selectManaging:
+            case self::selectActiveForUsr:
+            {
+                $additionalSelect =
+                "
+                    , ROUND(
+                        6371 * ACOS(
+                            LEAST(
+                                1.0,
+                                GREATEST(
+                                    -1.0,
+                                    COS(RADIANS(ST_X(t.grpbasepoint))) *
+                                    COS(RADIANS(ST_X(eu.userloginedpoint))) *
+                                    COS(RADIANS(ST_Y(eu.userloginedpoint)) - RADIANS(ST_Y(t.grpbasepoint))) +
+                                    SIN(RADIANS(ST_X(t.grpbasepoint))) * SIN(RADIANS(ST_X(eu.userloginedpoint)))
+                                )
+                            )
+                        )
+                    , 1) grpdistancekm
+                ";
+                break;
+            }
+        }
 
         /* --------------- */
         /* from */
         /* --------------- */
         switch($OPTION)
         {
-            case self::selectByPk          : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
-            case self::selectByPkForInside : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
-            case self::selectManaging      : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub'))) t"; break; }
-            case self::selectActiveForUsr  : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive')) t"; break; }
+            case self::selectByPk               : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
+            case self::selectByPkForInside      : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
+            case self::selectManaging           : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub'))) t"; break; }
+            case self::selectActiveForUsr       : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive')) t"; break; }
+            case self::selectActiveAllForInside : { $from = "(select * from grp) t"; break; }
             default:
             {
                 throw new GGexception("(server) no option defined");
+            }
+        }
+
+        /* --------------- */
+        /* additional join */
+        /* --------------- */
+        switch($OPTION)
+        {
+            case self::selectByPk:
+            case self::selectManaging:
+            case self::selectActiveForUsr:
+            {
+                $additionalJoin .=
+                "
+                    left join user eu
+                        on
+                            eu.userno = '$EXECUTOR'
+                ";
+                break;
             }
         }
 
@@ -172,6 +211,7 @@ class GrpBO extends _CommonBO
         "
             select
                 $select
+                $additionalSelect
             from
                 $from
                 left join user u
@@ -188,9 +228,7 @@ class GrpBO extends _CommonBO
                 left join _addrcode ac
                     on
                         ac.addrcode = t.grpbaseaddrcode
-                left join user eu
-                    on
-                        eu.userno = '$EXECUTOR'
+                $additionalJoin
             order by
                 t.grpname asc
         ";
@@ -201,7 +239,6 @@ class GrpBO extends _CommonBO
     /* ========================= */
     /* update (sub) */
     /* ========================= */
-    /* public function changeStoreStatus($STORENO, $STORE_STATUS)     { return $this->update(get_defined_vars(), __FUNCTION__); } */
     public function updateBaccnodefaultForInside($GRPNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updateGrpintroForInside($GRPNO, $GRPINTRO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function recalcGrpmcntForInside($GRPNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
@@ -387,5 +424,33 @@ class GrpBO extends _CommonBO
         return $rslt;
     }
 
+
+    public function getTokenOfActiveUsersByGrpno($grpno)
+    {
+        $grpMemberBO = new GrpMemberBO();
+        $userBO = new UserBO();
+
+        $tokenArr = array();
+        $grpMemberList = Common::getData($grpMemberBO->selectActiveUsersForInside($grpno));
+        foreach($grpMemberList as $grpMember)
+        {
+            /* get */
+            $userno = Common::get($grpMember, GrpMemberBO::FIELD__USERNO);
+            $user = $userBO->getByPk($userno);
+            $pushtoken = Common::getField($user, UserBO::FIELD__PUSHTOKEN);
+
+            /* check if user is active */
+            if(UserBO::isActive($user) == false)
+                continue;
+
+            /* check if user has a push token */
+            if(Common::isEmpty($pushtoken))
+                continue;
+
+            /* save to tokenArr array */
+            $tokenArr[] = $pushtoken;
+        }
+        return $tokenArr;
+    }
 }
 ?>
