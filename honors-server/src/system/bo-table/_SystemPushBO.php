@@ -153,6 +153,8 @@ class SystemPushBO extends _CommonBO
                 $select
             from
                 $from
+            order by
+                sp.pushidx
         ";
         $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;

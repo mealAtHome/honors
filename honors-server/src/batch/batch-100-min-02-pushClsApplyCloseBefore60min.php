@@ -56,7 +56,10 @@
             /* 두 시간을 기준으로 각각 60분 뒤에 기명이 마감되는 클래스를 조회 */
             $clsList = Common::getData($clsBO->selectApplyCloseBetweenByGrpnoForInside($grpno, $lastprocTimeFormatted, $thisprocTimeFormatted));
             foreach($clsList as $cls)
-                $systemPushBO->insertPushtypeClsApplyCloseBefore60MinForInside($grpno, $cls);
+            {
+                $clsno = Common::get($cls, ClsBO::FIELD__CLSNO);
+                $systemPushBO->insertPushtypeClsApplyCloseBefore1HourForInside($grpno, $clsno);
+            }
         }
 
         /* 마지막으로 처리한 시간을 현재 시간으로 업데이트 */

@@ -56,7 +56,10 @@
             /* 두 시간을 기준으로 각각 10분 뒤에 기명이 시작되는 클래스를 조회 */
             $clsList = Common::getData($clsBO->selectApplyStartBetweenByGrpnoForInside($grpno, $lastprocTimeFormatted, $thisprocTimeFormatted));
             foreach($clsList as $cls)
-                $systemPushBO->insertPushtypeClsApplyStartBefore10MinForInside($grpno, $cls);
+            {
+                $clsno = Common::get($cls, ClsBO::FIELD__CLSNO);
+                $systemPushBO->insertPushtypeClsApplyStartBefore10MinForInside($grpno, $clsno);
+            }
         }
 
         /* 마지막으로 처리한 시간을 현재 시간으로 업데이트 */

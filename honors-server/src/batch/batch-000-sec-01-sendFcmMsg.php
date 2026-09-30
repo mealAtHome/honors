@@ -70,6 +70,7 @@
                     $cls = $clsBO->getByPk($grpno, $clsno);
                     $grpname = Common::get($cls, 'grpname');
                     $clsstartdt = Common::get($cls, 'clsstartdt');
+                    $clsstartdtFormatted = date("Y-m-d H:i", strtotime($clsstartdt));
                     $clsground = Common::get($cls, 'clsground');
 
                     /* make msg */
@@ -77,7 +78,7 @@
                     ->withNotification(
                         Notification::create(
                             '새로운일정 ('.$grpname.')',
-                            $clsstartdt.' / '.$clsground
+                            $clsstartdtFormatted.' / '.$clsground
                         )
                     )
                     ->withData([
@@ -100,14 +101,16 @@
                     $cls = $clsBO->getByPk($grpno, $clsno);
                     $grpname = Common::get($cls, 'grpname');
                     $clsstartdt = Common::get($cls, 'clsstartdt');
+                    $clsstartdtFormatted = date("Y-m-d H:i", strtotime($clsstartdt));
                     $clsground = Common::get($cls, 'clsground');
+                    $clscancelreason = Common::get($cls, 'clscancelreason');
 
                     /* make msg */
                     $message = CloudMessage::new()
                     ->withNotification(
                         Notification::create(
                             '일정취소 ('.$grpname.')',
-                            $clsstartdt.' / '.$clsground
+                            $clsstartdtFormatted.' / '.$clsground.' / '.$clscancelreason
                         )
                     )
                     ->withData([
@@ -120,7 +123,7 @@
                     $tokenArr = $grpBO->getTokenOfActiveUsersByGrpno($grpno);
                     break;
                 }
-                case SystemPushBO::PUSHTYPE__CLS_APPLY_START_BEFORE_10MIN:
+                case SystemPushBO::PUSHTYPE__CLS_APPLY_START_BEFORE_10_MIN:
                 {
                     /* vars */
                     $grpno = Common::get($pushdata, 'grpno');
@@ -130,14 +133,15 @@
                     $cls = $clsBO->getByPk($grpno, $clsno);
                     $grpname = Common::get($cls, 'grpname');
                     $clsstartdt = Common::get($cls, 'clsstartdt');
+                    $clsstartdtFormatted = date("Y-m-d H:i", strtotime($clsstartdt));
                     $clsground = Common::get($cls, 'clsground');
 
                     /* make msg */
                     $message = CloudMessage::new()
                     ->withNotification(
                         Notification::create(
-                            '기명시작 10분전 ('.$grpname.')',
-                            $clsstartdt.' / '.$clsground
+                            '모집시작 10분전 ('.$grpname.')',
+                            $clsstartdtFormatted.' / '.$clsground
                         )
                     )
                     ->withData([
@@ -150,7 +154,7 @@
                     $tokenArr = $grpBO->getTokenOfActiveUsersByGrpno($grpno);
                     break;
                 }
-                case SystemPushBO::PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1HOUR:
+                case SystemPushBO::PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1_HOUR:
                 {
                     /* vars */
                     $grpno = Common::get($pushdata, 'grpno');
@@ -160,14 +164,15 @@
                     $cls = $clsBO->getByPk($grpno, $clsno);
                     $grpname = Common::get($cls, 'grpname');
                     $clsstartdt = Common::get($cls, 'clsstartdt');
+                    $clsstartdtFormatted = date("Y-m-d H:i", strtotime($clsstartdt));
                     $clsground = Common::get($cls, 'clsground');
 
                     /* make msg */
                     $message = CloudMessage::new()
                     ->withNotification(
                         Notification::create(
-                            '기명마감 1시간 전 ('.$grpname.')',
-                            $clsstartdt.' / '.$clsground
+                            '모집마감 1시간 전 ('.$grpname.')',
+                            $clsstartdtFormatted.' / '.$clsground
                         )
                     )
                     ->withData([
