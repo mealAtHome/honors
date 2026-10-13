@@ -75,7 +75,7 @@ Api.User =
         return rslt;
     },
 
-    updatePushToken(pushtoken, noticeOK, noticeFail) { return Api.User.update({OPTION:"updatePushToken", PUSHTOKEN: pushtoken}, noticeOK, noticeFail); },
+    updatePushtoken(pushtoken, noticeOK, noticeFail) { return Api.User.update({OPTION:"updatePushtoken", PUSHTOKEN: pushtoken}, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main function */
