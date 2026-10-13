@@ -4,7 +4,7 @@ Api.User =
     /* select */
     /* ========================= */
     selectMe() { return Api.User.select({"OPTION":"selectMe"}); },
-    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin", "PUSHTOKEN":indexFcmToken }); },
+    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin"}); },
     selectCntById(id, noticeOK, noticeFail) { return Api.User.select({"OPTION":"selectCntById", "ID":id}, noticeOK, noticeFail); },
 
     /* ========================= */
@@ -55,7 +55,6 @@ Api.User =
             "ID"        : id,
             "PW"        : pw,
             "USERTYPE"  : usertype,
-            "TOKEN"     : indexFcmToken,
             "PLATFORM"  : GGstorage.getDeviceKindSmall(),
         };
         let ajax = Api.execute(ajaxData, "Api.User.login", noticeOK, noticeFail);
@@ -75,6 +74,8 @@ Api.User =
         let rslt = GGvalid.Api.isSucceed(ajax);
         return rslt;
     },
+
+    updatePushToken(pushtoken, noticeOK, noticeFail) { return Api.User.update({OPTION:"updatePushToken", PUSHTOKEN: pushtoken}, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main function */

@@ -17,6 +17,7 @@ class MUser
         /* data */      this.userloginedlng = GGC.Common.double(dat.userloginedlng);
         /* data */      this.point          = GGC.Common.int(dat.point);
         /* data */      this.adminflg       = GGC.Common.enum(dat.adminflg);
+        /* data */      this.pushtoken      = GGC.Common.enum(dat.pushtoken);
         /* data */      this.modidt         = GGC.Common.datetime(dat.modidt);
         /* data */      this.regidt         = GGC.Common.datetime(dat.regidt);
         /* data */      this.priv_phone     = GGC.Common.enum(dat.priv_phone);
@@ -43,6 +44,7 @@ class MUser
     getUserloginedlng() { return this.userloginedlng; }
     getPoint() { return this.point; }
     getAdminflg() { return this.adminflg; }
+    getPushtoken() { return this.pushtoken; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
     getPrivPhone() { return this.priv_phone; }

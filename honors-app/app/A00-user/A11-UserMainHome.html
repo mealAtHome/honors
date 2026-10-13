@@ -34,6 +34,10 @@
         <button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="DGRP" hyperlink-viewmode="page" grpno="GCYHTRMLKYLEXMELLYTWCUBWAWALXD" >모임상세</button>
     </div> -->
 
+    <div id="UMHM-div-placeholder">
+        <div>푸시 알림 권한 상태가 여기에 표시됩니다.</div>
+    </div>
+
     <!-- =============== -->
     <!-- cushion for tab -->
     <!-- =============== -->
@@ -66,12 +70,31 @@
                     /* 내 정보 조회 */
                     let mUser = Api.User.selectMe().getModel();
                     $("#UMHM-span-username").text(`${mUser.getName()}`);
-                    // mUsers.make("#UMHM-div-userInfo");
+
+                    /* get push grant & FCM token */
+                    if(GGstorage.isMobile())
+                    {
+                        /* grant permission */
+                        FirebasexMessaging.hasPermission(function (hasPermission)
+                        {
+                            $("#UMHM-div-placeholder").append(`<div>hasPermission: ${hasPermission}</div>`);
+                            if(!hasPermission)
+                            {
+                                FirebasexMessaging.grantPermission(function (hasPermission) {
+                                    $("#UMHM-div-placeholder").append(`<div>Notifications permission was ${hasPermission ? "granted" : "denied"}</div>`);
+                                });
+                            }
+                        });
+
+                        /* update token */
+                        FirebasexMessaging.getToken(
+                            function (fcmToken) { Api.User.updatePushtoken(fcmToken, GGF.NONE, GGF.NONE); },
+                            function (error)    { Api.User.updatePushtoken("", GGF.NONE, GGF.NONE); }
+                        );
+                    }
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
-
-                // GGinitPage.setCartFab();
             },
 
             close()

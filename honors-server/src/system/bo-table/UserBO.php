@@ -122,6 +122,10 @@ class UserBO extends _CommonBO
         $query   = "";
         $select  = "";
         $from    = "";
+
+        /* --------------- */
+        /* select */
+        /* --------------- */
         $select =
         "
               t.userno
@@ -141,6 +145,17 @@ class UserBO extends _CommonBO
             , t.regidt
             , up.priv_phone
         ";
+        switch($OPTION)
+        {
+            case UserBO::selectMe:
+            {
+                $select .=
+                "
+                    , t.pushtoken
+                ";
+                break;
+            }
+        }
 
         /* --------------- */
         /* from */
@@ -179,7 +194,6 @@ class UserBO extends _CommonBO
         switch($OPTION)
         {
             case UserBO::selectCntById: { $rslt[GGF::DATA] = []; break; }
-            case UserBO::selectMeForLogin: { $this->updatePushtokenForInside($EXECUTOR, $PUSHTOKEN); break; }
         }
         return $rslt;
     }
@@ -190,15 +204,14 @@ class UserBO extends _CommonBO
     /*
      */
     /* ==================== */
-    public function insertForInside                 ($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertForInside($ID, $PW, $NAME, $BIRTHYEAR, $PHONE, $EMAIL, $ADRCVFLG, $HASCARFLG) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function syncLoginedpointFromDefaultAddrForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function insertTempForInside             ($NAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function updateDeviceInfoByInside        ($USERNO, $PLATFORM, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function updatePhoneByUsernoForInside    ($USERNO, $PHONE) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function addPointForInside               ($USERNO, $POINT) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function updateBaccnodefaultForInside    ($USERNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function deleteRecordByPkForInside       ($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function updatePushtokenForInside        ($USERNO, $PUSHTOKEN) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertTempForInside($NAME) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updateDeviceInfoByInside($USERNO, $PLATFORM) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updatePhoneByUsernoForInside($USERNO, $PHONE) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function addPointForInside($USERNO, $POINT) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function updateBaccnodefaultForInside($USERNO, $BACCNODEFAULT) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function deleteRecordByPkForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
     const insertForInside = "insertForInside";
     const insertTempForInside = "insertTempForInside"; /* temp 유저 작성 */
@@ -209,7 +222,7 @@ class UserBO extends _CommonBO
     const updateBaccnodefaultForInside = "updateBaccnodefaultForInside";
     const deleteUserInfo = "deleteUserInfo";
     const deleteRecordByPkForInside = "deleteRecordByPkForInside";
-    const updatePushtokenForInside = "updatePushtokenForInside";
+    const updatePushtoken = "updatePushtoken";
     const updatePhonePrivacyByPk = "updatePhonePrivacyByPk"; /* EXECUTOR, PRIV_PHONE, PRIV_PHONE_GRPM */
     const syncLoginedpointFromDefaultAddrForInside = "syncLoginedpointFromDefaultAddrForInside";
     const updateUserloginedpointForUsr = "updateUserloginedpointForUsr"; /* 실시간 GPS로 직접 갱신 */
@@ -438,9 +451,6 @@ class UserBO extends _CommonBO
             }
             case self::updateDeviceInfoByInside:
             {
-                /* update pushToken */
-                $this->updatePushtokenForInside($USERNO, $PUSHTOKEN);
-
                 /* update platform */
                 if(Common::isEmpty($PLATFORM) == false)
                 {
@@ -509,10 +519,10 @@ class UserBO extends _CommonBO
                 $grpmPrivacyBO->upsertByGrpmArrForInside($EXECUTOR, $PRIV_PHONE_GRPM);
                 break;
             }
-            case self::updatePushtokenForInside:
+            case self::updatePushtoken:
             {
                 $PUSHTOKEN = $PUSHTOKEN == "" ? "null" : "'$PUSHTOKEN'";
-                $query = "update user set pushtoken = $PUSHTOKEN where userno = '$USERNO'";
+                $query = "update user set pushtoken = $PUSHTOKEN where userno = '$EXECUTOR'";
                 GGsql::exeQuery($query);
                 break;
             }

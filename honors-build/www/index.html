@@ -47,7 +47,7 @@
         <script>
             const ajaxDelayTime = 300; /* ajax 지연시간 */
             const VERSION = "10012";
-            const SCRIPT_MERGE = true; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
+            const SCRIPT_MERGE = false; /* 스크립트 병합 여부 (true: 병합, false: 개별) */
             const LOCALMODE = false;
             var scriptloaded = false;
             var appExitFlg = false; /* 한 번 더 누르면 앱 종료 플래그 */
@@ -58,7 +58,6 @@
                 getResourceHost() { return LOCALMODE ? 'https://m-res.yogimoim.com'          : 'https://a-res.yogimoim.com'; }, /* http://localhost:8081 */
                 getScriptHost()   { return LOCALMODE ? 'http://localhost:8084'               : 'https://a-src.yogimoim.com'; },
             };
-            var indexFcmToken = "";
             var initApp = function()
             {
                 /* ==================== */
@@ -162,22 +161,6 @@
                         Navigation.executeMoveBack();
                     }, false);
                 }
-
-                alert(window.location.href);
-
-                /* get push grant & FCM token */
-                FirebasexMessaging.grantPermission(function (hasPermission) {
-                    console.log("Notifications permission was " + (hasPermission ? "granted" : "denied"));
-                });
-                FirebasexMessaging.getToken(
-                    function (fcmToken) {
-                        indexFcmToken = fcmToken;
-                    },
-                    function (error) {
-                        console.error(error);
-                        indexFcmToken = "";
-                    }
-                );
 
                 /* app start */
                 let interval = setInterval(() =>
