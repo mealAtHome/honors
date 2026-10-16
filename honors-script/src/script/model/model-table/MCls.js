@@ -100,7 +100,7 @@ class MCls
 
     /* custom : 일정담당자(담당자1/담당자2) 여부 */
     isClsAdmin(myUserno)        { return myUserno == this.getClsusernoadm() || myUserno == this.getClsusernosub(); }
-    isWithinClsapplyPeriod()    { return GGdate.inWithinPeriod(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
+    isWithinClsapplyPeriod()    { return GGdate.inWithinPeriodTime(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
 
     isAppliable()               { return this.isWithinClsapplyPeriod() && this.isClsstatusIng(); }
 
@@ -138,9 +138,10 @@ class MCls
                     </div>
                     <div class="common-cushionHalfUp">
                         <div class="common-fonts08">
-                            ${GGC.Cls.clsapplyPeriodCard(this.getClsapplystartdt(), this.getClsapplyclosedt())}
+                            <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-calendar-event"></i><span>${this.getClsPeriod()}</span></div>
                             <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-map-pin"></i><span>${this.getClsground()}</span></div>
                             <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-credit-card"></i><span>${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
+                            ${this.isClsstatusEdit() || this.isClsstatusIng() ? GGC.Cls.clsapplyPeriodCard(this.getClsapplystartdt(), this.getClsapplyclosedt()) : ""}
                         </div>
                     </div>
                     ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}

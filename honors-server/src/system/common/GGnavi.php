@@ -15,7 +15,6 @@ class GGnavi
     static public function getAddressSigunguBO()                                    { require_once ROOT."/src/system/bo-ref/AddressSigunguBO.php"; }
     static public function getBankBO()                                              { require_once ROOT."/src/system/bo-ref/BankBO.php"; }
     static public function getSystemBoardBO()                                       { require_once ROOT."/src/system/bo-ref/SystemBoardBO.php"; }
-    static public function getRefHolidayBO()                                        { require_once ROOT.'/src/system/bo-ref/RefHolidayBO.php'; }
 
     /* BO : for users */
     static public function getSystemBatchBO()                                       { require_once ROOT."/src/system/bo-table/_SystemBatchBO.php"; }

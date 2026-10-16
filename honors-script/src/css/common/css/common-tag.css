@@ -873,6 +873,7 @@
   padding-top: var(--padBase);
   border-top: 1px solid var(--colorLine);
   overflow-x: auto; /* 가로 스크롤 허용 */
+  padding-bottom: 2px; /* overflow 로 인해 버튼 하단/우측 테두리가 잘리는 것 방지 */
 }
 
 .common-buttonsForCardTop ~ .common-buttonsForCardTop {

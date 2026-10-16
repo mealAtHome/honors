@@ -91,11 +91,13 @@ GGC.Cls =
     clsapplyPeriodCard(startDateStr, endDateStr)
     {
         let now = new Date();
-        let startDate = new Date(startDateStr);
-        let endDate = new Date(endDateStr);
+        let startDate = GGdate.toDate(startDateStr);
+        let endDate = GGdate.toDate(endDateStr);
+        if(startDate == null || endDate == null)
+            return ""; /* 모집기간을 알 수 없으면 표시하지 않는다 */
 
         let str = "";
-        let point = GGdate.getPointOfDate(now, startDate, endDate);
+        let point = GGdate.getPointOfDateTime(now, startDate, endDate); /* 서버와 동일하게 시각까지 판정 */
         let color = "";
         switch(point)
         {

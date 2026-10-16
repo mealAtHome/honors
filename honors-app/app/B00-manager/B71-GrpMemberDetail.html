@@ -193,7 +193,7 @@
                             {
                                 let mGrpMember = Api.GrpMember.selectByPkForMng(grpno, userno, GGF.none, GGF.toast);
                                 let mGrpMemberUser = mGrpMember.getMUser();
-                                $("#GMDT-div-profileCard").html(mGrpMember.makeGrpMember());
+                                $("#GMDT-div-profileCard").html(mGrpMember.makeGrpMember("", false));
 
                                 /* 정보 리스트 */
                                 $("#GMDT-span-birthyear").text(mGrpMemberUser.getBirthyear());

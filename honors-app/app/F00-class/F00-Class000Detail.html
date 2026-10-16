@@ -93,7 +93,10 @@
                         <div id="CLSD-div-clsusernosub" class="common-block"><span>담당자2 : </span><span id="CLSD-span-clsusernosubname"></span></div>
                     </td>
                 </tr>
-                <tr id="CLSD-tr-clscancelreason" style="display:none;"><th>취소사유</th><td><span id="CLSD-span-clscancelreason"></span></td></tr>
+                <tr id="CLSD-tr-clscancelreason" style="display:none;">
+                    <td><span class="common-bold common-colorNgtv">취소사유</span></td>
+                    <td><span class="common-bold common-colorNgtv" id="CLSD-span-clscancelreason"></span></td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -502,11 +505,13 @@
                 /* ----- */
                 /* apply */
                 /* ----- */
+                /* 모집기간 밖에서는 일반 멤버에게 참가/취소 버튼을 보여주지 않는다. (서버도 매니저만 모집기간 제한을 받지 않음) */
+                let canApply = CLSD.isManager || CLSD.mCls.isAppliable();
                 let applyHtml = "";
                 if(model.hasApplyer())
                 {
                     applyHtml = `${username}`
-                    if(clssettleflg == GGF.Cls.Clssettleflg.EDIT)
+                    if(clssettleflg == GGF.Cls.Clssettleflg.EDIT && canApply)
                     {
                         applyHtml =
                         `
@@ -518,7 +523,7 @@
                 else
                 {
                     applyHtml = "-";
-                    if(clssettleflg == GGF.Cls.Clssettleflg.EDIT)
+                    if(clssettleflg == GGF.Cls.Clssettleflg.EDIT && canApply)
                     {
                         applyHtml =
                         `

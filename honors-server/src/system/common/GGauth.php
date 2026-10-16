@@ -125,7 +125,7 @@ class GGauth
         $applystartdt = Common::getField($cls, ClsBO::FIELD__CLSAPPLYSTARTDT);
         $applyclosedt = Common::getField($cls, ClsBO::FIELD__CLSAPPLYCLOSEDT);
         if(GGdate::isInPeriod($applystartdt, $applyclosedt) == false)
-            throw new GGexception("일정 신청기간이 아닙니다.");
+            throw new GGexception("일정 모집기간이 아닙니다.");
         return true;
     }
 

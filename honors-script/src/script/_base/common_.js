@@ -288,38 +288,9 @@ var Common =
         return date.getFullYear();
     },
 
-    getLastMonthDate()
-    {
-        let start = new Date();
-        if(start.getMonth() == 0)
-        {
-            start.setFullYear(start.getFullYear()-1);
-            start.setMonth(11);
-        }
-        else
-        {
-            start.setMonth(start.getMonth()-1);
-        }
-        return start;
-    },
-
     getThisMonthDate()
     {
         let end = new Date();
-        return end;
-    },
-
-    getNextMonthDate()
-    {
-        let end = new Date();
-        if(end.getMonth() == 11)
-        {
-            end.setFullYear(end.getFullYear()+1);
-            end.setMonth(0);
-        }
-        else
-            end.setMonth(end.getMonth()+1);
-
         return end;
     },
 

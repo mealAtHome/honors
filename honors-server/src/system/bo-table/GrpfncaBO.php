@@ -183,6 +183,13 @@ class GrpfncaBO extends _CommonBO
                 /* check auth */
                 $ggAuth->hasGrpmfinauth($GRPNO, $EXECUTOR, true);
 
+                /* validation */
+                if(!is_numeric($GRPFNC_CAPITALTOTAL) || $GRPFNC_CAPITALTOTAL < 0) { throw new GGexception("자본금을 올바르게 입력해주세요."); }
+                $GRPFNC_CAPITALTOTAL = intval($GRPFNC_CAPITALTOTAL);
+                if(Common::isEmpty(trim($COMMENT))) { throw new GGexception("변경사유를 입력해주세요."); }
+                $current = GGsql::selectOne("select grpfnc_capitaltotal from grpfnca where grpno = '$GRPNO'");
+                if($current != null && intval($current['grpfnc_capitaltotal']) === $GRPFNC_CAPITALTOTAL) { throw new GGexception("현재 자본금과 동일합니다."); }
+
                 /* process */
                 $query = "update grpfnca gfnc set grpfnc_capitaltotal = $GRPFNC_CAPITALTOTAL, modidt = now() where gfnc.grpno = '$GRPNO'";
                 GGsql::exeQuery($query);

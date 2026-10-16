@@ -4,7 +4,7 @@
 
         <div class="common-div-header">
             <div header="back"><gg-backbtn onclick="CUDE.close()"></gg-backbtn></div>
-            <div header="title"><span>일정등록</span></div>
+            <div header="title"><span id="CUDE-span-title">일정등록</span></div>
         </div>
         <div class="common-div-headerPadding"></div>
         <div class="common-div-progressContainer">
@@ -368,6 +368,8 @@
                     {
                         case "insert":
                         {
+                            $("#CUDE-span-title").text("일정등록");
+
                             /* init */
                             let now = new Date();
                             now.setHours(0);
@@ -382,6 +384,7 @@
                         }
                         case "update":
                         {
+                            $("#CUDE-span-title").text("일정수정");
                             let mCls = Api.Cls.selectByPkForMng(grpno, clsno, GGF.none, GGF.toast);
                             $("#CUDE-input-clstitle").val(mCls.getClstitle());
                             $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
@@ -543,14 +546,14 @@
                     {
                         let clsapplystartdt = GGdate.fromDivYearToMin("#CUDE-div-clsapplystartdt");
                         let clsapplyclosedt = GGdate.fromDivYearToMin("#CUDE-div-clsapplyclosedt");
-                        if(Common.isEmpty(clsapplystartdt)) { Common.toastError("신청시작일시가 올바르지 않거나 입력되지 않았습니다."); return; }
-                        if(Common.isEmpty(clsapplyclosedt)) { Common.toastError("신청종료일시가 올바르지 않거나 입력되지 않았습니다."); return; }
+                        if(Common.isEmpty(clsapplystartdt)) { Common.toastError("모집시작일시가 올바르지 않거나 입력되지 않았습니다."); return; }
+                        if(Common.isEmpty(clsapplyclosedt)) { Common.toastError("모집종료일시가 올바르지 않거나 입력되지 않았습니다."); return; }
 
                         let clsapplystartdtDate = new Date(clsapplystartdt);
                         let clsapplyclosedtDate = new Date(clsapplyclosedt);
                         if(clsapplyclosedtDate <= clsapplystartdtDate)
                         {
-                            Common.toastError("신청종료일시는 신청시작일시 이후로 입력해주세요.");
+                            Common.toastError("모집종료일시는 모집시작일시 이후로 입력해주세요.");
                             return;
                         }
                         break;

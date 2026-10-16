@@ -234,66 +234,6 @@ var GGstorage =
     isMobile() { return GGstorage.getDeviceKind() === GGF.System.DeviceKind.MOBILE; },
 
     /* ========================= */
-    /* 휴일 리스트 */
-    /* ========================= */
-    setHolidayUpdated(val=null) { return GGstorage.setVal("holidayUpdated", val); },
-    getHolidayUpdated()         { return GGstorage.getVal("holidayUpdated"); },
-
-    setHolidays(val={}){ return GGstorage.setVal("holidays", val); },
-    getHolidays()
-    {
-        /* ----- */
-        /* get holidays string */
-        /* ----- */
-        let holidays = GGstorage.getVal("holidays");
-        if(holidays == null)
-            GGstorage.refreshHolidays();
-        holidays = GGstorage.getVal("holidays");
-
-        /* ----- */
-        /* get holidayUpdated */
-        /* ----- */
-        try
-        {
-            let holidayUpdated = GGstorage.getHolidayUpdated();
-            if(holidayUpdated != null)
-            {
-                let days = GGdate.getDaysBetweenDates(holidayUpdated, GGdate.getToday());
-                if(days >= 30)
-                {
-                    GGstorage.refreshHolidays();
-                    holidays = GGstorage.getVal("holidays");
-                }
-            }
-            else
-            {
-                GGstorage.setHolidayUpdated(GGdate.getToday());
-            }
-        }
-        catch(e)
-        {
-            log.error(e);
-            GGstorage.setHolidayUpdated(GGdate.getToday());
-        }
-
-        /* ----- */
-        /* make instance */
-        /* ----- */
-        let holidaysArr = $.parseJSON(holidays);
-        let mRefHolidays = _MCommon.fromArr(holidaysArr, MRefHolidays);
-        return mRefHolidays;
-    },
-    refreshHolidays()
-    {
-        let mRefHoliday = Api.RefHoliday.selectAll();
-        let string = mRefHoliday.getJson();
-        GGstorage.setHolidays(string);
-
-        /* set last updated */
-        GGstorage.setHolidayUpdated(GGdate.getToday());
-    },
-
-    /* ========================= */
     /* 데이터를 활용한 함수 */
     /* ========================= */
     logout()

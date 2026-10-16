@@ -69,7 +69,11 @@ class MGrpMember
     /* ========================= */
     // getClsstatusCard() { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
 
-    makeGrpMember(buttonHtml="")
+    /*
+        buttonHtml : 푸터에 표시할 버튼 (비어있으면 상세보기)
+        detailBtn  : false 면 상세보기를 표시하지 않는다. (멤버상세 페이지 자신 등)
+     */
+    makeGrpMember(buttonHtml="", detailBtn=true)
     {
         let model = this;
         let mUser = model.getMUser();
@@ -109,7 +113,7 @@ class MGrpMember
                 ${tagsHtml}
                 <div class="common-buttonsForCardTop">
                     <div class="common-flexCenter common-colorCmmt">${iconsHtml}</div>
-                    ${buttonHtml == "" ? detailHtml : `<div>${buttonHtml}</div>`}
+                    ${buttonHtml != "" ? `<div>${buttonHtml}</div>` : (detailBtn ? detailHtml : "")}
                 </div>
             </div>
         `;

@@ -165,6 +165,14 @@
                 let grpno = GFCU.Data.grpno;
                 let capital = $("#GFCU-input-capital").val().trim();
                 let comment = $("#GFCU-textarea-comment").val().trim();
+
+                /* validation */
+                let original = Number($("#GFCU-span-originalWon").attr("number"));
+                if(Common.isEmpty(capital) || isNaN(Number(capital)))   { Common.toastError("자본금을 숫자로 입력해주세요."); $("#GFCU-input-capital").focus(); return; }
+                if(Number(capital) < 0)                                 { Common.toastError("자본금은 0원 이상으로 입력해주세요."); $("#GFCU-input-capital").focus(); return; }
+                if(Number(capital) === original)                        { Common.toastError("현재 자본금과 동일합니다. 변경할 금액을 입력해주세요."); $("#GFCU-input-capital").focus(); return; }
+                if(Common.isEmpty(comment))                             { Common.toastError("변경사유를 입력해주세요."); $("#GFCU-textarea-comment").focus(); return; }
+
                 let process = function()
                 {
                     Common.showProgress();

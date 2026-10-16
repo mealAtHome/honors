@@ -125,7 +125,6 @@ else
         case 'login.php':
         case 'insertUser.php':
         case 'deleteUserInfo.php':
-        case 'select_refHoliday.php':
         {
             /* no check */
             break;
