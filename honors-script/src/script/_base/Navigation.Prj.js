@@ -300,6 +300,9 @@ Navigation.getData = function(code)
 /* ======================= */
 Navigation.executeShow = function()
 {
+    /* 스크롤 복원 : 복귀한 페이지의 show 가 실행되었음을 알린다. (Navigation.restoreScrollLater) */
+    Navigation.showCount++;
+
     /* ------------- */
     /* get pageStack */
     /* ------------- */

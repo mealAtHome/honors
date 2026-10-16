@@ -1,6 +1,56 @@
 var Navigation =
 {
     /* ================== */
+    /* 스크롤 위치 저장/복원 */
+    /*
+        - 저장 : moveFront 로 페이지를 떠날 때, 현재 페이지의 scrollTop 을 pageStack 의 해당 배열(scrollTop)에 저장한다.
+        - 복원 : moveBack 으로 돌아왔을 때(다이어로그를 닫아 아래 페이지가 다시 show 되는 경우 포함),
+                 복귀한 페이지의 show() 가 끝나 화면이 다시 그려진 뒤에 저장해둔 위치로 이동한다.
+        페이지는 이동할 때마다 DOM 에서 제거되고 show() 로 다시 그려지기 때문에, 그려진 뒤에 복원해야 한다.
+     */
+    /* ================== */
+    scrollToken     : 0, /* 새로운 이동이 시작되면 이전 복원 예약을 무효화하기 위한 토큰 */
+    showCount       : 0, /* executeShow 호출 횟수 (복귀한 페이지의 show 가 실행되었는지 확인용) */
+
+    /* 해당 페이지(ons-page)의 스크롤 영역 */
+    getPageScroller(pageCode)
+    {
+        let el = $(`#index-dom > ons-page[id='${pageCode}']`).children(".page__content")[0];
+        return el == undefined ? null : el;
+    },
+
+    /* 복원 예약 : 복귀한 페이지의 show() 가 실행되고, 프로그레스가 사라진(= 화면이 그려진) 뒤에 이동한다. */
+    restoreScrollLater(pageCode, top)
+    {
+        if(!(top > 0))
+            return;
+
+        let token = ++Navigation.scrollToken;
+        let showCountAtSet = Navigation.showCount;
+        let tries = 0;
+        let applied = 0;
+        let tick = function()
+        {
+            if(token != Navigation.scrollToken) return; /* 다른 이동이 시작됨 */
+            if(++tries > 50) return;                    /* 최대 5초 대기 */
+
+            let scroller = Navigation.getPageScroller(pageCode);
+            let isDrawn = scroller != null && Navigation.showCount > showCountAtSet && $("#index-progress").is(":hidden");
+            if(!isDrawn)
+            {
+                setTimeout(tick, 100);
+                return;
+            }
+
+            /* 화면 높이가 확정되기 전에 한 번 더 맞출 수 있도록 몇 차례 적용한다. */
+            scroller.scrollTop = top;
+            if(++applied < 3)
+                setTimeout(tick, 150);
+        };
+        setTimeout(tick, 100);
+    },
+
+    /* ================== */
     /* 이전 페이지에서 받은 데이터나, 뒤로가기를 실시 했을 때의 복구 데이터 호출 */
     /* ================== */
     getPageParam()
@@ -199,11 +249,21 @@ var Navigation =
             let nowPageData = Navigation.getData(lastestPage);
             pageStack[pageStack.length - 1].data          = nowPageData;
             pageStack[pageStack.length - 1].data.viewMode = lastestViewMode;
+
+            /* 현재 페이지의 스크롤 위치를 저장 (뒤로가기로 돌아왔을 때 복원) */
+            if(lastestViewMode == "page")
+            {
+                let scroller = Navigation.getPageScroller(lastestPage);
+                pageStack[pageStack.length - 1].scrollTop = scroller == null ? 0 : scroller.scrollTop;
+            }
         }
         else
         {
             pageStack = new Array();
         }
+
+        /* 새로운 이동이 시작되었으므로, 진행중이던 스크롤 복원 예약은 취소 */
+        Navigation.scrollToken++;
 
         /* --------------- */
         /* 다음 페이지와 이전 페이지가 동일하다면, 리프레쉬 후 종료 */
@@ -337,6 +397,11 @@ var Navigation =
             page     = pageStack[pageStack.length-1];
             viewMode = page.data.viewMode;              /* 복귀해야할 페이지의 viewMode */
             movePage = page.page;                       /* 복귀해야할 페이지코드 */
+
+            /* 복귀한 페이지가 다시 그려진 뒤, 떠나기 전의 스크롤 위치로 이동 (다이어로그를 닫는 경우 포함) */
+            Navigation.scrollToken++;
+            if(viewMode == "page")
+                Navigation.restoreScrollLater(movePage, page.scrollTop);
         }
 
         /* ---------- */
