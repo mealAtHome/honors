@@ -29,5 +29,11 @@
                 <true/>
             </dict>
         </config-file>
+        <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+            <string>회원과 모임의 위치의 거리를 측정하여 회원에게 알려주기 위해 필요합니다.</string>
+        </edit-config>
+        <edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+            <string>회원과 모임의 위치의 거리를 측정하여 회원에게 알려주기 위해 필요합니다.</string>
+        </edit-config>
     </platform>
 </widget>

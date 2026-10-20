@@ -34,10 +34,9 @@
         <button class="common-btn-outer commonEvent-tag-hyperlink" hyperlink="DGRP" hyperlink-viewmode="page" grpno="GCYHTRMLKYLEXMELLYTWCUBWAWALXD" >모임상세</button>
     </div> -->
 
-<!--     <div id="UMHM-div-placeholder">
-        <div>푸시 알림 권한 상태가 여기에 표시됩니다.</div>
+    <div id="UMHM-div-placeholder">
     </div>
- -->
+
     <!-- =============== -->
     <!-- cushion for tab -->
     <!-- =============== -->
@@ -95,6 +94,7 @@
                         );
                         pushtokenUpdated = true;
                     }
+                    $("#UMHM-div-placeholder").append(window.location.href);
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
