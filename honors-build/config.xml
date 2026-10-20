@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.yogimoim" version="1.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>모임은야구</name>
+    <name short="모임은야구">CirclesAreBaseball</name>
     <description>모임관리 어플리케이션</description>
     <author email="team.goldenglove@gmail.com" href="">
         모임은야구
@@ -21,6 +21,8 @@
     </platform>
     <platform name="ios">
         <content src="index.html" />
+        <preference name="productName" value="CirclesAreBaseball" />
+        <access origin="*" allows-arbitrary-loads-in-web-content="true" />
         <preference name="scheme" value="app" />
         <preference name="hostname" value="localhost" />
         <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
@@ -29,11 +31,11 @@
                 <true/>
             </dict>
         </config-file>
-        <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-            <string>회원과 모임의 위치의 거리를 측정하여 회원에게 알려주기 위해 필요합니다.</string>
-        </edit-config>
-        <edit-config target="NSLocationAlwaysAndWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-            <string>회원과 모임의 위치의 거리를 측정하여 회원에게 알려주기 위해 필요합니다.</string>
-        </edit-config>
+        <config-file target="*-Info.plist" parent="NSLocationWhenInUseUsageDescription">
+            <string>회원과 모임의 위치 간 거리를 계산하여 안내하기 위해 필요합니다.</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="NSLocationAlwaysAndWhenInUseUsageDescription">
+            <string>회원과 모임의 위치 간 거리를 계산하여 안내하기 위해 필요합니다.</string>
+        </config-file>
     </platform>
 </widget>
