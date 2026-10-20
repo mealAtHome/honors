@@ -4,6 +4,56 @@
 var Navigation =
 {
     /* ================== */
+    /* 스크롤 위치 저장/복원 */
+    /*
+        - 저장 : moveFront 로 페이지를 떠날 때, 현재 페이지의 scrollTop 을 pageStack 의 해당 배열(scrollTop)에 저장한다.
+        - 복원 : moveBack 으로 돌아왔을 때(다이어로그를 닫아 아래 페이지가 다시 show 되는 경우 포함),
+                 복귀한 페이지의 show() 가 끝나 화면이 다시 그려진 뒤에 저장해둔 위치로 이동한다.
+        페이지는 이동할 때마다 DOM 에서 제거되고 show() 로 다시 그려지기 때문에, 그려진 뒤에 복원해야 한다.
+     */
+    /* ================== */
+    scrollToken     : 0, /* 새로운 이동이 시작되면 이전 복원 예약을 무효화하기 위한 토큰 */
+    showCount       : 0, /* executeShow 호출 횟수 (복귀한 페이지의 show 가 실행되었는지 확인용) */
+
+    /* 해당 페이지(ons-page)의 스크롤 영역 */
+    getPageScroller(pageCode)
+    {
+        let el = $(`#index-dom > ons-page[id='${pageCode}']`).children(".page__content")[0];
+        return el == undefined ? null : el;
+    },
+
+    /* 복원 예약 : 복귀한 페이지의 show() 가 실행되고, 프로그레스가 사라진(= 화면이 그려진) 뒤에 이동한다. */
+    restoreScrollLater(pageCode, top)
+    {
+        if(!(top > 0))
+            return;
+
+        let token = ++Navigation.scrollToken;
+        let showCountAtSet = Navigation.showCount;
+        let tries = 0;
+        let applied = 0;
+        let tick = function()
+        {
+            if(token != Navigation.scrollToken) return; /* 다른 이동이 시작됨 */
+            if(++tries > 50) return;                    /* 최대 5초 대기 */
+
+            let scroller = Navigation.getPageScroller(pageCode);
+            let isDrawn = scroller != null && Navigation.showCount > showCountAtSet && $("#index-progress").is(":hidden");
+            if(!isDrawn)
+            {
+                setTimeout(tick, 100);
+                return;
+            }
+
+            /* 화면 높이가 확정되기 전에 한 번 더 맞출 수 있도록 몇 차례 적용한다. */
+            scroller.scrollTop = top;
+            if(++applied < 3)
+                setTimeout(tick, 150);
+        };
+        setTimeout(tick, 100);
+    },
+
+    /* ================== */
     /* 이전 페이지에서 받은 데이터나, 뒤로가기를 실시 했을 때의 복구 데이터 호출 */
     /* ================== */
     getPageParam()
@@ -202,11 +252,21 @@ var Navigation =
             let nowPageData = Navigation.getData(lastestPage);
             pageStack[pageStack.length - 1].data          = nowPageData;
             pageStack[pageStack.length - 1].data.viewMode = lastestViewMode;
+
+            /* 현재 페이지의 스크롤 위치를 저장 (뒤로가기로 돌아왔을 때 복원) */
+            if(lastestViewMode == "page")
+            {
+                let scroller = Navigation.getPageScroller(lastestPage);
+                pageStack[pageStack.length - 1].scrollTop = scroller == null ? 0 : scroller.scrollTop;
+            }
         }
         else
         {
             pageStack = new Array();
         }
+
+        /* 새로운 이동이 시작되었으므로, 진행중이던 스크롤 복원 예약은 취소 */
+        Navigation.scrollToken++;
 
         /* --------------- */
         /* 다음 페이지와 이전 페이지가 동일하다면, 리프레쉬 후 종료 */
@@ -340,6 +400,11 @@ var Navigation =
             page     = pageStack[pageStack.length-1];
             viewMode = page.data.viewMode;              /* 복귀해야할 페이지의 viewMode */
             movePage = page.page;                       /* 복귀해야할 페이지코드 */
+
+            /* 복귀한 페이지가 다시 그려진 뒤, 떠나기 전의 스크롤 위치로 이동 (다이어로그를 닫는 경우 포함) */
+            Navigation.scrollToken++;
+            if(viewMode == "page")
+                Navigation.restoreScrollLater(movePage, page.scrollTop);
         }
 
         /* ---------- */
@@ -707,6 +772,9 @@ Navigation.getData = function(code)
 /* ======================= */
 Navigation.executeShow = function()
 {
+    /* 스크롤 복원 : 복귀한 페이지의 show 가 실행되었음을 알린다. (Navigation.restoreScrollLater) */
+    Navigation.showCount++;
+
     /* ------------- */
     /* get pageStack */
     /* ------------- */
@@ -1331,38 +1399,9 @@ var Common =
         return date.getFullYear();
     },
 
-    getLastMonthDate()
-    {
-        let start = new Date();
-        if(start.getMonth() == 0)
-        {
-            start.setFullYear(start.getFullYear()-1);
-            start.setMonth(11);
-        }
-        else
-        {
-            start.setMonth(start.getMonth()-1);
-        }
-        return start;
-    },
-
     getThisMonthDate()
     {
         let end = new Date();
-        return end;
-    },
-
-    getNextMonthDate()
-    {
-        let end = new Date();
-        if(end.getMonth() == 11)
-        {
-            end.setFullYear(end.getFullYear()+1);
-            end.setMonth(0);
-        }
-        else
-            end.setMonth(end.getMonth()+1);
-
         return end;
     },
 
@@ -2754,53 +2793,48 @@ var GGdate =
         if(Common.isEmpty(str))
             return null;
 
-        let d = new Date();
-        d.setFullYear   (str.substring(0,4));
-        d.setMonth      (str.substring(5,7) * 1 - 1); // month is 0-indexed
-        d.setDate       (str.substring(8,10));
-        d.setHours      (str.substring(11,13));
-        d.setMinutes    (str.substring(14,16));
-        d.setSeconds    (str.substring(17,19));
-        return d;
+        /* "오늘"을 기준으로 setMonth/setDate 를 순차 호출하면, 오늘이 29~31일일 때 월이 넘쳐서 한 달 뒤로 밀린다. 따라서 한 번에 생성한다. */
+        return new Date
+        (
+            str.substring(0,4) * 1,
+            str.substring(5,7) * 1 - 1, // month is 0-indexed
+            str.substring(8,10) * 1,
+            str.substring(11,13) * 1 || 0,
+            str.substring(14,16) * 1 || 0,
+            str.substring(17,19) * 1 || 0
+        );
     },
 
-    /* 2024-xx-xx xx:xx:xx */
-    /* 0123456789012345678 */
-    fromStrYMD(str)
+    /**
+     * 값을 Date 로 변환한다. 변환할 수 없으면 null.
+     *  - Date                          : 그대로 (유효할 때만)
+     *  - "YYYY-MM-DD", "YYYY-MM-DD HH:II[:SS]", "YYYY-MM-DDTHH:II[:SS]" : 로컬 시각으로 해석 (fromStr)
+     *  - 타임존 표기가 붙은 ISO ("...T...Z", "...+09:00") : Date.parse 에 맡김
+     *  - 그 외                         : Date.parse 결과가 유효할 때만
+     * 존재하지 않는 날짜(예 : 2026-13-45)는 자동 보정하지 않고 null 로 처리한다.
+     */
+    toDate(v)
     {
-        if(Common.isEmpty(str))
+        if(v instanceof Date)
+            return isNaN(v) ? null : v;
+        if(Common.isEmpty(v))
             return null;
 
-        let d = new Date();
-        d.setFullYear   (str.substring(0,4));
-        d.setMonth      (str.substring(5,7) * 1 - 1); // month is 0-indexed
-        d.setDate       (str.substring(8,10));
-        d.setHours      (0);
-        d.setMinutes    (0);
-        d.setSeconds    (0);
-        return d;
+        let str = String(v).trim();
+        let d = null;
+        if(/T.*(Z|[+-]\d{2}:?\d{2})$/i.test(str))
+            d = new Date(Date.parse(str));
+        else if(/^\d{4}-\d{2}-\d{2}/.test(str))
+        {
+            d = GGdate.fromStr(str);
+            if(d != null && (d.getMonth() != str.substring(5,7) * 1 - 1 || d.getDate() != str.substring(8,10) * 1))
+                return null;
+        }
+        else
+            d = new Date(Date.parse(str));
+
+        return d == null || isNaN(d) ? null : d;
     },
-    getDdddFromYmd(str) { return GGdate.getDDDD(GGdate.fromStrYMD(str)); },
-
-    /* 2024-xx-xxTxx:xx */
-    /* 0123456789012345 */
-    fromDatetimeLocal(str)
-    {
-        if(Common.isEmpty(str))
-            return null;
-
-        let d = new Date();
-        d.setFullYear   (str.substring(0,4));
-        d.setMonth      (str.substring(5,7) * 1 - 1); // month is 0-indexed
-        d.setDate       (str.substring(8,10));
-        d.setHours      (str.substring(11,13));
-        d.setMinutes    (str.substring(14,16));
-        return d;
-    },
-
-    formatHH(d)   { return d == null ? null : (d.getHours()   + '') .padStart(2,"0"); },
-    formatII(d)   { return d == null ? null : (d.getMinutes() + '') .padStart(2,"0"); },
-    formatHHII(d) { return d == null ? null : `${GGdate.formatHH(d)}:${GGdate.formatII(d)}`; },
 
     getToday()
     {
@@ -2808,24 +2842,12 @@ var GGdate =
         return GGdate.getYYYYMMDD(d);
     },
 
-    plusDate(date, days) { date.setDate(date.getDate() + days); return date; },
-
     getYYYYMMDD(d)
     {
         let year   = String(d.getFullYear());
         let month  = String(d.getMonth() + 1).padStart(2, '0');
         let day    = String(d.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
-    },
-    getYMDTHIS(d)
-    {
-        let year    = String(d.getFullYear());
-        let month   = String(d.getMonth() + 1 ).padStart(2, '0');
-        let day     = String(d.getDate()      ).padStart(2, '0');
-        let hours   = String(d.getHours()     ).padStart(2, '0');
-        let minutes = String(d.getMinutes()   ).padStart(2, '0');
-        let seconds = String(d.getSeconds()   ).padStart(2, '0');
-        return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     },
 
     getYYYY             (d) { if(d == null) return ""; return d.getFullYear(); },
@@ -2847,80 +2869,6 @@ var GGdate =
     toMDdddd            (d) { if(d == null) return ""; return `${GGdate.getM(d)}/${GGdate.getD(d)}(${GGdate.getDDDD(d)})`; },
 
     strToYYMMDDdHHIIdot (d) { return GGdate.toYYMMDDdHHIIdot(GGdate.fromStr(d)); },
-
-    isHolidayToday()
-    {
-        let date = new Date();
-        let day  = date.getDay();
-
-        /* sat || sun */
-        if(day == 0 || day == 6)
-            return true;
-
-        /* holidays */
-        let mRefHolidays = GGstorage.getHolidays();
-        return mRefHolidays.isHoliday(date);
-    },
-
-    formatTimeToHHII(str)
-    {
-        let now = new Date();
-        let strDate = new Date(`${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()} ${str}`);
-        let hh = ''+strDate.getHours();
-        let mm = ''+strDate.getMinutes();
-        if(hh.length < 2) hh = '0'+hh;
-        if(mm.length < 2) mm = '0'+mm;
-        return `${hh}:${mm}`;
-    },
-
-    // /**
-    //  * period format
-    //  * @param {*} startdt
-    //  * @param {*} closedt
-    //  */
-    // period(startdt, closedt)
-    // {
-    //     if(Common.isEmpty(startdt) || Common.isEmpty(closedt))
-    //         return "-";
-
-    //     /* to date class */
-    //     startdt = GGdate.fromStr(startdt);
-    //     closedt = GGdate.fromStr(closedt);
-
-    //     /* is same date startdt, closedt? */
-    //     let skipDate = false;
-    //     if(
-    //         startdt.getFullYear() === closedt.getFullYear() &&
-    //         startdt.getMonth()    === closedt.getMonth() &&
-    //         startdt.getDate()     === closedt.getDate()
-    //     )
-    //     {
-    //         skipDate = true;
-    //     }
-
-    //     /* is 00 minutes both date? */
-    //     let skipMinute = false;
-    //     if(
-    //         startdt.getMinutes() === 0 &&
-    //         closedt.getMinutes() === 0
-    //     )
-    //     {
-    //         skipMinute = true;
-    //     }
-
-    //     /* format */
-    //     let rslt = GGdate.toYYMMDDddot(startdt);
-    //     if      ( skipMinute) rslt += ` ${GGdate.getHH(startdt)}`;
-    //     else if (!skipMinute) rslt += ` ${GGdate.getHH(startdt)}:${GGdate.getII(startdt)}`;
-
-    //     if      ( skipDate &&  skipMinute) rslt += `-${GGdate.getHH(closedt)}시`;
-    //     else if ( skipDate && !skipMinute) rslt += `-${GGdate.getHH(closedt)}:${GGdate.getII(closedt)}`;
-    //     else if (!skipDate &&  skipMinute) rslt += ` ~ ${GGdate.toYYMMDDddot(closedt)} ${GGdate.getHH(closedt)}시`;
-    //     else if (!skipDate && !skipMinute) rslt += ` ~ ${GGdate.toYYMMDDdHHIIdot(closedt)}`;
-
-    //     /* return */
-    //     return rslt;
-    // },
 
     /**
      * 일정(cls) 시작~종료 기간을 표시용 문자열로 변환
@@ -3088,7 +3036,29 @@ var GGdate =
         if(tg < fr)
             return GGF.GGdate.PointOfDate.UPCOMING;
     },
-    inWithinPeriod(fr, to) { return GGdate.getPointOfDate(new Date(), fr, to) === GGF.GGdate.PointOfDate.WITHIN; },
+
+    /**
+     * getPointOfDate 의 시각(시/분/초) 포함 버전. (서버의 GGdate::isInPeriod 와 동일한 기준)
+     * 모집기간처럼 시각까지 정확히 판정해야 하는 경우에 사용한다.
+     * 날짜 변환은 toDate 를 사용하며, 하나라도 변환할 수 없으면 예외 대신 null (판정 불가) 을 반환한다.
+     * @param {*} tg target
+     * @param {*} fr from
+     * @param {*} to to
+     * @returns UPCOMING | WITHIN | PASSED | null
+     */
+    getPointOfDateTime(tg, fr, to)
+    {
+        tg = GGdate.toDate(tg);
+        fr = GGdate.toDate(fr);
+        to = GGdate.toDate(to);
+        if(tg == null || fr == null || to == null)
+            return null;
+
+        if(tg < fr) return GGF.GGdate.PointOfDate.UPCOMING;
+        if(tg > to) return GGF.GGdate.PointOfDate.PASSED;
+        return GGF.GGdate.PointOfDate.WITHIN;
+    },
+    inWithinPeriodTime(fr, to) { return GGdate.getPointOfDateTime(new Date(), fr, to) === GGF.GGdate.PointOfDate.WITHIN; },
 
     /**
      * 날짜가 다가오기 전을 위한 텍스트를 반환합니다.
@@ -3148,25 +3118,23 @@ var GGdate =
             (start.getFullYear() - today.getFullYear()) * 12 +
             (start.getMonth() - today.getMonth());
 
-        let monthAnchor = new Date(today);
-        monthAnchor.setMonth(monthAnchor.getMonth() + months);
+        /* today 의 일(day)이 대상 월보다 클 때(예 : 31일 + 11월) 월이 넘치지 않도록 말일로 보정한다. */
+        const addMonths = (base, n) =>
+        {
+            let r = new Date(base.getFullYear(), base.getMonth() + n, 1);
+            let lastDay = new Date(r.getFullYear(), r.getMonth() + 1, 0).getDate();
+            r.setDate(Math.min(base.getDate(), lastDay));
+            return r;
+        };
+        let monthAnchor = addMonths(today, months);
 
         if (monthAnchor > start) {
             months--;
-            monthAnchor = new Date(today);
-            monthAnchor.setMonth(monthAnchor.getMonth() + months);
+            monthAnchor = addMonths(today, months);
         }
 
         const remainDays = Math.floor((start - monthAnchor) / DAY);
         return `${months}개월 뒤, ${remainDays}일 남음`;
-    },
-
-    getAgeByYear(birthYear)
-    {
-        if(Common.isEmpty(birthYear))
-            return "";
-        let nowYear = new Date().getFullYear();
-        return nowYear - birthYear + 1;
     }
 }
 
@@ -4182,11 +4150,13 @@ GGC.Cls =
     clsapplyPeriodCard(startDateStr, endDateStr)
     {
         let now = new Date();
-        let startDate = new Date(startDateStr);
-        let endDate = new Date(endDateStr);
+        let startDate = GGdate.toDate(startDateStr);
+        let endDate = GGdate.toDate(endDateStr);
+        if(startDate == null || endDate == null)
+            return ""; /* 모집기간을 알 수 없으면 표시하지 않는다 */
 
         let str = "";
-        let point = GGdate.getPointOfDate(now, startDate, endDate);
+        let point = GGdate.getPointOfDateTime(now, startDate, endDate); /* 서버와 동일하게 시각까지 판정 */
         let color = "";
         switch(point)
         {
@@ -6004,7 +5974,7 @@ Api.User =
     /* select */
     /* ========================= */
     selectMe() { return Api.User.select({"OPTION":"selectMe"}); },
-    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin", "PUSHTOKEN":indexFcmToken }); },
+    selectMeForLogin() { return Api.User.select({"OPTION":"selectMeForLogin"}); },
     selectCntById(id, noticeOK, noticeFail) { return Api.User.select({"OPTION":"selectCntById", "ID":id}, noticeOK, noticeFail); },
 
     /* ========================= */
@@ -6055,7 +6025,6 @@ Api.User =
             "ID"        : id,
             "PW"        : pw,
             "USERTYPE"  : usertype,
-            "TOKEN"     : indexFcmToken,
             "PLATFORM"  : GGstorage.getDeviceKindSmall(),
         };
         let ajax = Api.execute(ajaxData, "Api.User.login", noticeOK, noticeFail);
@@ -6075,6 +6044,8 @@ Api.User =
         let rslt = GGvalid.Api.isSucceed(ajax);
         return rslt;
     },
+
+    updatePushtoken(pushtoken, noticeOK, noticeFail) { return Api.User.update({OPTION:"updatePushtoken", PUSHTOKEN: pushtoken}, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main function */
@@ -7130,7 +7101,7 @@ class MCls
 
     /* custom : 일정담당자(담당자1/담당자2) 여부 */
     isClsAdmin(myUserno)        { return myUserno == this.getClsusernoadm() || myUserno == this.getClsusernosub(); }
-    isWithinClsapplyPeriod()    { return GGdate.inWithinPeriod(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
+    isWithinClsapplyPeriod()    { return GGdate.inWithinPeriodTime(this.getClsapplystartdt(), this.getClsapplyclosedt()); }
 
     isAppliable()               { return this.isWithinClsapplyPeriod() && this.isClsstatusIng(); }
 
@@ -7168,9 +7139,10 @@ class MCls
                     </div>
                     <div class="common-cushionHalfUp">
                         <div class="common-fonts08">
-                            ${GGC.Cls.clsapplyPeriodCard(this.getClsapplystartdt(), this.getClsapplyclosedt())}
+                            <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-calendar-event"></i><span>${this.getClsPeriod()}</span></div>
                             <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-map-pin"></i><span>${this.getClsground()}</span></div>
                             <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-credit-card"></i><span>${GGC.Common.priceWon(this.getClsbillapplyprice())}</span></div>
+                            ${this.isClsstatusEdit() || this.isClsstatusIng() ? GGC.Cls.clsapplyPeriodCard(this.getClsapplystartdt(), this.getClsapplyclosedt()) : ""}
                         </div>
                     </div>
                     ${btnHtml != "" ? `<div class="common-buttonsForCardTop">${btnHtml}</div>` : ""}
@@ -9670,7 +9642,11 @@ class MGrpMember
     /* ========================= */
     // getClsstatusCard() { return GGC.Cls.clsstatusCard(this.getClsstatus()); }
 
-    makeGrpMember(buttonHtml="")
+    /*
+        buttonHtml : 푸터에 표시할 버튼 (비어있으면 상세보기)
+        detailBtn  : false 면 상세보기를 표시하지 않는다. (멤버상세 페이지 자신 등)
+     */
+    makeGrpMember(buttonHtml="", detailBtn=true)
     {
         let model = this;
         let mUser = model.getMUser();
@@ -9710,7 +9686,7 @@ class MGrpMember
                 ${tagsHtml}
                 <div class="common-buttonsForCardTop">
                     <div class="common-flexCenter common-colorCmmt">${iconsHtml}</div>
-                    ${buttonHtml == "" ? detailHtml : `<div>${buttonHtml}</div>`}
+                    ${buttonHtml != "" ? `<div>${buttonHtml}</div>` : (detailBtn ? detailHtml : "")}
                 </div>
             </div>
         `;
@@ -10020,6 +9996,7 @@ class MUser
         /* data */      this.userloginedlng = GGC.Common.double(dat.userloginedlng);
         /* data */      this.point          = GGC.Common.int(dat.point);
         /* data */      this.adminflg       = GGC.Common.enum(dat.adminflg);
+        /* data */      this.pushtoken      = GGC.Common.enum(dat.pushtoken);
         /* data */      this.modidt         = GGC.Common.datetime(dat.modidt);
         /* data */      this.regidt         = GGC.Common.datetime(dat.regidt);
         /* data */      this.priv_phone     = GGC.Common.enum(dat.priv_phone);
@@ -10046,6 +10023,7 @@ class MUser
     getUserloginedlng() { return this.userloginedlng; }
     getPoint() { return this.point; }
     getAdminflg() { return this.adminflg; }
+    getPushtoken() { return this.pushtoken; }
     getModidt() { return this.modidt; }
     getRegidt() { return this.regidt; }
     getPrivPhone() { return this.priv_phone; }
