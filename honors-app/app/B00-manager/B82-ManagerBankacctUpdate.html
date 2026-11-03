@@ -88,6 +88,7 @@
                 if(MBKU.Data.grpno == undefined) { Common.toast("잘못된 접근입니다."); MBKU.close(); return; }
                 if(MBKU.Data.option == undefined) { MBKU.Data.option = "insert"; }
                 if(MBKU.Data.baccno == undefined) { MBKU.Data.baccno = ""; }
+                $("#MBKU-btn-save").text(MBKU.Data.option == GGF.update ? "계좌수정" : "계좌등록");
 
 
                 Common.showProgress();
@@ -111,8 +112,9 @@
                         case "update":
                         {
                             /* 계좌정보조회 */
-                            let mBankaccounts = Api.Bankaccount.selectByPk(MBKU.Data.baccno, "none", "toast");
+                            let mBankaccounts = Api.Bankaccount.selectByPkForGrp(MBKU.Data.grpno, MBKU.Data.baccno, GGF.none, GGF.toast);
                             let mBankaccount  = mBankaccounts.getModel();
+                            if(mBankaccount == null) { Common.toast("계좌정보를 찾을 수 없습니다."); break; }
 
                             /* 데이터 복구 */
                             $(`#MBKU-div-banks > .MBank-makeBankForChoose-tbl-forChoose > tbody > tr > td[bankcode=${mBankaccount.bacccode}]`).click();
@@ -177,7 +179,9 @@
                     setTimeout(function()
                     {
                         let grpno = MBKU.Data.grpno;
-                        let mApiResponse = Api.Bankaccount.insertForGrp(grpno, baccnickname, bacccode, baccacct, baccname, GGF.toast, GGF.toast);
+                        let mApiResponse = MBKU.Data.option == GGF.update
+                            ? Api.Bankaccount.updateForGrp(grpno, MBKU.Data.baccno, baccnickname, bacccode, baccacct, baccname, GGF.toast, GGF.toast)
+                            : Api.Bankaccount.insertForGrp(grpno, baccnickname, bacccode, baccacct, baccname, GGF.toast, GGF.toast);
                         if(mApiResponse.isSuccess())
                             Navigation.moveBack();
 

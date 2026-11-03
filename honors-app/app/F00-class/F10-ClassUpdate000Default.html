@@ -390,7 +390,10 @@
                             $("#CUDE-textarea-clscontent").val(mCls.getClscontent());
                             $("#CUDE-input-clsground").val(mCls.getClsground());
                             $("#CUDE-input-clsgroundaddr").val(mCls.getClsgroundaddr());
+                            $("#CUDE-input-clsbillapplyunit").val(mCls.getClsbillapplyunit());
                             $("#CUDE-input-clsbillapplyprice").val(mCls.getClsbillapplyprice());
+                            CUDE.setMngMember("#CUDE-div-usernoadm", grpno, mCls.getClsusernoadm());
+                            CUDE.setMngMember("#CUDE-div-usernosub", grpno, mCls.getClsusernosub());
                             GGdate.toDivYearToMin("#CUDE-div-clsstartdt", new Date(mCls.getClsstartdt()));
                             GGdate.toDivYearToMin("#CUDE-div-clsclosedt", new Date(mCls.getClsclosedt()));
                             GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", new Date(mCls.getClsapplystartdt()));
@@ -426,6 +429,20 @@
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            },
+
+            /* 수정 시, 저장된 주관자(정/부)를 화면에 복구 */
+            setMngMember(el, grpno, userno)
+            {
+                if(Common.isEmpty(userno))
+                    return;
+                let mGrpMember = Api.GrpMember.selectByPkForMng(grpno, userno, GGF.none, GGF.toast);
+                if(mGrpMember == null)
+                    return;
+                $(el).html(mGrpMember.makeGrpMember());
+                $(el).attr("grpno", grpno);
+                $(el).attr("userno", mGrpMember.getUserno());
+                $(el).attr("name", mGrpMember.getMUser().getName());
             },
 
             keyup()

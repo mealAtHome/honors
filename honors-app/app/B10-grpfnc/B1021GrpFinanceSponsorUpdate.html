@@ -223,6 +223,13 @@
                 let sponcost = $("#GFSU-input-sponcost").val().trim();
                 let sponcomment = $("#GFSU-textarea-sponcomment").val().trim();
 
+                /* validation */
+                if(sponsortype == "user" && Common.isEmpty(sponuserno))         { Common.toastError("찬조자를 선택해주세요."); return; }
+                if(sponsortype == "name" && Common.isEmpty(sponusername))       { Common.toastError("찬조자 이름을 입력해주세요."); $("#GFSU-input-sponusername").focus(); return; }
+                if(spontype == "thing" && Common.isEmpty(sponitem))             { Common.toastError("찬조품목을 입력해주세요."); $("#GFSU-input-sponitem").focus(); return; }
+                if(Common.isEmpty(sponcost) || isNaN(Number(sponcost)))         { Common.toastError("찬조금액을 숫자로 입력해주세요."); $("#GFSU-input-sponcost").focus(); return; }
+                if(Number(sponcost) < 0)                                        { Common.toastError("찬조금액은 0원 이상으로 입력해주세요."); $("#GFSU-input-sponcost").focus(); return; }
+
                 /* process */
                 let process = function()
                 {
@@ -233,6 +240,7 @@
                         if(mApiResponse.isSuccess())
                         {
                             Common.hideProgress();
+                            GFSU.close(true);
                             return;
                         }
                         Common.hideProgress();

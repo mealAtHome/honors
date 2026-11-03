@@ -3,6 +3,8 @@ Api.Bankaccount =
     /* ========================= */
     /* select */
     /* ========================= */
+    selectByPkForUser       (         baccno, noticeOK, noticeFail) { return Api.Bankaccount.select({ OPTION : "selectByPkForUser"       ,                  BACCNO:baccno, }, noticeOK, noticeFail); },
+    selectByPkForGrp        (bacckey, baccno, noticeOK, noticeFail) { return Api.Bankaccount.select({ OPTION : "selectByPkForGrp"        , BACCKEY:bacckey, BACCNO:baccno, }, noticeOK, noticeFail); },
     selectByExecutorForUser (         noticeOK, noticeFail) { return Api.Bankaccount.select({ OPTION : "selectByExecutorForUser" ,                  }, noticeOK, noticeFail); },
     selectByExecutorForGrp  (bacckey, noticeOK, noticeFail) { return Api.Bankaccount.select({ OPTION : "selectByExecutorForGrp"  , BACCKEY:bacckey, }, noticeOK, noticeFail); },
 
@@ -11,6 +13,8 @@ Api.Bankaccount =
     /* ========================= */
     insertForUser (         baccnickname, bacccode, baccacct, baccname, noticeOK, noticeFail) { return Api.Bankaccount.update({ OPTION:"insertForUser" ,                  BACCNICKNAME:baccnickname, BACCCODE:bacccode, BACCACCT:baccacct, BACCNAME:baccname }, noticeOK, noticeFail); },
     insertForGrp  (bacckey, baccnickname, bacccode, baccacct, baccname, noticeOK, noticeFail) { return Api.Bankaccount.update({ OPTION:"insertForGrp"  , BACCKEY:bacckey, BACCNICKNAME:baccnickname, BACCCODE:bacccode, BACCACCT:baccacct, BACCNAME:baccname }, noticeOK, noticeFail); },
+    updateForUser (         baccno, baccnickname, bacccode, baccacct, baccname, noticeOK, noticeFail) { return Api.Bankaccount.update({ OPTION:"updateForUser" ,                  BACCNO:baccno, BACCNICKNAME:baccnickname, BACCCODE:bacccode, BACCACCT:baccacct, BACCNAME:baccname }, noticeOK, noticeFail); },
+    updateForGrp  (bacckey, baccno, baccnickname, bacccode, baccacct, baccname, noticeOK, noticeFail) { return Api.Bankaccount.update({ OPTION:"updateForGrp"  , BACCKEY:bacckey, BACCNO:baccno, BACCNICKNAME:baccnickname, BACCCODE:bacccode, BACCACCT:baccacct, BACCNAME:baccname }, noticeOK, noticeFail); },
     deleteByPk    (bacctype, bacckey, baccno, noticeOK, noticeFail) { return Api.Bankaccount.update({ OPTION: "deleteByPk", BACCTYPE: bacctype, BACCKEY: bacckey, BACCNO: baccno }, noticeOK, noticeFail); },
 
     /* ========================= */

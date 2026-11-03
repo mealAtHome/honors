@@ -55,6 +55,7 @@ class MBankaccount
             }
             default:
             {
+                btnHtml += `<button class="common-btn-outer MBankaccount-make-btn-update" ${this.getPk()}>수정</button>`;
                 if(this.getDefaultflg() == GGF.N || this.getDefaultflg() == "")
                     btnHtml += `<button class="common-btn-outer MBankaccount-make-btn-delete" btn-type="cancel" ${this.getPk()}>삭제</button>`;
                 break;
@@ -158,7 +159,23 @@ class MBankaccounts extends _MCommon
         /* set event */
         /* ========================= */
         $(`${el} .MBankaccount-make-btn-delete`).off("click");
+        $(`${el} .MBankaccount-make-btn-update`).off("click");
         $(`${el} .MBankaccount-make-btn-choose`).off("click");
+
+        /* --------------- */
+        /* update entity */
+        /* --------------- */
+        $(`${el} .MBankaccount-make-btn-update`).on("click", function()
+        {
+            let bacctype = $(this).attr("bacctype");
+            let bacckey  = $(this).attr("bacckey");
+            let baccno   = $(this).attr("baccno");
+            switch(bacctype)
+            {
+                case "user" : Navigation.moveFrontPage(Navigation.Page.A82UserBankacctUpdate,    { option: GGF.update, baccno: baccno }); break;
+                case "grp"  : Navigation.moveFrontPage(Navigation.Page.B82ManagerBankacctUpdate, { option: GGF.update, baccno: baccno, grpno: bacckey }); break;
+            }
+        });
 
         /* --------------- */
         /* choose entity */

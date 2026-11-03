@@ -113,20 +113,6 @@
             /* event */
             /* ======================== */
 
-            /* 구매타입 : 멤버선택 */
-            $("#GFPU-btn-purchaseChoose").click(function()
-            {
-                let grpno = $(this).attr("grpno");
-                let el = "#GFPU-div-purchaseMember";
-                let data =
-                {
-                    option : "makeToEl",
-                    grpno : GFPU.Data.grpno,
-                    el : el,
-                }
-                Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
-            });
-
             /* 금액 입력 시, 업데이트 */
             $("#GFPU-input-purchasecost").keyup(function()
             {
@@ -142,6 +128,11 @@
                 let purchasecost = $("#GFPU-input-purchasecost").val().trim();
                 let purchasecomment = $("#GFPU-textarea-purchasecomment").val().trim();
 
+                /* validation */
+                if(Common.isEmpty(purchaseitem))                                { Common.toastError("구매품목을 입력해주세요."); $("#GFPU-input-purchaseitem").focus(); return; }
+                if(Common.isEmpty(purchasecost) || isNaN(Number(purchasecost))) { Common.toastError("구매금액을 숫자로 입력해주세요."); $("#GFPU-input-purchasecost").focus(); return; }
+                if(Number(purchasecost) < 0)                                    { Common.toastError("구매금액은 0원 이상으로 입력해주세요."); $("#GFPU-input-purchasecost").focus(); return; }
+
                 /* process */
                 let process = function()
                 {
@@ -152,6 +143,7 @@
                         if(mApiResponse.isSuccess())
                         {
                             Common.hideProgress();
+                            GFPU.close(true);
                             return;
                         }
                         Common.hideProgress();

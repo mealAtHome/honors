@@ -182,6 +182,7 @@
                         if(mApiResponse.isSuccess())
                         {
                             Common.hideProgress();
+                            GFCU.close(true);
                             return;
                         }
                         Common.hideProgress();

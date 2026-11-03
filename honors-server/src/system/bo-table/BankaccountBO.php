@@ -71,6 +71,8 @@ class BankaccountBO extends _CommonBO
     public function selectByBacckeyUsableForInside($BACCTYPE, $BACCKEY) { return $this->select(get_defined_vars(), __FUNCTION__); }
 
     const selectByPkForInside = "selectByPkForInside";
+    const selectByPkForUser = "selectByPkForUser";
+    const selectByPkForGrp = "selectByPkForGrp";
     const selectByExecutorForUser = "selectByExecutorForUser";
     const selectByExecutorForGrp = "selectByExecutorForGrp";
     const selectByBacckeyUsableForInside = "selectByBacckeyUsableForInside";
@@ -113,6 +115,8 @@ class BankaccountBO extends _CommonBO
         switch($OPTION)
         {
             case self::selectByExecutorForGrp: /* TODO : is executor owner of bacckey(grpno) ? */ break;
+            case self::selectByPkForGrp: $ggAuth->isGrpmanager($BACCKEY, $EXECUTOR, true); $BACCNO = intval($BACCNO); break;
+            case self::selectByPkForUser: $BACCNO = intval($BACCNO); break;
         }
 
         /* --------------- */
@@ -121,6 +125,8 @@ class BankaccountBO extends _CommonBO
         switch($OPTION)
         {
             case self::selectByPkForInside              : { $from = "(select * from bankaccount where bacctype = '$BACCTYPE'     and bacckey = '$BACCKEY'  and baccno = $BACCNO) t"; break; }
+            case self::selectByPkForUser                : { $from = "(select * from bankaccount where bacctype = '$bacctypeUser' and bacckey = '$EXECUTOR' and baccno = $BACCNO and usable = 'y' ) t"; break; }
+            case self::selectByPkForGrp                 : { $from = "(select * from bankaccount where bacctype = '$bacctypeGrp'  and bacckey = '$BACCKEY'  and baccno = $BACCNO and usable = 'y' ) t"; break; }
             case self::selectByExecutorForUser          : { $from = "(select * from bankaccount where bacctype = '$bacctypeUser' and bacckey = '$EXECUTOR' and usable = 'y' ) t"; break; }
             case self::selectByExecutorForGrp           : { $from = "(select * from bankaccount where bacctype = '$bacctypeGrp'  and bacckey = '$BACCKEY'  and usable = 'y' ) t"; break; }
             case self::selectByBacckeyUsableForInside   : { $from = "(select * from bankaccount where bacctype = '$BACCTYPE'     and bacckey = '$BACCKEY'  and usable = 'y' ) t"; break; }
@@ -160,6 +166,8 @@ class BankaccountBO extends _CommonBO
     /* ==================== */
     const insertForUser = "insertForUser";
     const insertForGrp = "insertForGrp";
+    const updateForUser = "updateForUser";
+    const updateForGrp = "updateForGrp";
     const deleteByPk = "deleteByPk";
     protected function update($options, $option="")
     {
@@ -185,7 +193,12 @@ class BankaccountBO extends _CommonBO
                 $bacckey = "";
                 $bacctype = "";
                 if      ($OPTION == self::insertForUser) { $bacckey = $EXECUTOR; $bacctype = $bacctypeUser; }
-                else if ($OPTION == self::insertForGrp)  { $bacckey = $BACCKEY;  $bacctype = $bacctypeGrp; }
+                else if ($OPTION == self::insertForGrp)  { $bacckey = $BACCKEY;  $bacctype = $bacctypeGrp; $ggAuth->isGrpmanager($BACCKEY, $EXECUTOR, true); }
+
+                /* escape free text */
+                $BACCNICKNAME = GGsql::realEscapeString($BACCNICKNAME);
+                $BACCACCT     = GGsql::realEscapeString($BACCACCT);
+                $BACCNAME     = GGsql::realEscapeString($BACCNAME);
 
                 /* is default */
                 $defaultflg = "";
@@ -247,6 +260,47 @@ class BankaccountBO extends _CommonBO
                         break;
                     }
                 }
+                break;
+            }
+            case self::updateForUser:
+            case self::updateForGrp:
+            {
+                /* var by option */
+                $bacckey = "";
+                $bacctype = "";
+                if      ($OPTION == self::updateForUser) { $bacckey = $EXECUTOR; $bacctype = $bacctypeUser; $ggAuth->isBankaccountOwner($EXECUTOR, $bacctype, $bacckey, $BACCNO, true); }
+                else if ($OPTION == self::updateForGrp)  { $bacckey = $BACCKEY;  $bacctype = $bacctypeGrp;  $ggAuth->hasGrpmfinauth($BACCKEY, $EXECUTOR, true); }
+
+                /* validation */
+                $BACCNO = intval($BACCNO);
+                if(Common::isEmpty($BACCCODE))     throw new GGexception("은행을 선택해주세요.");
+                if(Common::isEmpty($BACCNICKNAME)) throw new GGexception("계좌이름을 입력해주세요.");
+                if(Common::isEmpty($BACCACCT))     throw new GGexception("계좌번호를 입력해주세요.");
+                if(Common::isEmpty($BACCNAME))     throw new GGexception("예금주명을 입력해주세요.");
+
+                /* escape free text */
+                $BACCNICKNAME = GGsql::realEscapeString($BACCNICKNAME);
+                $BACCACCT     = GGsql::realEscapeString($BACCACCT);
+                $BACCNAME     = GGsql::realEscapeString($BACCNAME);
+
+                /* sql */
+                $query =
+                "
+                    update
+                        bankaccount
+                    set
+                          baccnickname = '$BACCNICKNAME'
+                        , bacccode     = '$BACCCODE'
+                        , baccacct     = '$BACCACCT'
+                        , baccname     = '$BACCNAME'
+                        , modidt       =  now()
+                    where
+                        bacctype = '$bacctype' and
+                        bacckey  = '$bacckey' and
+                        baccno   =  $BACCNO and
+                        usable   = 'y'
+                ";
+                GGsql::exeQuery($query);
                 break;
             }
             case self::deleteByPk:

@@ -9,10 +9,10 @@
     </div>
 
     <!-- 타이틀 -->
-    <div id="SBDL-div-title" class="common-div-cuhsion"></div>
+    <div id="SBDL-div-title" class="common-div-cushion common-strong common-fonts12"></div>
 
     <!-- 컨텐츠 -->
-    <div id="SBDL-div-content" class="common-div-cuhsion"></div>
+    <div id="SBDL-div-content" class="common-div-cushion"></div>
 
     <script>
         var SBDL =
@@ -38,6 +38,7 @@
                     {
                         let mSystemBoard = mSystemBoards.getModel();
                         let url = mSystemBoard.getFullUrl()+"/index.php";
+                        $("#SBDL-div-title").text(mSystemBoard.getSbtitle());
                         $("#SBDL-div-content").load(url);
                     }
 

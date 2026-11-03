@@ -117,20 +117,6 @@
             /* event */
             /* ======================== */
 
-            /* 손실타입 : 멤버선택 */
-            $("#GFLU-btn-lossChoose").click(function()
-            {
-                let grpno = $(this).attr("grpno");
-                let el = "#GFLU-div-lossMember";
-                let data =
-                {
-                    option : "makeToEl",
-                    grpno : GFLU.Data.grpno,
-                    el : el,
-                }
-                Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, data);
-            });
-
             /* 금액 입력 시, 업데이트 */
             $("#GFLU-input-losscost").keyup(function()
             {
@@ -146,6 +132,11 @@
                 let losscost = $("#GFLU-input-losscost").val().trim();
                 let losscomment = $("#GFLU-textarea-losscomment").val().trim();
 
+                /* validation */
+                if(Common.isEmpty(lossitem))                                    { Common.toastError("손실품목을 입력해주세요."); $("#GFLU-input-lossitem").focus(); return; }
+                if(Common.isEmpty(losscost) || isNaN(Number(losscost)))         { Common.toastError("손실금액을 숫자로 입력해주세요."); $("#GFLU-input-losscost").focus(); return; }
+                if(Number(losscost) < 0)                                        { Common.toastError("손실금액은 0원 이상으로 입력해주세요."); $("#GFLU-input-losscost").focus(); return; }
+
                 /* process */
                 let process = function()
                 {
@@ -156,6 +147,7 @@
                         if(mApiResponse.isSuccess())
                         {
                             Common.hideProgress();
+                            GFLU.close(true);
                             return;
                         }
                         Common.hideProgress();

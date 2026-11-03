@@ -6,6 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `모임은야구` ("Groups Are Baseball") — a Cordova hybrid app for managing amateur baseball meetup groups (member rosters, schedules, dues/settlement, group finances). Backend is plain PHP (no framework, no Composer), frontend is Onsen UI + jQuery, no build/bundle step for JS in local dev.
 
+## Roadmap and current progress — read first when resuming work
+
+- **`honors-docs/개발로드맵.md`** is the source of truth for development direction (5 phases: unfinished features + group creation/type + temp users → manual/PG settlement → PC web via `honors-main` → game records → league admin with AI score-sheet import) and for **what is in progress right now** (phase-1 backlog with checkboxes, pending policy decisions, completion log).
+- **`honors-docs/기능일람표.xlsx`** is the feature inventory, one sheet, tiered by viewpoint → menu → page. Three viewpoints: 유저 / 모임 관리자 / 플랫폼 관리자 (platform admin has no screens yet). The 비고 column records unfinished parts and bugs and drives the phase-1 backlog. The user edits this file by hand — read it before rewriting, and change only what was asked.
+- When a backlog item is finished: tick it in `개발로드맵.md`, add a row to its completion log (date, commit, summary), and clear or update the matching 비고 in `기능일람표.xlsx`.
+- Design for later phases now: new models should keep rendering out of the model (PC web reuse), and anything about game participants should allow temp users (records will attach to them and move on merge).
+
 ## Repo layout (one git repo, multiple sub-projects, each its own Docker container)
 
 | Folder | Container | Port | Role |
@@ -17,6 +24,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `honors-res` | `honors-res` | 8081 | Static resource host (uploaded images etc.) |
 | `honors-docker/db` (seed data only, no live app source mount) | `honors-mysql` | 4809→3306 | Dev DB, **actual engine is MySQL 8.0.33** (production runs **MariaDB 10.5.29** — see Gotchas) |
 | `honors-main` | `honors-main` | 8083 | Small static/legal content host (privacy policy etc.), not core app logic |
+| `honors-docs` | — | — | Planning docs: roadmap/progress (`개발로드맵.md`) and feature inventory (`기능일람표.xlsx`) |
 | `honors-sql` | — | — | Reference/history of schema changes as dated `.sql` files — **not auto-applied**; schema is applied manually (by the user) to dev/prod DBs, these files just document what changed and why |
 
 Bring the stack up from `honors-docker/`: `docker-compose up -d`. There is no test suite and no lint/build command — verification is done by hitting the running app directly (browser + `docker exec honors-mysql mysql ...` + `docker exec honors-api php -l <file>`).
