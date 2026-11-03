@@ -285,7 +285,7 @@ class ClssettleBO extends _CommonBO
                     $BILLDISCOUNT         = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLDISCOUNT));
                     $BILLPOINTED          = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLPOINTED));
                     $BILLFINAL            = intval(Common::getField($record, ClssettletmpBO::FIELD__BILLFINAL));
-                    $BILLMEMO             =        Common::getField($record, ClssettletmpBO::FIELD__BILLMEMO);
+                    $BILLMEMO             =        GGsql::realEscapeString(Common::getField($record, ClssettletmpBO::FIELD__BILLMEMO)); /* 자유입력 : DB에서 읽은 값도 다시 SQL에 넣을 때 escape */
 
                     /* is pointed? */
                     if($BILLPOINTED > 0)

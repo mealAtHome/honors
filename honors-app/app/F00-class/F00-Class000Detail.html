@@ -284,7 +284,10 @@
                         CLSD.isMember = mGrpMemberMe != null && mGrpMemberMe.getGrpmtype() != GGF.GrpMember.Grpmtype.GUEST;
                         if(mCls.isOpenToMercenary())
                         {
-                            $("#CLSD-span-clsopen").text(mCls.getClsmercmax() == null ? "용병 모집 중 (인원 제한 없음)" : `용병 ${mCls.getClsmercmax()}명 모집 중`);
+                            if(mCls.isMercenaryFull())
+                                $("#CLSD-span-clsopen").text(`용병 모집 마감 (${mCls.getClsmercapplied()} / ${mCls.getClsmercmax()}명)`).attr("pill-color", "ngtv");
+                            else
+                                $("#CLSD-span-clsopen").text(mCls.getClsmercmax() == null ? `용병 모집 중 (${mCls.getClsmercapplied()}명 신청, 인원 제한 없음)` : `용병 모집 중 (${mCls.getClsmercapplied()} / ${mCls.getClsmercmax()}명)`);
                             $("#CLSD-tr-clsopen").show();
                         }
 
@@ -516,7 +519,7 @@
                 /* apply */
                 /* ----- */
                 /* 모집기간 밖에서는 일반 멤버에게 참가/취소 버튼을 보여주지 않는다. (서버도 매니저만 모집기간 제한을 받지 않음) */
-                let canApply = CLSD.isManager || (CLSD.mCls.isAppliable() && (CLSD.isMember || CLSD.mCls.isOpenToMercenary()));
+                let canApply = CLSD.isManager || (CLSD.mCls.isAppliable() && (CLSD.isMember || (CLSD.mCls.isOpenToMercenary() && !CLSD.mCls.isMercenaryFull())));
                 let applyHtml = "";
                 if(model.hasApplyer())
                 {

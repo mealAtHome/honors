@@ -238,7 +238,13 @@ class ClsBO extends _CommonBO
         switch($OPTION)
         {
             case self::selectByPkForInside                              : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
-            case self::selectByPkForAll                                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
+            case self::selectByPkForAll                                 :
+            {
+                $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t";
+                /* 용병 신청 수 : 일정상세에서 용병 마감 여부 표시 */
+                $select .= ", (select count(*) from clslineupb b inner join grp_member gm on gm.grpno = b.grpno and gm.userno = b.userno where b.grpno = t.grpno and b.clsno = t.clsno and gm.grpmtype = 'guest') clsmercapplied";
+                break;
+            }
             case self::selectByPkForMng                                 : { $from = "(select * from cls where grpno = '$GRPNO' and clsno = '$CLSNO') t"; break; }
             case self::selectByGrpnoForMng                              : { $from = "(select * from cls where grpno = '$GRPNO') t"; break; }
             case self::selectByClsstatusForMng                          : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$CLSSTATUS') t"; break; }
@@ -434,8 +440,8 @@ class ClsBO extends _CommonBO
 
                 /* set var */
                 $clsno = $idxBO->makeClsno();
-                $CLSUSERNOADM = $CLSUSERNOADM === null ? "null" : "'$CLSUSERNOADM'";
-                $CLSUSERNOSUB = $CLSUSERNOSUB === null ? "null" : "'$CLSUSERNOSUB'";
+                $CLSUSERNOADM = Common::isEmpty($CLSUSERNOADM) ? "null" : "'$CLSUSERNOADM'";
+                $CLSUSERNOSUB = Common::isEmpty($CLSUSERNOSUB) ? "null" : "'$CLSUSERNOSUB'";
 
                 /* query */
                 $query =

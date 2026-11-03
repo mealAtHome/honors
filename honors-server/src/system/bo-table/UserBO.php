@@ -328,9 +328,6 @@ class UserBO extends _CommonBO
                 GGnavi::getImageUtils();
                 ImageUtils::setImgUser($userno);
 
-                /* insert grp_member */
-                $grpMemberBO->insertTempForInside($userno);
-
                 /* generate API key */
                 $rslt[GGF::ID] = $ID;
                 $rslt[GGF::USERNO] = $userno;
@@ -515,6 +512,20 @@ class UserBO extends _CommonBO
             }
             case self::updatePhonePrivacyByPk: /* EXECUTOR, PRIV_PHONE, PRIV_PHONE_GRPM */
             {
+                /* validation : 공개범위 값, 모임별 설정은 내가 속한 모임만 */
+                $privs = array(UserPrivacyBO::PRIVECY__ALL, UserPrivacyBO::PRIVECY__GRP, UserPrivacyBO::PRIVECY__MNG, UserPrivacyBO::PRIVECY__ANY);
+                if(!in_array($PRIV_PHONE, $privs, true)) throw new GGexception("공개범위를 선택해주세요.");
+                $grpmArr = array();
+                foreach((is_array($PRIV_PHONE_GRPM) ? $PRIV_PHONE_GRPM : array()) as $dat)
+                {
+                    $grpno = Common::get($dat, "GRPNO");
+                    $priv  = Common::get($dat, "PRIV_PHONE");
+                    if(!in_array($priv, array_merge(array("not"), $privs), true)) throw new GGexception("공개범위를 선택해주세요.");
+                    if($grpMemberBO->getByPk($grpno, $EXECUTOR) == null) continue;
+                    $grpmArr[] = array("GRPNO" => $grpno, "PRIV_PHONE" => $priv);
+                }
+                $PRIV_PHONE_GRPM = $grpmArr;
+
                 $userPrivacyBO->upsertByPkForInside($EXECUTOR, $PRIV_PHONE);
                 $grpmPrivacyBO->upsertByGrpmArrForInside($EXECUTOR, $PRIV_PHONE_GRPM);
                 break;

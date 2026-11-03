@@ -44,7 +44,10 @@
                 if(models.length == 0)
                     return `<div class="common-div-card common-colorCmmt" style="text-align:center;">지금 용병을 모집 중인 일정이 없습니다.</div>`;
 
+                /* 기준위치가 없으면 거리를 계산할 수 없어 안내 */
                 let html = "";
+                if(models.every(m => m.getGrpdistancekm() == null))
+                    html += `<div class="common-div-card common-fonts09" card-type="warning">기준위치가 없어 가까운 순으로 정렬하지 못했습니다. 모임 탭의 [주소변경]에서 기준위치를 정해주세요.</div>`;
                 for(let i in models)
                 {
                     let m = models[i];

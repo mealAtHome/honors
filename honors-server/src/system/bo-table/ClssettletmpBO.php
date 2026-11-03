@@ -252,7 +252,7 @@ class ClssettletmpBO extends _CommonBO
                     $BILLDISCOUNT   = intval($dat['BILLDISCOUNT']);
                     $BILLPOINTED    = intval($dat['BILLPOINTED']);
                     $BILLFINAL      = intval($dat['BILLFINAL']);
-                    $BILLMEMO       = $dat['BILLMEMO'];
+                    $BILLMEMO       = GGsql::realEscapeString($dat['BILLMEMO']);
 
                     /* insert */
                     $query =

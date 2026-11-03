@@ -160,6 +160,7 @@ class GrpMemberBO extends _CommonBO
             ,
             ifnull(
                 case
+                    when t.userno = '$EXECUTOR' then u.phone /* 본인 번호는 공개범위와 관계없이 보인다 */
                     when grpmprv.priv_phone is null then
                         case
                             when userprv.priv_phone = 'all' then u.phone
@@ -342,7 +343,6 @@ class GrpMemberBO extends _CommonBO
     /* update (sub) */
     /* ========================= */
     public function updatePointForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, $RELCLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
-    public function insertTempForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteRecordByPkForInside($GRPNO, $USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function joinForInside($GRPNO, $USERNO, $GRPMTYPE) { return $this->update(get_defined_vars(), __FUNCTION__); } /* 모임생성·가입승인·용병참가 공통 */
 
@@ -354,7 +354,6 @@ class GrpMemberBO extends _CommonBO
     const updateToDeleteForMng = "updateToDeleteForMng";
     const updatePointForInside = "updatePointForInside";
     const updateInjectPointForMng = "updateInjectPointForMng";
-    const insertTempForInside = "insertTempForInside";
     const updateGrpmpositionForMng = "updateGrpmpositionForMng";
     const makeTempUserForMng = "makeTempUserForMng";
     const mergeTempToMemberForMng = "mergeTempToMemberForMng";
@@ -445,26 +444,6 @@ class GrpMemberBO extends _CommonBO
                     GGsql::exeQuery($query);
                 }
                 $grpBO->recalcGrpmcntForInside($GRPNO);
-                break;
-            }
-            case self::insertTempForInside:
-            {
-                $query =
-                "
-                    insert into grp_member
-                    (
-                          grpno
-                        , userno
-                        , regidt
-                    )
-                    values
-                    (
-                          'GCYHTRMLKYLEXMELLYTWCUBWAWALXD'
-                        , '$USERNO'
-                        ,  now()
-                    )
-                ";
-                GGsql::exeQuery($query);
                 break;
             }
             case self::updateGrpmpositionForMng:

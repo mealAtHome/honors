@@ -12,42 +12,42 @@
 
         <div class="common-div-cushionUD">
             <ul class="common-ul-announce">
-                <li>전화번호 공개 설정을 변경할 수 있습니다.</li>
-                <li>아래 모임별설정에서 특정 모임에 대한 공개 여부를 설정할 수 있습니다.</li>
+                <li>전화번호를 누구에게 보여줄지 정합니다. 본인에게는 항상 보입니다.</li>
+                <li>아래 모임별설정에서 모임마다 다르게 정할 수 있습니다.</li>
             </ul>
         </div>
+
+        <style>
+            #UMPP .common-tbl-type th > .common-btn-radio { width: 6.5em; }
+            #UMPP-tbl-grpList > thead > tr > th,
+            #UMPP-tbl-grpList > tbody > tr > td { text-align: left; vertical-align: middle; }
+            #UMPP-tbl-grpList select { width: 100%; min-width: 9.5em; font-size: 0.95em; }
+        </style>
 
         <div class="common-div-cushionUD">
             <p class="common-p-title">전체설정</p>
             <table id="UMPP-tbl-userPrivPhone" class="common-tbl-vertical common-tbl-type common-fonts09" tbl-type="rowborder">
                 <tbody>
-                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="all" tab="">전체공개</button></th><td>전체 사용자에게 공개됩니다.</td></tr>
-                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="grp" tab="">모임공개</button></th><td>가입한 모임 내 멤버에게만 공개됩니다.</td></tr>
-                    <!-- <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="mng" tab="">운영진공개</button></th><td>가입한 모임 내 운영진에게만 공개됩니다.</td></tr> -->
-                    <!-- <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="any" tab="">비공개</button></th><td>아무에게도 공개되지 않습니다.</td></tr> -->
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="all" tab="">전체공개</button></th><td>모든 사용자에게 공개됩니다.</td></tr>
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="grp" tab="">모임공개</button></th><td>같은 모임 멤버에게만 공개됩니다.</td></tr>
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="mng" tab="">운영진공개</button></th><td>모임의 매니저·부매니저에게만 공개됩니다.</td></tr>
+                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="any" tab="">비공개</button></th><td>아무에게도 공개되지 않습니다.</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <style>
-            #UMPP-tbl-grpList > tbody > tr > td { white-space: nowrap; text-align: left; }
-            </style>
-        <div class="common-div-cushionUD" style="display:none;">
+        <div class="common-div-cushionUD">
             <hr class="common-hr-paddingUD03"/>
             <p class="common-p-title">모임별설정</p>
-            <div class="common-div-cushionUD">
-                <div class="common-div-scrollX">
-                    <table id="UMPP-tbl-grpList" class="common-tbl-normal common-fonts09" tbl-type="rowborder">
-                        <thead>
-                            <tr>
-                                <th>모임명</th>
-                                <th>공개범위</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-            </div>
+            <table id="UMPP-tbl-grpList" class="common-tbl-normal common-fonts09" tbl-type="rowborder" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>모임명</th>
+                        <th style="width:10.5em;">공개범위</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
 
         <!-- ======================== -->
@@ -78,30 +78,38 @@
                         UMPP.close(true);
                         return;
                     }
-                    $(`.UMPP-btn-userPrivPhone[val="${mUser.getPrivPhone()}"]`).attr("tab", "tab");
+                    $(".UMPP-btn-userPrivPhone").attr("tab", "");
+                    $(`.UMPP-btn-userPrivPhone[val="${mUser.getPrivPhone() || GGF.GrpmPrivacy.PrivPhone.GRP}"]`).attr("tab", "tab");
 
-                    /* get grp */
+                    /* 모임별 : 게스트(용병)로만 참가한 모임은 제외 */
+                    let options =
+                    [
+                        ["not", "전체설정에 따름"],
+                        [GGF.GrpmPrivacy.PrivPhone.ALL, "전체공개"],
+                        [GGF.GrpmPrivacy.PrivPhone.GRP, "모임공개"],
+                        [GGF.GrpmPrivacy.PrivPhone.MNG, "운영진공개"],
+                        [GGF.GrpmPrivacy.PrivPhone.ANY, "비공개"],
+                    ];
                     let html = "";
                     let mGrpMembers = Api.GrpMember.selectByExecutorForAll().getModels();
                     for(let i in mGrpMembers)
                     {
                         let mGrpMember = mGrpMembers[i];
+                        if(mGrpMember.getGrpmtype() == GGF.GrpMember.Grpmtype.GUEST)
+                            continue;
+                        let cur = mGrpMember.getPrivPhone() == "" ? "not" : mGrpMember.getPrivPhone();
+                        let optHtml = options.map(o => `<option value="${o[0]}" ${o[0] == cur ? "selected" : ""}>${o[1]}</option>`).join("");
                         html +=
                         `
                             <tr grpno="${mGrpMember.getGrpno()}">
-                                <td>${mGrpMember.getGrpname()}</td>
-                                <td>
-                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="not" tab="${mGrpMember.getPrivPhone() == "" ? "tab" : ""}">전체설정에 따름</button>
-                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="all" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.ALL ? "tab" : ""}">전체공개</button>
-                                    <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="grp" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.GRP ? "tab" : ""}">모임공개</button>
-                                    <!-- <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="mng" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.MNG ? "tab" : ""}">운영진공개</button> -->
-                                    <!-- <button class="UMPP-btn-privPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-privPhone-${mGrpMember.getGrpno()}" val="any" tab="${mGrpMember.getPrivPhone() == GGF.GrpmPrivacy.PrivPhone.ANY ? "tab" : ""}">비공개</button> -->
-                                </td>
+                                <td>${GGC.Common.escapeHtml(mGrpMember.getGrpname())}</td>
+                                <td><select class="UMPP-select-privPhone common-input-text">${optHtml}</select></td>
                             </tr>
                         `;
                     }
+                    if(html == "")
+                        html = `<tr><td colspan="2" class="common-colorCmmt">가입한 모임이 없습니다.</td></tr>`;
                     $("#UMPP-tbl-grpList > tbody").html(html);
-
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
@@ -128,11 +136,9 @@
             {
                 let privPhone = $('.UMPP-btn-userPrivPhone[tab="tab"]').attr("val");
                 let privPhoneGrpm = [];
-                $("#UMPP-tbl-grpList > tbody > tr").each(function()
+                $("#UMPP-tbl-grpList > tbody > tr[grpno]").each(function()
                 {
-                    let grpno = $(this).attr("grpno");
-                    let val = $(this).find(`.UMPP-btn-privPhone[tab="tab"]`).attr("val");
-                    privPhoneGrpm.push({ GRPNO: grpno, PRIV_PHONE: val });
+                    privPhoneGrpm.push({ GRPNO: $(this).attr("grpno"), PRIV_PHONE: $(this).find(".UMPP-select-privPhone").val() });
                 });
 
                 let process = function()

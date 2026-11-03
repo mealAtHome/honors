@@ -102,7 +102,7 @@
         <!-- ======================== -->
         <!-- 개인정보2 -->
         <!-- ======================== -->
-        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="UINT-div-personal2" slideform-next="#UINT-div-thanks" slideform-prev="#UINT-div-personal2" slideform-progress="#UINT-div-progress" slideform-progressval="75">
+        <div class="common-div-formChild" form-type="slide" slideform-status="wait" id="UINT-div-personal2" slideform-next="#UINT-div-thanks" slideform-prev="#UINT-div-personal1" slideform-progress="#UINT-div-progress" slideform-progressval="75">
             <div class="common-div-headerPadding"></div>
 
             <!-- 타이틀 -->
@@ -122,13 +122,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <!-- 활동중인 팀 -->
-            <div class="common-div-formField">
-                <span>활동중인 팀</span>
-                <span>(필수)</span>
-                <input id="UINT-input-teamname" class="common-input-field" placeholder="활동중인 팀 이름">
             </div>
 
             <!-- 다음으로 -->
@@ -254,7 +247,6 @@
                 if(!GGvalid.User.name("#UINT-input-name", GGF.toast))
                     return;
                 GGslideform.next("#UINT-div-slideformParent");
-                setTimeout(function() { UINT.initMap(); }, 300);
             });
             $("#UINT-btn-prevFromPersonal1").click(function() { GGslideform.prev("#UINT-div-slideformParent"); });
 
@@ -274,8 +266,7 @@
                     let email       = ""; /* $("#UINT-input-email").val(); */
                     let adrcvflg    = "n"; /* $(".UINT-radio-adrcvflg:checked").val(); */
                     let hascar      = $(".UINT-radio-hascarflg:checked").val();
-                    let teamname    = $("#UINT-input-teamname").val();
-                    let rslt = Api.User.insert(id, pw, name, birthYear, phone, email, adrcvflg, hascar, teamname, GGF.toast, GGF.alert);
+                    let rslt = Api.User.insert(id, pw, name, birthYear, phone, email, adrcvflg, hascar, "", GGF.toast, GGF.alert);
                     if(rslt == false) {
                         Common.hideProgress();
                         return;

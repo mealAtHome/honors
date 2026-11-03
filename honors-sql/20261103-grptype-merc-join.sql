@@ -34,3 +34,7 @@ create table grp_joinreq
     , primary key (grpno, userno)
     , key grp_joinreq_idx1 (userno)
 ) engine=InnoDB default charset=utf8mb4 collate=utf8mb4_unicode_ci;
+
+-- 데이터 정리 : 일정 주관자(정·부)가 비어 있으면 빈 문자열 대신 null (일정 등록 시 '' 로 저장되던 문제, 2026-11-03 코드 수정)
+update cls set clsusernoadm = null where clsusernoadm = '';
+update cls set clsusernosub = null where clsusernosub = '';
