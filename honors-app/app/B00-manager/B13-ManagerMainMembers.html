@@ -32,6 +32,10 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="common-cushionHalfUp common-fonts09">
+                <button id="MMMB-btn-createTemp" class="common-btn-outer">＋임시멤버</button>
+                <span>앱에 가입하지 않은 참가자를 모임 안에서 관리합니다.</span>
+            </div>
         </div>
     </div>
 
@@ -211,6 +215,12 @@
             {
                 MMMB.Data.pagenum = 1;
                 MMMB.search();
+            });
+
+            /* 임시멤버 생성 (S10 다이얼로그를 생성 전용으로 연다) */
+            $("#MMMB-btn-createTemp").click(function()
+            {
+                Navigation.moveFrontDialog(Navigation.Page.S10ChooseGrpMember, {option: "createTemp", grpno: MMMB.Data.grpno, title: "임시멤버 생성"});
             });
 
             /* 태그관리 이동 */

@@ -131,6 +131,8 @@ class GrpmtagbBO extends _CommonBO
     /* update */
     /* ========================= */
     const bulkSetForMng = "bulkSetForMng";
+    public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); } /* 임시멤버 병합 */
+    const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     protected function update($options, $option="")
     {
         /* vars */
@@ -146,6 +148,15 @@ class GrpmtagbBO extends _CommonBO
         /* process */
         switch($OPTION)
         {
+            case self::updateUsernoToTargetForInside:
+            {
+                /* 대상이 이미 가진 태그는 건너뛰고(ignore), 남은 임시멤버 태그는 삭제 */
+                $query = "update ignore grpmtagb set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                $query = "delete from grpmtagb where grpno = '$GRPNO' and userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
             case self::bulkSetForMng:
             {
                 /* 권한체크 : 모임 매니저(부매니저 포함)만 가능 */

@@ -22,6 +22,11 @@ class GrpMemberBO extends _CommonBO
         GGnavi::getGrpfncaBO();
         GGnavi::getGrpBO();
         GGnavi::getUserAddrBO();
+        GGnavi::getClsBO();
+        GGnavi::getClssettletmpBO();
+        GGnavi::getClssettlehistBO();
+        GGnavi::getGrpmtagbBO();
+        GGnavi::getGrpfncSponsorshipBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
@@ -32,6 +37,11 @@ class GrpMemberBO extends _CommonBO
         $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         $arr['grpBO'] = GrpBO::getInstance();
         $arr['userAddrBO'] = UserAddrBO::getInstance();
+        $arr['clsBO'] = ClsBO::getInstance();
+        $arr['clssettletmpBO'] = ClssettletmpBO::getInstance();
+        $arr['clssettlehistBO'] = ClssettlehistBO::getInstance();
+        $arr['grpmtagbBO'] = GrpmtagbBO::getInstance();
+        $arr['grpfncSponsorshipBO'] = GrpfncSponsorshipBO::getInstance();
         return $arr;
     }
 
@@ -460,8 +470,12 @@ class GrpMemberBO extends _CommonBO
                 /* is grpmanager? */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
+                /* validation */
+                $USERNAME = trim($USERNAME);
+                if(Common::isEmpty($USERNAME)) throw new GGexception("이름을 입력해주세요.");
+
                 /* make temp user */
-                $userInfo = $userBO->insertTempForInside($USERNAME);
+                $userInfo = $userBO->insertTempForInside(GGsql::realEscapeString($USERNAME));
                 $userno = Common::getField($userInfo, GGF::USERNO);
 
                 /* insert grp_member */
@@ -475,8 +489,7 @@ class GrpMemberBO extends _CommonBO
                 $point = intval($POINT);
                 if($point > 0)
                 {
-                    $this->updatePointForInside($GRPNO, $userno, $POINT);
-                    $grpMemberPointhistBO->insertForInside($GRPNO, $userno, $POINT, "임시멤버 등록화면에서 투여", null);
+                    $this->updatePointForInside($GRPNO, $userno, $point, "임시멤버 등록화면에서 투여", null); /* 이력 기록 포함 */
                 }
 
                 /* return */
@@ -488,6 +501,37 @@ class GrpMemberBO extends _CommonBO
                 /* is grpmanager? */
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
 
+                /* validation : 이 모임의 임시멤버(USERNO) → 이 모임의 정식멤버(TARGET)만 허용. 정식 회원 계정이 삭제되는 일을 막는다. */
+                if(Common::isEmpty($USERNO) || Common::isEmpty($TARGET)) throw new GGexception("시스템 오류입니다.");
+                if($USERNO == $TARGET)                                   throw new GGexception("같은 멤버끼리는 병합할 수 없습니다.");
+                if(Common::getField($userBO->getByPk($USERNO), UserBO::FIELD__USERTYPE) != "temp") throw new GGexception("임시멤버만 병합할 수 있습니다.");
+                if(Common::getField($userBO->getByPk($TARGET), UserBO::FIELD__USERTYPE) == "temp") throw new GGexception("임시멤버끼리는 병합할 수 없습니다. 정식 멤버를 선택해주세요.");
+                if($this->getByPk($GRPNO, $USERNO) == null)              throw new GGexception("이 모임의 임시멤버가 아닙니다.");
+                if($this->getByPk($GRPNO, $TARGET) == null)              throw new GGexception("병합할 대상이 이 모임의 멤버가 아닙니다.");
+
+                /* validation : 같은 일정에 두 사람이 모두 있으면 참가·정산이 겹치므로 병합 불가 */
+                $dupCnt = GGsql::selectCnt
+                ("
+                    select count(*) cnt from
+                    (
+                        select clsno from clslineupb where grpno = '$GRPNO' and userno = '$USERNO'
+                        union
+                        select clsno from clssettle  where grpno = '$GRPNO' and userno = '$USERNO'
+                        union
+                        select clsno from clssettletmp where grpno = '$GRPNO' and userno = '$USERNO'
+                    ) t
+                    where t.clsno in
+                    (
+                        select clsno from clslineupb where grpno = '$GRPNO' and userno = '$TARGET'
+                        union
+                        select clsno from clssettle  where grpno = '$GRPNO' and userno = '$TARGET'
+                        union
+                        select clsno from clssettletmp where grpno = '$GRPNO' and userno = '$TARGET'
+                    )
+                ");
+                if($dupCnt > 0)
+                    throw new GGexception("두 멤버가 함께 참가한 일정이 {$dupCnt}건 있어 병합할 수 없습니다. 해당 일정에서 한 명을 정리한 뒤 다시 시도해주세요.");
+
                 /* get point left */
                 $pointLeft = Common::getField($this->getByPk($GRPNO, $USERNO), GrpMemberBO::FIELD__POINT);
                 if($pointLeft != null)
@@ -496,18 +540,25 @@ class GrpMemberBO extends _CommonBO
                     $pointLeft = intval($pointLeft);
                     if($pointLeft > 0)
                     {
-                        $this->updatePointForInside($GRPNO, $TARGET, $pointLeft);
-                        $grpMemberPointhistBO->insertForInside($GRPNO, $TARGET, $pointLeft, "멤버병합으로 인한 포인트 이전", null);
+                        $this->updatePointForInside($GRPNO, $TARGET, $pointLeft, "멤버병합으로 인한 포인트 이전", null); /* 이력 기록 포함 */
                     }
                 }
 
                 /* update && delete */
                 $clslineupbBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
                 $clssettleBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $clssettletmpBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $clssettlehistBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $clsBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $grpmtagbBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
+                $grpfncSponsorshipBO->updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET);
                 $grpMemberPointhistBO->deleteRecordByGrpnoUsernoForInside($GRPNO, $USERNO);
                 $this->deleteRecordByPkForInside($GRPNO, $USERNO);
                 $userBO->deleteRecordByPkForInside($USERNO);
                 $grpmPrivacyBO->deleteByUsernoForInside($USERNO);
+
+                /* 임시멤버 잔여금이 빠졌으므로 모임 잔여금 합계 재계산 */
+                $grpfncaBO->recalGrpfncMemberpointtotalByPkForInside($GRPNO);
                 break;
             }
             case self::deleteRecordByPkForInside:

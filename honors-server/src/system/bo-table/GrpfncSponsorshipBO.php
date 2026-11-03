@@ -148,6 +148,8 @@ class GrpfncSponsorshipBO extends _CommonBO
     /* ========================= */
     const insertFromPage = "insertFromPage";
     const deleteByPk = "deleteByPk";
+    public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); } /* 임시멤버 병합 */
+    const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     protected function update($options, $option="")
     {
         /* vars */
@@ -163,6 +165,12 @@ class GrpfncSponsorshipBO extends _CommonBO
         /* process */
         switch($OPTION)
         {
+            case self::updateUsernoToTargetForInside:
+            {
+                $query = "update grpfnc_sponsorship set sponuserno = '$TARGET' where grpno = '$GRPNO' and sponuserno = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
             case self::insertFromPage:
             {
                 /* check auth */

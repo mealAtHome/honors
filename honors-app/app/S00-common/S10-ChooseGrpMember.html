@@ -5,17 +5,17 @@
     <!-- --------------- -->
     <div class="common-div-toolbar">
         <div><gg-backbtn onclick="CHGM.close(true);"></gg-backbtn></div>
-        <div><span>멤버선택</span></div>
+        <div><span id="CHGM-span-title">멤버선택</span></div>
     </div>
 
     <!-- --------------- -->
     <!-- 탭 -->
     <!-- --------------- -->
-    <!-- <div id="CHGM-div-tabBtn" class="common-div-cushion" style="display:none;"> -->
-    <!--     <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="origin" tab="tab">기존멤버에서</button> -->
-    <!--     <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="temp"   tab="">임시멤버생성</button> -->
-    <!--     <hr class="common-hr-paddingUD06"/> -->
-    <!-- </div> -->
+    <div id="CHGM-div-tabBtn" class="common-div-cushion" style="display:none;">
+        <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="origin" tab="tab">기존멤버에서</button>
+        <button class="CHGM-btn-tab commonEvent-btn-radio common-btn-radio" radio_name="CHGM-btn-tab" val="temp"   tab="">임시멤버생성</button>
+        <hr class="common-hr-paddingUD06"/>
+    </div>
 
     <!-- --------------- -->
     <!-- 기존멤버 -->
@@ -98,8 +98,22 @@
                 if(CHGM.Data.title != "")
                     $("#CHGM-span-title").text(CHGM.Data.title);
 
+                /* 임시멤버 생성 버튼 문구 */
+                switch(CHGM.Data.option)
+                {
+                    case "createTemp"                               : $("#CHGM-btn-createTempUser").text("임시멤버 생성"); break;
+                    case "F10ClassUpdate020SettleEdit-addSettleUser" : $("#CHGM-btn-createTempUser").text("임시멤버 생성하고 정산에 추가"); break;
+                }
+
                 /* view div by option */
-                if(CHGM.Data.regmember == GGF.Y)
+                if(CHGM.Data.option == "createTemp")
+                {
+                    $("#CHGM-div-tabBtn").hide();
+                    $(".CHGM-div-tabDiv").hide();
+                    $(".CHGM-div-tabDiv[screen-tab='temp']").show();
+                    return;
+                }
+                else if(CHGM.Data.regmember == GGF.Y)
                 {
                     $("#CHGM-div-tabBtn").show();
                     $(".CHGM-div-tabDiv").hide();
@@ -131,6 +145,12 @@
                 let process = null;
                 switch(CHGM.Data.option)
                 {
+                    case "createTemp":
+                    {
+                        Common.toastSuccess("임시멤버가 생성되었습니다.");
+                        Navigation.moveBack();
+                        break;
+                    }
                     case "makeToEl":
                     {
                         let mGrpMember = Api.GrpMember.selectByPkForAll(grpno, userno);
@@ -147,7 +167,7 @@
                     }
                     case "F00-applyToClslineupb":
                     {
-                        let etc = "관라자에 의한 대리접수";
+                        let etc = "관리자에 의한 대리접수";
                         process = function()
                         {
                             Common.showProgress();

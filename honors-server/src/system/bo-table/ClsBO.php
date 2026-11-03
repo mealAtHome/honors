@@ -332,6 +332,8 @@ class ClsBO extends _CommonBO
     const updateGrpfinancereflectflgToNForMng   = "updateGrpfinancereflectflgToNForMng";    /* [mng] [GRPNO, CLSNO] */
     const updatePurchaseidxMaxusedForInside     = "updatePurchaseidxMaxusedForInside";      /* [all] [GRPNO, CLSNO, PURCHASEIDX_MAXUSED] */
     const updateBillByPkForInside               = "updateBillByPkForInside";                /* [all] [GRPNO, CLSNO] */
+    public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); } /* 임시멤버 병합 */
+    const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     protected function update($options, $option="")
     {
         /* vars */
@@ -371,6 +373,16 @@ class ClsBO extends _CommonBO
         /* =============== */
         switch($OPTION)
         {
+            case self::updateUsernoToTargetForInside:
+            {
+                $query = "update cls set clsusernoadm = '$TARGET' where grpno = '$GRPNO' and clsusernoadm = '$USERNO'";
+                GGsql::exeQuery($query);
+                $query = "update cls set clsusernosub = '$TARGET' where grpno = '$GRPNO' and clsusernosub = '$USERNO'";
+                GGsql::exeQuery($query);
+                $query = "update cls set clsusernoreg = '$TARGET' where grpno = '$GRPNO' and clsusernoreg = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
             case self::insert:
             {
                 /* validation */

@@ -72,7 +72,7 @@
                     GMMT.close(true);
                     return;
                 }
-                $("#GMMT-div-selectedUser").html(mGrpMember.make());
+                $("#GMMT-div-selectedUser").html(mGrpMember.makeGrpMember("", false));
 
                 /* 멤버 검색 */
                 $("#GMMT-btn-search").click();
@@ -140,7 +140,7 @@
                                 if(mApiResponse.isSuccess())
                                 {
                                     Common.hideProgress();
-                                    GMMT.close(true);
+                                    Navigation.moveBackTwice(); /* 임시멤버가 사라졌으므로 멤버상세를 건너뛰고 목록으로 */
                                     return;
                                 }
                                 Common.hideProgress();

@@ -177,6 +177,8 @@ class ClssettlehistBO extends _CommonBO
     /* ========================= */
     const insertForInside = "insertForInside";
     const copyFromClssettleForInside = "copyFromClssettleForInside";
+    public function updateUsernoToTargetForInside($GRPNO, $USERNO, $TARGET) { return $this->update(get_defined_vars(), __FUNCTION__); } /* 임시멤버 병합 */
+    const updateUsernoToTargetForInside = "updateUsernoToTargetForInside";
     protected function update($options, $option="")
     {
         /* vars */
@@ -194,6 +196,12 @@ class ClssettlehistBO extends _CommonBO
         /* =============== */
         switch($OPTION)
         {
+            case self::updateUsernoToTargetForInside:
+            {
+                $query = "update clssettlehist set userno = '$TARGET' where grpno = '$GRPNO' and userno = '$USERNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
             case self::copyFromClssettleForInside:
             {
                 $query =
