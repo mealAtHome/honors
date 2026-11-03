@@ -17,11 +17,15 @@ class GrpBO extends _CommonBO
         GGnavi::getGrpMemberBO();
         GGnavi::getAddrcodeBO();
         GGnavi::getUserBO();
+        GGnavi::getIdxBO();
+        GGnavi::getGrpfncaBO();
     }
     function setBO()
     {
         self::readBO();
         $arr = array();
+        $arr['idxBO'] = IdxBO::getInstance();
+        $arr['grpfncaBO'] = GrpfncaBO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
         $arr['addrcodeBO'] = AddrcodeBO::getInstance();
         $arr['userBO'] = UserBO::getInstance();
@@ -38,6 +42,9 @@ class GrpBO extends _CommonBO
     const FIELD__GRPMANAGER             = "grpmanager";             /* (  ) char(30) */
     const FIELD__GRPIMG                 = "grpimg";                 /* (  ) char(10) */
     const FIELD__GRPNAME                = "grpname";                /* (  ) char(50) */
+    const FIELD__GRPTYPE                = "grptype";                /* (  ) enum('team','club','mercenary') */
+    const FIELD__GRPJOINPOLICY          = "grpjoinpolicy";          /* (  ) enum('approve','free','none') */
+    const FIELD__GRPCLSOPEN             = "grpclsopen";             /* (  ) enum('member','public') : 새 일정의 외부참가 기본값 */
     const FIELD__GRPINTRO               = "grpintro";               /* (  ) char(30) */
     const FIELD__BACCNODEFAULT          = "baccnodefault";          /* (  ) int */
     const FIELD__BACKNUMBERLENGTH       = "backnumberlength";       /* (  ) int */
@@ -61,6 +68,15 @@ class GrpBO extends _CommonBO
     const CLSBILLAVG_LOOKBACK_CNT = 10; /* 일정평균비용 계산에 사용하는 최근 일정 개수 */
     const BACKNUMBERLENGTH_MIN = 2; /* 등번호 문자수 최소 */
     const BACKNUMBERLENGTH_MAX = 5; /* 등번호 문자수 최대 */
+    const GRPNAME_MAX = 20; /* 모임이름 최대 글자수 */
+    const GRPTYPE__TEAM         = "team";       /* 팀 : 고정 로스터, 다른 팀과 시합 */
+    const GRPTYPE__CLUB         = "club";       /* 모임 : 동호회·친목, 자체 경기 */
+    const GRPTYPE__MERCENARY    = "mercenary";  /* 용병 모임 : 모든 일정이 외부에 열림 */
+    const JOINPOLICY__APPROVE   = "approve";    /* 가입신청 → 매니저 승인 */
+    const JOINPOLICY__FREE      = "free";       /* 신청 즉시 가입 */
+    const JOINPOLICY__NONE      = "none";       /* 가입 받지 않음 (일정별 용병 참가만) */
+    const CLSOPEN__MEMBER       = "member";     /* 일정은 멤버만 */
+    const CLSOPEN__PUBLIC       = "public";     /* 일정을 외부(용병)에 공개 */
     static public function getConsts()
     {
         $arr = array();
@@ -115,6 +131,9 @@ class GrpBO extends _CommonBO
             , t.grpmanager
             , t.grpimg
             , t.grpname
+            , t.grptype
+            , t.grpjoinpolicy
+            , t.grpclsopen
             , t.grpintro
             , t.baccnodefault
             , t.backnumberlength
@@ -254,6 +273,8 @@ class GrpBO extends _CommonBO
     const recalcClsStatsForInside = "recalcClsStatsForInside";
     const updateBacknumberlengthForMng = "updateBacknumberlengthForMng";
     const updateBasecampForMng = "updateBasecampForMng";
+    const insertForUsr = "insertForUsr";            /* 모임생성 : 만든 사람이 모임장(mng)이 된다 */
+    const updateTypeForMng = "updateTypeForMng";    /* 모임 타입·가입방식·일정공개 기본값 변경 */
     protected function update($options, $option="")
     {
         /* vars */
@@ -266,9 +287,78 @@ class GrpBO extends _CommonBO
         if($option != "")
             $OPTION = $option;
 
+        /* validation : 타입·속성 값 (insert / update 공통) */
+        switch($OPTION)
+        {
+            case self::insertForUsr:
+            case self::updateTypeForMng:
+            {
+                if(!in_array($GRPTYPE, array(self::GRPTYPE__TEAM, self::GRPTYPE__CLUB, self::GRPTYPE__MERCENARY), true))         throw new GGexception("모임 유형을 선택해주세요.");
+                if(!in_array($GRPJOINPOLICY, array(self::JOINPOLICY__APPROVE, self::JOINPOLICY__FREE, self::JOINPOLICY__NONE), true)) throw new GGexception("가입 방식을 선택해주세요.");
+                if(!in_array($GRPCLSOPEN, array(self::CLSOPEN__MEMBER, self::CLSOPEN__PUBLIC), true))                         throw new GGexception("일정 공개 범위를 선택해주세요.");
+                break;
+            }
+        }
+
         /* process */
         switch($OPTION)
         {
+            case self::insertForUsr:
+            {
+                /* validation */
+                $grpname = trim($GRPNAME);
+                if(Common::isEmpty($grpname))                    throw new GGexception("모임이름을 입력해주세요.");
+                if(mb_strlen($grpname) > self::GRPNAME_MAX)      throw new GGexception("모임이름은 ".self::GRPNAME_MAX."자 이내로 입력해주세요.");
+                $grpname = GGsql::realEscapeString($grpname);
+
+                /* insert grp */
+                $grpno = $idxBO->makeGrpno();
+                $query =
+                "
+                    insert into grp
+                    (
+                          grpno
+                        , grpmanager
+                        , grpname
+                        , grptype
+                        , grpjoinpolicy
+                        , grpclsopen
+                        , backnumberlength
+                        , grpmcnt
+                        , modidt
+                        , regidt
+                    )
+                    values
+                    (
+                          '$grpno'
+                        , '$EXECUTOR'
+                        , '$grpname'
+                        , '$GRPTYPE'
+                        , '$GRPJOINPOLICY'
+                        , '$GRPCLSOPEN'
+                        ,  2
+                        ,  0
+                        ,  now()
+                        ,  now()
+                    )
+                ";
+                GGsql::exeQuery($query);
+
+                /* 만든 사람을 모임장으로 등록, 재무 레코드 생성 */
+                $grpMemberBO->joinForInside($grpno, $EXECUTOR, GrpMemberBO::GRPMTYPE__MNG);
+                $grpfncaBO->makeRecordsIfNotExistsByPkForInside($grpno);
+
+                /* return */
+                $rslt[GGF::GRPNO] = $grpno;
+                break;
+            }
+            case self::updateTypeForMng:
+            {
+                $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
+                $query = "update grp set grptype = '$GRPTYPE', grpjoinpolicy = '$GRPJOINPOLICY', grpclsopen = '$GRPCLSOPEN', modidt = now() where grpno = '$GRPNO'";
+                GGsql::exeQuery($query);
+                break;
+            }
             case self::updateBaccnodefaultForInside:
             {
                 $query = "update grp set baccnodefault = $BACCNODEFAULT where grpno = '$GRPNO'";
@@ -335,7 +425,7 @@ class GrpBO extends _CommonBO
             }
             case self::recalcGrpmcntForInside:
             {
-                /* 활성상태이면서 일반(임시아님) 멤버만 카운트 */
+                /* 활성상태이면서 일반(임시아님) 멤버만 카운트. 게스트(용병)는 제외 */
                 $cnt = intval(GGsql::selectCnt(
                     "
                         select count(*) cnt
@@ -344,6 +434,7 @@ class GrpBO extends _CommonBO
                         where
                             gm.grpno = '$GRPNO' and
                             gm.grpmstatus = 'active' and
+                            gm.grpmtype <> 'guest' and
                             u.usertype = 'normal'
                     "
                 ));

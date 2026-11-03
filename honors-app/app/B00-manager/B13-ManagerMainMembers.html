@@ -32,10 +32,11 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="common-cushionHalfUp common-fonts09">
-                <button id="MMMB-btn-createTemp" class="common-btn-outer">＋임시멤버</button>
-                <span>앱에 가입하지 않은 참가자를 모임 안에서 관리합니다.</span>
+            <div class="common-cushionHalfUp" style="display:flex; gap:0.5em; flex-wrap:wrap;">
+                <button id="MMMB-btn-joinreq" class="common-btn-outer" style="padding:0.3em 0.9em;">가입신청 <span id="MMMB-span-joinreqCnt" class="common-alertBadge" style="display:none;"></span></button>
+                <button id="MMMB-btn-createTemp" class="common-btn-outer" style="padding:0.3em 0.9em;">＋임시멤버</button>
             </div>
+            <span class="common-block common-fonts08 common-colorCmmt" style="margin-top:0.3em;">임시멤버 : 앱에 가입하지 않은 참가자를 모임 안에서 관리합니다.</span>
         </div>
     </div>
 
@@ -93,6 +94,10 @@
                     let searchtagidx = MMMB.Data.searchtagidx;
                     let mGrpmtagas = Api.Grpmtaga.selectByGrpno(MMMB.Data.grpno);
                     mGrpmtagas.makePillForSearchGrpm("#MMMB-div-tagList");
+
+                    /* 승인 대기 가입신청 수 */
+                    let joinreqCnt = Api.GrpJoinreq.selectWaitByGrpnoForMng(MMMB.Data.grpno, GGF.none, GGF.none).getModels().length;
+                    $("#MMMB-span-joinreqCnt").text(joinreqCnt).toggle(joinreqCnt > 0);
 
                     /* 태그 클릭 시, 태그에 해당하는 멤버만 검색 */
                     $("#MMMB-div-tagList > .MGrpmtaga-makePillForSearchGrpm-pill").click(function()
@@ -215,6 +220,12 @@
             {
                 MMMB.Data.pagenum = 1;
                 MMMB.search();
+            });
+
+            /* 가입신청 관리 */
+            $("#MMMB-btn-joinreq").click(function()
+            {
+                Navigation.moveFrontPage(Navigation.Page.B73GrpJoinreqList, {grpno: MMMB.Data.grpno});
             });
 
             /* 임시멤버 생성 (S10 다이얼로그를 생성 전용으로 연다) */

@@ -54,7 +54,7 @@ Every page is a single `<ons-page id="XXXX">` HTML file (in `honors-app/app/<Bnn
 
 Adding a new page or a new `Api.Xxx.yyy` endpoint requires touching `Navigation.Prj.js` in up to 6 places: the `Navigation.Page` enum (page id → 4-letter code), the URL switch, the `getData` switch, the `executeShow` switch, the `executeMoveBack` switch, and (for a new API function) `getApiUrlByFuncName`. Missing any one of these fails silently or throws only when that specific path is exercised.
 
-New JS files (models in `model/model-table/` or `model/model-ref/`, API wrappers in `api/api-table/`) must also be added to `GGbase.js`'s script manifest (see LOCALMODE above).
+New JS files (models in `model/model-table/` or `model/model-ref/`, API wrappers in `api/api-table/`) must also be added to `GGbase.js`'s script manifest (see LOCALMODE above) **and** to the release bundler `honors-script/src/tool/01-merge.sh`, which also lists files explicitly (used when `SCRIPT_MERGE = true`). Note the `?v=` value is in practice fixed (not per boot), so after editing JS the browser may keep serving the old file from cache — force-reload before verifying.
 
 ### API call patterns: blocking vs Promise
 Two coexisting client-side calling conventions:

@@ -1,0 +1,208 @@
+<ons-page id="MGTP">
+
+    <style>
+        /* 선택 버튼 폭을 통일해서 설명 글이 한 줄로 맞게 */
+        #MGTP .common-tbl-type th > .common-btn-radio { width: 7.5em; }
+    </style>
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="MGTP.close(true);"></gg-backbtn></div>
+        <div><span id="MGTP-span-title">모임 만들기</span></div>
+    </div>
+
+    <div class="common-div-formChild">
+
+        <!-- 모임이름 (생성 시에만) -->
+        <div id="MGTP-div-grpname" class="common-div-formField">
+            <span>*모임이름</span>
+            <span>20글자 이내로 입력해주세요.</span>
+            <input id="MGTP-input-grpname" type="text" class="common-input-field" maxlength="20" placeholder="모임이름"/>
+        </div>
+
+        <!-- 모임 유형 -->
+        <div class="common-div-formField">
+            <span>*모임 유형</span>
+            <span>유형을 고르면 아래 설정이 추천값으로 바뀝니다. 설정은 따로 바꿀 수 있습니다.</span>
+            <table class="common-tbl-vertical common-tbl-type common-fonts09" tbl-type="rowborder">
+                <tbody>
+                    <tr><th><button class="MGTP-btn-grptype commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-grptype" val="team"      tab=""   >팀</button></th><td>고정 멤버로 다른 팀과 시합하고 리그에 나갑니다.</td></tr>
+                    <tr><th><button class="MGTP-btn-grptype commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-grptype" val="club"      tab="tab">모임</button></th><td>동호회·친목 모임. 자체 경기나 연습을 합니다.</td></tr>
+                    <tr><th><button class="MGTP-btn-grptype commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-grptype" val="mercenary" tab=""   >용병</button></th><td>가입 없이 일정마다 용병을 모아 경기를 엽니다.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 가입 방식 -->
+        <div class="common-div-formField">
+            <span>*가입 방식</span>
+            <span>모임상세에서 가입을 어떻게 받을지 정합니다.</span>
+            <table class="common-tbl-vertical common-tbl-type common-fonts09" tbl-type="rowborder">
+                <tbody>
+                    <tr><th><button class="MGTP-btn-joinpolicy commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-joinpolicy" val="approve" tab="tab">승인 후 가입</button></th><td>가입신청을 매니저가 승인합니다.</td></tr>
+                    <tr><th><button class="MGTP-btn-joinpolicy commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-joinpolicy" val="free"    tab=""   >바로 가입</button></th><td>신청하면 바로 멤버가 됩니다.</td></tr>
+                    <tr><th><button class="MGTP-btn-joinpolicy commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-joinpolicy" val="none"    tab=""   >가입 받지 않음</button></th><td>가입 없이 일정별 용병 참가만 받습니다.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 일정 공개 기본값 -->
+        <div class="common-div-formField">
+            <span>*일정 공개 기본값</span>
+            <span>새 일정을 만들 때의 기본값입니다. 일정마다 따로 바꿀 수 있습니다.</span>
+            <table class="common-tbl-vertical common-tbl-type common-fonts09" tbl-type="rowborder">
+                <tbody>
+                    <tr><th><button class="MGTP-btn-clsopen commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-clsopen" val="member" tab="tab">멤버만</button></th><td>모임 멤버만 일정에 참가합니다.</td></tr>
+                    <tr><th><button class="MGTP-btn-clsopen commonEvent-btn-radio common-btn-radio" radio_name="MGTP-btn-clsopen" val="public" tab=""   >용병에게 공개</button></th><td>멤버가 아니어도 용병으로 참가 신청할 수 있습니다.</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 저장 -->
+        <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
+            <tbody>
+                <tr>
+                    <td><button id="MGTP-btn-save" class="common-btn-inner">모임 만들기</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div> <!-- formChild -->
+
+    <script>
+        /*
+            모임 만들기 / 모임 유형·가입 설정
+            - grpno 없음 : 모임 생성 (만든 사람이 모임장이 된다)
+            - grpno 있음 : 기존 모임의 유형·가입 방식·일정 공개 기본값 변경
+        */
+        var MGTP =
+        {
+            code : "MGTP",
+            Data: {},
+
+            show()
+            {
+                if(MGTP.Data.grpno == undefined) { MGTP.Data.grpno = ""; }
+
+                /* 생성 */
+                if(Common.isEmpty(MGTP.Data.grpno))
+                {
+                    $("#MGTP-span-title").text("모임 만들기");
+                    $("#MGTP-btn-save").text("모임 만들기");
+                    $("#MGTP-div-grpname").show();
+                    MGTP.choose("grptype", GGF.Grp.Grptype.CLUB);
+                    MGTP.applyPreset(GGF.Grp.Grptype.CLUB);
+                    return;
+                }
+
+                /* 수정 */
+                $("#MGTP-span-title").text("모임 유형·가입 설정");
+                $("#MGTP-btn-save").text("저장하기");
+                $("#MGTP-div-grpname").hide();
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrp = Api.Grp.selectByPk(MGTP.Data.grpno, GGF.none, GGF.toast);
+                    if(mGrp != null)
+                    {
+                        MGTP.choose("grptype", mGrp.getGrptype());
+                        MGTP.choose("joinpolicy", mGrp.getGrpjoinpolicy());
+                        MGTP.choose("clsopen", mGrp.getGrpclsopen());
+                    }
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* 라디오 버튼 선택 표시 */
+            choose(name, val)
+            {
+                $(`.MGTP-btn-${name}`).attr("tab", "");
+                $(`.MGTP-btn-${name}[val='${val}']`).attr("tab", "tab");
+            },
+            chosen(name) { return $(`.MGTP-btn-${name}[tab='tab']`).attr("val"); },
+
+            /* 유형별 추천값 */
+            applyPreset(grptype)
+            {
+                let preset = GGC.Grp.presetByGrptype(grptype);
+                MGTP.choose("joinpolicy", preset.joinpolicy);
+                MGTP.choose("clsopen", preset.clsopen);
+            },
+
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            /* 유형을 바꾸면 추천값 적용 */
+            $(".MGTP-btn-grptype").click(function()
+            {
+                MGTP.applyPreset($(this).attr("val"));
+            });
+
+            /* 저장 */
+            $("#MGTP-btn-save").click(function()
+            {
+                let grptype       = MGTP.chosen("grptype");
+                let grpjoinpolicy = MGTP.chosen("joinpolicy");
+                let grpclsopen    = MGTP.chosen("clsopen");
+                let isInsert      = Common.isEmpty(MGTP.Data.grpno);
+                let grpname       = $("#MGTP-input-grpname").val().trim();
+
+                /* validation */
+                if(isInsert && Common.isEmpty(grpname)) { Common.toastError("모임이름을 입력해주세요."); $("#MGTP-input-grpname").focus(); return; }
+                if(Common.isEmpty(grptype))             { Common.toastError("모임 유형을 선택해주세요."); return; }
+
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        if(isInsert)
+                        {
+                            let mApiResponse = Api.Grp.insertForUsr(grpname, grptype, grpjoinpolicy, grpclsopen, GGF.toast, GGF.toast);
+                            if(mApiResponse.isSuccess())
+                            {
+                                GGstorage.Prj.setGrpmtypeByGrpno(mApiResponse.getGrpno(), GGF.GrpMember.Grpmtype.MNG);
+                                Common.hideProgress();
+                                MGTP.close(true);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            let mApiResponse = Api.Grp.updateTypeForMng(MGTP.Data.grpno, grptype, grpjoinpolicy, grpclsopen, GGF.toast, GGF.toast);
+                            if(mApiResponse.isSuccess())
+                            {
+                                Common.hideProgress();
+                                MGTP.close(true);
+                                return;
+                            }
+                        }
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2(isInsert ? "모임을 만드시겠습니까? 만든 사람이 모임장이 됩니다." : "저장하시겠습니까?", process);
+            });
+
+            /* ========================= */
+            /* page process */
+            /* ========================= */
+            try
+            {
+                MGTP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                MGTP.close(true);
+            }
+        });
+    </script>
+</ons-page>

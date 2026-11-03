@@ -46,6 +46,26 @@ class GGauth
             throw new GGexception("모임 관리자만 접근가능합니다.");
         return false;
     }
+    /* 모임의 활성 멤버(매니저·부매니저·멤버). 게스트(용병)와 탈퇴 멤버는 제외 */
+    public function isGrpmember($GRPNO, $USERNO, $errorflg=false)
+    {
+        GGnavi::getUserBO();
+        GGnavi::getGrpMemberBO();
+        $grpMemberBO = GrpMemberBO::getInstance();
+        $userBO = UserBO::getInstance();
+
+        $grpMember = $grpMemberBO->getByPk($GRPNO, $USERNO);
+        $grpmtype   = Common::getField($grpMember, GrpMemberBO::FIELD__GRPMTYPE);
+        $grpmstatus = Common::getField($grpMember, GrpMemberBO::FIELD__GRPMSTATUS);
+        $adminflg   = Common::getField($userBO->getByPk($USERNO), UserBO::FIELD__ADMINFLG);
+
+        if($grpmstatus == GrpMemberBO::GRPMSTATUS__ACTIVE && in_array($grpmtype, array(GrpMemberBO::GRPMTYPE__MNG, GrpMemberBO::GRPMTYPE__MNGSUB, GrpMemberBO::GRPMTYPE__MEMBER), true)) return true;
+        if($adminflg == GGF::Y) return true;
+
+        if($errorflg)
+            throw new GGexception("모임 멤버만 접근가능합니다.");
+        return false;
+    }
     public function isGrpowner($GRPNO, $USERNO, $errorflg=false)
     {
         /* bo */

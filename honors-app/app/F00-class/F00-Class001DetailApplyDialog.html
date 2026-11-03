@@ -156,14 +156,15 @@
                             Common.showProgress();
                             setTimeout(function()
                             {
+                                /* 멤버가 아니면(용병 참가) 내 회원정보의 이름을 쓴다 */
                                 let mGrpMember = Api.GrpMember.selectMeByGrpno(CLSA.Data.grpno);
-                                if(mGrpMember == null)
+                                let mUser = mGrpMember != null ? mGrpMember.getMUser() : Api.User.selectMe().getModel();
+                                if(mUser == null)
                                 {
                                     Common.toast("잘못된 접근입니다.");
                                     CLSA.close(true);
                                     return;
                                 }
-                                let mUser = mGrpMember.getMUser();
                                 CLSA.Data.name = mUser.getName();
                                 $("#CLSA-input-username").val(CLSA.Data.name);
 

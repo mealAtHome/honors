@@ -38,6 +38,8 @@
     $options["CLSAPPLYSTARTDT"]                                     = get("CLSAPPLYSTARTDT");
     $options["CLSBILLAPPLYPRICE"]                                   = get("CLSBILLAPPLYPRICE");
     $options["CLSBILLAPPLYUNIT"]                                    = get("CLSBILLAPPLYUNIT");
+    $options["CLSOPENFLG"]                                          = get("CLSOPENFLG");
+    $options["CLSMERCMAX"]                                          = get("CLSMERCMAX");
     $options["CLSCANCELREASON"]                                     = get("CLSCANCELREASON");
     $options["CLSCLOSEDT"]                                          = get("CLSCLOSEDT");
     $options["CLSCONTENT"]                                          = get("CLSCONTENT");
@@ -73,6 +75,9 @@
     $options["GRPRULES"]                                            = get("GRPRULES");
     $options["GRPMANAGER"]                                          = get("GRPMANAGER");
     $options["GRPNAME"]                                             = get("GRPNAME");
+    $options["GRPTYPE"]                                             = get("GRPTYPE");
+    $options["GRPJOINPOLICY"]                                       = get("GRPJOINPOLICY");
+    $options["GRPCLSOPEN"]                                          = get("GRPCLSOPEN");
     $options["GRPMBACKNUM"]                                         = get("GRPMBACKNUM");
     $options["GRPNO"]                                               = get("GRPNO");
     $options["HASCARFLG"]                                           = get("HASCARFLG");
@@ -110,6 +115,7 @@
     $options["PUSHTOKEN"]                                           = get("PUSHTOKEN");
     $options["PW"]                                                  = get("PW");
     $options["REGDT"]                                               = get("REGDT");
+    $options["REQMSG"]                                              = get("REQMSG");
     $options["REGIDT"]                                              = get("REGIDT");
     $options["SBINDEX"]                                             = get("SBINDEX");
     $options["SCLCLOSEDATE"]                                        = get("SCLCLOSEDATE");

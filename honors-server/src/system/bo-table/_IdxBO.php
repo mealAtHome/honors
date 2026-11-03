@@ -29,6 +29,7 @@ class IdxBO extends _CommonBO
     /* ========================= */
     const ENTITY__USER = "user";
     const ENTITY__CLS  = "game";
+    const ENTITY__GRP  = "grp";
     const ENTITY__PLOG = "payment_log";
     function setBO()
     {
@@ -43,6 +44,7 @@ class IdxBO extends _CommonBO
     /* ========================= */
     public function makeUserno      () { return $this->makeNewIdx(30, self::ENTITY__USER, ""); }
     public function makeClsno       () { return $this->makeNewIdx(14, self::ENTITY__CLS, ""); }
+    public function makeGrpno       () { return $this->makeNewIdx(30, self::ENTITY__GRP, ""); }
     public function makePlogidx     ($USERNO, $PLOGD) { return $this->getNewIdx(self::ENTITY__PLOG, $USERNO, $PLOGD); }
 
     public function makeNewIdx($length=30, $entity="", $index="")
@@ -62,6 +64,7 @@ class IdxBO extends _CommonBO
             {
                 case self::ENTITY__USER : $idx =                      $this->getRandomString($length  );  $query = "select coalesce(count(*),0) cnt from user where userno = '$idx'"; break;
                 case self::ENTITY__CLS  : $idx = GGdate::getYMD()."-".$this->getRandomString($length-9);  $query = "select coalesce(count(*),0) cnt from cls  where clsno  = '$idx'"; break;
+                case self::ENTITY__GRP  : $idx =                      $this->getRandomString($length  );  $query = "select coalesce(count(*),0) cnt from grp  where grpno  = '$idx'"; break;
             }
             $cnt = intval(GGsql::selectCnt($query));
             if($cnt == 0)

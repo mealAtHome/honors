@@ -88,6 +88,44 @@
             },
 
             /* ========================= */
+            /* 가입 카드 : 모임의 가입 방식과 내 상태(멤버 / 대기 / 없음)에 따라 */
+            /* ========================= */
+            makeJoinCard(mGrp)
+            {
+                let grpno = mGrp.getGrpno();
+                let mGrpMember = Api.GrpMember.selectMeByGrpno(grpno, GGF.none, GGF.none);
+                if(mGrpMember != null && mGrpMember.getGrpmtype() != GGF.GrpMember.Grpmtype.GUEST)
+                    return ""; /* 이미 멤버 */
+
+                let card = (title, body) => `<div class="common-div-card"><div class="common-header"><i class="ti ti-user-plus"></i><span>${title}</span></div><div class="common-cushionHalfUp">${body}</div></div>`;
+
+                if(mGrp.getGrpjoinpolicy() == GGF.Grp.Joinpolicy.NONE)
+                    return card("용병으로 참가하기", `<span class="common-fonts09">가입 없이 용병 모집 일정에 참가하는 모임입니다. 일정 탭이나 [용병 모집 찾기]에서 참가해주세요.</span>`);
+
+                let mReq = Api.GrpJoinreq.selectMineByGrpnoForUsr(grpno, GGF.none, GGF.none);
+                if(mReq != null && mReq.isWait())
+                    return card("가입신청 현황", `
+                        <span class="common-block common-fonts09">가입 승인을 기다리고 있습니다. 매니저가 승인하면 멤버가 됩니다.</span>
+                        <button class="DGRP-btn-joinCancel common-btn-outer" btn-type="cancel" btn-size="large">신청 취소</button>
+                    `);
+
+                let rejected = (mReq != null && mReq.isRejected()) ? `<span class="common-block common-fonts09 common-colorCmmt">이전 가입신청이 거절되었습니다. 다시 신청할 수 있습니다.</span>` : "";
+                if(mGrp.getGrpjoinpolicy() == GGF.Grp.Joinpolicy.FREE)
+                    return card("이 모임에 가입하기", `
+                        ${rejected}
+                        <span class="common-block common-fonts09">신청하면 바로 멤버가 됩니다.</span>
+                        <button class="DGRP-btn-joinRequest common-btn-inner" btn-size="large">바로 가입하기</button>
+                    `);
+
+                return card("가입신청하기", `
+                    ${rejected}
+                    <textarea id="DGRP-textarea-reqmsg" class="common-textarea-field" rows="3" maxlength="200" placeholder="가입인사 (선택, 200자 이내)" style="width:100%; box-sizing:border-box;"></textarea>
+                    <span class="common-block common-fonts08 common-colorCmmt">매니저가 승인하면 멤버가 됩니다.</span>
+                    <button class="DGRP-btn-joinRequest common-btn-inner" btn-size="large">가입신청</button>
+                `);
+            },
+
+            /* ========================= */
             /* search */
             /* ========================= */
             search()
@@ -110,6 +148,9 @@
                                 /* 모임정보 */
                                 let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.toast);
                                 let infoHtml = mGrp.makeGrpCardMain();
+
+                                /* 가입 카드 : 모임 카드 바로 아래 */
+                                infoHtml += DGRP.makeJoinCard(mGrp);
 
                                 /* 모임장 연락처 */
                                 infoHtml += mGrp.makeManagerContactCard();
@@ -226,6 +267,41 @@
             /* =============== */
             /* 검색 */
             /* =============== */
+            /* 가입신청 / 바로 가입 */
+            $("#DGRP-div-info").on("click", ".DGRP-btn-joinRequest", function()
+            {
+                let reqmsg = ($("#DGRP-textarea-reqmsg").val() || "").trim();
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.GrpJoinreq.requestForUsr(DGRP.Data.grpno, reqmsg, GGF.toast, GGF.toast);
+                        Common.hideProgress();
+                        if(mApiResponse.isSuccess())
+                            Navigation.executeShow();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("이 모임에 가입하시겠습니까?", process);
+            });
+
+            /* 가입신청 취소 */
+            $("#DGRP-div-info").on("click", ".DGRP-btn-joinCancel", function()
+            {
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = Api.GrpJoinreq.cancelForUsr(DGRP.Data.grpno, GGF.toast, GGF.toast);
+                        Common.hideProgress();
+                        if(mApiResponse.isSuccess())
+                            Navigation.executeShow();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("가입신청을 취소하시겠습니까?", process);
+            });
+
             $("#DGRP-input-searchkey").keypress(function(e) { if(e.key == "Enter") $("#DGRP-btn-search").click(); });
             $("#DGRP-btn-search").click(function()
             {

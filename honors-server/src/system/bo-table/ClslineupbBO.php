@@ -17,10 +17,12 @@ class ClslineupbBO extends _CommonBO
         GGnavi::getUserBO();
         GGnavi::getClslineupaBO();
         GGnavi::getGrpMemberBO();
+        GGnavi::getClsBO();
         $arr = array();
         $arr['ggAuth'] = GGauth::getInstance();
         $arr['userBO'] = UserBO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        $arr['clsBO'] = ClsBO::getInstance();
         return $arr;
     }
 
@@ -331,6 +333,31 @@ class ClslineupbBO extends _CommonBO
                 $isGrpmanager = $ggAuth->isGrpmanager($GRPNO, $EXECUTOR); /* is grp manager */
                 if($isGrpmanager != true) {
                     $ggAuth->isClsInApplyDt($GRPNO, $CLSNO);
+                }
+
+                /* 참가 자격 : 모임 멤버. 외부참가(용병)가 열린 일정이면 비멤버도 게스트 멤버로 등록하고 참가 */
+                if(!$ggAuth->isGrpmember($GRPNO, $EXECUTOR))
+                {
+                    $cls = $clsBO->getByPk($GRPNO, $CLSNO);
+                    if(Common::getField($cls, ClsBO::FIELD__CLSOPENFLG) != GGF::Y)
+                        throw new GGexception("모임 멤버만 참가할 수 있는 일정입니다.");
+
+                    /* 용병 모집 인원 */
+                    $mercmax = Common::getField($cls, ClsBO::FIELD__CLSMERCMAX);
+                    if(Common::isNotEmpty($mercmax))
+                    {
+                        $mercCnt = intval(GGsql::selectCnt
+                        ("
+                            select count(*) cnt
+                            from clslineupb b
+                                inner join grp_member gm on gm.grpno = b.grpno and gm.userno = b.userno
+                            where b.grpno = '$GRPNO' and b.clsno = '$CLSNO' and gm.grpmtype = '".GrpMemberBO::GRPMTYPE__GUEST."'
+                        "));
+                        if($mercCnt >= intval($mercmax))
+                            throw new GGexception("용병 모집이 마감되었습니다.");
+                    }
+
+                    $grpMemberBO->joinForInside($GRPNO, $EXECUTOR, GrpMemberBO::GRPMTYPE__GUEST);
                 }
 
                 /* 해당 포지션에 이미 다른 유저가 기입하였는지 확인 */

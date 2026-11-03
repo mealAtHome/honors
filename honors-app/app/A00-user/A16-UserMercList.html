@@ -1,0 +1,89 @@
+<ons-page id="UMRC">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="UMRC.close(true);"></gg-backbtn></div>
+        <div><span>용병 모집 찾기</span></div>
+    </div>
+
+    <div class="common-div-cushion common-fonts09">
+        <span>용병을 모집 중인 일정입니다. 내 기준위치에서 가까운 순으로 보여줍니다.</span>
+        <span class="common-block common-colorCmmt">기준위치는 모임 탭의 [주소변경]에서 바꿀 수 있습니다.</span>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <div id="UMRC-div-list" class="common-div-cushion"></div>
+
+    <script>
+        /*
+            용병 모집 찾기 (유저)
+            - 모임에 가입하지 않아도 참가 신청할 수 있는 일정(clsopenflg = y) 목록
+            - 상세보기에서 빈 자리에 [참가]로 신청하면 그 모임에 게스트(용병)로 등록된다
+        */
+        var UMRC =
+        {
+            code : "UMRC",
+            Data: {},
+
+            show()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mClss = Api.Cls.selectOpenForMercenaryForUsr(GGF.none, GGF.toast);
+                    $("#UMRC-div-list").html(UMRC.makeList(mClss.getModels()));
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            /* 목록 html : 일정 카드 + 거리·빈자리·용병 인원 */
+            makeList(models)
+            {
+                if(models.length == 0)
+                    return `<div class="common-div-card common-colorCmmt" style="text-align:center;">지금 용병을 모집 중인 일정이 없습니다.</div>`;
+
+                let html = "";
+                for(let i in models)
+                {
+                    let m = models[i];
+                    let distance = m.getGrpdistancekm() == null ? "" : `<div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-map-pin"></i><span>${m.getGrpdistancekm()}km</span></div>`;
+                    let merc = m.getClsmercmax() == null ? `용병 ${m.getClsmercapplied()}명 신청` : `용병 ${m.getClsmercapplied()} / ${m.getClsmercmax()}명`;
+                    let full = m.isMercenaryFull() || m.getClsemptycnt() == 0;
+                    let info =
+                    `
+                        <div class="common-fonts08">
+                            <div class="common-pill" pill-type="mini" pill-color="main">${GGC.Grp.grptypeCvrt(m.getGrptype())}</div>
+                            <div class="common-pill" pill-type="mini" pill-color="${full ? "ngtv" : "info"}"><span>${full ? "용병 마감" : merc}</span></div>
+                            <div class="common-pill" pill-type="mini" pill-color="trns"><i class="ti ti-users-group"></i><span>빈 자리 ${m.getClsemptycnt()}</span></div>
+                            ${distance}
+                        </div>
+                        <div class="commonEvent-tag-hyperlink common-flexCenterSm common-colorSide common-fonts08" hyperlink="${Navigation.Page.F00Class000Detail}" hyperlink-viewmode="page" ${m.getPk()}><span>상세보기·참가</span><i class="ti ti-chevron-right"></i></div>
+                    `;
+                    html += m.makeCls(info);
+                }
+                return html;
+            },
+
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            try
+            {
+                UMRC.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UMRC.close(true);
+            }
+        });
+    </script>
+</ons-page>

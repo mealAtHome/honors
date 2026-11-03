@@ -46,6 +46,8 @@ Navigation.getApiUrlByFuncName = function(funcName="")
         /* Addrcode */                  case "Api.Addrcode.select"                                  : url = serverHost + "/src/data/address/selectAddrcode.php"; break;
         /* GrpIntro */                  case "Api.GrpIntro.select"                                  : url = serverHost + "/src/data/grpIntro/selectGrpIntro.php"; break;
         /* GrpIntro */                  case "Api.GrpIntro.update"                                  : url = serverHost + "/src/data/grpIntro/updateGrpIntro.php"; break;
+        /* GrpJoinreq */                case "Api.GrpJoinreq.select"                                : url = serverHost + "/src/data/grpJoinreq/selectGrpJoinreq.php"; break;
+        /* GrpJoinreq */                case "Api.GrpJoinreq.update"                                : url = serverHost + "/src/data/grpJoinreq/updateGrpJoinreq.php"; break;
         /* UserAddr */                  case "Api.UserAddr.select"                                  : url = serverHost + "/src/data/userAddr/selectUserAddr.php"; break;
         /* UserAddr */                  case "Api.UserAddr.update"                                  : url = serverHost + "/src/data/userAddr/updateUserAddr.php"; break;
         /* Grpmtaga */                  case "Api.Grpmtaga.select"                                  : url = serverHost + "/src/data/grpmtaga/selectGrpmtaga.php"; break;
@@ -77,6 +79,7 @@ Navigation.Page =
     /* A00-user */          A13UserMainCls : "UMCL",
     /* A00-user */          A14UserMainSettle : "UMST",
     /* A00-user */          A15UserMainManage : "UMMG",
+    /* A00-user */          A16UserMercList : "UMRC",
     /* A00-user */          A81UserBankacctList : "UBKL",
     /* A00-user */          A82UserBankacctUpdate : "UBKU",
     /* A10-userManage */    A1011ManagePhonePrivacy : "UMPP",
@@ -95,6 +98,7 @@ Navigation.Page =
     /* B00-manager */       B86ManagerUpdateBacknumberlength : "MUBL",
     /* B00-manager */       B87ManagerUpdateBasecamp : "MUBC",
     /* B00-manager */       B88ManagerUpdateGrpIntro : "MUGI",
+    /* B00-manager */       B02ManagerGrpType : "MGTP",
     /* B10-grpfnc */        B1000GrpFinanceHome : "GFHM",
     /* B10-grpfnc */        B1010GrpFinanceCapitalList : "GFCL",
     /* B10-grpfnc */        B1011GrpFinanceCapitalUpdate : "GFCU",
@@ -106,6 +110,7 @@ Navigation.Page =
     /* B10-grpfnc */        B1041GrpFinanceLossUpdate : "GFLU",
     /* B70-grpm */          B71GrpMemberDetail : "GMDT",
     /* B70-grpm */          B72GrpMemberMergeTemp : "GMMT",
+    /* B00-manager */       B73GrpJoinreqList : "GMJR",
     /* B70-grpm */          B72GrpMemberTagList : "GMTL",
     /* B70-grpm */          B75GrpMemberTagUpdate : "GMTU",
     /* B70-grpm */          B76GrpMemberTagBulk : "GMTB",
@@ -154,6 +159,7 @@ Navigation.getURL = function(str)
         /* A00-user */          case Navigation.Page.A13UserMainCls                                : url = `${host}/app/A00-user/A13-UserMainCls.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A14UserMainSettle                             : url = `${host}/app/A00-user/A14-UserMainSettle.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A15UserMainManage                             : url = `${host}/app/A00-user/A15-UserMainManage.html?${scriptVersion}`; break;
+        /* A00-user */          case Navigation.Page.A16UserMercList                               : url = `${host}/app/A00-user/A16-UserMercList.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A81UserBankacctList                           : url = `${host}/app/A00-user/A81-UserBankacctList.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate                         : url = `${host}/app/A00-user/A82-UserBankacctUpdate.html?${scriptVersion}`; break;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy                       : url = `${host}/app/A10-userManage/A1011ManagePhonePrivacy.html?${scriptVersion}`; break;
@@ -167,6 +173,7 @@ Navigation.getURL = function(str)
         /* B00-manager */       case Navigation.Page.B14ManagerMainSettle                          : url = `${host}/app/B00-manager/B14-ManagerMainSettle.html?${scriptVersion}`; break;
         /* B00-manager */       case Navigation.Page.B71GrpMemberDetail                            : url = `${host}/app/B00-manager/B71-GrpMemberDetail.html?${scriptVersion}`; break;
         /* B00-manager */       case Navigation.Page.B72GrpMemberMergeTemp                         : url = `${host}/app/B00-manager/B72-GrpMemberMergeTemp.html?${scriptVersion}`; break;
+        /* B00-manager */       case Navigation.Page.B73GrpJoinreqList                             : url = `${host}/app/B00-manager/B73-GrpJoinreqList.html?${scriptVersion}`; break;
         /* B00-manager */       case Navigation.Page.B80GrpManageHome                              : url = `${host}/app/B00-manager/B80GrpManageHome.html?${scriptVersion}`; break;
         /* B00-manager */       case Navigation.Page.B81ManagerBankacctList                        : url = `${host}/app/B00-manager/B81-ManagerBankacctList.html?${scriptVersion}`; break;
         /* B00-manager */       case Navigation.Page.B82ManagerBankacctUpdate                      : url = `${host}/app/B00-manager/B82-ManagerBankacctUpdate.html?${scriptVersion}`; break;
@@ -174,6 +181,7 @@ Navigation.getURL = function(str)
         /* B00-manager */       case Navigation.Page.B86ManagerUpdateBacknumberlength              : url = `${host}/app/B00-manager/B86ManagerUpdateBacknumberlength.html?${scriptVersion}`; break;
         /* B00-manager */       case Navigation.Page.B87ManagerUpdateBasecamp                      : url = `${host}/app/B00-manager/B87ManagerUpdateBasecamp.html?${scriptVersion}`; break;
         /* B00-manager */       case Navigation.Page.B88ManagerUpdateGrpIntro                      : url = `${host}/app/B00-manager/B88ManagerUpdateGrpIntro.html?${scriptVersion}`; break;
+        /* B00-manager */       case Navigation.Page.B02ManagerGrpType                             : url = `${host}/app/B00-manager/B02-ManagerGrpType.html?${scriptVersion}`; break;
         /* B10-grpfnc */        case Navigation.Page.B1000GrpFinanceHome                           : url = `${host}/app/B10-grpfnc/B1000GrpFinanceHome.html?${scriptVersion}`; break;
         /* B10-grpfnc */        case Navigation.Page.B1010GrpFinanceCapitalList                    : url = `${host}/app/B10-grpfnc/B1010GrpFinanceCapitalList.html?${scriptVersion}`; break;
         /* B10-grpfnc */        case Navigation.Page.B1011GrpFinanceCapitalUpdate                  : url = `${host}/app/B10-grpfnc/B1011GrpFinanceCapitalUpdate.html?${scriptVersion}`; break;
@@ -230,6 +238,7 @@ Navigation.getData = function(code)
         /* A00-user */          case Navigation.Page.A13UserMainCls : return data = UMCL.Data;
         /* A00-user */          case Navigation.Page.A14UserMainSettle : return data = UMST.Data;
         /* A00-user */          case Navigation.Page.A15UserMainManage : return data = UMMG.Data;
+        /* A00-user */          case Navigation.Page.A16UserMercList : return data = UMRC.Data;
         /* A00-user */          case Navigation.Page.A81UserBankacctList : return data = UBKL.Data;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate : return data = UBKU.Data;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy : return data = UMPP.Data;
@@ -248,6 +257,7 @@ Navigation.getData = function(code)
         /* B00-manager */       case Navigation.Page.B86ManagerUpdateBacknumberlength : return data = MUBL.Data;
         /* B00-manager */       case Navigation.Page.B87ManagerUpdateBasecamp : return data = MUBC.Data;
         /* B00-manager */       case Navigation.Page.B88ManagerUpdateGrpIntro : return data = MUGI.Data;
+        /* B00-manager */       case Navigation.Page.B02ManagerGrpType : return data = MGTP.Data;
         /* B10-grpfnc */        case Navigation.Page.B1000GrpFinanceHome : return data = GFHM.Data;
         /* B10-grpfnc */        case Navigation.Page.B1010GrpFinanceCapitalList : return data = GFCL.Data;
         /* B10-grpfnc */        case Navigation.Page.B1011GrpFinanceCapitalUpdate : return data = GFCU.Data;
@@ -259,6 +269,7 @@ Navigation.getData = function(code)
         /* B10-grpfnc */        case Navigation.Page.B1041GrpFinanceLossUpdate : return data = GFLU.Data;
         /* B70-grpm */          case Navigation.Page.B71GrpMemberDetail : return data = GMDT.Data;
         /* B70-grpm */          case Navigation.Page.B72GrpMemberMergeTemp : return data = GMMT.Data;
+        /* B00-manager */       case Navigation.Page.B73GrpJoinreqList : return data = GMJR.Data;
         /* B70-grpm */          case Navigation.Page.B72GrpMemberTagList : return data = GMTL.Data;
         /* B70-grpm */          case Navigation.Page.B75GrpMemberTagUpdate : return data = GMTU.Data;
         /* B70-grpm */          case Navigation.Page.B76GrpMemberTagBulk : return data = GMTB.Data;
@@ -342,6 +353,7 @@ Navigation.executeShow = function()
         /* A00-user */          case Navigation.Page.A13UserMainCls : UMCL.show(); break;
         /* A00-user */          case Navigation.Page.A14UserMainSettle : UMST.show(); break;
         /* A00-user */          case Navigation.Page.A15UserMainManage : UMMG.show(); break;
+        /* A00-user */          case Navigation.Page.A16UserMercList : UMRC.show(); break;
         /* A00-user */          case Navigation.Page.A81UserBankacctList : UBKL.show(); break;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate : UBKU.show(); break;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy : UMPP.show(); break;
@@ -360,6 +372,7 @@ Navigation.executeShow = function()
         /* B00-manager */       case Navigation.Page.B86ManagerUpdateBacknumberlength : MUBL.show(); break;
         /* B00-manager */       case Navigation.Page.B87ManagerUpdateBasecamp : MUBC.show(); break;
         /* B00-manager */       case Navigation.Page.B88ManagerUpdateGrpIntro : MUGI.show(); break;
+        /* B00-manager */       case Navigation.Page.B02ManagerGrpType : MGTP.show(); break;
         /* B10-grpfnc */        case Navigation.Page.B1000GrpFinanceHome : GFHM.show(); break;
         /* B10-grpfnc */        case Navigation.Page.B1010GrpFinanceCapitalList : GFCL.show(); break;
         /* B10-grpfnc */        case Navigation.Page.B1011GrpFinanceCapitalUpdate : GFCU.show(); break;
@@ -371,6 +384,7 @@ Navigation.executeShow = function()
         /* B10-grpfnc */        case Navigation.Page.B1041GrpFinanceLossUpdate : GFLU.show(); break;
         /* B70-grpm */          case Navigation.Page.B71GrpMemberDetail : GMDT.show(); break;
         /* B70-grpm */          case Navigation.Page.B72GrpMemberMergeTemp : GMMT.show(); break;
+        /* B00-manager */       case Navigation.Page.B73GrpJoinreqList : GMJR.show(); break;
         /* B70-grpm */          case Navigation.Page.B72GrpMemberTagList : GMTL.show(); break;
         /* B70-grpm */          case Navigation.Page.B75GrpMemberTagUpdate : GMTU.show(); break;
         /* B70-grpm */          case Navigation.Page.B76GrpMemberTagBulk : GMTB.show(); break;
@@ -431,6 +445,7 @@ Navigation.executeMoveBack = function()
         /* A00-user */          case Navigation.Page.A13UserMainCls : UMCL.close(true); break;
         /* A00-user */          case Navigation.Page.A14UserMainSettle : UMST.close(true); break;
         /* A00-user */          case Navigation.Page.A15UserMainManage : UMMG.close(true); break;
+        /* A00-user */          case Navigation.Page.A16UserMercList : UMRC.close(true); break;
         /* A00-user */          case Navigation.Page.A81UserBankacctList : UBKL.close(true); break;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate : UBKU.close(true); break;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy : UMPP.close(true); break;
@@ -449,6 +464,7 @@ Navigation.executeMoveBack = function()
         /* B00-manager */       case Navigation.Page.B86ManagerUpdateBacknumberlength : MUBL.close(true); break;
         /* B00-manager */       case Navigation.Page.B87ManagerUpdateBasecamp : MUBC.close(true); break;
         /* B00-manager */       case Navigation.Page.B88ManagerUpdateGrpIntro : MUGI.close(true); break;
+        /* B00-manager */       case Navigation.Page.B02ManagerGrpType : MGTP.close(true); break;
         /* B10-grpfnc */        case Navigation.Page.B1000GrpFinanceHome : GFHM.close(true); break;
         /* B10-grpfnc */        case Navigation.Page.B1010GrpFinanceCapitalList : GFCL.close(true); break;
         /* B10-grpfnc */        case Navigation.Page.B1011GrpFinanceCapitalUpdate : GFCU.close(true); break;
@@ -460,6 +476,7 @@ Navigation.executeMoveBack = function()
         /* B10-grpfnc */        case Navigation.Page.B1041GrpFinanceLossUpdate : GFLU.close(true); break;
         /* B70-grpm */          case Navigation.Page.B71GrpMemberDetail : GMDT.close(true); break;
         /* B70-grpm */          case Navigation.Page.B72GrpMemberMergeTemp : GMMT.close(true); break;
+        /* B00-manager */       case Navigation.Page.B73GrpJoinreqList : GMJR.close(true); break;
         /* B70-grpm */          case Navigation.Page.B72GrpMemberTagList : GMTL.close(true); break;
         /* B70-grpm */          case Navigation.Page.B75GrpMemberTagUpdate : GMTU.close(true); break;
         /* B70-grpm */          case Navigation.Page.B76GrpMemberTagBulk : GMTB.close(true); break;

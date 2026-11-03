@@ -8,6 +8,7 @@ GGC.GrpMember =
             case GGF.GrpMember.Grpmtype.MNG    : rslt = "매니저"; break;
             case GGF.GrpMember.Grpmtype.MNGSUB : rslt = "부매니저"; break;
             case GGF.GrpMember.Grpmtype.MEMBER : rslt = "멤버"; break;
+            case GGF.GrpMember.Grpmtype.GUEST  : rslt = "용병"; break;
         }
         return rslt;
     },

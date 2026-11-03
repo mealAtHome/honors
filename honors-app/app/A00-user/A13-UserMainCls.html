@@ -15,6 +15,9 @@
                 </tr>
             </tbody>
         </table>
+        <div style="text-align:right; margin-top:0.5em;">
+            <button id="UMCL-btn-findMerc" class="common-btn-outer common-fonts09" style="padding:0.3em 0.9em;"><i class="ti ti-search"></i>&nbsp;용병 모집 찾기</button>
+        </div>
     </div>
     <hr class="common-hr-paddingLR"/>
 
@@ -73,6 +76,7 @@
             /* events */
             /* ========================= */
             $("#UMCL-btn-addCls").click(function() { Navigation.moveFrontPage(Navigation.Page.F10ClassUpdate000Default, { }); });
+            $("#UMCL-btn-findMerc").click(function() { Navigation.moveFrontPage(Navigation.Page.A16UserMercList, { }); });
 
             /* =============== */
             /* tab click event */

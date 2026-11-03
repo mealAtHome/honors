@@ -1,0 +1,111 @@
+<ons-page id="GMJR">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="GMJR.close(true);"></gg-backbtn></div>
+        <div><span>가입신청</span></div>
+    </div>
+
+    <div class="common-div-cushion common-fonts09 common-colorCmmt">승인하면 멤버가 되고, 거절하면 신청자가 다시 신청할 수 있습니다.</div>
+    <div id="GMJR-div-list" class="common-div-cushion"></div>
+
+    <script>
+        /*
+            가입신청 관리 (모임 관리자)
+            - 승인 대기 중인 가입신청 목록, 승인(멤버 등록) / 거절
+        */
+        var GMJR =
+        {
+            code : "GMJR",
+            Data: {},
+
+            show()
+            {
+                if(Common.isEmpty(GMJR.Data.grpno)) { Common.toast("잘못된 접근입니다."); GMJR.close(true); return; }
+
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrpJoinreqs = Api.GrpJoinreq.selectWaitByGrpnoForMng(GMJR.Data.grpno, GGF.none, GGF.toast);
+                    $("#GMJR-div-list").html(GMJR.makeList(mGrpJoinreqs.getModels()));
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            makeList(models)
+            {
+                if(models.length == 0)
+                    return `<div class="common-div-card common-colorCmmt" style="text-align:center;">승인을 기다리는 가입신청이 없습니다.</div>`;
+
+                let html = "";
+                for(let i in models)
+                {
+                    let m = models[i];
+                    let birth = m.getBirthyear() ? `${m.getBirthyear()}년생` : "";
+                    html +=
+                    `
+                        <div class="common-div-card">
+                            <div class="common-flexParentLR">
+                                <div>
+                                    <span class="common-strong">${GGC.Common.escapeHtml(m.getUsername())}</span>
+                                    <span class="common-fonts08 common-colorCmmt">${birth} ${GGC.User.hascarflg(m.getHascarflg())}</span>
+                                </div>
+                                <div class="common-fonts08 common-colorCmmt">${GGdate.toYMDDHI(new Date(m.getRegdt()))}</div>
+                            </div>
+                            <div class="common-fonts09" style="margin-top:0.6em; padding:0.6em 0.8em; border-radius:0.4em; background-color:rgba(var(--colorMainRgb), 0.06);">
+                                ${m.getReqmsg() ? GGC.Common.escapeHtml(m.getReqmsg()) : `<span class="common-colorCmmt">가입인사 없음</span>`}
+                            </div>
+                            <div style="display:flex; gap:0.5em; justify-content:flex-end; margin-top:0.8em;">
+                                <button class="GMJR-btn-reject common-btn-outer" btn-type="cancel" style="min-width:5em; padding:0.4em 1em;" ${m.getPk()}>거절</button>
+                                <button class="GMJR-btn-approve common-btn-inner" style="min-width:5em; padding:0.4em 1em;" ${m.getPk()}>승인</button>
+                            </div>
+                        </div>
+                    `;
+                }
+                return html;
+            },
+
+            process(isApprove, userno)
+            {
+                let process = function()
+                {
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        let mApiResponse = isApprove
+                            ? Api.GrpJoinreq.approveForMng(GMJR.Data.grpno, userno, GGF.toast, GGF.toast)
+                            : Api.GrpJoinreq.rejectForMng(GMJR.Data.grpno, userno, GGF.toast, GGF.toast);
+                        Common.hideProgress();
+                        if(mApiResponse.isSuccess())
+                            Navigation.executeShow();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2(isApprove ? "가입을 승인하시겠습니까? 멤버로 등록됩니다." : "가입신청을 거절하시겠습니까?", process);
+            },
+
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            $("#GMJR-div-list").on("click", ".GMJR-btn-approve", function() { GMJR.process(true,  $(this).attr("userno")); });
+            $("#GMJR-div-list").on("click", ".GMJR-btn-reject",  function() { GMJR.process(false, $(this).attr("userno")); });
+
+            try
+            {
+                GMJR.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                GMJR.close(true);
+            }
+        });
+    </script>
+</ons-page>

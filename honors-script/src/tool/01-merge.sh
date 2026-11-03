@@ -61,6 +61,7 @@ echo -e "\n" >> $appPath; cat ../script/api/api-table/api-clssettlehist.js >> $a
 echo -e "\n" >> $appPath; cat ../script/api/api-table/api-clssettletmp.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/api/api-table/api-grp.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/api/api-table/api-grpIntro.js >> $appPath
+echo -e "\n" >> $appPath; cat ../script/api/api-table/api-grpJoinreq.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/api/api-table/api-userAddr.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/api/api-table/Api.GrpfncLoss.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/api/api-table/api-GrpfncPurchase.js >> $appPath
@@ -96,6 +97,7 @@ echo -e "\n" >> $appPath; cat ../script/model/model-table/MClssettlehist.js >> $
 echo -e "\n" >> $appPath; cat ../script/model/model-table/MClssettletmp.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/model/model-table/MGrp.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/model/model-table/MGrpIntro.js >> $appPath
+echo -e "\n" >> $appPath; cat ../script/model/model-table/MGrpJoinreq.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/model/model-table/MUserAddr.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/model/model-table/MGrpfncLoss.js >> $appPath
 echo -e "\n" >> $appPath; cat ../script/model/model-table/MGrpfncPurchase.js >> $appPath

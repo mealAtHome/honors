@@ -26,6 +26,8 @@ Api.Cls =
     selectForAllByClsstatusEnd          (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusEnd"       , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
     selectForAllByClsstatusCancel       (grpno, pagenum   , noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectForAllByClsstatusCancel"    , GRPNO: grpno, PAGENUM: pagenum, }, noticeOK, noticeFail); },
 
+    selectOpenForMercenaryForUsr        (                   noticeOK, noticeFail) { return Api.Cls.select({OPTION:"selectOpenForMercenaryForUsr"     , }, noticeOK, noticeFail); },
+
     /* ========================= */
     /* insert */
     /* ========================= */
@@ -45,6 +47,8 @@ Api.Cls =
         , clsapplyclosedt
         , clsusernoadm
         , clsusernosub
+        , clsopenflg
+        , clsmercmax
         , noticeOK
         , noticeFail
     )
@@ -65,7 +69,9 @@ Api.Cls =
             CLSAPPLYSTARTDT     : clsapplystartdt,
             CLSAPPLYCLOSEDT     : clsapplyclosedt,
             CLSUSERNOADM        : clsusernoadm,
-            CLSUSERNOSUB        : clsusernosub
+            CLSUSERNOSUB        : clsusernosub,
+            CLSOPENFLG          : clsopenflg,
+            CLSMERCMAX          : clsmercmax,
         };
         return Api.Cls.update(ajax, noticeOK, noticeFail);
     },

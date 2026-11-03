@@ -84,6 +84,7 @@
                     </td>
                 </tr>
                 <tr><td><span>참가비</span></td><td><span id="CLSD-span-clsapplybill"></span></td></tr>
+                <tr id="CLSD-tr-clsopen" style="display:none;"><td><span>용병</span></td><td><span id="CLSD-span-clsopen" class="common-pill" pill-type="mini" pill-color="info"></span></td></tr>
                 <tr><td><span>상세</span></td><td><span id="CLSD-span-clscontent"></span></td></tr>
                 <tr>
                     <td>담당자</td>
@@ -277,6 +278,15 @@
                         /* is manager */
                         CLSD.isManager = GGstorage.Prj.isManagerOfGrp(grpno);
                         CLSD.mCls = mCls;
+
+                        /* 멤버 여부 (게스트=용병은 멤버 아님). 멤버가 아니면 용병 모집 일정에만 참가할 수 있다 */
+                        let mGrpMemberMe = Api.GrpMember.selectMeByGrpno(grpno, GGF.none, GGF.none);
+                        CLSD.isMember = mGrpMemberMe != null && mGrpMemberMe.getGrpmtype() != GGF.GrpMember.Grpmtype.GUEST;
+                        if(mCls.isOpenToMercenary())
+                        {
+                            $("#CLSD-span-clsopen").text(mCls.getClsmercmax() == null ? "용병 모집 중 (인원 제한 없음)" : `용병 ${mCls.getClsmercmax()}명 모집 중`);
+                            $("#CLSD-tr-clsopen").show();
+                        }
 
                         /* 포지션이동 : 일정담당자(담당자1/담당자2) 여부 (실제 열 표시여부는 clslineupb 조회 후 결정) */
                         CLSD.isClsAdmin = mCls.isClsAdmin(CLSD.Storage.myUserno);
@@ -506,7 +516,7 @@
                 /* apply */
                 /* ----- */
                 /* 모집기간 밖에서는 일반 멤버에게 참가/취소 버튼을 보여주지 않는다. (서버도 매니저만 모집기간 제한을 받지 않음) */
-                let canApply = CLSD.isManager || CLSD.mCls.isAppliable();
+                let canApply = CLSD.isManager || (CLSD.mCls.isAppliable() && (CLSD.isMember || CLSD.mCls.isOpenToMercenary()));
                 let applyHtml = "";
                 if(model.hasApplyer())
                 {

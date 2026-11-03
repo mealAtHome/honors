@@ -54,7 +54,7 @@ class GrpMemberBO extends _CommonBO
     const FIELD__USERNO         = "userno";        /* (pk) char(30) */
     const FIELD__USERADDRIDX    = "useraddridx";   /* (  ) int */
     const FIELD__GRPMBACKNUM    = "grpmbacknum";   /* (  ) char(5) */
-    const FIELD__GRPMTYPE       = "grpmtype";      /* (  ) enum('mng','mngsub','member') */
+    const FIELD__GRPMTYPE       = "grpmtype";      /* (  ) enum('mng','mngsub','member','guest') */
     const FIELD__GRPMPOSITION   = "grpmposition";  /* (  ) char(20) */
     const FIELD__GRPMFINAUTH    = "grpmfinauth";   /* (  ) enum('y','n') */
     const FIELD__GRPMSTATUS     = "grpmstatus";    /* (  ) enum('active','delete') */
@@ -72,6 +72,7 @@ class GrpMemberBO extends _CommonBO
     const GRPMTYPE__MNG         = "mng"; /* manager */
     const GRPMTYPE__MNGSUB      = "mngsub"; /* sub manager */
     const GRPMTYPE__MEMBER      = "member"; /* member */
+    const GRPMTYPE__GUEST       = "guest"; /* guest : 용병으로 참가한 비멤버 */
     const GRPMSTATUS__ACTIVE    = "active"; /* active */
     const GRPMSTATUS__DELETE    = "delete"; /* delete */
 
@@ -81,6 +82,7 @@ class GrpMemberBO extends _CommonBO
         $arr['grpmtypeMng']    = self::GRPMTYPE__MNG; /* 멤버타입 : 관리자 */
         $arr['grpmtypeMngsub'] = self::GRPMTYPE__MNGSUB; /* 멤버타입 : 서브 관리자 */
         $arr['grpmtypeMember'] = self::GRPMTYPE__MEMBER; /* 멤버타입 : 일반 멤버 */
+        $arr['grpmtypeGuest']  = self::GRPMTYPE__GUEST; /* 멤버타입 : 게스트(용병) */
         $arr['grpmstatusActive'] = self::GRPMSTATUS__ACTIVE; /* 멤버상태 : 활성 */
         $arr['grpmstatusDelete'] = self::GRPMSTATUS__DELETE; /* 멤버상태 : 삭제 */
         return $arr;
@@ -342,11 +344,13 @@ class GrpMemberBO extends _CommonBO
     public function updatePointForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, $RELCLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertTempForInside($USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function deleteRecordByPkForInside($GRPNO, $USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function joinForInside($GRPNO, $USERNO, $GRPMTYPE) { return $this->update(get_defined_vars(), __FUNCTION__); } /* 모임생성·가입승인·용병참가 공통 */
 
     /* ========================= */
     /* update */
     /* ========================= */
     /* const insert = "insert"; */
+    const joinForInside = "joinForInside";
     const updateToDeleteForMng = "updateToDeleteForMng";
     const updatePointForInside = "updatePointForInside";
     const updateInjectPointForMng = "updateInjectPointForMng";
@@ -414,6 +418,33 @@ class GrpMemberBO extends _CommonBO
 
                 /* update point */
                 $this->updatePointForInside($GRPNO, $USERNO, $POINT, $POINTMEMO, null);
+                break;
+            }
+            case self::joinForInside:
+            {
+                /*
+                    멤버 등록. 이미 행이 있으면 아래처럼 처리한다.
+                    - 탈퇴(delete) 상태 → 다시 활성화하고 타입을 새로 지정
+                    - 게스트 → 멤버 이상으로 올라가는 경우만 타입 변경 (멤버가 게스트로 내려가지 않음)
+                */
+                $row = $this->getByPk($GRPNO, $USERNO);
+                if($row == null)
+                {
+                    $query = "insert into grp_member (grpno, userno, grpmtype, grpmfinauth, grpmstatus, regidt) values ('$GRPNO', '$USERNO', '$GRPMTYPE', '".($GRPMTYPE == self::GRPMTYPE__MNG ? "y" : "n")."', '$grpmstatusActive', now())";
+                    GGsql::exeQuery($query);
+                    $grpmPrivacyBO->insertDefaultForInside($GRPNO, $USERNO);
+                }
+                else if(Common::getField($row, self::FIELD__GRPMSTATUS) == self::GRPMSTATUS__DELETE)
+                {
+                    $query = "update grp_member set grpmtype = '$GRPMTYPE', grpmstatus = '$grpmstatusActive', deletedt = null, modidt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
+                    GGsql::exeQuery($query);
+                }
+                else if(Common::getField($row, self::FIELD__GRPMTYPE) == self::GRPMTYPE__GUEST && $GRPMTYPE != self::GRPMTYPE__GUEST)
+                {
+                    $query = "update grp_member set grpmtype = '$GRPMTYPE', modidt = now() where grpno = '$GRPNO' and userno = '$USERNO'";
+                    GGsql::exeQuery($query);
+                }
+                $grpBO->recalcGrpmcntForInside($GRPNO);
                 break;
             }
             case self::insertTempForInside:

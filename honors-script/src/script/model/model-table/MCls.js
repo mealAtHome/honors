@@ -15,12 +15,18 @@ class MCls
         /* data */      this.clsbillapplyunit       = GGC.Common.char(dat.clsbillapplyunit);
         /* data */      this.clsapplystartdt        = GGC.Common.datetime(dat.clsapplystartdt);
         /* data */      this.clsapplyclosedt        = GGC.Common.datetime(dat.clsapplyclosedt);
+        /* data */      this.clsopenflg             = GGC.Common.enum(dat.clsopenflg);
+        /* data */      this.clsmercmax             = Common.isEmpty(dat.clsmercmax) ? null : GGC.Common.int(dat.clsmercmax);
         /* data */      this.clssettleflg           = GGC.Common.enum(dat.clssettleflg);
         /* data */      this.clsmodidt              = GGC.Common.datetime(dat.clsmodidt);
         /* data */      this.clsregdt               = GGC.Common.datetime(dat.clsregdt);
         /* data */      this.grpmanagerid           = GGC.Common.char(dat.grpmanagerid);
         /* data */      this.grpimg                 = GGC.Common.char(dat.grpimg);
         /* data */      this.grpname                = GGC.Common.char(dat.grpname);
+        /* data */      this.grptype                = GGC.Common.enum(dat.grptype);                                              /* 용병 모집 검색 */
+        /* data */      this.grpdistancekm          = Common.isEmpty(dat.grpdistancekm) ? null : Number(dat.grpdistancekm);      /* 용병 모집 검색 */
+        /* data */      this.clsemptycnt            = GGC.Common.int(dat.clsemptycnt);                                           /* 용병 모집 검색 : 빈 자리 */
+        /* data */      this.clsmercapplied         = GGC.Common.int(dat.clsmercapplied);                                        /* 용병 모집 검색 : 용병 신청 수 */
         /* data */      this.clsusernoregname       = GGC.Common.char(dat.clsusernoregname);
         /* data */      this.clsusernoadmname       = GGC.Common.char(dat.clsusernoadmname);
         /* data */      this.clsusernosubname       = GGC.Common.char(dat.clsusernosubname);
@@ -51,12 +57,20 @@ class MCls
     /* data */      getClsbillapplyunit() { return this.clsbillapplyunit; }
     /* data */      getClsapplystartdt() { return this.clsapplystartdt; }
     /* data */      getClsapplyclosedt() { return this.clsapplyclosedt; }
+    /* data */      getClsopenflg() { return this.clsopenflg; }
+    /* data */      getClsmercmax() { return this.clsmercmax; }
+                    isOpenToMercenary() { return this.clsopenflg === GGF.Y; } /* 외부(용병) 참가 허용 */
     /* data */      getClssettleflg() { return this.clssettleflg; }
     /* data */      getClsmodidt() { return this.clsmodidt; }
     /* data */      getClsregdt() { return this.clsregdt; }
     /* data */      getGrpmanagerid() { return this.grpmanagerid; }
     /* data */      getGrpimg() { return this.grpimg; }
     /* data */      getGrpname() { return this.grpname; }
+    /* data */      getGrptype() { return this.grptype; }
+    /* data */      getGrpdistancekm() { return this.grpdistancekm; }
+    /* data */      getClsemptycnt() { return this.clsemptycnt; }
+    /* data */      getClsmercapplied() { return this.clsmercapplied; }
+                    isMercenaryFull() { return this.clsmercmax != null && this.clsmercapplied >= this.clsmercmax; }
     /* data */      getClsusernoregname() { return this.clsusernoregname; }
     /* data */      getClsusernoadmname() { return this.clsusernoadmname; }
     /* data */      getClsusernosubname() { return this.clsusernosubname; }

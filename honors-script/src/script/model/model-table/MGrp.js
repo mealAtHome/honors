@@ -6,7 +6,10 @@ class MGrp
         /* data */    this.grpmanager           = GGC.Common.char(dat.grpmanager);
         /* data */    this.grpimg               = GGC.Common.char(dat.grpimg);
         /* data */    this.grpname              = GGC.Common.char(dat.grpname);
-        /* data */    this.grpintro             = GGC.Common.char(dat.grpintro);
+        /* data */    this.grptype              = GGC.Common.enum(dat.grptype);
+        /* data */    this.grpjoinpolicy        = GGC.Common.enum(dat.grpjoinpolicy);
+        /* data */    this.grpclsopen           = GGC.Common.enum(dat.grpclsopen);
+        /* data */    this.grpintro            = GGC.Common.char(dat.grpintro);
         /* data */    this.backnumberlength     = GGC.Common.int(dat.backnumberlength);
         /* data */    this.grpbaseaddrcode      = GGC.Common.bigint(dat.grpbaseaddrcode);
         /* data */    this.grpbaselat           = GGC.Common.double(dat.grpbaselat);
@@ -43,6 +46,10 @@ class MGrp
     getGrpmanager() { return this.grpmanager; }
     getGrpimg() { return this.grpimg; }
     getGrpname() { return this.grpname; }
+    getGrptype() { return this.grptype; }
+    getGrpjoinpolicy() { return this.grpjoinpolicy; }
+    getGrpclsopen() { return this.grpclsopen; }
+    getGrptypeCvrt() { return GGC.Grp.grptypeCvrt(this.grptype); }
     getGrpintro() { return this.grpintro; }
     getBacknumberlength() { return this.backnumberlength; }
     getGrpbaseaddrcode() { return this.grpbaseaddrcode; }

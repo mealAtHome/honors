@@ -12,6 +12,8 @@ Api.Grp =
     /* update */
     /* ========================= */
     updateBacknumberlengthForMng(grpno, backnumberlength, noticeOK, noticeFail) { return Api.Grp.update({ OPTION:"updateBacknumberlengthForMng", GRPNO:grpno, BACKNUMBERLENGTH:backnumberlength, }, noticeOK, noticeFail); },
+    insertForUsr(grpname, grptype, grpjoinpolicy, grpclsopen, noticeOK, noticeFail) { return Api.Grp.update({ OPTION:"insertForUsr", GRPNAME:grpname, GRPTYPE:grptype, GRPJOINPOLICY:grpjoinpolicy, GRPCLSOPEN:grpclsopen, }, noticeOK, noticeFail); },
+    updateTypeForMng(grpno, grptype, grpjoinpolicy, grpclsopen, noticeOK, noticeFail) { return Api.Grp.update({ OPTION:"updateTypeForMng", GRPNO:grpno, GRPTYPE:grptype, GRPJOINPOLICY:grpjoinpolicy, GRPCLSOPEN:grpclsopen, }, noticeOK, noticeFail); },
     updateBasecampForMng(grpno, grpbaseaddrcode, grpbaselat, grpbaselng, noticeOK, noticeFail) { return Api.Grp.update({ OPTION:"updateBasecampForMng", GRPNO:grpno, GRPBASEADDRCODE:grpbaseaddrcode, GRPBASELAT:grpbaselat, GRPBASELNG:grpbaselng, }, noticeOK, noticeFail); },
 
     /* ========================= */

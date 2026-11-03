@@ -224,6 +224,24 @@
                 </div> -->
             </div>
 
+            <!-- 용병 모집 (외부 참가) -->
+            <div class="common-div-formField">
+                <span>용병 모집</span>
+                <span>[선택] 모임 멤버가 아니어도 이 일정에 참가 신청할 수 있게 합니다.</span>
+                <div class="common-div-cushionUD" style="display:flex; gap:0.5em;">
+                    <button class="CUDE-btn-clsopenflg commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clsopenflg" val="n" tab="tab" style="min-width:6em;">멤버만</button>
+                    <button class="CUDE-btn-clsopenflg commonEvent-btn-radio common-btn-radio" radio_name="CUDE-btn-clsopenflg" val="y" tab=""    style="min-width:6em;">용병 모집</button>
+                </div>
+                <div id="CUDE-div-clsmercmax" style="display:none;">
+                    <div style="display:flex; align-items:center; gap:0.5em;">
+                        <span>모집 인원</span>
+                        <input id="CUDE-input-clsmercmax" type="number" class="common-input-field" style="width:3.5em; flex:none; text-align:center;" placeholder="0" min="1">
+                        <span>명</span>
+                    </div>
+                    <span class="common-block common-fonts09 common-colorCmmt">비워두면 인원 제한 없이 받습니다.</span>
+                </div>
+            </div>
+
             <!-- 다음으로 -->
             <table class="common-tbl-slideformFooterBtn" tbl-type="button2">
                 <tbody>
@@ -304,6 +322,7 @@
                         <tr><th>일정장소</th><td><div id="CUDE-div-summaryClsground"></div></td></tr>
                         <tr><th>일정일시</th><td><div id="CUDE-div-summaryClsdt"></div></td></tr>
                         <tr><th>모집일시</th><td><div id="CUDE-div-summaryClsapplydt"></div></td></tr>
+                        <tr><th>용병모집</th><td><div id="CUDE-div-summaryClsopen"></div></td></tr>
                         <tr><th>일정관리자</th><td><div id="CUDE-div-summaryUsernoadm"></div></td></tr>
                     </tbody>
                 </table>
@@ -380,6 +399,13 @@
                             GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", now);
                             GGdate.toDivYearToMin("#CUDE-div-clsapplyclosedt", now);
                             CUDE.keyup();
+
+                            /* 용병 모집 : 모임의 일정 공개 기본값 */
+                            if(grpno != "")
+                            {
+                                let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.none);
+                                CUDE.setClsopenflg(mGrp != null && mGrp.getGrpclsopen() == GGF.Grp.Clsopen.PUBLIC ? GGF.Y : GGF.N);
+                            }
                             break;
                         }
                         case "update":
@@ -394,6 +420,7 @@
                             $("#CUDE-input-clsbillapplyprice").val(mCls.getClsbillapplyprice());
                             CUDE.setMngMember("#CUDE-div-usernoadm", grpno, mCls.getClsusernoadm());
                             CUDE.setMngMember("#CUDE-div-usernosub", grpno, mCls.getClsusernosub());
+                            CUDE.setClsopenflg(mCls.getClsopenflg() == GGF.Y ? GGF.Y : GGF.N, mCls.getClsmercmax());
                             GGdate.toDivYearToMin("#CUDE-div-clsstartdt", new Date(mCls.getClsstartdt()));
                             GGdate.toDivYearToMin("#CUDE-div-clsclosedt", new Date(mCls.getClsclosedt()));
                             GGdate.toDivYearToMin("#CUDE-div-clsapplystartdt", new Date(mCls.getClsapplystartdt()));
@@ -429,6 +456,15 @@
 
                     Common.hideProgress();
                 }, ajaxDelayTime);
+            },
+
+            /* 용병 모집 선택 표시 */
+            setClsopenflg(flg, mercmax=null)
+            {
+                $(".CUDE-btn-clsopenflg").attr("tab", "");
+                $(`.CUDE-btn-clsopenflg[val='${flg}']`).attr("tab", "tab");
+                $("#CUDE-div-clsmercmax").toggle(flg == GGF.Y);
+                $("#CUDE-input-clsmercmax").val(mercmax == null ? "" : mercmax);
             },
 
             /* 수정 시, 저장된 주관자(정/부)를 화면에 복구 */
@@ -504,6 +540,8 @@
                 $("#CUDE-span-clsbillapplypricePretty").html(`${unit} 당, ${bill}`);
             });
 
+            $(".CUDE-btn-clsopenflg").click(function() { $("#CUDE-div-clsmercmax").toggle($(this).attr("val") == GGF.Y); });
+
             $(".CUDE-btn-formPrev").click(function() { GGslideform.prev("#CUDE-div-slideformParent"); });
             $(".CUDE-btn-formNext").click(function()
             {
@@ -517,6 +555,10 @@
                     {
                         let grpno = $(`.CUDE-btn-chooseGrp[tab="tab"]`).attr("grpno");
                         if(Common.isEmpty(grpno)) { Common.toastError("모임을 선택해주세요."); return; }
+
+                        /* 고른 모임의 일정 공개 기본값으로 용병 모집 초기화 */
+                        let mGrp = Api.Grp.selectByPk(grpno, GGF.none, GGF.none);
+                        CUDE.setClsopenflg(mGrp != null && mGrp.getGrpclsopen() == GGF.Grp.Clsopen.PUBLIC ? GGF.Y : GGF.N);
                         break;
                     }
                     case "CUDE-div-formIntro":
@@ -600,6 +642,9 @@
                         $("#CUDE-div-summaryClsdt").html(`시작 : ${clsstartdt}<br/>종료 : ${clsclosedt}`);
                         $("#CUDE-div-summaryClsapplydt").html(`시작 : ${clsapplystartdt}<br/>종료 : ${clsapplyclosedt}`);
                         $("#CUDE-div-summaryUsernoadm").html(`정:${clsusernoadm}<br/>부:${clsusernosub}`);
+                        const openflg = $(".CUDE-btn-clsopenflg[tab='tab']").attr("val");
+                        const mercmax = $("#CUDE-input-clsmercmax").val().trim();
+                        $("#CUDE-div-summaryClsopen").text(openflg == GGF.Y ? `용병 모집 (${mercmax == "" ? "인원 제한 없음" : mercmax + "명"})` : "멤버만");
                         break;
                     }
                     case "CUDE-div-formComplete":
@@ -727,6 +772,8 @@
                         const clsapplyclosedt       = GGdate.fromDivYearToMin("#CUDE-div-clsapplyclosedt");
                         const clsusernoadm          = GGC.Common.char($("#CUDE-div-usernoadm").attr("userno"));
                         const clsusernosub          = GGC.Common.char($("#CUDE-div-usernosub").attr("userno"));
+                        const clsopenflg            = $(".CUDE-btn-clsopenflg[tab='tab']").attr("val") || GGF.N;
+                        const clsmercmax            = clsopenflg == GGF.Y ? $("#CUDE-input-clsmercmax").val().trim() : "";
 
                         let mApiResponse = Api.Cls.updateFromPage(
                             option
@@ -744,6 +791,8 @@
                             , clsapplyclosedt
                             , clsusernoadm
                             , clsusernosub
+                            , clsopenflg
+                            , clsmercmax
                             , GGF.none
                             , GGF.toast
                         );

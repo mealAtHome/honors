@@ -35,6 +35,7 @@ class GGnavi
     static public function getClzcancelBO()                                         { require_once ROOT."/src/system/bo-table/ClzcancelBO.php"; }
     static public function getGrpBO()                                               { require_once ROOT."/src/system/bo-table/GrpBO.php"; }
     static public function getGrpIntroBO()                                          { require_once ROOT."/src/system/bo-table/GrpIntroBO.php"; }
+    static public function getGrpJoinreqBO()                                        { require_once ROOT."/src/system/bo-table/GrpJoinreqBO.php"; }
     static public function getGrpfncaBO()                                           { require_once ROOT."/src/system/bo-table/GrpfncaBO.php"; }
     static public function getGrpfnclogBO()                                         { require_once ROOT."/src/system/bo-table/GrpfnclogBO.php"; }
     static public function getGrpfncLossBO()                                        { require_once ROOT."/src/system/bo-table/GrpfncLossBO.php"; }

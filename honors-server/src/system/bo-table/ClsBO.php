@@ -47,6 +47,8 @@ class ClsBO extends _CommonBO
     const FIELD__CLSNO                      = "clsno";                      /* (PK) char(14)                / NO  */
     const FIELD__CLSSTATUS                  = "clsstatus";                  /* (  ) char(30)                / NO  */
     const FIELD__CLSSETTLEFLG               = "clssettleflg";               /* (  ) char(4)                 / YES */
+    const FIELD__CLSOPENFLG                 = "clsopenflg";                 /* (  ) enum('y','n')           / NO  : 외부(용병) 참가 허용 */
+    const FIELD__CLSMERCMAX                 = "clsmercmax";                 /* (  ) int                     / YES : 용병 모집 인원 (null = 제한 없음) */
     const FIELD__CLSTITLE                   = "clstitle";                   /* (  ) char(50)                / NO  */
     const FIELD__CLSCONTENT                 = "clscontent";                 /* (  ) varchar(255)            / YES  */
     const FIELD__CLSSTARTDT                 = "clsstartdt";                 /* (  ) datetime                / NO  */
@@ -125,6 +127,7 @@ class ClsBO extends _CommonBO
     const selectForUserByClssettleflgN      = "selectForUserByClssettleflgN";       /* [user] [EXECUTOR]        : 탭검색 */
     const selectForUserByClsstatusEnd       = "selectForUserByClsstatusEnd";        /* [user] [EXECUTOR]        : 탭검색 */
     const selectForUserByClsstatusCancel    = "selectForUserByClsstatusCancel";     /* [user] [EXECUTOR]        : 탭검색 */
+    const selectOpenForMercenaryForUsr      = "selectOpenForMercenaryForUsr";       /* [user] [EXECUTOR]        : 용병 모집 중인 일정 (내 기준위치에서 가까운 순) */
     const selectForMngrByClsstatusEdit      = "selectForMngrByClsstatusEdit";       /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
     const selectForMngrByClsstatusIng       = "selectForMngrByClsstatusIng";        /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
     const selectForMngrByClssettleflgN      = "selectForMngrByClssettleflgN";       /* [mngr] [EXECUTOR, GRPNO] : 탭검색 */
@@ -160,6 +163,8 @@ class ClsBO extends _CommonBO
               t.grpno
             , t.clsno
             , t.clsstatus
+            , t.clsopenflg
+            , t.clsmercmax
             , t.clssettleflg
             , t.clstitle
             , t.clscontent
@@ -211,6 +216,10 @@ class ClsBO extends _CommonBO
             }
         }
 
+        /* 옵션별 추가 조인·정렬 (기본값) */
+        $additionalJoin = "";
+        $orderBy = "t.clsstartdt desc";
+
         /* --------------- */
         /* add column to mng */
         /* --------------- */
@@ -237,10 +246,11 @@ class ClsBO extends _CommonBO
             case self::selectApplyStartBetweenByGrpnoForInside          : { $from = "(select * from cls where grpno = '$GRPNO' and clsapplystartdt between '$LASTPROCTIMEFORMATTED' and '$THISPROCTIMEFORMATTED') t"; break; }
             case self::selectApplyCloseBetweenByGrpnoForInside          : { $from = "(select * from cls where grpno = '$GRPNO' and clsapplyclosedt between '$LASTPROCTIMEFORMATTED' and '$THISPROCTIMEFORMATTED') t"; break; }
             case self::selectClsstatusEditInImMng                       : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype in ('mng', 'mngsub')) and clsstatus = '$clsstatusEdit') t"; break; }
-            case self::selectForUserByClsstatusIng                      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusIng') t"; break; }
-            case self::selectForUserByClssettleflgN                     : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
-            case self::selectForUserByClsstatusEnd                      : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
-            case self::selectForUserByClsstatusCancel                   : { $from = "(select * from cls where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive') and clsstatus = '$clsstatusCancel') t"; break; }
+            /* 내 일정 : 멤버로 있는 모임의 일정 + 용병(게스트)으로 참가한 일정 */
+            case self::selectForUserByClsstatusIng                      : { $from = "(select * from cls where (grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype <> 'guest') or (grpno, clsno) in (select grpno, clsno from clslineupb where userno = '$EXECUTOR')) and clsstatus = '$clsstatusIng') t"; break; }
+            case self::selectForUserByClssettleflgN                     : { $from = "(select * from cls where (grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype <> 'guest') or (grpno, clsno) in (select grpno, clsno from clslineupb where userno = '$EXECUTOR')) and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
+            case self::selectForUserByClsstatusEnd                      : { $from = "(select * from cls where (grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype <> 'guest') or (grpno, clsno) in (select grpno, clsno from clslineupb where userno = '$EXECUTOR')) and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
+            case self::selectForUserByClsstatusCancel                   : { $from = "(select * from cls where (grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype <> 'guest') or (grpno, clsno) in (select grpno, clsno from clslineupb where userno = '$EXECUTOR')) and clsstatus = '$clsstatusCancel') t"; break; }
             case self::selectForMngrByClsstatusEdit                     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEdit') t"; break; }
             case self::selectForMngrByClsstatusIng                      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusIng') t"; break; }
             case self::selectForMngrByClssettleflgN                     : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
@@ -250,6 +260,26 @@ class ClsBO extends _CommonBO
             case self::selectForAllByClssettleflgN                      : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgEdit') t"; break; }
             case self::selectForAllByClsstatusEnd                       : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusEnd' and clssettleflg = '$clssettleflgDone') t"; break; }
             case self::selectForAllByClsstatusCancel                    : { $from = "(select * from cls where grpno = '$GRPNO' and clsstatus = '$clsstatusCancel') t"; break; }
+            case self::selectOpenForMercenaryForUsr                     :
+            {
+                /* 진행중이고 모집기간이 끝나지 않은, 용병 모집이 열린 일정 */
+                $from = "(select * from cls where clsopenflg = 'y' and clsstatus = '$clsstatusIng' and clsapplyclosedt > now()) t";
+
+                /* 거리(km, 내 기준위치 ↔ 모임 아지트), 빈 자리, 용병 신청 수. POINT는 위도 먼저(ST_X=lat) */
+                $select .=
+                "
+                    , grp.grptype
+                    , ROUND(6371 * ACOS(LEAST(1.0, GREATEST(-1.0,
+                          COS(RADIANS(ST_X(grp.grpbasepoint))) * COS(RADIANS(ST_X(eu.userloginedpoint))) * COS(RADIANS(ST_Y(eu.userloginedpoint)) - RADIANS(ST_Y(grp.grpbasepoint)))
+                        + SIN(RADIANS(ST_X(grp.grpbasepoint))) * SIN(RADIANS(ST_X(eu.userloginedpoint)))
+                      ))), 1) grpdistancekm
+                    , (select count(*) from clslineupb b where b.grpno = t.grpno and b.clsno = t.clsno and b.userno is null) clsemptycnt
+                    , (select count(*) from clslineupb b inner join grp_member gm on gm.grpno = b.grpno and gm.userno = b.userno where b.grpno = t.grpno and b.clsno = t.clsno and gm.grpmtype = 'guest') clsmercapplied
+                ";
+                $additionalJoin = "left join user eu on eu.userno = '$EXECUTOR'";
+                $orderBy = "grpdistancekm is null, grpdistancekm asc, t.clsstartdt asc";
+                break;
+            }
             case self::selectAppliedFor1YearByUserno                    :
             {
                 $from =
@@ -304,8 +334,9 @@ class ClsBO extends _CommonBO
                     on
                         t.grpno = clzc.grpno and
                         t.clsno = clzc.clsno
+                $additionalJoin
             order by
-                t.clsstartdt desc
+                $orderBy
         ";
         $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
@@ -364,6 +395,19 @@ class ClsBO extends _CommonBO
                 if(Common::isEmpty(trim($CLSBILLAPPLYUNIT))  ) { throw new GGexception("입력되지 않은 항목이 있습니다. (참가비단위)"); }
                 if(Common::isEmpty(trim($CLSAPPLYSTARTDT))   ) { throw new GGexception("입력되지 않은 항목이 있습니다. (모집시작일시)"); }
                 if(Common::isEmpty(trim($CLSAPPLYCLOSEDT))   ) { throw new GGexception("입력되지 않은 항목이 있습니다. (모집종료일시)"); }
+
+                /* 외부(용병) 참가 : 값이 없으면 모임의 일정 공개 기본값을 따른다 */
+                if($CLSOPENFLG !== GGF::Y && $CLSOPENFLG !== GGF::N)
+                    $CLSOPENFLG = Common::getField($grpBO->getByPk($GRPNO), GrpBO::FIELD__GRPCLSOPEN) == GrpBO::CLSOPEN__PUBLIC ? GGF::Y : GGF::N;
+                $CLSMERCMAX = Common::isEmpty(trim($CLSMERCMAX)) ? "null" : intval($CLSMERCMAX);
+                if($CLSMERCMAX !== "null" && $CLSMERCMAX < 1) { throw new GGexception("용병 모집 인원은 1명 이상으로 입력해주세요."); }
+
+                /* escape free text */
+                $CLSTITLE         = GGsql::realEscapeString($CLSTITLE);
+                $CLSCONTENT       = GGsql::realEscapeString($CLSCONTENT);
+                $CLSGROUND        = GGsql::realEscapeString($CLSGROUND);
+                $CLSGROUNDADDR    = GGsql::realEscapeString($CLSGROUNDADDR);
+                $CLSBILLAPPLYUNIT = GGsql::realEscapeString($CLSBILLAPPLYUNIT);
                 break;
             }
         }
@@ -401,6 +445,8 @@ class ClsBO extends _CommonBO
                           grpno
                         , clsno
                         , clsstatus
+                        , clsopenflg
+                        , clsmercmax
                         , clstitle
                         , clscontent
                         , clsstartdt
@@ -422,6 +468,8 @@ class ClsBO extends _CommonBO
                           '$GRPNO'
                         , '$clsno'
                         , '$clsstatusEdit'
+                        , '$CLSOPENFLG'
+                        ,  $CLSMERCMAX
                         , '$CLSTITLE'
                         , '$CLSCONTENT'
                         , '$CLSSTARTDT'
@@ -452,6 +500,10 @@ class ClsBO extends _CommonBO
                 $ggAuth->isGrpmanager($GRPNO, $EXECUTOR, true);
                 $ggAuth->checkClsNotCanceled($GRPNO, $CLSNO, true);
 
+                /* 주관자(정/부) : 비어 있으면 null */
+                $CLSUSERNOADM = Common::isEmpty($CLSUSERNOADM) ? "null" : "'$CLSUSERNOADM'";
+                $CLSUSERNOSUB = Common::isEmpty($CLSUSERNOSUB) ? "null" : "'$CLSUSERNOSUB'";
+
                 /* update cls info */
                 $query   =
                 "
@@ -469,6 +521,10 @@ class ClsBO extends _CommonBO
                         , clsbillapplyunit  = '$CLSBILLAPPLYUNIT'
                         , clsapplystartdt   = '$CLSAPPLYSTARTDT'
                         , clsapplyclosedt   = '$CLSAPPLYCLOSEDT'
+                        , clsopenflg        = '$CLSOPENFLG'
+                        , clsmercmax        =  $CLSMERCMAX
+                        , clsusernoadm      =  $CLSUSERNOADM
+                        , clsusernosub      =  $CLSUSERNOSUB
                     where
                         grpno = '$GRPNO' and
                         clsno = '$CLSNO'
@@ -571,6 +627,8 @@ class ClsBO extends _CommonBO
                         , clsbillapplyunit
                         , clsapplystartdt
                         , clsapplyclosedt
+                        , clsopenflg
+                        , clsmercmax
                         , clsmodidt
                         , clsregdt
                     )
@@ -588,6 +646,8 @@ class ClsBO extends _CommonBO
                         ,  clsbillapplyunit
                         ,  clsapplystartdt
                         ,  clsapplyclosedt
+                        ,  clsopenflg
+                        ,  clsmercmax
                         ,  now()
                         ,  now()
                     from
