@@ -41,14 +41,14 @@
         <div class="common-div-formField">
             <span>취소사유</span>
             <span>[필수] 50글자 이내</span>
-            <textarea id="CUDE-textarea-clscancelreason" type="text" class="common-textarea-field" rows="4"></textarea>
+            <textarea id="CUCC-textarea-clscancelreason" type="text" class="common-textarea-field" rows="4"></textarea>
         </div>
 
         <!-- 다음으로 -->
         <table class="common-tbl-slideformFooterBtn" tbl-type="button1">
             <tbody>
                 <tr>
-                    <td><button id="CUDE-btn-clscancel" class="common-btn-inner" btn-type="cancel">일정취소</button></td>
+                    <td><button id="CUCC-btn-clscancel" class="common-btn-inner" btn-type="cancel">일정취소</button></td>
                 </tr>
             </tbody>
         </table>
@@ -122,12 +122,12 @@
             /* =============== */
             /* 저장 */
             /* =============== */
-            $("#CUDE-btn-clscancel").click(function()
+            $("#CUCC-btn-clscancel").click(function()
             {
                 /* set var */
                 let clsno = CUCC.Data.clsno;
                 let grpno = CUCC.Data.grpno;
-                let clscancelreason = $("#CUDE-textarea-clscancelreason").val().trim();
+                let clscancelreason = $("#CUCC-textarea-clscancelreason").val().trim();
 
                 /* input check */
                 if(clscancelreason == "") { Common.toastError("취소사유를 입력해주세요."); return; }
@@ -142,6 +142,7 @@
                         let mApiResponse = Api.Cls.updateClsstatusToCancel(grpno, clsno, clscancelreason, GGF.none, GGF.toast);
                         if(mApiResponse.isSuccess())
                         {
+                            Common.hideProgress();
                             Common.toastSuccess("일정이 취소되었습니다.");
                             CUCC.close();
                             return;

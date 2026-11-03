@@ -105,6 +105,7 @@ class GrpBO extends _CommonBO
     const selectManaging = "selectManaging"; /* 모임 : 내 모임리스트를 가져옴 */
     const selectActiveForUsr = "selectActiveForUsr";
     const selectActiveAllForInside = "selectActiveAllForInside";
+    const selectFindForUsr = "selectFindForUsr"; /* 모임 찾기 : 내가 멤버가 아닌 모임, 가까운 순 (GRPNAME 검색 선택) */
     protected function select($options, $option="")
     {
         /* vars */
@@ -125,6 +126,7 @@ class GrpBO extends _CommonBO
         $additionalSelect = "";
         $from   = "";
         $additionalJoin = "";
+        $orderBy = "t.grpname asc";
         $select =
         "
               t.grpno
@@ -166,6 +168,7 @@ class GrpBO extends _CommonBO
             case self::selectByPk:
             case self::selectManaging:
             case self::selectActiveForUsr:
+            case self::selectFindForUsr:
             {
                 $additionalSelect =
                 "
@@ -196,7 +199,14 @@ class GrpBO extends _CommonBO
             case self::selectByPk               : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
             case self::selectByPkForInside      : { $from = "(select * from grp where grpno = '$GRPNO' ) t"; break; }
             case self::selectManaging           : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub'))) t"; break; }
-            case self::selectActiveForUsr       : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive')) t"; break; }
+            case self::selectActiveForUsr       : { $from = "(select * from grp where grpno in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype <> 'guest')) t"; break; } /* 게스트(용병)로만 참가한 모임은 제외 */
+            case self::selectFindForUsr         :
+            {
+                $grpnameLike = GGsql::realEscapeString(trim(isset($GRPNAME) ? $GRPNAME : ""));
+                $from = "(select * from grp where grpno not in (select grpno from grp_member where userno = '$EXECUTOR' and grpmstatus = '$grpmstatusActive' and grpmtype <> 'guest')".($grpnameLike == "" ? "" : " and grpname like '%$grpnameLike%'").") t";
+                $orderBy = "grpdistancekm is null, grpdistancekm asc, t.grpmcnt desc, t.grpname asc";
+                break;
+            }
             case self::selectActiveAllForInside : { $from = "(select * from grp) t"; break; }
             default:
             {
@@ -212,6 +222,7 @@ class GrpBO extends _CommonBO
             case self::selectByPk:
             case self::selectManaging:
             case self::selectActiveForUsr:
+            case self::selectFindForUsr:
             {
                 $additionalJoin .=
                 "
@@ -249,7 +260,7 @@ class GrpBO extends _CommonBO
                         ac.addrcode = t.grpbaseaddrcode
                 $additionalJoin
             order by
-                t.grpname asc
+                $orderBy
         ";
         $rslt = GGsql::select($query, $from, $options, $OPTION);
         return $rslt;
@@ -516,17 +527,32 @@ class GrpBO extends _CommonBO
     }
 
 
+    /* 모임 활성 멤버(게스트 제외)의 푸시토큰 */
     public function getTokenOfActiveUsersByGrpno($grpno)
     {
         $grpMemberBO = new GrpMemberBO();
+        $usernoArr = array();
+        foreach(Common::getData($grpMemberBO->selectActiveUsersForInside($grpno)) as $grpMember)
+            $usernoArr[] = Common::get($grpMember, GrpMemberBO::FIELD__USERNO);
+        return $this->getTokenByUsernoArr($usernoArr);
+    }
+
+    /* 모임 운영진(매니저·부매니저)의 푸시토큰 */
+    public function getTokenOfManagersByGrpno($grpno)
+    {
+        $rows = Common::getData(GGsql::select("select userno from grp_member where grpno = '$grpno' and grpmstatus = 'active' and grpmtype in ('".GrpMemberBO::GRPMTYPE__MNG."', '".GrpMemberBO::GRPMTYPE__MNGSUB."')", "", array(), ""));
+        return $this->getTokenByUsernoArr(array_column($rows, GrpMemberBO::FIELD__USERNO));
+    }
+
+    /* 회원번호 목록 → 푸시토큰 (탈퇴·토큰 없는 회원 제외, 중복 제거) */
+    public function getTokenByUsernoArr($usernoArr)
+    {
         $userBO = new UserBO();
 
         $tokenArr = array();
-        $grpMemberList = Common::getData($grpMemberBO->selectActiveUsersForInside($grpno));
-        foreach($grpMemberList as $grpMember)
+        foreach(array_unique($usernoArr) as $userno)
         {
             /* get */
-            $userno = Common::get($grpMember, GrpMemberBO::FIELD__USERNO);
             $user = $userBO->getByPk($userno);
             $pushtoken = Common::getField($user, UserBO::FIELD__PUSHTOKEN);
 

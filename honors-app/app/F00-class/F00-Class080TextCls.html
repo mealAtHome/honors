@@ -70,7 +70,10 @@
                         html += `\n■장소 : ${mCls.getClsground()} (${mCls.getClsgroundaddr()})`;
                         html += `\n■참가비 : ${mCls.getClsapplybillpriceWon()}`;
                         html += `\n■주관 : (주) ${mCls.getClsusernoadmname()} ${Common.isEmpty(mCls.getClsusernosubname()) ? "" : `, (부) ${mCls.getClsusernosubname()}`}`;
+                        if(mCls.isOpenToMercenary())
+                            html += `\n■용병 : ${mCls.getClsmercmax() == null ? "모집 중 (인원 제한 없음)" : `${mCls.getClsmercmax()}명 모집 중`}`;
                         html += `\n■특이사항`;
+                        html += `\n${Common.isEmpty(mCls.getClscontent()) ? "없음" : mCls.getClscontent()}`;
                         html += `\n`;
 
                         let hour = GGdate.fromStr(mCls.getClsapplystartdt()).getHours();

@@ -567,6 +567,9 @@
             /* =============== */
             $("#CULT-btn-save").click(function()
             {
+                /* validation : 템플릿 이름 */
+                if(Common.isEmpty($("#CULT-input-lineuptitle").val().trim())) { Common.toastError("템플릿 이름을 입력해주세요."); $("#CULT-input-lineuptitle").focus(); return; }
+
                 let process = function()
                 {
                     /* get input */

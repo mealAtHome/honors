@@ -237,7 +237,7 @@ class GrpMemberBO extends _CommonBO
                 ";
                 break;
             }
-            case self::selectActiveUsersForInside: { $from = "(select * from grp_member where grpno = '$GRPNO' and grpmstatus = '$grpmstatusActive') t"; break; }
+            case self::selectActiveUsersForInside: { $from = "(select * from grp_member where grpno = '$GRPNO' and grpmstatus = '$grpmstatusActive' and grpmtype <> 'guest') t"; break; } /* 모임 전체 알림 대상 : 게스트(용병) 제외 */
             default:
                 throw new GGexception("(server) no option defined");
         }

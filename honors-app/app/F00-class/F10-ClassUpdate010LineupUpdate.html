@@ -465,19 +465,23 @@
                 let data = CUTF.getLineupData();
 
                 /* save */
-                Common.showProgress();
-                setTimeout(function()
+                let process = function()
                 {
-                    let mApiResponse = Api.Clslineupa.updateFromPage(CUTF.Data.grpno, CUTF.Data.clsno, data, GGF.toast, GGF.toast);
-                    if(mApiResponse.isSuccess())
+                    Common.showProgress();
+                    setTimeout(function()
                     {
-                        Common.hideProgress();
-                        CUTF.show();
-                        return;
-                    }
+                        let mApiResponse = Api.Clslineupa.updateFromPage(CUTF.Data.grpno, CUTF.Data.clsno, data, GGF.toast, GGF.toast);
+                        if(mApiResponse.isSuccess())
+                        {
+                            Common.hideProgress();
+                            CUTF.show();
+                            return;
+                        }
 
-                    Common.hideProgress();
-                }, ajaxDelayTime);
+                        Common.hideProgress();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("라인업을 저장하시겠습니까?", process);
             });
 
             /* ========================= */

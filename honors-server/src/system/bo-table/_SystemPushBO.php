@@ -45,6 +45,8 @@ class SystemPushBO extends _CommonBO
     const PUSHTYPE__CLS_CANCEL = "clsCancel"; /* 일정이 취소됨 */
     const PUSHTYPE__CLS_APPLY_START_BEFORE_10_MIN = "clsApplyStartBefore10Min"; /* 모집시작 10분 전 */
     const PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1_HOUR = "clsApplyCloseBefore1Hour"; /* 모집마감 1시간 전 */
+    const PUSHTYPE__GRP_JOINREQ = "grpJoinreq"; /* 가입신청이 들어옴 (운영진에게) */
+    const PUSHTYPE__CLS_SETTLE_DONE = "clsSettleDone"; /* 정산이 확정됨 (정산 대상자에게) */
 
     const PUSHSTATUS__WAIT = "wait";
     const PUSHSTATUS__ING = "ing";
@@ -58,6 +60,8 @@ class SystemPushBO extends _CommonBO
         $arr['pushtypeClsCancel'] = self::PUSHTYPE__CLS_CANCEL; /* 푸시타입 : 일정이 취소됨 */
         $arr['pushtypeClsApplyStartBefore10Min'] = self::PUSHTYPE__CLS_APPLY_START_BEFORE_10_MIN; /* 푸시타입 : 모집시작 10분 전 */
         $arr['pushtypeClsApplyCloseBefore1Hour'] = self::PUSHTYPE__CLS_APPLY_CLOSE_BEFORE_1_HOUR; /* 푸시타입 : 모집마감 1시간 전 */
+        $arr['pushtypeGrpJoinreq'] = self::PUSHTYPE__GRP_JOINREQ; /* 푸시타입 : 가입신청 */
+        $arr['pushtypeClsSettleDone'] = self::PUSHTYPE__CLS_SETTLE_DONE; /* 푸시타입 : 정산확정 */
         $arr['pushstatusWait'] = self::PUSHSTATUS__WAIT; /* 푸시상태 : 대기중 */
         $arr['pushstatusIng'] = self::PUSHSTATUS__ING;   /* 푸시상태 : 진행중 */
         $arr['pushstatusEnd'] = self::PUSHSTATUS__END;   /* 푸시상태 : 완료 */
@@ -168,6 +172,8 @@ class SystemPushBO extends _CommonBO
     public function insertPushtypeClsCancelForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertPushtypeClsApplyStartBefore10MinForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function insertPushtypeClsApplyCloseBefore1HourForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertPushtypeGrpJoinreqForInside($GRPNO, $USERNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
+    public function insertPushtypeClsSettleDoneForInside($GRPNO, $CLSNO) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updatePushstatusWaitToIngForInside($PUSHIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
     public function updatePushstatusIngToEndForInside($PUSHIDX) { return $this->update(get_defined_vars(), __FUNCTION__); }
 
@@ -180,6 +186,8 @@ class SystemPushBO extends _CommonBO
     const insertPushtypeClsCancelForInside = "insertPushtypeClsCancelForInside"; /* GRPNO, CLSNO */
     const insertPushtypeClsApplyStartBefore10MinForInside = "insertPushtypeClsApplyStartBefore10MinForInside"; /* GRPNO, CLSNO */
     const insertPushtypeClsApplyCloseBefore1HourForInside = "insertPushtypeClsApplyCloseBefore1HourForInside"; /* GRPNO, CLSNO */
+    const insertPushtypeGrpJoinreqForInside = "insertPushtypeGrpJoinreqForInside"; /* GRPNO, USERNO */
+    const insertPushtypeClsSettleDoneForInside = "insertPushtypeClsSettleDoneForInside"; /* GRPNO, CLSNO */
     const updatePushstatusWaitToIngForInside = "updatePushstatusWaitToIngForInside"; /* PUSHIDX */
     const updatePushstatusIngToEndForInside = "updatePushstatusIngToEndForInside"; /* PUSHIDX */
     protected function update($options, $option="")
@@ -241,6 +249,18 @@ class SystemPushBO extends _CommonBO
             {
                 $pushdatajson = array("grpno" => $GRPNO,"clsno" => $CLSNO,);
                 $this->insertWaitForInside($pushtypeClsOpen, json_encode($pushdatajson));
+                break;
+            }
+            case self::insertPushtypeGrpJoinreqForInside:
+            {
+                $pushdatajson = array("grpno" => $GRPNO, "userno" => $USERNO,);
+                $this->insertWaitForInside($pushtypeGrpJoinreq, json_encode($pushdatajson));
+                break;
+            }
+            case self::insertPushtypeClsSettleDoneForInside:
+            {
+                $pushdatajson = array("grpno" => $GRPNO, "clsno" => $CLSNO,);
+                $this->insertWaitForInside($pushtypeClsSettleDone, json_encode($pushdatajson));
                 break;
             }
             case self::insertPushtypeClsCancelForInside:

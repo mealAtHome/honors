@@ -1,0 +1,86 @@
+<ons-page id="UFGP">
+
+    <!-- ======================== -->
+    <!-- 페이지용 타이틀 -->
+    <!-- ======================== -->
+    <div class="common-div-toolbar">
+        <div><gg-backbtn onclick="UFGP.close(true);"></gg-backbtn></div>
+        <div><span>모임 찾기</span></div>
+    </div>
+
+    <div class="common-div-cushion common-search-top">
+        <input type="text" id="UFGP-input-grpname" class="common-input-text" placeholder="모임 이름"/>
+        <button id="UFGP-btn-search" class="common-btn-outer"><i class="ti ti-search"></i><span>&nbsp;검색</span></button>
+        <span class="common-block common-fonts08 common-colorCmmt" style="margin-top:0.3em;">내가 가입하지 않은 모임을 기준위치에서 가까운 순으로 보여줍니다. 상세보기에서 가입신청할 수 있습니다.</span>
+    </div>
+    <hr class="common-hr-paddingLR"/>
+
+    <div id="UFGP-div-notice"></div>
+    <div id="UFGP-div-list" class="common-div-cushion"></div>
+
+    <script>
+        /*
+            모임 찾기 (유저)
+            - 내가 멤버가 아닌 모임 목록. 모임상세(D10)에서 가입신청 / 바로 가입 / 용병 참가
+        */
+        var UFGP =
+        {
+            code : "UFGP",
+            Data: {},
+
+            show()
+            {
+                if(UFGP.Data.grpname == undefined) { UFGP.Data.grpname = ""; }
+                $("#UFGP-input-grpname").val(UFGP.Data.grpname);
+                UFGP.search();
+            },
+
+            search()
+            {
+                Common.showProgress();
+                setTimeout(function()
+                {
+                    let mGrps = Api.Grp.selectFindForUsr(UFGP.Data.grpname, GGF.none, GGF.toast);
+                    let models = mGrps.getModels();
+
+                    /* 기준위치가 없으면 거리 정렬이 안 되므로 안내 */
+                    let noDistance = models.length > 0 && models.every(m => m.getGrpdistancekm() == null);
+                    $("#UFGP-div-notice").html(noDistance ? `<div class="common-div-cushion"><div class="common-div-card common-fonts09" card-type="warning">기준위치가 없어 가까운 순으로 정렬하지 못했습니다. 모임 탭의 [주소변경]에서 기준위치를 정해주세요.</div></div>` : "");
+
+                    if(models.length == 0)
+                        $("#UFGP-div-list").html(`<div class="common-div-card common-colorCmmt" style="text-align:center;">${UFGP.Data.grpname == "" ? "가입할 수 있는 모임이 없습니다." : "검색 결과가 없습니다."}</div>`);
+                    else
+                        mGrps.makeGrpForView("#UFGP-div-list");
+
+                    Common.hideProgress();
+                }, ajaxDelayTime);
+            },
+
+            close(force=false)
+            {
+                Navigation.moveBack();
+            },
+        }
+
+        $(document).ready(function()
+        {
+            $("#UFGP-btn-search").click(function()
+            {
+                UFGP.Data.grpname = $("#UFGP-input-grpname").val().trim();
+                UFGP.search();
+            });
+            $("#UFGP-input-grpname").keypress(function(e) { if(e.key == "Enter") $("#UFGP-btn-search").click(); });
+
+            try
+            {
+                UFGP.Data = Navigation.getPageParam();
+                Navigation.executeShow();
+            }
+            catch(e)
+            {
+                console.error(e);
+                UFGP.close(true);
+            }
+        });
+    </script>
+</ons-page>

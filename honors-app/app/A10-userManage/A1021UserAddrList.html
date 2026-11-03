@@ -69,7 +69,7 @@
                 Common.showProgress();
                 setTimeout(function()
                 {
-                    let mApiResponse = Api.UserAddr.updateDefaultForMng(UALI.Data.userno, useraddridx, GGF.none, GGF.toast);
+                    let mApiResponse = Api.UserAddr.updateDefaultForUsr(UALI.Data.userno, useraddridx, GGF.none, GGF.toast);
                     if(mApiResponse.isSuccess())
                     {
                         Navigation.executeShow();
@@ -87,7 +87,7 @@
                     Common.showProgress();
                     setTimeout(function()
                     {
-                        let mApiResponse = Api.UserAddr.deleteForMng(UALI.Data.userno, useraddridx, GGF.none, GGF.toast);
+                        let mApiResponse = Api.UserAddr.deleteForUsr(UALI.Data.userno, useraddridx, GGF.none, GGF.toast);
                         if(mApiResponse.isSuccess())
                         {
                             Navigation.executeShow();

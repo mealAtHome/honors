@@ -163,10 +163,10 @@ class UserAddrBO extends _CommonBO
     /* ========================= */
     /* update */
     /* ========================= */
-    const insertForMng = "insertForMng";
-    const updateForMng = "updateForMng";
-    const deleteForMng = "deleteForMng";
-    const updateDefaultForMng = "updateDefaultForMng";
+    const insertForUsr = "insertForUsr";
+    const updateForUsr = "updateForUsr";
+    const deleteForUsr = "deleteForUsr";
+    const updateDefaultForUsr = "updateDefaultForUsr";
     protected function update($options, $option="")
     {
         /* vars */
@@ -182,7 +182,7 @@ class UserAddrBO extends _CommonBO
         /* process */
         switch($OPTION)
         {
-            case self::insertForMng:
+            case self::insertForUsr:
             {
                 /* 본인만 가능 */
                 $ggAuth->checkMe($EXECUTOR, $USERNO, true);
@@ -228,7 +228,7 @@ class UserAddrBO extends _CommonBO
                 GGsql::exeQuery($query);
                 break;
             }
-            case self::updateForMng:
+            case self::updateForUsr:
             {
                 /* 본인만 가능 */
                 $ggAuth->checkMe($EXECUTOR, $USERNO, true);
@@ -268,7 +268,7 @@ class UserAddrBO extends _CommonBO
                 GGsql::exeQuery($query);
                 break;
             }
-            case self::deleteForMng:
+            case self::deleteForUsr:
             {
                 /* 본인만 가능 */
                 $ggAuth->checkMe($EXECUTOR, $USERNO, true);
@@ -299,7 +299,7 @@ class UserAddrBO extends _CommonBO
                 }
                 break;
             }
-            case self::updateDefaultForMng:
+            case self::updateDefaultForUsr:
             {
                 /* 본인만 가능 */
                 $ggAuth->checkMe($EXECUTOR, $USERNO, true);

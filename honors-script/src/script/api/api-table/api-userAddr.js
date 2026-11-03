@@ -8,10 +8,10 @@ Api.UserAddr =
     /* ========================= */
     /* update */
     /* ========================= */
-    insertForMng(userno, useraddrtitle, useraddrcode, lat, lng, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"insertForMng", USERNO:userno, USERADDRTITLE:useraddrtitle, USERADDRCODE:useraddrcode, LAT:lat, LNG:lng, }, noticeOK, noticeFail); },
-    updateForMng(userno, useraddridx, useraddrtitle, useraddrcode, lat, lng, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"updateForMng", USERNO:userno, USERADDRIDX:useraddridx, USERADDRTITLE:useraddrtitle, USERADDRCODE:useraddrcode, LAT:lat, LNG:lng, }, noticeOK, noticeFail); },
-    deleteForMng(userno, useraddridx, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"deleteForMng", USERNO:userno, USERADDRIDX:useraddridx, }, noticeOK, noticeFail); },
-    updateDefaultForMng(userno, useraddridx, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"updateDefaultForMng", USERNO:userno, USERADDRIDX:useraddridx, }, noticeOK, noticeFail); },
+    insertForUsr(userno, useraddrtitle, useraddrcode, lat, lng, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"insertForUsr", USERNO:userno, USERADDRTITLE:useraddrtitle, USERADDRCODE:useraddrcode, LAT:lat, LNG:lng, }, noticeOK, noticeFail); },
+    updateForUsr(userno, useraddridx, useraddrtitle, useraddrcode, lat, lng, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"updateForUsr", USERNO:userno, USERADDRIDX:useraddridx, USERADDRTITLE:useraddrtitle, USERADDRCODE:useraddrcode, LAT:lat, LNG:lng, }, noticeOK, noticeFail); },
+    deleteForUsr(userno, useraddridx, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"deleteForUsr", USERNO:userno, USERADDRIDX:useraddridx, }, noticeOK, noticeFail); },
+    updateDefaultForUsr(userno, useraddridx, noticeOK, noticeFail) { return Api.UserAddr.update({ OPTION:"updateDefaultForUsr", USERNO:userno, USERADDRIDX:useraddridx, }, noticeOK, noticeFail); },
 
     /* ========================= */
     /* main function */

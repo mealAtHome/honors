@@ -576,6 +576,9 @@ class ClsBO extends _CommonBO
                 /* update clsstatus */
                 $query = "update cls set clssettleflg = '$clssettleflgDone', clsmodidt = now() where grpno = '$GRPNO' and clsno = '$CLSNO'";
                 GGsql::exeQuery($query);
+
+                /* push : 정산 대상자에게 정산 안내 */
+                $systemPushBO->insertPushtypeClsSettleDoneForInside($GRPNO, $CLSNO);
                 break;
             }
             case self::updateClsstatusToCancel:

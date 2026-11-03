@@ -108,7 +108,11 @@
                 <tr><td>청구합계</td><td><span id="CLSD-span-clsbillsales"></span></td></tr>
                 <tr><td>구매합계</td><td><span id="CLSD-span-clsbillpurchase"></span></td></tr>
                 <tr><td>집계결과</td><td><span id="CLSD-span-clsbillfinal"></span></td></tr>
-                <tr><td>재무반영여부</td><td><span id="CLSD-div-grpfinancereflectflg"></span></td></tr>
+                <tr><td>재무반영여부</td><td>
+                    <span id="CLSD-div-grpfinancereflectflg"></span>
+                    <button id="CLSD-btn-grpfinancereflectflgToY" class="common-btn-outer common-fonts08" style="display:none; margin-left:0.4em;">반영설정</button>
+                    <button id="CLSD-btn-grpfinancereflectflgToN" class="common-btn-outer common-fonts08" btn-type="cancel" style="display:none; margin-left:0.4em;">반영해제</button>
+                </td></tr>
             </tbody>
         </table>
     </div>
@@ -265,6 +269,8 @@
                         $("#CLSD-span-clsbillpurchase")       .text(mCls.getClsbillpurchaseWon());
                         $("#CLSD-span-clsbillfinal")          .text(mCls.getClsbillfinalWon());
                         $("#CLSD-div-grpfinancereflectflg")   .html(mCls.getGrpfinancereflectflgFont());
+                        $("#CLSD-btn-grpfinancereflectflgToY").toggle(mCls.getGrpfinancereflectflg() == GGF.Cls.Grpfinancereflectflg.N);
+                        $("#CLSD-btn-grpfinancereflectflgToN").toggle(mCls.getGrpfinancereflectflg() == GGF.Cls.Grpfinancereflectflg.Y);
 
                         if(Common.isEmpty(mCls.getClsusernoregname())) { $("#CLSD-div-clsusernoreg").addClass("common-colorBody"); }
                         if(Common.isEmpty(mCls.getClsusernoadmname())) { $("#CLSD-div-clsusernoadm").addClass("common-colorBody"); }
@@ -808,25 +814,33 @@
             {
                 let grpno = CLSD.Data.grpno;
                 let clsno = CLSD.Data.clsno;
-                Common.showProgress();
-                setTimeout(function()
+                let process = function()
                 {
-                    Api.Cls.updateGrpfinancereflectflgToYForMng(grpno, clsno, GGF.toast, GGF.toast);
-                    Common.hideProgress();
-                    Navigation.executeShow();
-                }, ajaxDelayTime);
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        Api.Cls.updateGrpfinancereflectflgToYForMng(grpno, clsno, GGF.toast, GGF.toast);
+                        Common.hideProgress();
+                        Navigation.executeShow();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("이 일정의 정산 결과를 모임 재무에 반영하시겠습니까?", process);
             });
             $("#CLSD-btn-grpfinancereflectflgToN").click(function()
             {
                 let grpno = CLSD.Data.grpno;
                 let clsno = CLSD.Data.clsno;
-                Common.showProgress();
-                setTimeout(function()
+                let process = function()
                 {
-                    Api.Cls.updateGrpfinancereflectflgToNForMng(grpno, clsno, GGF.toast, GGF.toast);
-                    Common.hideProgress();
-                    Navigation.executeShow();
-                }, ajaxDelayTime);
+                    Common.showProgress();
+                    setTimeout(function()
+                    {
+                        Api.Cls.updateGrpfinancereflectflgToNForMng(grpno, clsno, GGF.toast, GGF.toast);
+                        Common.hideProgress();
+                        Navigation.executeShow();
+                    }, ajaxDelayTime);
+                };
+                Common.confirm2("이 일정의 모임 재무 반영을 해제하시겠습니까?", process);
             });
 
             /* ========================= */

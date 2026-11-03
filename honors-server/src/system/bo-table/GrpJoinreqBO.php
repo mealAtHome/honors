@@ -17,6 +17,7 @@ class GrpJoinreqBO extends _CommonBO
     {
         GGnavi::getGrpBO();
         GGnavi::getGrpMemberBO();
+        GGnavi::getSystemPushBO();
     }
     function setBO()
     {
@@ -24,6 +25,7 @@ class GrpJoinreqBO extends _CommonBO
         $arr = array();
         $arr['grpBO'] = GrpBO::getInstance();
         $arr['grpMemberBO'] = GrpMemberBO::getInstance();
+        $arr['systemPushBO'] = SystemPushBO::getInstance();
         $arr['ggAuth'] = GGauth::getInstance();
         return $arr;
     }
@@ -168,6 +170,8 @@ class GrpJoinreqBO extends _CommonBO
                 GGsql::exeQuery($query);
                 if($isFree)
                     $grpMemberBO->joinForInside($GRPNO, $EXECUTOR, GrpMemberBO::GRPMTYPE__MEMBER);
+                else
+                    $systemPushBO->insertPushtypeGrpJoinreqForInside($GRPNO, $EXECUTOR); /* 운영진에게 승인 요청 알림 */
 
                 $rslt[self::FIELD__REQSTATUS] = $status;
                 break;

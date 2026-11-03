@@ -153,14 +153,14 @@
                 let currentVal = tr.find(".MUBL-td-backnumView").text().trim();
                 if(currentVal == "-") currentVal = "";
                 tr.find(".MUBL-td-backnumView").html(`<input type="text" class="MUBL-input-membacknum common-input-text common-fonts09" maxlength="5" value="${currentVal}" style="width:5em;"/>`);
-                tr.find(".MUBL-td-action").html(`<button class="MUBL-btn-saveRow common-btn-inner">저장</button>`);
+                tr.find(".MUBL-td-action").html(`<button class="MUBL-btn-saveRow common-btn-inner">저장</button> <button class="MUBL-btn-cancelRow common-btn-outer" btn-type="cancel">취소</button>`);
             });
 
             /* 취소 : 다시 조회해서 원래대로 */
-            // $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-cancelRow", function()
-            // {
-            //     MUBL.searchMember();
-            // });
+            $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-cancelRow", function()
+            {
+                MUBL.searchMember();
+            });
 
             /* 저장(개별 행) */
             $("#MUBL-tbl-memberList").on("click", ".MUBL-btn-saveRow", function()

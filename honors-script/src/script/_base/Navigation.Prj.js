@@ -80,6 +80,7 @@ Navigation.Page =
     /* A00-user */          A14UserMainSettle : "UMST",
     /* A00-user */          A15UserMainManage : "UMMG",
     /* A00-user */          A16UserMercList : "UMRC",
+    /* A00-user */          A17UserGrpFind : "UFGP",
     /* A00-user */          A81UserBankacctList : "UBKL",
     /* A00-user */          A82UserBankacctUpdate : "UBKU",
     /* A10-userManage */    A1011ManagePhonePrivacy : "UMPP",
@@ -160,6 +161,7 @@ Navigation.getURL = function(str)
         /* A00-user */          case Navigation.Page.A14UserMainSettle                             : url = `${host}/app/A00-user/A14-UserMainSettle.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A15UserMainManage                             : url = `${host}/app/A00-user/A15-UserMainManage.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A16UserMercList                               : url = `${host}/app/A00-user/A16-UserMercList.html?${scriptVersion}`; break;
+        /* A00-user */          case Navigation.Page.A17UserGrpFind                                : url = `${host}/app/A00-user/A17-UserGrpFind.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A81UserBankacctList                           : url = `${host}/app/A00-user/A81-UserBankacctList.html?${scriptVersion}`; break;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate                         : url = `${host}/app/A00-user/A82-UserBankacctUpdate.html?${scriptVersion}`; break;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy                       : url = `${host}/app/A10-userManage/A1011ManagePhonePrivacy.html?${scriptVersion}`; break;
@@ -239,6 +241,7 @@ Navigation.getData = function(code)
         /* A00-user */          case Navigation.Page.A14UserMainSettle : return data = UMST.Data;
         /* A00-user */          case Navigation.Page.A15UserMainManage : return data = UMMG.Data;
         /* A00-user */          case Navigation.Page.A16UserMercList : return data = UMRC.Data;
+        /* A00-user */          case Navigation.Page.A17UserGrpFind : return data = UFGP.Data;
         /* A00-user */          case Navigation.Page.A81UserBankacctList : return data = UBKL.Data;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate : return data = UBKU.Data;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy : return data = UMPP.Data;
@@ -354,6 +357,7 @@ Navigation.executeShow = function()
         /* A00-user */          case Navigation.Page.A14UserMainSettle : UMST.show(); break;
         /* A00-user */          case Navigation.Page.A15UserMainManage : UMMG.show(); break;
         /* A00-user */          case Navigation.Page.A16UserMercList : UMRC.show(); break;
+        /* A00-user */          case Navigation.Page.A17UserGrpFind : UFGP.show(); break;
         /* A00-user */          case Navigation.Page.A81UserBankacctList : UBKL.show(); break;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate : UBKU.show(); break;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy : UMPP.show(); break;
@@ -446,6 +450,7 @@ Navigation.executeMoveBack = function()
         /* A00-user */          case Navigation.Page.A14UserMainSettle : UMST.close(true); break;
         /* A00-user */          case Navigation.Page.A15UserMainManage : UMMG.close(true); break;
         /* A00-user */          case Navigation.Page.A16UserMercList : UMRC.close(true); break;
+        /* A00-user */          case Navigation.Page.A17UserGrpFind : UFGP.close(true); break;
         /* A00-user */          case Navigation.Page.A81UserBankacctList : UBKL.close(true); break;
         /* A00-user */          case Navigation.Page.A82UserBankacctUpdate : UBKU.close(true); break;
         /* A10-userManage */    case Navigation.Page.A1011ManagePhonePrivacy : UMPP.close(true); break;

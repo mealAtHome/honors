@@ -121,8 +121,67 @@
                         'clsno' => $clsno,
                     ]);
 
-                    /* 활성유저의 푸시토큰 가져오기 */
-                    $tokenArr = $grpBO->getTokenOfActiveUsersByGrpno($grpno);
+                    /* 활성유저 + 이 일정에 참가한 용병(게스트)의 푸시토큰 */
+                    $applicants = Common::getData(GGsql::select("select distinct userno from clslineupb where grpno = '$grpno' and clsno = '$clsno' and userno is not null", "", array(), ""));
+                    $tokenArr = array_values(array_unique(array_merge(
+                        $grpBO->getTokenOfActiveUsersByGrpno($grpno),
+                        $grpBO->getTokenByUsernoArr(array_column($applicants, 'userno'))
+                    )));
+                    break;
+                }
+                case SystemPushBO::PUSHTYPE__GRP_JOINREQ:
+                {
+                    /* vars */
+                    $grpno  = Common::get($pushdata, 'grpno');
+                    $userno = Common::get($pushdata, 'userno');
+                    $grpname  = Common::get($grpBO->getByPk($grpno), 'grpname');
+                    $username = Common::get($userBO->getByPk($userno), 'name');
+
+                    /* make msg */
+                    $message = CloudMessage::new()
+                    ->withNotification(
+                        Notification::create(
+                            '가입신청 ('.$grpname.')',
+                            $username.'님이 가입을 신청했습니다. 모임멤버 화면에서 승인해주세요.'
+                        )
+                    )
+                    ->withData([
+                        'type' => 'grpJoinreq',
+                        'grpno' => $grpno,
+                    ]);
+
+                    /* 운영진(매니저·부매니저)의 푸시토큰 */
+                    $tokenArr = $grpBO->getTokenOfManagersByGrpno($grpno);
+                    break;
+                }
+                case SystemPushBO::PUSHTYPE__CLS_SETTLE_DONE:
+                {
+                    /* vars */
+                    $grpno = Common::get($pushdata, 'grpno');
+                    $clsno = Common::get($pushdata, 'clsno');
+
+                    /* get cls */
+                    $cls = $clsBO->getByPk($grpno, $clsno);
+                    $grpname = Common::get($cls, 'grpname');
+                    $clstitle = Common::get($cls, 'clstitle');
+
+                    /* make msg */
+                    $message = CloudMessage::new()
+                    ->withNotification(
+                        Notification::create(
+                            '정산 안내 ('.$grpname.')',
+                            $clstitle.' 정산이 확정되었습니다. 정산 탭에서 금액을 확인해주세요.'
+                        )
+                    )
+                    ->withData([
+                        'type' => 'cls',
+                        'grpno' => $grpno,
+                        'clsno' => $clsno,
+                    ]);
+
+                    /* 이 일정의 정산 대상자 푸시토큰 */
+                    $settled = Common::getData(GGsql::select("select userno from clssettle where grpno = '$grpno' and clsno = '$clsno'", "", array(), ""));
+                    $tokenArr = $grpBO->getTokenByUsernoArr(array_column($settled, 'userno'));
                     break;
                 }
                 case SystemPushBO::PUSHTYPE__CLS_APPLY_START_BEFORE_10_MIN:

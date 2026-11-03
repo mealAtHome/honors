@@ -214,9 +214,9 @@
                         let userno = UAUP.Data.userno;
                         let mApiResponse = null;
                         if(UAUP.Data.option == "update")
-                            mApiResponse = Api.UserAddr.updateForMng(userno, UAUP.Data.useraddridx, title, UAUP.Data.selectedAddrcode, UAUP.Data.selectedLat, UAUP.Data.selectedLng, GGF.none, GGF.toast);
+                            mApiResponse = Api.UserAddr.updateForUsr(userno, UAUP.Data.useraddridx, title, UAUP.Data.selectedAddrcode, UAUP.Data.selectedLat, UAUP.Data.selectedLng, GGF.none, GGF.toast);
                         else
-                            mApiResponse = Api.UserAddr.insertForMng(userno, title, UAUP.Data.selectedAddrcode, UAUP.Data.selectedLat, UAUP.Data.selectedLng, GGF.none, GGF.toast);
+                            mApiResponse = Api.UserAddr.insertForUsr(userno, title, UAUP.Data.selectedAddrcode, UAUP.Data.selectedLat, UAUP.Data.selectedLng, GGF.none, GGF.toast);
 
                         if(mApiResponse.isSuccess())
                         {
