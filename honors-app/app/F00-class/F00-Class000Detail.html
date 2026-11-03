@@ -279,7 +279,7 @@
                         CLSD.mCls = mCls;
 
                         /* 포지션이동 : 일정담당자(담당자1/담당자2) 여부 (실제 열 표시여부는 clslineupb 조회 후 결정) */
-                        /* CLSD.isClsAdmin = mCls.isClsAdmin(CLSD.Storage.myUserno); */
+                        CLSD.isClsAdmin = mCls.isClsAdmin(CLSD.Storage.myUserno);
 
                         /* is manager and end */
                         let isManagerAndEnd = (CLSD.isManager && mCls.isEnd());
@@ -596,7 +596,7 @@
                                     position="${positionHtml}"
                                     username="${GGC.Common.escapeHtml(username)}"
                                     applyername="${GGC.Common.escapeHtml(model.getApplyername())}"
-                                    allow-occupied-dst="${GGF.Y}"
+                                    allow-occupied-dst="${CLSD.isClsAdmin ? GGF.Y : GGF.N}"
                                 >이동</button>
                             </td>
                         `

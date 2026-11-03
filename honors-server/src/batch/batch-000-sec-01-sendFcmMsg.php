@@ -52,6 +52,8 @@
             $pushstatus = Common::get($pushWaitModel, SystemPushBO::FIELD__PUSHSTATUS);
             $pushtype = Common::get($pushWaitModel, SystemPushBO::FIELD__PUSHTYPE);
             $pushdatajson = Common::get($pushWaitModel, SystemPushBO::FIELD__PUSHDATAJSON);
+            $message = null;
+            $tokenArr = array();
 
             /* update pushstatus to 'Ing' */
             $systemPushBO->updatePushstatusWaitToIngForInside($pushidx);
@@ -197,7 +199,7 @@
             }
 
             /* update pushstatus to 'End' */
-            // $systemPushBO->updatePushstatusIngToEndForInside($pushidx);
+            $systemPushBO->updatePushstatusIngToEndForInside($pushidx);
         }
     }
     catch(Throwable $e)

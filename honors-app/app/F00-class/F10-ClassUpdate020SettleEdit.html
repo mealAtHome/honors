@@ -642,7 +642,7 @@
                     if(availablePoint <= 0)
                         return;
 
-                    if(availablePoint >= billfinal) billpointedEl.val(billpointed + (availablePoint - billfinal)); /* 반영가능한 포인트가 청구금액보다 많거나 같은 경우 */
+                    if(availablePoint >= billfinal) billpointedEl.val(billpointed + billfinal); /* 반영가능한 포인트가 청구금액보다 많거나 같은 경우 */
                     if(availablePoint <  billfinal) billpointedEl.val(billpointed + availablePoint);               /* 반영가능한 포인트가 청구금액보다 작은 경우 */
 
                     /* trigger keyup event to update UI */

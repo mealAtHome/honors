@@ -51,7 +51,7 @@
                     if(mClss.getModels().length == 0) { $(".UMCL-td-searchtype[searchtype='edit']").hide(); if(UMCL.Data.searchtype == "") UMCL.Data.searchtype = "ing";  }
 
                     /* set */
-                    isMngOfAnyGrp = GGstorage.Prj.isMngOfAnyGrp();
+                    UMCL.isMngOfAnyGrp = GGstorage.Prj.isMngOfAnyGrp();
 
                     /* click last selected tab */
                     $(`.UMCL-td-searchtype[searchtype='${UMCL.Data.searchtype}']`).click();
