@@ -512,8 +512,8 @@ class UserBO extends _CommonBO
             }
             case self::updatePhonePrivacyByPk: /* EXECUTOR, PRIV_PHONE, PRIV_PHONE_GRPM */
             {
-                /* validation : 공개범위 값, 모임별 설정은 내가 속한 모임만 */
-                $privs = array(UserPrivacyBO::PRIVECY__ALL, UserPrivacyBO::PRIVECY__GRP, UserPrivacyBO::PRIVECY__MNG, UserPrivacyBO::PRIVECY__ANY);
+                /* validation : 공개범위 값(비공개는 받지 않음 : 급한 연락을 위해 최소 운영진에게는 공개), 모임별 설정은 내가 속한 모임만 */
+                $privs = array(UserPrivacyBO::PRIVECY__ALL, UserPrivacyBO::PRIVECY__GRP, UserPrivacyBO::PRIVECY__MNG);
                 if(!in_array($PRIV_PHONE, $privs, true)) throw new GGexception("공개범위를 선택해주세요.");
                 $grpmArr = array();
                 foreach((is_array($PRIV_PHONE_GRPM) ? $PRIV_PHONE_GRPM : array()) as $dat)

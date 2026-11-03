@@ -13,6 +13,7 @@
         <div class="common-div-cushionUD">
             <ul class="common-ul-announce">
                 <li>전화번호를 누구에게 보여줄지 정합니다. 본인에게는 항상 보입니다.</li>
+                <li>급한 연락이 필요할 수 있어, 모임 운영진(매니저·부매니저)에게는 항상 공개됩니다.</li>
                 <li>아래 모임별설정에서 모임마다 다르게 정할 수 있습니다.</li>
             </ul>
         </div>
@@ -31,7 +32,6 @@
                     <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="all" tab="">전체공개</button></th><td>모든 사용자에게 공개됩니다.</td></tr>
                     <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="grp" tab="">모임공개</button></th><td>같은 모임 멤버에게만 공개됩니다.</td></tr>
                     <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="mng" tab="">운영진공개</button></th><td>모임의 매니저·부매니저에게만 공개됩니다.</td></tr>
-                    <tr><th><button class="UMPP-btn-userPrivPhone commonEvent-btn-radio common-btn-radio" radio_name="UMPP-btn-userPrivPhone" val="any" tab="">비공개</button></th><td>아무에게도 공개되지 않습니다.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -88,7 +88,6 @@
                         [GGF.GrpmPrivacy.PrivPhone.ALL, "전체공개"],
                         [GGF.GrpmPrivacy.PrivPhone.GRP, "모임공개"],
                         [GGF.GrpmPrivacy.PrivPhone.MNG, "운영진공개"],
-                        [GGF.GrpmPrivacy.PrivPhone.ANY, "비공개"],
                     ];
                     let html = "";
                     let mGrpMembers = Api.GrpMember.selectByExecutorForAll().getModels();

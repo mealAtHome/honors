@@ -161,6 +161,7 @@ class GrpMemberBO extends _CommonBO
             ifnull(
                 case
                     when t.userno = '$EXECUTOR' then u.phone /* 본인 번호는 공개범위와 관계없이 보인다 */
+                    when execgrpm.grpmtype in ('$grpmtypeMng', '$grpmtypeMngsub') then u.phone /* 급한 연락을 위해 운영진에게는 항상 공개 */
                     when grpmprv.priv_phone is null then
                         case
                             when userprv.priv_phone = 'all' then u.phone

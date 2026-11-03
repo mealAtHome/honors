@@ -38,3 +38,7 @@ create table grp_joinreq
 -- 데이터 정리 : 일정 주관자(정·부)가 비어 있으면 빈 문자열 대신 null (일정 등록 시 '' 로 저장되던 문제, 2026-11-03 코드 수정)
 update cls set clsusernoadm = null where clsusernoadm = '';
 update cls set clsusernosub = null where clsusernosub = '';
+
+-- 데이터 정리 : 전화번호 "비공개(any)"는 받지 않음(2026-11-03 정책). 급한 연락을 위해 최소 운영진공개로 바꾼다
+update user_privacy set priv_phone = 'mng' where priv_phone = 'any';
+update grpm_privacy set priv_phone = 'mng' where priv_phone = 'any';
